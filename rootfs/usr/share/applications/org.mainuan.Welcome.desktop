@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=Application
+Name=Mainuan Welcome
+Name[pt_BR]=Boas-vindas do Mainuan
+GenericName=Welcome Center
+GenericName[pt_BR]=Central de boas-vindas
+Comment=Set up and get to know Mainuan
+Comment[pt_BR]=Configure e conheça o Mainuan
+Keywords=welcome;setup;appearance;drivers;codecs;antivirus;firewall;
+Keywords[pt_BR]=boas-vindas;configuração;aparência;drivers;codecs;antivírus;firewall;
+TryExec=mainuan-welcome
+Exec=mainuan-welcome
+Icon=/usr/share/plasma/avatars/logoMainuan.png
+Terminal=false
+Categories=Qt;KDE;Settings;
+StartupNotify=true
+StartupWMClass=mainuan-welcome
+SingleMainWindow=true

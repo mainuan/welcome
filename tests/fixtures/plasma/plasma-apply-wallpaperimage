@@ -1,0 +1,4 @@
+#!/bin/bash
+# Simulated plasma-apply-wallpaperimage: records the call in $MOCK_LOG.
+[[ -n ${MOCK_WALLPAPER_FAIL:-} ]] && { echo "wallpaper plugin unavailable" >&2; exit 1; }
+echo "plasma-apply-wallpaperimage $*" >>"${MOCK_LOG:-/dev/null}"

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Mainuan Welcome
+Name[pt_BR]=Boas-vindas do Mainuan
+Comment=Show the Mainuan Welcome when the session starts
+Comment[pt_BR]=Mostra as boas-vindas do Mainuan ao iniciar a sessão
+TryExec=mainuan-welcome
+Exec=mainuan-welcome
+Icon=/usr/share/plasma/avatars/logoMainuan.png
+Terminal=false
+NoDisplay=true
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=2

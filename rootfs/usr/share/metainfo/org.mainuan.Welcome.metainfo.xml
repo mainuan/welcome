@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.mainuan.Welcome</id>
+  <name>Mainuan Welcome</name>
+  <name xml:lang="pt-BR">Boas-vindas do Mainuan</name>
+  <summary>Configure o Mainuan e conheça os recursos do seu desktop</summary>
+  <summary xml:lang="pt-BR">Configure o Mainuan e conheça os recursos do seu desktop</summary>
+  <description>
+    <p>Welcome application of the Mainuan desktop. It helps new users choose the look of the desktop, install media codecs, the antivirus, the firewall, office suites and web browsers, and find the video tutorials.</p>
+    <p xml:lang="pt-BR">Aplicativo de boas-vindas do Mainuan. Ajuda novos usuários a escolher a aparência da área de trabalho, instalar codecs de mídia, antivírus, firewall, suítes de escritório e navegadores, e encontrar os tutoriais em vídeo.</p>
+  </description>
+  <developer id="org.mainuan">
+    <name>Mainuan</name>
+  </developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <content_rating type="oars-1.1"/>
+  <launchable type="desktop-id">org.mainuan.Welcome.desktop</launchable>
+  <url type="homepage">https://github.com/ruscher/welcome5</url>
+  <url type="bugtracker">https://github.com/ruscher/welcome5/issues</url>
+  <provides>
+    <binary>mainuan-welcome</binary>
+  </provides>
+</component>

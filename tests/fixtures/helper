@@ -1,0 +1,62 @@
+#!/bin/bash
+# Simulated privileged helper speaking the same protocol as
+# rootfs/usr/libexec/mainuan-welcome/mainuan-welcome-helper.
+set -u
+state="$MOCK_STATE_DIR/deb"
+delay=${MOCK_DELAY:-0}
+say() { printf '%s\n' "$*"; sleep "$delay"; }
+
+[[ $# -eq 2 && $1 == install ]] || { say "@@error invalid"; exit 2; }
+case "$2" in
+    antivirus) packages=(clamav clamav-daemon clamav-freshclam) ;;
+    firewall) packages=(ufw plasma-firewall) ;;
+    codecs) packages=(gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad ffmpeg) ;;
+    *) say "@@error invalid"; exit 2 ;;
+esac
+
+say "@@phase preparing"
+missing=()
+for package in "${packages[@]}"; do
+    grep -qxF "$package" "$state" 2>/dev/null || missing+=("$package")
+done
+
+if (( ${#missing[@]} > 0 )); then
+    case "${MOCK_SCENARIO:-success}" in
+        locked)
+            say "@@phase waiting"
+            echo "E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 4242 (unattended-upgr)" >&2
+            say "@@error locked"; exit 1 ;;
+        network)
+            say "@@phase updating"
+            echo "W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/resolute/InRelease  Temporary failure resolving 'archive.ubuntu.com'" >&2
+            say "@@error network"; exit 1 ;;
+    esac
+    say "@@phase updating"
+    say "dlstatus:1:0.0000:Retrieving file 1 of 3"
+    say "@@packages ${missing[*]}"
+    say "@@phase installing"
+    for percent in 0 18.5 41.2 66.9 88.3 100; do
+        say "dlstatus:2:$percent:Retrieving file $(( ${percent%.*} / 20 + 1 )) of 6"
+    done
+    total=${#missing[@]} index=0
+    for package in "${missing[@]}"; do
+        base=$(( index * 100 / total ))
+        say "pmstatus:$package:$base:Preparing $package (amd64)"
+        say "pmstatus:$package:$(( base + 100 / total / 3 )):Unpacking $package (amd64)"
+        if [[ ${MOCK_SCENARIO:-success} == apt-error && $index -eq $(( total - 1 )) ]]; then
+            say "pmerror:$package:$(( base + 100 / total / 2 )):installed $package package post-installation script subprocess returned error exit status 1"
+            echo "E: Sub-process /usr/bin/dpkg returned an error code (1)" >&2
+            say "@@error failed"; exit 1
+        fi
+        say "pmstatus:$package:$(( base + 200 / total / 3 )):Configuring $package (amd64)"
+        say "pmstatus:$package:$(( base + 100 / total )):Installed $package (amd64)"
+        echo "$package" >>"$state"
+        index=$((index + 1))
+    done
+fi
+
+if [[ $2 == antivirus ]]; then
+    say "@@phase signatures"
+    [[ ${MOCK_SCENARIO:-success} == signatures ]] && say "@@warning signatures"
+fi
+say "@@done"

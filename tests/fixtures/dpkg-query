@@ -1,0 +1,13 @@
+#!/bin/bash
+# Simulated `dpkg-query -W -f=… <packages>` backed by "$MOCK_STATE_DIR/deb".
+shift 2
+rc=0
+for package in "$@"; do
+    if grep -qxF "$package" "$MOCK_STATE_DIR/deb" 2>/dev/null; then
+        printf '%s\tii \n' "$package"
+    else
+        echo "dpkg-query: no packages found matching $package" >&2
+        rc=1
+    fi
+done
+exit "$rc"

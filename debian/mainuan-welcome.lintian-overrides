@@ -1,0 +1,3 @@
+# The helper only checks whether another package manager holds the dpkg locks
+# (fuser on the lock files) so it can wait; it never reads or edits the database.
+mainuan-welcome: uses-dpkg-database-directly [usr/libexec/mainuan-welcome/mainuan-welcome-helper]

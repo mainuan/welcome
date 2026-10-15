@@ -1,0 +1,29 @@
+#!/bin/bash
+# Simulated plasma-apply-lookandfeel: writes the keys the real tool writes for
+# the Mainuan packages into $XDG_CONFIG_HOME. MOCK_LNF_FAIL makes it fail and
+# MOCK_LNF_NOOP makes it succeed without changing anything.
+set -u
+[[ $# -eq 2 && $1 == --apply ]] || { echo "usage: --apply <package>" >&2; exit 2; }
+[[ -n ${MOCK_LNF_FAIL:-} ]] && { echo "kf.package: Could not load package $2" >&2; exit 1; }
+[[ -n ${MOCK_LNF_NOOP:-} ]] && exit 0
+echo "lookandfeel $2" >>"${MOCK_LOG:-/dev/null}"
+
+case "$2" in
+    Dream-Light-Color-Global-6) scheme=DreamCyanLightColor icons=kora-cyan theme=Dream-Color-Plasma cursor=breeze_cursors window=239,240,241 ;;
+    Dream-Dark-Color-Global-6) scheme=DreamCyanDarkColor icons=kora-cyan theme=Dream-Color-Plasma cursor=cyan-cursor window=30,30,46 ;;
+    com.github.vinceliuice.MacTahoe-Light) scheme=MacTahoeLight icons=MacTahoe-light theme=MacTahoe-Light cursor=MacTahoe-light window=242,242,242 ;;
+    com.github.vinceliuice.MacTahoe-Dark) scheme=MacTahoeDark icons=MacTahoe-dark theme=MacTahoe-Dark cursor=MacTahoe-dark window=36,36,36 ;;
+    org.kde.breeze.desktop) scheme=BreezeLight icons=breeze theme=default cursor=breeze_cursors window=239,240,241 ;;
+    org.kde.breezedark.desktop) scheme=BreezeDark icons=breeze-dark theme=default cursor=breeze_cursors window=32,35,38 ;;
+    *) echo "unknown package $2" >&2; exit 1 ;;
+esac
+
+config=$XDG_CONFIG_HOME
+mkdir -p "$config"
+{
+    printf '[Colors:Window]\nBackgroundNormal=%s\n\n[General]\nColorScheme=%s\n\n[Icons]\nTheme=%s\n\n' "$window" "$scheme" "$icons"
+    # Plasma does not record its default package.
+    [[ $2 == org.kde.breeze.desktop ]] || printf '[KDE]\nLookAndFeelPackage=%s\n' "$2"
+} >"$config/kdeglobals"
+printf '[Theme]\nname=%s\n' "$theme" >"$config/plasmarc"
+printf '[Mouse]\ncursorTheme=%s\n' "$cursor" >"$config/kcminputrc"

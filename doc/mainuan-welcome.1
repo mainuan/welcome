@@ -1,0 +1,32 @@
+.TH MAINUAN-WELCOME 1 "October 2026" "mainuan-welcome 2.2.0" "User Commands"
+.SH NAME
+mainuan-welcome \- Mainuan welcome and first-login assistant
+.SH SYNOPSIS
+.B mainuan-welcome
+.SH DESCRIPTION
+.B mainuan-welcome
+opens the Mainuan Welcome window. It lets the user choose the visual style,
+theme, accent colour and desktop layout, and installs media codecs, the
+antivirus, the firewall, office suites and web browsers.
+.PP
+Starting a second copy brings the open window to the front.
+.SH FILES
+.TP
+.I /etc/xdg/autostart/org.mainuan.Welcome.desktop
+System-wide entry that opens the Welcome at login.
+.TP
+.I $XDG_CONFIG_HOME/autostart/org.mainuan.Welcome.desktop
+Written with
+.B Hidden=true
+when the user unticks "Mostrar esta tela ao iniciar o sistema".
+.TP
+.I /usr/libexec/mainuan-welcome/mainuan-welcome-helper
+Privileged helper run through
+.BR pkexec (1);
+it accepts only fixed installation profiles.
+.TP
+.I /var/log/mainuan-welcome/install.log
+Output of the last package installation (readable by root).
+.SH SEE ALSO
+.BR pkexec (1),
+.BR flatpak (1)

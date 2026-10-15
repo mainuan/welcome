@@ -1,0 +1,20 @@
+mainuan-welcome (2.2.0) resolute; urgency=medium
+
+  * Each accent color applies its Mainuan wallpaper; visual styles keep it.
+  * Six native Plasma 6 desktop layouts with backup, automatic rollback and
+    "Restaurar layout anterior".
+  * Sobre with a local system report (copy/save, no private data).
+  * Contribuir with an offline Pix QR code; ships /etc/mainuan/welcome.conf.
+  * Line icons in the sidebar and one page width across the app.
+  * Plasma version read over D-Bus instead of running plasmashell, which
+    crashed when started by the tests during package builds.
+
+ -- ruscher <rruscher@gmail.com>  Fri, 02 Oct 2026 17:40:00 -0300
+
+mainuan-welcome (2.1.0) resolute; urgency=medium
+
+  * Native Qt 6/Kirigami Welcome with the universal installer.
+  * Official Mainuan logo, per-user "show at login" preference and
+    system-wide XDG autostart entry.
+
+ -- ruscher <rruscher@gmail.com>  Fri, 02 Oct 2026 11:48:44 -0300

@@ -1,0 +1,7 @@
+#!/bin/bash
+# Simulated pkexec: MOCK_SCENARIO=cancel (dialog dismissed) or auth (not authorized).
+case "${MOCK_SCENARIO:-success}" in
+    cancel) exit 126 ;;
+    auth) echo "Error executing command as another user: Not authorized" >&2; exit 127 ;;
+esac
+exec "$@"

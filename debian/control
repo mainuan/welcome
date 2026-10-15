@@ -1,0 +1,49 @@
+Source: mainuan-welcome
+Section: kde
+Priority: optional
+Maintainer: ruscher <rruscher@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+               cmake (>= 3.24),
+               libkf6config-dev,
+               libqrencode-dev,
+               pkgconf,
+               libkirigami-dev,
+               qt6-base-dev (>= 6.5),
+               qt6-declarative-dev (>= 6.5),
+               qt6-declarative-dev-tools,
+               qt6-multimedia-dev (>= 6.5),
+Standards-Version: 4.7.0
+Homepage: https://github.com/ruscher/welcome5
+Vcs-Git: https://github.com/ruscher/welcome5.git
+Vcs-Browser: https://github.com/ruscher/welcome5
+Rules-Requires-Root: no
+
+Package: mainuan-welcome
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         pkexec,
+         psmisc,
+         qml6-module-org-kde-kirigami,
+         qml6-module-qtcore,
+         qml6-module-qtmultimedia,
+         qml6-module-qtqml-workerscript,
+         qml6-module-qtquick-controls,
+         qml6-module-qtquick-dialogs,
+         qml6-module-qtquick-layouts,
+         qml6-module-qtquick-templates,
+         qml6-module-qtquick-window,
+Recommends: flatpak,
+            libkf6kcmutils-bin,
+            mesa-utils,
+            pciutils,
+            plasma-workspace,
+Description: Mainuan welcome and first-login assistant
+ Native Qt/Kirigami welcome application of the Mainuan desktop. It opens on
+ login (users can turn this off), lets the user choose the visual style,
+ theme, accent colour and desktop layout, and installs media codecs, the
+ ClamAV antivirus with the ClamUI interface, the UFW firewall with its
+ Plasma module, office suites and web browsers with real progress.
+ .
+ Privileged operations go through a small helper authorized by polkit
+ that accepts only a fixed set of installation profiles.

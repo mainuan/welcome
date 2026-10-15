@@ -1,0 +1,46 @@
+#!/bin/bash
+# Simulated flatpak CLI backed by "$MOCK_STATE_DIR/flatpak" ("<app id>\t<installation>").
+set -u
+state="$MOCK_STATE_DIR/flatpak"
+delay=${MOCK_DELAY:-0}
+case "${1:-}" in
+    list)
+        [[ -f $state ]] && cat "$state"
+        exit 0 ;;
+    remotes)
+        printf 'flathub\t%s\n' "${MOCK_FLATHUB_SCOPE:-system}"
+        exit 0 ;;
+    remote-add)
+        exit 0 ;;
+    install)
+        app=${!#}
+        case "${MOCK_SCENARIO:-success}" in
+            flatpak-network)
+                echo "Looking for matches…"
+                echo "error: Unable to connect to dl.flathub.org: Could not resolve hostname" >&2
+                exit 1 ;;
+            flatpak-denied)
+                echo "error: Flatpak system operation Deploy not allowed for user" >&2
+                exit 1 ;;
+        esac
+        echo "Looking for matches…"
+        echo "Required runtime for $app (runtime/org.gnome.Platform/x86_64/49) found in remote flathub"
+        for op in 1 2; do
+            echo "Installing $op/2…"
+            for percent in 0 25 50 75 100; do
+                printf 'Installing %s/2… %-20s %3d%%  1.2 MB/s  00:0%s\n' "$op" "████" "$percent" "$op"
+                sleep "$delay"
+            done
+        done
+        printf '%s\t%s\n' "$app" "${MOCK_FLATHUB_SCOPE:-system}" >>"$state"
+        echo "Installation complete."
+        exit 0 ;;
+    uninstall)
+        app=${!#}
+        [[ -f $state ]] && sed -i "/^${app//./\\.}\t/d" "$state"
+        exit 0 ;;
+    run)
+        exit 0 ;;
+esac
+echo "unsupported mock command: $*" >&2
+exit 1

@@ -1,0 +1,242 @@
+#!/bin/bash
+# Mainuan Welcome — privileged installation helper.
+#
+# Runs as root only through pkexec (polkit action org.mainuan.welcome.install).
+# Usage: mainuan-welcome-helper install <antivirus|firewall|codecs>
+#
+# The caller chooses a profile, never package names: every package list lives
+# in this file. Only missing packages are installed, nothing is removed
+# (--no-remove) and dpkg locks are waited for, never deleted.
+#
+# stdout is a line protocol read by the Welcome:
+#   @@phase <preparing|waiting|updating|installing|signatures>
+#   @@packages <pkg>…        @@warning <kind>        @@error <kind>        @@done
+#   dlstatus:… / pmstatus:… / pmerror:…   (APT::Status-Fd, relayed verbatim)
+# APT and dpkg output goes to a root-owned log; its tail is printed on stderr
+# when something fails.
+
+set -uo pipefail
+# If the Welcome disappears, writes to its pipe must fail quietly instead of
+# killing this process (and dpkg) in the middle of an installation.
+trap '' PIPE
+umask 022
+
+export PATH=/usr/sbin:/usr/bin:/sbin:/bin
+export LC_ALL=C
+export DEBIAN_FRONTEND=noninteractive
+export APT_LISTCHANGES_FRONTEND=none
+export NEEDRESTART_SUSPEND=1
+
+readonly LOG_DIR=/var/log/mainuan-welcome
+readonly LOG_FILE="$LOG_DIR/install.log"
+readonly LOCK_FILES=(/var/lib/dpkg/lock-frontend /var/lib/dpkg/lock /var/lib/apt/lists/lock /var/cache/apt/archives/lock)
+readonly LOCK_WAIT_SECONDS=180
+
+emit() {
+    printf '%s\n' "$*" 2>/dev/null || true
+}
+
+relay() {
+    local line
+    while IFS= read -r line; do
+        printf '%s\n' "$line" 2>/dev/null || true
+    done
+}
+
+fail() {
+    emit "@@error $1"
+    if [[ -n "${log_start:-}" && -f "$LOG_FILE" ]]; then
+        tail -n +"$log_start" "$LOG_FILE" | tail -n 60 >&2 2>/dev/null || true
+    fi
+    exit 1
+}
+
+profile_packages() {
+    case "$1" in
+        antivirus)
+            printf '%s\n' clamav clamav-daemon clamav-freshclam
+            # ClamUI is distributed through Flathub; a ClamUI .deb does not need it.
+            command -v clamui >/dev/null 2>&1 || printf '%s\n' flatpak
+            ;;
+        firewall)
+            printf '%s\n' ufw plasma-firewall
+            ;;
+        codecs)
+            printf '%s\n' gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad ffmpeg
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+is_installed() {
+    [[ "$(dpkg-query -W -f='${db:Status-Abbrev}' "$1" 2>/dev/null)" == ii* ]]
+}
+
+has_candidate() {
+    local candidate
+    candidate=$(apt-cache policy "$1" 2>/dev/null | awk '/Candidate:/ { print $2; exit }')
+    [[ -n "$candidate" && "$candidate" != "(none)" ]]
+}
+
+lists_are_fresh() {
+    [[ -n "$(find /var/lib/apt/lists -maxdepth 1 -type f -name '*Release' -mmin -1440 -print -quit 2>/dev/null)" ]]
+}
+
+apt_is_locked() {
+    command -v fuser >/dev/null 2>&1 || return 1
+    local file
+    for file in "${LOCK_FILES[@]}"; do
+        [[ -e "$file" ]] && fuser -s "$file" >/dev/null 2>&1 && return 0
+    done
+    return 1
+}
+
+wait_for_apt_lock() {
+    local waited=0
+    apt_is_locked || return 0
+    emit "@@phase waiting"
+    while apt_is_locked; do
+        if (( waited >= LOCK_WAIT_SECONDS )); then
+            fail locked
+        fi
+        sleep 2
+        waited=$((waited + 2))
+    done
+}
+
+classify_failure() {
+    local output
+    output=$(tail -n +"$log_start" "$LOG_FILE" 2>/dev/null)
+    if grep -qE 'Could not get lock|Unable to acquire the dpkg frontend lock|Unable to lock the administration directory' <<<"$output"; then
+        echo locked
+    elif grep -q 'dpkg was interrupted' <<<"$output"; then
+        echo interrupted
+    elif grep -qE "You don't have enough free space|No space left on device" <<<"$output"; then
+        echo space
+    elif grep -qE 'Temporary failure resolving|Could not resolve|Failed to fetch|Unable to connect|Could not connect|Network is unreachable|Connection timed out|Connection failed' <<<"$output"; then
+        echo network
+    elif grep -qE 'Unable to locate package|has no installation candidate' <<<"$output"; then
+        echo unavailable
+    elif grep -qE 'unmet dependencies|held broken packages|Unable to correct problems|remove is disabled' <<<"$output"; then
+        echo dependencies
+    else
+        echo failed
+    fi
+}
+
+run_apt() {
+    # Status lines go to fd 3 → relay → stdout; human output goes to the log.
+    apt-get -q \
+        -o APT::Status-Fd=3 \
+        -o DPkg::Lock::Timeout=120 \
+        -o Dpkg::Use-Pty=0 \
+        -o Dpkg::Options::=--force-confdef \
+        -o Dpkg::Options::=--force-confold \
+        "$@" 3>&1 1>>"$LOG_FILE" 2>&1 | relay
+    return "${PIPESTATUS[0]}"
+}
+
+signatures_present() {
+    compgen -G '/var/lib/clamav/main.c[vl]d' >/dev/null && compgen -G '/var/lib/clamav/daily.c[vl]d' >/dev/null
+}
+
+update_signatures() {
+    signatures_present && return 0
+    command -v freshclam >/dev/null 2>&1 || return 0
+
+    emit "@@phase signatures"
+    local service_active=0 updated=0
+    if command -v systemctl >/dev/null 2>&1 && systemctl is-active --quiet clamav-freshclam 2>/dev/null; then
+        # The service holds freshclam's lock; stop it for the one-off update.
+        service_active=1
+        systemctl stop clamav-freshclam >>"$LOG_FILE" 2>&1 || true
+    fi
+    if timeout 900 freshclam --stdout >>"$LOG_FILE" 2>&1; then
+        updated=1
+    fi
+    if command -v systemctl >/dev/null 2>&1; then
+        if (( service_active )) || systemctl is-enabled --quiet clamav-freshclam 2>/dev/null; then
+            systemctl start clamav-freshclam >>"$LOG_FILE" 2>&1 || true
+        fi
+        if signatures_present && systemctl is-enabled --quiet clamav-daemon 2>/dev/null; then
+            systemctl start clamav-daemon >>"$LOG_FILE" 2>&1 || true
+        fi
+    fi
+    (( updated )) || emit "@@warning signatures"
+}
+
+main() {
+    if [[ $# -ne 2 || "$1" != install ]]; then
+        emit "@@error invalid"
+        exit 2
+    fi
+    local profile=$2
+    local -a packages missing=()
+    if ! mapfile -t packages < <(profile_packages "$profile") || (( ${#packages[@]} == 0 )); then
+        emit "@@error invalid"
+        exit 2
+    fi
+    if (( EUID != 0 )); then
+        emit "@@error permission"
+        exit 1
+    fi
+    if [[ ! -x /usr/bin/apt-get || ! -x /usr/bin/dpkg-query ]]; then
+        emit "@@error unsupported"
+        exit 1
+    fi
+
+    mkdir -p "$LOG_DIR" && chmod 0750 "$LOG_DIR"
+    printf '=== %s install %s\n' "$(date --iso-8601=seconds)" "$profile" >"$LOG_FILE"
+    chmod 0640 "$LOG_FILE"
+    log_start=2
+
+    emit "@@phase preparing"
+    local package
+    for package in "${packages[@]}"; do
+        is_installed "$package" || missing+=("$package")
+    done
+
+    if (( ${#missing[@]} > 0 )); then
+        wait_for_apt_lock
+
+        local need_update=0
+        lists_are_fresh || need_update=1
+        for package in "${missing[@]}"; do
+            has_candidate "$package" || need_update=1
+        done
+        if (( need_update )); then
+            emit "@@phase updating"
+            # A failed refresh is not fatal while every package still has a
+            # candidate; apt-get also exits 0 when only some indexes failed.
+            run_apt update || true
+        fi
+        local kind
+        for package in "${missing[@]}"; do
+            if ! has_candidate "$package"; then
+                kind=$(classify_failure)
+                [[ "$kind" == failed ]] && kind=unavailable
+                fail "$kind"
+            fi
+        done
+
+        emit "@@packages ${missing[*]}"
+        emit "@@phase installing"
+        if ! run_apt install -y --no-remove "${missing[@]}"; then
+            fail "$(classify_failure)"
+        fi
+        for package in "${missing[@]}"; do
+            is_installed "$package" || fail failed
+        done
+    fi
+
+    if [[ "$profile" == antivirus ]]; then
+        update_signatures
+    fi
+
+    emit "@@done"
+    exit 0
+}
+
+main "$@"

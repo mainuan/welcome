@@ -1,0 +1,4 @@
+#!/bin/bash
+# Simulated plasma-changeicons: switches the icon theme and records the call in $MOCK_LOG.
+sed -i "s/^Theme=.*/Theme=$1/" "$XDG_CONFIG_HOME/kdeglobals"
+echo "plasma-changeicons $*" >>"${MOCK_LOG:-/dev/null}"
