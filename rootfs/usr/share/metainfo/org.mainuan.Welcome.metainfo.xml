@@ -16,8 +16,15 @@
   <project_license>GPL-3.0-or-later</project_license>
   <content_rating type="oars-1.1"/>
   <launchable type="desktop-id">org.mainuan.Welcome.desktop</launchable>
-  <url type="homepage">https://github.com/ruscher/welcome5</url>
-  <url type="bugtracker">https://github.com/ruscher/welcome5/issues</url>
+  <url type="homepage">https://github.com/mainuan/welcome</url>
+  <url type="bugtracker">https://github.com/mainuan/welcome/issues</url>
+  <releases>
+    <release version="1.0" date="2026-10-17" type="stable">
+      <description>
+        <p>First official Mainuan Welcome release, with native Plasma customization and application installation.</p>
+      </description>
+    </release>
+  </releases>
   <provides>
     <binary>mainuan-welcome</binary>
   </provides>

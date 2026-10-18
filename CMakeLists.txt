@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(mainuan-welcome VERSION 2.2.0 LANGUAGES CXX)
+project(mainuan-welcome VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -43,11 +43,15 @@ add_library(mainuan-core STATIC
     src/services/VisualStyle.cpp
     src/services/AccentProfile.cpp
     src/services/AccentProfile.h
+    src/services/UserAvatar.cpp
+    src/services/UserAvatar.h
     src/services/VisualStyle.h
     src/services/PackageService.cpp
     src/services/PackageService.h
     src/services/InstallService.cpp
     src/services/InstallService.h
+    src/services/FreeOfficeProfile.cpp
+    src/services/FreeOfficeProfile.h
     src/services/InstallProgressParser.cpp
     src/services/InstallProgressParser.h
     src/services/SingleInstance.cpp
@@ -71,11 +75,16 @@ add_library(mainuan-core STATIC
 )
 
 target_include_directories(mainuan-core PUBLIC src)
+qt_add_resources(mainuan-core installation_profiles
+    PREFIX "/installation"
+    BASE rootfs/usr/share/mainuan-welcome
+    FILES rootfs/usr/share/mainuan-welcome/freeoffice.profile
+)
 # Plasma and KWin scripts used by LayoutService.
 qt_add_resources(mainuan-core layout_scripts
     PREFIX "/layouts"
     BASE src/layouts
-    FILES src/layouts/desktop-layouts.js src/layouts/kwin-tiling.js
+    FILES src/layouts/desktop-layouts.js src/layouts/reference-layouts.js src/layouts/kwin-tiling.js
 )
 target_compile_definitions(mainuan-core PRIVATE MAINUAN_HELPER_PATH="${MAINUAN_HELPER_PATH}")
 target_link_libraries(mainuan-core PUBLIC
@@ -129,6 +138,9 @@ set(MAINUAN_ASSETS
     rootfs/usr/share/welcome/com.microsoft.Edge.png
     rootfs/usr/share/welcome/com.opera.opera-gx.png
     rootfs/usr/share/welcome/com.wps.Office.png
+    rootfs/usr/share/welcome/freeOffice.png
+    rootfs/usr/share/welcome/vivaldi.png
+    rootfs/usr/share/welcome/zenBrowser.png
     rootfs/usr/share/welcome/io.gitlab.librewolf-community.png
     rootfs/usr/share/welcome/org.libreoffice.LibreOffice.png
     rootfs/usr/share/welcome/org.torproject.torbrowser-launcher.png
@@ -234,6 +246,8 @@ install(PROGRAMS
     rootfs/usr/libexec/mainuan-welcome/mainuan-welcome-helper
     DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/mainuan-welcome
 )
+install(FILES rootfs/usr/share/mainuan-welcome/freeoffice.profile
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/mainuan-welcome)
 
 # The polkit action authorizes exactly the installed helper path.
 configure_file(
@@ -259,6 +273,26 @@ if (Qt6Test_FOUND)
         MAINUAN_TEST_HELPER="${CMAKE_CURRENT_SOURCE_DIR}/rootfs/usr/libexec/mainuan-welcome/mainuan-welcome-helper"
         MAINUAN_TEST_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures")
     add_test(NAME tst_mainuan COMMAND tst_mainuan)
+    add_executable(tst_appinstallation tests/tst_appinstallation.cpp)
+    target_link_libraries(tst_appinstallation PRIVATE mainuan-core Qt6::Test)
+    target_compile_definitions(tst_appinstallation PRIVATE
+        MAINUAN_TEST_HELPER="${CMAKE_CURRENT_SOURCE_DIR}/rootfs/usr/libexec/mainuan-welcome/mainuan-welcome-helper"
+        MAINUAN_TEST_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures")
+    add_test(NAME tst_appinstallation COMMAND tst_appinstallation)
+    add_executable(tst_layouts tests/tst_layouts.cpp)
+    target_link_libraries(tst_layouts PRIVATE mainuan-core Qt6::Test Qt6::Qml)
+    target_compile_definitions(tst_layouts PRIVATE
+        MAINUAN_TEST_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures")
+    add_test(NAME tst_layouts COMMAND tst_layouts)
+    find_program(MAINUAN_QMLTESTRUNNER NAMES qmltestrunner HINTS /usr/lib/qt6/bin)
+    if(MAINUAN_QMLTESTRUNNER)
+        add_test(NAME layouts_qml COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tests/layouts-qml.sh
+            ${MAINUAN_QMLTESTRUNNER} ${CMAKE_CURRENT_SOURCE_DIR})
+        set_tests_properties(layouts_qml PROPERTIES SKIP_RETURN_CODE 77)
+        add_test(NAME applications_qml COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tests/apps-qml.sh
+            ${MAINUAN_QMLTESTRUNNER} ${CMAKE_CURRENT_SOURCE_DIR})
+        set_tests_properties(applications_qml PROPERTIES SKIP_RETURN_CODE 77)
+    endif()
     add_test(NAME smoke_startup COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/tests/smoke.sh $<TARGET_FILE:mainuan-welcome>)
     set_tests_properties(smoke_startup PROPERTIES SKIP_RETURN_CODE 77)
 endif()

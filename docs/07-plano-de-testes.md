@@ -1,5 +1,7 @@
 # Plano de testes
 
+> Registro histórico do desenvolvimento experimental. Os números 2.x, resultados de execução e caminhos de capturas descrevem aquele momento. A primeira versão oficial é **1.0**; consulte a [documentação atual](README.md) antes de seguir instruções antigas.
+
 | Área | Teste |
 |---|---|
 | Configuração | `cmake -S . -B build-test` em diretório limpo |

@@ -1,3 +1,101 @@
+mainuan-welcome (1.0) resolute; urgency=medium
+
+  * Prepare the first official Mainuan Welcome release with the validated
+    native Qt/Plasma features, restricted installer and existing resources.
+  * Adopt official version 1.0 intentionally below the experimental 2.3.1.x
+    builds; preserve their history and document the explicit Debian downgrade.
+  * Update official repository metadata and document installation/maintenance.
+  * Add Ubuntu 26.04 CI with complete tests, Debian artifact validation and
+    checksums; publish releases only for existing matching version tags.
+
+ -- ruscher <rruscher@gmail.com>  Sat, 17 Oct 2026 23:15:00 -0300
+
+mainuan-welcome (2.3.1.5) resolute; urgency=medium
+
+  * Simplify installation progress to the product, source, one progress bar
+    and a concise safety notice, preserving the existing installer backend.
+  * Add display-only source metadata to the existing installation profiles.
+  * Keep friendly results, optional technical details and retry/open actions;
+    cover progress, accessibility and both color modes with isolated tests.
+
+ -- ruscher <rruscher@gmail.com>  Sat, 17 Oct 2026 22:57:17 -0300
+
+mainuan-welcome (2.3.1.4) resolute; urgency=medium
+
+  * Install Vivaldi and Zen Browser through the existing internal Flatpak
+    flow,
+    retaining progress, installed-state detection, launch and removal actions.
+  * Add the restricted FreeOffice Debian profile with asynchronous HTTPS
+    download,
+    a pinned official artifact, validation before authentication and after
+    secure
+    transfer to the polkit helper, APT dependency resolution and state
+    verification.
+  * Reuse the installation dialog with vendor provenance and confirmation;
+    cover failures, retries, package validation and application cards in
+    isolation.
+  * Preserve the existing layouts and appearance features unchanged.
+
+ -- ruscher <rruscher@gmail.com>  Sat, 17 Oct 2026 22:12:00 -0300
+
+mainuan-welcome (2.3.1.3) resolute; urgency=medium
+
+  * Match classic panel spacing to the new active, tagged manual reference.
+    Keep edge-relative offsets and the captured custom length ranges, adapting
+    only when measured neighboring panels require more room.
+  * Test classic anchors, offsets and separation at common screen resolutions;
+    preserve other layouts, widget configuration, backups and rollback.
+
+ -- ruscher <rruscher@gmail.com>  Sat, 17 Oct 2026 21:22:03 -0300
+
+mainuan-welcome (2.3.1.2) resolute; urgency=medium
+
+  * Correct only the fourth classic panel's custom length bounds from the
+    supplied reference, independently of the 40-pixel panel thickness.
+  * Reserve space for its full resizing interval without changing neighboring
+    panels; add regression tests for lengths and widget order.
+
+ -- ruscher <rruscher@gmail.com>  Sat, 17 Oct 2026 20:51:05 -0300
+
+mainuan-welcome (2.3.1.1) resolute; urgency=medium
+
+  * Correct the five classic segments from the updated Mainuan reference;
+    remove kdeaichat, preserve the custom length range and require all widgets.
+  * Fit the three-panel layout to its contents, fill both Lomiri panels and
+    standardize panel thickness at 40 logical pixels.
+  * Replace the selectable floating layout with single-bar, preserving legacy
+    panels on startup; normalize supported task and tray icon settings.
+  * Verify measured segment spacing asynchronously and extend isolated tests.
+  * Start incremental four-component versions for development test packages.
+
+ -- ruscher <rruscher@gmail.com>  Sat, 17 Oct 2026 20:22:13 -0300
+
+mainuan-welcome (2.3.1) resolute; urgency=medium
+
+  * Add the three-panel and single-bar layouts, and convert the top panel,
+    Lomiri and W7 layouts from sanitized Mainuan references with responsive
+    geometry, mandatory launcher preflight and per-screen validation.
+  * Apply the installed Dream KDE color schemes using stable color identifiers.
+  * Preserve the selected scheme and Kora icons after global style and variant
+    changes, with asynchronous sequencing and configuration readback.
+  * Synchronize the Mainuan wallpaper and user avatar with safe atomic writes
+    and a private, first-use backup; preserve independent avatar settings.
+  * Validate missing resources and report partial failures; add isolated tests
+    for all twelve schemes, icon themes, avatar formats and unsafe paths.
+  * Require the Qt SVG image plugin for the SVG avatars shipped by Mainuan.
+
+ -- ruscher <rruscher@gmail.com>  Fri, 16 Oct 2026 19:00:00 -0300
+
+mainuan-welcome (2.3.0) resolute; urgency=medium
+
+  * Add the official FreeOffice Debian download to Office.
+  * Open Vivaldi and Zen Browser in KDE Discover, keeping installation
+    confirmation there and detecting their installed Flatpak state on return.
+  * Distinguish web, download, Discover and internal installation actions;
+    embed the three application icons in the Qt resources.
+
+ -- ruscher <rruscher@gmail.com>  Fri, 16 Oct 2026 12:00:00 -0300
+
 mainuan-welcome (2.2.0) resolute; urgency=medium
 
   * Each accent color applies its Mainuan wallpaper; visual styles keep it.

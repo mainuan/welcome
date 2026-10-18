@@ -1,5 +1,7 @@
 # UX, layouts e relatório do sistema — auditoria e plano
 
+> Registro histórico do desenvolvimento experimental. Os números 2.x, resultados de execução e caminhos de capturas descrevem aquele momento. A primeira versão oficial é **1.0**; consulte a [documentação atual](README.md) antes de seguir instruções antigas.
+
 Escrito em 02/10/2026 sobre a `main` em `28cf04a`, antes da implementação. Ambiente de referência: VM Mainuan 2026 (base Ubuntu 26.04, Plasma 6.6.6, Wayland, 1 monitor, 4 áreas de trabalho virtuais).
 
 ## Estado encontrado
@@ -16,7 +18,7 @@ Escrito em 02/10/2026 sobre a `main` em `28cf04a`, antes da implementação. Amb
 
 ## Sistema real
 
-- Papéis de parede em `/usr/share/wallpapers/` (plural; `/usr/share/wallpaper/` não existe): `01ciano.png`, `02cinza.png`, `03magenta.png` (não “magenda”), `04purpura.png`, `05marrom.png`, `06lima.png`. `plasma-apply-wallpaperimage` percorre `desktops()`, isto é, todos os monitores.
+- Papéis de parede em `/usr/share/wallpapers/` (plural; `/usr/share/wallpaper/` não existe): `01ciano.png`, `02cinza.png`, `03magenta.png` (não “magenda”), `04violet.png`, `05marrom.png`, `06lima.png`. `plasma-apply-wallpaperimage` percorre `desktops()`, isto é, todos os monitores.
 - Layout de fábrica do Mainuan: cinco “ilhas” flutuantes na base (menu; clima + áreas de trabalho; tarefas; bandeja com KdeControlStation, KDE AI Chat e ChatAI; relógio), altura 40 px, comprimento “fit”/personalizado.
 - `org.kde.PlasmaShell` oferece `evaluateScript`, `dumpCurrentLayoutJS` e `setWallpaper`. KWin oferece `org.kde.kwin.Scripting.loadScript` e, no script, `workspace.rootTile(tela, área)` com `split()`/`remove()`.
 - `dumpCurrentLayoutJS` + `loadSerializedLayout` **não** restauram fielmente no Plasma 6.6: alturas mudam (40 → 56), comprimento vira “fill” e a ordem dos widgets muda (testado na VM e revertido).

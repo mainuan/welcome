@@ -1,5 +1,7 @@
 # Relatório final
 
+> Registro histórico do desenvolvimento experimental. Os números 2.x, resultados de execução e caminhos de capturas descrevem aquele momento. A primeira versão oficial é **1.0**; consulte a [documentação atual](README.md) antes de seguir instruções antigas.
+
 ## Resumo
 
 O protótipo Electron foi reconstruído como aplicação Qt 6 nativa com C++/QML/Kirigami. A aplicação agora possui páginas Início, Office, Navegadores, Tutoriais, Layouts, Sobre e Contribuir, com recursos locais embutidos.

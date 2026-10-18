@@ -25,15 +25,19 @@ void ApplicationModel::setInstallService(InstallService *installer)
         return;
     }
     for (const ApplicationEntry &entry : std::as_const(m_entries)) {
-        if (!entry.packageId.isEmpty() && entry.webUrl.isEmpty()) {
+        if (entry.action == ApplicationAction::InternalFlatpak && !entry.packageId.isEmpty()) {
             m_installer->registerApplication(entry.packageId, entry.name, entry.description, entry.iconSource);
         }
     }
+    connect(m_installer, &InstallService::profilesChanged, this, &ApplicationModel::updateAllRows);
     connect(m_installer, &InstallService::busyChanged, this, &ApplicationModel::updateAllRows);
     connect(m_installer, &InstallService::finished, this, [this](const QString &profileId, bool success) {
-        const QString packageId = profileId.section(QLatin1Char(':'), 1);
+        const QString packageId = profileId == QStringLiteral("freeoffice")
+            ? QStringLiteral("softmaker-freeoffice-2024") : profileId.section(QLatin1Char(':'), 1);
         if (success) {
             m_errors.remove(packageId);
+        } else {
+            m_errors.insert(packageId, m_installer->resultMessage());
         }
         updateAllRows();
     });
@@ -51,15 +55,23 @@ QVariant ApplicationModel::data(const QModelIndex &index, int role) const
     }
 
     const ApplicationEntry &entry = m_entries.at(index.row());
-    const bool installed = m_service->isInstalled(entry.packageId);
-    const QString profile = entry.packageId.isEmpty() || !entry.webUrl.isEmpty()
-        ? QString() : QStringLiteral("app:") + entry.packageId;
+    const bool flatpak = entry.action == ApplicationAction::InternalFlatpak;
+    const bool debian = entry.action == ApplicationAction::InternalDebian;
+    const bool online = entry.action == ApplicationAction::WebPage;
+    // The managed Debian catalog currently authorizes exactly one fixed profile.
+    const QString profile = flatpak ? QStringLiteral("app:") + entry.packageId
+        : debian && entry.id == QStringLiteral("freeoffice")
+          && entry.packageId == QStringLiteral("softmaker-freeoffice-2024") ? QStringLiteral("freeoffice") : QString();
+    const QVariantMap state = m_installer != nullptr ? m_installer->profiles().value(profile).toMap() : QVariantMap();
+    const bool installed = flatpak ? m_service->isInstalled(entry.packageId)
+                                  : debian && state.value(QStringLiteral("installed")).toBool();
     const bool installing = m_installer != nullptr && m_installer->busy() && !profile.isEmpty()
         && m_installer->profileId() == profile;
     const bool busy = installing || m_busyPackages.contains(entry.packageId);
-    const bool online = !entry.webUrl.isEmpty();
-    const bool available = online || (PackageService::isAllowedApplication(entry.packageId)
-                                      && m_service->flatpakAvailable());
+    const bool failed = m_installer != nullptr && m_installer->profileId() == profile
+        && (m_installer->phase() == QStringLiteral("error") || m_installer->phase() == QStringLiteral("cancelled"));
+    const bool available = online || (debian && (installed || state.value(QStringLiteral("canInstall")).toBool()))
+        || (flatpak && PackageService::isAllowedApplication(entry.packageId) && m_service->flatpakAvailable());
 
     switch (role) {
     case ApplicationIdRole: return entry.id;
@@ -71,6 +83,9 @@ QVariant ApplicationModel::data(const QModelIndex &index, int role) const
     case BusyRole: return busy;
     case AvailableRole: return available;
     case InstallStateRole:
+        if (debian && state.value(QStringLiteral("state")) == QStringLiteral("checking")) {
+            return QStringLiteral("Verificando…");
+        }
         if (!available) {
             return QStringLiteral("Indisponível");
         }
@@ -80,12 +95,19 @@ QVariant ApplicationModel::data(const QModelIndex &index, int role) const
         if (busy) {
             return installing ? QStringLiteral("Instalando…") : QStringLiteral("Removendo…");
         }
-        if (m_errors.contains(entry.packageId)) {
+        if (failed || m_errors.contains(entry.packageId)) {
             return QStringLiteral("Erro");
         }
         return installed ? QStringLiteral("Instalado") : QStringLiteral("Disponível");
     case WebUrlRole: return entry.webUrl;
     case InstallProfileRole: return profile;
+    case ActionTypeRole:
+        switch (entry.action) {
+        case ApplicationAction::InternalFlatpak: return QStringLiteral("flatpak");
+        case ApplicationAction::WebPage: return QStringLiteral("web");
+        case ApplicationAction::InternalDebian: return QStringLiteral("debian");
+        }
+        return {};
     default: return {};
     }
 }
@@ -98,7 +120,7 @@ QHash<int, QByteArray> ApplicationModel::roleNames() const
         {IconSourceRole, "iconSource"},      {InstalledRole, "installed"},
         {BusyRole, "busy"},                  {AvailableRole, "available"},
         {InstallStateRole, "installState"}, {WebUrlRole, "webUrl"},
-        {InstallProfileRole, "installProfile"}
+        {InstallProfileRole, "installProfile"}, {ActionTypeRole, "actionType"}
     };
 }
 
@@ -107,7 +129,9 @@ bool ApplicationModel::remove(int row)
     if (row < 0 || row >= m_entries.size()) {
         return false;
     }
-    return m_service->remove(m_entries.at(row).packageId);
+    const ApplicationEntry &entry = m_entries.at(row);
+    return entry.action == ApplicationAction::InternalFlatpak
+        && (m_installer == nullptr || !m_installer->busy()) && m_service->remove(entry.packageId);
 }
 
 void ApplicationModel::updateAllRows()

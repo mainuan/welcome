@@ -7,7 +7,7 @@
 
 #include <functional>
 
-// Applies the six desktop layouts of Aparência > Layout do desktop with
+// Applies the seven desktop layouts of Aparência > Layout do desktop with
 // Plasma desktop scripting (org.kde.PlasmaShell.evaluateScript), keeps
 // per-user backups of the panel configuration and restores them.
 class LayoutService final : public QObject
@@ -26,12 +26,20 @@ public:
         QString layout; // id when every panel carries the same tag, else empty
         int panels = -1;
         int launchers = -1;
+        int screens = -1;
+        int matchingLaunchers = -1;
+        bool structureOk = false;
         bool valid() const { return panels >= 0; }
+    };
+
+    struct Backend {
+        std::function<void(const QString &, std::function<void(bool, const QString &)>)> evaluate;
+        std::function<void(const QString &, std::function<void(bool)>)> controlPlasma;
     };
 
     // `configDir` and `backupDir` override $XDG_CONFIG_HOME and the backup
     // location (tests only).
-    explicit LayoutService(QObject *parent = nullptr, const QString &configDir = {}, const QString &backupDir = {});
+    explicit LayoutService(QObject *parent = nullptr, const QString &configDir = {}, const QString &backupDir = {}, Backend backend = {});
 
     static const QStringList &layoutIds();
     static bool isAllowedLayout(const QString &id);
@@ -39,7 +47,9 @@ public:
     // The Plasma script applying `id`; `installedWidgets` are plasmoid ids
     // found on disk (anything else is dropped).
     static QString buildScript(const QString &id, const QStringList &installedWidgets);
+    static QString buildPreflightScript(const QString &id, const QStringList &installedWidgets);
     static Description parseDescription(const QString &output);
+    static bool matchesLayout(const Description &description, const QString &id);
     static QStringList installedPlasmoids();
 
     QString activeLayout() const;
@@ -63,6 +73,8 @@ signals:
 
 private:
     void describe(std::function<void(const Description &)> done);
+    void settleLayout(const QString &id, int attempts, const QString &previous,
+                      std::function<void(bool, const QString &)> done);
     void evaluate(const QString &script, std::function<void(bool ok, const QString &output)> done);
     void applyTiling(std::function<void(bool ok)> done);
     void runTilingScript(const QString &path, std::function<void(bool ok)> done);
@@ -76,6 +88,7 @@ private:
     void pruneBackups(const QString &keep);
 
     QString m_configDir;
+    Backend m_backend;
     QString m_backupDir;
     QString m_activeLayout;
     QString m_message;

@@ -8,6 +8,8 @@
 class InstallService;
 class PackageService;
 
+enum class ApplicationAction { InternalFlatpak, InternalDebian, WebPage };
+
 struct ApplicationEntry
 {
     QString id;
@@ -16,6 +18,7 @@ struct ApplicationEntry
     QString packageId;
     QString iconSource;
     QString webUrl;
+    ApplicationAction action = ApplicationAction::InternalFlatpak;
 };
 
 class ApplicationModel final : public QAbstractListModel
@@ -34,7 +37,8 @@ public:
         AvailableRole,
         InstallStateRole,
         WebUrlRole,
-        InstallProfileRole
+        InstallProfileRole,
+        ActionTypeRole
     };
 
     explicit ApplicationModel(PackageService *service, QList<ApplicationEntry> entries,
@@ -44,7 +48,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    // Registers the Flatpak entries as installer profiles ("app:<id>") and
+    // Registers Flatpak entries as installer profiles ("app:<id>") and
     // reflects running installations in the busy/installState roles.
     void setInstallService(InstallService *installer);
 

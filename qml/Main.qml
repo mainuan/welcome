@@ -37,6 +37,12 @@ Kirigami.ApplicationWindow {
             if (!installDialog.opened)
                 installDialog.openFor(installService.profileId);
             installDialog.requestClose();
+        } else if (systemService.busy) {
+            close.accepted = false;
+            root.showPassiveNotification("Aguarde a aplicação da aparência terminar antes de fechar o Welcome.");
+        } else if (layoutService.busy) {
+            close.accepted = false;
+            root.showPassiveNotification("Aguarde a aplicação ou restauração do layout terminar antes de fechar o Welcome.");
         }
     }
 

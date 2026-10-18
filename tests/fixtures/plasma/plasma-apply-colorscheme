@@ -1,3 +1,46 @@
-#!/bin/bash
-# Simulated plasma-apply-colorscheme: records the call in $MOCK_LOG.
-echo "plasma-apply-colorscheme $*" >>"${MOCK_LOG:-/dev/null}"
+#!/usr/bin/python3
+# Isolated Plasma CLI simulation: only reads fixture data and XDG_CONFIG_HOME.
+import configparser
+import os
+import pathlib
+import sys
+
+def config(path):
+    result = configparser.ConfigParser(interpolation=None, strict=False, allow_no_value=True)
+    result.optionxform = str
+    result.read(path)
+    return result
+
+args = sys.argv[1:]
+roots = [pathlib.Path(os.environ['XDG_DATA_HOME'])] + [pathlib.Path(p) for p in os.environ['XDG_DATA_DIRS'].split(':')]
+if args == ['--list-schemes']:
+    hidden = os.environ.get('MOCK_SCHEME_HIDDEN', '')
+    for name in sorted({p.stem for root in roots for p in (root / 'color-schemes').glob('*.colors')}):
+        if name != hidden:
+            print(' * ' + name)
+    sys.exit(0)
+if len(args) != 1 or args[0].startswith('-'):
+    sys.exit(2)
+if os.environ.get('MOCK_SCHEME_FAIL'):
+    sys.exit(1)
+scheme = args[0]
+source = next((root / 'color-schemes' / (scheme + '.colors') for root in roots if (root / 'color-schemes' / (scheme + '.colors')).is_file()), None)
+if source is None:
+    sys.exit(1)
+with open(os.environ['MOCK_LOG'], 'a') as log:
+    log.write('plasma-apply-colorscheme ' + scheme + '\n')
+if os.environ.get('MOCK_SCHEME_NOOP'):
+    sys.exit(0)
+path = pathlib.Path(os.environ['XDG_CONFIG_HOME']) / 'kdeglobals'
+current = config(path)
+if current.get('General', 'ColorScheme', fallback='') == scheme:
+    sys.exit(0)  # The real CLI skips an already-active scheme.
+source_config = config(source)
+for section in source_config.sections():
+    if section.startswith('Colors:'):
+        current[section] = dict(source_config[section])
+if not current.has_section('General'):
+    current.add_section('General')
+current['General']['ColorScheme'] = scheme
+with path.open('w') as output:
+    current.write(output, space_around_delimiters=False)

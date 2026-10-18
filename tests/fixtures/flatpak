@@ -5,7 +5,13 @@ state="$MOCK_STATE_DIR/flatpak"
 delay=${MOCK_DELAY:-0}
 case "${1:-}" in
     list)
+        sleep "${MOCK_LIST_DELAY:-0}"
         [[ -f $state ]] && cat "$state"
+        exit 0 ;;
+    info)
+        app=${!#}
+        grep -qF "$app" "$state" || exit 1
+        printf 'app/%s/x86_64/stable\n' "$app"
         exit 0 ;;
     remotes)
         printf 'flathub\t%s\n' "${MOCK_FLATHUB_SCOPE:-system}"
@@ -32,7 +38,7 @@ case "${1:-}" in
                 sleep "$delay"
             done
         done
-        printf '%s\t%s\n' "$app" "${MOCK_FLATHUB_SCOPE:-system}" >>"$state"
+        [[ ${MOCK_SCENARIO:-success} == flatpak-noop ]] || printf '%s\t%s\n' "$app" "${MOCK_FLATHUB_SCOPE:-system}" >>"$state"
         echo "Installation complete."
         exit 0 ;;
     uninstall)

@@ -10,13 +10,20 @@
 #include "services/SystemReportService.h"
 #include "services/SystemService.h"
 #include "services/VisualStyle.h"
+#include "services/UserAvatar.h"
+#include <KConfigGroup>
+#include <KSharedConfig>
+#include <QImage>
+#include <QBuffer>
 
 #include <QtTest>
 
 #include <QFile>
+#include <QDesktopServices>
 #include <QProcess>
 #include <QStandardPaths>
 #include <QTemporaryDir>
+#include <QTimer>
 
 #include <memory>
 #include <unistd.h>
@@ -45,12 +52,17 @@ public:
     MockSystem(const QStringList &debPackages, const QStringList &flatpaks)
     {
         writeLines(QStringLiteral("deb"), debPackages);
+        setFlatpaks(flatpaks);
+        qputenv("MOCK_STATE_DIR", m_dir.path().toLocal8Bit());
+    }
+
+    void setFlatpaks(const QStringList &flatpaks)
+    {
         QStringList lines;
         for (const QString &flatpak : flatpaks) {
             lines << flatpak + QStringLiteral("\tsystem");
         }
         writeLines(QStringLiteral("flatpak"), lines);
-        qputenv("MOCK_STATE_DIR", m_dir.path().toLocal8Bit());
     }
 
     QStringList lines(const QString &name) const
@@ -112,6 +124,15 @@ bool runToEnd(InstallService &installer, const QString &profile)
 
 } // namespace
 
+class UrlReceiver final : public QObject
+{
+    Q_OBJECT
+public:
+    QUrl received;
+public slots:
+    void receive(const QUrl &url) { received = url; }
+};
+
 class MainuanTest final : public QObject
 {
     Q_OBJECT
@@ -119,7 +140,7 @@ class MainuanTest final : public QObject
 private slots:
     void cleanup();
 
-    void acceptsOnlyHexAccentColors();
+    void acceptsOnlyKnownAccentIds();
     void rejectsUnexpectedPackageIds();
     void acceptsOnlyKnownLayouts();
     void buildsLayoutScripts();
@@ -130,7 +151,16 @@ private slots:
     void reportsVisualStyleFailures();
     void switchesThemeWithinTheActiveStyle();
     void recordsTheChosenAccentColor();
+    void detectsAppearanceWithoutChangingUserResources();
+    void reportsPartialAccentFailures();
+    void preservesAccentOverridesOnFailure();
+    void backsUpAndSafelyReplacesAvatars();
+    void rejectsUnsafeAvatarFilesAndWrites();
     void exposesModelRolesAndLocalVideoCatalog();
+    void distinguishesManagedApplicationActions();
+    void refreshesExternalFlatpaksAsynchronously();
+    void opensSpecificDiscoverPagesAndHandlesErrors();
+    void requestsExternalDownloadThroughDesktopServices();
 
     void parsesHelperProtocol();
     void parsesFlatpakProgress();
@@ -163,15 +193,21 @@ void MainuanTest::cleanup()
 {
     qunsetenv("MOCK_SCENARIO");
     qunsetenv("MOCK_STATE_DIR");
+    qunsetenv("MOCK_LIST_DELAY");
+    qunsetenv("MOCK_DISCOVER_LOG");
+    qunsetenv("MOCK_DISCOVER_EXIT");
 }
 
-void MainuanTest::acceptsOnlyHexAccentColors()
+void MainuanTest::acceptsOnlyKnownAccentIds()
 {
-    QVERIFY(SystemService::isValidAccent(QStringLiteral("#3daee9")));
-    QVERIFY(SystemService::isValidAccent(QStringLiteral("#AABBCC")));
-    QVERIFY(!SystemService::isValidAccent(QStringLiteral("red")));
-    QVERIFY(!SystemService::isValidAccent(QStringLiteral("#12345")));
-    QVERIFY(!SystemService::isValidAccent(QStringLiteral("#123456789")));
+    for (const QString &id : {QStringLiteral("brown"), QStringLiteral("cyan"), QStringLiteral("magenta"),
+                             QStringLiteral("lime"), QStringLiteral("gray"), QStringLiteral("violet")}) {
+        QVERIFY(SystemService::isValidAccent(id));
+    }
+    for (const QString &id : {QStringLiteral("#3daee9"), QStringLiteral("red"), QStringLiteral("CYAN"),
+                             QStringLiteral("../cyan"), QStringLiteral("cyan; id"), QString()}) {
+        QVERIFY(!SystemService::isValidAccent(id));
+    }
 }
 
 void MainuanTest::rejectsUnexpectedPackageIds()
@@ -186,7 +222,7 @@ void MainuanTest::rejectsUnexpectedPackageIds()
 
 void MainuanTest::acceptsOnlyKnownLayouts()
 {
-    QCOMPARE(LayoutService::layoutIds().size(), 6);
+    QCOMPARE(LayoutService::layoutIds().size(), 7);
     for (const QString &id : LayoutService::layoutIds()) {
         QVERIFY(LayoutService::isAllowedLayout(id));
         QVERIFY(!LayoutService::displayName(id).isEmpty());
@@ -214,7 +250,7 @@ void MainuanTest::buildsLayoutScripts()
     QCOMPARE(description.launchers, 1);
     description = LayoutService::parseDescription(QStringLiteral("|5|1"));
     QVERIFY(description.valid());
-    QVERIFY(description.layout.isEmpty()); // custom layout, not one of the six
+    QVERIFY(description.layout.isEmpty()); // custom layout, not one of the seven
     QVERIFY(LayoutService::parseDescription(QStringLiteral("hacked|5|1")).layout.isEmpty());
     QVERIFY(!LayoutService::parseDescription(QStringLiteral("Error: TypeError")).valid());
     QVERIFY(!LayoutService::parseDescription(QStringLiteral("unity|x|1")).valid());
@@ -268,7 +304,7 @@ void MainuanTest::backsUpAndRestoresPanelConfiguration()
 
     // Outside Plasma nothing is applied and no backup is taken.
     const int before = static_cast<int>(service.backups().size());
-    service.apply(QStringLiteral("floating"));
+    service.apply(QStringLiteral("single-bar"));
     QVERIFY(!service.busy());
     QVERIFY(service.messageIsError());
     QCOMPARE(service.backups().size(), before);
@@ -293,18 +329,26 @@ void MainuanTest::mapsVisualStylesToMainuanThemes()
     QCOMPARE(breeze->package(true), QStringLiteral("org.kde.breezedark.desktop"));
     QCOMPARE(VisualStyles::profiles().size(), 3);
 
-    // Each accent color carries the Mainuan wallpaper of the same color.
-    const QList<QPair<QString, QString>> wallpapers = {
-        {QStringLiteral("#d08040"), QStringLiteral("05marrom.png")}, {QStringLiteral("#e8177d"), QStringLiteral("03magenta.png")},
-        {QStringLiteral("#3daee9"), QStringLiteral("01ciano.png")},  {QStringLiteral("#3dd425"), QStringLiteral("06lima.png")},
-        {QStringLiteral("#aab6b9"), QStringLiteral("02cinza.png")},  {QStringLiteral("#a588cb"), QStringLiteral("04purpura.png")}};
-    QCOMPARE(AccentProfiles::profiles().size(), wallpapers.size());
-    for (const auto &[color, wallpaper] : wallpapers) {
-        QVERIFY(AccentProfiles::find(color));
-        QCOMPARE(AccentProfiles::find(color)->wallpaper, wallpaper);
+    const QStringList ids = {"brown", "cyan", "magenta", "lime", "gray", "violet"};
+    const QStringList names = {"Marrom", "Ciano", "Magenta", "Lima", "Cinza", "Violeta"};
+    const QStringList stems = {"DreamBrown", "DreamCyan", "DreamMagenta", "DreamLime", "DreamGray", "DreamViolet"};
+    const QStringList icons = {"kora-brown", "kora-cyan", "kora-magenta", "kora-lima", "kora-grey", "kora-violet"};
+    const QStringList wallpapers = {"05marrom.png", "01ciano.png", "03magenta.png", "06lima.png", "02cinza.png", "04violet.png"};
+    QCOMPARE(AccentProfiles::profiles().size(), 6);
+    for (int i = 0; i < ids.size(); ++i) {
+        const AccentProfile *profile = AccentProfiles::find(ids[i]);
+        QVERIFY(profile);
+        QCOMPARE(profile->name, names[i]);
+        QCOMPARE(profile->lightScheme, stems[i] + "LightColor");
+        QCOMPARE(profile->darkScheme, stems[i] + "DarkColor");
+        QCOMPARE(profile->iconTheme, icons[i]);
+        QCOMPARE(profile->wallpaper, wallpapers[i]);
+        QCOMPARE(profile->avatar(), "icons/" + icons[i] + "/status/scalable/.face");
+        QCOMPARE(AccentProfiles::fromScheme(profile->scheme(false)), profile);
+        QCOMPARE(AccentProfiles::fromScheme(profile->scheme(true)), profile);
     }
-    QCOMPARE(AccentProfiles::find(QStringLiteral("#E8177D"))->name, QStringLiteral("Rosa"));
-    QVERIFY(!AccentProfiles::find(QStringLiteral("#123456")));
+    QVERIFY(!AccentProfiles::fromScheme(QStringLiteral("ExternalScheme")));
+    QVERIFY(!AccentProfiles::find(QStringLiteral("#e8177d")));
 
     QVERIFY(SystemService::isAllowedVisualStyle(QStringLiteral("blur")));
     QVERIFY(SystemService::isAllowedVisualStyle(QStringLiteral("glass")));
@@ -342,64 +386,90 @@ class PlasmaSandbox
 public:
     PlasmaSandbox()
     {
-        const QString data = m_root.filePath(QStringLiteral("data"));
+        if (!m_root.isValid()) {
+            qFatal("Cannot create an isolated appearance test directory");
+        }
+        for (const char *name : environmentNames()) {
+            m_environment.insert(name, {qEnvironmentVariableIsSet(name), qgetenv(name)});
+        }
         for (const VisualStyleProfile &profile : VisualStyles::profiles()) {
             for (const QString &package : {profile.lightPackage, profile.darkPackage}) {
-                touch(data + QStringLiteral("/plasma/look-and-feel/") + package + QStringLiteral("/metadata.json"));
+                write(data() + "/plasma/look-and-feel/" + package + "/metadata.json", "{}");
             }
         }
         for (const AccentProfile &accent : AccentProfiles::profiles()) {
-            touch(data + QStringLiteral("/wallpapers/") + accent.wallpaper);
+            write(data() + "/wallpapers/" + accent.wallpaper, "wallpaper fixture");
+            write(data() + "/icons/" + accent.iconTheme + "/index.theme", "[Icon Theme]\nName=Kora\nDirectories=status/scalable\n");
+            write(data() + "/" + accent.avatar(),
+                  "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\"><rect width=\"32\" height=\"32\" fill=\""
+                  + accent.color.toUtf8() + "\"/></svg>");
+            for (bool dark : {false, true}) {
+                write(data() + "/color-schemes/" + accent.scheme(dark) + ".colors",
+                    "[General]\nName=" + accent.name.toUtf8() + "\n[Colors:Window]\nBackgroundNormal="
+                    + (dark ? QByteArray("30,30,46") : QByteArray("239,240,241"))
+                    // Swatch values deliberately differ from the selection color.
+                    + "\n[Colors:Selection]\nBackgroundNormal=17,99,155\n");
+            }
         }
-        for (const QString &icons : {QStringLiteral("breeze"), QStringLiteral("breeze-dark"), QStringLiteral("kora-cyan")}) {
-            touch(data + QStringLiteral("/icons/") + icons + QStringLiteral("/index.theme"));
+        for (const QString &icons : {QStringLiteral("breeze"), QStringLiteral("breeze-dark")}) {
+            write(data() + "/icons/" + icons + "/index.theme", "[Icon Theme]\nName=Breeze\nDirectories=actions\n");
         }
-        // Cursor themes Mainuan ships (MacTahoe's are missing there too).
-        touch(data + QStringLiteral("/icons/breeze_cursors/cursors/default"));
-        touch(data + QStringLiteral("/icons/cyan-cursor/cursors/default"));
-
-        qputenv("XDG_CONFIG_HOME", config().toLocal8Bit());
-        qputenv("XDG_CONFIG_DIRS", m_root.filePath(QStringLiteral("xdg")).toLocal8Bit());
-        qputenv("XDG_DATA_HOME", m_root.filePath(QStringLiteral("home-data")).toLocal8Bit());
-        qputenv("XDG_DATA_DIRS", data.toLocal8Bit());
-        qputenv("MOCK_LOG", log().toLocal8Bit());
+        write(data() + "/icons/breeze_cursors/cursors/default", {});
+        write(data() + "/icons/cyan-cursor/cursors/default", {});
         QDir().mkpath(config());
+        QDir().mkpath(home());
+        QFile::setPermissions(home(), QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ExeOwner);
+        qputenv("XDG_CONFIG_HOME", config().toUtf8());
+        qputenv("XDG_CONFIG_DIRS", m_root.filePath("xdg").toUtf8());
+        qputenv("XDG_DATA_HOME", m_root.filePath("home-data").toUtf8());
+        qputenv("XDG_DATA_DIRS", data().toUtf8());
+        qputenv("MOCK_LOG", log().toUtf8());
     }
-
     ~PlasmaSandbox()
     {
-        for (const char *name : {"XDG_CONFIG_HOME", "XDG_CONFIG_DIRS", "XDG_DATA_HOME", "XDG_DATA_DIRS", "MOCK_LOG",
-                                 "MOCK_LNF_FAIL", "MOCK_LNF_NOOP", "MOCK_WALLPAPER_FAIL"}) {
-            qunsetenv(name);
+        for (auto it = m_environment.cbegin(); it != m_environment.cend(); ++it) {
+            if (it.value().first) qputenv(it.key().constData(), it.value().second);
+            else qunsetenv(it.key().constData());
         }
     }
-
-    QString config() const { return m_root.filePath(QStringLiteral("config")); }
-    QString log() const { return m_root.filePath(QStringLiteral("calls.log")); }
-    QString data() const { return m_root.filePath(QStringLiteral("data")); }
+    QString config() const { return m_root.filePath("config"); }
+    QString home() const { return m_root.filePath("home"); }
+    QString log() const { return m_root.filePath("calls.log"); }
+    QString data() const { return m_root.filePath("data"); }
     static QString tools() { return QStringLiteral(MAINUAN_TEST_FIXTURES "/plasma"); }
-
-    QStringList takeCalls() const
-    {
-        QFile file(log());
-        if (!file.open(QIODevice::ReadOnly)) {
-            return {};
-        }
-        const QStringList calls = QString::fromUtf8(file.readAll()).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
-        file.close();
-        file.remove();
-        return calls;
-    }
-
-private:
-    static void touch(const QString &path)
+    static void write(const QString &path, const QByteArray &bytes)
     {
         QDir().mkpath(QFileInfo(path).absolutePath());
         QFile file(path);
-        QVERIFY(file.open(QIODevice::WriteOnly));
+        QVERIFY(file.open(QIODevice::WriteOnly | QIODevice::Truncate));
+        QCOMPARE(file.write(bytes), bytes.size());
     }
-
+    static QByteArray read(const QString &path)
+    {
+        QFile file(path);
+        return file.open(QIODevice::ReadOnly) ? file.readAll() : QByteArray();
+    }
+    void appearance(const QString &scheme, const QString &icons = "breeze", const QString &style = "org.kde.breeze.desktop")
+    {
+        write(config() + "/kdeglobals", "[General]\nColorScheme=" + scheme.toUtf8()
+              + "\n[Icons]\nTheme=" + icons.toUtf8() + "\n[KDE]\nLookAndFeelPackage=" + style.toUtf8()
+              + "\n[Colors:Window]\nBackgroundNormal=" + (scheme.contains("Dark") ? QByteArray("30,30,46") : QByteArray("239,240,241")) + "\n");
+    }
+    QStringList takeCalls() const
+    {
+        const QStringList calls = QString::fromUtf8(read(log())).split('\n', Qt::SkipEmptyParts);
+        QFile::remove(log());
+        return calls;
+    }
+private:
+    static QList<const char *> environmentNames()
+    {
+        return {"XDG_CONFIG_HOME", "XDG_CONFIG_DIRS", "XDG_DATA_HOME", "XDG_DATA_DIRS", "MOCK_LOG",
+                "MOCK_LNF_FAIL", "MOCK_LNF_NOOP", "MOCK_LNF_DELAY", "MOCK_WALLPAPER_FAIL", "MOCK_ICONS_FAIL",
+                "MOCK_ICONS_NOOP", "MOCK_SCHEME_FAIL", "MOCK_SCHEME_NOOP", "MOCK_SCHEME_HIDDEN"};
+    }
     QTemporaryDir m_root;
+    QHash<QByteArray, QPair<bool, QByteArray>> m_environment;
 };
 
 bool waitIdle(const SystemService &service)
@@ -412,168 +482,340 @@ bool waitIdle(const SystemService &service)
 void MainuanTest::appliesVisualStyleProfiles()
 {
     PlasmaSandbox sandbox;
-    SystemService service;
+    sandbox.appearance("DreamBrownDarkColor", "kora-brown");
+    SystemService service(nullptr, sandbox.home());
     service.setToolSearchPaths({PlasmaSandbox::tools()});
-    QVERIFY(service.visualStyleAvailable());
-    QCOMPARE(service.installedVisualStyles(), (QStringList{QStringLiteral("blur"), QStringLiteral("glass"), QStringLiteral("solid")}));
-    QCOMPARE(service.visualStyle(), QStringLiteral("solid")); // empty config: Plasma defaults
-
-    service.setVisualStyle(QStringLiteral("blur"));
-    QVERIFY(service.busy());
-    QVERIFY(waitIdle(service));
-    QCOMPARE(service.visualStyle(), QStringLiteral("blur"));
-    QCOMPARE(service.lastMessage(), QStringLiteral("Estilo Dream aplicado."));
-    // The style does not touch the wallpaper; it follows the accent color.
-    QCOMPARE(sandbox.takeCalls(), (QStringList{QStringLiteral("lookandfeel Dream-Light-Color-Global-6")}));
-
-    // Tahoe names icon and cursor themes Mainuan does not ship: Breeze fallbacks.
-    service.setVisualStyle(QStringLiteral("glass"));
-    QVERIFY(waitIdle(service));
-    QCOMPARE(service.visualStyle(), QStringLiteral("glass"));
-    QCOMPARE(service.lastMessage(), QStringLiteral("Estilo Tahoe aplicado."));
-    QCOMPARE(sandbox.takeCalls(), (QStringList{
-        QStringLiteral("lookandfeel com.github.vinceliuice.MacTahoe-Light"),
-        QStringLiteral("plasma-changeicons breeze"),
-        QStringLiteral("plasma-apply-cursortheme breeze_cursors")}));
-
-    service.setVisualStyle(QStringLiteral("solid"));
-    QVERIFY(waitIdle(service));
-    QCOMPARE(service.visualStyle(), QStringLiteral("solid"));
-    QCOMPARE(service.lastMessage(), QStringLiteral("Estilo Breeze aplicado."));
-    QCOMPARE(sandbox.takeCalls(), (QStringList{QStringLiteral("lookandfeel org.kde.breeze.desktop")}));
-
-    // Repeated switching keeps working and the state is read back by a new instance.
-    for (const QString &style : {QStringLiteral("blur"), QStringLiteral("solid"), QStringLiteral("glass")}) {
+    QCOMPARE(service.accentId(), QStringLiteral("brown"));
+    QCOMPARE(service.iconTheme(), QStringLiteral("kora-brown"));
+    QCOMPARE(service.accentProfiles().size(), 6);
+    for (const QString &style : {QStringLiteral("blur"), QStringLiteral("glass"), QStringLiteral("solid"), QStringLiteral("blur")}) {
+        qputenv("MOCK_LNF_DELAY", "0.05");
         service.setVisualStyle(style);
+        QVERIFY(service.busy());
+        service.setAccent("cyan"); // Must not race the theme application.
         QVERIFY(waitIdle(service));
         QCOMPARE(service.visualStyle(), style);
+        QVERIFY(service.darkTheme());
+        QCOMPARE(service.accentId(), QStringLiteral("brown"));
+        QCOMPARE(service.colorScheme(), QStringLiteral("DreamBrownDarkColor"));
+        QCOMPARE(service.iconTheme(), QStringLiteral("kora-brown"));
+        const QStringList calls = sandbox.takeCalls();
+        const int theme = calls.indexOf("lookandfeel " + VisualStyles::find(style)->darkPackage);
+        const int scheme = calls.indexOf("plasma-apply-colorscheme DreamBrownDarkColor");
+        const int icons = calls.indexOf("plasma-changeicons kora-brown");
+        QVERIFY(theme >= 0 && scheme > theme && icons > scheme);
+        QVERIFY(!calls.contains(QStringLiteral("plasma-apply-colorscheme DreamCyanDarkColor")));
+        QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+        QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), PlasmaSandbox::read(sandbox.data() + "/" + AccentProfiles::find("brown")->avatar()));
     }
-    SystemService reopened;
-    QCOMPARE(reopened.visualStyle(), QStringLiteral("glass"));
+    SystemService reopened(nullptr, sandbox.home());
+    QCOMPARE(reopened.visualStyle(), QStringLiteral("blur"));
+    QCOMPARE(reopened.accentId(), QStringLiteral("brown"));
+    QCOMPARE(reopened.iconTheme(), QStringLiteral("kora-brown"));
+
+    service.setAccent("violet");
+    QVERIFY(waitIdle(service));
+    sandbox.takeCalls();
+    for (const QString &style : {QStringLiteral("glass"), QStringLiteral("solid"), QStringLiteral("blur")}) {
+        service.setVisualStyle(style);
+        QVERIFY(waitIdle(service));
+        QCOMPARE(service.accentId(), QStringLiteral("violet"));
+        QVERIFY(sandbox.takeCalls().contains("plasma-apply-wallpaperimage " + sandbox.data() + "/wallpapers/04violet.png"));
+    }
 }
 
 void MainuanTest::reportsVisualStyleFailures()
 {
     PlasmaSandbox sandbox;
-    SystemService service;
+    sandbox.appearance("DreamVioletLightColor", "kora-violet");
+    SystemService service(nullptr, sandbox.home());
     service.setToolSearchPaths({PlasmaSandbox::tools()});
-
-    service.setVisualStyle(QStringLiteral("unknown"));
+    service.setVisualStyle("unknown");
     QVERIFY(!service.busy());
-    QCOMPARE(service.lastMessage(), QStringLiteral("Erro: Estilo visual inválido."));
-
-    // The essential step fails: no success and the selection does not move.
+    QVERIFY(service.lastMessage().contains("inválido"));
     qputenv("MOCK_LNF_FAIL", "1");
-    service.setVisualStyle(QStringLiteral("blur"));
+    service.setVisualStyle("blur");
     QVERIFY(waitIdle(service));
     QCOMPARE(service.visualStyle(), QStringLiteral("solid"));
-    QVERIFY(service.lastMessage().startsWith(QStringLiteral("Erro: Não foi possível aplicar o estilo Dream.")));
-    QVERIFY(sandbox.takeCalls().isEmpty());
+    QVERIFY(service.lastMessage().contains("Não foi possível aplicar o estilo Dream"));
     qunsetenv("MOCK_LNF_FAIL");
-
-    // The tool reports success but Plasma's configuration does not change.
     qputenv("MOCK_LNF_NOOP", "1");
-    service.setVisualStyle(QStringLiteral("glass"));
+    service.setVisualStyle("glass");
     QVERIFY(waitIdle(service));
-    QCOMPARE(service.visualStyle(), QStringLiteral("solid"));
-    QCOMPARE(service.lastMessage(), QStringLiteral("Erro: O Plasma não confirmou o estilo Tahoe."));
+    QVERIFY(service.lastMessage().contains("não confirmou o estilo Tahoe"));
     qunsetenv("MOCK_LNF_NOOP");
+    QVERIFY(QFile::remove(sandbox.data() + "/color-schemes/DreamVioletDarkColor.colors"));
     sandbox.takeCalls();
-
-    service.setVisualStyle(QStringLiteral("blur"));
+    service.setTheme("dark");
     QVERIFY(waitIdle(service));
-    QCOMPARE(service.visualStyle(), QStringLiteral("blur"));
-
-    // Missing package.
-    QVERIFY(QFile::remove(sandbox.data() + QStringLiteral("/plasma/look-and-feel/org.kde.breeze.desktop/metadata.json")));
-    service.setVisualStyle(QStringLiteral("solid"));
+    QVERIFY(service.lastMessage().contains("DreamVioletDarkColor.colors"));
+    QCOMPARE(service.colorScheme(), QStringLiteral("DreamVioletLightColor"));
+    QVERIFY(sandbox.takeCalls().isEmpty());
+    QVERIFY(QFile::remove(sandbox.data() + "/icons/kora-violet/index.theme"));
+    service.setVisualStyle("blur");
     QVERIFY(!service.busy());
-    QCOMPARE(service.lastMessage(), QStringLiteral("Erro: O estilo Breeze não está instalado neste sistema."));
-    service.refresh();
-    QVERIFY(!service.installedVisualStyles().contains(QStringLiteral("solid")));
-
-    // Missing plasma-apply-lookandfeel.
+    QCOMPARE(service.iconTheme(), QStringLiteral("kora-violet"));
+    QVERIFY(service.lastMessage().contains("ícones kora-violet"));
+    QVERIFY(QFile::remove(sandbox.data() + "/plasma/look-and-feel/org.kde.breeze.desktop/metadata.json"));
+    service.setVisualStyle("solid");
+    QVERIFY(!service.busy());
+    QVERIFY(service.lastMessage().contains("não está instalado"));
     QTemporaryDir noTools;
     service.setToolSearchPaths({noTools.path()});
-    QVERIFY(!service.visualStyleAvailable());
-    service.setVisualStyle(QStringLiteral("glass"));
+    service.setVisualStyle("glass");
     QVERIFY(!service.busy());
-    QVERIFY(service.lastMessage().contains(QStringLiteral("plasma-apply-lookandfeel")));
-    QCOMPARE(service.visualStyle(), QStringLiteral("blur"));
+    QVERIFY(service.lastMessage().contains("plasma-apply-lookandfeel"));
 }
 
 void MainuanTest::switchesThemeWithinTheActiveStyle()
 {
     PlasmaSandbox sandbox;
-    SystemService service;
+    SystemService service(nullptr, sandbox.home());
     service.setToolSearchPaths({PlasmaSandbox::tools()});
-    service.setVisualStyle(QStringLiteral("blur"));
-    QVERIFY(waitIdle(service));
-    QVERIFY(!service.darkTheme());
-    sandbox.takeCalls();
-
-    service.setTheme(QStringLiteral("dark"));
-    QVERIFY(waitIdle(service));
-    QVERIFY(service.darkTheme());
-    QCOMPARE(service.visualStyle(), QStringLiteral("blur"));
-    QCOMPARE(service.lastMessage(), QStringLiteral("Tema escuro aplicado."));
-    // The theme switch keeps the wallpaper.
-    QCOMPARE(sandbox.takeCalls(), (QStringList{QStringLiteral("lookandfeel Dream-Dark-Color-Global-6")}));
-
-    // A style chosen in dark mode uses the dark variant.
-    service.setVisualStyle(QStringLiteral("solid"));
-    QVERIFY(waitIdle(service));
-    QVERIFY(service.darkTheme());
-    QCOMPARE(sandbox.takeCalls().constFirst(), QStringLiteral("lookandfeel org.kde.breezedark.desktop"));
+    for (const QString &style : {QStringLiteral("blur"), QStringLiteral("glass"), QStringLiteral("solid")}) {
+        service.setVisualStyle(style);
+        QVERIFY(waitIdle(service));
+        for (const QString &id : {QStringLiteral("cyan"), QStringLiteral("violet")}) {
+            service.setAccent(id);
+            QVERIFY(waitIdle(service));
+            for (const QString &variant : {QStringLiteral("dark"), QStringLiteral("light")}) {
+                service.setTheme(variant);
+                QVERIFY(waitIdle(service));
+                QCOMPARE(service.visualStyle(), style);
+                QCOMPARE(service.darkTheme(), variant == "dark");
+                QCOMPARE(service.accentId(), id);
+                QCOMPARE(service.colorScheme(), AccentProfiles::find(id)->scheme(variant == "dark"));
+                QCOMPARE(service.iconTheme(), AccentProfiles::find(id)->iconTheme);
+                QVERIFY(!service.lastMessage().startsWith("Erro:"));
+            }
+        }
+    }
 }
 
 void MainuanTest::recordsTheChosenAccentColor()
 {
     PlasmaSandbox sandbox;
-    SystemService service;
+    SystemService service(nullptr, sandbox.home());
     service.setToolSearchPaths({PlasmaSandbox::tools()});
-
-    service.setAccent(QStringLiteral("#E8177D"));
-    QVERIFY(waitIdle(service));
-    QCOMPARE(sandbox.takeCalls(), (QStringList{
-        QStringLiteral("plasma-apply-colorscheme --accent-color #e8177d"),
-        QStringLiteral("plasma-apply-wallpaperimage ") + sandbox.data() + QStringLiteral("/wallpapers/03magenta.png")}));
-    QCOMPARE(service.lastMessage(), QStringLiteral("Cor Rosa e papel de parede aplicados."));
-    QCOMPARE(service.accentColor(), QStringLiteral("#e8177d"));
-    // Stored where System Settings stores it, so Plasma keeps it across global themes.
-    QFile globals(sandbox.config() + QStringLiteral("/kdeglobals"));
-    QVERIFY(globals.open(QIODevice::ReadOnly));
-    QVERIFY(globals.readAll().contains("AccentColor=232,23,125"));
-
-    // Each color applies its own wallpaper.
-    for (const AccentProfile &accent : AccentProfiles::profiles()) {
-        service.setAccent(accent.color);
-        QVERIFY(waitIdle(service));
-        QCOMPARE(sandbox.takeCalls().constLast(),
-                 QStringLiteral("plasma-apply-wallpaperimage ") + sandbox.data() + QStringLiteral("/wallpapers/") + accent.wallpaper);
-        QCOMPARE(service.accentColor(), accent.color);
+    for (const AccentProfile &profile : AccentProfiles::profiles()) {
+        for (bool dark : {false, true}) {
+            sandbox.appearance(profile.scheme(dark));
+            service.refresh();
+            service.setAccent(profile.id);
+            QVERIFY(waitIdle(service));
+            QCOMPARE(service.accentId(), profile.id);
+            QCOMPARE(service.colorScheme(), profile.scheme(dark));
+            QCOMPARE(service.iconTheme(), profile.iconTheme);
+            QCOMPARE(service.accentColor(), QStringLiteral("#11639b")); // Identity does not come from the hex swatch.
+            const QStringList expected = {"plasma-apply-colorscheme " + profile.scheme(dark),
+                "plasma-changeicons " + profile.iconTheme,
+                "plasma-apply-wallpaperimage " + sandbox.data() + "/wallpapers/" + profile.wallpaper};
+            QCOMPARE(sandbox.takeCalls(), expected);
+            QVERIFY(!PlasmaSandbox::read(sandbox.config() + "/kdeglobals").contains("AccentColor="));
+            QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), PlasmaSandbox::read(sandbox.data() + "/" + profile.avatar()));
+            QVERIFY(!service.lastMessage().startsWith("Erro:"));
+            SystemService reopened(nullptr, sandbox.home());
+            QCOMPARE(reopened.accentId(), profile.id);
+        }
     }
-
-    // Missing wallpaper: the color is applied, the wallpaper is reported, not claimed.
-    QVERIFY(QFile::remove(sandbox.data() + QStringLiteral("/wallpapers/06lima.png")));
-    service.setAccent(QStringLiteral("#3dd425"));
-    QVERIFY(waitIdle(service));
-    QCOMPARE(sandbox.takeCalls(), (QStringList{QStringLiteral("plasma-apply-colorscheme --accent-color #3dd425")}));
-    QCOMPARE(service.accentColor(), QStringLiteral("#3dd425"));
-    QCOMPARE(service.lastMessage(), QStringLiteral("Erro: Cor Verde aplicada, mas o papel de parede 06lima.png não foi encontrado."));
-
-    // The wallpaper tool fails.
-    qputenv("MOCK_WALLPAPER_FAIL", "1");
-    service.setAccent(QStringLiteral("#3daee9"));
-    QVERIFY(waitIdle(service));
-    QCOMPARE(service.lastMessage(), QStringLiteral("Erro: Cor Azul aplicada, mas não foi possível trocar o papel de parede."));
-    qunsetenv("MOCK_WALLPAPER_FAIL");
-    sandbox.takeCalls();
-
-    service.setAccent(QStringLiteral("red; rm -rf ~"));
+    service.setAccent("red; rm -rf ~");
     QVERIFY(!service.busy());
-    QCOMPARE(service.lastMessage(), QStringLiteral("Erro: Cor de destaque inválida."));
     QVERIFY(sandbox.takeCalls().isEmpty());
+}
+
+void MainuanTest::detectsAppearanceWithoutChangingUserResources()
+{
+    PlasmaSandbox sandbox;
+    sandbox.appearance("ExternalScheme", "custom-icons", "org.example.custom");
+    const QString globals = sandbox.config() + "/kdeglobals";
+    PlasmaSandbox::write(globals, PlasmaSandbox::read(globals) + "\n[General]\nAccentColor=232,23,125\nCustomPreference=keep\n");
+    const QByteArray before = PlasmaSandbox::read(globals);
+    PlasmaSandbox::write(sandbox.home() + "/.face", "custom avatar");
+    SystemService service(nullptr, sandbox.home());
+    service.setToolSearchPaths({PlasmaSandbox::tools()});
+    QVERIFY(service.accentId().isEmpty()); // Even a matching legacy hex cannot select a profile.
+    QCOMPARE(service.iconTheme(), QStringLiteral("custom-icons"));
+    QCOMPARE(PlasmaSandbox::read(globals), before);
+    QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), QByteArray("custom avatar"));
+    QVERIFY(!QFileInfo::exists(sandbox.home() + "/.face.mainuan-welcome-backup"));
+    QVERIFY(sandbox.takeCalls().isEmpty());
+    service.setTheme("dark");
+    QVERIFY(!service.busy());
+    QVERIFY(service.lastMessage().contains("esquema externo"));
+    QCOMPARE(PlasmaSandbox::read(globals), before);
+    // A known Dream scheme is recognized without copying anything on startup.
+    for (const AccentProfile &profile : AccentProfiles::profiles()) {
+        sandbox.appearance(profile.darkScheme, profile.iconTheme);
+        service.refresh();
+        QCOMPARE(service.accentId(), profile.id);
+        QCOMPARE(service.iconTheme(), profile.iconTheme);
+        QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), QByteArray("custom avatar"));
+    }
+}
+
+void MainuanTest::reportsPartialAccentFailures()
+{
+    PlasmaSandbox sandbox;
+    sandbox.appearance("BreezeLight", "breeze");
+    SystemService service(nullptr, sandbox.home());
+    service.setToolSearchPaths({PlasmaSandbox::tools()});
+    const QString index = sandbox.data() + "/icons/kora-magenta/index.theme";
+    QVERIFY(QFile::remove(index));
+    service.setAccent("magenta");
+    QVERIFY(waitIdle(service));
+    QCOMPARE(service.colorScheme(), QStringLiteral("DreamMagentaLightColor"));
+    QCOMPARE(service.iconTheme(), QStringLiteral("breeze"));
+    QVERIFY(service.lastMessage().contains("ícones kora-magenta"));
+    QVERIFY(!sandbox.takeCalls().contains("plasma-changeicons kora-magenta"));
+    QVERIFY(QFileInfo::exists(sandbox.home() + "/.face"));
+    PlasmaSandbox::write(index, "[Icon Theme]\nName=Broken\n");
+    service.setAccent("magenta");
+    QVERIFY(waitIdle(service));
+    QCOMPARE(service.iconTheme(), QStringLiteral("breeze"));
+    QVERIFY(service.lastMessage().contains("index.theme inválido"));
+    QVERIFY(QFile::remove(sandbox.data() + "/wallpapers/01ciano.png"));
+    service.setAccent("cyan");
+    QVERIFY(waitIdle(service));
+    QCOMPARE(service.colorScheme(), QStringLiteral("DreamCyanLightColor"));
+    QCOMPARE(service.iconTheme(), QStringLiteral("kora-cyan"));
+    QVERIFY(service.lastMessage().contains("papel de parede 01ciano.png ausente"));
+    qputenv("MOCK_WALLPAPER_FAIL", "1");
+    service.setAccent("violet");
+    QVERIFY(waitIdle(service));
+    QCOMPARE(service.accentId(), QStringLiteral("violet"));
+    QVERIFY(service.lastMessage().startsWith("Erro:"));
+    QVERIFY(service.lastMessage().contains("papel de parede"));
+    qunsetenv("MOCK_WALLPAPER_FAIL");
+    QVERIFY(QFile::remove(sandbox.data() + "/" + AccentProfiles::find("brown")->avatar()));
+    service.setAccent("brown");
+    QVERIFY(waitIdle(service));
+    QCOMPARE(service.colorScheme(), QStringLiteral("DreamBrownLightColor"));
+    QVERIFY(service.lastMessage().contains("avatar:"));
+    QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), PlasmaSandbox::read(sandbox.data() + "/" + AccentProfiles::find("violet")->avatar()));
+    qputenv("MOCK_ICONS_NOOP", "1");
+    service.setAccent("gray");
+    QVERIFY(waitIdle(service));
+    QCOMPARE(service.iconTheme(), QStringLiteral("kora-brown"));
+    QVERIFY(service.lastMessage().contains("não confirmou os ícones kora-grey"));
+}
+
+void MainuanTest::preservesAccentOverridesOnFailure()
+{
+    PlasmaSandbox sandbox;
+    sandbox.appearance("DreamCyanLightColor", "breeze");
+    const QString globals = sandbox.config() + "/kdeglobals";
+    PlasmaSandbox::write(globals, PlasmaSandbox::read(globals) + "\n[General]\nAccentColor=232,23,125\nCustomPreference=keep\n");
+    PlasmaSandbox::write(sandbox.home() + "/.face", "old avatar");
+    SystemService service(nullptr, sandbox.home());
+    service.setToolSearchPaths({PlasmaSandbox::tools()});
+    qputenv("MOCK_SCHEME_HIDDEN", "DreamBrownLightColor");
+    service.setAccent("brown");
+    QVERIFY(waitIdle(service));
+    QVERIFY(service.lastMessage().contains("não reconheceu"));
+    QCOMPARE(service.colorScheme(), QStringLiteral("DreamCyanLightColor"));
+    qunsetenv("MOCK_SCHEME_HIDDEN");
+    for (const char *flag : {"MOCK_SCHEME_FAIL", "MOCK_SCHEME_NOOP"}) {
+        qputenv(flag, "1");
+        service.setAccent("brown");
+        QVERIFY(waitIdle(service));
+        QCOMPARE(service.colorScheme(), QStringLiteral("DreamCyanLightColor"));
+        const KConfigGroup general(KSharedConfig::openConfig("kdeglobals"), "General");
+        QCOMPARE(general.readEntry("AccentColor", QString()), QStringLiteral("232,23,125"));
+        QCOMPARE(general.readEntry("CustomPreference", QString()), QStringLiteral("keep"));
+        QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), QByteArray("old avatar"));
+        QVERIFY(service.lastMessage().startsWith("Erro:"));
+        qunsetenv(flag);
+    }
+    // Same-scheme selection must fully reload, clearing the old tint.
+    service.setAccent("cyan");
+    QVERIFY(waitIdle(service));
+    QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+    QVERIFY(!PlasmaSandbox::read(globals).contains("AccentColor="));
+    QVERIFY(PlasmaSandbox::read(globals).contains("CustomPreference=keep"));
+    QCOMPARE(service.accentColor(), QStringLiteral("#11639b"));
+    // An inherited custom tint must not leak into the chosen scheme either.
+    const QString defaults = QDir(qEnvironmentVariable("XDG_CONFIG_DIRS")).filePath("kdeglobals");
+    PlasmaSandbox::write(defaults, "[General]\nAccentColor=255,0,0\n");
+    service.setAccent("magenta");
+    QVERIFY(waitIdle(service));
+    QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+    QCOMPARE(PlasmaSandbox::read(defaults), QByteArray("[General]\nAccentColor=255,0,0\n"));
+    QVERIFY(!PlasmaSandbox::read(globals).contains("AccentColor=255,0,0"));
+}
+
+void MainuanTest::backsUpAndSafelyReplacesAvatars()
+{
+    PlasmaSandbox sandbox;
+    const QString face = sandbox.home() + "/.face";
+    const QString backup = sandbox.home() + "/.face.mainuan-welcome-backup";
+    PlasmaSandbox::write(face, "original personal avatar bytes");
+    QVERIFY(QFile::setPermissions(face, QFileDevice::ReadOwner | QFileDevice::WriteOwner));
+    QVERIFY(QFile::link(face, sandbox.home() + "/.face.icon"));
+    for (const AccentProfile &profile : AccentProfiles::profiles()) {
+        const QString source = sandbox.data() + "/" + profile.avatar();
+        QVERIFY2(UserAvatar::update(source, sandbox.home()).isEmpty(), qPrintable(profile.id));
+        QCOMPARE(PlasmaSandbox::read(face), PlasmaSandbox::read(source));
+        QCOMPARE(PlasmaSandbox::read(backup), QByteArray("original personal avatar bytes"));
+        QVERIFY(QFileInfo(sandbox.home() + "/.face.icon").isSymLink());
+        QCOMPARE(QFileInfo(sandbox.home() + "/.face.icon").symLinkTarget(), face);
+        QVERIFY(!(QFile::permissions(face) & (QFileDevice::ReadGroup | QFileDevice::ReadOther | QFileDevice::WriteGroup | QFileDevice::WriteOther)));
+        QVERIFY(!(QFile::permissions(backup) & (QFileDevice::ReadGroup | QFileDevice::ReadOther | QFileDevice::WriteGroup | QFileDevice::WriteOther)));
+    }
+    // Original PNG bytes and independent .face.icon files remain unchanged.
+    const QString png = sandbox.data() + "/avatar.png";
+    QImage image(16, 16, QImage::Format_ARGB32);
+    image.fill(Qt::cyan);
+    QVERIFY(image.save(png, "PNG"));
+    QVERIFY(QFile::remove(sandbox.home() + "/.face.icon"));
+    PlasmaSandbox::write(sandbox.home() + "/.face.icon", "independent avatar");
+    QVERIFY(UserAvatar::update(png, sandbox.home()).isEmpty());
+    QCOMPARE(PlasmaSandbox::read(face), PlasmaSandbox::read(png));
+    QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face.icon"), QByteArray("independent avatar"));
+    QVERIFY(QFile::remove(sandbox.home() + "/.face.icon"));
+    QVERIFY(UserAvatar::update(png, sandbox.home()).isEmpty());
+    QCOMPARE(QFileInfo(sandbox.home() + "/.face.icon").symLinkTarget(), face);
+    QVERIFY(QDir(sandbox.home()).entryList({".mainuan-avatar-*"}, QDir::Files | QDir::Hidden).isEmpty());
+}
+
+void MainuanTest::rejectsUnsafeAvatarFilesAndWrites()
+{
+    PlasmaSandbox sandbox;
+    const QString source = sandbox.data() + "/" + AccentProfiles::find("cyan")->avatar();
+    const QString face = sandbox.home() + "/.face";
+    const QString external = sandbox.home() + "/external";
+    PlasmaSandbox::write(external, "must remain unchanged");
+    QVERIFY(QFile::link(external, face));
+    QVERIFY(!UserAvatar::update(source, sandbox.home()).isEmpty());
+    QCOMPARE(PlasmaSandbox::read(external), QByteArray("must remain unchanged"));
+    QVERIFY(QFile::remove(face));
+    PlasmaSandbox::write(face, "existing avatar");
+    const QString backup = sandbox.home() + "/.face.mainuan-welcome-backup";
+    QVERIFY(QFile::link(external, backup));
+    QVERIFY(!UserAvatar::update(source, sandbox.home()).isEmpty());
+    QCOMPARE(PlasmaSandbox::read(face), QByteArray("existing avatar"));
+    QVERIFY(QFile::remove(backup));
+    QVERIFY(!UserAvatar::update(sandbox.data() + "/missing", sandbox.home()).isEmpty());
+    const QString invalid = sandbox.data() + "/invalid";
+    PlasmaSandbox::write(invalid, "not an image");
+    QVERIFY(!UserAvatar::update(invalid, sandbox.home()).isEmpty());
+    const QString alias = sandbox.data() + "/alias";
+    QVERIFY(QFile::link(source, alias));
+    QVERIFY(!UserAvatar::update(alias, sandbox.home()).isEmpty());
+    QVERIFY(QFile::setPermissions(source, {}));
+    QVERIFY(!UserAvatar::update(source, sandbox.home()).isEmpty());
+    QVERIFY(QFile::setPermissions(source, QFileDevice::ReadOwner | QFileDevice::WriteOwner));
+    QVERIFY(QFile::setPermissions(sandbox.home(), QFileDevice::ReadOwner | QFileDevice::ExeOwner));
+    QVERIFY(!UserAvatar::update(source, sandbox.home()).isEmpty());
+    QCOMPARE(PlasmaSandbox::read(face), QByteArray("existing avatar"));
+    QVERIFY(!QFileInfo::exists(backup));
+    QVERIFY(QFile::setPermissions(sandbox.home(), QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ExeOwner));
+    const QString homeAlias = sandbox.data() + "/home-alias";
+    QVERIFY(QFile::link(sandbox.home(), homeAlias));
+    QVERIFY(!UserAvatar::update(source, homeAlias).isEmpty());
+    QVERIFY(QFile::setPermissions(sandbox.home(), QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ExeOwner | QFileDevice::WriteOther));
+    QVERIFY(!UserAvatar::update(source, sandbox.home()).isEmpty());
+    QFile::setPermissions(sandbox.home(), QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ExeOwner);
+    QCOMPARE(PlasmaSandbox::read(external), QByteArray("must remain unchanged"));
 }
 
 void MainuanTest::exposesModelRolesAndLocalVideoCatalog()
@@ -582,7 +824,7 @@ void MainuanTest::exposesModelRolesAndLocalVideoCatalog()
     const ApplicationEntry onlineEntry{
         QStringLiteral("gdocs"), QStringLiteral("Documentos"), QStringLiteral("Online"),
         QStringLiteral("webapp.gdocs"), QStringLiteral("qrc:/assets/webapp.gdocs.png"),
-        QStringLiteral("https://docs.google.com/")};
+        QStringLiteral("https://docs.google.com/"), ApplicationAction::WebPage};
     ApplicationModel applications(&packageService, {onlineEntry});
 
     QCOMPARE(applications.rowCount(), 1);
@@ -606,6 +848,123 @@ void MainuanTest::exposesModelRolesAndLocalVideoCatalog()
              QStringLiteral("qrc:/assets/icone-videoaulas_g204.svg"));
     QVERIFY(videos.data(videoIndex, VideoModel::FileSourceRole).toString().startsWith(
         QStringLiteral("file:///var/lib/curso-linux/videos/")));
+}
+
+void MainuanTest::distinguishesManagedApplicationActions()
+{
+    MockSystem system({}, {});
+    PackageService packages(nullptr, QStringLiteral("/nonexistent/flatpak"));
+    InstallService installer(&packages, mockBackend());
+    ApplicationModel model(&packages, {
+        {"freeoffice", "FreeOffice", {}, "softmaker-freeoffice-2024", "qrc:/assets/freeOffice.png", {}, ApplicationAction::InternalDebian},
+        {"vivaldi", "Vivaldi", {}, "com.vivaldi.Vivaldi", {}, {}},
+        {"zen", "Zen Browser", {}, "app.zen_browser.zen", {}, {}},
+        {"libreoffice", "LibreOffice", {}, "org.libreoffice.LibreOffice", {}, {}}
+    });
+    model.setInstallService(&installer);
+    QVERIFY(waitForDetection(installer));
+    QVERIFY(model.data(model.index(0), ApplicationModel::AvailableRole).toBool());
+    QCOMPARE(model.data(model.index(0), ApplicationModel::ActionTypeRole).toString(), QStringLiteral("debian"));
+    QCOMPARE(model.data(model.index(0), ApplicationModel::InstallProfileRole).toString(), QStringLiteral("freeoffice"));
+    QVERIFY(!model.remove(0));
+    for (const QString &id : {QStringLiteral("com.vivaldi.Vivaldi"), QStringLiteral("app.zen_browser.zen")}) {
+        QVERIFY(PackageService::isAllowedApplication(id));
+        QVERIFY(installer.profiles().contains(QStringLiteral("app:") + id));
+        QVERIFY(!installer.registerApplication(id, id, {}, {})); // No duplicate profiles.
+    }
+    QVERIFY(installer.profiles().contains(QStringLiteral("app:org.libreoffice.LibreOffice")));
+    for (int row = 1; row < 4; ++row) {
+        QVERIFY(!model.data(model.index(row), ApplicationModel::AvailableRole).toBool());
+        QCOMPARE(model.data(model.index(row), ApplicationModel::ActionTypeRole).toString(), QStringLiteral("flatpak"));
+    }
+}
+
+void MainuanTest::refreshesExternalFlatpaksAsynchronously()
+{
+    MockSystem system({}, {});
+    qputenv("MOCK_LIST_DELAY", "0.1");
+    PackageService packages(nullptr, fixture(QStringLiteral("flatpak")));
+    ApplicationModel model(&packages, {
+        {"vivaldi", "Vivaldi", {}, "com.vivaldi.Vivaldi", {}, {}, ApplicationAction::InternalFlatpak},
+        {"zen", "Zen Browser", {}, "app.zen_browser.zen", {}, {}, ApplicationAction::InternalFlatpak}
+    });
+    QSignalSpy changed(&packages, &PackageService::installedApplicationsChanged);
+    bool responsive = false;
+    QTimer::singleShot(0, &packages, [&responsive]() { responsive = true; });
+    packages.refresh(); // A return to Welcome during an ongoing query queues another query.
+    QTRY_VERIFY(responsive);
+    QTRY_VERIFY(changed.count() >= 2);
+    QVERIFY(!model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
+    system.setFlatpaks({QStringLiteral("com.vivaldi.Vivaldi"), QStringLiteral("app.zen_browser.zen")});
+    packages.refresh();
+    QTRY_VERIFY(model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
+    QTRY_VERIFY(model.data(model.index(1), ApplicationModel::InstalledRole).toBool());
+    QCOMPARE(model.data(model.index(1), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Instalado"));
+    system.setFlatpaks({});
+    packages.refresh();
+    QTRY_VERIFY(!model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
+    QTRY_VERIFY(!model.data(model.index(1), ApplicationModel::InstalledRole).toBool());
+}
+
+void MainuanTest::opensSpecificDiscoverPagesAndHandlesErrors()
+{
+    QTemporaryDir temp;
+    SystemService service;
+    PackageService packages(nullptr, QStringLiteral("/nonexistent/flatpak"));
+    ApplicationModel model(&packages, {
+        {"zen", "Zen Browser", {}, "app.zen_browser.zen", {}, {}, ApplicationAction::InternalFlatpak}
+    });
+    service.setToolSearchPaths({temp.path()});
+    QVERIFY(!service.openDiscover(QStringLiteral("com.vivaldi.Vivaldi")));
+    QVERIFY(service.lastMessage().contains(QStringLiteral("Discover não foi encontrado")));
+    service.setToolSearchPaths({fixture(QStringLiteral("discover"))});
+    QVERIFY(!service.openDiscover(QStringLiteral("com.vivaldi.Vivaldi; touch /tmp/untrusted")));
+    const QString log = temp.filePath(QStringLiteral("arguments"));
+    qputenv("MOCK_DISCOVER_LOG", log.toUtf8());
+    for (const QString &id : {QStringLiteral("com.vivaldi.Vivaldi"), QStringLiteral("app.zen_browser.zen")}) {
+        QVERIFY(service.openDiscover(id));
+        const QByteArray expected = "--application\nappstream://" + id.toUtf8() + '\n';
+        QTRY_VERIFY([&]() {
+            QFile file(log);
+            return file.open(QIODevice::ReadOnly) && file.readAll() == expected;
+        }());
+    }
+    qputenv("MOCK_DISCOVER_EXIT", "1");
+    QFile::remove(log);
+    QVERIFY(service.openDiscover(QStringLiteral("app.zen_browser.zen")));
+    QTRY_VERIFY(QFile::exists(log));
+    QVERIFY(!model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
+    QCOMPARE(model.data(model.index(0), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Indisponível"));
+    QFile::remove(log);
+    QVERIFY(service.openDiscover(QStringLiteral("app.zen_browser.zen"))); // Retry stays available.
+    QTRY_VERIFY(QFile::exists(log));
+    // An executable with a missing interpreter passes discovery but cannot start.
+    QFile broken(temp.filePath(QStringLiteral("plasma-discover")));
+    QVERIFY(broken.open(QIODevice::WriteOnly));
+    broken.write("#!/nonexistent/discover-interpreter\n");
+    broken.close();
+    QVERIFY(broken.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ExeOwner));
+    service.setToolSearchPaths({temp.path()});
+    QVERIFY(!service.openDiscover(QStringLiteral("app.zen_browser.zen")));
+    QVERIFY(service.lastMessage().startsWith(QStringLiteral("Erro:")));
+}
+
+void MainuanTest::requestsExternalDownloadThroughDesktopServices()
+{
+    UrlReceiver receiver;
+    SystemService service;
+    const QString url = QStringLiteral("https://www.softmaker.net/down/softmaker-freeoffice-2024_1238-01_amd64.deb");
+    QDesktopServices::setUrlHandler(QStringLiteral("https"), &receiver, "receive");
+    const bool opened = service.openUrl(url);
+    QDesktopServices::unsetUrlHandler(QStringLiteral("https"));
+    QVERIFY(opened);
+    QCOMPARE(receiver.received, QUrl(url));
+    QCOMPARE(service.lastMessage(), QStringLiteral("Abertura solicitada ao navegador."));
+    QVERIFY(!service.openUrl(QStringLiteral("file:///tmp/unsafe.deb")));
+    QVERIFY(service.lastMessage().startsWith(QStringLiteral("Erro:")));
+    // With no GUI application/default-browser integration, a rejected handoff is reported.
+    QVERIFY(!service.openUrl(url));
+    QVERIFY(service.lastMessage().contains(QStringLiteral("Não foi possível abrir a URL")));
 }
 
 void MainuanTest::parsesHelperProtocol()
@@ -1090,7 +1449,10 @@ void MainuanTest::collectsSystemReportWithoutSecrets()
     QVERIFY(text.contains(QStringLiteral("MAC 52:54:00:xx:xx:xx")));
     QVERIFY(!text.contains(QStringLiteral("12:34:56")));
     QVERIFY(!text.contains(QStringLiteral("Nome do computador")));
-    QVERIFY(!text.contains(QSysInfo::machineHostName()));
+    // A hostname such as "Mainuan" may also be part of the distribution name.
+    // Reject it as a complete exported field value, rather than a substring.
+    QVERIFY(!text.contains(QRegularExpression(QStringLiteral("(?:^|\\n)[^:\\n]+: *")
+        + QRegularExpression::escape(QSysInfo::machineHostName()) + QStringLiteral("(?:\\n|$)"))));
     QVERIFY(!text.contains(QRegularExpression(QStringLiteral("\\b\\d{1,3}(\\.\\d{1,3}){3}\\b"))));  // no IPv4 addresses
 
     const QVariantList sections = report.sections();

@@ -7,16 +7,22 @@
 #include <QProcess>
 #include <QString>
 #include <QStringList>
+#include <QVariantList>
 
 #include <functional>
 
 struct VisualStyleProfile;
+struct AccentProfile;
 
 class SystemService final : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool darkTheme READ darkTheme NOTIFY darkThemeChanged)
     Q_PROPERTY(QString accentColor READ accentColor NOTIFY accentColorChanged)
+    Q_PROPERTY(QString accentId READ accentId NOTIFY accentColorChanged)
+    Q_PROPERTY(QString colorScheme READ colorScheme NOTIFY accentColorChanged)
+    Q_PROPERTY(QString iconTheme READ iconTheme NOTIFY iconThemeChanged)
+    Q_PROPERTY(QVariantList accentProfiles READ accentProfiles CONSTANT)
     Q_PROPERTY(QString visualStyle READ visualStyle NOTIFY visualStyleChanged)
     Q_PROPERTY(bool visualStyleAvailable READ visualStyleAvailable NOTIFY visualStyleChanged)
     Q_PROPERTY(QStringList installedVisualStyles READ installedVisualStyles NOTIFY visualStyleChanged)
@@ -34,10 +40,14 @@ class SystemService final : public QObject
     Q_PROPERTY(bool busy READ busy NOTIFY busyChanged)
 
 public:
-    explicit SystemService(QObject *parent = nullptr);
+    explicit SystemService(QObject *parent = nullptr, const QString &userHome = {});
 
     bool darkTheme() const;
     QString accentColor() const;
+    QString accentId() const;
+    QString colorScheme() const;
+    QString iconTheme() const;
+    QVariantList accentProfiles() const;
     QString visualStyle() const;
     bool visualStyleAvailable() const;
     QStringList installedVisualStyles() const;
@@ -66,11 +76,13 @@ public:
     Q_INVOKABLE void setVisualStyle(const QString &style);
     Q_INVOKABLE void performAction(const QString &action);
     Q_INVOKABLE bool openUrl(const QString &url);
+    Q_INVOKABLE bool openDiscover(const QString &applicationId);
     Q_INVOKABLE bool copyText(const QString &text);
 
 signals:
     void darkThemeChanged();
     void accentColorChanged();
+    void iconThemeChanged();
     void visualStyleChanged();
     void plasmaVersionChanged();
     void pixKeyChanged();
@@ -93,18 +105,19 @@ private:
     void readPlasmaVersion();
     void setMessage(const QString &message, bool error = false);
     void setBusy(bool busy);
-    void runCommands(QList<Command> commands, const QString &successMessage, const QString &errorPrefix,
-                     std::function<void()> onSuccess = {});
     QString findTool(const QString &name) const;
     void runTool(const QString &program, const QStringList &arguments,
-                 std::function<void(bool ok, const QString &errorOutput)> done);
+                 std::function<void(bool ok, const QString &output)> done);
     void applyStyleProfile(const VisualStyleProfile &profile, bool dark, const QString &successMessage);
     // `replacedWallpaper` is the image the package replaced, empty if it kept it.
     void finishStyleProfile(const VisualStyleProfile &profile, bool dark, const QString &successMessage,
-                            const QString &replacedWallpaper);
+                            const QString &replacedWallpaper, const QString &accentId);
     // Image of the first desktop's wallpaper (file URL), empty when unknown.
     void readWallpaper(std::function<void(const QString &image)> done);
-    void applyAccentWallpaper(const QString &accent, const QString &colorMessage);
+    void validateScheme(const AccentProfile &profile, bool dark, std::function<void(const QString &)> done);
+    void applyAccentScheme(const AccentProfile &profile, bool dark, std::function<void(const QString &)> done);
+    void applyAccentExtras(const AccentProfile &profile, const QString &successMessage, QList<Command> steps = {});
+    void finishAppearance(const QString &successMessage, const QStringList &failures = {});
     void runStyleFollowUps(QList<Command> steps, QStringList failures,
                            std::function<void(const QStringList &failures)> done);
 
@@ -113,6 +126,10 @@ private:
     QStringList m_toolPaths;
     QStringList m_installedVisualStyles;
     QString m_accentColor;
+    QString m_accentId;
+    QString m_colorScheme;
+    QString m_iconTheme;
+    QString m_userHome;
     QString m_visualStyle;
     QString m_plasmaVersion;
     QString m_pixKey;

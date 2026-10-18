@@ -17,7 +17,11 @@ Rectangle {
             { x: 0.35, y: 0.85, w: 0.30, h: 0.10, pill: true }, { x: 0.69, y: 0.85, w: 0.17, h: 0.10, pill: true },
             { x: 0.88, y: 0.85, w: 0.10, h: 0.10, pill: true }],
         "panel-top": [{ x: 0, y: 0, w: 1, h: 0.10 }],
-        "floating": [{ x: 0.28, y: 0.83, w: 0.44, h: 0.12, pill: true }],
+        "three-panels": [
+            { x: 0.03, y: 0.85, w: 0.28, h: 0.10, pill: true },
+            { x: 0.34, y: 0.85, w: 0.32, h: 0.10, pill: true },
+            { x: 0.69, y: 0.85, w: 0.28, h: 0.10, pill: true }],
+        "single-bar": [{ x: 0.04, y: 0.85, w: 0.92, h: 0.10, pill: true }],
         "minimal": [{ x: 0, y: 0.935, w: 1, h: 0.065 }],
         "unity": [{ x: 0, y: 0, w: 1, h: 0.075 }, { x: 0, y: 0.075, w: 0.08, h: 0.925 }],
         "tiling": [

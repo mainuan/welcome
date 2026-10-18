@@ -3,7 +3,7 @@
 #include <QAbstractListModel>
 #include <QList>
 
-// The six desktop layouts shown in Aparência > Layout do desktop. Availability
+// The seven desktop layouts shown in Aparência > Layout do desktop. Availability
 // and the layout in use come from LayoutService.
 class LayoutModel final : public QAbstractListModel
 {

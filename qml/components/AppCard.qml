@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 Rectangle {
     id: card
+    objectName: "applicationCard-" + row
 
     property var appModel
     property var system
@@ -16,6 +17,8 @@ Rectangle {
     property bool available: false
     property string installState: ""
     property string webUrl: ""
+    property string actionType: "flatpak"
+    property string packageId: ""
     property string installProfile: ""
     property bool installerBusy: false
     property bool dark: false
@@ -47,6 +50,7 @@ Rectangle {
             color: elevatedColor
 
             Image {
+                objectName: "applicationArtwork"
                 anchors.fill: parent
                 anchors.margins: 13
                 source: card.appIcon
@@ -89,14 +93,19 @@ Rectangle {
                 elide: Text.ElideRight
             }
             Controls.Button {
-                Layout.preferredWidth: card.webUrl.length > 0 ? 78 : 102
-                Layout.minimumWidth: card.webUrl.length > 0 ? 72 : 94
-                text: card.webUrl.length > 0 ? "Abrir" : (card.busy ? "Aguarde…" : (card.installed ? "Remover" : "Instalar"))
-                icon.name: card.webUrl.length > 0 ? "internet-web-browser" : (card.installed ? "edit-delete" : "download")
-                enabled: card.available && !card.busy && (card.webUrl.length > 0 || card.installed || !card.installerBusy)
+                objectName: "installApplicationButton"
+                Layout.preferredWidth: card.actionType === "web" ? 78 : 102
+                Layout.minimumWidth: card.actionType === "web" ? 72 : 94
+                text: card.actionType === "web" ? "Abrir"
+                    : card.actionType === "debian" && card.installed ? "Instalado"
+                    : (card.busy ? "Aguarde…" : (card.installed ? "Remover" : "Instalar"))
+                icon.name: card.actionType === "web" ? "internet-web-browser"
+                    : card.actionType === "flatpak" && card.installed ? "edit-delete" : "download"
+                enabled: card.available && !card.busy && (card.actionType === "web" || !card.installerBusy)
+                    && !(card.actionType === "debian" && card.installed)
                 highlighted: !card.installed
                 onClicked: {
-                    if (card.webUrl.length > 0)
+                    if (card.actionType === "web")
                         card.system.openUrl(card.webUrl);
                     else if (card.installed)
                         card.appModel.remove(card.row);

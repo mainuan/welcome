@@ -1,5 +1,7 @@
 # Aparência e instalador universal — plano
 
+> Registro histórico do desenvolvimento experimental. Os números 2.x, resultados de execução e caminhos de capturas descrevem aquele momento. A primeira versão oficial é **1.0**; consulte a [documentação atual](README.md) antes de seguir instruções antigas.
+
 Planejamento escrito em 02/10/2026, antes da implementação, sobre a árvore de trabalho de `main` (HEAD `11d3547`).
 
 ## Qual aplicação é alterada

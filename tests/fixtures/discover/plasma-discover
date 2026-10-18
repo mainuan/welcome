@@ -1,0 +1,4 @@
+#!/bin/sh
+# Capture separate arguments without contacting the desktop or installing anything.
+printf '%s\n' "$@" > "$MOCK_DISCOVER_LOG"
+exit "${MOCK_DISCOVER_EXIT:-0}"

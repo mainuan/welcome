@@ -1,8 +1,10 @@
 #include "SystemService.h"
 
 #include "AccentProfile.h"
+#include "PackageService.h"
 #include "PlasmaInfo.h"
 #include "QrCode.h"
+#include "UserAvatar.h"
 #include "VisualStyle.h"
 
 #include <KConfigGroup>
@@ -21,8 +23,10 @@
 #include <QGuiApplication>
 #include <QLoggingCategory>
 #include <QPalette>
+#include <QRegularExpression>
 #include <QSettings>
 #include <QStandardPaths>
+#include <QThread>
 #include <QUrl>
 #include <memory>
 
@@ -66,8 +70,15 @@ bool lookAndFeelInstalled(const QString &package)
 
 bool iconThemeInstalled(const QString &theme)
 {
-    return !QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                   QStringLiteral("icons/") + theme + QStringLiteral("/index.theme")).isEmpty();
+    const QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+        QStringLiteral("icons/") + theme + QStringLiteral("/index.theme"));
+    if (file.isEmpty() || !QFileInfo(file).isReadable()) {
+        return false;
+    }
+    const KConfig config(file, KConfig::SimpleConfig);
+    const KConfigGroup group(&config, QStringLiteral("Icon Theme"));
+    return !group.readEntry("Name", QString()).trimmed().isEmpty()
+        && !group.readEntry("Directories", QStringList()).isEmpty();
 }
 
 bool cursorThemeInstalled(const QString &theme)
@@ -95,16 +106,16 @@ QColor configColor(const KConfigGroup &group, const char *key)
 {
     const QString raw = group.readEntry(key, QString()).trimmed();
     const QStringList channels = raw.split(QLatin1Char(','));
-    if (channels.size() == 3) {
-        int rgb[3];
-        for (int i = 0; i < 3; ++i) {
+    if (channels.size() == 3 || channels.size() == 4) {
+        int rgb[4] = {0, 0, 0, 255};
+        for (int i = 0; i < channels.size(); ++i) {
             bool ok = false;
             rgb[i] = channels.at(i).trimmed().toInt(&ok);
             if (!ok || rgb[i] < 0 || rgb[i] > 255) {
                 return {};
             }
         }
-        return QColor(rgb[0], rgb[1], rgb[2]);
+        return QColor(rgb[0], rgb[1], rgb[2], rgb[3]);
     }
     return raw.startsWith(QLatin1Char('#')) ? QColor(raw) : QColor();
 }
@@ -124,8 +135,9 @@ bool isDarkScheme(const QString &scheme)
 
 }
 
-SystemService::SystemService(QObject *parent)
+SystemService::SystemService(QObject *parent, const QString &userHome)
     : QObject(parent)
+    , m_userHome(userHome.isEmpty() ? QDir::homePath() : userHome)
     , m_sessionType(qEnvironmentVariable("XDG_SESSION_TYPE", QStringLiteral("unknown")).toLower())
     , m_logoSource(QFileInfo(kMainuanLogo).isReadable() ? QUrl::fromLocalFile(kMainuanLogo).toString() : QString())
 {
@@ -151,6 +163,20 @@ bool SystemService::darkTheme() const
 QString SystemService::accentColor() const
 {
     return m_accentColor;
+}
+
+QString SystemService::accentId() const { return m_accentId; }
+QString SystemService::colorScheme() const { return m_colorScheme; }
+QString SystemService::iconTheme() const { return m_iconTheme; }
+
+QVariantList SystemService::accentProfiles() const
+{
+    QVariantList result;
+    for (const AccentProfile &profile : AccentProfiles::profiles()) {
+        result.append(QVariantMap{{QStringLiteral("id"), profile.id}, {QStringLiteral("name"), profile.name},
+                                  {QStringLiteral("color"), profile.color}});
+    }
+    return result;
 }
 
 QString SystemService::visualStyle() const
@@ -230,9 +256,7 @@ bool SystemService::busy() const
 
 bool SystemService::isValidAccent(const QString &value)
 {
-    const QColor color(value.trimmed());
-    return color.isValid() && value.trimmed().startsWith(QLatin1Char('#'))
-        && (value.trimmed().size() == 7 || value.trimmed().size() == 9);
+    return AccentProfiles::find(value) != nullptr;
 }
 
 bool SystemService::isAllowedVisualStyle(const QString &value)
@@ -270,20 +294,26 @@ void SystemService::readDesktopState()
         emit darkThemeChanged();
     }
 
-    // AccentColor is written by System Settings and by setAccent(); when only
-    // plasma-apply-colorscheme --accent-color was used, the tinted selection
-    // color is the accent in effect.
+    const AccentProfile *profile = AccentProfiles::fromScheme(scheme);
+    const QString newId = profile != nullptr ? profile->id : QString();
     QColor accent = configColor(KConfigGroup(globals, QStringLiteral("General")), "AccentColor");
-    if (!accent.isValid()) {
+    if (!accent.isValid() || accent.alpha() == 0) {
         accent = configColor(KConfigGroup(globals, QStringLiteral("Colors:Selection")), "BackgroundNormal");
     }
     if (!accent.isValid() && guiApplication) {
         accent = QGuiApplication::palette().highlight().color();
     }
     const QString newAccent = accent.name(QColor::HexRgb).toLower();
-    if (newAccent != m_accentColor) {
+    if (newAccent != m_accentColor || newId != m_accentId || scheme != m_colorScheme) {
         m_accentColor = newAccent;
+        m_accentId = newId;
+        m_colorScheme = scheme;
         emit accentColorChanged();
+    }
+    const QString icons = KConfigGroup(globals, QStringLiteral("Icons")).readEntry("Theme", QString());
+    if (icons != m_iconTheme) {
+        m_iconTheme = icons;
+        emit iconThemeChanged();
     }
 }
 
@@ -405,54 +435,6 @@ void SystemService::setBusy(bool busy)
     }
 }
 
-void SystemService::runCommands(QList<Command> commands, const QString &successMessage, const QString &errorPrefix,
-                                std::function<void()> onSuccess)
-{
-    if (commands.isEmpty()) {
-        if (onSuccess) {
-            onSuccess();
-        } else {
-            setMessage(successMessage);
-            setBusy(false);
-            refresh();
-        }
-        return;
-    }
-    if (!m_busy) {
-        setBusy(true);
-        setMessage(QStringLiteral("Aplicando alteração…"));
-    }
-
-    const Command command = commands.takeFirst();
-    QProcess *process = new QProcess(this);
-    process->setStandardInputFile(QProcess::nullDevice());
-    const auto failedToStart = std::make_shared<bool>(false);
-    connect(process, &QProcess::errorOccurred, this, [this, process, failedToStart](QProcess::ProcessError error) {
-        if (error == QProcess::FailedToStart) {
-            *failedToStart = true;
-            setMessage(QStringLiteral("comando não encontrado"), true);
-            setBusy(false);
-            process->deleteLater();
-        }
-    });
-    connect(process, &QProcess::finished, this,
-            [this, process, commands, successMessage, errorPrefix, onSuccess, failedToStart](int exitCode, QProcess::ExitStatus) {
-                if (*failedToStart) {
-                    return;
-                }
-                const QString errorOutput = QString::fromLocal8Bit(process->readAllStandardError()).trimmed();
-                process->deleteLater();
-                if (exitCode != 0) {
-                    setMessage(errorPrefix + (errorOutput.isEmpty() ? QStringLiteral("código %1").arg(exitCode)
-                                                                    : errorOutput), true);
-                    setBusy(false);
-                    return;
-                }
-                runCommands(commands, successMessage, errorPrefix, onSuccess);
-            });
-    process->start(command.program, command.arguments);
-}
-
 void SystemService::setTheme(const QString &theme)
 {
     if (theme != QStringLiteral("dark") && theme != QStringLiteral("light")) {
@@ -465,6 +447,8 @@ void SystemService::setTheme(const QString &theme)
         return;
     }
 
+    readDesktopState();
+    readVisualStyle();
     // With a Mainuan style active, switch to its light or dark variant so the
     // theme and the style stay consistent.
     if (const VisualStyleProfile *profile = VisualStyles::find(m_visualStyle)) {
@@ -474,84 +458,198 @@ void SystemService::setTheme(const QString &theme)
         return;
     }
 
-    const QString executable = findTool(QStringLiteral("plasma-apply-colorscheme"));
-    if (executable.isEmpty()) {
-        setMessage(QStringLiteral("plasma-apply-colorscheme não está disponível."), true);
-        return;
+    if (const AccentProfile *accent = AccentProfiles::find(m_accentId)) {
+        setBusy(true);
+        validateScheme(*accent, theme == QStringLiteral("dark"), [this, accent, theme](const QString &error) {
+            if (!error.isEmpty()) {
+                finishAppearance({}, {error});
+                return;
+            }
+            applyAccentScheme(*accent, theme == QStringLiteral("dark"), [this, accent](const QString &failure) {
+                if (!failure.isEmpty()) {
+                    finishAppearance({}, {failure});
+                    return;
+                }
+                applyAccentExtras(*accent, QStringLiteral("Tema e cor %1 aplicados.").arg(accent->name));
+            });
+        });
+    } else {
+        setMessage(QStringLiteral("O esquema externo atual não possui uma variante conhecida. Selecione uma cor Mainuan primeiro."), true);
     }
-
-    const QString scheme = theme == QStringLiteral("dark") ? QStringLiteral("DreamGrayDarkColor")
-                                                              : QStringLiteral("DreamGrayLightColor");
-    runCommands({{executable, {scheme}, QStringLiteral("tema")}}, QStringLiteral("Tema aplicado."),
-                QStringLiteral("Não foi possível aplicar o tema: "));
 }
 
-void SystemService::setAccent(const QString &accent)
+void SystemService::setAccent(const QString &id)
 {
-    const QString normalized = accent.trimmed().toLower();
-    if (!isValidAccent(normalized)) {
+    const AccentProfile *profile = AccentProfiles::find(id);
+    if (profile == nullptr) {
         setMessage(QStringLiteral("Cor de destaque inválida."), true);
         return;
     }
-
-    const QString executable = findTool(QStringLiteral("plasma-apply-colorscheme"));
-    if (executable.isEmpty()) {
-        setMessage(QStringLiteral("plasma-apply-colorscheme não está disponível."), true);
+    if (m_busy) {
+        setMessage(QStringLiteral("Aguarde a operação atual terminar."), true);
         return;
     }
-
-    runCommands({{executable, {QStringLiteral("--accent-color"), normalized}, QStringLiteral("cor de destaque")}},
-                QStringLiteral("Cor de destaque aplicada."),
-                QStringLiteral("Não foi possível aplicar a cor: "),
-                [this, normalized]() {
-                    // plasma-apply-colorscheme only tints the current scheme. Record the
-                    // choice like System Settings does, so Plasma keeps it when the
-                    // global theme changes and the Welcome shows the exact color.
-                    KConfigGroup general(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), QStringLiteral("General"));
-                    const QColor color(normalized);
-                    general.writeEntry("AccentColor",
-                                       QStringLiteral("%1,%2,%3").arg(color.red()).arg(color.green()).arg(color.blue()),
-                                       KConfig::Notify);
-                    general.sync();
-                    announcePaletteChange();
-                    readDesktopState();
-                    applyAccentWallpaper(normalized, QStringLiteral("Cor de destaque aplicada."));
-                });
+    readDesktopState();
+    const bool dark = m_darkTheme;
+    setBusy(true);
+    setMessage(QStringLiteral("Aplicando cor %1…").arg(profile->name));
+    validateScheme(*profile, dark, [this, profile, dark](const QString &error) {
+        if (!error.isEmpty()) {
+            finishAppearance({}, {error});
+            return;
+        }
+        applyAccentScheme(*profile, dark, [this, profile](const QString &failure) {
+            if (!failure.isEmpty()) {
+                finishAppearance({}, {failure});
+                return;
+            }
+            applyAccentExtras(*profile, QStringLiteral("Cor %1, ícones, papel de parede e avatar aplicados.").arg(profile->name));
+        });
+    });
 }
 
-// Sets the Mainuan wallpaper that matches `accent` on every desktop
-// (plasma-apply-wallpaperimage walks all desktops, so all monitors).
-void SystemService::applyAccentWallpaper(const QString &accent, const QString &colorMessage)
+void SystemService::validateScheme(const AccentProfile &profile, bool dark, std::function<void(const QString &)> done)
 {
-    const AccentProfile *profile = AccentProfiles::find(accent);
-    if (profile == nullptr) {
-        setMessage(colorMessage);
-        setBusy(false);
+    const QString scheme = profile.scheme(dark);
+    const QString file = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+        QStringLiteral("color-schemes/") + scheme + QStringLiteral(".colors"));
+    if (file.isEmpty() || !QFileInfo(file).isReadable()) {
+        done(QStringLiteral("Esquema %1.colors ausente ou ilegível.").arg(scheme));
         return;
+    }
+    const KConfig config(file, KConfig::SimpleConfig);
+    if (KConfigGroup(&config, QStringLiteral("General")).readEntry("Name", QString()).trimmed().isEmpty()
+        || !configColor(KConfigGroup(&config, QStringLiteral("Colors:Window")), "BackgroundNormal").isValid()) {
+        done(QStringLiteral("Esquema %1.colors inválido.").arg(scheme));
+        return;
+    }
+    const QString tool = findTool(QStringLiteral("plasma-apply-colorscheme"));
+    if (tool.isEmpty()) {
+        done(QStringLiteral("plasma-apply-colorscheme não está disponível."));
+        return;
+    }
+    runTool(tool, {QStringLiteral("--list-schemes")}, [scheme, done](bool ok, const QString &output) {
+        const QRegularExpression listed(QStringLiteral("(?:^|\\n)\\s*\\*\\s+") + QRegularExpression::escape(scheme)
+                                        + QStringLiteral("(?:\\s|$)"));
+        done(ok && listed.match(output).hasMatch() ? QString()
+             : QStringLiteral("O Plasma não reconheceu o esquema %1.colors.").arg(scheme));
+    });
+}
+
+void SystemService::applyAccentScheme(const AccentProfile &profile, bool dark, std::function<void(const QString &)> done)
+{
+    const QString scheme = profile.scheme(dark);
+    const QString tool = findTool(QStringLiteral("plasma-apply-colorscheme"));
+    const auto globals = freshConfig(QStringLiteral("kdeglobals"));
+    KConfigGroup general(globals, QStringLiteral("General"));
+    // Snapshot only the two keys this operation owns, including whether they
+    // were inherited. No other user preferences are removed or rewritten.
+    const KConfig local(QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation)
+                        + QStringLiteral("/kdeglobals"), KConfig::SimpleConfig);
+    const KConfigGroup localGeneral(&local, QStringLiteral("General"));
+    const bool hadScheme = localGeneral.hasKey("ColorScheme");
+    const QString oldScheme = localGeneral.readEntry("ColorScheme", QString());
+    const bool hadAccent = localGeneral.hasKey("AccentColor");
+    const QString oldAccent = localGeneral.readEntry("AccentColor", QString());
+    const auto restore = [globals, hadScheme, oldScheme, hadAccent, oldAccent]() {
+        globals->reparseConfiguration();
+        KConfigGroup group(globals, QStringLiteral("General"));
+        if (hadScheme) group.writeEntry("ColorScheme", oldScheme, KConfig::Notify);
+        else group.revertToDefault("ColorScheme", KConfig::Notify);
+        if (hadAccent) group.writeEntry("AccentColor", oldAccent, KConfig::Notify);
+        else group.revertToDefault("AccentColor", KConfig::Notify);
+        group.sync();
+    };
+    // The CLI deliberately skips an already-selected scheme. Clear its selector
+    // temporarily to force a full reload, including after removing a custom tint.
+    // Startup never changes these keys.
+    general.deleteEntry("AccentColor");
+    general.writeEntry("ColorScheme", QString());
+    bool prepared = general.sync();
+    KConfigGroup effective(freshConfig(QStringLiteral("kdeglobals")), QStringLiteral("General"));
+    // Deleting a local override can expose an inherited custom accent. KDE's
+    // transparent setting disables tinting without modifying the defaults file.
+    if (effective.hasKey("AccentColor")) {
+        effective.writeEntry("AccentColor", QStringLiteral("0,0,0,0"));
+        prepared = effective.sync() && prepared;
+    }
+    const KConfigGroup checked(freshConfig(QStringLiteral("kdeglobals")), QStringLiteral("General"));
+    const QColor remaining = configColor(checked, "AccentColor");
+    if (!prepared || !checked.readEntry("ColorScheme", QString()).isEmpty()
+        || (checked.hasKey("AccentColor") && (!remaining.isValid() || remaining.alpha() > 0))) {
+        restore();
+        done(QStringLiteral("Não foi possível preparar a configuração de cores do KDE."));
+        return;
+    }
+    runTool(tool, {scheme}, [this, scheme, restore, done](bool ok, const QString &output) {
+        const KConfigGroup applied(freshConfig(QStringLiteral("kdeglobals")), QStringLiteral("General"));
+        const QColor override = configColor(applied, "AccentColor");
+        if (!ok || applied.readEntry("ColorScheme", QString()) != scheme || (override.isValid() && override.alpha() > 0)) {
+            qCWarning(lcAppearance) << "scheme not confirmed:" << scheme << "process succeeded:" << ok
+                                   << "reported scheme:" << applied.readEntry("ColorScheme", QString())
+                                   << "custom accent:" << override << "tool result:" << lastLine(output);
+            restore();
+            done(QStringLiteral("O Plasma não confirmou o esquema %1 sem substituição de cor.").arg(scheme));
+            return;
+        }
+        announcePaletteChange();
+        readDesktopState();
+        done({});
+    });
+}
+
+void SystemService::applyAccentExtras(const AccentProfile &profile, const QString &successMessage, QList<Command> steps)
+{
+    QStringList failures;
+    if (!iconThemeInstalled(profile.iconTheme)) {
+        failures << QStringLiteral("tema de ícones %1 ausente ou index.theme inválido (ícones anteriores preservados)").arg(profile.iconTheme);
+    } else {
+        steps.prepend({findTool(QStringLiteral("plasma-changeicons")), {profile.iconTheme}, QStringLiteral("ícones ") + profile.iconTheme});
     }
     const QString wallpaper = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                     QStringLiteral("wallpapers/") + profile->wallpaper);
-    const QString tool = findTool(QStringLiteral("plasma-apply-wallpaperimage"));
-    if (wallpaper.isEmpty() || tool.isEmpty()) {
-        qCWarning(lcAppearance) << "wallpaper not applied:" << profile->wallpaper
-                                << (wallpaper.isEmpty() ? "file not found" : "plasma-apply-wallpaperimage missing");
-        setMessage(QStringLiteral("Cor %1 aplicada, mas o papel de parede %2 não foi encontrado.")
-                       .arg(profile->name, profile->wallpaper),
-                   true);
-        setBusy(false);
-        return;
+        QStringLiteral("wallpapers/") + profile.wallpaper);
+    if (wallpaper.isEmpty()) {
+        failures << QStringLiteral("papel de parede %1 ausente").arg(profile.wallpaper);
+    } else {
+        steps.append({findTool(QStringLiteral("plasma-apply-wallpaperimage")), {wallpaper}, QStringLiteral("papel de parede")});
     }
-    runTool(tool, {wallpaper}, [this, profile](bool ok, const QString &errorOutput) {
-        if (ok) {
-            qCInfo(lcAppearance) << "accent" << profile->name << "wallpaper" << profile->wallpaper;
-            setMessage(QStringLiteral("Cor %1 e papel de parede aplicados.").arg(profile->name));
-        } else {
-            qCWarning(lcAppearance) << "plasma-apply-wallpaperimage failed:" << errorOutput.trimmed();
-            setMessage(QStringLiteral("Cor %1 aplicada, mas não foi possível trocar o papel de parede.").arg(profile->name),
-                       true);
+    runStyleFollowUps(steps, failures, [this, profile, successMessage](QStringList errors) {
+        readDesktopState();
+        if (iconThemeInstalled(profile.iconTheme) && m_iconTheme != profile.iconTheme) {
+            errors << QStringLiteral("o Plasma não confirmou os ícones %1").arg(profile.iconTheme);
         }
-        setBusy(false);
+        // External changes during the async operation must not select an avatar
+        // for a scheme that is no longer active.
+        if (AccentProfiles::fromScheme(m_colorScheme) == AccentProfiles::find(profile.id)) {
+            const QString source = QStandardPaths::locate(QStandardPaths::GenericDataLocation, profile.avatar());
+            const auto result = std::make_shared<QString>();
+            // Image decoding, copying and fsync can be slow on a network home.
+            // The worker owns only values; it never touches QML or this service.
+            auto *worker = QThread::create([source, home = m_userHome, result]() {
+                *result = UserAvatar::update(source, home);
+            });
+            connect(worker, &QThread::finished, worker, &QObject::deleteLater);
+            connect(worker, &QThread::finished, this, [this, successMessage, errors, result]() mutable {
+                if (!result->isEmpty()) errors << QStringLiteral("avatar: ") + *result;
+                finishAppearance(successMessage, errors);
+            });
+            worker->start();
+            return;
+        } else {
+            errors << QStringLiteral("esquema alterado durante a operação; avatar preservado");
+        }
+        finishAppearance(successMessage, errors);
     });
+}
+
+void SystemService::finishAppearance(const QString &successMessage, const QStringList &failures)
+{
+    readDesktopState();
+    readVisualStyle();
+    setMessage(failures.isEmpty() ? successMessage
+               : QStringLiteral("Não foi possível concluir todos os ajustes: ") + failures.join(QStringLiteral("; ")) + QLatin1Char('.'),
+               !failures.isEmpty());
+    setBusy(false);
 }
 
 void SystemService::readWallpaper(std::function<void(const QString &)> done)
@@ -578,6 +676,7 @@ void SystemService::setVisualStyle(const QString &style)
         setMessage(QStringLiteral("Aguarde a operação atual terminar."), true);
         return;
     }
+    readDesktopState();
     applyStyleProfile(*profile, m_darkTheme, QStringLiteral("Estilo %1 aplicado.").arg(profile->name));
 }
 
@@ -587,9 +686,10 @@ void SystemService::runTool(const QString &program, const QStringList &arguments
     auto *process = new QProcess(this);
     process->setStandardInputFile(QProcess::nullDevice());
     connect(process, &QProcess::finished, this, [process, done](int exitCode, QProcess::ExitStatus status) {
-        const QString errorOutput = QString::fromLocal8Bit(process->readAllStandardError());
+        const bool ok = status == QProcess::NormalExit && exitCode == 0;
+        const QString output = QString::fromLocal8Bit(ok ? process->readAllStandardOutput() : process->readAllStandardError());
         process->deleteLater();
-        done(status == QProcess::NormalExit && exitCode == 0, errorOutput);
+        done(ok, output);
     });
     connect(process, &QProcess::errorOccurred, this, [process, done](QProcess::ProcessError error) {
         if (error == QProcess::FailedToStart) {
@@ -618,74 +718,80 @@ void SystemService::applyStyleProfile(const VisualStyleProfile &profile, bool da
         setMessage(QStringLiteral("O estilo %1 não está instalado neste sistema.").arg(profile.name), true);
         return;
     }
-
+    // Snapshot the identity before KConfigWatcher sees the global theme's defaults.
+    const QString accentId = m_accentId;
+    const AccentProfile *accent = AccentProfiles::find(accentId);
+    if (accent != nullptr && (!iconThemeInstalled(accent->iconTheme)
+                             || findTool(QStringLiteral("plasma-changeicons")).isEmpty())) {
+        setMessage(QStringLiteral("Não foi possível preservar o tema de ícones %1. Estilo anterior preservado.").arg(accent->iconTheme), true);
+        return;
+    }
     setBusy(true);
     setMessage(QStringLiteral("Aplicando estilo %1…").arg(profile.name));
-    qCInfo(lcAppearance) << "applying" << profile.name << package;
-
-    readWallpaper([this, lookAndFeelTool, package, profile, dark, successMessage](const QString &wallpaperBefore) {
-        // `package` comes from the closed profile table, never from QML.
-        runTool(lookAndFeelTool, {QStringLiteral("--apply"), package},
-                [this, profile, dark, successMessage, wallpaperBefore](bool ok, const QString &errorOutput) {
-                    if (!ok) {
-                        qCWarning(lcAppearance) << "plasma-apply-lookandfeel failed:" << errorOutput.trimmed();
-                        const QString detail = lastLine(errorOutput);
-                        setMessage(QStringLiteral("Não foi possível aplicar o estilo %1.").arg(profile.name)
-                                       + (detail.isEmpty() ? QString() : QStringLiteral(" (") + detail + QLatin1Char(')')),
-                                   true);
-                        readDesktopState();
-                        readVisualStyle();
-                        setBusy(false);
-                        return;
-                    }
-                    readWallpaper([this, profile, dark, successMessage, wallpaperBefore](const QString &wallpaperAfter) {
-                        finishStyleProfile(profile, dark, successMessage, wallpaperBefore != wallpaperAfter
-                                                                               ? wallpaperBefore : QString());
-                    });
+    const auto apply = [this, lookAndFeelTool, package, profile, dark, successMessage, accentId](const QString &error) {
+        if (!error.isEmpty()) {
+            finishAppearance({}, {error});
+            return;
+        }
+        readWallpaper([this, lookAndFeelTool, package, profile, dark, successMessage, accentId](const QString &wallpaperBefore) {
+            runTool(lookAndFeelTool, {QStringLiteral("--apply"), package},
+                    [this, profile, dark, successMessage, wallpaperBefore, accentId](bool ok, const QString &output) {
+                if (!ok) {
+                    finishAppearance({}, {QStringLiteral("Não foi possível aplicar o estilo %1.").arg(profile.name) + lastLine(output)});
+                    return;
+                }
+                // The process has finished; confirm the global theme before any
+                // restoration. No timers race a later look-and-feel process.
+                readDesktopState();
+                readVisualStyle();
+                if (m_visualStyle != profile.id || m_darkTheme != dark) {
+                    finishAppearance({}, {QStringLiteral("O Plasma não confirmou o estilo %1.").arg(profile.name)});
+                    return;
+                }
+                readWallpaper([this, profile, dark, successMessage, wallpaperBefore, accentId](const QString &wallpaperAfter) {
+                    finishStyleProfile(profile, dark, successMessage,
+                        wallpaperBefore != wallpaperAfter ? wallpaperBefore : QString(), accentId);
                 });
-    });
+            });
+        });
+    };
+    if (accent != nullptr) validateScheme(*accent, dark, apply);
+    else apply({});
 }
 
 void SystemService::finishStyleProfile(const VisualStyleProfile &profile, bool dark, const QString &successMessage,
-                                       const QString &replacedWallpaper)
+                                      const QString &replacedWallpaper, const QString &accentId)
 {
     QList<Command> followUps;
+    const AccentProfile *accent = AccentProfiles::find(accentId);
     const QString icons = KConfigGroup(freshConfig(QStringLiteral("kdeglobals")), QStringLiteral("Icons"))
                               .readEntry("Theme", QString());
     const QString fallbackIcons = dark ? profile.fallbackDarkIcons : profile.fallbackLightIcons;
-    if (!icons.isEmpty() && !iconThemeInstalled(icons) && iconThemeInstalled(fallbackIcons)) {
+    if (accent == nullptr && !icons.isEmpty() && !iconThemeInstalled(icons) && iconThemeInstalled(fallbackIcons)) {
         followUps.append({findTool(QStringLiteral("plasma-changeicons")), {fallbackIcons}, QStringLiteral("ícones")});
     }
     const QString cursor = KConfigGroup(freshConfig(QStringLiteral("kcminputrc")), QStringLiteral("Mouse"))
                                .readEntry("cursorTheme", QString());
     if (!cursor.isEmpty() && !cursorThemeInstalled(cursor) && cursorThemeInstalled(profile.fallbackCursor)) {
-        followUps.append({findTool(QStringLiteral("plasma-apply-cursortheme")), {profile.fallbackCursor},
-                          QStringLiteral("cursor")});
+        followUps.append({findTool(QStringLiteral("plasma-apply-cursortheme")), {profile.fallbackCursor}, QStringLiteral("cursor")});
+    }
+    if (accent != nullptr) {
+        applyAccentScheme(*accent, dark, [this, accent, successMessage, followUps](const QString &error) {
+            if (!error.isEmpty()) {
+                finishAppearance({}, {error});
+                return;
+            }
+            applyAccentExtras(*accent, successMessage, followUps);
+        });
+        return;
     }
     if (!replacedWallpaper.isEmpty()) {
-        const AccentProfile *accent = AccentProfiles::find(m_accentColor);
-        const QString wallpaper = accent != nullptr
-            ? QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("wallpapers/") + accent->wallpaper)
-            : QUrl(replacedWallpaper).toLocalFile();
-        qCInfo(lcAppearance) << "the style changed the wallpaper; restoring" << wallpaper;
+        const QString wallpaper = QUrl(replacedWallpaper).toLocalFile();
         followUps.append({wallpaper.isEmpty() ? QString() : findTool(QStringLiteral("plasma-apply-wallpaperimage")),
                           {wallpaper}, QStringLiteral("papel de parede")});
     }
-
-    runStyleFollowUps(followUps, {}, [this, profile, successMessage](const QStringList &failures) {
-        readDesktopState();
-        readVisualStyle();
-        if (m_visualStyle != profile.id) {
-            qCWarning(lcAppearance) << "style not confirmed after applying" << profile.name;
-            setMessage(QStringLiteral("O Plasma não confirmou o estilo %1.").arg(profile.name), true);
-        } else if (!failures.isEmpty()) {
-            setMessage(successMessage + QStringLiteral(" Não foi possível ajustar: ")
-                           + failures.join(QStringLiteral(", ")) + QLatin1Char('.'),
-                       true);
-        } else {
-            setMessage(successMessage);
-        }
-        setBusy(false);
+    runStyleFollowUps(followUps, {}, [this, successMessage](const QStringList &failures) {
+        finishAppearance(successMessage, failures);
     });
 }
 
@@ -738,7 +844,32 @@ bool SystemService::openUrl(const QString &url)
         setMessage(QStringLiteral("URL bloqueada por segurança."), true);
         return false;
     }
-    return QDesktopServices::openUrl(parsed);
+    const bool opened = QDesktopServices::openUrl(parsed);
+    setMessage(opened ? QStringLiteral("Abertura solicitada ao navegador.")
+                      : QStringLiteral("Não foi possível abrir a URL no navegador padrão."), !opened);
+    return opened;
+}
+
+bool SystemService::openDiscover(const QString &applicationId)
+{
+    if (!PackageService::isDiscoverApplication(applicationId)) {
+        setMessage(QStringLiteral("Aplicativo não permitido para abertura no Discover."), true);
+        return false;
+    }
+    const QString executable = findTool(QStringLiteral("plasma-discover"));
+    if (executable.isEmpty()) {
+        setMessage(QStringLiteral("O Discover não foi encontrado. Instale o KDE Discover para abrir este aplicativo."), true);
+        return false;
+    }
+    // Discover owns the confirmation and installation, and must remain open
+    // even if the user closes the Welcome. A successful launch is not an install.
+    if (!QProcess::startDetached(executable, {QStringLiteral("--application"), QStringLiteral("appstream://") + applicationId})) {
+        setMessage(QStringLiteral("Não foi possível abrir a página no Discover. Tente novamente."), true);
+        return false;
+    }
+    setMessage(QStringLiteral("Abertura da página solicitada ao Discover. Confirme a instalação no Discover; "
+                              "se o aplicativo não for encontrado, verifique o Flathub e tente novamente."));
+    return true;
 }
 
 bool SystemService::copyText(const QString &text)

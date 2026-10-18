@@ -10,6 +10,7 @@ say() { printf '%s\n' "$*"; sleep "$delay"; }
 case "$2" in
     antivirus) packages=(clamav clamav-daemon clamav-freshclam) ;;
     firewall) packages=(ufw plasma-firewall) ;;
+    freeoffice) packages=(softmaker-freeoffice-2024); cat > /dev/null ;;
     codecs) packages=(gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad ffmpeg) ;;
     *) say "@@error invalid"; exit 2 ;;
 esac
@@ -50,7 +51,7 @@ if (( ${#missing[@]} > 0 )); then
         fi
         say "pmstatus:$package:$(( base + 200 / total / 3 )):Configuring $package (amd64)"
         say "pmstatus:$package:$(( base + 100 / total )):Installed $package (amd64)"
-        echo "$package" >>"$state"
+        [[ ${MOCK_SCENARIO:-success} == helper-noop ]] || echo "$package" >>"$state"
         index=$((index + 1))
     done
 fi

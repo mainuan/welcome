@@ -6,6 +6,10 @@
 #include <QCoreApplication>
 #include <QFileInfo>
 #include <QLibraryInfo>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QSysInfo>
 #include <QRegularExpression>
 #include <QStandardPaths>
 #include <QTimer>
@@ -71,6 +75,18 @@ QString friendlyError(const QString &kind)
     }
     if (kind == QStringLiteral("flatpak-missing")) {
         return QStringLiteral("O Flatpak não está disponível neste sistema.");
+    }
+    if (kind == QStringLiteral("freeoffice-download")) {
+        return QStringLiteral("Não foi possível baixar o FreeOffice da origem oficial autorizada. "
+                              "Verifique a conexão e tente novamente. Redirecionamentos e outras versões são recusados.");
+    }
+    if (kind == QStringLiteral("freeoffice-invalid")) {
+        return QStringLiteral("O arquivo do FreeOffice não corresponde ao pacote autorizado "
+                              "(integridade, tamanho, nome, versão ou arquitetura). A instalação foi interrompida.");
+    }
+    if (kind == QStringLiteral("verification")) {
+        return QStringLiteral("O instalador terminou, mas não foi possível confirmar que o aplicativo está instalado. "
+                              "Verifique os detalhes e tente novamente.");
     }
     return QStringLiteral("O sistema não conseguiu instalar todos os componentes. Tente novamente; se o problema "
                           "continuar, use “Ver detalhes” para obter as informações técnicas.");
@@ -148,6 +164,7 @@ InstallService::InstallService(PackageService *packages, Backend backend, QObjec
     Profile antivirus;
     antivirus.id = QStringLiteral("antivirus");
     antivirus.name = QStringLiteral("Antivírus");
+    antivirus.source = QStringLiteral("Repositórios configurados / Flathub");
     antivirus.description = QStringLiteral("Proteção ClamAV com a interface gráfica ClamUI.");
     antivirus.iconName = QStringLiteral("security-high");
     antivirus.runningTitle = QStringLiteral("Instalando ClamAV + ClamUI");
@@ -172,6 +189,7 @@ InstallService::InstallService(PackageService *packages, Backend backend, QObjec
     Profile firewall;
     firewall.id = QStringLiteral("firewall");
     firewall.name = QStringLiteral("Firewall");
+    firewall.source = QStringLiteral("Repositórios configurados");
     firewall.description = QStringLiteral("UFW com o módulo de firewall do KDE Plasma.");
     firewall.iconName = QStringLiteral("security-medium");
     firewall.runningTitle = QStringLiteral("Instalando Firewall");
@@ -192,6 +210,7 @@ InstallService::InstallService(PackageService *packages, Backend backend, QObjec
     Profile codecs;
     codecs.id = QStringLiteral("codecs");
     codecs.name = QStringLiteral("Codecs de mídia");
+    codecs.source = QStringLiteral("Repositórios configurados");
     codecs.description = QStringLiteral("Suporte aos formatos de áudio e vídeo mais usados.");
     codecs.iconName = QStringLiteral("applications-multimedia");
     codecs.runningTitle = QStringLiteral("Instalando codecs de mídia");
@@ -209,7 +228,25 @@ InstallService::InstallService(PackageService *packages, Backend backend, QObjec
                             {QStringLiteral("ffmpeg"), QStringLiteral("FFmpeg")},
                             {QStringLiteral("libav"), QStringLiteral("FFmpeg")}};
 
-    m_profiles = {antivirus, firewall, codecs};
+    Profile freeoffice;
+    freeoffice.id = QStringLiteral("freeoffice");
+    freeoffice.name = QStringLiteral("FreeOffice");
+    freeoffice.source = QStringLiteral("SoftMaker");
+    freeoffice.description = QStringLiteral("Suíte de escritório gratuita da SoftMaker.");
+    freeoffice.iconSource = QStringLiteral("qrc:/assets/freeOffice.png");
+    freeoffice.runningTitle = QStringLiteral("Instalando FreeOffice");
+    freeoffice.successTitle = QStringLiteral("FreeOffice instalado com sucesso");
+    freeoffice.successMessage = QStringLiteral("O FreeOffice está instalado e disponível no menu de aplicativos.");
+    freeoffice.sourceNotice = QStringLiteral("Origem: SoftMaker — %1\n"
+        "FreeOffice 2024, revisão 1238 (pacote Debian 3714, amd64). "
+        "Após o download e a validação, o sistema solicitará autorização administrativa. "
+        "Este pacote externo contém scripts do fabricante que serão executados como administrador.")
+        .arg(m_backend.freeOffice.url.toString());
+    freeoffice.usesHelper = true;
+    freeoffice.components = {{QStringLiteral("FreeOffice"), {QStringLiteral("softmaker-freeoffice-2024")}, {}, {}}};
+    freeoffice.packageLabels = {{QStringLiteral("softmaker-freeoffice-2024"), QStringLiteral("FreeOffice")}};
+    m_profiles = {antivirus, firewall, codecs, freeoffice};
+    m_network = m_backend.network != nullptr ? m_backend.network : new QNetworkAccessManager(this);
 
     connect(m_packages, &PackageService::installedApplicationsChanged, this, &InstallService::profilesChanged);
     connect(m_packages, &PackageService::flatpakAvailableChanged, this, &InstallService::profilesChanged);
@@ -236,7 +273,7 @@ InstallService::Phase InstallService::currentPhase() const { return m_phase; }
 
 int InstallService::step() const
 {
-    return m_stepIndex < 0 ? 0 : m_stepIndex + 1;
+    return m_stepIndex < 0 ? 0 : std::min(m_stepIndex + 1, static_cast<int>(m_steps.size()));
 }
 
 int InstallService::stepCount() const
@@ -259,12 +296,14 @@ bool InstallService::isSystemProfile(const QString &profileId)
 bool InstallService::registerApplication(const QString &flatpakId, const QString &name, const QString &description,
                                          const QString &iconSource)
 {
-    if (!PackageService::isAllowedApplication(flatpakId) || findProfile(kAppPrefix + flatpakId) != nullptr) {
+    if (!PackageService::isAllowedApplication(flatpakId)
+        || findProfile(kAppPrefix + flatpakId) != nullptr) {
         return false;
     }
     Profile profile;
     profile.id = kAppPrefix + flatpakId;
     profile.name = name;
+    profile.source = QStringLiteral("Flathub");
     profile.description = description;
     profile.iconSource = iconSource;
     profile.runningTitle = QStringLiteral("Instalando %1").arg(name);
@@ -377,6 +416,10 @@ QVariantMap InstallService::profileState(const Profile &profile) const
     if (needsApt && !aptSupported()) {
         installPossible = false;
     }
+    if (profile.id == QStringLiteral("freeoffice")) {
+        installPossible = installPossible && m_backend.freeOffice.isValid()
+            && isExecutableFile(m_backend.dpkgDeb) && QSysInfo::buildCpuArchitecture() == QStringLiteral("x86_64");
+    }
 
     const bool hasAptComponents = std::any_of(profile.components.cbegin(), profile.components.cend(),
                                               [](const Component &c) { return !c.aptPackages.isEmpty(); });
@@ -445,11 +488,13 @@ QVariantMap InstallService::profileInfo(const QString &profileId) const
     }
     return {{QStringLiteral("id"), profile->id},
             {QStringLiteral("name"), profile->name},
+            {QStringLiteral("source"), profile->source},
             {QStringLiteral("description"), profile->description},
             {QStringLiteral("iconName"), profile->iconName},
             {QStringLiteral("iconSource"), profile->iconSource},
             {QStringLiteral("runningTitle"), profile->runningTitle},
             {QStringLiteral("successTitle"), profile->successTitle},
+            {QStringLiteral("sourceNotice"), profile->sourceNotice},
             {QStringLiteral("actionLabel"), profile->actionLabel}};
 }
 
@@ -495,7 +540,7 @@ void InstallService::detect(std::function<void()> done)
     auto *process = new QProcess(this);
     m_detectProcess = process;
     process->setStandardInputFile(QProcess::nullDevice());
-    connect(process, &QProcess::finished, this, [process, complete](int, QProcess::ExitStatus) {
+    connect(process, &QProcess::finished, this, [this, process, complete](int, QProcess::ExitStatus status) {
         // dpkg-query exits with 1 when some package is unknown; its output is still valid.
         QHash<QString, bool> installed;
         const QStringList lines = QString::fromUtf8(process->readAllStandardOutput()).split(QLatin1Char('\n'));
@@ -507,11 +552,13 @@ void InstallService::detect(std::function<void()> done)
             }
         }
         process->deleteLater();
-        complete(true, installed);
+        m_detectProcess = nullptr;
+        complete(status == QProcess::NormalExit, installed);
     });
-    connect(process, &QProcess::errorOccurred, this, [process, complete](QProcess::ProcessError error) {
+    connect(process, &QProcess::errorOccurred, this, [this, process, complete](QProcess::ProcessError error) {
         if (error == QProcess::FailedToStart) {
             process->deleteLater();
+            m_detectProcess = nullptr;
             complete(false, {});
         }
     });
@@ -520,7 +567,7 @@ void InstallService::detect(std::function<void()> done)
 
 bool InstallService::start(const QString &profileId)
 {
-    if (busy()) {
+    if (busy() || m_packages->busy()) {
         return false;
     }
     if (findProfile(profileId) == nullptr) {
@@ -586,6 +633,14 @@ void InstallService::planJob()
             finishError(QStringLiteral("unsupported"));
             return;
         }
+        if (profile->id == QStringLiteral("freeoffice")) {
+            if (!m_backend.freeOffice.isValid() || !isExecutableFile(m_backend.dpkgDeb)
+                || QSysInfo::buildCpuArchitecture() != QStringLiteral("x86_64")) {
+                finishError(QStringLiteral("freeoffice-invalid"));
+                return;
+            }
+            m_steps.append({StepKind::FreeOfficeDownload, {}, QStringLiteral("FreeOffice")});
+        }
         m_steps.append({StepKind::Helper, QString(), helperLabels.join(QStringLiteral(" e "))});
     }
     m_steps.append(flatpakSteps);
@@ -601,15 +656,186 @@ void InstallService::runNextStep()
 {
     ++m_stepIndex;
     if (m_stepIndex >= m_steps.size()) {
-        finishSuccess();
+        if (m_profileId == QStringLiteral("freeoffice")) {
+            verifyFreeOfficeInstalled();
+        } else if (m_profileId == QStringLiteral("app:com.vivaldi.Vivaldi")
+                   || m_profileId == QStringLiteral("app:app.zen_browser.zen")) {
+            verifyBrowserInstalled();
+        } else {
+            finishSuccess();
+        }
         return;
     }
     const Step step = m_steps.at(m_stepIndex);
-    if (step.kind == StepKind::Helper) {
+    if (step.kind == StepKind::FreeOfficeDownload) {
+        downloadFreeOffice();
+    } else if (step.kind == StepKind::Helper) {
         runHelperStep();
     } else {
         runFlatpakStep(step);
     }
+}
+
+void InstallService::downloadFreeOffice()
+{
+    const auto &profile = m_backend.freeOffice;
+    if (!profile.acceptsUrl(profile.url)) {
+        finishError(QStringLiteral("freeoffice-invalid"));
+        return;
+    }
+    m_downloadFile.close();
+    m_downloadDirectory = std::make_unique<QTemporaryDir>();
+    if (!m_downloadDirectory->isValid()) {
+        finishError(QStringLiteral("space"), m_downloadDirectory->errorString());
+        return;
+    }
+    m_downloadFile.setFileName(m_downloadDirectory->filePath(QStringLiteral("freeoffice.deb")));
+    if (!m_downloadFile.open(QIODevice::ReadWrite | QIODevice::NewOnly)) {
+        finishError(QStringLiteral("space"), m_downloadFile.errorString());
+        return;
+    }
+    m_downloadFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
+    m_downloadHash.reset();
+    setPhase(Phase::Downloading, QStringLiteral("Baixando FreeOffice da SoftMaker…"));
+    appendDetails(QStringLiteral("Origem autorizada: %1\nPacote: %2 · versão %3 · %4 · %5 bytes\nSHA-256 fixado: %6")
+        .arg(profile.url.toString(), profile.package, profile.version, profile.architecture)
+        .arg(profile.size).arg(QString::fromLatin1(profile.sha256)));
+
+    QNetworkRequest request(profile.url);
+    request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
+    request.setRawHeader("Accept-Encoding", "identity");
+    request.setTransferTimeout(30000);
+    auto *reply = m_network->get(request);
+    reply->setReadBufferSize(256 * 1024);
+    auto failure = std::make_shared<QString>();
+    const auto drain = [this, reply, failure]() {
+        if (!failure->isEmpty()) {
+            return;
+        }
+        const auto bytes = reply->readAll();
+        if (m_downloadFile.size() + bytes.size() > m_backend.freeOffice.size) {
+            *failure = QStringLiteral("O arquivo excede o tamanho autorizado.");
+        } else if (m_downloadFile.write(bytes) != bytes.size()) {
+            *failure = m_downloadFile.errorString();
+        } else {
+            m_downloadHash.addData(bytes);
+        }
+        if (!failure->isEmpty()) {
+            reply->abort();
+        }
+    };
+    connect(reply, &QNetworkReply::readyRead, this, drain);
+    connect(reply, &QNetworkReply::downloadProgress, this, [this](qint64 received, qint64 total) {
+        const int progress = total == m_backend.freeOffice.size
+            ? static_cast<int>(std::min<qint64>(100, received * 100 / total)) : -1;
+        setProgress(progress, QStringLiteral("Baixando FreeOffice da SoftMaker…"));
+    });
+    // Bound the complete transfer as well as individual network stalls.
+    QTimer::singleShot(15 * 60 * 1000, reply, [reply]() { if (!reply->isFinished()) reply->abort(); });
+    connect(reply, &QNetworkReply::finished, this, [this, reply, failure, drain]() {
+        drain();
+        const int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        const bool transportOk = reply->error() == QNetworkReply::NoError && status == 200
+            && m_backend.freeOffice.acceptsUrl(reply->url())
+            && !reply->attribute(QNetworkRequest::RedirectionTargetAttribute).isValid();
+        const QString technical = QStringLiteral("HTTP %1: %2\n%3").arg(status).arg(reply->errorString(), *failure);
+        reply->deleteLater();
+        if (!transportOk || !failure->isEmpty()) {
+            finishError(failure->isEmpty() ? QStringLiteral("freeoffice-download") : QStringLiteral("freeoffice-invalid"), technical);
+            return;
+        }
+        if (!m_downloadFile.flush() || m_downloadFile.size() != m_backend.freeOffice.size
+            || m_downloadHash.result().toHex() != m_backend.freeOffice.sha256) {
+            finishError(QStringLiteral("freeoffice-invalid"), QStringLiteral("Tamanho ou SHA-256 divergente."));
+            return;
+        }
+        validateFreeOffice();
+    });
+}
+
+void InstallService::validateFreeOffice()
+{
+    setPhase(Phase::Preparing, QStringLiteral("Validando o pacote Debian do FreeOffice…"));
+    auto *process = new QProcess(this);
+    process->setStandardInputFile(QProcess::nullDevice());
+    connect(process, &QProcess::finished, this, [this, process](int code, QProcess::ExitStatus status) {
+        const QByteArray metadata = process->readAllStandardOutput();
+        const QString technical = QString::fromUtf8(process->readAllStandardError());
+        process->deleteLater();
+        if (code != 0 || status != QProcess::NormalExit || !m_backend.freeOffice.matchesMetadata(metadata)) {
+            finishError(QStringLiteral("freeoffice-invalid"), QString::fromUtf8(metadata) + technical);
+            return;
+        }
+        runNextStep();
+    });
+    connect(process, &QProcess::errorOccurred, this, [this, process](QProcess::ProcessError error) {
+        if (error == QProcess::FailedToStart) {
+            process->deleteLater();
+            finishError(QStringLiteral("freeoffice-invalid"), process->errorString());
+        }
+    });
+    QTimer::singleShot(30000, process, [process]() { if (process->state() != QProcess::NotRunning) process->kill(); });
+    process->start(m_backend.dpkgDeb, {QStringLiteral("--show"),
+        QStringLiteral("--showformat=${Package}\\n${Version}\\n${Architecture}\\n"), m_downloadFile.fileName()});
+}
+
+void InstallService::transferFreeOffice()
+{
+    if (m_process == nullptr || m_process->state() != QProcess::Running || !m_process->isWritable()) {
+        return;
+    }
+    // Backpressure keeps the 160 MiB package out of QProcess's in-memory queue.
+    while (m_process->bytesToWrite() < 256 * 1024 && !m_downloadFile.atEnd()) {
+        const QByteArray chunk = m_downloadFile.read(64 * 1024);
+        if (chunk.isEmpty() || m_process->write(chunk) != chunk.size()) {
+            m_process->closeWriteChannel();
+            return; // The helper rejects any incomplete transfer before invoking APT.
+        }
+    }
+    if (m_downloadFile.atEnd()) {
+        m_process->closeWriteChannel();
+    }
+}
+
+void InstallService::verifyFreeOfficeInstalled()
+{
+    setPhase(Phase::Preparing, QStringLiteral("Confirmando a instalação do FreeOffice…"));
+    detect([this]() {
+        if (m_dpkgAvailable && m_debInstalled.value(QStringLiteral("softmaker-freeoffice-2024"))) {
+            finishSuccess();
+        } else {
+            finishError(QStringLiteral("verification"));
+        }
+    });
+}
+
+void InstallService::verifyBrowserInstalled()
+{
+    setPhase(Phase::Preparing, QStringLiteral("Confirmando a instalação do navegador…"));
+    m_process = new QProcess(this);
+    m_process->setStandardInputFile(QProcess::nullDevice());
+    connect(m_process, &QProcess::finished, this, [this](int code, QProcess::ExitStatus status) {
+        const auto output = m_process->readAllStandardOutput().trimmed();
+        const auto error = QString::fromUtf8(m_process->readAllStandardError());
+        m_process->deleteLater();
+        m_process = nullptr;
+        const auto id = m_profileId.mid(kAppPrefix.size()).toUtf8();
+        if (code == 0 && status == QProcess::NormalExit && output.startsWith("app/" + id + '/')) {
+            finishSuccess();
+        } else {
+            finishError(QStringLiteral("verification"), error);
+        }
+    });
+    connect(m_process, &QProcess::errorOccurred, this, [this](QProcess::ProcessError error) {
+        if (error == QProcess::FailedToStart && m_process != nullptr) {
+            m_process->deleteLater();
+            m_process = nullptr;
+            finishError(QStringLiteral("verification"));
+        }
+    });
+    m_process->start(flatpakExecutable(), {QStringLiteral("info"), m_flatpakScope, QStringLiteral("--show-ref"),
+        m_profileId.mid(kAppPrefix.size())});
 }
 
 void InstallService::runHelperStep()
@@ -622,7 +848,18 @@ void InstallService::runHelperStep()
     setPhase(Phase::Authenticating, QStringLiteral("Aguardando autorização do administrador…"));
 
     m_process = new QProcess(this);
-    m_process->setStandardInputFile(QProcess::nullDevice());
+    if (m_profileId == QStringLiteral("freeoffice")) {
+        if (!m_downloadFile.isOpen() || !m_downloadFile.seek(0)) {
+            m_process->deleteLater();
+            m_process = nullptr;
+            finishError(QStringLiteral("freeoffice-invalid"));
+            return;
+        }
+        connect(m_process, &QProcess::started, this, &InstallService::transferFreeOffice);
+        connect(m_process, &QProcess::bytesWritten, this, &InstallService::transferFreeOffice);
+    } else {
+        m_process->setStandardInputFile(QProcess::nullDevice());
+    }
     connect(m_process, &QProcess::readyReadStandardOutput, this, &InstallService::handleHelperOutput);
     connect(m_process, &QProcess::readyReadStandardError, this, [this]() {
         m_stderrBuffer.append(m_process->readAllStandardError());
@@ -991,7 +1228,7 @@ void InstallService::finishError(const QString &kind, const QString &technical)
 
 void InstallService::finishCancelled()
 {
-    m_resultMessage = m_stepIndex > 0
+    m_resultMessage = m_stepIndex > 0 && m_profileId != QStringLiteral("freeoffice")
         ? QStringLiteral("A autorização foi cancelada. Os componentes instalados nas etapas anteriores foram mantidos.")
         : QStringLiteral("A autorização foi cancelada. Nenhuma alteração foi feita no sistema.");
     setPhase(Phase::Cancelled, QString());
@@ -1002,6 +1239,8 @@ void InstallService::endJob()
 {
     const QString completed = m_profileId;
     const bool success = m_phase == Phase::Success;
+    m_downloadFile.close();
+    m_downloadDirectory.reset();
     refresh();
     emit profilesChanged();
     emit finished(completed, success);

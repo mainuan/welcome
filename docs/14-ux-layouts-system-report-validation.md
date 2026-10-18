@@ -1,5 +1,7 @@
 # UX, layouts e relatório do sistema — validação
 
+> Registro histórico do desenvolvimento experimental. Os números 2.x, resultados de execução e caminhos de capturas descrevem aquele momento. A primeira versão oficial é **1.0**; consulte a [documentação atual](README.md) antes de seguir instruções antigas.
+
 Executada em 02/10/2026 no host de desenvolvimento (BigLinux, Plasma 6.7, Qt 6.11.2) e na VM de testes Mainuan 2026 LTS (base Ubuntu 26.04, Plasma 6.6.6, KDE Frameworks 6.24, Qt 6.10.2, Wayland, 1 monitor, 4 áreas de trabalho). O plano e a auditoria estão em `13-ux-layouts-system-report-plan.md`.
 
 ## Alterações realizadas
@@ -25,7 +27,7 @@ Executada em 02/10/2026 no host de desenvolvimento (BigLinux, Plasma 6.7, Qt 6.1
 | Azul | `#3daee9` | `01ciano.png` |
 | Verde | `#3dd425` | `06lima.png` |
 | Cinza | `#aab6b9` | `02cinza.png` |
-| Lilás | `#a588cb` | `04purpura.png` |
+| Lilás | `#a588cb` | `04violet.png` |
 
 Os nomes reais são `/usr/share/wallpapers` (plural) e `03magenta.png`. Arquivo ausente: a cor é aplicada e a mensagem diz qual papel de parede faltou; falha da ferramenta: a cor é aplicada e a mensagem informa o erro.
 

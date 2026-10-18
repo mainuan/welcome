@@ -6,6 +6,7 @@ set -u
 [[ $# -eq 2 && $1 == --apply ]] || { echo "usage: --apply <package>" >&2; exit 2; }
 [[ -n ${MOCK_LNF_FAIL:-} ]] && { echo "kf.package: Could not load package $2" >&2; exit 1; }
 [[ -n ${MOCK_LNF_NOOP:-} ]] && exit 0
+sleep "${MOCK_LNF_DELAY:-0}"
 echo "lookandfeel $2" >>"${MOCK_LOG:-/dev/null}"
 
 case "$2" in

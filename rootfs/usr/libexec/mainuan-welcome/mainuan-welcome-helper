@@ -2,7 +2,8 @@
 # Mainuan Welcome — privileged installation helper.
 #
 # Runs as root only through pkexec (polkit action org.mainuan.welcome.install).
-# Usage: mainuan-welcome-helper install <antivirus|firewall|codecs>
+# Usage: mainuan-welcome-helper install <antivirus|firewall|codecs|freeoffice>
+# FreeOffice alone receives the pinned package bytes on stdin, never a path/URL.
 #
 # The caller chooses a profile, never package names: every package list lives
 # in this file. Only missing packages are installed, nothing is removed
@@ -31,6 +32,7 @@ readonly LOG_DIR=/var/log/mainuan-welcome
 readonly LOG_FILE="$LOG_DIR/install.log"
 readonly LOCK_FILES=(/var/lib/dpkg/lock-frontend /var/lib/dpkg/lock /var/lib/apt/lists/lock /var/cache/apt/archives/lock)
 readonly LOCK_WAIT_SECONDS=180
+readonly FREEOFFICE_PROFILE=/usr/share/mainuan-welcome/freeoffice.profile
 
 emit() {
     printf '%s\n' "$*" 2>/dev/null || true
@@ -63,6 +65,9 @@ profile_packages() {
             ;;
         codecs)
             printf '%s\n' gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad ffmpeg
+            ;;
+        freeoffice)
+            printf '%s\n' softmaker-freeoffice-2024
             ;;
         *)
             return 1
@@ -167,6 +172,55 @@ update_signatures() {
     (( updated )) || emit "@@warning signatures"
 }
 
+# No archive extraction or maintainer scripts are run during validation. The
+# pinned digest is measured from the exact official HTTPS artifact documented
+# in docs/20-internal-application-installation.md, not a caller-supplied hash.
+validate_freeoffice() {
+    local file=$1 size=$2 digest=$3 package=$4 version=$5 arch=$6 actual metadata
+    [[ -f "$file" && ! -L "$file" ]] || return 1
+    [[ $(stat -c %s -- "$file") == "$size" ]] || return 1
+    actual=$(sha256sum -- "$file") || return 1
+    [[ ${actual%% *} == "$digest" ]] || return 1
+    metadata=$(dpkg-deb --show --showformat='${Package}\n${Version}\n${Architecture}\n' "$file") || return 1
+    [[ "$metadata" == "$package"$'\n'"$version"$'\n'"$arch" ]]
+}
+
+install_freeoffice() {
+    local -a fields
+    [[ -f "$FREEOFFICE_PROFILE" && ! -L "$FREEOFFICE_PROFILE" ]] || fail freeoffice-invalid
+    mapfile -t fields < "$FREEOFFICE_PROFILE"
+    [[ ${#fields[@]} -eq 6 ]] || fail freeoffice-invalid
+    local url=${fields[0]} package=${fields[1]} version=${fields[2]} arch=${fields[3]} size=${fields[4]} digest=${fields[5]}
+    [[ "$url" == https://www.softmaker.net/down/softmaker-freeoffice-2024_1238-01_amd64.deb &&
+       "$package" == softmaker-freeoffice-2024 && "$version" == 3714 && "$arch" == amd64 &&
+       "$size" =~ ^[1-9][0-9]{0,8}$ && "$digest" =~ ^[a-f0-9]{64}$ ]] || fail freeoffice-invalid
+    [[ $(dpkg --print-architecture) == amd64 ]] || fail unsupported
+
+    # A root-owned, unpredictable directory prevents caller substitution between
+    # validation and apt-get. Bound both the input length and the transfer time.
+    umask 077
+    freeoffice_dir=$(mktemp -d /var/tmp/mainuan-freeoffice.XXXXXXXXXX) || fail space
+    trap 'rm -f -- "$freeoffice_dir/freeoffice.deb"; rmdir -- "$freeoffice_dir"' EXIT
+    local deb="$freeoffice_dir/freeoffice.deb"
+    emit "@@phase preparing"
+    timeout 180 dd bs=65536 iflag=fullblock,count_bytes count="$((size + 1))" of="$deb" status=none || fail freeoffice-invalid
+    validate_freeoffice "$deb" "$size" "$digest" "$package" "$version" "$arch" >>"$LOG_FILE" 2>&1 || fail freeoffice-invalid
+    # _apt may read the validated public artifact; only root can replace it.
+    chmod 0444 "$deb" && chmod 0711 "$freeoffice_dir" || fail permission
+    if ! is_installed "$package"; then
+        wait_for_apt_lock
+        if ! lists_are_fresh; then
+            emit "@@phase updating"
+            run_apt update || true
+        fi
+        emit "@@packages $package"
+        emit "@@phase installing"
+        run_apt install -y --no-remove "$deb" || fail "$(classify_failure)"
+    fi
+    is_installed "$package" || fail failed
+    emit "@@done"
+}
+
 main() {
     if [[ $# -ne 2 || "$1" != install ]]; then
         emit "@@error invalid"
@@ -193,6 +247,10 @@ main() {
     log_start=2
 
     emit "@@phase preparing"
+    if [[ "$profile" == freeoffice ]]; then
+        install_freeoffice
+        return
+    fi
     local package
     for package in "${packages[@]}"; do
         is_installed "$package" || missing+=("$package")
@@ -239,4 +297,8 @@ main() {
     exit 0
 }
 
-main "$@"
+# Sourcing exposes validation functions to isolated tests, never an alternate
+# privileged CLI. Polkit still authorizes only this executable and main's profiles.
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+    main "$@"
+fi

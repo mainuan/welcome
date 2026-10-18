@@ -1,5 +1,7 @@
 # Aparência e instalador universal — validação
 
+> Registro histórico do desenvolvimento experimental. Os números 2.x, resultados de execução e caminhos de capturas descrevem aquele momento. A primeira versão oficial é **1.0**; consulte a [documentação atual](README.md) antes de seguir instruções antigas.
+
 Executada em 02/10/2026 no host de desenvolvimento (BigLinux/Manjaro, Plasma 6.7.4, Wayland, Qt 6.11.2) e em contêineres Podman Ubuntu 24.04, Ubuntu 26.04 e Debian 13. O plano está em `appearance-and-installer-plan.md`.
 
 ## Alterações realizadas

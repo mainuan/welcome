@@ -1,5 +1,7 @@
 # Shell e integração com o sistema
 
+> Registro histórico do desenvolvimento experimental. Os números 2.x, resultados de execução e caminhos de capturas descrevem aquele momento. A primeira versão oficial é **1.0**; consulte a [documentação atual](README.md) antes de seguir instruções antigas.
+
 ## Auditoria do shell legado
 
 `bash -n rootfs/usr/share/welcome/welcome-cli.sh` passou. ShellCheck não está instalado no host, portanto não foi possível emitir um resultado ShellCheck. A revisão manual encontrou:

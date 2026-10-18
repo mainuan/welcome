@@ -97,6 +97,10 @@ Kirigami.Page {
                         color: page.textColor
                     }
                     Controls.Label {
+                        text: "Mainuan Welcome " + Qt.application.version
+                        color: page.mutedColor
+                    }
+                    Controls.Label {
                         Layout.fillWidth: true
                         text: page.summary.version ? "Mainuan " + page.summary.version : (page.summary.os || "")
                         color: page.mutedColor
@@ -123,7 +127,7 @@ Kirigami.Page {
                         Controls.Button {
                             text: "Repositório"
                             icon.name: "internet-web-browser"
-                            onClicked: page.system.openUrl("https://github.com/ruscher/welcome5")
+                            onClicked: page.system.openUrl("https://github.com/mainuan/welcome")
                         }
                     }
                 }

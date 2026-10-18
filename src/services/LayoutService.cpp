@@ -9,6 +9,7 @@
 #include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QLoggingCategory>
 #include <QProcess>
 #include <QRegularExpression>
@@ -42,11 +43,30 @@ QString resourceText(const QString &path)
     return file.open(QIODevice::ReadOnly) ? QString::fromUtf8(file.readAll()) : QString();
 }
 
+QString scriptLibrary()
+{
+    const QString reference = resourceText(QStringLiteral(":/layouts/reference-layouts.js"));
+    const QString desktop = resourceText(QStringLiteral(":/layouts/desktop-layouts.js"));
+    return reference.isEmpty() || desktop.isEmpty() ? QString() : reference + QLatin1Char('\n') + desktop;
+}
+
+QString widgetPrelude(const QStringList &installedWidgets)
+{
+    static const QRegularExpression pluginId(QStringLiteral("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"));
+    QJsonArray widgets;
+    for (const QString &widget : installedWidgets) {
+        if (pluginId.match(widget).hasMatch()) widgets.append(widget);
+    }
+    return QStringLiteral("var installedWidgets = %1;\n")
+        .arg(QString::fromUtf8(QJsonDocument(widgets).toJson(QJsonDocument::Compact)));
+}
+
 } // namespace
 
-LayoutService::LayoutService(QObject *parent, const QString &configDir, const QString &backupDir)
+LayoutService::LayoutService(QObject *parent, const QString &configDir, const QString &backupDir, Backend backend)
     : QObject(parent)
     , m_configDir(configDir.isEmpty() ? QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) : configDir)
+    , m_backend(std::move(backend))
     , m_backupDir(backupDir.isEmpty()
                       ? QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
                             + QStringLiteral("/mainuan-welcome/layout-backups")
@@ -56,9 +76,10 @@ LayoutService::LayoutService(QObject *parent, const QString &configDir, const QS
 
 const QStringList &LayoutService::layoutIds()
 {
-    static const QStringList ids = {QStringLiteral("plasma-default"), QStringLiteral("panel-top"),
-                                    QStringLiteral("floating"),       QStringLiteral("minimal"),
-                                    QStringLiteral("unity"),          QStringLiteral("tiling")};
+    static const QStringList ids = {QStringLiteral("plasma-default"), QStringLiteral("three-panels"),
+                                    QStringLiteral("single-bar"), QStringLiteral("tiling"),
+                                    QStringLiteral("panel-top"),
+                                    QStringLiteral("unity"), QStringLiteral("minimal")};
     return ids;
 }
 
@@ -70,11 +91,13 @@ bool LayoutService::isAllowedLayout(const QString &id)
 QString LayoutService::displayName(const QString &id)
 {
     static const QHash<QString, QString> names = {
-        {QStringLiteral("plasma-default"), QStringLiteral("Plasma padrão")},
+        {QStringLiteral("plasma-default"), QStringLiteral("Clássico — 5 barras")},
+        {QStringLiteral("three-panels"), QStringLiteral("3 barras")},
+        {QStringLiteral("single-bar"), QStringLiteral("Barra única")},
         {QStringLiteral("panel-top"), QStringLiteral("Painel superior")},
         {QStringLiteral("floating"), QStringLiteral("Flutuante")},
-        {QStringLiteral("minimal"), QStringLiteral("Minimalista")},
-        {QStringLiteral("unity"), QStringLiteral("Unity-like")},
+        {QStringLiteral("minimal"), QStringLiteral("Barra W7")},
+        {QStringLiteral("unity"), QStringLiteral("Lomiri")},
         {QStringLiteral("tiling"), QStringLiteral("Tiling")}};
     return names.value(id);
 }
@@ -84,26 +107,44 @@ QString LayoutService::buildScript(const QString &id, const QStringList &install
     if (!isAllowedLayout(id)) {
         return {};
     }
-    static const QRegularExpression pluginId(QStringLiteral("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"));
-    QJsonArray widgets;
-    for (const QString &widget : installedWidgets) {
-        if (pluginId.match(widget).hasMatch()) {
-            widgets.append(widget);
-        }
-    }
-    const QString library = resourceText(QStringLiteral(":/layouts/desktop-layouts.js"));
+    const QString library = scriptLibrary();
     if (library.isEmpty()) {
         return {};
     }
     // Both values are JSON-encoded; `id` is also from the allowlist above.
-    return QStringLiteral("var installedWidgets = %1;\n%2\napplyMainuanLayout(%3);\n")
-        .arg(QString::fromUtf8(QJsonDocument(widgets).toJson(QJsonDocument::Compact)), library,
+    return widgetPrelude(installedWidgets) + QStringLiteral("%1\napplyMainuanLayout(%2);\n")
+        .arg(library,
              QString::fromUtf8(QJsonDocument(QJsonArray{id}).toJson(QJsonDocument::Compact)).mid(1).chopped(1));
+}
+
+QString LayoutService::buildPreflightScript(const QString &id, const QStringList &installedWidgets)
+{
+    QString script = buildScript(id, installedWidgets);
+    if (script.isEmpty()) return {};
+    const QString action = QStringLiteral("applyMainuanLayout(\"") + id + QStringLiteral("\");\n");
+    script.chop(action.size());
+    return script + QStringLiteral("print(JSON.stringify(preflightMainuanLayout(\"") + id + QStringLiteral("\")));\n");
 }
 
 LayoutService::Description LayoutService::parseDescription(const QString &output)
 {
     Description description;
+    if (output.trimmed().startsWith(QLatin1Char('{'))) {
+        const QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
+        if (!document.isObject()) return description;
+        const QJsonObject object = document.object();
+        if (!object.value(QStringLiteral("structureOk")).isBool()) return description;
+        description.panels = object.value(QStringLiteral("panels")).toInt(-1);
+        description.launchers = object.value(QStringLiteral("launchers")).toInt(-1);
+        description.screens = object.value(QStringLiteral("screens")).toInt(-1);
+        description.matchingLaunchers = object.value(QStringLiteral("matchingLaunchers")).toInt(-1);
+        description.structureOk = object.value(QStringLiteral("structureOk")).toBool();
+        const QString id = object.value(QStringLiteral("layout")).toString();
+        description.layout = isAllowedLayout(id) || id == QStringLiteral("floating") ? id : QString();
+        if (description.panels < 0 || description.launchers < 0 || description.screens < 1 || description.matchingLaunchers < 0) return {};
+        return description;
+    }
+    // Accept old three-field diagnostics, but they cannot confirm an application.
     const QStringList fields = output.trimmed().split(QLatin1Char('|'));
     if (fields.size() != 3) {
         return description;
@@ -115,10 +156,20 @@ LayoutService::Description LayoutService::parseDescription(const QString &output
     if (!panelsOk || !launchersOk || panels < 0 || launchers < 0) {
         return description;
     }
-    description.layout = isAllowedLayout(fields.at(0)) ? fields.at(0) : QString();
+    description.layout = isAllowedLayout(fields.at(0)) || fields.at(0) == QStringLiteral("floating") ? fields.at(0) : QString();
     description.panels = panels;
     description.launchers = launchers;
     return description;
+}
+
+bool LayoutService::matchesLayout(const Description &description, const QString &id)
+{
+    if ((!isAllowedLayout(id) && id != QStringLiteral("floating")) || !description.valid() || description.layout != id || !description.structureOk
+        || description.screens < 1 || description.matchingLaunchers != description.screens) return false;
+    const qint64 screens = description.screens;
+    const int perScreen = id == QStringLiteral("three-panels") ? 3 : id == QStringLiteral("unity") ? 2 : 1;
+    if (id == QStringLiteral("plasma-default")) return description.panels == 5 * screens;
+    return description.panels == perScreen * screens;
 }
 
 QStringList LayoutService::installedPlasmoids()
@@ -248,6 +299,10 @@ void LayoutService::finish(const QString &message, bool error)
 
 void LayoutService::evaluate(const QString &script, std::function<void(bool, const QString &)> done)
 {
+    if (m_backend.evaluate) {
+        m_backend.evaluate(script, std::move(done));
+        return;
+    }
     QDBusMessage call = plasmaCall(QStringLiteral("evaluateScript"));
     call << script;
     auto *watcher = new QDBusPendingCallWatcher(QDBusConnection::sessionBus().asyncCall(call, kScriptTimeoutMs), this);
@@ -264,18 +319,48 @@ void LayoutService::evaluate(const QString &script, std::function<void(bool, con
 
 void LayoutService::describe(std::function<void(const Description &)> done)
 {
-    const QString library = resourceText(QStringLiteral(":/layouts/desktop-layouts.js"));
-    evaluate(library + QStringLiteral("\ndescribeMainuanLayout();\n"), [done](bool ok, const QString &output) {
+    const QString library = scriptLibrary();
+    evaluate(widgetPrelude(installedPlasmoids()) + library + QStringLiteral("\ndescribeMainuanLayout();\n"), [done](bool ok, const QString &output) {
         done(ok ? parseDescription(output) : Description());
     });
 }
 
 void LayoutService::refresh()
 {
+    if (m_busy) return;
     describe([this](const Description &description) {
+        if (m_busy) return; // Ignore a refresh started before an application.
         m_available = description.valid();
-        m_activeLayout = description.layout;
+        m_activeLayout = matchesLayout(description, description.layout) ? description.layout : QString();
         emit stateChanged();
+    });
+}
+
+void LayoutService::settleLayout(const QString &id, int attempts, const QString &previous,
+                                std::function<void(bool, const QString &)> done)
+{
+    if (id != QStringLiteral("plasma-default") && id != QStringLiteral("three-panels")) {
+        done(true, {});
+        return;
+    }
+    // Let Plasma measure the applets before positioning neighboring custom
+    // segments. Two equal samples avoid declaring success on initial sizes.
+    QTimer::singleShot(200, this, [this, id, attempts, previous, done]() {
+        const QString script = widgetPrelude(installedPlasmoids()) + scriptLibrary()
+            + QStringLiteral("\nprint(JSON.stringify(positionMainuanLayout(\"%1\")));\n").arg(id);
+        evaluate(script, [this, id, attempts, previous, done](bool ok, const QString &output) {
+            const QJsonObject result = QJsonDocument::fromJson(output.toUtf8()).object();
+            const QString signature = result.value(QStringLiteral("signature")).toString();
+            if (!ok || signature.isEmpty()) {
+                done(false, QStringLiteral("Não foi possível medir os segmentos do layout."));
+            } else if (result.value(QStringLiteral("ok")).toBool() && signature == previous) {
+                done(true, {});
+            } else if (attempts > 1) {
+                settleLayout(id, attempts - 1, signature, done);
+            } else {
+                done(false, QStringLiteral("Os segmentos não estabilizaram sem sobreposição nesta tela."));
+            }
+        });
     });
 }
 
@@ -294,46 +379,65 @@ void LayoutService::apply(const QString &id)
     }
 
     const QString name = displayName(id);
-    const QString backup = createBackup();
-    if (backup.isEmpty()) {
-        setMessage(QStringLiteral("Não foi possível guardar uma cópia do layout atual; nada foi alterado."), true);
+    const QStringList widgets = installedPlasmoids();
+    m_busy = true;
+    setMessage(QStringLiteral("Verificando o lançador do layout %1…").arg(name), false);
+    const QString preflight = buildPreflightScript(id, widgets);
+    if (preflight.isEmpty()) {
+        finish(QStringLiteral("Não foi possível carregar os scripts de layout; nada foi alterado."), true);
         return;
     }
-
-    m_busy = true;
-    setMessage(QStringLiteral("Aplicando layout %1…").arg(name), false);
-    qCInfo(lcLayout) << "applying layout" << id;
-
-    const auto rollBack = [this, backup](const QString &reason) {
-        qCWarning(lcLayout).noquote() << reason << "- restoring" << backup;
-        restartPlasmaWithBackup(backup, [this, reason](bool restored) {
-            finish(reason + (restored ? QStringLiteral(" O layout anterior foi restaurado.")
-                                      : QStringLiteral(" Não foi possível restaurar automaticamente; use “Restaurar layout anterior”.")),
-                   true);
-            refresh();
-        });
-    };
-
-    evaluate(buildScript(id, installedPlasmoids()), [this, id, name, rollBack](bool ok, const QString &output) {
-        if (!ok) {
-            rollBack(QStringLiteral("Não foi possível aplicar o layout %1 (%2).").arg(name, output.trimmed()));
+    evaluate(preflight, [this, id, name, widgets](bool checked, const QString &output) {
+        const QJsonObject result = QJsonDocument::fromJson(output.toUtf8()).object();
+        if (!checked || !result.value(QStringLiteral("ok")).toBool()) {
+            finish(result.value(QStringLiteral("message")).toString(
+                QStringLiteral("Não foi possível verificar os widgets obrigatórios; os painéis anteriores foram preservados.")), true);
             return;
         }
-        describe([this, id, name, rollBack](const Description &description) {
-            // Never leave the user without a panel holding an application launcher.
-            if (!description.valid() || description.layout != id || description.panels < 1 || description.launchers < 1) {
-                rollBack(QStringLiteral("O layout %1 não ficou completo.").arg(name));
+        const QString backup = createBackup();
+        if (backup.isEmpty()) {
+            finish(QStringLiteral("Não foi possível guardar uma cópia do layout atual; nada foi alterado."), true);
+            return;
+        }
+        setMessage(QStringLiteral("Aplicando layout %1…").arg(name), false);
+        const auto rollBack = [this, backup](const QString &reason) {
+            qCWarning(lcLayout).noquote() << reason << "- restoring" << backup;
+            restartPlasmaWithBackup(backup, [this, reason](bool restored) {
+                finish(reason + (restored ? QStringLiteral(" O layout anterior foi restaurado.")
+                    : QStringLiteral(" Não foi possível restaurar automaticamente; use “Restaurar layout anterior”.")), true);
+                refresh();
+            });
+        };
+        evaluate(buildScript(id, widgets), [this, id, name, rollBack](bool ok, const QString &applied) {
+            const QString prefix = QStringLiteral("MAINUAN_PREFLIGHT_ERROR:");
+            if (ok && applied.trimmed().startsWith(prefix)) {
+                finish(applied.trimmed().mid(prefix.size()), true);
                 return;
             }
-            m_activeLayout = id;
-            if (id != QStringLiteral("tiling")) {
-                finish(QStringLiteral("Layout %1 aplicado.").arg(name), false);
+            if (!ok) {
+                rollBack(QStringLiteral("Não foi possível aplicar o layout %1 (%2).").arg(name, applied.trimmed()));
                 return;
             }
-            applyTiling([this, name](bool tilesOk) {
-                finish(tilesOk ? QStringLiteral("Layout %1 aplicado. Arraste janelas com Shift pressionado para encaixá-las nos blocos.").arg(name)
-                               : QStringLiteral("Layout %1 aplicado, mas os blocos do KWin não puderam ser configurados.").arg(name),
-                       !tilesOk);
+            settleLayout(id, 10, {}, [this, id, name, rollBack](bool settled, const QString &reason) {
+                if (!settled) {
+                    rollBack(reason);
+                    return;
+                }
+                describe([this, id, name, rollBack](const Description &description) {
+                    if (!matchesLayout(description, id)) {
+                        rollBack(QStringLiteral("O layout %1 não ficou completo.").arg(name));
+                        return;
+                    }
+                    m_activeLayout = id;
+                    if (id != QStringLiteral("tiling")) {
+                        finish(QStringLiteral("Layout %1 aplicado.").arg(name), false);
+                        return;
+                    }
+                    applyTiling([this, name](bool tilesOk) {
+                        finish(tilesOk ? QStringLiteral("Layout %1 aplicado. Arraste janelas com Shift pressionado para encaixá-las nos blocos.").arg(name)
+                            : QStringLiteral("Layout %1 aplicado, mas os blocos do KWin não puderam ser configurados.").arg(name), !tilesOk);
+                    });
+                });
             });
         });
     });
@@ -419,6 +523,10 @@ void LayoutService::restoreBackup()
 // once, also when systemctl cannot start or hangs (killed after 60 s).
 void LayoutService::controlPlasma(const QString &action, std::function<void(bool ok)> done)
 {
+    if (m_backend.controlPlasma) {
+        m_backend.controlPlasma(action, std::move(done));
+        return;
+    }
     const QString systemctl = QStandardPaths::findExecutable(QStringLiteral("systemctl"));
     if (systemctl.isEmpty()) {
         done(false);

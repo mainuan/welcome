@@ -4,23 +4,37 @@ namespace AccentProfiles {
 
 const QList<AccentProfile> &profiles()
 {
-    // File names as shipped by Mainuan 2026 in /usr/share/wallpapers.
     static const QList<AccentProfile> list = {
-        {QStringLiteral("#d08040"), QStringLiteral("Laranja"), QStringLiteral("05marrom.png")},
-        {QStringLiteral("#e8177d"), QStringLiteral("Rosa"), QStringLiteral("03magenta.png")},
-        {QStringLiteral("#3daee9"), QStringLiteral("Azul"), QStringLiteral("01ciano.png")},
-        {QStringLiteral("#3dd425"), QStringLiteral("Verde"), QStringLiteral("06lima.png")},
-        {QStringLiteral("#aab6b9"), QStringLiteral("Cinza"), QStringLiteral("02cinza.png")},
-        {QStringLiteral("#a588cb"), QStringLiteral("Lilás"), QStringLiteral("04purpura.png")},
+        {QStringLiteral("brown"), QStringLiteral("Marrom"), QStringLiteral("#d08040"),
+         QStringLiteral("DreamBrownLightColor"), QStringLiteral("DreamBrownDarkColor"), QStringLiteral("kora-brown"), QStringLiteral("05marrom.png")},
+        {QStringLiteral("cyan"), QStringLiteral("Ciano"), QStringLiteral("#3daee9"),
+         QStringLiteral("DreamCyanLightColor"), QStringLiteral("DreamCyanDarkColor"), QStringLiteral("kora-cyan"), QStringLiteral("01ciano.png")},
+        {QStringLiteral("magenta"), QStringLiteral("Magenta"), QStringLiteral("#e8177d"),
+         QStringLiteral("DreamMagentaLightColor"), QStringLiteral("DreamMagentaDarkColor"), QStringLiteral("kora-magenta"), QStringLiteral("03magenta.png")},
+        {QStringLiteral("lime"), QStringLiteral("Lima"), QStringLiteral("#3dd425"),
+         QStringLiteral("DreamLimeLightColor"), QStringLiteral("DreamLimeDarkColor"), QStringLiteral("kora-lima"), QStringLiteral("06lima.png")},
+        {QStringLiteral("gray"), QStringLiteral("Cinza"), QStringLiteral("#aab6b9"),
+         QStringLiteral("DreamGrayLightColor"), QStringLiteral("DreamGrayDarkColor"), QStringLiteral("kora-grey"), QStringLiteral("02cinza.png")},
+        {QStringLiteral("violet"), QStringLiteral("Violeta"), QStringLiteral("#a588cb"),
+         QStringLiteral("DreamVioletLightColor"), QStringLiteral("DreamVioletDarkColor"), QStringLiteral("kora-violet"), QStringLiteral("04violet.png")},
     };
     return list;
 }
 
-const AccentProfile *find(const QString &color)
+const AccentProfile *find(const QString &id)
 {
-    const QString normalized = color.trimmed().toLower();
     for (const AccentProfile &profile : profiles()) {
-        if (profile.color == normalized) {
+        if (profile.id == id) {
+            return &profile;
+        }
+    }
+    return nullptr;
+}
+
+const AccentProfile *fromScheme(const QString &scheme)
+{
+    for (const AccentProfile &profile : profiles()) {
+        if (profile.lightScheme == scheme || profile.darkScheme == scheme) {
             return &profile;
         }
     }

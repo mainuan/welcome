@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QProcess>
+#include <QPointer>
 #include <QObject>
 #include <QHash>
 #include <QStringList>
@@ -23,6 +24,7 @@ public:
     bool busy() const;
 
     static bool isAllowedApplication(const QString &applicationId);
+    static bool isDiscoverApplication(const QString &applicationId);
 
     bool isInstalled(const QString &applicationId) const;
     QString installation(const QString &applicationId) const;
@@ -44,6 +46,8 @@ private:
     void setMessage(const QString &message);
 
     QProcess *m_process = nullptr;
+    QPointer<QProcess> m_refreshProcess;
+    bool m_refreshPending = false;
     QString m_flatpakOverride;
     QHash<QString, QString> m_installations;
     QString m_lastMessage;

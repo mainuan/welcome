@@ -18,14 +18,7 @@ Kirigami.Page {
     property color mutedColor: "#697286"
     property color successColor: "#2da65a"
 
-    readonly property var accentPalette: [
-        { color: "#d08040", name: "Laranja" },
-        { color: "#e8177d", name: "Rosa" },
-        { color: "#3daee9", name: "Azul" },
-        { color: "#3dd425", name: "Verde" },
-        { color: "#aab6b9", name: "Cinza" },
-        { color: "#a588cb", name: "Lilás" }
-    ]
+    readonly property var accentPalette: page.system.accentProfiles
 
     title: "Aparência"
     padding: 0
@@ -56,6 +49,7 @@ Kirigami.Page {
             dark: page.dark
             accent: page.accent
             textColor: page.textColor
+            error: text.indexOf("Erro:") === 0
         }
 
         Controls.Label {
@@ -84,7 +78,7 @@ Kirigami.Page {
                     Layout.fillWidth: true
                     title: "Estilo visual"
                     subtitle: page.system.visualStyleAvailable
-                              ? "Muda o visual completo do Plasma: painéis, janelas, ícones e papel de parede."
+                              ? "Muda o estilo do Plasma e mantém a cor Mainuan e seus ícones selecionados."
                               : "Disponível apenas no KDE Plasma."
                     iconName: "preferences-desktop-effects"
                     accent: page.accent; textColor: page.textColor; mutedColor: page.mutedColor
@@ -130,7 +124,7 @@ Kirigami.Page {
                 SettingRow {
                     Layout.fillWidth: true
                     title: "Cor de destaque"
-                    subtitle: "Cor usada em botões, seleções e elementos ativos. A cor escolhida é mantida ao trocar o estilo visual."
+                    subtitle: "Aplica o esquema KDE, os ícones Kora, o papel de parede e o avatar. Mantém a escolha ao trocar estilo ou tema."
                     iconName: "color-picker"
                     accent: page.accent; textColor: page.textColor; mutedColor: page.mutedColor
 
@@ -143,7 +137,7 @@ Kirigami.Page {
                             delegate: Controls.AbstractButton {
                                 id: swatch
                                 required property var modelData
-                                readonly property bool selected: page.accent.toString().toLowerCase() === modelData.color
+                                readonly property bool selected: page.system.accentId === modelData.id
                                 implicitWidth: 30
                                 implicitHeight: 30
                                 enabled: !page.system.busy
@@ -157,7 +151,7 @@ Kirigami.Page {
                                     const requested = checked;
                                     checked = Qt.binding(() => selected);
                                     if (requested)
-                                        page.system.setAccent(modelData.color);
+                                        page.system.setAccent(modelData.id);
                                 }
                                 Accessible.role: Accessible.RadioButton
                                 Accessible.name: "Cor de destaque " + modelData.name
@@ -229,6 +223,7 @@ Kirigami.Page {
                 model: page.layouts
                 delegate: Rectangle {
                     id: layoutCard
+                    objectName: "layoutCard-" + layoutId
                     required property string layoutId
                     required property string name
                     required property string description
@@ -296,6 +291,7 @@ Kirigami.Page {
                         }
                         Item { Layout.fillHeight: true }
                         Controls.Button {
+                            objectName: "applyLayout-" + layoutCard.layoutId
                             Layout.alignment: Qt.AlignRight
                             text: layoutCard.active ? "Aplicado" : "Aplicar"
                             icon.name: layoutCard.active ? "checkmark" : "dialog-ok-apply"

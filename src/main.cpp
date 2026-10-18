@@ -58,6 +58,13 @@ int main(int argc, char *argv[])
     InstallService installService(&packageService);
 #endif
 
+    QObject::connect(&app, &QGuiApplication::applicationStateChanged, &packageService,
+                     [&installService](Qt::ApplicationState state) {
+        if (state == Qt::ApplicationActive) {
+            installService.refresh();
+        }
+    });
+
     const auto asset = [](const QString &fileName) {
         return QStringLiteral("qrc:/assets/") + fileName;
     };
@@ -68,12 +75,15 @@ int main(int argc, char *argv[])
         {QStringLiteral("wps"), QStringLiteral("WPS Office"),
          QStringLiteral("Interface familiar ao Microsoft Office"), QStringLiteral("com.wps.Office"),
          asset(QStringLiteral("com.wps.Office.png")), QString()},
+        {QStringLiteral("freeoffice"), QStringLiteral("FreeOffice"),
+         QStringLiteral("Suíte de escritório gratuita com editores de textos, planilhas e apresentações."), QStringLiteral("softmaker-freeoffice-2024"),
+         asset(QStringLiteral("freeOffice.png")), QString(), ApplicationAction::InternalDebian},
         {QStringLiteral("gdocs"), QStringLiteral("Google Docs"),
          QStringLiteral("Documentos online com colaboração"), QString(),
-         asset(QStringLiteral("webapp.gdocs.png")), QStringLiteral("https://docs.google.com/")},
+         asset(QStringLiteral("webapp.gdocs.png")), QStringLiteral("https://docs.google.com/"), ApplicationAction::WebPage},
         {QStringLiteral("office365"), QStringLiteral("Office 365 Online"),
          QStringLiteral("Suite Microsoft direto no navegador"), QString(),
-         asset(QStringLiteral("webapp.office365.png")), QStringLiteral("https://www.office.com/")}
+         asset(QStringLiteral("webapp.office365.png")), QStringLiteral("https://www.office.com/"), ApplicationAction::WebPage}
     });
 
     ApplicationModel browserModel(&packageService, {
@@ -86,6 +96,12 @@ int main(int argc, char *argv[])
         {QStringLiteral("brave"), QStringLiteral("Brave"),
          QStringLiteral("Bloqueio de anúncios integrado"), QStringLiteral("com.brave.Browser"),
          asset(QStringLiteral("com.brave.Browser.png")), QString()},
+        {QStringLiteral("vivaldi"), QStringLiteral("Vivaldi"),
+         QStringLiteral("Navegador com recursos avançados de personalização, organização de abas e privacidade."),
+         QStringLiteral("com.vivaldi.Vivaldi"), asset(QStringLiteral("vivaldi.png")), QString(), ApplicationAction::InternalFlatpak},
+        {QStringLiteral("zen"), QStringLiteral("Zen Browser"),
+         QStringLiteral("Navegador focado em privacidade, produtividade e organização por abas verticais."),
+         QStringLiteral("app.zen_browser.zen"), asset(QStringLiteral("zenBrowser.png")), QString(), ApplicationAction::InternalFlatpak},
         {QStringLiteral("librewolf"), QStringLiteral("LibreWolf"),
          QStringLiteral("Navegador focado em privacidade"), QStringLiteral("io.gitlab.librewolf-community"),
          asset(QStringLiteral("io.gitlab.librewolf-community.png")), QString()},

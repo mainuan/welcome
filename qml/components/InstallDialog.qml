@@ -13,6 +13,7 @@ Controls.Popup {
     property var info: ({})
     property bool showDetails: false
     property bool closeBlocked: false
+    property bool awaitingConfirmation: false
 
     property bool dark: false
     property color accent: "#3daee9"
@@ -31,6 +32,9 @@ Controls.Popup {
     readonly property bool failed: phase === "error"
     readonly property bool cancelled: phase === "cancelled"
     readonly property bool finished: succeeded || failed || cancelled
+    // A completed download/step can report 100 before the whole job succeeds.
+    // Keep indicating ongoing work in that interval, without inventing a total.
+    readonly property bool hasProgress: running && installer.percent >= 0 && installer.percent < 100
     readonly property var profileState: installer && installer.profiles[profileId] ? installer.profiles[profileId] : ({})
     readonly property bool canRunAction: succeeded && (info.actionLabel || "").length > 0 && profileState.canLaunch === true
 
@@ -41,15 +45,15 @@ Controls.Popup {
         info = installer.profileInfo(target);
         showDetails = false;
         closeBlocked = false;
+        awaitingConfirmation = !installer.busy && (info.sourceNotice || "").length > 0;
         open();
-        if (!installer.busy)
+        if (!installer.busy && !awaitingConfirmation)
             installer.start(target);
     }
 
     function requestClose() {
         if (running) {
             closeBlocked = true;
-            blockedPulse.restart();
             return;
         }
         close();
@@ -143,6 +147,7 @@ Controls.Popup {
                     }
                     Kirigami.Icon {
                         id: resultIcon
+                        objectName: "installationResultIcon"
                         anchors.centerIn: parent
                         width: 28
                         height: 28
@@ -167,26 +172,52 @@ Controls.Popup {
                     spacing: 4
                     Kirigami.Heading {
                         id: title
+                        objectName: "installationTitle"
                         Layout.fillWidth: true
                         level: 3
                         wrapMode: Text.WordWrap
                         color: dialog.textColor
-                        text: dialog.succeeded ? (dialog.info.successTitle || "Instalação concluída")
-                            : dialog.failed ? "Não foi possível concluir a instalação"
-                            : dialog.cancelled ? "Instalação cancelada"
-                            : (dialog.info.runningTitle || "Instalando")
+                        text: dialog.finished ? (dialog.info.name || "Instalação")
+                            : (dialog.awaitingConfirmation ? "Instalar " : "Instalando ") + (dialog.info.name || "componentes")
                     }
                     Controls.Label {
+                        objectName: "installationResultMessage"
                         Layout.fillWidth: true
+                        visible: dialog.finished
                         wrapMode: Text.WordWrap
+                        textFormat: Text.PlainText
                         color: dialog.mutedColor
-                        text: dialog.finished ? dialog.installer.resultMessage
-                            : (dialog.installer.stepCount > 1
-                               ? "Etapa " + dialog.installer.step + " de " + dialog.installer.stepCount
-                               : (dialog.info.description || ""))
+                        text: dialog.succeeded ? "Instalação concluída com sucesso."
+                            : dialog.finished ? dialog.installer.resultMessage : ""
                         Accessible.role: Accessible.StaticText
                     }
                 }
+            }
+
+            Controls.Label {
+                objectName: "installationSource"
+                Layout.fillWidth: true
+                text: "Origem: " + (dialog.info.source || "")
+                textFormat: Text.PlainText
+                wrapMode: Text.WordWrap
+                color: dialog.mutedColor
+                Accessible.role: Accessible.StaticText
+                Accessible.name: text
+            }
+
+            Controls.Label {
+                objectName: "installationSourceNotice"
+                Layout.fillWidth: true
+                // Preserve the existing vendor consent before starting; it is
+                // never part of the normal progress or result presentation.
+                visible: dialog.awaitingConfirmation && (dialog.info.sourceNotice || "").length > 0
+                text: dialog.info.sourceNotice || ""
+                textFormat: Text.PlainText
+                wrapMode: Text.WrapAnywhere
+                color: dialog.mutedColor
+                font.pixelSize: 12
+                Accessible.role: Accessible.StaticText
+                Accessible.name: text
             }
 
             ColumnLayout {
@@ -196,33 +227,25 @@ Controls.Popup {
 
                 Controls.ProgressBar {
                     id: progress
+                    objectName: "installationProgress"
                     Layout.fillWidth: true
                     from: 0
                     to: 100
-                    indeterminate: dialog.running && dialog.installer.percent < 0
-                    value: dialog.succeeded ? 100 : Math.max(0, dialog.installer.percent)
+                    indeterminate: dialog.running && !dialog.hasProgress
+                    value: dialog.succeeded ? 100 : (dialog.hasProgress ? dialog.installer.percent : 0)
                     Behavior on value { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
                     Accessible.name: "Progresso da instalação"
-                    Accessible.description: indeterminate ? "Em andamento" : Math.round(value) + "%"
+                    Accessible.description: indeterminate ? "Em andamento" : (dialog.succeeded ? 100 : dialog.installer.percent) + "%"
                 }
 
-                RowLayout {
-                    Layout.fillWidth: true
-                    spacing: 8
-                    Controls.Label {
-                        Layout.fillWidth: true
-                        text: dialog.succeeded ? "Concluído" : dialog.installer.message
-                        color: dialog.textColor
-                        elide: Text.ElideRight
-                        Accessible.role: Accessible.StaticText
-                        Accessible.name: text
-                    }
-                    Controls.Label {
-                        visible: dialog.succeeded || (dialog.running && dialog.installer.percent >= 0)
-                        text: (dialog.succeeded ? 100 : dialog.installer.percent) + "%"
-                        color: dialog.mutedColor
-                        font.features: { "tnum": 1 }
-                    }
+                Controls.Label {
+                    objectName: "installationPercentage"
+                    Layout.alignment: Qt.AlignRight
+                    visible: dialog.succeeded || dialog.hasProgress
+                    text: (dialog.succeeded ? 100 : dialog.installer.percent) + "%"
+                    color: dialog.mutedColor
+                    font.features: { "tnum": 1 }
+                    Accessible.name: text
                 }
             }
 
@@ -236,24 +259,17 @@ Controls.Popup {
                     Layout.preferredHeight: 16
                     Layout.alignment: Qt.AlignTop
                     source: "dialog-information"
-                    color: dialog.closeBlocked ? dialog.accent : dialog.mutedColor
+                    color: dialog.mutedColor
                     Accessible.ignored: true
                 }
                 Controls.Label {
+                    objectName: "installationSafetyNotice"
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     font.pixelSize: 12
-                    font.weight: dialog.closeBlocked ? Font.DemiBold : Font.Normal
-                    color: dialog.closeBlocked ? dialog.textColor : dialog.mutedColor
-                    text: dialog.closeBlocked
-                          ? "Interromper agora pode deixar o sistema inconsistente. Você poderá fechar esta janela assim que a instalação terminar."
-                          : "Você pode continuar usando o computador. A instalação não pode ser interrompida com segurança."
+                    color: dialog.mutedColor
+                    text: "Por segurança, a instalação não pode ser cancelada."
                     Accessible.role: Accessible.StaticText
-                }
-                SequentialAnimation {
-                    id: blockedPulse
-                    NumberAnimation { target: blockedNotice; property: "opacity"; to: 0.35; duration: 90 }
-                    NumberAnimation { target: blockedNotice; property: "opacity"; to: 1; duration: 160 }
                 }
             }
 
@@ -263,6 +279,7 @@ Controls.Popup {
                 spacing: 6
 
                 Controls.Button {
+                    objectName: "installationDetailsToggle"
                     flat: true
                     text: dialog.showDetails ? "Ocultar detalhes" : "Ver detalhes"
                     icon.name: dialog.showDetails ? "arrow-up" : "arrow-down"
@@ -270,6 +287,7 @@ Controls.Popup {
                     Accessible.description: "Mostra a saída técnica da instalação"
                 }
                 Rectangle {
+                    objectName: "installationDetailsPanel"
                     Layout.fillWidth: true
                     Layout.preferredHeight: 170
                     visible: dialog.showDetails
@@ -284,6 +302,7 @@ Controls.Popup {
                         // A plain TextEdit: Breeze's TextArea passes itself to a property
                         // typed TextInput and logs a warning every time it is created.
                         TextEdit {
+                            objectName: "installationTechnicalDetails"
                             width: detailsScroll.availableWidth
                             readOnly: true
                             selectByMouse: true
@@ -302,11 +321,23 @@ Controls.Popup {
 
             RowLayout {
                 Layout.fillWidth: true
-                visible: dialog.finished
+                visible: dialog.finished || dialog.awaitingConfirmation
                 spacing: 8
                 Item { Layout.fillWidth: true }
                 Controls.Button {
+                    objectName: "confirmVendorInstallation"
+                    visible: dialog.awaitingConfirmation
+                    text: "Instalar"
+                    highlighted: true
+                    onClicked: {
+                        dialog.awaitingConfirmation = false;
+                        dialog.installer.start(dialog.profileId);
+                    }
+                    Accessible.name: "Instalar FreeOffice da SoftMaker"
+                }
+                Controls.Button {
                     id: actionButton
+                    objectName: "installationResultAction"
                     visible: dialog.canRunAction
                     text: dialog.info.actionLabel || ""
                     icon.name: text === "Abrir" ? "system-run" : "configure"
@@ -318,6 +349,7 @@ Controls.Popup {
                 }
                 Controls.Button {
                     id: retryButton
+                    objectName: "retryInstallation"
                     visible: dialog.failed || dialog.cancelled
                     text: "Tentar novamente"
                     icon.name: "view-refresh"
@@ -330,6 +362,7 @@ Controls.Popup {
                 }
                 Controls.Button {
                     id: closeButton
+                    objectName: "closeInstallation"
                     text: "Fechar"
                     icon.name: "window-close"
                     onClicked: dialog.close()

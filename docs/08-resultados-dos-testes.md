@@ -1,5 +1,7 @@
 # Resultados dos testes
 
+> Registro histórico do desenvolvimento experimental. Os números 2.x, resultados de execução e caminhos de capturas descrevem aquele momento. A primeira versão oficial é **1.0**; consulte a [documentação atual](README.md) antes de seguir instruções antigas.
+
 Executados em 15/09/2026 no host Plasma 6.7.4/Wayland.
 
 | Teste | Comando | Esperado | Obtido | Resultado |

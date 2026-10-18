@@ -40,7 +40,7 @@ Kirigami.Page {
         Controls.Label {
             visible: !page.pkgService.flatpakAvailable
             Layout.fillWidth: true
-            text: "Flatpak não foi encontrado. A detecção e a instalação estão indisponíveis neste sistema."
+            text: "Flatpak não foi encontrado. Os aplicativos Flatpak estão indisponíveis. O FreeOffice e os serviços online continuam independentes do Flatpak."
             color: page.mutedColor
             wrapMode: Text.WordWrap
         }
@@ -50,6 +50,15 @@ Kirigami.Page {
             text: page.pkgService.lastMessage
             color: page.pkgService.lastMessage.indexOf("Falha") === 0 ? "#c94444" : page.mutedColor
             wrapMode: Text.WordWrap
+        }
+
+        MessageBanner {
+            Layout.fillWidth: true
+            text: page.system.lastMessage
+            dark: page.dark
+            accent: page.accent
+            textColor: page.textColor
+            error: text.indexOf("Erro:") === 0
         }
 
         Flow {
@@ -82,6 +91,8 @@ Kirigami.Page {
                     available: model.available
                     installState: model.installState
                     webUrl: model.webUrl
+                    actionType: model.actionType
+                    packageId: model.packageId
                     installProfile: model.installProfile
                     installerBusy: page.installer.busy
                     onInstallRequested: (profileId) => page.installRequested(profileId)

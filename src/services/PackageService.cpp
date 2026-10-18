@@ -2,6 +2,7 @@
 
 #include <QFileInfo>
 #include <QStandardPaths>
+#include <QTimer>
 
 PackageService::PackageService(QObject *parent, const QString &flatpakProgram)
     : QObject(parent)
@@ -47,12 +48,20 @@ bool PackageService::isAllowedApplication(const QString &applicationId)
         QStringLiteral("com.google.Chrome"),
         QStringLiteral("com.microsoft.Edge"),
         QStringLiteral("com.brave.Browser"),
+        QStringLiteral("com.vivaldi.Vivaldi"),
+        QStringLiteral("app.zen_browser.zen"),
         QStringLiteral("io.gitlab.librewolf-community"),
         QStringLiteral("com.opera.opera-gx"),
         QStringLiteral("org.torproject.torbrowser-launcher"),
         QStringLiteral("io.github.linx_systems.ClamUI")
     };
     return allowlist.contains(applicationId);
+}
+
+bool PackageService::isDiscoverApplication(const QString &applicationId)
+{
+    return applicationId == QStringLiteral("com.vivaldi.Vivaldi")
+        || applicationId == QStringLiteral("app.zen_browser.zen");
 }
 
 bool PackageService::isInstalled(const QString &applicationId) const
@@ -75,9 +84,11 @@ void PackageService::setMessage(const QString &message)
 
 void PackageService::refresh()
 {
-    if (m_process != nullptr) {
+    if (m_process != nullptr || m_refreshProcess != nullptr) {
+        m_refreshPending = true;
         return;
     }
+    m_refreshPending = false;
 
     const QString flatpak = flatpakExecutable();
     const bool available = !flatpak.isEmpty();
@@ -94,8 +105,14 @@ void PackageService::refresh()
     }
 
     QProcess *process = new QProcess(this);
-    connect(process, &QProcess::finished, this, [this, process](int exitCode, QProcess::ExitStatus) {
-        if (exitCode == 0) {
+    m_refreshProcess = process;
+    connect(process, &QObject::destroyed, this, [this]() {
+        if (m_refreshPending) {
+            QTimer::singleShot(0, this, &PackageService::refresh);
+        }
+    });
+    connect(process, &QProcess::finished, this, [this, process](int exitCode, QProcess::ExitStatus status) {
+        if (status == QProcess::NormalExit && exitCode == 0) {
             QHash<QString, QString> found;
             const QString output = QString::fromLocal8Bit(process->readAllStandardOutput());
             const QStringList lines = output.split(QLatin1Char('\n'), Qt::SkipEmptyParts);

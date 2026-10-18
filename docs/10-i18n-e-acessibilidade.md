@@ -1,5 +1,7 @@
 # Internacionalização e acessibilidade
 
+> Registro histórico do desenvolvimento experimental. Os números 2.x, resultados de execução e caminhos de capturas descrevem aquele momento. A primeira versão oficial é **1.0**; consulte a [documentação atual](README.md) antes de seguir instruções antigas.
+
 ## Estado atual
 
 Os controles são Qt Quick Controls/Kirigami, têm foco nativo, nomes acessíveis nos botões e não dependem apenas de cor para os estados principais. A navegação usa botões reais, o player possui controles de play/pause, seek e volume, e itens indisponíveis ficam com texto explicativo.

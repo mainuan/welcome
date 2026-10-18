@@ -1,5 +1,8 @@
 #pragma once
 
+#include "FreeOfficeProfile.h"
+#include <QCryptographicHash>
+#include <QFile>
 #include <QHash>
 #include <QList>
 #include <QObject>
@@ -7,10 +10,13 @@
 #include <QProcess>
 #include <QStringList>
 #include <QVariantMap>
+#include <QTemporaryDir>
 
 #include <functional>
+#include <memory>
 
 class PackageService;
+class QNetworkAccessManager;
 
 // Installs the allowlisted profiles of the Welcome (system components through
 // the polkit helper and Flatpak applications) and reports real progress.
@@ -51,6 +57,10 @@ public:
         QString helper;
         QString dpkgQuery;
         QString aptGet;
+        QString dpkgDeb = QStringLiteral("/usr/bin/dpkg-deb");
+        FreeOfficeProfile freeOffice = FreeOfficeProfile::official();
+        // C++ test seam; never exposed to QML or accepted by the privileged helper.
+        QNetworkAccessManager *network = nullptr;
         static Backend system();
     };
 
@@ -112,6 +122,8 @@ private:
         QString successTitle;
         QString successMessage;
         QString actionLabel;
+        QString source;
+        QString sourceNotice;
         Launcher launcher = Launcher::None;
         QString launchTarget;
         bool usesHelper = false;
@@ -119,7 +131,7 @@ private:
         QList<QPair<QString, QString>> packageLabels; // package prefix → label
     };
 
-    enum class StepKind { Helper, FlatpakRemote, Flatpak };
+    enum class StepKind { Helper, FlatpakRemote, Flatpak, FreeOfficeDownload };
 
     struct Step
     {
@@ -138,6 +150,11 @@ private:
     void planJob();
     void runNextStep();
     void runHelperStep();
+    void downloadFreeOffice();
+    void validateFreeOffice();
+    void transferFreeOffice();
+    void verifyFreeOfficeInstalled();
+    void verifyBrowserInstalled();
     void runFlatpakRemoteStep(const Step &step);
     void runFlatpakStep(const Step &step);
     void handleHelperOutput();
@@ -187,4 +204,8 @@ private:
     int m_flatpakOperation = 0;
     int m_flatpakOperations = 0;
     int m_flatpakPercent = -1;
+    QNetworkAccessManager *m_network = nullptr;
+    std::unique_ptr<QTemporaryDir> m_downloadDirectory;
+    QFile m_downloadFile;
+    QCryptographicHash m_downloadHash{QCryptographicHash::Sha256};
 };
