@@ -262,6 +262,15 @@ install(FILES
 
 if (Qt6Test_FOUND)
     enable_testing()
+    find_program(MAINUAN_DBUS_RUN_SESSION NAMES dbus-run-session REQUIRED)
+    # A disconnected bus leaves the appearance wallpaper query unfinished.
+    # Give each native suite its own bus, without Plasma service activation,
+    # both for ordinary CTest and for debhelper's isolated/parallel test run.
+    function(mainuan_add_isolated_test target)
+        add_test(NAME ${target} COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tests/run-isolated.sh
+            ${MAINUAN_DBUS_RUN_SESSION} ${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/session-bus.conf
+            $<TARGET_FILE:${target}>)
+    endfunction()
     add_executable(tst_mainuan
         tests/tst_mainuan.cpp
     )
@@ -272,18 +281,18 @@ if (Qt6Test_FOUND)
     target_compile_definitions(tst_mainuan PRIVATE
         MAINUAN_TEST_HELPER="${CMAKE_CURRENT_SOURCE_DIR}/rootfs/usr/libexec/mainuan-welcome/mainuan-welcome-helper"
         MAINUAN_TEST_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures")
-    add_test(NAME tst_mainuan COMMAND tst_mainuan)
+    mainuan_add_isolated_test(tst_mainuan)
     add_executable(tst_appinstallation tests/tst_appinstallation.cpp)
     target_link_libraries(tst_appinstallation PRIVATE mainuan-core Qt6::Test)
     target_compile_definitions(tst_appinstallation PRIVATE
         MAINUAN_TEST_HELPER="${CMAKE_CURRENT_SOURCE_DIR}/rootfs/usr/libexec/mainuan-welcome/mainuan-welcome-helper"
         MAINUAN_TEST_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures")
-    add_test(NAME tst_appinstallation COMMAND tst_appinstallation)
+    mainuan_add_isolated_test(tst_appinstallation)
     add_executable(tst_layouts tests/tst_layouts.cpp)
     target_link_libraries(tst_layouts PRIVATE mainuan-core Qt6::Test Qt6::Qml)
     target_compile_definitions(tst_layouts PRIVATE
         MAINUAN_TEST_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures")
-    add_test(NAME tst_layouts COMMAND tst_layouts)
+    mainuan_add_isolated_test(tst_layouts)
     find_program(MAINUAN_QMLTESTRUNNER NAMES qmltestrunner HINTS /usr/lib/qt6/bin)
     if(MAINUAN_QMLTESTRUNNER)
         add_test(NAME layouts_qml COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tests/layouts-qml.sh

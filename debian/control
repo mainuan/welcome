@@ -3,6 +3,7 @@ Section: kde
 Priority: optional
 Maintainer: ruscher <rruscher@gmail.com>
 Build-Depends: debhelper-compat (= 13),
+               dbus-daemon,
                cmake (>= 3.24),
                libkf6config-dev,
                libqrencode-dev,

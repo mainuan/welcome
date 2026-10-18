@@ -20,6 +20,9 @@
 
 #include <QFile>
 #include <QDesktopServices>
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
+#include <QDBusReply>
 #include <QProcess>
 #include <QStandardPaths>
 #include <QTemporaryDir>
@@ -138,6 +141,7 @@ class MainuanTest final : public QObject
     Q_OBJECT
 
 private slots:
+    void initTestCase();
     void cleanup();
 
     void acceptsOnlyKnownAccentIds();
@@ -188,6 +192,15 @@ private slots:
     void startupPreferenceIsStoredPerUser();
     void startupPreferenceReadsPlasmaOverrides();
 };
+
+void MainuanTest::initTestCase()
+{
+    const auto bus = QDBusConnection::sessionBus();
+    QVERIFY2(bus.isConnected(), "Run through CTest: appearance fixtures need a connected private D-Bus session.");
+    const QDBusReply<bool> plasma = bus.interface()->isServiceRegistered(QStringLiteral("org.kde.plasmashell"));
+    QVERIFY(plasma.isValid());
+    QVERIFY2(!plasma.value(), "Tests must not connect to a real Plasma session.");
+}
 
 void MainuanTest::cleanup()
 {

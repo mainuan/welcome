@@ -106,6 +106,17 @@ fica em `debian/control`; não há outra lista de bibliotecas no workflow. Os te
 QtTest, QML e de inicialização usam diretórios temporários, ferramentas simuladas
 e renderização offscreen. Não instalam aplicativos nem alteram a sessão Plasma.
 O verificador de release recusa testes ausentes, ignorados ou com falhas.
+As suítes C++ recebem um barramento D-Bus privado por `dbus-run-session`
+(dependência de compilação `dbus-daemon`), sem ativação de serviços instalados,
+além de HOME e diretórios XDG temporários. Execute-as pelo CTest para manter esse
+isolamento também durante `dh_auto_test`. O workflow verifica as seis suítes
+sequencialmente e em paralelo; o empacotamento repete os testes obrigatórios.
+Isso evita depender do socket da sessão do host: o debhelper cria outro
+`XDG_RUNTIME_DIR`, sem esse socket. Sem barramento conectado, a consulta
+assíncrona de wallpaper podia ficar sem sinal de conclusão antes mesmo de
+executar o comando Plasma simulado. O barramento privado devolve o erro esperado
+de serviço ausente; não inicia o Plasma, não exige serialização e mantém os
+timeouts e as verificações de aparência existentes.
 
 Para executar a aplicação compilada: `./build/bin/mainuan-welcome`.
 Para gerar o pacote:

@@ -60,9 +60,11 @@ jobs:
 
       - name: Run all QtTest, QML and startup tests without a desktop session
         run: |
-          env -u DBUS_SESSION_BUS_ADDRESS -u DISPLAY -u WAYLAND_DISPLAY \
-            ctest --test-dir build --output-on-failure --output-junit release-tests.xml
+          # CTest owns session isolation, also when invoked by dh_auto_test.
+          ctest --test-dir build --parallel 1 --output-on-failure --output-junit release-tests.xml
           python3 .github/scripts/check_release.py tests build/release-tests.xml
+          ctest --test-dir build --parallel 2 --output-on-failure --output-junit release-tests-parallel.xml
+          python3 .github/scripts/check_release.py tests build/release-tests-parallel.xml
 
       - name: Build and validate the Debian package
         env:
