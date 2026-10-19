@@ -45,7 +45,10 @@ procedência, sem substituição silenciosa de produto/versão. Veja o documento
 O modal mostra produto, origem centralizada no perfil, uma barra real ou
 indeterminada e o aviso de segurança. Um 100% intermediário de download não é
 tratado como conclusão de toda a instalação. A confirmação de origem do FreeOffice
-permanece antes do início. Fechar normalmente o modal ou a janela não interrompe
+permanece antes do início, com origem SoftMaker e um aviso breve de autorização
+administrativa. URL, hash, metadados e mensagens internas permanecem nos detalhes
+de diagnóstico; após falhas, o usuário pode solicitar “Ver detalhes”.
+Fechar normalmente o modal ou a janela não interrompe
 APT, dpkg ou Flatpak. As origens são informativas, sem alterar os instaladores.
 
 ## Aparência, Kora e avatar
@@ -96,6 +99,17 @@ mas aplicar normalmente um layout não exige reinício. Veja [17](17-layout-func
 e o ajuste final de geometria em [19](19-classic-manual-spacing.md).
 
 ## Outras integrações e testes
+
+O card Drivers adicionais procura somente o executável público
+`mainuan-gestao-drivers` no PATH e o abre por QProcess, sem argumentos, shell ou
+elevação. O lançador do projeto é `org.mainuan.GestaoDrivers.desktop`; sua presença
+isolada não comprova que o executável está disponível. O Welcome não consulta
+versões, tags ou downloads da ferramenta nem implementa operações de drivers.
+PackageKit/PolicyKit e as alterações de drivers pertencem à própria ferramenta.
+O pacote `mainuan-gestao-drivers` é instalado separadamente: não há Depends ou
+Recommends novo, pois sua disponibilidade nas fontes APT não está garantida.
+A ISO deve tratar os dois pacotes como componentes independentes. Sem a
+ferramenta, o botão fica desabilitado e o card informa sua ausência.
 
 O relatório da máquina evita identificadores sensíveis e coleta dados somente
 quando solicitado. A página Pix lê `/etc/mainuan/welcome.conf`, com fallback na

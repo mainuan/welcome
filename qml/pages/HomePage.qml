@@ -98,14 +98,15 @@ Kirigami.Page {
         SectionLabel { text: "Hardware & Mídia"; color: page.mutedColor }
 
         StatusRow {
+            objectName: "driversRow"
             Layout.fillWidth: true
             surfaceColor: page.surfaceColor; borderColor: page.borderColor; accent: page.accent
             textColor: page.textColor; mutedColor: page.mutedColor
             successColor: page.successColor; warningColor: page.warningColor
             title: "Drivers adicionais"
-            description: "Gerencie drivers proprietários de vídeo, Wi-Fi e outros dispositivos."
+            description: "Consulte e gerencie os drivers disponíveis para o seu computador."
             iconName: "computer"
-            statusText: page.system.driversAvailable ? "" : "Gerenciador indisponível"
+            statusText: page.system.driversStatus
             primaryText: "Gerenciar"
             primaryIcon: "configure"
             primaryHighlighted: false

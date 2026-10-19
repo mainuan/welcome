@@ -9,6 +9,7 @@ mkdir -p "$isolated/components" "$isolated/runtime" "$isolated/config" "$isolate
 chmod 700 "$isolated/runtime"
 cp "$source_dir"/qml/components/*.qml "$isolated/components/"
 cp "$source_dir/qml/pages/AppsPage.qml" "$isolated/components/"
+cp "$source_dir/qml/pages/HomePage.qml" "$isolated/components/"
 cp "$source_dir"/rootfs/usr/share/welcome/{freeOffice,vivaldi,zenBrowser}.png "$isolated/components/"
 cp "$source_dir/tests/qml/tst_Applications.qml" "$isolated/"
 set +e

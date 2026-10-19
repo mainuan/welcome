@@ -237,11 +237,7 @@ InstallService::InstallService(PackageService *packages, Backend backend, QObjec
     freeoffice.runningTitle = QStringLiteral("Instalando FreeOffice");
     freeoffice.successTitle = QStringLiteral("FreeOffice instalado com sucesso");
     freeoffice.successMessage = QStringLiteral("O FreeOffice está instalado e disponível no menu de aplicativos.");
-    freeoffice.sourceNotice = QStringLiteral("Origem: SoftMaker — %1\n"
-        "FreeOffice 2024, revisão 1238 (pacote Debian 3714, amd64). "
-        "Após o download e a validação, o sistema solicitará autorização administrativa. "
-        "Este pacote externo contém scripts do fabricante que serão executados como administrador.")
-        .arg(m_backend.freeOffice.url.toString());
+    freeoffice.sourceNotice = QStringLiteral("Este pacote é fornecido pela SoftMaker e poderá solicitar autorização de administrador.");
     freeoffice.usesHelper = true;
     freeoffice.components = {{QStringLiteral("FreeOffice"), {QStringLiteral("softmaker-freeoffice-2024")}, {}, {}}};
     freeoffice.packageLabels = {{QStringLiteral("softmaker-freeoffice-2024"), QStringLiteral("FreeOffice")}};

@@ -10,6 +10,10 @@ mainuan-welcome (1.0) resolute; urgency=medium
   * Isolate native tests on private D-Bus sessions without service activation
     so appearance fixtures complete under debhelper's temporary runtime.
     Check all suites sequentially and in parallel before packaging in CI.
+  * Keep external package consent concise while retaining technical diagnostics
+    and all existing download, verification and authentication safeguards.
+  * Open the independent Mainuan driver manager through its stable executable,
+    without a version dependency or fallback to other driver tools.
 
  -- ruscher <rruscher@gmail.com>  Sat, 17 Oct 2026 23:15:00 -0300
 

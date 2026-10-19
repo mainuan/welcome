@@ -165,6 +165,9 @@ private slots:
     void refreshesExternalFlatpaksAsynchronously();
     void opensSpecificDiscoverPagesAndHandlesErrors();
     void requestsExternalDownloadThroughDesktopServices();
+    void opensIndependentDriverManagerVersions_data();
+    void opensIndependentDriverManagerVersions();
+    void reportsMissingOrBrokenDriverManager();
 
     void parsesHelperProtocol();
     void parsesFlatpakProgress();
@@ -478,6 +481,7 @@ private:
     static QList<const char *> environmentNames()
     {
         return {"XDG_CONFIG_HOME", "XDG_CONFIG_DIRS", "XDG_DATA_HOME", "XDG_DATA_DIRS", "MOCK_LOG",
+                "PATH", "MOCK_DRIVERS_LOG", "WAYLAND_DISPLAY", "DISPLAY", "XDG_SESSION_TYPE",
                 "MOCK_LNF_FAIL", "MOCK_LNF_NOOP", "MOCK_LNF_DELAY", "MOCK_WALLPAPER_FAIL", "MOCK_ICONS_FAIL",
                 "MOCK_ICONS_NOOP", "MOCK_SCHEME_FAIL", "MOCK_SCHEME_NOOP", "MOCK_SCHEME_HIDDEN"};
     }
@@ -491,6 +495,80 @@ bool waitIdle(const SystemService &service)
 }
 
 } // namespace
+
+void MainuanTest::opensIndependentDriverManagerVersions_data()
+{
+    QTest::addColumn<QByteArray>("toolVersion");
+    QTest::newRow("compatible-tool-1") << QByteArray("1.0");
+    QTest::newRow("compatible-tool-2") << QByteArray("2.4");
+}
+
+void MainuanTest::opensIndependentDriverManagerVersions()
+{
+    QFETCH(QByteArray, toolVersion);
+    PlasmaSandbox sandbox;
+    const QString bin = sandbox.home() + "/bin";
+    const QString executable = bin + "/mainuan-gestao-drivers";
+    PlasmaSandbox::write(executable,
+        "#!/bin/bash\nprintf '%s\\n' '" + toolVersion
+        + "' \"$#\" \"$UID\" \"$EUID\" \"$WAYLAND_DISPLAY\" \"$DISPLAY\" \"$XDG_SESSION_TYPE\" "
+          "\"$XDG_RUNTIME_DIR\" \"$DBUS_SESSION_BUS_ADDRESS\" >\"$MOCK_DRIVERS_LOG\"\n");
+    QVERIFY(QFile::setPermissions(executable, QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ExeOwner));
+    for (const QString &other : {QString("kubuntu-driver-manager"), QString("software-properties-qt"),
+         QString("plasma-discover"), QString("pkexec"), QString("sudo")}) {
+        const QString rejected = bin + '/' + other;
+        PlasmaSandbox::write(rejected, "#!/bin/bash\nprintf 'unexpected launcher\\n' >\"$MOCK_DRIVERS_LOG\"\n");
+        QVERIFY(QFile::setPermissions(rejected, QFileDevice::ReadOwner | QFileDevice::ExeOwner));
+    }
+    qputenv("PATH", bin.toUtf8());
+    qputenv("MOCK_DRIVERS_LOG", sandbox.log().toUtf8());
+    qputenv("WAYLAND_DISPLAY", "mainuan-test-wayland");
+    qputenv("DISPLAY", "mainuan-test-display");
+    qputenv("XDG_SESSION_TYPE", "wayland");
+    SystemService service(nullptr, sandbox.home());
+    QVERIFY(service.driversAvailable());
+    QCOMPARE(service.driversStatus(), QStringLiteral("Gestão de Drivers disponível"));
+    QVERIFY(!QFile::exists(sandbox.log())); // Opening Welcome does not launch the tool.
+    service.performAction(QStringLiteral("drivers"));
+    QByteArray expected = toolVersion + "\n0\n" + QByteArray::number(getuid()) + '\n' + QByteArray::number(geteuid()) + '\n';
+    for (const char *key : {"WAYLAND_DISPLAY", "DISPLAY", "XDG_SESSION_TYPE", "XDG_RUNTIME_DIR", "DBUS_SESSION_BUS_ADDRESS"}) {
+        expected += qgetenv(key) + '\n';
+    }
+    // No version probe, command-line options, elevation or session replacement.
+    QTRY_COMPARE(PlasmaSandbox::read(sandbox.log()), expected);
+    QVERIFY(!service.lastMessage().startsWith(QStringLiteral("Erro:")));
+}
+
+void MainuanTest::reportsMissingOrBrokenDriverManager()
+{
+    PlasmaSandbox sandbox;
+    const QString bin = sandbox.home() + "/bin";
+    const QString legacy = bin + "/kubuntu-driver-manager";
+    PlasmaSandbox::write(legacy, "#!/bin/bash\nprintf 'legacy called\\n' >\"$MOCK_DRIVERS_LOG\"\n");
+    QVERIFY(QFile::setPermissions(legacy, QFileDevice::ReadOwner | QFileDevice::ExeOwner));
+    // A desktop entry alone cannot make an absent executable available.
+    PlasmaSandbox::write(sandbox.data() + "/applications/org.mainuan.GestaoDrivers.desktop",
+        "[Desktop Entry]\nType=Application\nExec=mainuan-gestao-drivers\nName=Gestão de Drivers\n");
+    qputenv("PATH", bin.toUtf8());
+    qputenv("MOCK_DRIVERS_LOG", sandbox.log().toUtf8());
+    SystemService service(nullptr, sandbox.home());
+    QVERIFY(!service.driversAvailable());
+    QCOMPARE(service.driversStatus(), QStringLiteral("Gestão de Drivers não instalada"));
+    service.performAction(QStringLiteral("drivers"));
+    QVERIFY(service.lastMessage().contains(QStringLiteral("Gestão de Drivers não está instalada")));
+    QVERIFY(!QFile::exists(sandbox.log()));
+    const QString executable = bin + "/mainuan-gestao-drivers";
+    PlasmaSandbox::write(executable, "#!/nonexistent/mainuan-drivers-interpreter\n");
+    QVERIFY(QFile::setPermissions(executable, QFileDevice::ReadOwner | QFileDevice::ExeOwner));
+    service.refresh();
+    QVERIFY(service.driversAvailable());
+    service.performAction(QStringLiteral("drivers"));
+    QVERIFY(service.lastMessage().contains(QStringLiteral("Não foi possível abrir a Gestão de Drivers")));
+    QVERIFY(QFile::remove(executable));
+    service.refresh();
+    QVERIFY(!service.driversAvailable());
+    QVERIFY(!QFile::exists(sandbox.log()));
+}
 
 void MainuanTest::appliesVisualStyleProfiles()
 {

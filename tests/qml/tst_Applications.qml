@@ -17,6 +17,13 @@ Item {
         id: mockSystem
         property string lastMessage: ""
         property int urls: 0
+        property bool driversAvailable: false
+        property string driversStatus: driversAvailable ? "Gestão de Drivers disponível" : "Gestão de Drivers não instalada"
+        property string firewallStatus: ""
+        property string sessionType: "wayland"
+        property string plasmaVersion: ""
+        property string lastAction: ""
+        function performAction(action) { lastAction = action }
         function openUrl(url) { urls++ }
         function openDiscover(id) { fail("Unexpected Discover invocation") }
     }
@@ -43,7 +50,7 @@ Item {
         property int launches: 0
         function profileInfo(id) {
             return {name: "FreeOffice", source: "SoftMaker", description: "Descrição longa que deve ficar oculta", actionLabel: actionLabel,
-                    sourceNotice: "Origem: SoftMaker. Scripts executados como administrador.",
+                    sourceNotice: "Este pacote é fornecido pela SoftMaker e poderá solicitar autorização de administrador.",
                     iconSource: Qt.resolvedUrl("components/freeOffice.png").toString()}
         }
         function start(id) { starts++; profileId = id; phase = "preparing"; busy = true; return true }
@@ -76,6 +83,13 @@ Item {
         mutedColor: dark ? "#aeb8c8" : "#657080"
         successColor: dark ? "#7fdda5" : "#258b4b"
     }
+    App.HomePage {
+        id: homePage
+        anchors.fill: parent
+        visible: false
+        system: mockSystem
+        installer: mockInstaller
+    }
     TestCase {
         name: "ApplicationInstallation"
         when: windowShown
@@ -92,6 +106,10 @@ Item {
             mockInstaller.message = "Preparando"
             mockInstaller.resultMessage = "Falha simulada"
             mockInstaller.details = "Detalhes simulados"
+            homePage.visible = false
+            page.visible = true
+            mockSystem.driversAvailable = false
+            mockSystem.lastAction = ""
         }
         function test_cardsUseProfilesAndPreserveIcons() {
             const profiles = ["freeoffice", "app:com.vivaldi.Vivaldi", "app:app.zen_browser.zen"]
@@ -127,7 +145,12 @@ Item {
             verify(dialog.awaitingConfirmation)
             compare(mockInstaller.starts, previousStarts)
             const notice = findChild(dialog.contentItem, "installationSourceNotice")
-            verify(notice.text.includes("SoftMaker") && notice.text.includes("administrador"))
+            compare(findChild(dialog.contentItem, "installationTitle").text, "Instalar FreeOffice")
+            compare(findChild(dialog.contentItem, "installationSource").text, "Origem: SoftMaker")
+            compare(notice.text, "Este pacote é fornecido pela SoftMaker e poderá solicitar autorização de administrador.")
+            compare(findChild(dialog.contentItem, "closeInstallation").text, "Cancelar")
+            const visibleText = descendants(dialog.contentItem).filter(item => item.visible && typeof item.text === "string").map(item => item.text)
+            verify(!visibleText.some(text => /https?:|SHA-256|softmaker-freeoffice|amd64|3714|1238|APT|dpkg|Polkit|Etapa/.test(text)))
             const confirmation = findChild(dialog.contentItem, "confirmVendorInstallation")
             verify(confirmation.visible)
             confirmation.clicked()
@@ -151,6 +174,43 @@ Item {
             mockInstaller.busy = false
             dialog.requestClose()
             tryCompare(dialog, "opened", false)
+        }
+        function test_cancelExternalConsentDoesNotInstall() {
+            const previousStarts = mockInstaller.starts
+            dialog.openFor("freeoffice")
+            tryCompare(dialog, "opened", true)
+            verify(dialog.awaitingConfirmation)
+            findChild(dialog.contentItem, "closeInstallation").clicked()
+            tryCompare(dialog, "opened", false)
+            compare(mockInstaller.starts, previousStarts)
+            verify(!mockInstaller.busy)
+            dialog.openFor("freeoffice")
+            tryCompare(dialog, "opened", true)
+            verify(dialog.awaitingConfirmation)
+            compare(mockInstaller.starts, previousStarts)
+        }
+        function test_driverCard_data() {
+            return [{tag: "light", dark: false}, {tag: "dark", dark: true}]
+        }
+        function test_driverCard(data) {
+            page.visible = false
+            homePage.dark = data.dark
+            homePage.visible = true
+            const row = findChild(homePage, "driversRow")
+            verify(row !== null)
+            compare(row.title, "Drivers adicionais")
+            compare(row.description, "Consulte e gerencie os drivers disponíveis para o seu computador.")
+            compare(row.primaryText, "Gerenciar")
+            const button = descendants(row).find(item => item instanceof Controls.Button && item.text === "Gerenciar")
+            verify(button !== undefined)
+            verify(!button.enabled)
+            compare(row.statusText, "Gestão de Drivers não instalada")
+            mockSystem.driversAvailable = true
+            verify(button.enabled)
+            compare(row.statusText, "Gestão de Drivers disponível")
+            compare(button.Accessible.name, "Drivers adicionais: Gerenciar")
+            button.clicked()
+            compare(mockSystem.lastAction, "drivers")
         }
         function descendants(item) {
             let items = []
@@ -197,7 +257,7 @@ Item {
             compare(progress.Accessible.description, "Em andamento")
             const visibleText = descendants(dialog.contentItem).filter(item => item.visible && typeof item.text === "string").map(item => item.text)
             verify(!visibleText.some(text => text.includes("Etapa") || text.includes("libcurl4") || text.includes("pmstatus:")
-                || text.includes("Descrição longa") || text.includes("Scripts executados")))
+                || text.includes("Descrição longa") || /https?:|SHA-256|softmaker-freeoffice|amd64|3714|1238|APT|dpkg|Polkit/.test(text)))
             verify(!details.visible)
             verify(!findChild(dialog.contentItem, "installationDetailsToggle").visible)
             for (const value of [0, 18, 67, 99]) {

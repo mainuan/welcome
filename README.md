@@ -15,6 +15,7 @@ Repositório oficial: https://github.com/mainuan/welcome
 - Instalação de suítes Office e navegadores, incluindo FreeOffice, Vivaldi e Zen,
   com progresso, erros acessíveis e autenticação pelo sistema quando necessária.
 - Perfis de antivírus, firewall e codecs; serviços online Google Docs e Office 365.
+- Acesso à ferramenta independente Mainuan Gestão de Drivers, quando instalada.
 - Relatório da máquina, tutoriais locais, contribuição Pix e opção de abrir no login.
 
 | Início | Aparência |
@@ -29,9 +30,12 @@ recursos não reproduz toda a personalização do Mainuan.
 
 ## Obter e instalar
 
-Após o mantenedor publicar a tag `v1.0`, baixe `mainuan-welcome_1.0_amd64.deb` e
+Baixe `mainuan-welcome_1.0_amd64.deb` e
 `SHA256SUMS` na [Release v1.0](https://github.com/mainuan/welcome/releases/tag/v1.0).
-A preparação local não significa que essa Release já foi publicada.
+A Release publicada permanece intacta. Uma recompilação corrigida com a mesma
+versão 1.0 deve ser identificada pelo commit e checksum do novo artefato; ela não
+constitui atualização de versão pelo APT. Veja [como distribuir e reinstalar essa
+compilação](docs/releasing.md#recompilações-corrigidas-da-versão-10).
 
 Na pasta dos dois arquivos:
 

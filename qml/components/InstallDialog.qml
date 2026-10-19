@@ -213,7 +213,7 @@ Controls.Popup {
                 visible: dialog.awaitingConfirmation && (dialog.info.sourceNotice || "").length > 0
                 text: dialog.info.sourceNotice || ""
                 textFormat: Text.PlainText
-                wrapMode: Text.WrapAnywhere
+                wrapMode: Text.WordWrap
                 color: dialog.mutedColor
                 font.pixelSize: 12
                 Accessible.role: Accessible.StaticText
@@ -363,7 +363,7 @@ Controls.Popup {
                 Controls.Button {
                     id: closeButton
                     objectName: "closeInstallation"
-                    text: "Fechar"
+                    text: dialog.awaitingConfirmation ? "Cancelar" : "Fechar"
                     icon.name: "window-close"
                     onClicked: dialog.close()
                 }

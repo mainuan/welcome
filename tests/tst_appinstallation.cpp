@@ -170,6 +170,8 @@ private slots:
         PackageService packages(nullptr, fixture("flatpak"));
         InstallService installer(&packages, backendWithoutNetwork());
         QCOMPARE(installer.profileInfo("freeoffice").value("source").toString(), QStringLiteral("SoftMaker"));
+        QCOMPARE(installer.profileInfo("freeoffice").value("sourceNotice").toString(),
+                 QStringLiteral("Este pacote é fornecido pela SoftMaker e poderá solicitar autorização de administrador."));
         QCOMPARE(installer.profileInfo("firewall").value("source").toString(), QStringLiteral("Repositórios configurados"));
         QCOMPARE(installer.profileInfo("codecs").value("source").toString(), QStringLiteral("Repositórios configurados"));
         QCOMPARE(installer.profileInfo("antivirus").value("source").toString(), QStringLiteral("Repositórios configurados / Flathub"));
@@ -265,11 +267,14 @@ private slots:
         QCOMPARE(network.requests.size(), 1);
         QCOMPARE(network.requests.first().attribute(QNetworkRequest::RedirectPolicyAttribute).toInt(), int(QNetworkRequest::ManualRedirectPolicy));
         QVERIFY(!model.remove(0));
+        // Diagnostics retain the pinned artifact, independently of the short consent text.
+        QVERIFY(installer.details().contains(mock.freeOffice.url.toString()));
+        QVERIFY(installer.details().contains(QString::fromLatin1(mock.freeOffice.sha256)));
         if (fault == "success") {
             QVERIFY(phases.indexOf("downloading") < phases.indexOf("authenticating"));
             QVERIFY(std::any_of(downloadProgress.begin(), downloadProgress.end(), [](int v) { return v > 0 && v < 100; }));
             QVERIFY(model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
-            QVERIFY(installer.profileInfo("freeoffice").value("sourceNotice").toString().contains("scripts"));
+            QVERIFY(!installer.profileInfo("freeoffice").value("sourceNotice").toString().isEmpty());
             QSignalSpy again(&installer, &InstallService::finished);
             QVERIFY(installer.start("freeoffice"));
             QVERIFY(again.wait(5000));

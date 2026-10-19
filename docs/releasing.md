@@ -2,7 +2,7 @@
 
 ## Política de versão
 
-A primeira versão oficial é **1.0**, tag prevista **v1.0**, pacote
+A primeira versão oficial é **1.0**, tag oficial **v1.0**, pacote
 `mainuan-welcome_1.0_amd64.deb`. A série 2.x foi experimental; seu histórico foi
 mantido em `debian/changelog` e nos relatórios identificados como históricos.
 CMake, a primeira entrada do changelog e a primeira release AppStream precisam
@@ -102,6 +102,10 @@ de trabalho é executada. O push em `main` gera somente o artefato de teste.
 
 ## Criar a publicação oficial depois da validação
 
+**Registro do procedimento original:** a tag `v1.0` e sua Release já existem.
+Não repita os comandos abaixo para a recompilação corrigida e não mova a tag.
+Use o procedimento de artefato separado descrito na próxima seção.
+
 Espere a primeira execução remota aprovada, baixe e confira o artefato, e valide
 o pacote na sessão Mainuan. Releia a política de downgrade e confira os canais
 externos que possam conter 2.x. Depois, somente quando decidir publicar:
@@ -120,3 +124,28 @@ inicia outra compilação; a publicação ocorre apenas após todos os gates. Pa
 versões futuras, atualize os três metadados e use a tag correspondente, como
 `v1.1`. A primeira execução real do Actions só pode ser avaliada após o usuário
 enviar estes arquivos; validação local de YAML não equivale a execução remota.
+
+## Recompilações corrigidas da versão 1.0
+
+A correção de confirmação externa e integração com Gestão de Drivers mantém
+CMake, AppStream e Debian em **1.0**. A tag e os assets da Release existente
+permanecem intocados. Não reexecute a publicação da tag esperando substituir os
+assets: o workflow recusa uma Release já existente.
+
+Após revisão e push manual em `main`, ou execução manual do workflow nessa
+branch, baixe o novo artefato de Actions com seu `SHA256SUMS`. Para distribuição
+separada, use um diretório/artefato identificado pelo commit e checksum, mantendo
+o nome interno `mainuan-welcome_1.0_amd64.deb`. Registre esses identificadores ao
+compartilhar o arquivo; não sobrescreva o pacote ou checksum da Release publicada.
+
+O APT não considera dois pacotes com versão Debian 1.0 como atualização de
+versão. A substituição é manual e explícita, após conferir o checksum:
+
+```bash
+sha256sum --check SHA256SUMS
+sudo apt install --reinstall ./mainuan-welcome_1.0_amd64.deb
+```
+
+Quem ainda usa uma versão experimental superior precisa também autorizar o
+downgrade, conforme a seção anterior. A Gestão de Drivers é outro pacote, com
+versionamento independente; sua integração usa somente `mainuan-gestao-drivers`.

@@ -36,6 +36,8 @@ namespace {
 
 // Shipped by the Mainuan artwork; referenced in place instead of bundling a copy.
 const QString kMainuanLogo = QStringLiteral("/usr/share/plasma/avatars/logoMainuan.png");
+// Stable public launcher; the driver tool manages its own version and permissions.
+const QString kDriverManager = QStringLiteral("mainuan-gestao-drivers");
 
 // Reads a KDE configuration file through the whole cascade
 // ($XDG_CONFIG_HOME, then $XDG_CONFIG_DIRS, which in a Plasma session starts
@@ -368,9 +370,9 @@ void SystemService::readPlasmaVersion()
 
 void SystemService::refreshDiagnostics()
 {
-    m_driversAvailable = !QStandardPaths::findExecutable(QStringLiteral("kubuntu-driver-manager")).isEmpty();
-    m_driversStatus = m_driversAvailable ? QStringLiteral("Gerenciador disponível")
-                                         : QStringLiteral("Gerenciador indisponível");
+    m_driversAvailable = !QStandardPaths::findExecutable(kDriverManager).isEmpty();
+    m_driversStatus = m_driversAvailable ? QStringLiteral("Gestão de Drivers disponível")
+                                         : QStringLiteral("Gestão de Drivers não instalada");
 
     // `ufw status` requires root; the boot-time switch in ufw.conf is world-readable.
     QFile ufwConfig(QStringLiteral("/etc/ufw/ufw.conf"));
@@ -821,13 +823,13 @@ void SystemService::runStyleFollowUps(QList<Command> steps, QStringList failures
 void SystemService::performAction(const QString &action)
 {
     if (action == QStringLiteral("drivers")) {
-        const QString executable = QStandardPaths::findExecutable(QStringLiteral("kubuntu-driver-manager"));
+        const QString executable = QStandardPaths::findExecutable(kDriverManager);
         if (executable.isEmpty()) {
-            setMessage(QStringLiteral("O gerenciador de drivers não está instalado."), true);
+            setMessage(QStringLiteral("A Gestão de Drivers não está instalada."), true);
             return;
         }
         if (!QProcess::startDetached(executable, {})) {
-            setMessage(QStringLiteral("Não foi possível abrir o gerenciador de drivers."), true);
+            setMessage(QStringLiteral("Não foi possível abrir a Gestão de Drivers."), true);
         }
         return;
     }
