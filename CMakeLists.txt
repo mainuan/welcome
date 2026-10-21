@@ -5,6 +5,14 @@ project(mainuan-welcome VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Match the distribution's oldest amd64 CPUs, including during LTO linking.
+# The build environment/ELF gates also reject incompatible prebuilt inputs.
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|amd64|AMD64)$")
+    add_compile_options(-march=x86-64 -mtune=generic)
+    add_link_options(-march=x86-64 -mtune=generic)
+endif()
 
 include(GNUInstallDirs)
 

@@ -4,6 +4,11 @@ Aplicação nativa de boas-vindas do Mainuan Linux, baseada em C++17, Qt 6/QML e
 Kirigami. Destino suportado: **Mainuan / Kubuntu 26.04 LTS, KDE Plasma 6 e Wayland,
 amd64**. Não utiliza Electron, Node.js, Chromium embarcado ou WebView.
 
+O pacote de distribuição tem como alvo **x86-64 básico (v1/SSE2)**. O CI usa
+uma base Ubuntu 26.04 sem variantes amd64v3, audita ELF/flags e testa o pacote
+sob QEMU sem AVX/AVX2. A ISO e suas bibliotecas também precisam respeitar esse
+alvo: consulte [o diagnóstico e os gates de CPU](docs/cpu-compatibility.md).
+
 Repositório oficial: https://github.com/mainuan/welcome
 
 ## Funcionalidades

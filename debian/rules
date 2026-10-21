@@ -6,4 +6,5 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 	dh $@ --buildsystem=cmake
 
 override_dh_auto_configure:
+	python3 .github/scripts/check_cpu.py environment --output debian/.debhelper/cpu-environment.json
 	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release

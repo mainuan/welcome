@@ -19,6 +19,13 @@ jobs:
   build:
     runs-on: ubuntu-26.04
     timeout-minutes: 45
+    container:
+      # Audited official linux/amd64 manifest, without installed CPU variants.
+      image: ubuntu:26.04@sha256:42527649dbc4f9197a6073f426f488cbff0e9cc9f2afce32d91c383e4875634a
+      options: --platform linux/amd64
+    defaults:
+      run:
+        shell: bash
     permissions:
       contents: read
     env:
@@ -29,6 +36,21 @@ jobs:
       version: ${{ steps.metadata.outputs.version }}
       artifact-id: ${{ steps.upload.outputs.artifact-id }}
     steps:
+      - name: Bootstrap a baseline Ubuntu 26.04 environment
+        run: |
+          # Set this BEFORE the first apt update/install. Disabling variants on
+          # an already populated runner would not replace its installed inputs.
+          cat > /etc/apt/apt.conf.d/99mainuan-baseline <<'APT'
+          #clear APT::Architecture-Variants;
+          APT::Architecture-Variants "";
+          APT::Architecture "amd64";
+          #clear APT::Architectures;
+          APT::Architectures { "amd64"; };
+          APT
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends build-essential dpkg-dev fakeroot lintian git ca-certificates python3 qemu-user
+          useradd --create-home --uid 1001 --shell /bin/bash welcome-build
+
       - name: Check out the exact triggering commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -37,10 +59,11 @@ jobs:
 
       - name: Install build tools and dependencies from debian/control
         run: |
-          sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends build-essential dpkg-dev fakeroot lintian
-          sudo apt-get build-dep --yes --no-install-recommends ./
+          DEBIAN_FRONTEND=noninteractive apt-get build-dep --yes --no-install-recommends ./
           dpkg-checkbuilddeps
+          chown -R welcome-build:welcome-build "$GITHUB_WORKSPACE"
+          chown welcome-build:welcome-build "$(dirname "$GITHUB_WORKSPACE")"
+          runuser -u welcome-build -- python3 .github/scripts/check_cpu.py environment --output build/cpu-environment.json
 
       - name: Validate the version, tag and source integrity
         id: metadata
@@ -48,39 +71,50 @@ jobs:
           RELEASE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
           EXPECTED_COMMIT: ${{ github.sha }}
         run: |
-          test "$(git rev-parse HEAD)" = "$EXPECTED_COMMIT"
-          git diff --check
-          python3 -m unittest discover -s .github/scripts -p 'test_*.py'
-          python3 .github/scripts/check_release.py metadata --tag "$RELEASE_TAG" --github-output "$GITHUB_OUTPUT"
+          chown welcome-build:welcome-build "$GITHUB_OUTPUT"
+          runuser -u welcome-build -- bash -euo pipefail -c '
+            test "$(git rev-parse HEAD)" = "$EXPECTED_COMMIT"
+            git diff --check
+            python3 -m unittest discover -s .github/scripts -p "test_*.py"
+            python3 .github/scripts/check_release.py metadata --tag "$RELEASE_TAG" --github-output "$GITHUB_OUTPUT"
+          '
 
       - name: Compile
         run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DMAINUAN_DEVELOPER_MODE=OFF
-          cmake --build build --parallel 2
+          runuser -u welcome-build -- cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DMAINUAN_DEVELOPER_MODE=OFF
+          runuser -u welcome-build -- cmake --build build --parallel 2
+          runuser -u welcome-build -- python3 .github/scripts/check_cpu.py flags build/compile_commands.json --output build/cpu-flags.json
 
       - name: Run all QtTest, QML and startup tests without a desktop session
         run: |
           # CTest owns session isolation, also when invoked by dh_auto_test.
-          ctest --test-dir build --parallel 1 --output-on-failure --output-junit release-tests.xml
-          python3 .github/scripts/check_release.py tests build/release-tests.xml
-          ctest --test-dir build --parallel 2 --output-on-failure --output-junit release-tests-parallel.xml
-          python3 .github/scripts/check_release.py tests build/release-tests-parallel.xml
+          runuser -u welcome-build -- ctest --test-dir build --parallel 1 --output-on-failure --output-junit release-tests.xml
+          runuser -u welcome-build -- python3 .github/scripts/check_release.py tests build/release-tests.xml
+          runuser -u welcome-build -- ctest --test-dir build --parallel 2 --output-on-failure --output-junit release-tests-parallel.xml
+          runuser -u welcome-build -- python3 .github/scripts/check_release.py tests build/release-tests-parallel.xml
 
       - name: Build and validate the Debian package
         env:
           PACKAGE_VERSION: ${{ steps.metadata.outputs.version }}
         run: |
-          dpkg-buildpackage -us -uc -b
-          package="../mainuan-welcome_${PACKAGE_VERSION}_amd64.deb"
-          python3 .github/scripts/check_release.py package "$package" --version "$PACKAGE_VERSION"
-          dpkg-deb --info "$package"
-          dpkg-deb --contents "$package"
-          lintian --fail-on error "$package"
-          mkdir dist
-          cp -- "$package" dist/
-          cd dist
-          sha256sum "mainuan-welcome_${PACKAGE_VERSION}_amd64.deb" > SHA256SUMS
-          sha256sum --check SHA256SUMS
+          runuser -u welcome-build -- bash -euo pipefail -c '
+            dpkg-buildpackage -us -uc -b
+            package="../mainuan-welcome_${PACKAGE_VERSION}_amd64.deb"
+            python3 .github/scripts/check_release.py package "$package" --version "$PACKAGE_VERSION"
+            dpkg-deb --info "$package"
+            dpkg-deb --contents "$package"
+            lintian --fail-on error "$package"
+            mkdir dist
+            python3 .github/scripts/check_cpu.py package "$package" --output dist/cpu-elf.json
+            python3 .github/scripts/check_cpu.py flags obj-x86_64-linux-gnu/compile_commands.json --output dist/cpu-flags.json
+            python3 .github/scripts/check_cpu.py dependencies "$package" --output dist/cpu-dependencies.json
+            python3 .github/scripts/cpu_smoke.py "$package" > dist/cpu-smoke.log 2>&1
+            cp build/cpu-environment.json dist/
+            cp -- "$package" dist/
+            cd dist
+            sha256sum "mainuan-welcome_${PACKAGE_VERSION}_amd64.deb" > SHA256SUMS
+            sha256sum --check SHA256SUMS
+          '
 
       - name: Upload the validated package and checksums
         id: upload
@@ -90,6 +124,8 @@ jobs:
           path: |
             dist/mainuan-welcome_${{ steps.metadata.outputs.version }}_amd64.deb
             dist/SHA256SUMS
+            dist/cpu-*.json
+            dist/cpu-smoke.log
           if-no-files-found: error
           retention-days: 30
 
