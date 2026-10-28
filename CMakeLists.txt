@@ -46,6 +46,7 @@ if (COMMAND qt_policy)
 endif()
 
 add_library(mainuan-core STATIC
+    src/WindowGeometry.h
     src/services/SystemService.cpp
     src/services/SystemService.h
     src/services/VisualStyle.cpp
