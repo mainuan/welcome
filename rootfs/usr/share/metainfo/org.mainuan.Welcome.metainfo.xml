@@ -19,6 +19,12 @@
   <url type="homepage">https://github.com/mainuan/welcome</url>
   <url type="bugtracker">https://github.com/mainuan/welcome/issues</url>
   <releases>
+    <release version="1.0.1" date="2026-10-28" type="stable">
+      <description>
+        <p>Recognize inherited Mainuan color schemes at startup and preserve the current color when switching between light and dark modes.</p>
+        <p>Use a smaller resizable window and responsive pages, simplify installation indicators, and apply each visual style's installed window decoration.</p>
+      </description>
+    </release>
     <release version="1.0" date="2026-10-17" type="stable">
       <description>
         <p>First official Mainuan Welcome release, with native Plasma customization and application installation.</p>

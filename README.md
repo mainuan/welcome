@@ -1,4 +1,4 @@
-# Mainuan Welcome 1.0
+# Mainuan Welcome 1.0.1
 
 Aplicação nativa de boas-vindas do Mainuan Linux, baseada em C++17, Qt 6/QML e
 Kirigami. Destino suportado: **Mainuan / Kubuntu 26.04 LTS, KDE Plasma 6 e Wayland,
@@ -35,21 +35,32 @@ recursos não reproduz toda a personalização do Mainuan.
 
 ## Obter e instalar
 
-Baixe `mainuan-welcome_1.0_amd64.deb` e
-`SHA256SUMS` na [Release v1.0](https://github.com/mainuan/welcome/releases/tag/v1.0).
-A Release publicada permanece intacta. Uma recompilação corrigida com a mesma
-versão 1.0 deve ser identificada pelo commit e checksum do novo artefato; ela não
-constitui atualização de versão pelo APT. Veja [como distribuir e reinstalar essa
-compilação](docs/releasing.md#recompilações-corrigidas-da-versão-10).
+A versão corretiva **1.0.1 está em preparação**. Após o envio manual do código,
+obtenha `mainuan-welcome_1.0.1_amd64.deb` e `SHA256SUMS` no artefato do commit
+aprovado em [GitHub Actions](https://github.com/mainuan/welcome/actions/workflows/build-deb.yml).
+A futura tag será `v1.0.1`, somente após aprovação do mantenedor.
+A [Release v1.0 existente](https://github.com/mainuan/welcome/releases/tag/v1.0)
+permanece intacta; seus assets são da versão anterior. Veja o
+[procedimento de publicação](docs/releasing.md).
+
+Esta correção reconhece a cor Mainuan já configurada, inclusive em `kdedefaults`,
+para alternar diretamente entre Claro e Escuro sem selecionar novamente a cor.
+Esquemas externos desconhecidos são preservados.
+
+A janela abre normalmente em 870 × 600, com mínimo de 760 × 520 e adaptação à
+área útil de telas menores. A versão também simplifica os indicadores de
+instalação e corrige a decoração Lavanda no Dream, mantendo as decorações
+próprias de Tahoe e Breeze. Veja a [validação e as limitações gráficas](docs/22-final-1.0.1-ux-decoration.md).
 
 Na pasta dos dois arquivos:
 
 ```bash
 sha256sum --check SHA256SUMS
-sudo apt install ./mainuan-welcome_1.0_amd64.deb
+sudo apt install ./mainuan-welcome_1.0.1_amd64.deb
 ```
 
-Para reinstalar a mesma versão, acrescente `--reinstall`. O pacote abre o Welcome
+A versão 1.0.1 é superior a 1.0 para o APT. Para reinstalar a mesma versão,
+acrescente `--reinstall`. O pacote abre o Welcome
 no login; cada usuário pode desativar “Mostrar esta tela ao iniciar o sistema”.
 
 ### Migração das versões experimentais superiores
@@ -66,7 +77,7 @@ downgrade explicitamente, após verificar o checksum:
 
 ```bash
 dpkg-query -W -f='${Version}\n' mainuan-welcome
-sudo apt install --allow-downgrades ./mainuan-welcome_1.0_amd64.deb
+sudo apt install --allow-downgrades ./mainuan-welcome_1.0.1_amd64.deb
 ```
 
 Não foi acrescentado epoch nem feita uma migração automática. Se um repositório
@@ -131,13 +142,13 @@ Para executar a aplicação compilada: `./build/bin/mainuan-welcome`.
 Para gerar o pacote:
 
 ```bash
-python3 .github/scripts/check_release.py metadata --tag v1.0
+python3 .github/scripts/check_release.py metadata --tag v1.0.1
 dpkg-buildpackage -us -uc -b
-python3 .github/scripts/check_release.py package ../mainuan-welcome_1.0_amd64.deb --version 1.0
-lintian --fail-on error ../mainuan-welcome_1.0_amd64.deb
+python3 .github/scripts/check_release.py package ../mainuan-welcome_1.0.1_amd64.deb --version 1.0.1
+lintian --fail-on error ../mainuan-welcome_1.0.1_amd64.deb
 mkdir -p dist
-cp ../mainuan-welcome_1.0_amd64.deb dist/
-(cd dist && sha256sum mainuan-welcome_1.0_amd64.deb > SHA256SUMS)
+cp ../mainuan-welcome_1.0.1_amd64.deb dist/
+(cd dist && sha256sum mainuan-welcome_1.0.1_amd64.deb > SHA256SUMS)
 ```
 
 `dpkg-buildpackage` repete os testes e grava os pacotes na pasta acima do código.

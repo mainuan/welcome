@@ -6,11 +6,11 @@ import org.kde.kirigami as Kirigami
 Kirigami.ApplicationWindow {
     id: root
     visible: false
-    width: 1180
-    height: 760
-    minimumWidth: 900
-    minimumHeight: 620
-    title: "Mainuan — Bem-vindo"
+    width: 870
+    height: 600
+    minimumWidth: 760
+    minimumHeight: 520
+    title: "Mainuan — Boas-vindas"
     property bool dark: systemService.darkTheme
     property color accent: systemService.accentColor.length > 0 ? systemService.accentColor : "#3daee9"
     // Kirigami supplies the controls and icon theme; these explicit surfaces keep
@@ -62,6 +62,7 @@ Kirigami.ApplicationWindow {
 
     InstallDialog {
         id: installDialog
+        objectName: "installDialog"
         installer: installService
         dark: root.dark
         accent: root.accent

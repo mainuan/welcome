@@ -63,15 +63,18 @@ Kirigami.Page {
 
         Flow {
             id: cardFlow
+            objectName: "applicationFlow"
+            readonly property int columns: Math.max(1, Math.min(3, Math.floor((width + spacing) / (220 + spacing))))
             Layout.fillWidth: true
-            Layout.preferredHeight: Math.max(300, Math.ceil(appRepeater.count / 3) * 300 + Math.max(0, Math.ceil(appRepeater.count / 3) - 1) * 14)
+            Layout.preferredHeight: Math.ceil(appRepeater.count / columns) * 300
+                                    + Math.max(0, Math.ceil(appRepeater.count / columns) - 1) * spacing
             Layout.minimumHeight: Layout.preferredHeight
             spacing: 14
             Repeater {
                 id: appRepeater
                 model: page.appModel
                 delegate: AppCard {
-                    width: Math.max(220, Math.min(310, (cardFlow.width - 28) / 3))
+                    width: Math.max(0, Math.min(310, (cardFlow.width - (cardFlow.columns - 1) * cardFlow.spacing) / cardFlow.columns))
                     appModel: page.appModel
                     system: page.system
                     row: index

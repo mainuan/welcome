@@ -1,3 +1,4 @@
+#include "WindowGeometry.h"
 #include "models/ApplicationModel.h"
 #include "models/LayoutModel.h"
 #include "models/VideoModel.h"
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
     // offers its native file dialogs (used by "Salvar relatório") to widget apps.
     QApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("Mainuan Welcome"));
-    app.setApplicationDisplayName(QStringLiteral("Mainuan — Bem-vindo"));
+    app.setApplicationDisplayName(QStringLiteral("Mainuan — Boas-vindas"));
     app.setOrganizationName(QStringLiteral("Mainuan"));
     app.setOrganizationDomain(QStringLiteral("mainuan.org"));
     app.setApplicationVersion(QStringLiteral(MAINUAN_VERSION));
@@ -160,19 +161,16 @@ int main(int argc, char *argv[])
     rootObject->setParent(&engine);
 
     if (auto *window = qobject_cast<QQuickWindow *>(rootObject)) {
+        QScreen *screen = window->screen();
+        if (screen == nullptr) {
+            screen = QGuiApplication::primaryScreen();
+        }
+        if (screen != nullptr) {
+            const QRect initial = WelcomeWindow::initialGeometry(screen->availableGeometry());
+            window->setMinimumSize(WelcomeWindow::minimumSize(initial.size()));
+            window->setGeometry(initial);
+        }
         window->show();
-        QTimer::singleShot(0, window, [window]() {
-            QScreen *screen = window->screen();
-            if (screen == nullptr) {
-                screen = QGuiApplication::primaryScreen();
-            }
-            if (screen != nullptr) {
-                const QRect available = screen->availableGeometry();
-                const int x = available.x() + (available.width() - window->width()) / 2;
-                const int y = available.y() + (available.height() - window->height()) / 2;
-                window->setPosition(QPoint(x, y));
-            }
-        });
     }
 
     QObject::connect(&singleInstance, &SingleInstance::activationRequested, &app,

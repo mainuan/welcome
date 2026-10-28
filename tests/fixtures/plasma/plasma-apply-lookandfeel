@@ -19,8 +19,55 @@ case "$2" in
     *) echo "unknown package $2" >&2; exit 1 ;;
 esac
 
+case "$2" in
+    Dream-Light*) decoration=Cyan-Light library=org.kde.kwin.aurorae ;;
+    Dream-Dark*) decoration=Cyan-Dark library=org.kde.kwin.aurorae ;;
+    *MacTahoe-Light) decoration=__aurorae__svg__MacTahoe-Light library=org.kde.kwin.aurorae ;;
+    *MacTahoe-Dark) decoration=__aurorae__svg__MacTahoe-Dark library=org.kde.kwin.aurorae ;;
+    *) decoration=Breeze library=org.kde.breeze ;;
+esac
+
 config=$XDG_CONFIG_HOME
 mkdir -p "$config"
+if [[ -n ${MOCK_LNF_DEFAULTS:-} ]]; then
+    # Real Plasma writes selectors to kdedefaults and reverts local overrides,
+    # while copying the actual palette to the user's kdeglobals.
+    python3 - "$config" "$2" "$scheme" "$icons" "$theme" "$cursor" "$window" "$library" "$decoration" <<'PY'
+import configparser
+import pathlib
+import sys
+root, package, scheme, icons, theme, cursor, window, library, decoration = sys.argv[1:]
+root = pathlib.Path(root)
+(root / 'kdedefaults').mkdir(exist_ok=True)
+for filename, entries in {
+    'kdeglobals': [('General', 'ColorScheme', scheme), ('Icons', 'Theme', icons)],
+    'plasmarc': [('Theme', 'name', theme)],
+    'kcminputrc': [('Mouse', 'cursorTheme', cursor)],
+    'kwinrc': [('org.kde.kdecoration2', 'library', library), ('org.kde.kdecoration2', 'theme', decoration)],
+}.items():
+    local = configparser.ConfigParser(interpolation=None, strict=False, allow_no_value=True)
+    local.optionxform = str
+    local.read(root / filename)
+    defaults = configparser.ConfigParser(interpolation=None, strict=False, allow_no_value=True)
+    defaults.optionxform = str
+    defaults.read(root / 'kdedefaults' / filename)
+    for section, key, value in entries:
+        if not defaults.has_section(section):
+            defaults.add_section(section)
+        defaults[section][key] = value
+        if local.has_section(section):
+            local.remove_option(section, key)
+    if filename == 'kdeglobals':
+        local['Colors:Window'] = {'BackgroundNormal': window}
+        if not local.has_section('KDE'):
+            local.add_section('KDE')
+        local['KDE']['LookAndFeelPackage'] = package
+    for path, config in [(root / filename, local), (root / 'kdedefaults' / filename, defaults)]:
+        with path.open('w') as output:
+            config.write(output, space_around_delimiters=False)
+PY
+    exit $?
+fi
 {
     printf '[Colors:Window]\nBackgroundNormal=%s\n\n[General]\nColorScheme=%s\n\n[Icons]\nTheme=%s\n\n' "$window" "$scheme" "$icons"
     # Plasma does not record its default package.
@@ -28,3 +75,17 @@ mkdir -p "$config"
 } >"$config/kdeglobals"
 printf '[Theme]\nname=%s\n' "$theme" >"$config/plasmarc"
 printf '[Mouse]\ncursorTheme=%s\n' "$cursor" >"$config/kcminputrc"
+python3 - "$config/kwinrc" "$library" "$decoration" <<'PY'
+import configparser
+import sys
+path, library, theme = sys.argv[1:]
+config = configparser.ConfigParser(interpolation=None, strict=False, allow_no_value=True)
+config.optionxform = str
+config.read(path)
+if not config.has_section('org.kde.kdecoration2'):
+    config.add_section('org.kde.kdecoration2')
+config['org.kde.kdecoration2']['library'] = library
+config['org.kde.kdecoration2']['theme'] = theme
+with open(path, 'w') as output:
+    config.write(output, space_around_delimiters=False)
+PY

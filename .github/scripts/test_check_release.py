@@ -31,6 +31,15 @@ class ReleaseGates(unittest.TestCase):
         with self.assertRaises(ValueError):
             check_release.metadata(self.root)
 
+    def test_patch_release_and_existing_tag(self):
+        for name in ["CMakeLists.txt", "debian/changelog",
+                     "rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml"]:
+            path = self.root / name
+            path.write_text(path.read_text().replace("1.0", "1.0.1"))
+        self.assertEqual(check_release.metadata(self.root, "v1.0.1"), "1.0.1")
+        with self.assertRaises(ValueError):
+            check_release.metadata(self.root, "v1.0")
+
     def test_personal_dependency(self):
         (self.root / "src").mkdir()
         (self.root / "src/personal.cpp").write_text('const char *reference = "/home/someone/reference";')

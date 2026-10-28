@@ -6,6 +6,7 @@ import QtQuick.Layouts
 // `maxWidth` pixels, so the content starts at the same place on every page.
 Controls.ScrollView {
     id: container
+    objectName: "pageScrollView"
 
     property int maxWidth: 820
     property int margin: 24

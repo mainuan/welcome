@@ -62,6 +62,8 @@ Controls.Popup {
     parent: Controls.Overlay.overlay
     anchors.centerIn: parent
     width: Math.min(540, (parent ? parent.width : 540) - 48)
+    height: Math.min(contentItem.implicitHeight + topPadding + bottomPadding,
+                     Math.max(0, (parent ? parent.height : 600) - 32))
     modal: true
     focus: true
     padding: 24
@@ -101,9 +103,13 @@ Controls.Popup {
         shadow.color: Qt.rgba(0, 0, 0, dialog.dark ? 0.5 : 0.22)
     }
 
-    contentItem: FocusScope {
+    contentItem: Controls.ScrollView {
+        id: bodyScroll
         implicitWidth: column.implicitWidth
         implicitHeight: column.implicitHeight
+        contentWidth: availableWidth
+        contentHeight: column.implicitHeight
+        clip: true
         focus: true
         Keys.onEscapePressed: dialog.requestClose()
 
@@ -112,7 +118,7 @@ Controls.Popup {
 
         ColumnLayout {
             id: column
-            anchors.fill: parent
+            width: bodyScroll.availableWidth
             spacing: 16
 
             RowLayout {

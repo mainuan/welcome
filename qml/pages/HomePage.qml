@@ -28,6 +28,7 @@ Kirigami.Page {
     // Row backed by an InstallService profile: status badge, "Instalar" while
     // something is missing and an optional configuration action.
     component ProfileRow: StatusRow {
+        objectName: "profileRow-" + profileId
         // Inline components do not see the ids of this file.
         property var host
         property string profileId: ""
@@ -49,6 +50,9 @@ Kirigami.Page {
                 return installedNote.length > 0 ? "Instalado · " + installedNote : "Instalado";
             if (profileState.canInstall === false && (profileState.unavailableReason || "").length > 0)
                 return "Indisponível neste sistema";
+            if (profileState.canInstall === true
+                    && (profileState.state === "missing" || profileState.state === "partial"))
+                return "";
             return profileState.summary || "";
         }
         statusKind: installedNow ? "ok" : (profileState.state === "partial" ? "warn" : "neutral")
@@ -59,7 +63,7 @@ Kirigami.Page {
         primaryEnabled: profileState.canInstall === true && !host.installer.busy
         onPrimaryClicked: host.installRequested(profileId)
 
-        secondaryText: configureText
+        secondaryText: installedNow && profileState.canLaunch === true && !runningNow ? configureText : ""
         secondaryIcon: "configure"
         secondaryEnabled: profileState.canLaunch === true
         onSecondaryClicked: host.installer.launch(profileId)
@@ -76,8 +80,9 @@ Kirigami.Page {
         contentSpacing: 12
 
         Kirigami.Heading {
+            objectName: "welcomeGreeting"
             Layout.fillWidth: true
-            text: "Bem-vindo ao <font color='" + page.accent + "'>Mainuan</font>"
+            text: "Boas-vindas ao <font color='" + page.accent + "'>Mainuan</font>"
             level: 1
         }
         Controls.Label {
@@ -106,7 +111,7 @@ Kirigami.Page {
             title: "Drivers adicionais"
             description: "Consulte e gerencie os drivers disponíveis para o seu computador."
             iconName: "computer"
-            statusText: page.system.driversStatus
+            statusText: page.system.driversAvailable ? "" : page.system.driversStatus
             primaryText: "Gerenciar"
             primaryIcon: "configure"
             primaryHighlighted: false
@@ -138,7 +143,8 @@ Kirigami.Page {
             description: "Controle as conexões de rede com o UFW e o módulo do KDE Plasma."
             iconName: "security-medium"
             configureText: "Configurar"
-            installedNote: page.system.firewallStatus
+            // The service reads ufw.conf's boot preference, not live protection.
+            installedNote: page.system.firewallStatus.length > 0 ? "início: " + page.system.firewallStatus.toLowerCase() : ""
         }
 
         Controls.Label {

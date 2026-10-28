@@ -1,10 +1,12 @@
-# Documentação do Mainuan Welcome 1.0
+# Documentação do Mainuan Welcome 1.0.1
 
 Referências atuais:
 
 - [README principal](../README.md): funcionalidades, instalação e compilação.
 - [Arquitetura e manutenção](architecture-and-maintenance.md): serviços,
   segurança, autenticação, backups e recursos externos.
+- [Correção de Claro/Escuro 1.0.1](21-initial-theme-detection.md): diagnóstico e regressão.
+- [Consolidação 1.0.1](22-final-1.0.1-ux-decoration.md): interface, janela e matriz Aurorae.
 - [Publicação](releasing.md): Actions, tags, checksums e migração Debian.
 - [Auditoria da limpeza 1.0](cleanup-1.0.md): inventário e decisões de preservação.
 
@@ -32,4 +34,4 @@ As seguintes referências conservam detalhes úteis, sujeitos às correções po
 
 Os relatórios iniciais que descrevem instalação via Discover, cores hexadecimais
 ou outros layouts documentam estados antigos. A consolidação atual acima evita
-que essas instruções sejam confundidas com o funcionamento da versão 1.0.
+que essas instruções sejam confundidas com o funcionamento da versão 1.0.1.

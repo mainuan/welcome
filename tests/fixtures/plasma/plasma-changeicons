@@ -1,6 +1,21 @@
 #!/bin/bash
 # Simulated plasma-changeicons: switches the icon theme and records the call in $MOCK_LOG.
+set -e
 [[ -n ${MOCK_ICONS_FAIL:-} ]] && exit 1
 [[ -n ${MOCK_ICONS_NOOP:-} ]] && exit 0
-sed -i "s/^Theme=.*/Theme=$1/" "$XDG_CONFIG_HOME/kdeglobals"
+python3 - "$1" <<'PY'
+import configparser
+import os
+import pathlib
+import sys
+path = pathlib.Path(os.environ['XDG_CONFIG_HOME']) / 'kdeglobals'
+config = configparser.ConfigParser(interpolation=None, strict=False, allow_no_value=True)
+config.optionxform = str
+config.read(path)
+if not config.has_section('Icons'):
+    config.add_section('Icons')
+config['Icons']['Theme'] = sys.argv[1]
+with path.open('w') as output:
+    config.write(output, space_around_delimiters=False)
+PY
 echo "plasma-changeicons $*" >>"${MOCK_LOG:-/dev/null}"

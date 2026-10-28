@@ -327,6 +327,7 @@ Kirigami.Page {
 
     Kirigami.PromptDialog {
         id: restoreDialog
+        objectName: "restoreLayoutDialog"
         parent: page.Controls.Overlay.overlay
         preferredWidth: Kirigami.Units.gridUnit * 28
         title: "Restaurar layout anterior?"

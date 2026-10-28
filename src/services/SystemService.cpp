@@ -39,14 +39,74 @@ const QString kMainuanLogo = QStringLiteral("/usr/share/plasma/avatars/logoMainu
 // Stable public launcher; the driver tool manages its own version and permissions.
 const QString kDriverManager = QStringLiteral("mainuan-gestao-drivers");
 
-// Reads a KDE configuration file through the whole cascade
-// ($XDG_CONFIG_HOME, then $XDG_CONFIG_DIRS, which in a Plasma session starts
-// with ~/.config/kdedefaults where global themes write their values).
+// Global themes store defaults separately from the user's overrides. Not every
+// launcher inherits Plasma's XDG_CONFIG_DIRS augmentation, so include kdedefaults
+// explicitly, ahead of system defaults and behind the local file. Keep KConfig's
+// parsing/immutability rules, and write only to the normal user configuration.
 KSharedConfig::Ptr freshConfig(const QString &name)
 {
-    KSharedConfig::Ptr config = KSharedConfig::openConfig(name);
+    const QString home = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
+    const QString defaults = home + QStringLiteral("/kdedefaults");
+    QStringList directories = QStandardPaths::standardLocations(QStandardPaths::GenericConfigLocation);
+    directories.removeAll(home);
+    directories.removeAll(defaults);
+    directories.prepend(defaults);
+    QStringList sources;
+    // addConfigSources orders sources from least to most specific.
+    for (auto it = directories.crbegin(); it != directories.crend(); ++it) {
+        sources.append(QDir(*it).filePath(name));
+    }
+    // Supply the cascade ourselves, retaining a relative name for KConfig's
+    // D-Bus notifications (watching absolute configuration names is unsupported).
+    KSharedConfig::Ptr config = KSharedConfig::openConfig(name, KConfig::NoCascade);
+    if (config->additionalConfigSources() != sources) {
+        config->addConfigSources(sources);
+    }
     config->reparseConfiguration();
     return config;
+}
+
+WindowDecoration currentDecoration()
+{
+    const KConfigGroup group(freshConfig(QStringLiteral("kwinrc")), QStringLiteral("org.kde.kdecoration2"));
+    return {group.readEntry("library", QString()), group.readEntry("theme", QString())};
+}
+
+void requestKWinReload()
+{
+    auto call = QDBusMessage::createMethodCall(QStringLiteral("org.kde.KWin"), QStringLiteral("/KWin"),
+                                             QStringLiteral("org.kde.KWin"), QStringLiteral("reconfigure"));
+    call.setAutoStartService(false);
+    QDBusConnection::sessionBus().call(call, QDBus::NoBlock);
+}
+
+QString decorationError(const WindowDecoration &decoration)
+{
+    bool pluginFound = false;
+    for (const QString &path : QCoreApplication::libraryPaths()) {
+        for (const QString &api : {QStringLiteral("org.kde.kdecoration3"), QStringLiteral("org.kde.kdecoration2")}) {
+            const QFileInfo plugin(path + '/' + api + '/' + decoration.library + QStringLiteral(".so"));
+            pluginFound |= plugin.isFile() && plugin.isReadable();
+        }
+    }
+    if (!pluginFound) return QStringLiteral("O mecanismo de decoração %1 não está instalado.").arg(decoration.library);
+    if (decoration.library == QStringLiteral("org.kde.breeze")) return {};
+
+    const QString name = decoration.theme.mid(QStringLiteral("__aurorae__svg__").size());
+    const QString dir = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+        QStringLiteral("aurorae/themes/") + name, QStandardPaths::LocateDirectory);
+    const KConfig metadata(dir + QStringLiteral("/metadata.desktop"), KConfig::SimpleConfig);
+    const KConfigGroup entry(&metadata, QStringLiteral("Desktop Entry"));
+    const auto readable = [&dir](const QString &file) {
+        const QFileInfo info(dir + '/' + file);
+        return info.isFile() && info.isReadable() && info.size() > 0;
+    };
+    if (dir.isEmpty() || entry.readEntry("X-KDE-PluginInfo-Name", QString()) != name
+        || entry.readEntry("Name", QString()).isEmpty() || !readable(name + QStringLiteral("rc"))
+        || (!readable(QStringLiteral("decoration.svg")) && !readable(QStringLiteral("decoration.svgz")))) {
+        return QStringLiteral("A decoração %1 não está instalada ou seus recursos estão incompletos.").arg(name);
+    }
+    return {};
 }
 
 // plasma-apply-colorscheme announces the new palette before AccentColor is
@@ -137,6 +197,36 @@ bool isDarkScheme(const QString &scheme)
 
 }
 
+struct SystemService::DecorationChange
+{
+    WindowDecoration desired;
+    WindowDecoration previous;
+    bool preserveCustom = false;
+    bool globalApplied = false;
+    bool hadLibrary = false;
+    bool hadTheme = false;
+    QString localLibrary;
+    QString localTheme;
+
+    bool restore() const
+    {
+        const auto config = freshConfig(QStringLiteral("kwinrc"));
+        KConfigGroup group(config, QStringLiteral("org.kde.kdecoration2"));
+        if (hadLibrary) group.writeEntry("library", localLibrary, KConfig::Notify);
+        else group.revertToDefault("library", KConfig::Notify);
+        if (hadTheme) group.writeEntry("theme", localTheme, KConfig::Notify);
+        else group.revertToDefault("theme", KConfig::Notify);
+        if (!group.sync()) return false;
+        // A global theme may have changed inherited defaults in the meantime.
+        const WindowDecoration inherited = currentDecoration();
+        if (inherited.library != previous.library) group.writeEntry("library", previous.library, KConfig::Notify);
+        if (inherited.theme != previous.theme) group.writeEntry("theme", previous.theme, KConfig::Notify);
+        const bool restored = group.sync();
+        if (restored) requestKWinReload();
+        return restored;
+    }
+};
+
 SystemService::SystemService(QObject *parent, const QString &userHome)
     : QObject(parent)
     , m_userHome(userHome.isEmpty() ? QDir::homePath() : userHome)
@@ -149,10 +239,14 @@ SystemService::SystemService(QObject *parent, const QString &userHome)
         readDesktopState();
         readVisualStyle();
     };
-    m_globalsWatcher = KConfigWatcher::create(KSharedConfig::openConfig(QStringLiteral("kdeglobals")));
-    m_plasmaWatcher = KConfigWatcher::create(KSharedConfig::openConfig(QStringLiteral("plasmarc")));
+    m_globalsWatcher = KConfigWatcher::create(freshConfig(QStringLiteral("kdeglobals")));
+    m_plasmaWatcher = KConfigWatcher::create(freshConfig(QStringLiteral("plasmarc")));
+    m_defaultGlobalsWatcher = KConfigWatcher::create(KSharedConfig::openConfig(QStringLiteral("kdedefaults/kdeglobals"), KConfig::SimpleConfig));
+    m_defaultPlasmaWatcher = KConfigWatcher::create(KSharedConfig::openConfig(QStringLiteral("kdedefaults/plasmarc"), KConfig::SimpleConfig));
     connect(m_globalsWatcher.data(), &KConfigWatcher::configChanged, this, onAppearanceChanged);
     connect(m_plasmaWatcher.data(), &KConfigWatcher::configChanged, this, onAppearanceChanged);
+    connect(m_defaultGlobalsWatcher.data(), &KConfigWatcher::configChanged, this, onAppearanceChanged);
+    connect(m_defaultPlasmaWatcher.data(), &KConfigWatcher::configChanged, this, onAppearanceChanged);
 
     refresh();
 }
@@ -451,12 +545,18 @@ void SystemService::setTheme(const QString &theme)
 
     readDesktopState();
     readVisualStyle();
+    // A recognized global theme does not imply a recognized color scheme.
+    // Never replace an external/custom scheme with that theme's default color.
+    if (AccentProfiles::find(m_accentId) == nullptr) {
+        setMessage(QStringLiteral("O esquema externo atual não possui uma variante conhecida. Selecione uma cor Mainuan primeiro."), true);
+        return;
+    }
     // With a Mainuan style active, switch to its light or dark variant so the
     // theme and the style stay consistent.
     if (const VisualStyleProfile *profile = VisualStyles::find(m_visualStyle)) {
         applyStyleProfile(*profile, theme == QStringLiteral("dark"),
                           theme == QStringLiteral("dark") ? QStringLiteral("Tema escuro aplicado.")
-                                                          : QStringLiteral("Tema claro aplicado."));
+                                                          : QStringLiteral("Tema claro aplicado."), true);
         return;
     }
 
@@ -472,7 +572,7 @@ void SystemService::setTheme(const QString &theme)
                     finishAppearance({}, {failure});
                     return;
                 }
-                applyAccentExtras(*accent, QStringLiteral("Tema e cor %1 aplicados.").arg(accent->name));
+                finishAppearance(QStringLiteral("Tema e cor %1 aplicados.").arg(accent->name));
             });
         });
     } else {
@@ -646,12 +746,68 @@ void SystemService::applyAccentExtras(const AccentProfile &profile, const QStrin
 
 void SystemService::finishAppearance(const QString &successMessage, const QStringList &failures)
 {
+    if (m_decorationChange) {
+        completeDecoration(successMessage, failures);
+        return;
+    }
     readDesktopState();
     readVisualStyle();
     setMessage(failures.isEmpty() ? successMessage
                : QStringLiteral("Não foi possível concluir todos os ajustes: ") + failures.join(QStringLiteral("; ")) + QLatin1Char('.'),
                !failures.isEmpty());
     setBusy(false);
+}
+
+void SystemService::checkKWin(std::function<void(const QString &)> done)
+{
+    auto call = QDBusMessage::createMethodCall(QStringLiteral("org.kde.KWin"), QStringLiteral("/KWin"),
+                                             QStringLiteral("org.kde.KWin"), QStringLiteral("supportInformation"));
+    call.setAutoStartService(false);
+    auto *watcher = new QDBusPendingCallWatcher(QDBusConnection::sessionBus().asyncCall(call, 3000), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [done](QDBusPendingCallWatcher *pending) {
+        const QDBusPendingReply<QString> reply = *pending;
+        pending->deleteLater();
+        if (reply.isError()) qCWarning(lcAppearance) << "KWin handshake:" << reply.error().name() << reply.error().message();
+        done(reply.isError() ? QStringLiteral("Não foi possível comunicar com o KWin para atualizar a decoração.") : QString());
+    });
+}
+
+void SystemService::completeDecoration(const QString &successMessage, QStringList failures)
+{
+    const auto change = std::move(m_decorationChange);
+    if (!change->globalApplied) {
+        if (currentDecoration() != change->previous && !change->restore()) {
+            failures << QStringLiteral("não foi possível restaurar a decoração anterior");
+        }
+        finishAppearance(successMessage, failures);
+        return;
+    }
+    const QString resourceError = change->preserveCustom ? QString() : decorationError(change->desired);
+    if (!resourceError.isEmpty()) {
+        if (!change->restore()) failures << QStringLiteral("não foi possível restaurar a decoração anterior");
+        finishAppearance({}, failures << resourceError);
+        return;
+    }
+    const auto config = freshConfig(QStringLiteral("kwinrc"));
+    KConfigGroup group(config, QStringLiteral("org.kde.kdecoration2"));
+    group.writeEntry("library", change->desired.library, KConfig::Notify);
+    group.writeEntry("theme", change->desired.theme, KConfig::Notify);
+    if (!group.sync() || currentDecoration() != change->desired) {
+        change->restore();
+        finishAppearance({}, failures << QStringLiteral("Não foi possível gravar a decoração solicitada no KWin."));
+        return;
+    }
+    // KWin's reconfigure is Q_NOREPLY. Send it without waiting for a nonexistent
+    // method reply, then use an ordered supportInformation round trip to check delivery.
+    // This confirms configuration/request handling, never visible rendering.
+    requestKWinReload();
+    checkKWin([this, change, successMessage, failures](const QString &error) mutable {
+        if (!error.isEmpty() || currentDecoration() != change->desired) {
+            if (!change->restore()) failures << QStringLiteral("não foi possível restaurar a decoração anterior");
+            failures << (error.isEmpty() ? QStringLiteral("A configuração final da decoração foi alterada durante a operação.") : error);
+        }
+        finishAppearance(successMessage, failures);
+    });
 }
 
 void SystemService::readWallpaper(std::function<void(const QString &)> done)
@@ -708,7 +864,7 @@ void SystemService::runTool(const QString &program, const QStringList &arguments
 // wallpaper belongs to the accent color: if the package changed it, the
 // accent's wallpaper (or the previous image) is put back. Success is reported
 // only if Plasma's configuration then identifies the requested style.
-void SystemService::applyStyleProfile(const VisualStyleProfile &profile, bool dark, const QString &successMessage)
+void SystemService::applyStyleProfile(const VisualStyleProfile &profile, bool dark, const QString &successMessage, bool themeOnly)
 {
     const QString lookAndFeelTool = findTool(QStringLiteral("plasma-apply-lookandfeel"));
     if (lookAndFeelTool.isEmpty()) {
@@ -720,6 +876,24 @@ void SystemService::applyStyleProfile(const VisualStyleProfile &profile, bool da
         setMessage(QStringLiteral("O estilo %1 não está instalado neste sistema.").arg(profile.name), true);
         return;
     }
+    auto decoration = std::make_shared<DecorationChange>();
+    decoration->previous = currentDecoration();
+    decoration->preserveCustom = themeOnly && !VisualStyles::isKnownDecoration(decoration->previous);
+    decoration->desired = decoration->preserveCustom ? decoration->previous : profile.decoration(dark);
+    if (!decoration->preserveCustom) {
+        const QString error = decorationError(decoration->desired);
+        if (!error.isEmpty()) {
+            setMessage(error + QStringLiteral(" Aparência anterior preservada."), true);
+            return;
+        }
+    }
+    const KConfig local(QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation)
+                        + QStringLiteral("/kwinrc"), KConfig::SimpleConfig);
+    const KConfigGroup localGroup(&local, QStringLiteral("org.kde.kdecoration2"));
+    decoration->hadLibrary = localGroup.hasKey("library");
+    decoration->hadTheme = localGroup.hasKey("theme");
+    decoration->localLibrary = localGroup.readEntry("library", QString());
+    decoration->localTheme = localGroup.readEntry("theme", QString());
     // Snapshot the identity before KConfigWatcher sees the global theme's defaults.
     const QString accentId = m_accentId;
     const AccentProfile *accent = AccentProfiles::find(accentId);
@@ -730,29 +904,37 @@ void SystemService::applyStyleProfile(const VisualStyleProfile &profile, bool da
     }
     setBusy(true);
     setMessage(QStringLiteral("Aplicando estilo %1…").arg(profile.name));
-    const auto apply = [this, lookAndFeelTool, package, profile, dark, successMessage, accentId](const QString &error) {
+    const auto apply = [this, lookAndFeelTool, package, profile, dark, successMessage, accentId, themeOnly, decoration](const QString &error) {
         if (!error.isEmpty()) {
             finishAppearance({}, {error});
             return;
         }
-        readWallpaper([this, lookAndFeelTool, package, profile, dark, successMessage, accentId](const QString &wallpaperBefore) {
-            runTool(lookAndFeelTool, {QStringLiteral("--apply"), package},
-                    [this, profile, dark, successMessage, wallpaperBefore, accentId](bool ok, const QString &output) {
-                if (!ok) {
-                    finishAppearance({}, {QStringLiteral("Não foi possível aplicar o estilo %1.").arg(profile.name) + lastLine(output)});
-                    return;
-                }
-                // The process has finished; confirm the global theme before any
-                // restoration. No timers race a later look-and-feel process.
-                readDesktopState();
-                readVisualStyle();
-                if (m_visualStyle != profile.id || m_darkTheme != dark) {
-                    finishAppearance({}, {QStringLiteral("O Plasma não confirmou o estilo %1.").arg(profile.name)});
-                    return;
-                }
-                readWallpaper([this, profile, dark, successMessage, wallpaperBefore, accentId](const QString &wallpaperAfter) {
-                    finishStyleProfile(profile, dark, successMessage,
-                        wallpaperBefore != wallpaperAfter ? wallpaperBefore : QString(), accentId);
+        checkKWin([this, lookAndFeelTool, package, profile, dark, successMessage, accentId, themeOnly, decoration](const QString &kwinError) {
+            if (!kwinError.isEmpty()) {
+                finishAppearance({}, {kwinError});
+                return;
+            }
+            m_decorationChange = decoration;
+            readWallpaper([this, lookAndFeelTool, package, profile, dark, successMessage, accentId, themeOnly](const QString &wallpaperBefore) {
+                runTool(lookAndFeelTool, {QStringLiteral("--apply"), package},
+                        [this, profile, dark, successMessage, wallpaperBefore, accentId, themeOnly](bool ok, const QString &output) {
+                    if (!ok) {
+                        finishAppearance({}, {QStringLiteral("Não foi possível aplicar o estilo %1.").arg(profile.name) + lastLine(output)});
+                        return;
+                    }
+                    // The process has finished; confirm the global theme before any
+                    // restoration. No timers race a later look-and-feel process.
+                    readDesktopState();
+                    readVisualStyle();
+                    if (m_visualStyle != profile.id || m_darkTheme != dark) {
+                        finishAppearance({}, {QStringLiteral("O Plasma não confirmou o estilo %1.").arg(profile.name)});
+                        return;
+                    }
+                    m_decorationChange->globalApplied = true;
+                    readWallpaper([this, profile, dark, successMessage, wallpaperBefore, accentId, themeOnly](const QString &wallpaperAfter) {
+                        finishStyleProfile(profile, dark, successMessage,
+                            wallpaperBefore != wallpaperAfter ? wallpaperBefore : QString(), accentId, themeOnly);
+                    });
                 });
             });
         });
@@ -762,7 +944,7 @@ void SystemService::applyStyleProfile(const VisualStyleProfile &profile, bool da
 }
 
 void SystemService::finishStyleProfile(const VisualStyleProfile &profile, bool dark, const QString &successMessage,
-                                      const QString &replacedWallpaper, const QString &accentId)
+                                      const QString &replacedWallpaper, const QString &accentId, bool themeOnly)
 {
     QList<Command> followUps;
     const AccentProfile *accent = AccentProfiles::find(accentId);
@@ -778,12 +960,33 @@ void SystemService::finishStyleProfile(const VisualStyleProfile &profile, bool d
         followUps.append({findTool(QStringLiteral("plasma-apply-cursortheme")), {profile.fallbackCursor}, QStringLiteral("cursor")});
     }
     if (accent != nullptr) {
-        applyAccentScheme(*accent, dark, [this, accent, successMessage, followUps](const QString &error) {
+        applyAccentScheme(*accent, dark, [this, accent, successMessage, followUps, themeOnly, icons, replacedWallpaper](const QString &error) mutable {
             if (!error.isEmpty()) {
                 finishAppearance({}, {error});
                 return;
             }
-            applyAccentExtras(*accent, successMessage, followUps);
+            if (!themeOnly) {
+                applyAccentExtras(*accent, successMessage, followUps);
+                return;
+            }
+            // Light/dark keeps the color family: restore only resources that
+            // the global theme replaced. Do not rewrite the user's avatar or
+            // reset a wallpaper that the global theme left untouched.
+            if (icons != accent->iconTheme) {
+                followUps.append({findTool(QStringLiteral("plasma-changeicons")), {accent->iconTheme}, QStringLiteral("ícones")});
+            }
+            if (!replacedWallpaper.isEmpty()) {
+                const QString wallpaper = QUrl(replacedWallpaper).toLocalFile();
+                followUps.append({wallpaper.isEmpty() ? QString() : findTool(QStringLiteral("plasma-apply-wallpaperimage")),
+                                  {wallpaper}, QStringLiteral("papel de parede")});
+            }
+            runStyleFollowUps(followUps, {}, [this, accent, successMessage](QStringList failures) {
+                readDesktopState();
+                if (m_iconTheme != accent->iconTheme) {
+                    failures << QStringLiteral("o Plasma não confirmou os ícones %1").arg(accent->iconTheme);
+                }
+                finishAppearance(successMessage, failures);
+            });
         });
         return;
     }

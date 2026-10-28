@@ -8,6 +8,15 @@
 // light and a dark variant plus the icon/cursor themes to use when the package
 // refers to ones that are missing. The wallpaper follows the accent color
 // (AccentProfile), not the style.
+struct WindowDecoration
+{
+    QString library;
+    QString theme;
+
+    bool operator==(const WindowDecoration &other) const { return library == other.library && theme == other.theme; }
+    bool operator!=(const WindowDecoration &other) const { return !(*this == other); }
+};
+
 struct VisualStyleProfile
 {
     QString id;           // identifier used by QML: "blur", "glass" or "solid"
@@ -19,14 +28,18 @@ struct VisualStyleProfile
     QString fallbackLightIcons;
     QString fallbackDarkIcons;
     QString fallbackCursor;
+    WindowDecoration lightDecoration;
+    WindowDecoration darkDecoration;
 
     QString package(bool dark) const { return dark ? darkPackage : lightPackage; }
+    WindowDecoration decoration(bool dark) const { return dark ? darkDecoration : lightDecoration; }
 };
 
 namespace VisualStyles {
 
 const QList<VisualStyleProfile> &profiles();
 const VisualStyleProfile *find(const QString &id);
+bool isKnownDecoration(const WindowDecoration &decoration);
 
 // Style id ("blur", "glass", "solid") for the active configuration, or an
 // empty string when another global theme is in use. `lookAndFeelPackage` is

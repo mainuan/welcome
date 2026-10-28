@@ -52,6 +52,7 @@ Rectangle {
         mutedColor: root.mutedColor
 
         RowLayout {
+            objectName: "statusIndicator"
             visible: root.statusText.length > 0
             Layout.rightMargin: 4
             spacing: 5
@@ -81,6 +82,7 @@ Rectangle {
         }
 
         Controls.Button {
+            objectName: "primaryStatusAction"
             visible: root.primaryText.length > 0
             Layout.minimumWidth: 112
             text: root.primaryText
@@ -92,6 +94,7 @@ Rectangle {
         }
 
         Controls.Button {
+            objectName: "secondaryStatusAction"
             visible: root.secondaryText.length > 0
             Layout.minimumWidth: 112
             text: root.secondaryText

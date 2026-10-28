@@ -1,3 +1,23 @@
+mainuan-welcome (1.0.1) resolute; urgency=medium
+
+  * Recognize Mainuan color schemes inherited from kdedefaults even when a
+    launcher omits that directory from XDG_CONFIG_DIRS, preserving local
+    preferences and KConfig notifications without changing settings at startup.
+  * Switch directly between light and dark variants of the current color,
+    preserving Dream/Tahoe/Breeze and refusing unknown external schemes.
+  * Cover initial state, restarts, inherited defaults, external changes and
+    failures with isolated appearance regression tests.
+  * Preserve baseline amd64 build, ELF audits and QEMU publication gates.
+  * Hide redundant missing-package badges in the three home installation rows,
+    retaining real package detection, useful status and accessible actions.
+  * Start at 870x600 with adaptive 760x520 minima, responsive card grids and
+    scrollable installation dialogs; test all seven pages at four Qt scales.
+  * Complete Dream with the installed Lavanda Aurorae variants after the global
+    theme finishes, preserving Tahoe/Breeze and unknown custom decorations.
+    Validate resources, notify KWin over D-Bus and report partial failures.
+
+ -- ruscher <rruscher@gmail.com>  Wed, 28 Oct 2026 12:02:00 -0300
+
 mainuan-welcome (1.0) resolute; urgency=medium
 
   * Prepare the first official Mainuan Welcome release with the validated

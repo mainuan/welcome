@@ -100,16 +100,19 @@ Kirigami.Page {
 
         Flow {
             id: videoFlow
+            objectName: "tutorialFlow"
+            readonly property int columns: Math.max(1, Math.min(3, Math.floor((width + spacing) / (220 + spacing))))
             visible: !page.playerVisible
             Layout.fillWidth: true
-            Layout.preferredHeight: 550
-            Layout.minimumHeight: 550
+            Layout.preferredHeight: Math.ceil(videoRepeater.count / columns) * 268
+                                    + Math.max(0, Math.ceil(videoRepeater.count / columns) - 1) * spacing
+            Layout.minimumHeight: Layout.preferredHeight
             spacing: 14
             Repeater {
                 id: videoRepeater
                 model: page.tutorialModel
                 delegate: Rectangle {
-                    width: Math.max(220, Math.min(310, (videoFlow.width - 28) / 3))
+                    width: Math.max(0, Math.min(310, (videoFlow.width - (videoFlow.columns - 1) * videoFlow.spacing) / videoFlow.columns))
                     height: 268
                     radius: 14
                     color: page.surfaceColor

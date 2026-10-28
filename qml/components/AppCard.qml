@@ -86,7 +86,10 @@ Rectangle {
         RowLayout {
             Layout.fillWidth: true
             Controls.Label {
+                objectName: "applicationStatus"
                 Layout.fillWidth: true
+                visible: !(card.available && !card.installed && !card.busy
+                           && card.actionType !== "web" && card.installState === "Disponível")
                 text: card.installState
                 color: card.installed ? successColor : mutedColor
                 font.pixelSize: 11

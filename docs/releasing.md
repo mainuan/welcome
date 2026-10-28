@@ -2,6 +2,14 @@
 
 ## Política de versão
 
+A versão corretiva em preparação é **1.0.1**, pacote
+`mainuan-welcome_1.0.1_amd64.deb` e futura tag **v1.0.1**. Ela corrige a detecção
+inicial da aparência; não altera a API QML 1.0. A tag e os assets de `v1.0`
+permanecem intactos. `dpkg --compare-versions 1.0.1 gt 1.0` confirma que a nova
+versão permite atualização normal a partir de 1.0. A série experimental 2.x
+continua superior e exige o downgrade explícito descrito abaixo, agora usando
+o arquivo `mainuan-welcome_1.0.1_amd64.deb`.
+
 A primeira versão oficial é **1.0**, tag oficial **v1.0**, pacote
 `mainuan-welcome_1.0_amd64.deb`. A série 2.x foi experimental; seu histórico foi
 mantido em `debian/changelog` e nos relatórios identificados como históricos.
@@ -13,10 +21,10 @@ Não há geração automática de números, tags, epochs ou commits.
 
 `dpkg --compare-versions 2.3.1.5 gt 1.0` e a comparação com `2.2.0` retornam zero.
 Não se trata de um upgrade Debian. O usuário precisa solicitar explicitamente
-o arquivo local 1.0, conferi-lo e executar:
+o arquivo local 1.0.1, conferi-lo e executar:
 
 ```bash
-sudo apt install --allow-downgrades ./mainuan-welcome_1.0_amd64.deb
+sudo apt install --allow-downgrades ./mainuan-welcome_1.0.1_amd64.deb
 ```
 
 Não se acrescentou epoch para contornar a ordem. Um APT que continue oferecendo
@@ -40,7 +48,7 @@ sem candidato adicional identificado em suas fontes APT configuradas.
 | Push de código para `main` | CI, testes e artefato temporário; nenhuma Release |
 | Pull Request para `main` | Mesmas verificações e artefato, sem publicação |
 | `workflow_dispatch` | Compilação manual, sem publicação, mesmo se selecionada uma tag |
-| Push de tag `v1.0` | Testa e gera pacote 1.0; depois publica a Release correspondente |
+| Push de uma nova tag `v1.0.1` | Testa e gera pacote 1.0.1; depois publica a Release correspondente |
 
 O workflow usa `ubuntu-26.04`, dependências de `debian/control` via
 `apt-get build-dep ./` e `dpkg-checkbuilddeps`. Inclui compilação CMake,
@@ -92,7 +100,7 @@ git add .github .gitignore LICENSE CMakeLists.txt README.md debian doc docs qml 
 git diff --cached --check
 git diff --cached --stat
 git diff --cached
-git commit -m "Prepare Mainuan Welcome 1.0 and Debian CI"
+git commit -m "Fix initial light/dark switching for Mainuan Welcome 1.0.1"
 git push origin main
 ```
 
@@ -102,32 +110,30 @@ de trabalho é executada. O push em `main` gera somente o artefato de teste.
 
 ## Criar a publicação oficial depois da validação
 
-**Registro do procedimento original:** a tag `v1.0` e sua Release já existem.
-Não repita os comandos abaixo para a recompilação corrigida e não mova a tag.
-Use o procedimento de artefato separado descrito na próxima seção.
-
-Espere a primeira execução remota aprovada, baixe e confira o artefato, e valide
-o pacote na sessão Mainuan. Releia a política de downgrade e confira os canais
-externos que possam conter 2.x. Depois, somente quando decidir publicar:
+Aguarde o push manual em `main` e todos os gates remotos: metadados, seis suítes
+sequenciais/paralelas, testes no empacotamento, lintian e validação de CPU/QEMU.
+Baixe o artefato identificado pelo commit, confira `SHA256SUMS` e valide a
+alternância Claro/Escuro na sessão Mainuan/Wayland. Somente após aprovação,
+o mantenedor poderá executar os comandos seguintes; eles não são executados
+pela preparação local:
 
 ```bash
 git switch main
 git pull --ff-only origin main
 git status --short
-python3 .github/scripts/check_release.py metadata --tag v1.0
-git tag -a v1.0 -m "Mainuan Welcome 1.0"
-git push origin v1.0
+python3 .github/scripts/check_release.py metadata --tag v1.0.1
+git tag -a v1.0.1 -m "Mainuan Welcome 1.0.1"
+git push origin v1.0.1
 ```
 
-Não crie a tag com mudanças pendentes nem mova uma tag já publicada. O push da tag
-inicia outra compilação; a publicação ocorre apenas após todos os gates. Para
-versões futuras, atualize os três metadados e use a tag correspondente, como
-`v1.1`. A primeira execução real do Actions só pode ser avaliada após o usuário
-enviar estes arquivos; validação local de YAML não equivale a execução remota.
+Não crie a tag com mudanças pendentes. Não mova/recrie `v1.0` nem substitua seus
+assets. O push da nova tag inicia outra compilação; somente seu sucesso libera
+a publicação. Push em `main` e execução manual continuam gerando apenas artefatos.
+Validações locais não comprovam a aprovação de uma execução remota ainda não feita.
 
-## Recompilações corrigidas da versão 1.0
+## Histórico: recompilações corrigidas da versão 1.0
 
-A correção de confirmação externa e integração com Gestão de Drivers mantém
+Antes da versão 1.0.1, a correção de confirmação externa e integração com Gestão de Drivers manteve
 CMake, AppStream e Debian em **1.0**. A tag e os assets da Release existente
 permanecem intocados. Não reexecute a publicação da tag esperando substituir os
 assets: o workflow recusa uma Release já existente.

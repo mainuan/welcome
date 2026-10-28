@@ -110,12 +110,14 @@ Item {
             page.visible = true
             mockSystem.driversAvailable = false
             mockSystem.lastAction = ""
+            mockSystem.firewallStatus = ""
         }
         function test_cardsUseProfilesAndPreserveIcons() {
             const profiles = ["freeoffice", "app:com.vivaldi.Vivaldi", "app:app.zen_browser.zen"]
             for (let row = 0; row < 3; ++row) {
                 const card = findChild(page, "applicationCard-" + row)
                 verify(card !== null)
+                verify(!findChild(card, "applicationStatus").visible)
                 const button = findChild(card, "installApplicationButton")
                 compare(button.text, "Instalar")
                 compare(button.Accessible.name, apps.get(row).name + ": Instalar")
@@ -129,14 +131,33 @@ Item {
                 mockInstaller.busy = false
             }
             apps.setProperty(0, "installed", true)
+            apps.setProperty(0, "installState", "Instalado")
             const freeButton = findChild(findChild(page, "applicationCard-0"), "installApplicationButton")
             compare(freeButton.text, "Instalado")
+            verify(findChild(findChild(page, "applicationCard-0"), "applicationStatus").visible)
             verify(!freeButton.enabled)
             apps.setProperty(0, "installed", false)
             const onlineButton = findChild(findChild(page, "applicationCard-3"), "installApplicationButton")
+            verify(findChild(findChild(page, "applicationCard-3"), "applicationStatus").visible)
             compare(onlineButton.text, "Abrir")
             onlineButton.clicked()
             compare(mockSystem.urls, 1)
+        }
+        function test_applicationStatusPreservesMeaningfulStates() {
+            const card = findChild(page, "applicationCard-1")
+            const status = findChild(card, "applicationStatus")
+            apps.setProperty(1, "busy", true)
+            apps.setProperty(1, "installState", "Instalando…")
+            verify(status.visible)
+            apps.setProperty(1, "busy", false)
+            apps.setProperty(1, "installState", "Erro")
+            verify(status.visible)
+            apps.setProperty(1, "available", false)
+            apps.setProperty(1, "installState", "Indisponível")
+            verify(status.visible)
+            apps.setProperty(1, "available", true)
+            apps.setProperty(1, "installState", "Disponível")
+            verify(!status.visible)
         }
         function test_vendorConsentProgressAndRetry() {
             const previousStarts = mockInstaller.starts
@@ -192,6 +213,96 @@ Item {
         function test_driverCard_data() {
             return [{tag: "light", dark: false}, {tag: "dark", dark: true}]
         }
+        function test_profileIndicators_data() {
+            let rows = []
+            for (const id of ["antivirus", "firewall", "codecs"]) {
+                for (const dark of [false, true]) {
+                    for (const state of ["missing", "partial", "installed", "running", "checking", "error", "unavailable"]) {
+                        rows.push({tag: id + "-" + state + "-" + dark, id: id, state: state, dark: dark})
+                    }
+                }
+            }
+            return rows
+        }
+        function test_firewallPackageDoesNotImplyProtection() {
+            page.visible = false
+            homePage.visible = true
+            mockInstaller.profiles = {firewall: {state: "installed", canInstall: false}}
+            const row = findChild(homePage, "profileRow-firewall")
+            compare(row.statusText, "Instalado")
+            mockSystem.firewallStatus = "Inativo"
+            compare(row.statusText, "Instalado · início: inativo")
+            mockSystem.firewallStatus = "Ativado"
+            compare(row.statusText, "Instalado · início: ativado")
+            verify(!/proteção ativa/.test(row.statusText))
+        }
+        function test_profileIndicators(data) {
+            page.visible = false
+            homePage.visible = true
+            homePage.dark = data.dark
+            let profile = {state: data.state, canInstall: true, canLaunch: false, running: false, summary: ""}
+            if (data.state === "missing") profile.summary = "Não instalado"
+            if (data.state === "partial") profile.summary = "Falta: UFW"
+            if (data.state === "checking") { profile.summary = "Verificando…"; profile.canInstall = false }
+            if (data.state === "error") profile.summary = "Falha ao consultar os componentes. Tente novamente."
+            if (data.state === "running") profile.running = true
+            if (data.state === "installed") profile.canInstall = false
+            if (data.state === "unavailable") { profile.canInstall = false; profile.unavailableReason = "Ferramenta necessária ausente" }
+            let profiles = {}
+            profiles[data.id] = profile
+            mockInstaller.profiles = profiles
+            const row = findChild(homePage, "profileRow-" + data.id)
+            const indicator = findChild(row, "statusIndicator")
+            const button = findChild(row, "primaryStatusAction")
+            verify(row !== null)
+            compare(button.Accessible.name, row.title + ": " + button.text)
+            if (data.state === "missing" || data.state === "partial") {
+                compare(row.statusText, "")
+                verify(!indicator.visible)
+                compare(button.text, "Instalar")
+                verify(button.enabled)
+                // State changes must update the badge without recreating the row.
+                mockInstaller.profiles = {[data.id]: {state: "installed", canInstall: false}}
+                compare(row.statusText, "Instalado")
+                verify(indicator.visible)
+            } else {
+                verify(indicator.visible)
+                if (data.state === "running") compare(row.statusText, "Instalando…")
+                if (data.state === "checking") compare(row.statusText, "Verificando…")
+                if (data.state === "installed") compare(row.statusText, "Instalado")
+                if (data.state === "error") compare(row.statusText, profile.summary)
+                if (data.state === "unavailable") { compare(row.statusText, "Indisponível neste sistema"); verify(!button.enabled) }
+            }
+            verify(!/proteção ativa|verificação ativa|Ativado/.test(row.statusText))
+        }
+        function test_profileConfigurationRequiresInstalledComponents() {
+            page.visible = false
+            homePage.visible = true
+            const states = [
+                {state: "missing", canInstall: true, canLaunch: true, running: false, visible: false},
+                {state: "partial", canInstall: true, canLaunch: true, running: false, visible: false},
+                {state: "installed", canInstall: false, canLaunch: false, running: false, visible: false},
+                {state: "installed", canInstall: false, canLaunch: true, running: false, visible: true},
+                {state: "missing", canInstall: true, canLaunch: true, running: true, visible: false}
+            ]
+            for (const id of ["antivirus", "firewall"]) {
+                for (const profile of states) {
+                    mockInstaller.profiles = {[id]: profile}
+                    const row = findChild(homePage, "profileRow-" + id)
+                    const configure = findChild(row, "secondaryStatusAction")
+                    compare(configure.visible, profile.visible)
+                    if (profile.visible) {
+                        compare(configure.text, "Configurar")
+                        verify(configure.enabled)
+                    }
+                }
+            }
+        }
+        function test_welcomeGreetingUsesBoasVindas() {
+            const greeting = findChild(homePage, "welcomeGreeting")
+            verify(greeting.text.startsWith("Boas-vindas ao "))
+            verify(greeting.text.includes("<font color='" + homePage.accent + "'>Mainuan</font>"))
+        }
         function test_driverCard(data) {
             page.visible = false
             homePage.dark = data.dark
@@ -207,7 +318,8 @@ Item {
             compare(row.statusText, "Gestão de Drivers não instalada")
             mockSystem.driversAvailable = true
             verify(button.enabled)
-            compare(row.statusText, "Gestão de Drivers disponível")
+            compare(row.statusText, "")
+            verify(!findChild(row, "statusIndicator").visible)
             compare(button.Accessible.name, "Drivers adicionais: Gerenciar")
             button.clicked()
             compare(mockSystem.lastAction, "drivers")

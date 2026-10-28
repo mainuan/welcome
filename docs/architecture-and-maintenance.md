@@ -1,4 +1,4 @@
-# Arquitetura e manutenção — Mainuan Welcome 1.0
+# Arquitetura e manutenção — Mainuan Welcome 1.0.1
 
 ## Estrutura e recursos
 
@@ -61,10 +61,17 @@ Os wallpapers são `05marrom.png`, `01ciano.png`, `03magenta.png`, `06lima.png`,
 
 A seleção usa os doze esquemas Dream existentes no sistema, sem `--accent-color`
 como substituto. O hexadecimal serve ao seletor visual. A detecção lê o estado
-KDE, incluindo `kdeglobals`, por KConfig e sua cascata de defaults. Ao trocar
+KDE, incluindo `kdeglobals`, por KConfig e sua cascata de defaults. A cascata
+inclui explicitamente `~/.config/kdedefaults` mesmo se o lançador não exportar
+esse diretório em `XDG_CONFIG_DIRS`: preferências locais têm precedência sobre
+os defaults do tema, que têm precedência sobre os defaults do sistema. A leitura
+não escreve configurações. O ID vem do esquema oficial, nunca do hexadecimal.
+Os watchers KConfig mantêm a interface sincronizada com mudanças externas. Ao trocar
 Dream/Tahoe/Breeze ou claro/escuro, o serviço aguarda o tema global e reaplica
 os recursos da cor conhecida. Uma simples inicialização não substitui temas
-personalizados. Falhas parciais são informadas individualmente.
+personalizados. Claro/Escuro preserva a família reconhecida desde a inicialização;
+recusa esquemas desconhecidos, não regrava o avatar e só restaura o wallpaper
+quando o tema global o substitui. Falhas parciais são informadas individualmente.
 
 `UserAvatar` grava `~/.face` do usuário atual sem root, valida a imagem, recusa
 links inesperados e preserva um backup privado antes da primeira substituição.

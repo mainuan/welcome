@@ -1,4 +1,4 @@
-# CPU AMD64 básica — Mainuan Welcome 1.0
+# CPU AMD64 básica — Mainuan Welcome 1.0.1
 
 ## Diagnóstico de 21/10/2026
 
@@ -92,9 +92,9 @@ Para validar um ambiente e um pacote já construído:
 ```bash
 python3 .github/scripts/check_cpu.py environment --output build/cpu-environment.json
 python3 .github/scripts/check_cpu.py flags build/compile_commands.json
-python3 .github/scripts/check_cpu.py package ../mainuan-welcome_1.0_amd64.deb
-python3 .github/scripts/check_cpu.py dependencies ../mainuan-welcome_1.0_amd64.deb
-python3 .github/scripts/cpu_smoke.py ../mainuan-welcome_1.0_amd64.deb
+python3 .github/scripts/check_cpu.py package ../mainuan-welcome_1.0.1_amd64.deb
+python3 .github/scripts/check_cpu.py dependencies ../mainuan-welcome_1.0.1_amd64.deb
+python3 .github/scripts/cpu_smoke.py ../mainuan-welcome_1.0.1_amd64.deb
 ```
 
 O último comando exige `qemu-user`; ele não instala o Welcome ou aplicativos.
@@ -113,7 +113,8 @@ não basta desabilitar variantes APT depois de instalar bibliotecas v3. Não fa�
 substituição improvisada da libc nem copie bibliotecas para o pacote Welcome.
 Outros componentes Mainuan mantêm seus próprios processos de build e auditoria.
 
-A versão permanece 1.0. A tag e os assets de `v1.0` ficam intactos. O mantenedor
-pode distribuir o novo artefato de Actions separadamente, identificado por commit
-e SHA-256, conforme [a política de recompilações](releasing.md#recompilações-corrigidas-da-versão-10).
-O APT não considera a recompilação de mesma versão um upgrade de versão.
+A correção de aparência é distribuída como **1.0.1**, mantendo todos os gates
+de CPU da recompilação 1.0 descrita neste diagnóstico histórico. A tag e os assets
+de `v1.0` ficam intactos. O novo pacote pode atualizar 1.0 normalmente; a futura
+`v1.0.1` só será enviada após aprovação do mantenedor, conforme a
+[política de publicação](releasing.md).

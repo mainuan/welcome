@@ -445,14 +445,15 @@ QVariantMap InstallService::profileState(const Profile &profile) const
     bool canLaunch = false;
     switch (profile.launcher) {
     case Launcher::ClamUi:
-        canLaunch = m_packages->isInstalled(kClamUiId) || probeExists(QStringLiteral("clamui"));
+        canLaunch = state == QStringLiteral("installed")
+            && (m_packages->isInstalled(kClamUiId) || probeExists(QStringLiteral("clamui")));
         break;
     case Launcher::FirewallKcm:
-        canLaunch = probeExists(QStringLiteral("kcm:kcm_firewall"))
+        canLaunch = state == QStringLiteral("installed") && probeExists(QStringLiteral("kcm:kcm_firewall"))
             && (probeExists(QStringLiteral("kcmshell6")) || probeExists(QStringLiteral("systemsettings")));
         break;
     case Launcher::FlatpakApp:
-        canLaunch = m_packages->isInstalled(profile.launchTarget);
+        canLaunch = state == QStringLiteral("installed") && m_packages->isInstalled(profile.launchTarget);
         break;
     case Launcher::None:
         break;
@@ -1246,6 +1247,11 @@ bool InstallService::launch(const QString &profileId)
 {
     const Profile *profile = findProfile(profileId);
     if (profile == nullptr) {
+        return false;
+    }
+    if (!profileState(*profile).value(QStringLiteral("canLaunch")).toBool()) {
+        emit launchFailed(QStringLiteral("Não é possível abrir %1: os componentes necessários não estão instalados ou a ferramenta está indisponível.")
+                              .arg(profile->name));
         return false;
     }
 

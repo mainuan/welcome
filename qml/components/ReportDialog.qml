@@ -9,6 +9,7 @@ import org.kde.kirigami as Kirigami
 // section, with actions to refresh, copy and save the text report.
 Controls.Popup {
     id: dialog
+    objectName: "systemReportDialog"
 
     property var report
     property string logoSource: ""

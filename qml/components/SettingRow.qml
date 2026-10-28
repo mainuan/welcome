@@ -17,7 +17,7 @@ Item {
     property int compactWidth: 620
     default property alias trailing: trailingRow.data
 
-    readonly property bool compact: width < compactWidth
+    readonly property bool compact: width < compactWidth || width < trailingRow.implicitWidth + 340
 
     implicitHeight: grid.implicitHeight + 28
 

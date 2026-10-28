@@ -1,4 +1,5 @@
 #include "models/ApplicationModel.h"
+#include "WindowGeometry.h"
 #include "models/VideoModel.h"
 #include "services/InstallProgressParser.h"
 #include "services/AccentProfile.h"
@@ -21,6 +22,7 @@
 #include <QFile>
 #include <QDesktopServices>
 #include <QDBusConnection>
+#include <QDBusContext>
 #include <QDBusConnectionInterface>
 #include <QDBusReply>
 #include <QProcess>
@@ -154,6 +156,16 @@ private slots:
     void appliesVisualStyleProfiles();
     void reportsVisualStyleFailures();
     void switchesThemeWithinTheActiveStyle();
+    void switchesInitialMainuanTheme_data();
+    void switchesInitialMainuanTheme();
+    void followsExternalAppearanceChanges();
+    void respectsAppearanceConfigPrecedence();
+    void preservesUnknownSchemeWhenSwitchingTheme();
+    void reportsInitialThemeFailures();
+    void appliesOfficialDecorations();
+    void preservesCustomAndInheritedDecorations();
+    void reportsDecorationFailures();
+    void sizesWindowWithinAvailableGeometry();
     void recordsTheChosenAccentColor();
     void detectsAppearanceWithoutChangingUserResources();
     void reportsPartialAccentFailures();
@@ -183,6 +195,7 @@ private slots:
     void installsOnlyClamUiWhenClamAvExists();          // H
     void installsOnlyClamAvWhenClamUiExists();          // I
     void completesFirewallWithPlasmaIntegration();      // J
+    void doesNotLaunchPartiallyInstalledFirewall();
     void treatsDeniedFlatpakAuthorizationAsCancelled();
     void disablesAptProfilesOnNonDebianSystems();
     void rejectsUnknownProfiles();
@@ -203,6 +216,7 @@ void MainuanTest::initTestCase()
     const QDBusReply<bool> plasma = bus.interface()->isServiceRegistered(QStringLiteral("org.kde.plasmashell"));
     QVERIFY(plasma.isValid());
     QVERIFY2(!plasma.value(), "Tests must not connect to a real Plasma session.");
+    QVERIFY(!bus.interface()->isServiceRegistered(QStringLiteral("org.kde.KWin")).value());
 }
 
 void MainuanTest::cleanup()
@@ -395,6 +409,48 @@ void MainuanTest::detectsVisualStyleFromPlasmaConfig()
 
 namespace {
 
+class MockKWin final : public QObject, protected QDBusContext
+{
+    Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.kde.KWin")
+public:
+    MockKWin()
+    {
+        if (!bus.registerObject("/KWin", this, QDBusConnection::ExportAllSlots)
+            || !bus.registerService("org.kde.KWin")) qFatal("Cannot register isolated KWin mock");
+    }
+    ~MockKWin() override
+    {
+        bus.unregisterObject("/KWin");
+        bus.unregisterService("org.kde.KWin");
+        QDBusConnection::disconnectFromBus(QStringLiteral("mainuan-test-kwin"));
+    }
+    // A distinct connection exercises real bus ordering instead of Qt's
+    // same-connection shortcut for local method calls.
+    QDBusConnection bus = QDBusConnection::connectToBus(QDBusConnection::SessionBus, QStringLiteral("mainuan-test-kwin"));
+    int calls = 0;
+    bool failReloadAcknowledgement = false;
+    int queries = 0;
+    WindowDecoration applied;
+public slots:
+    QString supportInformation()
+    {
+        ++queries;
+        if (failReloadAcknowledgement && queries > 1) {
+            sendErrorReply(QStringLiteral("org.kde.KWin.Error"), QStringLiteral("Simulated KWin reload communication failure"));
+        }
+        return QStringLiteral("isolated KWin mock");
+    }
+    Q_NOREPLY void reconfigure()
+    {
+        ++calls;
+        KConfig config(qEnvironmentVariable("XDG_CONFIG_HOME") + "/kwinrc", KConfig::NoGlobals);
+        config.addConfigSources({qEnvironmentVariable("XDG_CONFIG_HOME") + "/kdedefaults/kwinrc"});
+        const KConfigGroup group(&config, "org.kde.kdecoration2");
+        applied = {group.readEntry("library", QString()), group.readEntry("theme", QString())};
+    }
+};
+
 // A user home and a system data directory with the Mainuan themes, plus the
 // simulated Plasma tools from tests/fixtures/plasma.
 class PlasmaSandbox
@@ -413,6 +469,18 @@ public:
                 write(data() + "/plasma/look-and-feel/" + package + "/metadata.json", "{}");
             }
         }
+        for (const QString &name : {QString("Lavanda-Light"), QString("Lavanda-Dark"),
+                                    QString("MacTahoe-Light"), QString("MacTahoe-Dark")}) {
+            const QString path = data() + "/aurorae/themes/" + name + '/';
+            write(path + "metadata.desktop", "[Desktop Entry]\nName=Mainuan test\nX-KDE-PluginInfo-Name=" + name.toUtf8() + '\n');
+            write(path + name + "rc", "[General]\nTitleAlignment=Center\n");
+            write(path + "decoration.svg", "<svg xmlns=\"http://www.w3.org/2000/svg\"/>\n");
+        }
+        for (const QString &library : {QString("org.kde.kwin.aurorae.v2"), QString("org.kde.kwin.aurorae"), QString("org.kde.breeze")}) {
+            write(data() + "/plugins/org.kde.kdecoration3/" + library + ".so", "plugin presence fixture; never loaded\n");
+        }
+        m_pluginPaths = QCoreApplication::libraryPaths();
+        QCoreApplication::addLibraryPath(data() + "/plugins");
         for (const AccentProfile &accent : AccentProfiles::profiles()) {
             write(data() + "/wallpapers/" + accent.wallpaper, "wallpaper fixture");
             write(data() + "/icons/" + accent.iconTheme + "/index.theme", "[Icon Theme]\nName=Kora\nDirectories=status/scalable\n");
@@ -443,6 +511,7 @@ public:
     }
     ~PlasmaSandbox()
     {
+        QCoreApplication::setLibraryPaths(m_pluginPaths);
         for (auto it = m_environment.cbegin(); it != m_environment.cend(); ++it) {
             if (it.value().first) qputenv(it.key().constData(), it.value().second);
             else qunsetenv(it.key().constData());
@@ -452,6 +521,7 @@ public:
     QString home() const { return m_root.filePath("home"); }
     QString log() const { return m_root.filePath("calls.log"); }
     QString data() const { return m_root.filePath("data"); }
+    MockKWin kwin;
     static QString tools() { return QStringLiteral(MAINUAN_TEST_FIXTURES "/plasma"); }
     static void write(const QString &path, const QByteArray &bytes)
     {
@@ -482,10 +552,11 @@ private:
     {
         return {"XDG_CONFIG_HOME", "XDG_CONFIG_DIRS", "XDG_DATA_HOME", "XDG_DATA_DIRS", "MOCK_LOG",
                 "PATH", "MOCK_DRIVERS_LOG", "WAYLAND_DISPLAY", "DISPLAY", "XDG_SESSION_TYPE",
-                "MOCK_LNF_FAIL", "MOCK_LNF_NOOP", "MOCK_LNF_DELAY", "MOCK_WALLPAPER_FAIL", "MOCK_ICONS_FAIL",
+                "MOCK_LNF_FAIL", "MOCK_LNF_NOOP", "MOCK_LNF_DELAY", "MOCK_LNF_DEFAULTS", "MOCK_WALLPAPER_FAIL", "MOCK_ICONS_FAIL",
                 "MOCK_ICONS_NOOP", "MOCK_SCHEME_FAIL", "MOCK_SCHEME_NOOP", "MOCK_SCHEME_HIDDEN"};
     }
     QTemporaryDir m_root;
+    QStringList m_pluginPaths;
     QHash<QByteArray, QPair<bool, QByteArray>> m_environment;
 };
 
@@ -495,6 +566,310 @@ bool waitIdle(const SystemService &service)
 }
 
 } // namespace
+
+void MainuanTest::sizesWindowWithinAvailableGeometry()
+{
+    for (const QSize &screen : {QSize(870, 600), QSize(1024, 768), QSize(1280, 720),
+         QSize(1366, 768), QSize(1920, 1080), QSize(760, 520), QSize(640, 360)}) {
+        for (const QPoint &origin : {QPoint(0, 0), QPoint(-1920, 40), QPoint(1920, 0)}) {
+            const QRect available(origin, screen);
+            const QRect initial = WelcomeWindow::initialGeometry(available);
+            const QSize minimum = WelcomeWindow::minimumSize(initial.size());
+            QVERIFY(available.contains(initial));
+            QVERIFY(initial.width() <= 870);
+            QVERIFY(initial.height() <= 600);
+            QVERIFY(minimum.width() < initial.width());
+            QVERIFY(minimum.height() < initial.height());
+            if (screen.width() >= 1024 && screen.height() >= 720) {
+                QCOMPARE(initial.size(), QSize(870, 600));
+                QCOMPARE(minimum, QSize(760, 520));
+            }
+        }
+    }
+}
+
+void MainuanTest::appliesOfficialDecorations()
+{
+    PlasmaSandbox sandbox;
+    sandbox.appearance("DreamCyanLightColor", "kora-cyan", "Dream-Light-Color-Global-6");
+    PlasmaSandbox::write(sandbox.config() + "/kwinrc",
+        "[org.kde.kdecoration2]\nlibrary=org.kde.kwin.aurorae\ntheme=Cyan-Light\n[User]\nPreference=keep\n");
+    SystemService service(nullptr, sandbox.home());
+    service.setToolSearchPaths({PlasmaSandbox::tools()});
+    QVERIFY(sandbox.takeCalls().isEmpty());
+    QCOMPARE(sandbox.kwin.calls, 0);
+    for (const VisualStyleProfile &style : VisualStyles::profiles()) {
+        service.setVisualStyle(style.id);
+        QVERIFY(waitIdle(service));
+        for (bool dark : {true, false}) {
+            const int before = sandbox.kwin.calls;
+            service.setTheme(dark ? "dark" : "light");
+            QVERIFY(waitIdle(service));
+            QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+            QCOMPARE(service.accentId(), QStringLiteral("cyan"));
+            QCOMPARE(sandbox.kwin.applied.library, style.decoration(dark).library);
+            QCOMPARE(sandbox.kwin.applied.theme, style.decoration(dark).theme);
+            QCOMPARE(sandbox.kwin.calls, before + 1);
+            const KConfig config(sandbox.config() + "/kwinrc", KConfig::SimpleConfig);
+            QCOMPARE(KConfigGroup(&config, "User").readEntry("Preference", QString()), QStringLiteral("keep"));
+        }
+    }
+    // A new service sees the persisted decoration and still switches directly.
+    SystemService reopened(nullptr, sandbox.home());
+    reopened.setToolSearchPaths({PlasmaSandbox::tools()});
+    reopened.setTheme("dark");
+    QVERIFY(waitIdle(reopened));
+    QCOMPARE(sandbox.kwin.applied.library, QStringLiteral("org.kde.breeze"));
+}
+
+void MainuanTest::preservesCustomAndInheritedDecorations()
+{
+    PlasmaSandbox sandbox;
+    sandbox.appearance("DreamVioletLightColor", "kora-violet", "Dream-Light-Color-Global-6");
+    const QString defaults = sandbox.config() + "/kdedefaults/kwinrc";
+    PlasmaSandbox::write(defaults, "[org.kde.kdecoration2]\nlibrary=org.kde.kwin.aurorae.v2\ntheme=__aurorae__svg__Lavanda-Light\n");
+    qputenv("MOCK_LNF_DEFAULTS", "1");
+    SystemService service(nullptr, sandbox.home());
+    service.setToolSearchPaths({PlasmaSandbox::tools()});
+    QVERIFY(!QFileInfo::exists(sandbox.config() + "/kwinrc")); // Detection is read-only.
+    service.setTheme("dark");
+    QVERIFY(waitIdle(service));
+    QCOMPARE(sandbox.kwin.applied.theme, QStringLiteral("__aurorae__svg__Lavanda-Dark"));
+    // A deliberate local external decoration wins over inherited Dream defaults.
+    PlasmaSandbox::write(sandbox.config() + "/kwinrc",
+        "[org.kde.kdecoration2]\nlibrary=org.example.custom\ntheme=Personal\n[User]\nPreference=keep\n");
+    service.setTheme("light");
+    QVERIFY(waitIdle(service));
+    QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+    QCOMPARE(sandbox.kwin.applied.library, QStringLiteral("org.example.custom"));
+    QCOMPARE(sandbox.kwin.applied.theme, QStringLiteral("Personal"));
+    QCOMPARE(service.colorScheme(), QStringLiteral("DreamVioletLightColor"));
+}
+
+void MainuanTest::reportsDecorationFailures()
+{
+    PlasmaSandbox sandbox;
+    sandbox.appearance("DreamCyanLightColor", "kora-cyan", "Dream-Light-Color-Global-6");
+    const QString kwin = sandbox.config() + "/kwinrc";
+    const QByteArray before = "[org.kde.kdecoration2]\nlibrary=org.kde.kwin.aurorae.v2\ntheme=__aurorae__svg__Lavanda-Light\n";
+    PlasmaSandbox::write(kwin, before);
+    SystemService service(nullptr, sandbox.home());
+    service.setToolSearchPaths({PlasmaSandbox::tools()});
+    const QString metadata = sandbox.data() + "/aurorae/themes/Lavanda-Dark/metadata.desktop";
+    const QByteArray valid = PlasmaSandbox::read(metadata);
+    QVERIFY(QFile::remove(metadata));
+    for (int missingId = 0; missingId < 2; ++missingId) {
+        if (missingId) PlasmaSandbox::write(metadata, "[Desktop Entry]\nName=No identifier\n");
+        service.setTheme("dark");
+        QVERIFY(waitIdle(service));
+        QVERIFY(service.lastMessage().contains("Lavanda-Dark"));
+        QVERIFY(service.lastMessage().startsWith("Erro:"));
+        QCOMPARE(PlasmaSandbox::read(kwin), before);
+        QVERIFY(sandbox.takeCalls().isEmpty());
+        QVERIFY(!service.darkTheme());
+    }
+    PlasmaSandbox::write(metadata, valid);
+    QVERIFY(sandbox.kwin.bus.unregisterService("org.kde.KWin"));
+    service.setTheme("dark");
+    QVERIFY(waitIdle(service));
+    QVERIFY(service.lastMessage().contains("KWin"));
+    QVERIFY(!service.darkTheme());
+    QCOMPARE(PlasmaSandbox::read(kwin), before);
+    QVERIFY(sandbox.takeCalls().isEmpty());
+    QVERIFY(sandbox.kwin.bus.registerService("org.kde.KWin"));
+    sandbox.kwin.queries = 0;
+    sandbox.kwin.failReloadAcknowledgement = true;
+    service.setTheme("dark");
+    QVERIFY(waitIdle(service));
+    QVERIFY(service.lastMessage().startsWith("Erro:"));
+    QVERIFY(service.lastMessage().contains("KWin"));
+    const KConfig config(kwin, KConfig::SimpleConfig);
+    QCOMPARE(KConfigGroup(&config, "org.kde.kdecoration2").readEntry("theme", QString()),
+             QStringLiteral("__aurorae__svg__Lavanda-Light"));
+}
+
+void MainuanTest::switchesInitialMainuanTheme_data()
+{
+    QTest::addColumn<QString>("accentId");
+    QTest::addColumn<QString>("styleId");
+    QTest::addColumn<bool>("initialDark");
+    QTest::addColumn<int>("source");
+    for (const AccentProfile &accent : AccentProfiles::profiles()) {
+        for (const VisualStyleProfile &style : VisualStyles::profiles()) {
+            for (bool dark : {false, true}) {
+                // Local settings, inherited defaults with Plasma's environment,
+                // and a launcher that does not export kdedefaults in XDG dirs.
+                for (int source : {0, 1, 2}) {
+                    const QByteArray row = (accent.id + '-' + style.id + (dark ? "-dark-" : "-light-")
+                                            + QString::number(source)).toUtf8();
+                    QTest::newRow(row.constData()) << accent.id << style.id << dark << source;
+                }
+            }
+        }
+    }
+}
+
+void MainuanTest::switchesInitialMainuanTheme()
+{
+    QFETCH(QString, accentId);
+    QFETCH(QString, styleId);
+    QFETCH(bool, initialDark);
+    QFETCH(int, source);
+    PlasmaSandbox sandbox;
+    const auto *accent = AccentProfiles::find(accentId);
+    const auto *style = VisualStyles::find(styleId);
+    const QString globals = sandbox.config() + "/kdeglobals";
+    const QString defaults = sandbox.config() + "/kdedefaults/kdeglobals";
+    sandbox.appearance(accent->scheme(initialDark), accent->iconTheme, style->package(initialDark));
+    const QByteArray settings = PlasmaSandbox::read(globals);
+    if (source) {
+        PlasmaSandbox::write(defaults, settings);
+        PlasmaSandbox::write(globals, "[General]\nCustomPreference=keep\n");
+        PlasmaSandbox::write(sandbox.config() + "/kdedefaults/plasmarc",
+                            "[Theme]\nname=" + style->plasmaTheme.toUtf8() + "\n");
+        if (source == 1) {
+            qputenv("XDG_CONFIG_DIRS", (sandbox.config() + "/kdedefaults:"
+                                      + qEnvironmentVariable("XDG_CONFIG_DIRS")).toUtf8());
+        }
+    }
+    PlasmaSandbox::write(sandbox.home() + "/.face", "personal avatar");
+    qputenv("MOCK_LNF_DEFAULTS", "1");
+    for (int restart = 0; restart < 2; ++restart) {
+        SystemService service(nullptr, sandbox.home());
+        service.setToolSearchPaths({PlasmaSandbox::tools()});
+        QCOMPARE(service.accentId(), accentId);
+        QCOMPARE(service.visualStyle(), styleId);
+        QCOMPARE(service.darkTheme(), initialDark);
+        QCOMPARE(service.colorScheme(), accent->scheme(initialDark));
+        if (!restart) {
+            QCOMPARE(PlasmaSandbox::read(globals), source ? QByteArray("[General]\nCustomPreference=keep\n") : settings);
+            QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), QByteArray("personal avatar"));
+            QVERIFY(sandbox.takeCalls().isEmpty());
+        }
+        // Never call setAccent: the initial identity must come from KDE.
+        for (bool targetDark : {!initialDark, initialDark}) {
+            service.setTheme(targetDark ? "dark" : "light");
+            QVERIFY(waitIdle(service));
+            QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+            QCOMPARE(service.accentId(), accentId);
+            QCOMPARE(service.visualStyle(), styleId);
+            QCOMPARE(service.darkTheme(), targetDark);
+            QCOMPARE(service.colorScheme(), accent->scheme(targetDark));
+            QCOMPARE(service.iconTheme(), accent->iconTheme);
+            QCOMPARE(sandbox.kwin.applied.library, style->decoration(targetDark).library);
+            QCOMPARE(sandbox.kwin.applied.theme, style->decoration(targetDark).theme);
+            QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), QByteArray("personal avatar"));
+            QVERIFY(!QFileInfo::exists(sandbox.home() + "/.face.mainuan-welcome-backup"));
+            const QStringList calls = sandbox.takeCalls();
+            const int global = calls.indexOf("lookandfeel " + style->package(targetDark));
+            const int scheme = calls.indexOf("plasma-apply-colorscheme " + accent->scheme(targetDark));
+            QVERIFY(global >= 0);
+            QVERIFY(scheme > global); // Reapply only after the global theme ends.
+            QVERIFY(!calls.join('\n').contains("plasma-apply-wallpaperimage"));
+        }
+    }
+}
+
+void MainuanTest::preservesUnknownSchemeWhenSwitchingTheme()
+{
+    PlasmaSandbox sandbox;
+    for (const VisualStyleProfile &style : VisualStyles::profiles()) {
+        sandbox.appearance("ExternalScheme", "custom-icons", style.lightPackage);
+        const QByteArray before = PlasmaSandbox::read(sandbox.config() + "/kdeglobals");
+        SystemService service(nullptr, sandbox.home());
+        service.setToolSearchPaths({PlasmaSandbox::tools()});
+        service.setTheme("dark");
+        QVERIFY(waitIdle(service));
+        QVERIFY(service.lastMessage().startsWith("Erro:"));
+        QCOMPARE(service.colorScheme(), QStringLiteral("ExternalScheme"));
+        QCOMPARE(PlasmaSandbox::read(sandbox.config() + "/kdeglobals"), before);
+        QVERIFY(sandbox.takeCalls().isEmpty());
+    }
+}
+
+void MainuanTest::followsExternalAppearanceChanges()
+{
+    PlasmaSandbox sandbox;
+    sandbox.appearance("DreamCyanLightColor", "kora-cyan");
+    SystemService service(nullptr, sandbox.home());
+    service.setToolSearchPaths({PlasmaSandbox::tools()});
+    QSignalSpy accentChanged(&service, &SystemService::accentColorChanged);
+    QSignalSpy darkChanged(&service, &SystemService::darkThemeChanged);
+    const auto globals = KSharedConfig::openConfig("kdeglobals");
+    KConfigGroup(globals, "General").writeEntry("ColorScheme", "DreamMagentaDarkColor", KConfig::Notify);
+    KConfigGroup(globals, "Colors:Window").writeEntry("BackgroundNormal", "30,30,46", KConfig::Notify);
+    QVERIFY(globals->sync());
+    QTRY_COMPARE(service.accentId(), QStringLiteral("magenta"));
+    QTRY_VERIFY(service.darkTheme());
+    QVERIFY(!accentChanged.isEmpty());
+    QVERIFY(!darkChanged.isEmpty());
+    service.setTheme("light");
+    QVERIFY(waitIdle(service));
+    QCOMPARE(service.colorScheme(), QStringLiteral("DreamMagentaLightColor"));
+    QVERIFY(!service.darkTheme());
+}
+
+void MainuanTest::reportsInitialThemeFailures()
+{
+    PlasmaSandbox sandbox;
+    sandbox.appearance("DreamCyanLightColor", "kora-cyan", "Dream-Light-Color-Global-6");
+    SystemService service(nullptr, sandbox.home());
+    service.setToolSearchPaths({PlasmaSandbox::tools()});
+    const QString target = sandbox.data() + "/color-schemes/DreamCyanDarkColor.colors";
+    const QByteArray scheme = PlasmaSandbox::read(target);
+    QVERIFY(QFile::remove(target));
+    service.setTheme("dark");
+    QVERIFY(waitIdle(service));
+    QVERIFY(service.lastMessage().startsWith("Erro:"));
+    QCOMPARE(service.colorScheme(), QStringLiteral("DreamCyanLightColor"));
+    QVERIFY(!service.darkTheme());
+    QVERIFY(sandbox.takeCalls().isEmpty());
+    PlasmaSandbox::write(target, scheme);
+    qputenv("MOCK_LNF_FAIL", "1");
+    service.setTheme("dark");
+    QVERIFY(waitIdle(service));
+    QVERIFY(service.lastMessage().startsWith("Erro:"));
+    QCOMPARE(service.colorScheme(), QStringLiteral("DreamCyanLightColor"));
+    QVERIFY(!service.darkTheme());
+    qunsetenv("MOCK_LNF_FAIL");
+    qputenv("MOCK_SCHEME_FAIL", "1");
+    service.setTheme("dark");
+    QVERIFY(waitIdle(service));
+    QVERIFY(service.lastMessage().startsWith("Erro:"));
+    QVERIFY(!sandbox.takeCalls().join('\n').contains("plasma-apply-wallpaperimage"));
+    // Report the actual state, even if the global theme changed before a failure.
+    const KConfigGroup general(KSharedConfig::openConfig("kdeglobals"), "General");
+    QCOMPARE(service.colorScheme(), general.readEntry("ColorScheme", QString()));
+}
+
+void MainuanTest::respectsAppearanceConfigPrecedence()
+{
+    PlasmaSandbox sandbox;
+    const QString defaults = sandbox.config() + "/kdedefaults/kdeglobals";
+    PlasmaSandbox::write(QDir(qEnvironmentVariable("XDG_CONFIG_DIRS")).filePath("kdeglobals"),
+                        "[General]\nColorScheme=BreezeLight\n");
+    PlasmaSandbox::write(defaults, "[General]\nColorScheme=DreamCyanLightColor\n");
+    PlasmaSandbox::write(sandbox.config() + "/kdedefaults/plasmarc", "[Theme]\nname=MacTahoe-Light\n");
+    SystemService service(nullptr, sandbox.home());
+    service.setToolSearchPaths({PlasmaSandbox::tools()});
+    QCOMPARE(service.accentId(), QStringLiteral("cyan"));
+    QCOMPARE(service.visualStyle(), QStringLiteral("glass"));
+    QCOMPARE(PlasmaSandbox::read(defaults), QByteArray("[General]\nColorScheme=DreamCyanLightColor\n"));
+    QVERIFY(!QFileInfo::exists(sandbox.config() + "/kdeglobals"));
+    // Default-only changes from a global-theme KCM also notify the service.
+    const auto config = KSharedConfig::openConfig("kdedefaults/kdeglobals", KConfig::SimpleConfig);
+    KConfigGroup(config, "General").writeEntry("ColorScheme", "DreamVioletDarkColor", KConfig::Notify);
+    QVERIFY(config->sync());
+    QTRY_COMPARE(service.accentId(), QStringLiteral("violet"));
+    QTRY_VERIFY(service.darkTheme());
+    sandbox.appearance("ExternalScheme", "custom-icons", "org.example.custom");
+    service.refresh();
+    QVERIFY(service.accentId().isEmpty()); // A local external choice wins over defaults.
+    service.setTheme("light");
+    QVERIFY(!service.busy());
+    QCOMPARE(service.colorScheme(), QStringLiteral("ExternalScheme"));
+    QVERIFY(sandbox.takeCalls().isEmpty());
+}
 
 void MainuanTest::opensIndependentDriverManagerVersions_data()
 {
@@ -1340,6 +1715,7 @@ void MainuanTest::installsOnlyClamUiWhenClamAvExists()
     }, 5000));
     QCOMPARE(stateOf(installer, QStringLiteral("antivirus")).value(QStringLiteral("summary")).toString(),
              QStringLiteral("Falta: ClamUI"));
+    QVERIFY(!stateOf(installer, QStringLiteral("antivirus")).value(QStringLiteral("canLaunch")).toBool());
 
     QVERIFY(runToEnd(installer, QStringLiteral("antivirus")));
     QCOMPARE(installer.phase(), QStringLiteral("success"));
@@ -1356,6 +1732,7 @@ void MainuanTest::installsOnlyClamAvWhenClamUiExists()
     QVERIFY(QTest::qWaitFor([&]() {
         return stateOf(installer, QStringLiteral("antivirus")).value(QStringLiteral("state")) == QStringLiteral("partial");
     }, 5000));
+    QVERIFY(!stateOf(installer, QStringLiteral("antivirus")).value(QStringLiteral("canLaunch")).toBool());
 
     QVERIFY(runToEnd(installer, QStringLiteral("antivirus")));
     QCOMPARE(installer.phase(), QStringLiteral("success"));
@@ -1372,11 +1749,28 @@ void MainuanTest::completesFirewallWithPlasmaIntegration()
     QVERIFY(QTest::qWaitFor([&]() {
         return stateOf(installer, QStringLiteral("firewall")).value(QStringLiteral("state")) == QStringLiteral("partial");
     }, 5000));
+    QVERIFY(!stateOf(installer, QStringLiteral("firewall")).value(QStringLiteral("canLaunch")).toBool());
 
     QVERIFY(runToEnd(installer, QStringLiteral("firewall")));
     QCOMPARE(installer.phase(), QStringLiteral("success"));
     QVERIFY(installer.details().contains(QStringLiteral("Pacotes a instalar: plasma-firewall")));
     QCOMPARE(system.lines(QStringLiteral("deb")), (QStringList{QStringLiteral("ufw"), QStringLiteral("plasma-firewall")}));
+}
+
+void MainuanTest::doesNotLaunchPartiallyInstalledFirewall()
+{
+    MockSystem system({QStringLiteral("plasma-firewall")}, {});
+    Services services = makeServices();
+    InstallService &installer = *services.installer;
+    QVERIFY(QTest::qWaitFor([&]() {
+        return stateOf(installer, QStringLiteral("firewall")).value(QStringLiteral("state")) == QStringLiteral("partial");
+    }, 5000));
+    const QVariantMap state = stateOf(installer, QStringLiteral("firewall"));
+    QVERIFY(!state.value(QStringLiteral("canLaunch")).toBool());
+    QSignalSpy launchFailed(&installer, &InstallService::launchFailed);
+    QVERIFY(!installer.launch(QStringLiteral("firewall")));
+    QCOMPARE(launchFailed.count(), 1);
+    QVERIFY(launchFailed.constFirst().constFirst().toString().contains(QStringLiteral("não estão instalados")));
 }
 
 void MainuanTest::treatsDeniedFlatpakAuthorizationAsCancelled()

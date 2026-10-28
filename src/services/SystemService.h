@@ -10,6 +10,7 @@
 #include <QVariantList>
 
 #include <functional>
+#include <memory>
 
 struct VisualStyleProfile;
 struct AccentProfile;
@@ -108,21 +109,28 @@ private:
     QString findTool(const QString &name) const;
     void runTool(const QString &program, const QStringList &arguments,
                  std::function<void(bool ok, const QString &output)> done);
-    void applyStyleProfile(const VisualStyleProfile &profile, bool dark, const QString &successMessage);
+    void applyStyleProfile(const VisualStyleProfile &profile, bool dark, const QString &successMessage,
+                           bool themeOnly = false);
     // `replacedWallpaper` is the image the package replaced, empty if it kept it.
     void finishStyleProfile(const VisualStyleProfile &profile, bool dark, const QString &successMessage,
-                            const QString &replacedWallpaper, const QString &accentId);
+                            const QString &replacedWallpaper, const QString &accentId, bool themeOnly);
     // Image of the first desktop's wallpaper (file URL), empty when unknown.
     void readWallpaper(std::function<void(const QString &image)> done);
     void validateScheme(const AccentProfile &profile, bool dark, std::function<void(const QString &)> done);
     void applyAccentScheme(const AccentProfile &profile, bool dark, std::function<void(const QString &)> done);
     void applyAccentExtras(const AccentProfile &profile, const QString &successMessage, QList<Command> steps = {});
     void finishAppearance(const QString &successMessage, const QStringList &failures = {});
+    void completeDecoration(const QString &successMessage, QStringList failures);
+    void checkKWin(std::function<void(const QString &error)> done);
     void runStyleFollowUps(QList<Command> steps, QStringList failures,
                            std::function<void(const QStringList &failures)> done);
 
     KConfigWatcher::Ptr m_globalsWatcher;
     KConfigWatcher::Ptr m_plasmaWatcher;
+    KConfigWatcher::Ptr m_defaultGlobalsWatcher;
+    KConfigWatcher::Ptr m_defaultPlasmaWatcher;
+    struct DecorationChange;
+    std::shared_ptr<DecorationChange> m_decorationChange;
     QStringList m_toolPaths;
     QStringList m_installedVisualStyles;
     QString m_accentColor;
