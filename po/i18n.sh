@@ -248,7 +248,10 @@ for lang in langs:
                 # every form may only use the source's placeholders and must keep the
                 # non-count ones; the count itself may be spelled out in a singular form
                 allowed = set(toks(e['msgid'])) | set(toks(e['msgid_plural'])); got = toks(v)
-                needed = set(toks(e['msgid_plural'])) - {'%1', '%n', '%d', '{count}', '{n}'}
+                # the count may be spelled out in a form (ar: zero/one/two): numeric
+                # placeholders of the source are optional, the others are required
+                numeric = {t for t in allowed if re.fullmatch(r"%\d+|%n|%d|%\(\w+\)d|\{(count|n|num|number)\}", t)}
+                needed = set(toks(e['msgid_plural'])) - numeric
                 if set(got) - allowed or needed - set(got):
                     print(f"PLACEHOLDER {lang} {k}: {e['msgid_plural']!r} -> {v!r}"); bad += 1
                 continue
