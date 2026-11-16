@@ -21,7 +21,7 @@ Rectangle {
     color: surfaceColor
     border.color: borderColor
     Accessible.role: Accessible.StaticText
-    Accessible.name: label + ": " + value
+    Accessible.name: i18nc("@info:accessible label and value", "%1: %2", label, value)
 
     RowLayout {
         id: row

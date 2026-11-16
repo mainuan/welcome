@@ -1,6 +1,7 @@
 #include "VideoModel.h"
 
 #include <QFileInfo>
+#include <KLocalizedString>
 #include <QUrl>
 
 VideoModel::VideoModel(QObject *parent)
@@ -8,11 +9,11 @@ VideoModel::VideoModel(QObject *parent)
 {
     const QString videoDirectory = QStringLiteral("/var/lib/curso-linux/videos");
     const QList<QStringList> videos = {
-        {QStringLiteral("Conhecendo o sistema"), QStringLiteral("aula_1.mp4"), QStringLiteral("icone-videoaulas_g204.svg")},
-        {QStringLiteral("Conectando à internet"), QStringLiteral("aula_2.mp4"), QStringLiteral("icone-videoaulas_g207.svg")},
-        {QStringLiteral("Personalizando o sistema"), QStringLiteral("aula_3.mp4"), QStringLiteral("icone-videoaulas_g208.svg")},
-        {QStringLiteral("Instalando programas"), QStringLiteral("aula_4.mp4"), QStringLiteral("icone-videoaulas_g205.svg")},
-        {QStringLiteral("Aulas online"), QStringLiteral("aula_5.mp4"), QStringLiteral("icone-videoaulas_g209.svg")}
+        {i18nc("@title video lesson", "Getting to know the system"), QStringLiteral("aula_1.mp4"), QStringLiteral("icone-videoaulas_g204.svg")},
+        {i18nc("@title video lesson", "Connecting to the internet"), QStringLiteral("aula_2.mp4"), QStringLiteral("icone-videoaulas_g207.svg")},
+        {i18nc("@title video lesson", "Customizing the system"), QStringLiteral("aula_3.mp4"), QStringLiteral("icone-videoaulas_g208.svg")},
+        {i18nc("@title video lesson", "Installing software"), QStringLiteral("aula_4.mp4"), QStringLiteral("icone-videoaulas_g205.svg")},
+        {i18nc("@title video lesson", "Online lessons"), QStringLiteral("aula_5.mp4"), QStringLiteral("icone-videoaulas_g209.svg")}
     };
 
     for (const QStringList &video : videos) {

@@ -1,5 +1,8 @@
 #include "LayoutService.h"
 
+#include <KLazyLocalizedString>
+#include <KLocalizedString>
+
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusPendingCallWatcher>
@@ -22,6 +25,38 @@
 Q_LOGGING_CATEGORY(lcLayout, "mainuan.welcome.layout")
 
 namespace {
+
+// Sentence for a failed preflightMainuanLayout() check. The script runs inside
+// plasmashell, where this application's catalog is not loaded, so it returns a
+// stable code (plus parameters) and the sentence is composed here.
+QString preflightMessage(const QJsonObject &result)
+{
+    const QString code = result.value(QStringLiteral("code")).toString();
+    if (code == QStringLiteral("invalid-layout")) {
+        return i18n("Invalid layout.");
+    }
+    if (code == QStringLiteral("missing-launcher")) {
+        QStringList launchers;
+        for (const QJsonValue &launcher : result.value(QStringLiteral("launchers")).toArray()) {
+            launchers << launcher.toString();
+        }
+        // i18n: %1 is one or more Plasma widget ids joined by " or ".
+        return i18n("Required launcher missing: %1. The previous panels were preserved.",
+                    launchers.join(i18nc("separator between alternative widget ids", " or ")));
+    }
+    if (code == QStringLiteral("missing-widget")) {
+        // i18n: %1 is a Plasma widget id, e.g. org.kde.plasma.kickoff.
+        return i18n("Required widget missing: %1. The previous panels were preserved.",
+                    result.value(QStringLiteral("widget")).toString());
+    }
+    if (code == QStringLiteral("no-screen")) {
+        return i18n("No screen available in Plasma.");
+    }
+    if (code == QStringLiteral("screen-geometry")) {
+        return i18n("Could not query the screen geometry.");
+    }
+    return i18n("Could not check the required widgets; the previous panels were preserved.");
+}
 
 // Files that hold the panels and their widgets.
 const QStringList kLayoutFiles = {QStringLiteral("plasma-org.kde.plasma.desktop-appletsrc"),
@@ -90,16 +125,20 @@ bool LayoutService::isAllowedLayout(const QString &id)
 
 QString LayoutService::displayName(const QString &id)
 {
-    static const QHash<QString, QString> names = {
-        {QStringLiteral("plasma-default"), QStringLiteral("Clássico — 5 barras")},
-        {QStringLiteral("three-panels"), QStringLiteral("3 barras")},
-        {QStringLiteral("single-bar"), QStringLiteral("Barra única")},
-        {QStringLiteral("panel-top"), QStringLiteral("Painel superior")},
-        {QStringLiteral("floating"), QStringLiteral("Flutuante")},
-        {QStringLiteral("minimal"), QStringLiteral("Barra W7")},
-        {QStringLiteral("unity"), QStringLiteral("Lomiri")},
-        {QStringLiteral("tiling"), QStringLiteral("Tiling")}};
-    return names.value(id);
+    if (id == QStringLiteral("unity")) {
+        return QStringLiteral("Lomiri"); // product name, never translated
+    }
+    static const QHash<QString, KLazyLocalizedString> names = {
+        {QStringLiteral("plasma-default"), kli18nc("desktop layout name", "Classic — 5 panels")},
+        {QStringLiteral("three-panels"), kli18nc("desktop layout name", "3 panels")},
+        {QStringLiteral("single-bar"), kli18nc("desktop layout name", "Single panel")},
+        {QStringLiteral("panel-top"), kli18nc("desktop layout name", "Top panel")},
+        {QStringLiteral("floating"), kli18nc("desktop layout name", "Floating")},
+        // i18n: "W7" refers to a Windows 7 style taskbar.
+        {QStringLiteral("minimal"), kli18nc("desktop layout name", "W7 panel")},
+        {QStringLiteral("tiling"), kli18nc("desktop layout name", "Tiling")}};
+    const auto name = names.constFind(id);
+    return name == names.constEnd() ? QString() : name->toString();
 }
 
 QString LayoutService::buildScript(const QString &id, const QStringList &installedWidgets)
@@ -352,13 +391,13 @@ void LayoutService::settleLayout(const QString &id, int attempts, const QString 
             const QJsonObject result = QJsonDocument::fromJson(output.toUtf8()).object();
             const QString signature = result.value(QStringLiteral("signature")).toString();
             if (!ok || signature.isEmpty()) {
-                done(false, QStringLiteral("Não foi possível medir os segmentos do layout."));
+                done(false, i18n("Could not measure the layout segments."));
             } else if (result.value(QStringLiteral("ok")).toBool() && signature == previous) {
                 done(true, {});
             } else if (attempts > 1) {
                 settleLayout(id, attempts - 1, signature, done);
             } else {
-                done(false, QStringLiteral("Os segmentos não estabilizaram sem sobreposição nesta tela."));
+                done(false, i18n("The segments did not settle without overlapping on this screen."));
             }
         });
     });
@@ -367,55 +406,57 @@ void LayoutService::settleLayout(const QString &id, int attempts, const QString 
 void LayoutService::apply(const QString &id)
 {
     if (!isAllowedLayout(id)) {
-        setMessage(QStringLiteral("Layout inválido."), true);
+        setMessage(i18n("Invalid layout."), true);
         return;
     }
     if (m_busy) {
         return;
     }
     if (!m_available) {
-        setMessage(QStringLiteral("O Plasma não respondeu; abra o Welcome dentro de uma sessão do KDE Plasma."), true);
+        setMessage(i18n("Plasma did not respond; open the Welcome inside a KDE Plasma session."), true);
         return;
     }
 
     const QString name = displayName(id);
     const QStringList widgets = installedPlasmoids();
     m_busy = true;
-    setMessage(QStringLiteral("Verificando o lançador do layout %1…").arg(name), false);
+    setMessage(i18n("Checking the launcher of the %1 layout…", name), false);
     const QString preflight = buildPreflightScript(id, widgets);
     if (preflight.isEmpty()) {
-        finish(QStringLiteral("Não foi possível carregar os scripts de layout; nada foi alterado."), true);
+        finish(i18n("Could not load the layout scripts; nothing was changed."), true);
         return;
     }
     evaluate(preflight, [this, id, name, widgets](bool checked, const QString &output) {
         const QJsonObject result = QJsonDocument::fromJson(output.toUtf8()).object();
         if (!checked || !result.value(QStringLiteral("ok")).toBool()) {
-            finish(result.value(QStringLiteral("message")).toString(
-                QStringLiteral("Não foi possível verificar os widgets obrigatórios; os painéis anteriores foram preservados.")), true);
+            finish(preflightMessage(checked ? result : QJsonObject()), true);
             return;
         }
         const QString backup = createBackup();
         if (backup.isEmpty()) {
-            finish(QStringLiteral("Não foi possível guardar uma cópia do layout atual; nada foi alterado."), true);
+            finish(i18n("Could not save a copy of the current layout; nothing was changed."), true);
             return;
         }
-        setMessage(QStringLiteral("Aplicando layout %1…").arg(name), false);
+        setMessage(i18n("Applying the %1 layout…", name), false);
         const auto rollBack = [this, backup](const QString &reason) {
             qCWarning(lcLayout).noquote() << reason << "- restoring" << backup;
             restartPlasmaWithBackup(backup, [this, reason](bool restored) {
-                finish(reason + (restored ? QStringLiteral(" O layout anterior foi restaurado.")
-                    : QStringLiteral(" Não foi possível restaurar automaticamente; use “Restaurar layout anterior”.")), true);
+                // i18n: %1 is a complete sentence explaining why the layout failed.
+                finish(restored ? i18n("%1 The previous layout was restored.", reason)
+                    // i18n: “Restore Previous Layout” is the button on the Appearance page.
+                    : i18n("%1 Could not restore automatically; use “Restore Previous Layout”.", reason), true);
                 refresh();
             });
         };
         evaluate(buildScript(id, widgets), [this, id, name, rollBack](bool ok, const QString &applied) {
             const QString prefix = QStringLiteral("MAINUAN_PREFLIGHT_ERROR:");
             if (ok && applied.trimmed().startsWith(prefix)) {
-                finish(applied.trimmed().mid(prefix.size()), true);
+                finish(preflightMessage(QJsonDocument::fromJson(applied.trimmed().mid(prefix.size()).toUtf8()).object()), true);
                 return;
             }
             if (!ok) {
-                rollBack(QStringLiteral("Não foi possível aplicar o layout %1 (%2).").arg(name, applied.trimmed()));
+                // i18n: %2 is the raw error reported by Plasma.
+                rollBack(i18n("Could not apply the %1 layout (%2).", name, applied.trimmed()));
                 return;
             }
             settleLayout(id, 10, {}, [this, id, name, rollBack](bool settled, const QString &reason) {
@@ -425,17 +466,17 @@ void LayoutService::apply(const QString &id)
                 }
                 describe([this, id, name, rollBack](const Description &description) {
                     if (!matchesLayout(description, id)) {
-                        rollBack(QStringLiteral("O layout %1 não ficou completo.").arg(name));
+                        rollBack(i18n("The %1 layout was not completed.", name));
                         return;
                     }
                     m_activeLayout = id;
                     if (id != QStringLiteral("tiling")) {
-                        finish(QStringLiteral("Layout %1 aplicado.").arg(name), false);
+                        finish(i18n("%1 layout applied.", name), false);
                         return;
                     }
                     applyTiling([this, name](bool tilesOk) {
-                        finish(tilesOk ? QStringLiteral("Layout %1 aplicado. Arraste janelas com Shift pressionado para encaixá-las nos blocos.").arg(name)
-                            : QStringLiteral("Layout %1 aplicado, mas os blocos do KWin não puderam ser configurados.").arg(name), !tilesOk);
+                        finish(tilesOk ? i18n("%1 layout applied. Drag windows while holding Shift to snap them into the tiles.", name)
+                            : i18n("%1 layout applied, but the KWin tiles could not be configured.", name), !tilesOk);
                     });
                 });
             });
@@ -510,10 +551,10 @@ void LayoutService::restoreBackup()
         return;
     }
     m_busy = true;
-    setMessage(QStringLiteral("Restaurando o layout anterior; o Plasma será reiniciado…"), false);
+    setMessage(i18n("Restoring the previous layout; Plasma will be restarted…"), false);
     restartPlasmaWithBackup(existing.constLast(), [this](bool ok) {
-        finish(ok ? QStringLiteral("Layout anterior restaurado.")
-                  : QStringLiteral("Não foi possível restaurar o layout anterior."),
+        finish(ok ? i18n("Previous layout restored.")
+                  : i18n("Could not restore the previous layout."),
                !ok);
         refresh();
     });

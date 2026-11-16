@@ -160,27 +160,30 @@ function buildReferenceLayout(id, screen) {
     });
 }
 
+// Failures are reported as stable codes: this script runs inside plasmashell,
+// where the Welcome's translations are not available. LayoutService turns
+// them into translated sentences.
 function preflightMainuanLayout(id) {
     if (!Object.prototype.hasOwnProperty.call(layouts, id)) {
-        return { ok: false, message: "Layout inválido." };
+        return { ok: false, code: "invalid-layout" };
     }
     if (!launcherTypes(id).some(hasWidget)) {
-        return { ok: false, message: "Lançador obrigatório ausente: " + launcherTypes(id).join(" ou ") + ". Os painéis anteriores foram preservados." };
+        return { ok: false, code: "missing-launcher", launchers: launcherTypes(id) };
     }
     var required = REFERENCE_LAYOUTS[id] || [];
     for (var i = 0; i < required.length; ++i) {
         for (var j = 0; j < required[i].widgets.length; ++j) {
             var entry = required[i].widgets[j];
             if (entry.required && entry.type !== "org.kde.plasma.kickoff" && !hasWidget(entry.type)) {
-                return { ok: false, message: "Widget obrigatório ausente: " + entry.type + ". Os painéis anteriores foram preservados." };
+                return { ok: false, code: "missing-widget", widget: entry.type };
             }
         }
     }
-    if (screenCount < 1) return { ok: false, message: "Nenhuma tela disponível no Plasma." };
+    if (screenCount < 1) return { ok: false, code: "no-screen" };
     for (var screen = 0; screen < screenCount; ++screen) {
         var geometry = screenGeometry(screen);
         if (!geometry || !isFinite(geometry.width) || !isFinite(geometry.height) || geometry.width <= 0 || geometry.height <= 0) {
-            return { ok: false, message: "Não foi possível consultar a geometria da tela." };
+            return { ok: false, code: "screen-geometry" };
         }
     }
     return { ok: true };
@@ -189,7 +192,7 @@ function preflightMainuanLayout(id) {
 function applyMainuanLayout(id) {
     var check = preflightMainuanLayout(id); // Repeat just before any destructive step.
     if (!check.ok) {
-        print("MAINUAN_PREFLIGHT_ERROR:" + check.message);
+        print("MAINUAN_PREFLIGHT_ERROR:" + JSON.stringify(check));
         return;
     }
     panels().forEach(function (panel) { panel.remove(); });
@@ -259,7 +262,7 @@ function positionMainuanLayout(id) {
         }
     }
     return { ok: ok, signature: measurements.join(","),
-             message: ok ? "" : "Os widgets não cabem na tela sem sobrepor os segmentos." };
+             code: ok ? "" : "overlap" };
 }
 
 // Validation reads real panel locations and real widget types, not just tags.

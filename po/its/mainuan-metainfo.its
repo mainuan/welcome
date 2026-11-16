@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- Subset of AppStream's metainfo.its, shipped with the project so the build
+     does not depend on which package provides it. Elements marked
+     translate="no" (developer name, release notes) are left untranslated. -->
+<its:rules xmlns:its="http://www.w3.org/2005/11/its" version="2.0">
+  <its:translateRule selector="/component" translate="no"/>
+  <its:translateRule selector="/component/name |
+                               /component/summary |
+                               /component/description |
+                               /component/developer/name |
+                               /component/keywords/keyword |
+                               /component/releases/release/description"
+                     translate="yes"/>
+  <its:withinTextRule withinText="yes" selector="/component//description//em |
+                                                 /component//description//code"/>
+  <its:translateRule selector="/component/developer/name[@translate = 'no'] |
+                               /component/releases/release/description[@translate = 'no']"
+                     translate="no"/>
+</its:rules>

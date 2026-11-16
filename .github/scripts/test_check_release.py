@@ -14,7 +14,7 @@ class ReleaseGates(unittest.TestCase):
         for name, value in {
             "CMakeLists.txt": "project(mainuan-welcome VERSION 1.0 LANGUAGES CXX)\n",
             "debian/changelog": "mainuan-welcome (1.0) resolute; urgency=medium\n",
-            "rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml": '<component><releases><release version="1.0"/></releases></component>',
+            "rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in": '<component><releases><release version="1.0"/></releases></component>',
         }.items():
             path = self.root / name
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -33,7 +33,7 @@ class ReleaseGates(unittest.TestCase):
 
     def test_patch_release_and_existing_tag(self):
         for name in ["CMakeLists.txt", "debian/changelog",
-                     "rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml"]:
+                     "rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in"]:
             path = self.root / name
             path.write_text(path.read_text().replace("1.0", "1.0.1"))
         self.assertEqual(check_release.metadata(self.root, "v1.0.1"), "1.0.1")
@@ -58,7 +58,7 @@ class ReleaseGates(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check_release.tests(report)
             else:
-                self.assertEqual(check_release.tests(report), 6)
+                self.assertEqual(check_release.tests(report), len(check_release.EXPECTED_TESTS))
 
     def test_artificial_package_renaming_is_rejected(self):
         with patch("check_release.subprocess.check_output", side_effect=["mainuan-welcome\n", "2.3.1.5\n", "amd64\n"]):

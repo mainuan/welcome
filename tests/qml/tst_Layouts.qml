@@ -61,7 +61,7 @@ Item {
                 verify(card !== null)
                 verify(button !== null)
                 compare(card.name, entry.name)
-                compare(button.Accessible.name, "Aplicar layout " + entry.name)
+                compare(button.Accessible.name, "Apply layout " + entry.name)
                 compare(button.Accessible.description, entry.description)
                 verify(button.enabled)
                 if (previous !== null)
@@ -69,8 +69,8 @@ Item {
                 button.clicked()
                 compare(manager.requested, entry.layoutId)
                 manager.activeLayout = entry.layoutId
-                compare(button.text, "Aplicado")
-                compare(button.Accessible.name, "Layout em uso: " + entry.name)
+                compare(button.text, "Applied")
+                compare(button.Accessible.name, "Layout in use: " + entry.name)
                 compare(card.border.width, 2)
                 verify(!button.enabled)
                 manager.activeLayout = ""

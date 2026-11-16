@@ -79,6 +79,13 @@ jobs:
             python3 .github/scripts/check_release.py metadata --tag "$RELEASE_TAG" --github-output "$GITHUB_OUTPUT"
           '
 
+      - name: Check translation catalogs
+        run: |
+          # The committed POT matches the sources and every catalog is valid.
+          runuser -u welcome-build -- po/i18n.sh check-pot
+          runuser -u welcome-build -- po/i18n.sh validate
+          runuser -u welcome-build -- po/i18n.sh coverage
+
       - name: Compile
         run: |
           runuser -u welcome-build -- cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DMAINUAN_DEVELOPER_MODE=OFF

@@ -20,6 +20,7 @@ Item {
         property bool driversAvailable: false
         property string driversStatus: driversAvailable ? "Gestão de Drivers disponível" : "Gestão de Drivers não instalada"
         property string firewallStatus: ""
+        property string firewallStartupNote: ""
         property string sessionType: "wayland"
         property string plasmaVersion: ""
         property string lastAction: ""
@@ -59,9 +60,9 @@ Item {
     }
     ListModel {
         id: apps
-        ListElement { name: "FreeOffice"; description: "Suíte"; iconSource: "components/freeOffice.png"; installed: false; busy: false; available: true; installState: "Disponível"; webUrl: ""; actionType: "debian"; packageId: "softmaker-freeoffice-2024"; installProfile: "freeoffice" }
-        ListElement { name: "Vivaldi"; description: "Navegador"; iconSource: "components/vivaldi.png"; installed: false; busy: false; available: true; installState: "Disponível"; webUrl: ""; actionType: "flatpak"; packageId: "com.vivaldi.Vivaldi"; installProfile: "app:com.vivaldi.Vivaldi" }
-        ListElement { name: "Zen Browser"; description: "Navegador"; iconSource: "components/zenBrowser.png"; installed: false; busy: false; available: true; installState: "Disponível"; webUrl: ""; actionType: "flatpak"; packageId: "app.zen_browser.zen"; installProfile: "app:app.zen_browser.zen" }
+        ListElement { name: "FreeOffice"; description: "Suíte"; iconSource: "components/freeOffice.png"; installed: false; busy: false; available: true; installState: "Available"; webUrl: ""; actionType: "debian"; packageId: "softmaker-freeoffice-2024"; installProfile: "freeoffice" }
+        ListElement { name: "Vivaldi"; description: "Navegador"; iconSource: "components/vivaldi.png"; installed: false; busy: false; available: true; installState: "Available"; webUrl: ""; actionType: "flatpak"; packageId: "com.vivaldi.Vivaldi"; installProfile: "app:com.vivaldi.Vivaldi" }
+        ListElement { name: "Zen Browser"; description: "Navegador"; iconSource: "components/zenBrowser.png"; installed: false; busy: false; available: true; installState: "Available"; webUrl: ""; actionType: "flatpak"; packageId: "app.zen_browser.zen"; installProfile: "app:app.zen_browser.zen" }
         ListElement { name: "Google Docs"; description: "Online"; iconSource: ""; installed: false; busy: false; available: true; installState: "Online"; webUrl: "https://docs.google.com/"; actionType: "web"; packageId: ""; installProfile: "" }
     }
     App.AppsPage {
@@ -111,6 +112,7 @@ Item {
             mockSystem.driversAvailable = false
             mockSystem.lastAction = ""
             mockSystem.firewallStatus = ""
+            mockSystem.firewallStartupNote = ""
         }
         function test_cardsUseProfilesAndPreserveIcons() {
             const profiles = ["freeoffice", "app:com.vivaldi.Vivaldi", "app:app.zen_browser.zen"]
@@ -119,8 +121,8 @@ Item {
                 verify(card !== null)
                 verify(!findChild(card, "applicationStatus").visible)
                 const button = findChild(card, "installApplicationButton")
-                compare(button.text, "Instalar")
-                compare(button.Accessible.name, apps.get(row).name + ": Instalar")
+                compare(button.text, "Install")
+                compare(button.Accessible.name, apps.get(row).name + ": Install")
                 verify(button.enabled)
                 button.clicked()
                 compare(page.requested, profiles[row])
@@ -133,13 +135,13 @@ Item {
             apps.setProperty(0, "installed", true)
             apps.setProperty(0, "installState", "Instalado")
             const freeButton = findChild(findChild(page, "applicationCard-0"), "installApplicationButton")
-            compare(freeButton.text, "Instalado")
+            compare(freeButton.text, "Installed")
             verify(findChild(findChild(page, "applicationCard-0"), "applicationStatus").visible)
             verify(!freeButton.enabled)
             apps.setProperty(0, "installed", false)
             const onlineButton = findChild(findChild(page, "applicationCard-3"), "installApplicationButton")
             verify(findChild(findChild(page, "applicationCard-3"), "applicationStatus").visible)
-            compare(onlineButton.text, "Abrir")
+            compare(onlineButton.text, "Open")
             onlineButton.clicked()
             compare(mockSystem.urls, 1)
         }
@@ -147,16 +149,16 @@ Item {
             const card = findChild(page, "applicationCard-1")
             const status = findChild(card, "applicationStatus")
             apps.setProperty(1, "busy", true)
-            apps.setProperty(1, "installState", "Instalando…")
+            apps.setProperty(1, "installState", "Installing…")
             verify(status.visible)
             apps.setProperty(1, "busy", false)
-            apps.setProperty(1, "installState", "Erro")
+            apps.setProperty(1, "installState", "Error")
             verify(status.visible)
             apps.setProperty(1, "available", false)
-            apps.setProperty(1, "installState", "Indisponível")
+            apps.setProperty(1, "installState", "Unavailable")
             verify(status.visible)
             apps.setProperty(1, "available", true)
-            apps.setProperty(1, "installState", "Disponível")
+            apps.setProperty(1, "installState", "Available")
             verify(!status.visible)
         }
         function test_vendorConsentProgressAndRetry() {
@@ -166,12 +168,12 @@ Item {
             verify(dialog.awaitingConfirmation)
             compare(mockInstaller.starts, previousStarts)
             const notice = findChild(dialog.contentItem, "installationSourceNotice")
-            compare(findChild(dialog.contentItem, "installationTitle").text, "Instalar FreeOffice")
-            compare(findChild(dialog.contentItem, "installationSource").text, "Origem: SoftMaker")
+            compare(findChild(dialog.contentItem, "installationTitle").text, "Install FreeOffice")
+            compare(findChild(dialog.contentItem, "installationSource").text, "Source: SoftMaker")
             compare(notice.text, "Este pacote é fornecido pela SoftMaker e poderá solicitar autorização de administrador.")
-            compare(findChild(dialog.contentItem, "closeInstallation").text, "Cancelar")
+            compare(findChild(dialog.contentItem, "closeInstallation").text, "Cancel")
             const visibleText = descendants(dialog.contentItem).filter(item => item.visible && typeof item.text === "string").map(item => item.text)
-            verify(!visibleText.some(text => /https?:|SHA-256|softmaker-freeoffice|amd64|3714|1238|APT|dpkg|Polkit|Etapa/.test(text)))
+            verify(!visibleText.some(text => /https?:|SHA-256|softmaker-freeoffice|amd64|3714|1238|APT|dpkg|Polkit|Step/.test(text)))
             const confirmation = findChild(dialog.contentItem, "confirmVendorInstallation")
             verify(confirmation.visible)
             confirmation.clicked()
@@ -229,12 +231,12 @@ Item {
             homePage.visible = true
             mockInstaller.profiles = {firewall: {state: "installed", canInstall: false}}
             const row = findChild(homePage, "profileRow-firewall")
-            compare(row.statusText, "Instalado")
-            mockSystem.firewallStatus = "Inativo"
-            compare(row.statusText, "Instalado · início: inativo")
-            mockSystem.firewallStatus = "Ativado"
-            compare(row.statusText, "Instalado · início: ativado")
-            verify(!/proteção ativa/.test(row.statusText))
+            compare(row.statusText, "Installed")
+            mockSystem.firewallStartupNote = "startup: inactive"
+            compare(row.statusText, "Installed · startup: inactive")
+            mockSystem.firewallStartupNote = "startup: active"
+            compare(row.statusText, "Installed · startup: active")
+            verify(!/active protection/.test(row.statusText))
         }
         function test_profileIndicators(data) {
             page.visible = false
@@ -259,19 +261,19 @@ Item {
             if (data.state === "missing" || data.state === "partial") {
                 compare(row.statusText, "")
                 verify(!indicator.visible)
-                compare(button.text, "Instalar")
+                compare(button.text, "Install")
                 verify(button.enabled)
                 // State changes must update the badge without recreating the row.
                 mockInstaller.profiles = {[data.id]: {state: "installed", canInstall: false}}
-                compare(row.statusText, "Instalado")
+                compare(row.statusText, "Installed")
                 verify(indicator.visible)
             } else {
                 verify(indicator.visible)
-                if (data.state === "running") compare(row.statusText, "Instalando…")
+                if (data.state === "running") compare(row.statusText, "Installing…")
                 if (data.state === "checking") compare(row.statusText, "Verificando…")
-                if (data.state === "installed") compare(row.statusText, "Instalado")
+                if (data.state === "installed") compare(row.statusText, "Installed")
                 if (data.state === "error") compare(row.statusText, profile.summary)
-                if (data.state === "unavailable") { compare(row.statusText, "Indisponível neste sistema"); verify(!button.enabled) }
+                if (data.state === "unavailable") { compare(row.statusText, "Unavailable on this system"); verify(!button.enabled) }
             }
             verify(!/proteção ativa|verificação ativa|Ativado/.test(row.statusText))
         }
@@ -292,7 +294,7 @@ Item {
                     const configure = findChild(row, "secondaryStatusAction")
                     compare(configure.visible, profile.visible)
                     if (profile.visible) {
-                        compare(configure.text, "Configurar")
+                        compare(configure.text, "Configure")
                         verify(configure.enabled)
                     }
                 }
@@ -300,7 +302,7 @@ Item {
         }
         function test_welcomeGreetingUsesBoasVindas() {
             const greeting = findChild(homePage, "welcomeGreeting")
-            verify(greeting.text.startsWith("Boas-vindas ao "))
+            verify(greeting.text.startsWith("Welcome to "))
             verify(greeting.text.includes("<font color='" + homePage.accent + "'>Mainuan</font>"))
         }
         function test_driverCard(data) {
@@ -309,10 +311,10 @@ Item {
             homePage.visible = true
             const row = findChild(homePage, "driversRow")
             verify(row !== null)
-            compare(row.title, "Drivers adicionais")
-            compare(row.description, "Consulte e gerencie os drivers disponíveis para o seu computador.")
-            compare(row.primaryText, "Gerenciar")
-            const button = descendants(row).find(item => item instanceof Controls.Button && item.text === "Gerenciar")
+            compare(row.title, "Additional Drivers")
+            compare(row.description, "View and manage the drivers available for your computer.")
+            compare(row.primaryText, "Manage")
+            const button = descendants(row).find(item => item instanceof Controls.Button && item.text === "Manage")
             verify(button !== undefined)
             verify(!button.enabled)
             compare(row.statusText, "Gestão de Drivers não instalada")
@@ -320,7 +322,7 @@ Item {
             verify(button.enabled)
             compare(row.statusText, "")
             verify(!findChild(row, "statusIndicator").visible)
-            compare(button.Accessible.name, "Drivers adicionais: Gerenciar")
+            compare(button.Accessible.name, "Additional Drivers: Manage")
             button.clicked()
             compare(mockSystem.lastAction, "drivers")
         }
@@ -354,21 +356,21 @@ Item {
             const percentage = findChild(dialog.contentItem, "installationPercentage")
             const safety = findChild(dialog.contentItem, "installationSafetyNotice")
             const details = findChild(dialog.contentItem, "installationDetailsPanel")
-            compare(title.text, "Instalando FreeOffice")
-            compare(source.text, "Origem: SoftMaker")
+            compare(title.text, "Installing FreeOffice")
+            compare(source.text, "Source: SoftMaker")
             compare(source.Accessible.name, source.text)
             compare(dialog.contentItem.Accessible.role, Accessible.Dialog)
             compare(dialog.contentItem.Accessible.name, title.text)
-            compare(safety.text, "Por segurança, a instalação não pode ser cancelada.")
+            compare(safety.text, "For security reasons, the installation cannot be cancelled.")
             verify(safety.visible)
             verify(safety.color.r !== dialog.surfaceColor.r)
             const bars = descendants(dialog.contentItem).filter(item => item instanceof Controls.ProgressBar)
             compare(bars.length, 1)
             verify(progress.indeterminate)
             verify(!percentage.visible)
-            compare(progress.Accessible.description, "Em andamento")
+            compare(progress.Accessible.description, "In progress")
             const visibleText = descendants(dialog.contentItem).filter(item => item.visible && typeof item.text === "string").map(item => item.text)
-            verify(!visibleText.some(text => text.includes("Etapa") || text.includes("libcurl4") || text.includes("pmstatus:")
+            verify(!visibleText.some(text => text.includes("Step") || text.includes("libcurl4") || text.includes("pmstatus:")
                 || text.includes("Descrição longa") || /https?:|SHA-256|softmaker-freeoffice|amd64|3714|1238|APT|dpkg|Polkit/.test(text)))
             verify(!details.visible)
             verify(!findChild(dialog.contentItem, "installationDetailsToggle").visible)
@@ -383,19 +385,19 @@ Item {
             mockInstaller.percent = 100 // Download complete, installation still running.
             verify(progress.indeterminate)
             verify(!percentage.visible)
-            compare(progress.Accessible.description, "Em andamento")
+            compare(progress.Accessible.description, "In progress")
             mockInstaller.percent = -1
             verify(progress.indeterminate)
             dialog.requestClose()
             verify(dialog.opened)
-            compare(safety.text, "Por segurança, a instalação não pode ser cancelada.")
+            compare(safety.text, "For security reasons, the installation cannot be cancelled.")
             mockInstaller.phase = "success"
             mockInstaller.busy = false
             verify(dialog.succeeded)
             verify(!progress.indeterminate)
             tryCompare(progress, "value", 100)
             compare(percentage.text, "100%")
-            compare(findChild(dialog.contentItem, "installationResultMessage").text, "Instalação concluída com sucesso.")
+            compare(findChild(dialog.contentItem, "installationResultMessage").text, "Installation completed successfully.")
             compare(title.text, "FreeOffice")
             verify(findChild(dialog.contentItem, "installationResultIcon").visible)
             verify(!safety.visible)
@@ -418,7 +420,7 @@ Item {
             const toggle = findChild(dialog.contentItem, "installationDetailsToggle")
             verify(!panel.visible)
             verify(toggle.visible)
-            compare(toggle.text, "Ver detalhes")
+            compare(toggle.text, "Show Details")
             toggle.clicked()
             verify(panel.visible)
             compare(findChild(dialog.contentItem, "installationTechnicalDetails").text, mockInstaller.details)

@@ -9,7 +9,8 @@ import tarfile
 import xml.etree.ElementTree as ET
 
 
-EXPECTED_TESTS = {"tst_mainuan", "tst_appinstallation", "tst_layouts", "layouts_qml", "applications_qml", "smoke_startup"}
+EXPECTED_TESTS = {"tst_mainuan", "tst_appinstallation", "tst_layouts", "layouts_qml", "applications_qml", "smoke_startup",
+                  "i18n_pt_BR", "i18n_en", "i18n_qml_pt_BR", "i18n_qml_en", "i18n_metadata", "i18n_catalogs"}
 VERSION = r"[0-9]+\.[0-9]+(?:\.[0-9]+){0,2}"
 
 
@@ -22,7 +23,7 @@ def metadata(root, tag=""):
     first = (root / "debian/changelog").read_text().splitlines()[0]
     if not first.startswith(f"mainuan-welcome ({version}) "):
         raise ValueError("CMake and Debian changelog versions differ")
-    appstream = ET.parse(root / "rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml").getroot()
+    appstream = ET.parse(root / "rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in").getroot()
     release = appstream.find("releases/release")
     if release is None or release.get("version") != version:
         raise ValueError("AppStream must identify the same current release")
@@ -69,6 +70,7 @@ def package(path, version):
         "usr/share/metainfo/org.mainuan.Welcome.metainfo.xml",
         "etc/xdg/autostart/org.mainuan.Welcome.desktop",
         "etc/mainuan/welcome.conf",
+        "usr/share/locale/pt_BR/LC_MESSAGES/mainuan-welcome.mo",
     }
     executables = {"usr/bin/mainuan-welcome", "usr/libexec/mainuan-welcome/mainuan-welcome-helper"}
     found = set()

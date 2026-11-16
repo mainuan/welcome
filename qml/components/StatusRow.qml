@@ -71,8 +71,12 @@ Rectangle {
                      : (root.statusKind === "warn" ? root.warningColor : root.mutedColor)
                 font.pixelSize: 12
                 font.weight: root.statusKind === "ok" ? Font.DemiBold : Font.Normal
+                // Translations run up to ~40 % longer than Portuguese (German,
+                // Russian): wrap onto a second line before eliding.
+                wrapMode: Text.WordWrap
+                maximumLineCount: 2
                 elide: Text.ElideRight
-                Accessible.name: root.title + ": " + root.statusText
+                Accessible.name: i18nc("@info:accessible label and value", "%1: %2", root.title, root.statusText)
                 Accessible.description: root.statusTooltip
                 HoverHandler { id: statusHover }
                 Controls.ToolTip.visible: root.statusTooltip.length > 0 && statusHover.hovered
@@ -90,7 +94,7 @@ Rectangle {
             enabled: root.primaryEnabled
             highlighted: root.primaryHighlighted && enabled
             onClicked: root.primaryClicked()
-            Accessible.name: root.title + ": " + root.primaryText
+            Accessible.name: i18nc("@info:accessible label and value", "%1: %2", root.title, root.primaryText)
         }
 
         Controls.Button {
@@ -101,7 +105,7 @@ Rectangle {
             icon.name: root.secondaryIcon
             enabled: root.secondaryEnabled
             onClicked: root.secondaryClicked()
-            Accessible.name: root.title + ": " + root.secondaryText
+            Accessible.name: i18nc("@info:accessible label and value", "%1: %2", root.title, root.secondaryText)
         }
     }
 }

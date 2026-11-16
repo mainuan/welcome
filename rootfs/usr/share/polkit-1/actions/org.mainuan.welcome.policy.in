@@ -7,9 +7,7 @@
 
   <action id="org.mainuan.welcome.install">
     <description>Install system components recommended by Mainuan Welcome</description>
-    <description xml:lang="pt_BR">Instalar componentes do sistema recomendados pelo Mainuan Welcome</description>
     <message>Authentication is required to install system components such as the antivirus, the firewall or media codecs</message>
-    <message xml:lang="pt_BR">É necessário autenticar-se para instalar componentes do sistema, como antivírus, firewall ou codecs de mídia</message>
     <icon_name>system-software-install</icon_name>
     <defaults>
       <allow_any>no</allow_any>

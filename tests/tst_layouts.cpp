@@ -11,7 +11,7 @@
 
 namespace {
 const QStringList ids = {"plasma-default", "three-panels", "single-bar", "tiling", "panel-top", "unity", "minimal"};
-const QStringList names = {"Clássico — 5 barras", "3 barras", "Barra única", "Tiling", "Painel superior", "Lomiri", "Barra W7"};
+const QStringList names = {"Classic — 5 panels", "3 panels", "Single panel", "Tiling", "Top panel", "Lomiri", "W7 panel"};
 const QStringList widgets = {"org.kde.plasma.kickoff", "org.kde.plasma.kicker", "Orbit.Start.Menu", "TahoeLauncher",
     "org.kde.plasma.icontasks", "org.kde.plasma.systemtray", "org.kde.plasma.digitalclock", "org.kde.plasma.panelspacer",
     "org.kde.plasma.marginsseparator", "org.kde.plasma.appmenu", "org.kde.plasma.pager", "org.kde.plasma.trash",
@@ -408,7 +408,7 @@ void LayoutTest::sequencesBackupApplicationAndRollback() {
     QCOMPARE(read(applets), QByteArray("original panels\n")); QCOMPARE(read(shell), QByteArray("original shell\n"));
     controls.clear(); breakNextApplication = true;
     service.apply("panel-top"); QTRY_VERIFY(!service.busy());
-    QVERIFY(service.messageIsError()); QVERIFY(service.message().contains("restaurado"));
+    QVERIFY(service.messageIsError()); QVERIFY(service.message().contains("restored"));
     QCOMPARE(controls, QStringList({"stop", "start"}));
     QCOMPARE(read(applets), QByteArray("original panels\n"));
     controls.clear(); failNextApplication = true;
@@ -434,7 +434,7 @@ void LayoutTest::sequencesBackupApplicationAndRollback() {
     QTRY_VERIFY_WITH_TIMEOUT(!service.busy(), 5000);
     QVERIFY(eventLoopResponsive);
     QVERIFY(service.messageIsError());
-    QVERIFY(service.message().contains("sobreposição"));
+    QVERIFY(service.message().contains("overlapping"));
     QCOMPARE(controls, QStringList({"stop", "start"}));
     QCOMPARE(read(applets), beforeOverlap);
 

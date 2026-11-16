@@ -2,17 +2,18 @@
 
 #include "services/LayoutService.h"
 
+#include <KLocalizedString>
 LayoutModel::LayoutModel(QObject *parent)
     : QAbstractListModel(parent)
 {
     const QHash<QString, QString> descriptions = {
-        {QStringLiteral("plasma-default"), QStringLiteral("O visual do Mainuan: ilhas flutuantes na base com menu, tarefas, bandeja e relógio.")},
-        {QStringLiteral("three-panels"), QStringLiteral("Três segmentos flutuantes na base: menu e informações, tarefas e controles do sistema.")},
-        {QStringLiteral("single-bar"), QStringLiteral("Uma barra inferior flutuante com margens laterais, widgets e aplicativos fixados.")},
-        {QStringLiteral("panel-top"), QStringLiteral("Painel superior flutuante com TahoeLauncher, pesquisa, tarefas e controles.")},
-        {QStringLiteral("minimal"), QStringLiteral("Barra inferior de largura total, sem flutuação, com Kickoff e aplicativos fixados.")},
-        {QStringLiteral("unity"), QStringLiteral("Menu global no topo e painel vertical à esquerda com Orbit Start Menu.")},
-        {QStringLiteral("tiling"), QStringLiteral("Barra compacta no topo e blocos do KWin para organizar as janelas lado a lado.")}};
+        {QStringLiteral("plasma-default"), i18nc("@info desktop layout description", "The Mainuan look: floating islands at the bottom with menu, tasks, system tray and clock.")},
+        {QStringLiteral("three-panels"), i18nc("@info desktop layout description", "Three floating segments at the bottom: menu and information, tasks, and system controls.")},
+        {QStringLiteral("single-bar"), i18nc("@info desktop layout description", "A floating bottom bar with side margins, widgets and pinned applications.")},
+        {QStringLiteral("panel-top"), i18nc("@info desktop layout description", "Floating top panel with TahoeLauncher, search, tasks and controls.")},
+        {QStringLiteral("minimal"), i18nc("@info desktop layout description", "Full-width bottom bar, not floating, with Kickoff and pinned applications.")},
+        {QStringLiteral("unity"), i18nc("@info desktop layout description", "Global menu at the top and a vertical panel on the left with Orbit Start Menu.")},
+        {QStringLiteral("tiling"), i18nc("@info desktop layout description", "Compact bar at the top and KWin tiles to arrange windows side by side.")}};
     for (const QString &id : LayoutService::layoutIds()) {
         m_entries.append({id, LayoutService::displayName(id), descriptions.value(id)});
     }

@@ -25,7 +25,8 @@ Item {
         property var installedVisualStyles: ["blur", "glass", "solid"]
         property string driversStatus: "Gestão de Drivers não instalada"
         property bool driversAvailable: false
-        property string firewallStatus: "Inativo"
+        property string firewallStatus: "Inactive"
+        property string firewallStartupNote: "startup: inactive"
         property string sessionType: "wayland"
         property string plasmaVersion: "plasmashell 6.6"
         property string logoSource: ""
@@ -96,7 +97,7 @@ Item {
                 layoutModel.append({layoutId: ids[i], name: "Layout " + ids[i], description: "Descrição do layout e das opções disponíveis."})
             for (let i = 0; i < 9; ++i) {
                 const entry = {name: "Aplicativo " + i, description: "Descrição do programa com texto suficiente para validar a distribuição dos cartões.",
-                    iconSource: "", installed: false, busy: false, available: true, installState: "Disponível", webUrl: "",
+                    iconSource: "", installed: false, busy: false, available: true, installState: "Available", webUrl: "",
                     actionType: "flatpak", packageId: "org.example.App" + i, installProfile: "app:org.example.App" + i}
                 officeModel.append(entry)
                 browserModel.append(entry)

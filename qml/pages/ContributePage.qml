@@ -17,7 +17,7 @@ Kirigami.Page {
 
     readonly property bool hasPix: system.pixKey.length > 0
 
-    title: "Contribuir"
+    title: i18nc("@title navigation page", "Contribute")
     padding: 0
     background: Rectangle { color: page.pageColor }
 
@@ -29,10 +29,10 @@ Kirigami.Page {
     PageContainer {
         contentSpacing: 14
 
-        Kirigami.Heading { text: "Contribuir"; level: 1 }
+        Kirigami.Heading { text: i18nc("@title navigation page", "Contribute"); level: 1 }
         Controls.Label {
             Layout.fillWidth: true
-            text: "O Mainuan é feito em comunidade. Você pode ajudar com uma doação, com código ou relatando problemas."
+            text: i18n("Mainuan is made by its community. You can help with a donation, with code or by reporting problems.")
             color: page.mutedColor
             wrapMode: Text.WordWrap
         }
@@ -74,8 +74,9 @@ Kirigami.Page {
                         fillMode: Image.PreserveAspectFit
                         smooth: false
                         Accessible.role: Accessible.Graphic
-                        Accessible.name: (page.system.pixQrIsPayload ? "QR Code Pix" : "QR Code da chave Pix")
-                                         + ". Chave: " + page.system.pixKey
+                        // i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
+                        Accessible.name: page.system.pixQrIsPayload ? i18n("Pix QR code. Key: %1", page.system.pixKey)
+                                                                    : i18n("Pix key QR code. Key: %1", page.system.pixKey)
                     }
                 }
 
@@ -93,21 +94,21 @@ Kirigami.Page {
                             Accessible.ignored: true
                         }
                         Kirigami.Heading {
-                            text: "Apoie o Mainuan"
+                            text: i18n("Support Mainuan")
                             level: 2
                             color: page.textColor
                         }
                     }
                     Controls.Label {
                         Layout.fillWidth: true
-                        text: "Sua doação ajuda a manter o desenvolvimento, a infraestrutura e a comunidade."
+                        text: i18n("Your donation helps sustain development, infrastructure and the community.")
                         color: page.mutedColor
                         wrapMode: Text.WordWrap
                     }
 
                     Controls.Label {
                         Layout.topMargin: 6
-                        text: "Chave Pix"
+                        text: i18n("Pix Key")
                         color: page.mutedColor
                         font.pixelSize: 12
                         font.weight: Font.DemiBold
@@ -132,14 +133,14 @@ Kirigami.Page {
                             font.pixelSize: 15
                             verticalAlignment: Text.AlignVCenter
                             Accessible.role: Accessible.EditableText
-                            Accessible.name: "Chave Pix"
+                            Accessible.name: i18n("Pix Key")
                         }
                     }
                     RowLayout {
                         visible: page.hasPix
                         spacing: 10
                         Controls.Button {
-                            text: "Copiar chave Pix"
+                            text: i18n("Copy Pix Key")
                             icon.name: "edit-copy"
                             highlighted: true
                             onClicked: if (page.system.copyText(page.system.pixKey)) copiedTimer.restart()
@@ -154,7 +155,7 @@ Kirigami.Page {
                         }
                         Controls.Label {
                             visible: copiedTimer.running
-                            text: "Chave Pix copiada."
+                            text: i18n("Pix key copied.")
                             color: page.successColor
                             font.weight: Font.DemiBold
                             Accessible.role: Accessible.StaticText
@@ -164,8 +165,8 @@ Kirigami.Page {
                         visible: page.hasPix
                         Layout.fillWidth: true
                         text: page.system.pixQrIsPayload
-                              ? "Leia o QR Code no aplicativo do seu banco, na opção Pix."
-                              : "O QR Code contém a chave Pix. No aplicativo do banco, use a opção Pix com a chave copiada ou lida pelo código."
+                              ? i18n("Scan the QR code with your bank's app, using the Pix option.")
+                              : i18n("The QR code contains the Pix key. In your bank's app, use the Pix option with the copied key or the one read from the code.")
                         color: page.mutedColor
                         font.pixelSize: 12
                         wrapMode: Text.WordWrap
@@ -173,7 +174,7 @@ Kirigami.Page {
                     Controls.Label {
                         visible: !page.hasPix
                         Layout.fillWidth: true
-                        text: "A chave Pix ainda não foi configurada nesta instalação."
+                        text: i18n("The Pix key has not been set up on this installation yet.")
                         color: page.mutedColor
                         wrapMode: Text.WordWrap
                     }
@@ -183,7 +184,7 @@ Kirigami.Page {
 
         Controls.Label {
             Layout.topMargin: 6
-            text: "Outras formas de ajudar"
+            text: i18n("Other Ways to Help")
             color: page.mutedColor
             font.pixelSize: 12
             font.weight: Font.DemiBold
@@ -192,8 +193,8 @@ Kirigami.Page {
         ActionCard {
             Layout.fillWidth: true
             iconName: "github"
-            title: "Contribuir com código"
-            description: "Código, traduções e melhorias no GitHub."
+            title: i18n("Contribute Code")
+            description: i18n("Code, translations and improvements on GitHub.")
             accent: page.accent; surfaceColor: page.surfaceColor; borderColor: page.borderColor
             textColor: page.textColor; mutedColor: page.mutedColor
             onClicked: page.system.openUrl("https://github.com/mainuanos/mainuan")
@@ -201,8 +202,8 @@ Kirigami.Page {
         ActionCard {
             Layout.fillWidth: true
             iconName: "bug"
-            title: "Reportar um problema"
-            description: "Descreva o que aconteceu; anexar o relatório da máquina (em Sobre) ajuda muito."
+            title: i18n("Report a Problem")
+            description: i18n("Describe what happened; attaching the system report (in About) helps a lot.")
             accent: page.accent; surfaceColor: page.surfaceColor; borderColor: page.borderColor
             textColor: page.textColor; mutedColor: page.mutedColor
             onClicked: page.system.openUrl("https://github.com/mainuanos/mainuan/issues/new")
@@ -210,15 +211,15 @@ Kirigami.Page {
         ActionCard {
             Layout.fillWidth: true
             iconName: "users"
-            title: "Comunidade no Telegram"
-            description: "Converse com usuários e desenvolvedores do Mainuan."
+            title: i18n("Telegram Community")
+            description: i18n("Chat with Mainuan users and developers.")
             accent: page.accent; surfaceColor: page.surfaceColor; borderColor: page.borderColor
             textColor: page.textColor; mutedColor: page.mutedColor
             onClicked: page.system.openUrl("https://t.me/mainuanos")
         }
         Controls.Label {
             Layout.fillWidth: true
-            text: "Os links abrem no navegador só quando você clica. O QR Code é gerado no próprio computador, sem internet."
+            text: i18n("Links open in the browser only when you click them. The QR code is generated on this computer, without internet access.")
             color: page.mutedColor
             font.pixelSize: 12
             wrapMode: Text.WordWrap

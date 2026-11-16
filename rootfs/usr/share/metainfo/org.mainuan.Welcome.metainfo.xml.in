@@ -2,15 +2,12 @@
 <component type="desktop-application">
   <id>org.mainuan.Welcome</id>
   <name>Mainuan Welcome</name>
-  <name xml:lang="pt-BR">Boas-vindas do Mainuan</name>
-  <summary>Configure o Mainuan e conheça os recursos do seu desktop</summary>
-  <summary xml:lang="pt-BR">Configure o Mainuan e conheça os recursos do seu desktop</summary>
+  <summary>Set up Mainuan and get to know the features of your desktop</summary>
   <description>
     <p>Welcome application of the Mainuan desktop. It helps new users choose the look of the desktop, install media codecs, the antivirus, the firewall, office suites and web browsers, and find the video tutorials.</p>
-    <p xml:lang="pt-BR">Aplicativo de boas-vindas do Mainuan. Ajuda novos usuários a escolher a aparência da área de trabalho, instalar codecs de mídia, antivírus, firewall, suítes de escritório e navegadores, e encontrar os tutoriais em vídeo.</p>
   </description>
   <developer id="org.mainuan">
-    <name>Mainuan</name>
+    <name translate="no">Mainuan</name>
   </developer>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
@@ -20,13 +17,13 @@
   <url type="bugtracker">https://github.com/mainuan/welcome/issues</url>
   <releases>
     <release version="1.0.1" date="2026-10-28" type="stable">
-      <description>
+      <description translate="no">
         <p>Recognize inherited Mainuan color schemes at startup and preserve the current color when switching between light and dark modes.</p>
         <p>Use a smaller resizable window and responsive pages, simplify installation indicators, and apply each visual style's installed window decoration.</p>
       </description>
     </release>
     <release version="1.0" date="2026-10-17" type="stable">
-      <description>
+      <description translate="no">
         <p>First official Mainuan Welcome release, with native Plasma customization and application installation.</p>
       </description>
     </release>

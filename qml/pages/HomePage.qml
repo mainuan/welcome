@@ -20,7 +20,7 @@ Kirigami.Page {
 
     signal installRequested(string profileId)
 
-    title: "Início"
+    title: i18nc("@title navigation page", "Home")
     padding: 0
 
     background: Rectangle { color: pageColor }
@@ -45,11 +45,12 @@ Kirigami.Page {
 
         statusText: {
             if (runningNow)
-                return "Instalando…";
+                return i18n("Installing…");
             if (installedNow)
-                return installedNote.length > 0 ? "Instalado · " + installedNote : "Instalado";
+                // i18n: %1 is a short note such as "startup: enabled"
+                return installedNote.length > 0 ? i18n("Installed · %1", installedNote) : i18nc("@info status", "Installed");
             if (profileState.canInstall === false && (profileState.unavailableReason || "").length > 0)
-                return "Indisponível neste sistema";
+                return i18n("Unavailable on this system");
             if (profileState.canInstall === true
                     && (profileState.state === "missing" || profileState.state === "partial"))
                 return "";
@@ -58,7 +59,7 @@ Kirigami.Page {
         statusKind: installedNow ? "ok" : (profileState.state === "partial" ? "warn" : "neutral")
         statusTooltip: installedNow ? "" : (profileState.unavailableReason || "")
 
-        primaryText: installedNow ? "" : (runningNow ? "Instalando…" : "Instalar")
+        primaryText: installedNow ? "" : (runningNow ? i18n("Installing…") : i18nc("@action:button", "Install"))
         primaryIcon: "download"
         primaryEnabled: profileState.canInstall === true && !host.installer.busy
         onPrimaryClicked: host.installRequested(profileId)
@@ -82,12 +83,13 @@ Kirigami.Page {
         Kirigami.Heading {
             objectName: "welcomeGreeting"
             Layout.fillWidth: true
-            text: "Boas-vindas ao <font color='" + page.accent + "'>Mainuan</font>"
+            // i18n: %1 is a colour code; keep the <font> markup around the product name
+            text: i18n("Welcome to <font color='%1'>Mainuan</font>", String(page.accent))
             level: 1
         }
         Controls.Label {
             Layout.fillWidth: true
-            text: "Configure seu sistema à sua maneira, com ferramentas nativas do Plasma."
+            text: i18n("Set up your system your way, with native Plasma tools.")
             color: page.mutedColor
             wrapMode: Text.WordWrap
         }
@@ -100,7 +102,7 @@ Kirigami.Page {
             textColor: page.textColor
         }
 
-        SectionLabel { text: "Hardware & Mídia"; color: page.mutedColor }
+        SectionLabel { text: i18n("Hardware & Media"); color: page.mutedColor }
 
         StatusRow {
             objectName: "driversRow"
@@ -108,11 +110,11 @@ Kirigami.Page {
             surfaceColor: page.surfaceColor; borderColor: page.borderColor; accent: page.accent
             textColor: page.textColor; mutedColor: page.mutedColor
             successColor: page.successColor; warningColor: page.warningColor
-            title: "Drivers adicionais"
-            description: "Consulte e gerencie os drivers disponíveis para o seu computador."
+            title: i18n("Additional Drivers")
+            description: i18n("View and manage the drivers available for your computer.")
             iconName: "computer"
             statusText: page.system.driversAvailable ? "" : page.system.driversStatus
-            primaryText: "Gerenciar"
+            primaryText: i18nc("@action:button", "Manage")
             primaryIcon: "configure"
             primaryHighlighted: false
             primaryEnabled: page.system.driversAvailable
@@ -121,36 +123,38 @@ Kirigami.Page {
         ProfileRow {
             host: page
             profileId: "codecs"
-            title: "Codecs de mídia"
-            description: "Reproduza áudio e vídeo nos formatos mais comuns."
+            title: i18n("Media Codecs")
+            description: i18n("Play audio and video in the most common formats.")
             iconName: "applications-multimedia"
         }
 
-        SectionLabel { text: "Segurança & Privacidade"; color: page.mutedColor }
+        SectionLabel { text: i18n("Security & Privacy"); color: page.mutedColor }
 
         ProfileRow {
             host: page
             profileId: "antivirus"
-            title: "Antivírus"
-            description: "Proteção ClamAV com a interface gráfica ClamUI."
+            title: i18n("Antivirus")
+            description: i18n("ClamAV protection with the ClamUI graphical interface.")
             iconName: "security-high"
-            configureText: "Configurar"
+            configureText: i18nc("@action:button", "Configure")
         }
         ProfileRow {
             host: page
             profileId: "firewall"
-            title: "Firewall"
-            description: "Controle as conexões de rede com o UFW e o módulo do KDE Plasma."
+            title: i18n("Firewall")
+            description: i18n("Control network connections with UFW and the KDE Plasma module.")
             iconName: "security-medium"
-            configureText: "Configurar"
+            configureText: i18nc("@action:button", "Configure")
             // The service reads ufw.conf's boot preference, not live protection.
-            installedNote: page.system.firewallStatus.length > 0 ? "início: " + page.system.firewallStatus.toLowerCase() : ""
+            installedNote: page.system.firewallStartupNote
         }
 
         Controls.Label {
             Layout.topMargin: 4
             Layout.bottomMargin: 20
-            text: "Sessão: " + page.system.sessionType + (page.system.plasmaVersion.length > 0 ? "  ·  " + page.system.plasmaVersion : "")
+            // i18n: %1 is the session type (wayland/x11), %2 the Plasma version
+            text: page.system.plasmaVersion.length > 0 ? i18n("Session: %1  ·  %2", page.system.sessionType, page.system.plasmaVersion)
+                                                       : i18n("Session: %1", page.system.sessionType)
             color: page.mutedColor
             font.pixelSize: 11
         }

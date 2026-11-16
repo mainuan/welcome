@@ -89,7 +89,7 @@ Rectangle {
                 objectName: "applicationStatus"
                 Layout.fillWidth: true
                 visible: !(card.available && !card.installed && !card.busy
-                           && card.actionType !== "web" && card.installState === "Disponível")
+                           && card.actionType !== "web" && card.installState === i18n("Available"))
                 text: card.installState
                 color: card.installed ? successColor : mutedColor
                 font.pixelSize: 11
@@ -97,11 +97,13 @@ Rectangle {
             }
             Controls.Button {
                 objectName: "installApplicationButton"
-                Layout.preferredWidth: card.actionType === "web" ? 78 : 102
+                // Keep the original width as a minimum, but let longer
+                // translations ("Bitte warten …", "インストール済み") grow the button.
+                Layout.preferredWidth: Math.max(card.actionType === "web" ? 78 : 102, implicitWidth)
                 Layout.minimumWidth: card.actionType === "web" ? 72 : 94
-                text: card.actionType === "web" ? "Abrir"
-                    : card.actionType === "debian" && card.installed ? "Instalado"
-                    : (card.busy ? "Aguarde…" : (card.installed ? "Remover" : "Instalar"))
+                text: card.actionType === "web" ? i18n("Open")
+                    : card.actionType === "debian" && card.installed ? i18n("Installed")
+                    : (card.busy ? i18n("Please wait…") : (card.installed ? i18n("Remove") : i18n("Install")))
                 icon.name: card.actionType === "web" ? "internet-web-browser"
                     : card.actionType === "flatpak" && card.installed ? "edit-delete" : "download"
                 enabled: card.available && !card.busy && (card.actionType === "web" || !card.installerBusy)
@@ -115,7 +117,7 @@ Rectangle {
                     else
                         card.installRequested(card.installProfile);
                 }
-                Accessible.name: card.appName + ": " + text
+                Accessible.name: i18nc("@info:accessible label and value", "%1: %2", card.appName, text)
             }
         }
     }

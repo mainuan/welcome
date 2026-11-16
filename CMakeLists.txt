@@ -35,6 +35,8 @@ find_package(Qt6 6.5 QUIET COMPONENTS Test)
 # KConfig reads Plasma settings through the same cascade Plasma uses
 # (~/.config/kdedefaults holds the values written by global themes).
 find_package(KF6Config 6.0 REQUIRED)
+# Translations: KI18n for C++ (i18n()) and KI18nQml for QML (KLocalization, KF >= 6.8).
+find_package(KF6I18n 6.8 REQUIRED)
 # QR codes for Contribuir are generated locally.
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(QRENCODE REQUIRED IMPORTED_TARGET libqrencode)
@@ -46,6 +48,7 @@ if (COMMAND qt_policy)
 endif()
 
 add_library(mainuan-core STATIC
+    src/CatalogLayoutDirection.h
     src/WindowGeometry.h
     src/services/SystemService.cpp
     src/services/SystemService.h
@@ -96,12 +99,17 @@ qt_add_resources(mainuan-core layout_scripts
     FILES src/layouts/desktop-layouts.js src/layouts/reference-layouts.js src/layouts/kwin-tiling.js
 )
 target_compile_definitions(mainuan-core PRIVATE MAINUAN_HELPER_PATH="${MAINUAN_HELPER_PATH}")
+# Every i18n() call in the project resolves against the package's own catalog,
+# also when the code runs inside a test binary that never sets an application domain.
+set(MAINUAN_TRANSLATION_DOMAIN "mainuan-welcome")
+target_compile_definitions(mainuan-core PUBLIC TRANSLATION_DOMAIN="${MAINUAN_TRANSLATION_DOMAIN}")
 target_link_libraries(mainuan-core PUBLIC
     Qt6::Core
     Qt6::Gui
     Qt6::DBus
     Qt6::Network
     KF6::ConfigCore
+    KF6::I18n
     PkgConfig::QRENCODE
 )
 
@@ -192,6 +200,8 @@ target_link_libraries(mainuan-welcome PRIVATE
     Qt6::Widgets
     Qt6::Network
     Qt6::Multimedia
+    KF6::I18n
+    KF6::I18nQml
 )
 
 if (TARGET KF6::Kirigami)
@@ -216,8 +226,81 @@ install(TARGETS mainuan-welcome
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+# --- Translations ------------------------------------------------------------
+# Catalogs use the flat layout po/<lang>.po (languages listed in po/LINGUAS).
+# Each one is compiled to <build>/share/locale/<lang>/LC_MESSAGES/<domain>.mo,
+# which the executable also finds when it runs from the build tree, and is
+# installed to /usr/share/locale. The .desktop, AppStream and polkit files are
+# generated from their templates with msgfmt so they carry every language.
+find_program(MAINUAN_MSGFMT NAMES msgfmt REQUIRED)
+set(MAINUAN_PO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/po")
+set(MAINUAN_LOCALE_BUILD_DIR "${CMAKE_BINARY_DIR}/share/locale")
+file(STRINGS "${MAINUAN_PO_DIR}/LINGUAS" MAINUAN_LINGUAS REGEX "^[^#]")
+string(REGEX REPLACE "[ \t]+" ";" MAINUAN_LINGUAS "${MAINUAN_LINGUAS}")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${MAINUAN_PO_DIR}/LINGUAS")
+set(MAINUAN_PO_FILES)
+set(MAINUAN_MO_FILES)
+foreach(lang IN LISTS MAINUAN_LINGUAS)
+    set(po "${MAINUAN_PO_DIR}/${lang}.po")
+    set(mo "${MAINUAN_LOCALE_BUILD_DIR}/${lang}/LC_MESSAGES/${MAINUAN_TRANSLATION_DOMAIN}.mo")
+    add_custom_command(OUTPUT "${mo}"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${MAINUAN_LOCALE_BUILD_DIR}/${lang}/LC_MESSAGES"
+        COMMAND ${MAINUAN_MSGFMT} --check -o "${mo}" "${po}"
+        DEPENDS "${po}"
+        COMMENT "Compiling ${lang} catalog"
+        VERBATIM)
+    install(FILES "${mo}" DESTINATION "${CMAKE_INSTALL_LOCALEDIR}/${lang}/LC_MESSAGES")
+    list(APPEND MAINUAN_PO_FILES "${po}")
+    list(APPEND MAINUAN_MO_FILES "${mo}")
+endforeach()
+
+# msgfmt finds the ITS rules for the XML templates through po/its.
+set(MAINUAN_GETTEXT_ENV ${CMAKE_COMMAND} -E env "GETTEXTDATADIRS=${MAINUAN_PO_DIR}")
+file(GLOB MAINUAN_ITS_FILES CONFIGURE_DEPENDS "${MAINUAN_PO_DIR}/its/*")
+list(APPEND MAINUAN_ITS_FILES "${MAINUAN_PO_DIR}/polkit-lang.cmake")
+function(mainuan_translate_metadata mode template output)
+    get_filename_component(output_dir "${output}" DIRECTORY)
+    add_custom_command(OUTPUT "${output}"
+        # msgfmt does not create the output directory (clean build trees)
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${output_dir}"
+        COMMAND ${MAINUAN_GETTEXT_ENV} ${MAINUAN_MSGFMT} --${mode} --template "${template}" -d "${MAINUAN_PO_DIR}" -o "${output}"
+        ${ARGN}
+        DEPENDS "${template}" ${MAINUAN_PO_FILES} "${MAINUAN_PO_DIR}/LINGUAS" ${MAINUAN_ITS_FILES}
+        COMMENT "Translating ${output}"
+        VERBATIM)
+endfunction()
+
+set(MAINUAN_DESKTOP_FILE "${CMAKE_CURRENT_BINARY_DIR}/applications/org.mainuan.Welcome.desktop")
+set(MAINUAN_AUTOSTART_FILE "${CMAKE_CURRENT_BINARY_DIR}/autostart/org.mainuan.Welcome.desktop")
+set(MAINUAN_METAINFO_FILE "${CMAKE_CURRENT_BINARY_DIR}/org.mainuan.Welcome.metainfo.xml")
+set(MAINUAN_POLICY_FILE "${CMAKE_CURRENT_BINARY_DIR}/org.mainuan.welcome.policy")
+mainuan_translate_metadata(desktop
+    "${CMAKE_CURRENT_SOURCE_DIR}/rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in"
+    "${MAINUAN_DESKTOP_FILE}")
+mainuan_translate_metadata(desktop
+    "${CMAKE_CURRENT_SOURCE_DIR}/rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in"
+    "${MAINUAN_AUTOSTART_FILE}")
+mainuan_translate_metadata(xml
+    "${CMAKE_CURRENT_SOURCE_DIR}/rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in"
+    "${MAINUAN_METAINFO_FILE}")
+# The polkit action authorizes exactly the installed helper path: substitute
+# @MAINUAN_HELPER_PATH@ first, then merge the translations into the result.
+configure_file(
+    rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in
+    ${CMAKE_CURRENT_BINARY_DIR}/policy-template/org.mainuan.welcome.policy
+    @ONLY
+)
+mainuan_translate_metadata(xml
+    "${CMAKE_CURRENT_BINARY_DIR}/policy-template/org.mainuan.welcome.policy"
+    "${MAINUAN_POLICY_FILE}"
+    COMMAND ${CMAKE_COMMAND} -DFILE=${MAINUAN_POLICY_FILE} -P ${MAINUAN_PO_DIR}/polkit-lang.cmake)
+
+add_custom_target(mainuan-translations ALL DEPENDS
+    ${MAINUAN_MO_FILES}
+    "${MAINUAN_DESKTOP_FILE}" "${MAINUAN_AUTOSTART_FILE}" "${MAINUAN_METAINFO_FILE}" "${MAINUAN_POLICY_FILE}")
+
 install(FILES
-    rootfs/usr/share/applications/org.mainuan.Welcome.desktop
+    ${MAINUAN_DESKTOP_FILE}
     DESTINATION ${CMAKE_INSTALL_DATADIR}/applications
 )
 
@@ -235,7 +318,7 @@ endif()
 # System-wide login entry; each user can hide it from the Welcome itself
 # (Hidden=true in $XDG_CONFIG_HOME/autostart).
 install(FILES
-    rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop
+    ${MAINUAN_AUTOSTART_FILE}
     DESTINATION ${MAINUAN_SYSCONFDIR}/xdg/autostart
 )
 
@@ -245,7 +328,7 @@ install(FILES
 )
 
 install(FILES
-    rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml
+    ${MAINUAN_METAINFO_FILE}
     DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo
 )
 
@@ -258,14 +341,8 @@ install(PROGRAMS
 install(FILES rootfs/usr/share/mainuan-welcome/freeoffice.profile
     DESTINATION ${CMAKE_INSTALL_DATADIR}/mainuan-welcome)
 
-# The polkit action authorizes exactly the installed helper path.
-configure_file(
-    rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in
-    ${CMAKE_CURRENT_BINARY_DIR}/org.mainuan.welcome.policy
-    @ONLY
-)
 install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/org.mainuan.welcome.policy
+    ${MAINUAN_POLICY_FILE}
     DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/actions
 )
 
@@ -302,15 +379,49 @@ if (Qt6Test_FOUND)
     target_compile_definitions(tst_layouts PRIVATE
         MAINUAN_TEST_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures")
     mainuan_add_isolated_test(tst_layouts)
-    find_program(MAINUAN_QMLTESTRUNNER NAMES qmltestrunner HINTS /usr/lib/qt6/bin)
-    if(MAINUAN_QMLTESTRUNNER)
+    # i18n: the functional suites assert the English source text. LANGUAGE=en
+    # keeps an installed pt_BR catalog (or a Portuguese session) out of them;
+    # tst_i18n/i18n_qml below cover the translated interface.
+    set(MAINUAN_TEST_I18N_ENV "LANGUAGE=en")
+    set_tests_properties(tst_mainuan tst_appinstallation tst_layouts PROPERTIES ENVIRONMENT "${MAINUAN_TEST_I18N_ENV}")
+    add_executable(tst_i18n tests/tst_i18n.cpp)
+    target_link_libraries(tst_i18n PRIVATE mainuan-core Qt6::Test)
+    add_dependencies(tst_i18n mainuan-translations)
+    # glibc ignores LANGUAGE under the C locale, so both runs use a Brazilian
+    # session locale (Build-Depends: locales-all); LANGUAGE=en must still win.
+    foreach(lang IN ITEMS pt_BR en)
+        add_test(NAME i18n_${lang} COMMAND $<TARGET_FILE:tst_i18n>)
+        set_tests_properties(i18n_${lang} PROPERTIES ENVIRONMENT
+            "LC_ALL=pt_BR.UTF-8;LANGUAGE=${lang};MAINUAN_EXPECT_LANGUAGE=${lang};MAINUAN_LOCALE_DIR=${MAINUAN_LOCALE_BUILD_DIR};QT_QPA_PLATFORM=offscreen")
+    endforeach()
+    # QML suites need KI18n's i18n() in the engine: a QtQuickTest runner with
+    # the application's localization setup replaces the stock qmltestrunner.
+    find_package(Qt6 6.5 QUIET COMPONENTS QuickTest)
+    if(Qt6QuickTest_FOUND)
+        add_executable(mainuan-qmltest tests/qmltest_main.cpp)
+        target_link_libraries(mainuan-qmltest PRIVATE Qt6::QuickTest Qt6::Qml KF6::I18n KF6::I18nQml)
+        target_compile_definitions(mainuan-qmltest PRIVATE TRANSLATION_DOMAIN="${MAINUAN_TRANSLATION_DOMAIN}")
+        add_dependencies(mainuan-qmltest mainuan-translations)
+        set(MAINUAN_QML_I18N_ENV "LANGUAGE=en")
         add_test(NAME layouts_qml COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tests/layouts-qml.sh
-            ${MAINUAN_QMLTESTRUNNER} ${CMAKE_CURRENT_SOURCE_DIR})
-        set_tests_properties(layouts_qml PROPERTIES SKIP_RETURN_CODE 77)
+            $<TARGET_FILE:mainuan-qmltest> ${CMAKE_CURRENT_SOURCE_DIR})
+        set_tests_properties(layouts_qml PROPERTIES SKIP_RETURN_CODE 77 ENVIRONMENT "${MAINUAN_QML_I18N_ENV}")
         add_test(NAME applications_qml COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tests/apps-qml.sh
-            ${MAINUAN_QMLTESTRUNNER} ${CMAKE_CURRENT_SOURCE_DIR})
-        set_tests_properties(applications_qml PROPERTIES SKIP_RETURN_CODE 77)
+            $<TARGET_FILE:mainuan-qmltest> ${CMAKE_CURRENT_SOURCE_DIR})
+        set_tests_properties(applications_qml PROPERTIES SKIP_RETURN_CODE 77 ENVIRONMENT "${MAINUAN_QML_I18N_ENV}")
+        foreach(lang IN ITEMS pt_BR en)
+            add_test(NAME i18n_qml_${lang} COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tests/i18n-qml.sh
+                $<TARGET_FILE:mainuan-qmltest> ${CMAKE_CURRENT_SOURCE_DIR} ${MAINUAN_LOCALE_BUILD_DIR} ${lang})
+            set_tests_properties(i18n_qml_${lang} PROPERTIES SKIP_RETURN_CODE 77)
+        endforeach()
     endif()
     add_test(NAME smoke_startup COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/tests/smoke.sh $<TARGET_FILE:mainuan-welcome>)
     set_tests_properties(smoke_startup PROPERTIES SKIP_RETURN_CODE 77)
+    # The catalog and the metadata templates stay in sync with the sources.
+    find_program(MAINUAN_XGETTEXT NAMES xgettext)
+    if(MAINUAN_XGETTEXT)
+        add_test(NAME i18n_catalogs COMMAND bash -c "'${MAINUAN_PO_DIR}/i18n.sh' check-pot && '${MAINUAN_PO_DIR}/i18n.sh' validate")
+    endif()
+    add_test(NAME i18n_metadata COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tests/i18n-metadata.sh
+        ${MAINUAN_DESKTOP_FILE} ${MAINUAN_AUTOSTART_FILE} ${MAINUAN_METAINFO_FILE} ${MAINUAN_POLICY_FILE})
 endif()

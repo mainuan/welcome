@@ -1,0 +1,2691 @@
+# Spanish translations for mainuan-welcome package.
+# Copyright (C) 2026 Mainuan
+# This file is distributed under the same license as the mainuan-welcome package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mainuan-welcome\n"
+"Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"PO-Revision-Date: 2026-11-16 11:52-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: es <https://github.com/mainuan>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: qml/Main.qml:13
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — Bienvenida"
+
+#: qml/Main.qml:42
+msgid "Wait for the appearance changes to finish before closing the Welcome."
+msgstr ""
+"Espere a que terminen los cambios de aspecto antes de cerrar la Bienvenida."
+
+#: qml/Main.qml:45
+msgid ""
+"Wait for the layout to finish applying or restoring before closing the "
+"Welcome."
+msgstr ""
+"Espere a que termine de aplicarse o restaurarse la disposición antes de "
+"cerrar la Bienvenida."
+
+#: qml/Main.qml:81 qml/pages/HomePage.qml:23
+msgctxt "@title navigation page"
+msgid "Home"
+msgstr "Inicio"
+
+#: qml/Main.qml:82 qml/pages/AppearancePage.qml:23
+#: qml/pages/AppearancePage.qml:38
+msgctxt "@title navigation page"
+msgid "Appearance"
+msgstr "Aspecto"
+
+#: qml/Main.qml:83 qml/Main.qml:207
+msgctxt "@title navigation page"
+msgid "Office"
+msgstr "Oficina"
+
+#: qml/Main.qml:84 qml/Main.qml:208
+msgctxt "@title navigation page"
+msgid "Browsers"
+msgstr "Navegadores"
+
+#: qml/Main.qml:85 qml/pages/TutorialsPage.qml:23
+msgctxt "@title navigation page"
+msgid "Tutorials"
+msgstr "Tutoriales"
+
+#: qml/Main.qml:86 qml/pages/AboutPage.qml:22
+msgctxt "@title navigation page"
+msgid "About"
+msgstr "Acerca de"
+
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
+#: qml/pages/ContributePage.qml:32
+msgctxt "@title navigation page"
+msgid "Contribute"
+msgstr "Colaborar"
+
+#: qml/Main.qml:184
+msgid "Show this screen at system startup"
+msgstr "Mostrar esta pantalla al iniciar el sistema"
+
+#: qml/Main.qml:196
+msgid "Opens this screen automatically when you log in to your session"
+msgstr "Abre esta pantalla automáticamente al iniciar sesión"
+
+#: qml/Main.qml:207
+msgid "Install productivity tools or open online services."
+msgstr "Instale herramientas de productividad o abra servicios en línea."
+
+#: qml/Main.qml:208
+msgid "Choose your preferred browser to surf the web."
+msgstr "Elija su navegador preferido para navegar por la web."
+
+#. i18n: AppCard.qml compares this text with its own i18n("Available"); keep both identical.
+#: qml/components/AppCard.qml:92 src/models/ApplicationModel.cpp:104
+#, kde-format
+msgid "Available"
+msgstr "Disponible"
+
+#: qml/components/AppCard.qml:104 qml/components/InstallDialog.qml:352
+msgid "Open"
+msgstr "Abrir"
+
+#: qml/components/AppCard.qml:105
+msgid "Installed"
+msgstr "Instalado"
+
+#: qml/components/AppCard.qml:106 qml/components/InstallDialog.qml:339
+msgid "Install"
+msgstr "Instalar"
+
+#: qml/components/AppCard.qml:106
+msgid "Please wait…"
+msgstr "Espere un momento…"
+
+# from mainuan-grub-editor
+#: qml/components/AppCard.qml:106
+msgid "Remove"
+msgstr "Eliminar"
+
+#: qml/components/AppCard.qml:120 qml/components/InfoTile.qml:24
+#: qml/components/ReportDialog.qml:164 qml/components/ReportDialog.qml:302
+#: qml/components/SegmentedChoice.qml:45 qml/components/StatusRow.qml:79
+#: qml/components/StatusRow.qml:97 qml/components/StatusRow.qml:108
+msgctxt "@info:accessible label and value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/components/InstallDialog.qml:186
+msgid "Installation"
+msgstr "Instalación"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install %1"
+msgstr "Instalar %1"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install components"
+msgstr "Instalar componentes"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing %1"
+msgstr "Instalando %1"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing components"
+msgstr "Instalando componentes"
+
+#: qml/components/InstallDialog.qml:198
+msgid "Installation completed successfully."
+msgstr "La instalación se ha completado correctamente."
+
+#: qml/components/InstallDialog.qml:208
+msgid "Source: %1"
+msgstr "Origen: %1"
+
+#: qml/components/InstallDialog.qml:245
+msgid "Installation progress"
+msgstr "Progreso de la instalación"
+
+#: qml/components/InstallDialog.qml:246
+msgid "In progress"
+msgstr "En curso"
+
+#: qml/components/InstallDialog.qml:247 qml/components/InstallDialog.qml:254
+msgctxt "@info progress percentage"
+msgid "%1%"
+msgstr "%1 %"
+
+#: qml/components/InstallDialog.qml:280
+msgid "For security reasons, the installation cannot be cancelled."
+msgstr "Por motivos de seguridad, la instalación no se puede cancelar."
+
+#: qml/components/InstallDialog.qml:293
+msgid "Hide Details"
+msgstr "Ocultar detalles"
+
+#: qml/components/InstallDialog.qml:293
+msgid "Show Details"
+msgstr "Mostrar detalles"
+
+#: qml/components/InstallDialog.qml:296
+msgid "Shows the technical output of the installation"
+msgstr "Muestra la salida técnica de la instalación"
+
+#: qml/components/InstallDialog.qml:325
+msgid "Technical details of the installation"
+msgstr "Detalles técnicos de la instalación"
+
+#: qml/components/InstallDialog.qml:345
+msgid "Install FreeOffice from SoftMaker"
+msgstr "Instalar FreeOffice de SoftMaker"
+
+#: qml/components/InstallDialog.qml:363
+msgid "Try Again"
+msgstr "Intentar de nuevo"
+
+# from mainuan-grub-editor
+#: qml/components/InstallDialog.qml:375
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: qml/components/InstallDialog.qml:375 qml/components/ReportDialog.qml:206
+msgid "Close"
+msgstr "Cerrar"
+
+#: qml/components/ReportDialog.qml:75
+msgid "Save System Report"
+msgstr "Guardar informe del sistema"
+
+#: qml/components/ReportDialog.qml:78
+msgid "Text (*.txt)"
+msgstr "Texto (*.txt)"
+
+#: qml/components/ReportDialog.qml:80
+msgid "Report saved."
+msgstr "Informe guardado."
+
+#: qml/components/ReportDialog.qml:81
+msgid "Could not save the report."
+msgstr "No se ha podido guardar el informe."
+
+#: qml/components/ReportDialog.qml:87 qml/components/ReportDialog.qml:141
+#: qml/pages/AboutPage.qml:121
+msgid "System Report"
+msgstr "Informe del sistema"
+
+#: qml/components/ReportDialog.qml:136
+msgid "System summary"
+msgstr "Resumen del sistema"
+
+#: qml/components/ReportDialog.qml:146
+msgctxt "@label system report summary"
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: qml/components/ReportDialog.qml:147
+msgctxt "@label system report summary"
+msgid "Kernel"
+msgstr "Kernel"
+
+#: qml/components/ReportDialog.qml:148
+msgctxt "@label system report summary"
+msgid "CPU"
+msgstr "CPU"
+
+#: qml/components/ReportDialog.qml:149
+msgctxt "@label system report summary"
+msgid "GPU"
+msgstr "GPU"
+
+#: qml/components/ReportDialog.qml:150
+msgctxt "@label system report summary"
+msgid "Memory"
+msgstr "Memoria"
+
+#: qml/components/ReportDialog.qml:151
+msgctxt "@label system report summary"
+msgid "Uptime"
+msgstr "Tiempo activo"
+
+#: qml/components/ReportDialog.qml:174
+msgid "Copy Report"
+msgstr "Copiar informe"
+
+#: qml/components/ReportDialog.qml:179
+msgid "Report copied."
+msgstr "Informe copiado."
+
+#: qml/components/ReportDialog.qml:180
+msgid "Could not copy the report."
+msgstr "No se ha podido copiar el informe."
+
+#: qml/components/ReportDialog.qml:184
+msgid "Save Report"
+msgstr "Guardar informe"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refresh"
+msgstr "Actualizar"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refreshing…"
+msgstr "Actualizando…"
+
+#: qml/pages/AboutPage.qml:81
+msgid "Mainuan logo"
+msgstr "Logotipo de Mainuan"
+
+#: qml/pages/AboutPage.qml:125
+msgid "Opens the hardware and software information for technical support"
+msgstr "Abre la información de hardware y software para el soporte técnico"
+
+#: qml/pages/AboutPage.qml:128
+msgid "Repository"
+msgstr "Repositorio"
+
+#: qml/pages/AboutPage.qml:139
+msgid "This Computer"
+msgstr "Este equipo"
+
+# from mainuan-gestao-drivers
+#: qml/pages/AboutPage.qml:154
+msgid "Processor"
+msgstr "Procesador"
+
+#: qml/pages/AboutPage.qml:155
+msgid "Graphics"
+msgstr "Gráficos"
+
+#: qml/pages/AboutPage.qml:156
+msgid "Memory in use"
+msgstr "Memoria en uso"
+
+#: qml/pages/AboutPage.qml:157
+msgid "Storage (system)"
+msgstr "Almacenamiento (sistema)"
+
+#: qml/pages/AboutPage.qml:158
+msgctxt "@label installation date"
+msgid "Installation"
+msgstr "Instalación"
+
+#: qml/pages/AboutPage.qml:158
+msgid "Installation (estimated)"
+msgstr "Instalación (estimada)"
+
+#: qml/pages/AboutPage.qml:159
+msgid "Uptime"
+msgstr "Tiempo activo"
+
+#: qml/pages/AboutPage.qml:178
+msgid "Credits"
+msgstr "Créditos"
+
+#: qml/pages/AboutPage.qml:189
+msgid "Desktop environment and integration components."
+msgstr "Entorno de escritorio y componentes de integración."
+
+#: qml/pages/AboutPage.qml:201
+msgid "Distribution base and package repositories."
+msgstr "Base de la distribución y repositorios de paquetes."
+
+# reviewed: 'history' del proyecto en el repositorio = historial (de cambios),
+# no historia
+#: qml/pages/AboutPage.qml:210
+msgid ""
+"Free software. The license and the project history are in the repository."
+msgstr ""
+"Software libre. La licencia y el historial del proyecto están en el "
+"repositorio."
+
+#: qml/pages/AppearancePage.qml:41
+msgid "Customize the colors, transparency and arrangement of your desktop."
+msgstr ""
+"Personalice los colores, la transparencia y la disposición de su escritorio."
+
+#: qml/pages/AppearancePage.qml:57
+msgid "System Appearance"
+msgstr "Aspecto del sistema"
+
+#: qml/pages/AppearancePage.qml:79 qml/pages/AppearancePage.qml:89
+msgid "Visual Style"
+msgstr "Estilo visual"
+
+#: qml/pages/AppearancePage.qml:81
+msgid ""
+"Changes the Plasma style and keeps the Mainuan color and your selected icons."
+msgstr ""
+"Cambia el estilo de Plasma y conserva el color de Mainuan y los iconos que "
+"haya elegido."
+
+#: qml/pages/AppearancePage.qml:82
+msgid "Available only on KDE Plasma."
+msgstr "Disponible solo en KDE Plasma."
+
+#: qml/pages/AppearancePage.qml:93
+msgctxt "@option visual style"
+msgid "Blurred"
+msgstr "Desenfocado"
+
+#: qml/pages/AppearancePage.qml:93
+msgid "Dream theme: translucent panels with blur"
+msgstr "Tema Dream: paneles translúcidos con desenfoque"
+
+#: qml/pages/AppearancePage.qml:94
+msgctxt "@option visual style"
+msgid "Glass"
+msgstr "Cristal"
+
+#: qml/pages/AppearancePage.qml:94
+msgid "Tahoe theme: light panels with a glass effect"
+msgstr "Tema Tahoe: paneles claros con efecto de cristal"
+
+#: qml/pages/AppearancePage.qml:95
+msgid "Breeze theme: the default KDE look, without transparency"
+msgstr "Tema Brisa: el aspecto predeterminado de KDE, sin transparencia"
+
+#: qml/pages/AppearancePage.qml:95
+msgctxt "@option visual style"
+msgid "Solid"
+msgstr "Sólido"
+
+#: qml/pages/AppearancePage.qml:105 qml/pages/AppearancePage.qml:112
+msgid "System Theme"
+msgstr "Tema del sistema"
+
+#: qml/pages/AppearancePage.qml:106
+msgid "Light or dark colors across the whole system."
+msgstr "Colores claros u oscuros en todo el sistema."
+
+#: qml/pages/AppearancePage.qml:115
+msgctxt "@option color theme"
+msgid "Light"
+msgstr "Claro"
+
+#: qml/pages/AppearancePage.qml:116
+msgctxt "@option color theme"
+msgid "Dark"
+msgstr "Oscuro"
+
+#: qml/pages/AppearancePage.qml:126 qml/pages/AppearancePage.qml:134
+msgid "Accent Color"
+msgstr "Color de acento"
+
+#: qml/pages/AppearancePage.qml:127
+msgid ""
+"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
+"Keeps the choice when you change style or theme."
+msgstr ""
+"Aplica el esquema de color de KDE, los iconos Kora, el fondo de pantalla y "
+"el avatar. Conserva la elección al cambiar de estilo o de tema."
+
+#. i18n: %1 is the accent color name
+#: qml/pages/AppearancePage.qml:158
+msgid "Accent color %1"
+msgstr "Color de acento %1"
+
+#: qml/pages/AppearancePage.qml:191
+msgid "Desktop Layout"
+msgstr "Disposición del escritorio"
+
+#: qml/pages/AppearancePage.qml:200
+msgid ""
+"Choose how the panels are placed on the screen. Before each change the "
+"Welcome keeps a copy of the current layout."
+msgstr ""
+"Elija cómo se colocan los paneles en la pantalla. Antes de cada cambio, la "
+"Bienvenida guarda una copia de la disposición actual."
+
+#: qml/pages/AppearancePage.qml:201
+msgid "Layouts can only be applied inside a KDE Plasma session."
+msgstr ""
+"Las disposiciones solo se pueden aplicar dentro de una sesión de KDE Plasma."
+
+#: qml/pages/AppearancePage.qml:278
+msgctxt "@info layout status"
+msgid "In use"
+msgstr "En uso"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button layout already applied"
+msgid "Applied"
+msgstr "Aplicada"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button"
+msgid "Apply"
+msgstr "Aplicar"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Apply layout %1"
+msgstr "Aplicar la disposición %1"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Layout in use: %1"
+msgstr "Disposición en uso: %1"
+
+#: qml/pages/AppearancePage.qml:315
+msgid ""
+"Returns to the layout that was in use before the last change. Plasma "
+"restarts for a few seconds."
+msgstr ""
+"Vuelve a la disposición que se usaba antes del último cambio. Plasma se "
+"reiniciará durante unos segundos."
+
+#: qml/pages/AppearancePage.qml:321
+msgid "Restore Previous Layout"
+msgstr "Restaurar disposición anterior"
+
+#: qml/pages/AppearancePage.qml:334
+msgid "Restore previous layout?"
+msgstr "¿Restaurar la disposición anterior?"
+
+#: qml/pages/AppearancePage.qml:335
+msgid ""
+"The panels go back to how they were before the last layout change. Plasma "
+"will restart for a few seconds."
+msgstr ""
+"Los paneles vuelven a estar como antes del último cambio de disposición. "
+"Plasma se reiniciará durante unos segundos."
+
+#: qml/pages/AppearancePage.qml:339
+msgctxt "@action:button"
+msgid "Restore"
+msgstr "Restaurar"
+
+#: qml/pages/AppearancePage.qml:347
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: qml/pages/AppsPage.qml:43
+msgid ""
+"Flatpak was not found. Flatpak applications are unavailable. FreeOffice and "
+"the online services remain independent of Flatpak."
+msgstr ""
+"No se ha encontrado Flatpak. Las aplicaciones Flatpak no están disponibles. "
+"FreeOffice y los servicios en línea no dependen de Flatpak."
+
+#: qml/pages/ContributePage.qml:35
+msgid ""
+"Mainuan is made by its community. You can help with a donation, with code or "
+"by reporting problems."
+msgstr ""
+"Mainuan lo hace su comunidad. Puede ayudar con una donación, con código o "
+"informando de problemas."
+
+#. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
+#: qml/pages/ContributePage.qml:78
+msgid "Pix QR code. Key: %1"
+msgstr "Código QR de Pix. Clave: %1"
+
+#: qml/pages/ContributePage.qml:79
+msgid "Pix key QR code. Key: %1"
+msgstr "Código QR de la clave Pix. Clave: %1"
+
+#: qml/pages/ContributePage.qml:97
+msgid "Support Mainuan"
+msgstr "Apoyar a Mainuan"
+
+#: qml/pages/ContributePage.qml:104
+msgid ""
+"Your donation helps sustain development, infrastructure and the community."
+msgstr ""
+"Su donación ayuda a mantener el desarrollo, la infraestructura y la "
+"comunidad."
+
+#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+msgid "Pix Key"
+msgstr "Clave Pix"
+
+#: qml/pages/ContributePage.qml:143
+msgid "Copy Pix Key"
+msgstr "Copiar clave Pix"
+
+#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#, kde-format
+msgid "Pix key copied."
+msgstr "Clave Pix copiada."
+
+#: qml/pages/ContributePage.qml:168
+msgid "Scan the QR code with your bank's app, using the Pix option."
+msgstr ""
+"Escanee el código QR con la aplicación de su banco, usando la opción Pix."
+
+#: qml/pages/ContributePage.qml:169
+msgid ""
+"The QR code contains the Pix key. In your bank's app, use the Pix option "
+"with the copied key or the one read from the code."
+msgstr ""
+"El código QR contiene la clave Pix. En la aplicación de su banco, use la "
+"opción Pix con la clave copiada o con la leída del código."
+
+#: qml/pages/ContributePage.qml:177
+msgid "The Pix key has not been set up on this installation yet."
+msgstr "La clave Pix aún no se ha configurado en esta instalación."
+
+#: qml/pages/ContributePage.qml:187
+msgid "Other Ways to Help"
+msgstr "Otras formas de ayudar"
+
+#: qml/pages/ContributePage.qml:196
+msgid "Contribute Code"
+msgstr "Contribuir con código"
+
+#: qml/pages/ContributePage.qml:197
+msgid "Code, translations and improvements on GitHub."
+msgstr "Código, traducciones y mejoras en GitHub."
+
+#: qml/pages/ContributePage.qml:205
+msgid "Report a Problem"
+msgstr "Informar de un problema"
+
+#: qml/pages/ContributePage.qml:206
+msgid ""
+"Describe what happened; attaching the system report (in About) helps a lot."
+msgstr ""
+"Describa lo que ha ocurrido; adjuntar el informe del sistema (en Acerca de) "
+"ayuda mucho."
+
+#: qml/pages/ContributePage.qml:214
+msgid "Telegram Community"
+msgstr "Comunidad en Telegram"
+
+#: qml/pages/ContributePage.qml:215
+msgid "Chat with Mainuan users and developers."
+msgstr "Converse con usuarios y desarrolladores de Mainuan."
+
+#: qml/pages/ContributePage.qml:222
+msgid ""
+"Links open in the browser only when you click them. The QR code is generated "
+"on this computer, without internet access."
+msgstr ""
+"Los enlaces solo se abren en el navegador cuando se pulsa sobre ellos. El "
+"código QR se genera en este equipo, sin acceso a Internet."
+
+#: qml/pages/HomePage.qml:48 qml/pages/HomePage.qml:62
+msgid "Installing…"
+msgstr "Instalando…"
+
+#: qml/pages/HomePage.qml:51
+msgctxt "@info status"
+msgid "Installed"
+msgstr "Instalado"
+
+#. i18n: %1 is a short note such as "startup: enabled"
+#: qml/pages/HomePage.qml:51
+msgid "Installed · %1"
+msgstr "Instalado · %1"
+
+#: qml/pages/HomePage.qml:53
+msgid "Unavailable on this system"
+msgstr "No disponible en este sistema"
+
+#: qml/pages/HomePage.qml:62
+msgctxt "@action:button"
+msgid "Install"
+msgstr "Instalar"
+
+#. i18n: %1 is a colour code; keep the <font> markup around the product name
+#: qml/pages/HomePage.qml:87
+msgid "Welcome to <font color='%1'>Mainuan</font>"
+msgstr "Bienvenido a <font color='%1'>Mainuan</font>"
+
+#: qml/pages/HomePage.qml:92
+msgid "Set up your system your way, with native Plasma tools."
+msgstr ""
+"Configure su sistema a su manera, con las herramientas nativas de Plasma."
+
+#: qml/pages/HomePage.qml:105
+msgid "Hardware & Media"
+msgstr "Hardware y multimedia"
+
+#: qml/pages/HomePage.qml:113
+msgid "Additional Drivers"
+msgstr "Controladores adicionales"
+
+#: qml/pages/HomePage.qml:114
+msgid "View and manage the drivers available for your computer."
+msgstr "Vea y gestione los controladores disponibles para su equipo."
+
+#: qml/pages/HomePage.qml:117
+msgctxt "@action:button"
+msgid "Manage"
+msgstr "Gestionar"
+
+#: qml/pages/HomePage.qml:126 src/services/InstallService.cpp:221
+#, kde-format
+msgid "Media Codecs"
+msgstr "Códecs multimedia"
+
+#: qml/pages/HomePage.qml:127
+msgid "Play audio and video in the most common formats."
+msgstr "Reproduzca audio y vídeo en los formatos más comunes."
+
+#: qml/pages/HomePage.qml:131
+msgid "Security & Privacy"
+msgstr "Seguridad y privacidad"
+
+#: qml/pages/HomePage.qml:136 src/services/InstallService.cpp:175
+#, kde-format
+msgid "Antivirus"
+msgstr "Antivirus"
+
+#: qml/pages/HomePage.qml:137 src/services/InstallService.cpp:177
+#, kde-format
+msgid "ClamAV protection with the ClamUI graphical interface."
+msgstr "Protección de ClamAV con la interfaz gráfica ClamUI."
+
+#: qml/pages/HomePage.qml:139 qml/pages/HomePage.qml:147
+msgctxt "@action:button"
+msgid "Configure"
+msgstr "Configurar"
+
+#: qml/pages/HomePage.qml:144 src/services/InstallService.cpp:200
+#, kde-format
+msgid "Firewall"
+msgstr "Cortafuegos"
+
+#: qml/pages/HomePage.qml:145
+msgid "Control network connections with UFW and the KDE Plasma module."
+msgstr "Controle las conexiones de red con UFW y el módulo de KDE Plasma."
+
+#. i18n: %1 is the session type (wayland/x11), %2 the Plasma version
+#: qml/pages/HomePage.qml:156
+msgid "Session: %1  ·  %2"
+msgstr "Sesión: %1  ·  %2"
+
+#: qml/pages/HomePage.qml:157
+msgid "Session: %1"
+msgstr "Sesión: %1"
+
+#: qml/pages/TutorialsPage.qml:33
+msgid "Video Tutorials"
+msgstr "Videotutoriales"
+
+#: qml/pages/TutorialsPage.qml:36
+msgid ""
+"Learn the essentials of Mainuan. Missing videos are disabled without "
+"blocking navigation."
+msgstr ""
+"Aprenda lo esencial de Mainuan. Los vídeos que faltan se desactivan sin "
+"bloquear la navegación."
+
+#: qml/pages/TutorialsPage.qml:73
+msgctxt "@action:button"
+msgid "Close"
+msgstr "Cerrar"
+
+#: qml/pages/TutorialsPage.qml:89
+msgctxt "@action:button"
+msgid "Pause"
+msgstr "Pausar"
+
+#: qml/pages/TutorialsPage.qml:89 qml/pages/TutorialsPage.qml:134
+msgctxt "@action:button"
+msgid "Play"
+msgstr "Reproducir"
+
+#: qml/pages/TutorialsPage.qml:97
+msgid "Volume"
+msgstr "Volumen"
+
+#: qml/pages/TutorialsPage.qml:98
+msgctxt "@action:button"
+msgid "Full Screen"
+msgstr "Pantalla completa"
+
+#: qml/pages/TutorialsPage.qml:134
+msgctxt "@info video status"
+msgid "Unavailable"
+msgstr "No disponible"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "%1: video missing"
+msgstr "%1: falta el vídeo"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "Play %1"
+msgstr "Reproducir %1"
+
+#: qml/pages/TutorialsPage.qml:154
+msgid "File not found"
+msgstr "Archivo no encontrado"
+
+#: qml/pages/TutorialsPage.qml:163
+msgid "No tutorials have been added."
+msgstr "No se ha añadido ningún tutorial."
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:4
+msgid "Mainuan Welcome"
+msgstr "Bienvenida de Mainuan"
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:4
+msgid "Show the Mainuan Welcome when the session starts"
+msgstr "Mostrar la Bienvenida de Mainuan al iniciar la sesión"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:4
+msgid "Welcome Center"
+msgstr "Centro de bienvenida"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:5
+msgid "Set up and get to know Mainuan"
+msgstr "Configure y conozca Mainuan"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:6
+msgid "welcome;setup;appearance;drivers;codecs;antivirus;firewall;"
+msgstr "bienvenida;configuración;aspecto;controladores;códecs;antivirus;cortafuegos;welcome;setup;drivers;codecs;firewall;"
+
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:5
+msgid "Set up Mainuan and get to know the features of your desktop"
+msgstr "Configure Mainuan y conozca las funciones de su escritorio"
+
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:7
+msgid ""
+"Welcome application of the Mainuan desktop. It helps new users choose the "
+"look of the desktop, install media codecs, the antivirus, the firewall, "
+"office suites and web browsers, and find the video tutorials."
+msgstr ""
+"Aplicación de bienvenida del escritorio Mainuan. Ayuda a los nuevos usuarios "
+"a elegir el aspecto del escritorio, instalar códecs multimedia, el "
+"antivirus, el cortafuegos, suites ofimáticas y navegadores web, y a "
+"encontrar los videotutoriales."
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:9
+msgid "Install system components recommended by Mainuan Welcome"
+msgstr ""
+"Instalar componentes del sistema recomendados por la Bienvenida de Mainuan"
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:10
+msgid ""
+"Authentication is required to install system components such as the "
+"antivirus, the firewall or media codecs"
+msgstr ""
+"Se necesita autenticación para instalar componentes del sistema como el "
+"antivirus, el cortafuegos o los códecs multimedia"
+
+#: src/main.cpp:53
+#, kde-format
+msgctxt "@title application display name"
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — Bienvenida"
+
+#: src/main.cpp:96
+#, kde-format
+msgctxt "@info application description"
+msgid "Complete suite: Writer, Calc and Impress"
+msgstr "Suite completa: Writer, Calc e Impress"
+
+#: src/main.cpp:99
+#, kde-format
+msgctxt "@info application description"
+msgid "Interface familiar to Microsoft Office users"
+msgstr "Interfaz familiar para usuarios de Microsoft Office"
+
+# reviewed: FreeOffice es gratuito pero no software libre: 'Free' = gratuita
+# (pt_BR: gratuita)
+#: src/main.cpp:102
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Free office suite with word processor, spreadsheet and presentation editors."
+msgstr ""
+"Suite ofimática gratuita con procesador de textos, hoja de cálculo y editor "
+"de presentaciones."
+
+#: src/main.cpp:105
+#, kde-format
+msgctxt "@info application description"
+msgid "Online documents with collaboration"
+msgstr "Documentos en línea con colaboración"
+
+#: src/main.cpp:108
+#, kde-format
+msgctxt "@info application description"
+msgid "Microsoft suite right in the browser"
+msgstr "La suite de Microsoft directamente en el navegador"
+
+#: src/main.cpp:114
+#, kde-format
+msgctxt "@info application description"
+msgid "Google's web browser"
+msgstr "El navegador web de Google"
+
+#: src/main.cpp:117
+#, kde-format
+msgctxt "@info application description"
+msgid "Compatibility with Microsoft applications"
+msgstr "Compatibilidad con aplicaciones de Microsoft"
+
+#: src/main.cpp:120
+#, kde-format
+msgctxt "@info application description"
+msgid "Built-in ad blocking"
+msgstr "Bloqueo de anuncios integrado"
+
+#: src/main.cpp:123
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Browser with advanced customization, tab management and privacy features."
+msgstr ""
+"Navegador con personalización avanzada, gestión de pestañas y funciones de "
+"privacidad."
+
+#: src/main.cpp:126
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser focused on privacy, productivity and vertical tab organization."
+msgstr ""
+"Navegador centrado en la privacidad, la productividad y la organización de "
+"pestañas verticales."
+
+#: src/main.cpp:129
+#, kde-format
+msgctxt "@info application description"
+msgid "Privacy-focused browser"
+msgstr "Navegador centrado en la privacidad"
+
+#: src/main.cpp:132
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser with resource controls"
+msgstr "Navegador con control de recursos"
+
+#: src/main.cpp:135
+#, kde-format
+msgctxt "@info application description"
+msgid "Browsing through the Tor network"
+msgstr "Navegación a través de la red Tor"
+
+#: src/models/ApplicationModel.cpp:88
+#, kde-format
+msgctxt "@info:status application"
+msgid "Checking…"
+msgstr "Comprobando…"
+
+#: src/models/ApplicationModel.cpp:91
+#, kde-format
+msgctxt "@info:status application"
+msgid "Unavailable"
+msgstr "No disponible"
+
+#: src/models/ApplicationModel.cpp:94
+#, kde-format
+msgctxt "@info:status application"
+msgid "Online"
+msgstr "En línea"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installing…"
+msgstr "Instalando…"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Removing…"
+msgstr "Eliminando…"
+
+#: src/models/ApplicationModel.cpp:100
+#, kde-format
+msgctxt "@info:status application"
+msgid "Error"
+msgstr "Error"
+
+#: src/models/ApplicationModel.cpp:102
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installed"
+msgstr "Instalado"
+
+#: src/models/LayoutModel.cpp:10
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"The Mainuan look: floating islands at the bottom with menu, tasks, system "
+"tray and clock."
+msgstr ""
+"El aspecto de Mainuan: islas flotantes en la parte inferior con menú, "
+"tareas, bandeja del sistema y reloj."
+
+#: src/models/LayoutModel.cpp:11
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Three floating segments at the bottom: menu and information, tasks, and "
+"system controls."
+msgstr ""
+"Tres segmentos flotantes en la parte inferior: menú e información, tareas y "
+"controles del sistema."
+
+#: src/models/LayoutModel.cpp:12
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"A floating bottom bar with side margins, widgets and pinned applications."
+msgstr ""
+"Una barra inferior flotante con márgenes laterales, elementos gráficos y "
+"aplicaciones fijadas."
+
+#: src/models/LayoutModel.cpp:13
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Floating top panel with TahoeLauncher, search, tasks and controls."
+msgstr ""
+"Panel superior flotante con TahoeLauncher, búsqueda, tareas y controles."
+
+#: src/models/LayoutModel.cpp:14
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Full-width bottom bar, not floating, with Kickoff and pinned applications."
+msgstr ""
+"Barra inferior de ancho completo, no flotante, con Kickoff y aplicaciones "
+"fijadas."
+
+#: src/models/LayoutModel.cpp:15
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Global menu at the top and a vertical panel on the left with Orbit Start "
+"Menu."
+msgstr ""
+"Menú global en la parte superior y un panel vertical a la izquierda con "
+"Orbit Start Menu."
+
+#: src/models/LayoutModel.cpp:16
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Compact bar at the top and KWin tiles to arrange windows side by side."
+msgstr ""
+"Barra compacta en la parte superior y mosaicos de KWin para colocar las "
+"ventanas una junto a otra."
+
+#: src/models/VideoModel.cpp:12
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Getting to know the system"
+msgstr "Conocer el sistema"
+
+#: src/models/VideoModel.cpp:13
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Connecting to the internet"
+msgstr "Conectarse a Internet"
+
+#: src/models/VideoModel.cpp:14
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Customizing the system"
+msgstr "Personalizar el sistema"
+
+#: src/models/VideoModel.cpp:15
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Installing software"
+msgstr "Instalar software"
+
+#: src/models/VideoModel.cpp:16
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Online lessons"
+msgstr "Clases en línea"
+
+#: src/services/AccentProfile.cpp:8
+msgctxt "accent color"
+msgid "Brown"
+msgstr "Marrón"
+
+#: src/services/AccentProfile.cpp:10
+msgctxt "accent color"
+msgid "Cyan"
+msgstr "Cian"
+
+#: src/services/AccentProfile.cpp:12
+msgctxt "accent color"
+msgid "Magenta"
+msgstr "Magenta"
+
+#: src/services/AccentProfile.cpp:14
+msgctxt "accent color"
+msgid "Lime"
+msgstr "Lima"
+
+#: src/services/AccentProfile.cpp:16
+msgctxt "accent color"
+msgid "Gray"
+msgstr "Gris"
+
+#: src/services/AccentProfile.cpp:18
+msgctxt "accent color"
+msgid "Violet"
+msgstr "Violeta"
+
+#: src/services/InstallService.cpp:54
+#, kde-format
+msgid ""
+"Another program is installing or updating the system right now. Wait for it "
+"to finish and try again."
+msgstr ""
+"Otro programa está instalando o actualizando el sistema en este momento. "
+"Espere a que termine e inténtelo de nuevo."
+
+#: src/services/InstallService.cpp:57
+#, kde-format
+msgid ""
+"Could not download the files. Check your internet connection and try again."
+msgstr ""
+"No se han podido descargar los archivos. Compruebe su conexión a Internet e "
+"inténtelo de nuevo."
+
+#: src/services/InstallService.cpp:60
+#, kde-format
+msgid "There is not enough free disk space to complete the installation."
+msgstr ""
+"No hay suficiente espacio libre en el disco para completar la instalación."
+
+#: src/services/InstallService.cpp:63
+#, kde-format
+msgid ""
+"The required components were not found in the repositories configured on "
+"this system."
+msgstr ""
+"No se han encontrado los componentes necesarios en los repositorios "
+"configurados en este sistema."
+
+#: src/services/InstallService.cpp:66
+#, kde-format
+msgid ""
+"A previous installation was interrupted and must be repaired before new "
+"programs can be installed."
+msgstr ""
+"Una instalación anterior se interrumpió y debe repararse antes de poder "
+"instalar nuevos programas."
+
+#: src/services/InstallService.cpp:69
+#, kde-format
+msgid ""
+"The package system found a conflict that prevents the installation without "
+"removing other programs."
+msgstr ""
+"El sistema de paquetes ha encontrado un conflicto que impide la instalación "
+"sin eliminar otros programas."
+
+#: src/services/InstallService.cpp:72
+#, kde-format
+msgid ""
+"Authentication failed or your user does not have administrator privileges."
+msgstr ""
+"La autenticación ha fallado o su usuario no tiene privilegios de "
+"administrador."
+
+#: src/services/InstallService.cpp:75
+#, kde-format
+msgid ""
+"Automatic installation of these components requires a Debian- or Ubuntu-"
+"based system."
+msgstr ""
+"La instalación automática de estos componentes requiere un sistema basado en "
+"Debian o Ubuntu."
+
+#: src/services/InstallService.cpp:78
+#, kde-format
+msgid "Flatpak is not available on this system."
+msgstr "Flatpak no está disponible en este sistema."
+
+#: src/services/InstallService.cpp:81
+#, kde-format
+msgid ""
+"Could not download FreeOffice from the authorized official source. Check the "
+"connection and try again. Redirects and other versions are refused."
+msgstr ""
+"No se ha podido descargar FreeOffice de la fuente oficial autorizada. "
+"Compruebe la conexión e inténtelo de nuevo. Se rechazan las redirecciones y "
+"otras versiones."
+
+#: src/services/InstallService.cpp:84
+#, kde-format
+msgid ""
+"The FreeOffice file does not match the authorized package (integrity, size, "
+"name, version or architecture). The installation was stopped."
+msgstr ""
+"El archivo de FreeOffice no coincide con el paquete autorizado (integridad, "
+"tamaño, nombre, versión o arquitectura). Se ha detenido la instalación."
+
+#: src/services/InstallService.cpp:87
+#, kde-format
+msgid ""
+"The installer finished, but it could not be confirmed that the application "
+"is installed. Check the details and try again."
+msgstr ""
+"El instalador ha terminado, pero no se ha podido confirmar que la aplicación "
+"esté instalada. Revise los detalles e inténtelo de nuevo."
+
+#. i18n: “Show Details” must match the label of the details button in the installation dialog.
+#: src/services/InstallService.cpp:90
+#, kde-format
+msgid ""
+"The system could not install all components. Try again; if the problem "
+"persists, use “Show Details” to get the technical information."
+msgstr ""
+"El sistema no ha podido instalar todos los componentes. Inténtelo de nuevo; "
+"si el problema persiste, use «Mostrar detalles» para obtener la información "
+"técnica."
+
+#. i18n: joins the names of two components installed in the same step, e.g. "ClamAV and Flatpak".
+#: src/services/InstallService.cpp:144
+#, kde-format
+msgctxt "@item:intext two components"
+msgid "%1 and %2"
+msgstr "%1 y %2"
+
+#: src/services/InstallService.cpp:176
+#, kde-format
+msgid "Configured repositories / Flathub"
+msgstr "Repositorios configurados / Flathub"
+
+#: src/services/InstallService.cpp:179
+#, kde-format
+msgid "Installing ClamAV + ClamUI"
+msgstr "Instalando ClamAV + ClamUI"
+
+#: src/services/InstallService.cpp:180
+#, kde-format
+msgid "Antivirus installed successfully"
+msgstr "Antivirus instalado correctamente"
+
+#: src/services/InstallService.cpp:181
+#, kde-format
+msgid "ClamAV and ClamUI are ready to use."
+msgstr "ClamAV y ClamUI están listos para usarse."
+
+#: src/services/InstallService.cpp:182 src/services/InstallService.cpp:208
+#, kde-format
+msgctxt "@action:button open the settings of the installed component"
+msgid "Configure"
+msgstr "Configurar"
+
+#: src/services/InstallService.cpp:201 src/services/InstallService.cpp:222
+#, kde-format
+msgid "Configured repositories"
+msgstr "Repositorios configurados"
+
+#: src/services/InstallService.cpp:202
+#, kde-format
+msgid "UFW with the KDE Plasma firewall module."
+msgstr "UFW con el módulo de cortafuegos de KDE Plasma."
+
+#: src/services/InstallService.cpp:204
+#, kde-format
+msgid "Installing Firewall"
+msgstr "Instalando el cortafuegos"
+
+#: src/services/InstallService.cpp:205
+#, kde-format
+msgid "Firewall installed successfully"
+msgstr "Cortafuegos instalado correctamente"
+
+#: src/services/InstallService.cpp:206
+#, kde-format
+msgid ""
+"UFW and the KDE Plasma integration are installed. The firewall was not "
+"enabled automatically: use Configure to enable it and choose the rules."
+msgstr ""
+"UFW y la integración con KDE Plasma están instalados. El cortafuegos no se "
+"ha activado automáticamente: use Configurar para activarlo y elegir las "
+"reglas."
+
+#: src/services/InstallService.cpp:213 src/services/InstallService.cpp:217
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "KDE Plasma integration"
+msgstr "integración con KDE Plasma"
+
+#: src/services/InstallService.cpp:223
+#, kde-format
+msgid "Support for the most common audio and video formats."
+msgstr "Compatibilidad con los formatos de audio y vídeo más comunes."
+
+#: src/services/InstallService.cpp:225
+#, kde-format
+msgid "Installing media codecs"
+msgstr "Instalando códecs multimedia"
+
+#: src/services/InstallService.cpp:226
+#, kde-format
+msgid "Codecs installed successfully"
+msgstr "Códecs instalados correctamente"
+
+#: src/services/InstallService.cpp:227
+#, kde-format
+msgid "Audio and video in the most common formats can now be played."
+msgstr "Ya se pueden reproducir audio y vídeo en los formatos más comunes."
+
+#: src/services/InstallService.cpp:230
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "media codecs"
+msgstr "códecs multimedia"
+
+#: src/services/InstallService.cpp:236
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "GStreamer codecs"
+msgstr "códecs de GStreamer"
+
+# reviewed: FreeOffice es gratuito pero no software libre: 'Free' = gratuita
+#: src/services/InstallService.cpp:244
+#, kde-format
+msgid "Free office suite from SoftMaker."
+msgstr "Suite ofimática gratuita de SoftMaker."
+
+#: src/services/InstallService.cpp:246
+#, kde-format
+msgid "Installing FreeOffice"
+msgstr "Instalando FreeOffice"
+
+#: src/services/InstallService.cpp:247
+#, kde-format
+msgid "FreeOffice installed successfully"
+msgstr "FreeOffice instalado correctamente"
+
+#: src/services/InstallService.cpp:248
+#, kde-format
+msgid "FreeOffice is installed and available in the application menu."
+msgstr "FreeOffice está instalado y disponible en el menú de aplicaciones."
+
+#: src/services/InstallService.cpp:249
+#, kde-format
+msgid ""
+"This package is provided by SoftMaker and may ask for administrator "
+"authorization."
+msgstr ""
+"Este paquete lo proporciona SoftMaker y puede solicitar autorización de "
+"administrador."
+
+#: src/services/InstallService.cpp:314
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "Installing %1"
+msgstr "Instalando %1"
+
+#: src/services/InstallService.cpp:315
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "%1 installed successfully"
+msgstr "%1 instalado correctamente"
+
+#: src/services/InstallService.cpp:316
+#, kde-format
+msgid "The application is now available in the application menu."
+msgstr "La aplicación ya está disponible en el menú de aplicaciones."
+
+#: src/services/InstallService.cpp:317
+#, kde-format
+msgctxt "@action:button open the installed application"
+msgid "Open"
+msgstr "Abrir"
+
+#: src/services/InstallService.cpp:435
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Checking…"
+msgstr "Comprobando…"
+
+#: src/services/InstallService.cpp:438
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Installed"
+msgstr "Instalado"
+
+#. i18n: %1 is the name of the only component that is not installed yet.
+#: src/services/InstallService.cpp:442
+#, kde-format
+msgctxt "@info:status one component"
+msgid "Missing: %1"
+msgstr "Falta: %1"
+
+#. i18n: %1 is a comma-separated list of components that are not installed yet.
+#: src/services/InstallService.cpp:444
+#, kde-format
+msgctxt "@info:status several components"
+msgid "Missing: %1"
+msgstr "Faltan: %1"
+
+#: src/services/InstallService.cpp:447
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Not installed"
+msgstr "No instalado"
+
+#: src/services/InstallService.cpp:593
+#, kde-format
+msgid "Preparing the installation…"
+msgstr "Preparando la instalación…"
+
+#: src/services/InstallService.cpp:707 src/services/InstallService.cpp:741
+#, kde-format
+msgid "Downloading FreeOffice from SoftMaker…"
+msgstr "Descargando FreeOffice de SoftMaker…"
+
+#. i18n: technical details: %1 URL, %2 package name, %3 version, %4 architecture, %5 size in bytes, %6 checksum.
+#: src/services/InstallService.cpp:709
+#, kde-format
+msgid ""
+"Authorized source: %1\n"
+"Package: %2 · version %3 · %4 · %5 bytes\n"
+"Pinned SHA-256: %6"
+msgstr ""
+"Fuente autorizada: %1\n"
+"Paquete: %2 · versión %3 · %4 · %5 bytes\n"
+"SHA-256 fijado: %6"
+
+#: src/services/InstallService.cpp:727
+#, kde-format
+msgid "The file exceeds the authorized size."
+msgstr "El archivo supera el tamaño autorizado."
+
+#: src/services/InstallService.cpp:759
+#, kde-format
+msgid "Size or SHA-256 mismatch."
+msgstr "El tamaño o el SHA-256 no coinciden."
+
+#: src/services/InstallService.cpp:768
+#, kde-format
+msgid "Validating the FreeOffice Debian package…"
+msgstr "Validando el paquete Debian de FreeOffice…"
+
+#: src/services/InstallService.cpp:812
+#, kde-format
+msgid "Confirming the FreeOffice installation…"
+msgstr "Confirmando la instalación de FreeOffice…"
+
+#: src/services/InstallService.cpp:824
+#, kde-format
+msgid "Confirming the browser installation…"
+msgstr "Confirmando la instalación del navegador…"
+
+#: src/services/InstallService.cpp:857
+#, kde-format
+msgid "Waiting for administrator authorization…"
+msgstr "Esperando la autorización del administrador…"
+
+#: src/services/InstallService.cpp:883
+#, kde-format
+msgctxt "@info %1 is a program path, %2 the system error"
+msgid "Could not run %1: %2"
+msgstr "No se ha podido ejecutar %1: %2"
+
+#: src/services/InstallService.cpp:917
+#, kde-format
+msgctxt "@item:intext generic component label"
+msgid "required components"
+msgstr "componentes necesarios"
+
+#: src/services/InstallService.cpp:933
+#, kde-format
+msgid "Checking the required components…"
+msgstr "Comprobando los componentes necesarios…"
+
+#: src/services/InstallService.cpp:935
+#, kde-format
+msgid ""
+"Waiting for another program to finish installing or updating the system…"
+msgstr ""
+"Esperando a que otro programa termine de instalar o actualizar el sistema…"
+
+#: src/services/InstallService.cpp:937
+#, kde-format
+msgid "Updating the list of available programs…"
+msgstr "Actualizando la lista de programas disponibles…"
+
+#: src/services/InstallService.cpp:939
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Preparing the download of %1…"
+msgstr "Preparando la descarga de %1…"
+
+#: src/services/InstallService.cpp:941
+#, kde-format
+msgid "Updating the virus definitions…"
+msgstr "Actualizando las definiciones de virus…"
+
+#: src/services/InstallService.cpp:945
+#, kde-format
+msgctxt "@info %1 is a list of package names"
+msgid "Packages to install: %1"
+msgstr "Paquetes que se instalarán: %1"
+
+#: src/services/InstallService.cpp:954 src/services/InstallService.cpp:1061
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1…"
+msgstr "Descargando %1…"
+
+#: src/services/InstallService.cpp:956
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1 (file %2 of %3)…"
+msgstr "Descargando %1 (archivo %2 de %3)…"
+
+#: src/services/InstallService.cpp:970
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Configuring %1…"
+msgstr "Configurando %1…"
+
+#: src/services/InstallService.cpp:971
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Installing %1…"
+msgstr "Instalando %1…"
+
+#: src/services/InstallService.cpp:988
+#, kde-format
+msgid ""
+"The virus definitions could not be downloaded now; ClamAV will retry "
+"automatically in the background."
+msgstr ""
+"No se han podido descargar las definiciones de virus en este momento; ClamAV "
+"lo volverá a intentar automáticamente en segundo plano."
+
+#: src/services/InstallService.cpp:990
+#, kde-format
+msgid "freshclam did not finish updating the definitions."
+msgstr "freshclam no ha terminado de actualizar las definiciones."
+
+#: src/services/InstallService.cpp:1012
+#, kde-format
+msgid "Checking Flathub…"
+msgstr "Comprobando Flathub…"
+
+#: src/services/InstallService.cpp:1034
+#, kde-format
+msgid "Setting up Flathub…"
+msgstr "Configurando Flathub…"
+
+#: src/services/InstallService.cpp:1119
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1 (component %2 of %3)…"
+msgstr "Descargando e instalando %1 (componente %2 de %3)…"
+
+#: src/services/InstallService.cpp:1121
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1…"
+msgstr "Descargando e instalando %1…"
+
+#: src/services/InstallService.cpp:1144
+#, kde-format
+msgctxt "@info technical detail"
+msgid "Exit code: %1"
+msgstr "Código de salida: %1"
+
+#: src/services/InstallService.cpp:1232
+#, kde-format
+msgctxt "@info technical detail; %3 is an internal error code"
+msgid "Step: %1 of %2 · reason: %3"
+msgstr "Paso: %1 de %2 · motivo: %3"
+
+#: src/services/InstallService.cpp:1241
+#, kde-format
+msgid ""
+"The authorization was canceled. The components installed in the previous "
+"steps were kept."
+msgstr ""
+"Se ha cancelado la autorización. Se han conservado los componentes "
+"instalados en los pasos anteriores."
+
+#: src/services/InstallService.cpp:1242
+#, kde-format
+msgid "The authorization was canceled. No changes were made to the system."
+msgstr ""
+"Se ha cancelado la autorización. No se ha realizado ningún cambio en el "
+"sistema."
+
+#: src/services/InstallService.cpp:1266
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid ""
+"Cannot open %1: the required components are not installed or the tool is "
+"unavailable."
+msgstr ""
+"No se puede abrir %1: los componentes necesarios no están instalados o la "
+"herramienta no está disponible."
+
+#: src/services/InstallService.cpp:1300
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid "Could not open %1."
+msgstr "No se ha podido abrir %1."
+
+#: src/services/LayoutService.cpp:36 src/services/LayoutService.cpp:409
+#, kde-format
+msgid "Invalid layout."
+msgstr "Disposición no válida."
+
+#. i18n: %1 is one or more Plasma widget ids joined by " or ".
+#: src/services/LayoutService.cpp:44
+#, kde-format
+msgid "Required launcher missing: %1. The previous panels were preserved."
+msgstr ""
+"Falta un lanzador necesario: %1. Se han conservado los paneles anteriores."
+
+#: src/services/LayoutService.cpp:45
+#, kde-format
+msgctxt "separator between alternative widget ids"
+msgid " or "
+msgstr " o "
+
+#. i18n: %1 is a Plasma widget id, e.g. org.kde.plasma.kickoff.
+#: src/services/LayoutService.cpp:49
+#, kde-format
+msgid "Required widget missing: %1. The previous panels were preserved."
+msgstr ""
+"Falta un elemento gráfico necesario: %1. Se han conservado los paneles "
+"anteriores."
+
+#: src/services/LayoutService.cpp:53
+#, kde-format
+msgid "No screen available in Plasma."
+msgstr "No hay ninguna pantalla disponible en Plasma."
+
+#: src/services/LayoutService.cpp:56
+#, kde-format
+msgid "Could not query the screen geometry."
+msgstr "No se ha podido consultar la geometría de la pantalla."
+
+#: src/services/LayoutService.cpp:58
+#, kde-format
+msgid ""
+"Could not check the required widgets; the previous panels were preserved."
+msgstr ""
+"No se han podido comprobar los elementos gráficos necesarios; se han "
+"conservado los paneles anteriores."
+
+#: src/services/LayoutService.cpp:132
+msgctxt "desktop layout name"
+msgid "Classic — 5 panels"
+msgstr "Clásica — 5 paneles"
+
+#: src/services/LayoutService.cpp:133
+msgctxt "desktop layout name"
+msgid "3 panels"
+msgstr "3 paneles"
+
+#: src/services/LayoutService.cpp:134
+msgctxt "desktop layout name"
+msgid "Single panel"
+msgstr "Panel único"
+
+#: src/services/LayoutService.cpp:135
+msgctxt "desktop layout name"
+msgid "Top panel"
+msgstr "Panel superior"
+
+#: src/services/LayoutService.cpp:136
+msgctxt "desktop layout name"
+msgid "Floating"
+msgstr "Flotante"
+
+#. i18n: "W7" refers to a Windows 7 style taskbar.
+#: src/services/LayoutService.cpp:138
+msgctxt "desktop layout name"
+msgid "W7 panel"
+msgstr "Panel W7"
+
+#: src/services/LayoutService.cpp:139
+msgctxt "desktop layout name"
+msgid "Tiling"
+msgstr "Mosaico"
+
+#: src/services/LayoutService.cpp:394
+#, kde-format
+msgid "Could not measure the layout segments."
+msgstr "No se han podido medir los segmentos de la disposición."
+
+#: src/services/LayoutService.cpp:400
+#, kde-format
+msgid "The segments did not settle without overlapping on this screen."
+msgstr "Los segmentos no se han podido colocar sin solaparse en esta pantalla."
+
+#: src/services/LayoutService.cpp:416
+#, kde-format
+msgid "Plasma did not respond; open the Welcome inside a KDE Plasma session."
+msgstr ""
+"Plasma no ha respondido; abra la Bienvenida dentro de una sesión de KDE "
+"Plasma."
+
+#: src/services/LayoutService.cpp:423
+#, kde-format
+msgid "Checking the launcher of the %1 layout…"
+msgstr "Comprobando el lanzador de la disposición %1…"
+
+#: src/services/LayoutService.cpp:426
+#, kde-format
+msgid "Could not load the layout scripts; nothing was changed."
+msgstr ""
+"No se han podido cargar los scripts de la disposición; no se ha cambiado "
+"nada."
+
+#: src/services/LayoutService.cpp:437
+#, kde-format
+msgid "Could not save a copy of the current layout; nothing was changed."
+msgstr ""
+"No se ha podido guardar una copia de la disposición actual; no se ha "
+"cambiado nada."
+
+#: src/services/LayoutService.cpp:440
+#, kde-format
+msgid "Applying the %1 layout…"
+msgstr "Aplicando la disposición %1…"
+
+#. i18n: %1 is a complete sentence explaining why the layout failed.
+#: src/services/LayoutService.cpp:445
+#, kde-format
+msgid "%1 The previous layout was restored."
+msgstr "%1 Se ha restaurado la disposición anterior."
+
+#. i18n: “Restore Previous Layout” is the button on the Appearance page.
+#: src/services/LayoutService.cpp:447
+#, kde-format
+msgid "%1 Could not restore automatically; use “Restore Previous Layout”."
+msgstr ""
+"%1 No se ha podido restaurar automáticamente; use «Restaurar disposición "
+"anterior»."
+
+#. i18n: %2 is the raw error reported by Plasma.
+#: src/services/LayoutService.cpp:459
+#, kde-format
+msgid "Could not apply the %1 layout (%2)."
+msgstr "No se ha podido aplicar la disposición %1 (%2)."
+
+#: src/services/LayoutService.cpp:469
+#, kde-format
+msgid "The %1 layout was not completed."
+msgstr "No se ha completado la disposición %1."
+
+#: src/services/LayoutService.cpp:474
+#, kde-format
+msgid "%1 layout applied."
+msgstr "Disposición %1 aplicada."
+
+#: src/services/LayoutService.cpp:478
+#, kde-format
+msgid ""
+"%1 layout applied. Drag windows while holding Shift to snap them into the "
+"tiles."
+msgstr ""
+"Disposición %1 aplicada. Arrastre las ventanas manteniendo pulsada la tecla "
+"Mayús para ajustarlas a los mosaicos."
+
+#: src/services/LayoutService.cpp:479
+#, kde-format
+msgid "%1 layout applied, but the KWin tiles could not be configured."
+msgstr ""
+"Disposición %1 aplicada, pero no se han podido configurar los mosaicos de "
+"KWin."
+
+#: src/services/LayoutService.cpp:554
+#, kde-format
+msgid "Restoring the previous layout; Plasma will be restarted…"
+msgstr "Restaurando la disposición anterior; Plasma se reiniciará…"
+
+#: src/services/LayoutService.cpp:556
+#, kde-format
+msgid "Previous layout restored."
+msgstr "Disposición anterior restaurada."
+
+#: src/services/LayoutService.cpp:557
+#, kde-format
+msgid "Could not restore the previous layout."
+msgstr "No se ha podido restaurar la disposición anterior."
+
+#: src/services/PackageService.cpp:111 src/services/PackageService.cpp:161
+#, kde-format
+msgid "Flatpak is not installed."
+msgstr "Flatpak no está instalado."
+
+#: src/services/PackageService.cpp:140
+#, kde-format
+msgid "Could not query Flatpak."
+msgstr "No se ha podido consultar Flatpak."
+
+#: src/services/PackageService.cpp:151
+#, kde-format
+msgid "This application is not in the allowed list."
+msgstr "Esta aplicación no está en la lista de permitidas."
+
+#: src/services/PackageService.cpp:155
+#, kde-format
+msgid "Another Flatpak operation is in progress."
+msgstr "Hay otra operación de Flatpak en curso."
+
+#: src/services/PackageService.cpp:176
+#, kde-format
+msgctxt "@info:status %1 is a Flatpak application ID"
+msgid "Removing %1…"
+msgstr "Eliminando %1…"
+
+#: src/services/PackageService.cpp:182
+#, kde-format
+msgid "Removal finished."
+msgstr "Eliminación finalizada."
+
+#: src/services/PackageService.cpp:184
+#, kde-format
+msgctxt "@info:status %1 is the error output of Flatpak"
+msgid "Failed: %1"
+msgstr "Error: %1"
+
+#: src/services/PackageService.cpp:195
+#, kde-format
+msgid "Could not start Flatpak."
+msgstr "No se ha podido iniciar Flatpak."
+
+#: src/services/StartupPreference.cpp:75 src/services/StartupPreference.cpp:92
+#, kde-format
+msgid "Could not change the startup preference."
+msgstr "No se ha podido cambiar la preferencia de inicio."
+
+#: src/services/SystemReportService.cpp:38
+#, kde-format
+msgctxt "@info system report value"
+msgid "Not available"
+msgstr "No disponible"
+
+#: src/services/SystemReportService.cpp:186
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 día"
+msgstr[1] "%1 días"
+
+#: src/services/SystemReportService.cpp:189
+#, kde-format
+msgid "%1 hour"
+msgid_plural "%1 hours"
+msgstr[0] "%1 hora"
+msgstr[1] "%1 horas"
+
+#: src/services/SystemReportService.cpp:192
+#, kde-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 minuto"
+msgstr[1] "%1 minutos"
+
+#: src/services/SystemReportService.cpp:195
+#, kde-format
+msgid "less than a minute"
+msgstr "menos de un minuto"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration"
+msgid "%1 and %2"
+msgstr "%1 y %2"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration list separator"
+msgid ", "
+msgstr ", "
+
+#: src/services/SystemReportService.cpp:333
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (64-bit)"
+msgstr "%1 (64 bits)"
+
+#: src/services/SystemReportService.cpp:334
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (32-bit)"
+msgstr "%1 (32 bits)"
+
+#: src/services/SystemReportService.cpp:341
+#, kde-format
+msgctxt "@title system report section"
+msgid "System"
+msgstr "Sistema"
+
+#: src/services/SystemReportService.cpp:342
+#, kde-format
+msgctxt "@label system report item"
+msgid "Distribution"
+msgstr "Distribución"
+
+#: src/services/SystemReportService.cpp:344
+#, kde-format
+msgctxt "@label system report item"
+msgid "Version"
+msgstr "Versión"
+
+#: src/services/SystemReportService.cpp:347
+#: src/services/SystemReportService.cpp:349
+#, kde-format
+msgctxt "@label system report item"
+msgid "Base"
+msgstr "Base"
+
+#: src/services/SystemReportService.cpp:353
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation media"
+msgstr "Medio de instalación"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Estimated installation date"
+msgstr "Fecha de instalación estimada"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation date"
+msgstr "Fecha de instalación"
+
+#: src/services/SystemReportService.cpp:366
+#, kde-format
+msgctxt "@label system report item"
+msgid "Architecture"
+msgstr "Arquitectura"
+
+#: src/services/SystemReportService.cpp:368
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer name"
+msgstr "Nombre del equipo"
+
+#: src/services/SystemReportService.cpp:370
+#, kde-format
+msgctxt "@label system report item"
+msgid "Language"
+msgstr "Idioma"
+
+#: src/services/SystemReportService.cpp:371
+#, kde-format
+msgctxt "@label system report item"
+msgid "Date and time"
+msgstr "Fecha y hora"
+
+#: src/services/SystemReportService.cpp:374
+#, kde-format
+msgctxt "@title system report section"
+msgid "Desktop"
+msgstr "Escritorio"
+
+#: src/services/SystemReportService.cpp:378
+#, kde-format
+msgctxt "@label system report item"
+msgid "Session"
+msgstr "Sesión"
+
+#: src/services/SystemReportService.cpp:379
+#, kde-format
+msgctxt "@label system report item"
+msgid "Environment"
+msgstr "Entorno"
+
+#: src/services/SystemReportService.cpp:382
+#, kde-format
+msgctxt "@title system report section"
+msgid "Hardware"
+msgstr "Hardware"
+
+#: src/services/SystemReportService.cpp:386
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer"
+msgstr "Equipo"
+
+#: src/services/SystemReportService.cpp:388
+#, kde-format
+msgctxt "@label system report item"
+msgid "Processor"
+msgstr "Procesador"
+
+#: src/services/SystemReportService.cpp:389
+#, kde-format
+msgctxt "@label system report item"
+msgid "Cores / threads"
+msgstr "Núcleos / hilos"
+
+#: src/services/SystemReportService.cpp:391
+#, kde-format
+msgctxt "@info firmware type"
+msgid "BIOS (legacy)"
+msgstr "BIOS (heredada)"
+
+#: src/services/SystemReportService.cpp:392
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Not applicable (BIOS)"
+msgstr "No aplicable (BIOS)"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Enabled"
+msgstr "Activado"
+
+#: src/services/SystemReportService.cpp:399
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Could not be determined"
+msgstr "No se ha podido determinar"
+
+#: src/services/SystemReportService.cpp:406
+#, kde-format
+msgctxt "@title system report section"
+msgid "Graphics"
+msgstr "Gráficos"
+
+#: src/services/SystemReportService.cpp:430
+#, kde-format
+msgctxt "@info appended to a device name"
+msgid " · driver %1"
+msgstr " · controlador %1"
+
+#: src/services/SystemReportService.cpp:438
+#, kde-format
+msgctxt "@label system report item"
+msgid "OpenGL renderer"
+msgstr "Renderizador OpenGL"
+
+#: src/services/SystemReportService.cpp:445
+#, kde-format
+msgctxt "@label system report item"
+msgid "Monitor %1"
+msgstr "Monitor %1"
+
+#. i18n: screen name · width×height · refresh rate · scale percentage
+#: src/services/SystemReportService.cpp:447
+#, kde-format
+msgctxt "@info monitor details"
+msgid "%1 · %2×%3 · %4 Hz · scale %5%"
+msgstr "%1 · %2×%3 · %4 Hz · escala %5 %"
+
+#: src/services/SystemReportService.cpp:455
+#, kde-format
+msgctxt "@title system report section"
+msgid "Memory"
+msgstr "Memoria"
+
+#: src/services/SystemReportService.cpp:457
+#, kde-format
+msgctxt "@label system report item"
+msgid "Total"
+msgstr "Total"
+
+#: src/services/SystemReportService.cpp:458
+#, kde-format
+msgctxt "@label system report item"
+msgid "In use"
+msgstr "En uso"
+
+#: src/services/SystemReportService.cpp:459
+#, kde-format
+msgctxt "@label system report item"
+msgid "Available"
+msgstr "Disponible"
+
+#: src/services/SystemReportService.cpp:461
+#, kde-format
+msgctxt "@info swap usage"
+msgid "%1 of %2 in use"
+msgstr "%1 de %2 en uso"
+
+#: src/services/SystemReportService.cpp:462
+#, kde-format
+msgid "No swap"
+msgstr "Sin intercambio"
+
+#: src/services/SystemReportService.cpp:466
+#, kde-format
+msgctxt "@title system report section"
+msgid "Storage"
+msgstr "Almacenamiento"
+
+#: src/services/SystemReportService.cpp:478
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disk %1"
+msgstr "Disco %1"
+
+#: src/services/SystemReportService.cpp:497
+#, kde-format
+msgctxt "@label system report item"
+msgid "Other volume %1"
+msgstr "Otro volumen %1"
+
+#: src/services/SystemReportService.cpp:500
+#, kde-format
+msgctxt "@info volume usage"
+msgid "%1 used of %2 · %3 free"
+msgstr "%1 usado de %2 · %3 libre"
+
+#: src/services/SystemReportService.cpp:503
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disks"
+msgstr "Discos"
+
+#: src/services/SystemReportService.cpp:508
+#, kde-format
+msgctxt "@title system report section"
+msgid "Packages"
+msgstr "Paquetes"
+
+#: src/services/SystemReportService.cpp:511
+#: src/services/SystemReportService.cpp:526
+#, kde-format
+msgid "%1 package"
+msgid_plural "%1 packages"
+msgstr[0] "%1 paquete"
+msgstr[1] "%1 paquetes"
+
+#: src/services/SystemReportService.cpp:523
+#, kde-format
+msgid "%1 application"
+msgid_plural "%1 applications"
+msgstr[0] "%1 aplicación"
+msgstr[1] "%1 aplicaciones"
+
+#: src/services/SystemReportService.cpp:527
+#, kde-format
+msgid "Snap not installed"
+msgstr "Snap no instalado"
+
+#: src/services/SystemReportService.cpp:532
+#, kde-format
+msgctxt "@info kernel version"
+msgid "%1 (in use)"
+msgstr "%1 (en uso)"
+
+#: src/services/SystemReportService.cpp:534
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installed kernels"
+msgstr "Kernels instalados"
+
+#: src/services/SystemReportService.cpp:537
+#, kde-format
+msgctxt "@title system report section"
+msgid "Startup"
+msgstr "Arranque"
+
+#: src/services/SystemReportService.cpp:538
+#, kde-format
+msgctxt "@label system report item"
+msgid "Uptime"
+msgstr "Tiempo activo"
+
+#: src/services/SystemReportService.cpp:539
+#, kde-format
+msgctxt "@label system report item"
+msgid "Last boot"
+msgstr "Último arranque"
+
+#: src/services/SystemReportService.cpp:543
+#, kde-format
+msgctxt "@title system report section"
+msgid "Network"
+msgstr "Red"
+
+#: src/services/SystemReportService.cpp:556
+#, kde-format
+msgctxt "@info network adapter"
+msgid "driver %1"
+msgstr "controlador %1"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "connected"
+msgstr "conectado"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "disconnected"
+msgstr "desconectado"
+
+#: src/services/SystemReportService.cpp:569
+#, kde-format
+msgctxt "@label system report item"
+msgid "Adapters"
+msgstr "Adaptadores"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "32-bit"
+msgstr "32 bits"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "64-bit"
+msgstr "64 bits"
+
+#: src/services/SystemReportService.cpp:581
+#, kde-format
+msgctxt "@info memory usage summary"
+msgid "%1 of %2"
+msgstr "%1 de %2"
+
+#: src/services/SystemReportService.cpp:582
+#, kde-format
+msgctxt "@info storage summary"
+msgid "%1 free of %2"
+msgstr "%1 libre de %2"
+
+#: src/services/SystemReportService.cpp:593
+#, kde-format
+msgctxt "@info system report header"
+msgid "Generated on: %1"
+msgstr "Generado el: %1"
+
+#: src/services/SystemReportService.cpp:598
+#, kde-format
+msgctxt "@info system report line: label, value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: src/services/SystemReportService.cpp:603
+#, kde-format
+msgctxt "@info system report footer"
+msgid "No network addresses, serial numbers or computer name."
+msgstr "Sin direcciones de red, números de serie ni nombre del equipo."
+
+#: src/services/SystemService.cpp:93
+#, kde-format
+msgid "The %1 decoration engine is not installed."
+msgstr "El motor de decoración %1 no está instalado."
+
+#: src/services/SystemService.cpp:108
+#, kde-format
+msgid "The %1 decoration is not installed or its resources are incomplete."
+msgstr "La decoración %1 no está instalada o sus recursos están incompletos."
+
+#. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
+#: src/services/SystemService.cpp:480
+#, kde-format
+msgid "Driver Manager available"
+msgstr "Gestor de controladores disponible"
+
+#: src/services/SystemService.cpp:481
+#, kde-format
+msgid "Driver Manager not installed"
+msgstr "Gestor de controladores no instalado"
+
+#: src/services/SystemService.cpp:497
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Active"
+msgstr "Activo"
+
+#: src/services/SystemService.cpp:498
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Inactive"
+msgstr "Inactivo"
+
+# reviewed: estado en minúscula y forma natural; 'inicio' se confunde con la
+# página Inicio
+#: src/services/SystemService.cpp:501
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: active"
+msgstr "al arrancar: activo"
+
+# reviewed: estado en minúscula y forma natural; 'inicio' se confunde con la
+# página Inicio
+#: src/services/SystemService.cpp:502
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: inactive"
+msgstr "al arrancar: inactivo"
+
+#. i18n: %1 is an error message shown in the page banner.
+#: src/services/SystemService.cpp:538
+#, kde-format
+msgid "Error: %1"
+msgstr "Error: %1"
+
+#: src/services/SystemService.cpp:557
+#, kde-format
+msgid "Invalid theme."
+msgstr "Tema no válido."
+
+#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
+#: src/services/SystemService.cpp:858
+#, kde-format
+msgid "Wait for the current operation to finish."
+msgstr "Espere a que termine la operación actual."
+
+#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#, kde-format
+msgid ""
+"The current external color scheme has no known variant. Select a Mainuan "
+"color first."
+msgstr ""
+"El esquema de color externo actual no tiene ninguna variante conocida. "
+"Seleccione primero un color de Mainuan."
+
+#: src/services/SystemService.cpp:578
+#, kde-format
+msgid "Dark theme applied."
+msgstr "Tema oscuro aplicado."
+
+#: src/services/SystemService.cpp:579
+#, kde-format
+msgid "Light theme applied."
+msgstr "Tema claro aplicado."
+
+#. i18n: %1 is an accent color name (Brown, Cyan…).
+#: src/services/SystemService.cpp:596
+#, kde-format
+msgid "Theme and %1 color applied."
+msgstr "Tema y color %1 aplicados."
+
+#: src/services/SystemService.cpp:608
+#, kde-format
+msgid "Invalid accent color."
+msgstr "Color de acento no válido."
+
+#: src/services/SystemService.cpp:618
+#, kde-format
+msgid "Applying %1 color…"
+msgstr "Aplicando el color %1…"
+
+#: src/services/SystemService.cpp:629
+#, kde-format
+msgid "%1 color, icons, wallpaper and avatar applied."
+msgstr "Color %1, iconos, fondo de pantalla y avatar aplicados."
+
+#: src/services/SystemService.cpp:640
+#, kde-format
+msgid "Color scheme %1.colors is missing or unreadable."
+msgstr "Falta el esquema de color %1.colors o no se puede leer."
+
+#: src/services/SystemService.cpp:646
+#, kde-format
+msgid "Color scheme %1.colors is invalid."
+msgstr "El esquema de color %1.colors no es válido."
+
+#: src/services/SystemService.cpp:651
+#, kde-format
+msgid "plasma-apply-colorscheme is not available."
+msgstr "plasma-apply-colorscheme no está disponible."
+
+#: src/services/SystemService.cpp:658
+#, kde-format
+msgid "Plasma did not recognize the %1.colors color scheme."
+msgstr "Plasma no ha reconocido el esquema de color %1.colors."
+
+#: src/services/SystemService.cpp:704
+#, kde-format
+msgid "Could not prepare the KDE color configuration."
+msgstr "No se ha podido preparar la configuración de color de KDE."
+
+#: src/services/SystemService.cpp:715
+#, kde-format
+msgid "Plasma did not confirm the %1 color scheme without a color override."
+msgstr ""
+"Plasma no ha confirmado el esquema de color %1 sin una sustitución de color."
+
+# reviewed: sintaxis forzada ('%1: falta o index.theme no válido'); frase
+# natural
+#. i18n: Item of a list of failed adjustments (lowercase, no final period).
+#: src/services/SystemService.cpp:729
+#, kde-format
+msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
+msgstr ""
+"falta el tema de iconos %1 o su index.theme no es válido (se conservan los "
+"iconos anteriores)"
+
+#: src/services/SystemService.cpp:732
+#, kde-format
+msgctxt "failed adjustment list item; %1 is an icon theme"
+msgid "icons %1"
+msgstr "iconos %1"
+
+#: src/services/SystemService.cpp:737
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper %1 missing"
+msgstr "falta el fondo de pantalla %1"
+
+#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
+#: src/services/SystemService.cpp:1022
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper"
+msgstr "fondo de pantalla"
+
+#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "Plasma did not confirm the %1 icons"
+msgstr "Plasma no ha confirmado los iconos %1"
+
+#: src/services/SystemService.cpp:758
+#, kde-format
+msgctxt "failed adjustment list item; %1 is the avatar error"
+msgid "avatar: %1"
+msgstr "avatar: %1"
+
+#: src/services/SystemService.cpp:764
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "color scheme changed during the operation; avatar preserved"
+msgstr "el esquema de color cambió durante la operación; se conserva el avatar"
+
+#: src/services/SystemService.cpp:779
+#, kde-format
+msgid "Could not complete all adjustments: %1."
+msgstr "No se han podido completar todos los ajustes: %1."
+
+#: src/services/SystemService.cpp:780
+#, kde-format
+msgctxt "separator between failed adjustment list items"
+msgid "; "
+msgstr "; "
+
+#: src/services/SystemService.cpp:795
+#, kde-format
+msgid "Could not communicate with KWin to update the window decoration."
+msgstr ""
+"No se ha podido comunicar con KWin para actualizar la decoración de las "
+"ventanas."
+
+#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
+#: src/services/SystemService.cpp:830
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "could not restore the previous window decoration"
+msgstr "no se ha podido restaurar la decoración de ventanas anterior"
+
+#: src/services/SystemService.cpp:821
+#, kde-format
+msgid "Could not save the requested window decoration in KWin."
+msgstr "No se ha podido guardar en KWin la decoración de ventanas solicitada."
+
+#: src/services/SystemService.cpp:831
+#, kde-format
+msgid ""
+"The final window decoration configuration was changed during the operation."
+msgstr ""
+"La configuración final de la decoración de ventanas cambió durante la "
+"operación."
+
+#: src/services/SystemService.cpp:854
+#, kde-format
+msgid "Invalid visual style."
+msgstr "Estilo visual no válido."
+
+#: src/services/SystemService.cpp:862
+#, kde-format
+msgid "%1 style applied."
+msgstr "Estilo %1 aplicado."
+
+#: src/services/SystemService.cpp:895
+#, kde-format
+msgid ""
+"This system's Plasma does not provide plasma-apply-lookandfeel; the style "
+"cannot be changed."
+msgstr ""
+"El Plasma de este sistema no proporciona plasma-apply-lookandfeel; no se "
+"puede cambiar el estilo."
+
+#: src/services/SystemService.cpp:900
+#, kde-format
+msgid "The %1 style is not installed on this system."
+msgstr "El estilo %1 no está instalado en este sistema."
+
+#. i18n: %1 is a complete sentence describing the problem.
+#: src/services/SystemService.cpp:911
+#, kde-format
+msgid "%1 Previous appearance preserved."
+msgstr "%1 Se ha conservado el aspecto anterior."
+
+#: src/services/SystemService.cpp:927
+#, kde-format
+msgid "Could not preserve the %1 icon theme. Previous style preserved."
+msgstr ""
+"No se ha podido conservar el tema de iconos %1. Se ha conservado el estilo "
+"anterior."
+
+#: src/services/SystemService.cpp:931
+#, kde-format
+msgid "Applying %1 style…"
+msgstr "Aplicando el estilo %1…"
+
+#: src/services/SystemService.cpp:948
+#, kde-format
+msgid "Could not apply the %1 style."
+msgstr "No se ha podido aplicar el estilo %1."
+
+#: src/services/SystemService.cpp:956
+#, kde-format
+msgid "Plasma did not confirm the %1 style."
+msgstr "Plasma no ha confirmado el estilo %1."
+
+#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "icons"
+msgstr "iconos"
+
+#: src/services/SystemService.cpp:986
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "cursor"
+msgstr "cursor"
+
+#: src/services/SystemService.cpp:1057
+#, kde-format
+msgid "Driver Manager is not installed."
+msgstr "El Gestor de controladores no está instalado."
+
+#: src/services/SystemService.cpp:1061
+#, kde-format
+msgid "Could not open Driver Manager."
+msgstr "No se ha podido abrir el Gestor de controladores."
+
+#: src/services/SystemService.cpp:1066
+#, kde-format
+msgid "Unknown action."
+msgstr "Acción desconocida."
+
+#: src/services/SystemService.cpp:1075
+#, kde-format
+msgid "URL blocked for security reasons."
+msgstr "URL bloqueada por motivos de seguridad."
+
+#: src/services/SystemService.cpp:1079
+#, kde-format
+msgid "Requested the web browser to open the page."
+msgstr "Se ha solicitado al navegador web que abra la página."
+
+#: src/services/SystemService.cpp:1080
+#, kde-format
+msgid "Could not open the URL in the default web browser."
+msgstr "No se ha podido abrir la URL en el navegador web predeterminado."
+
+#: src/services/SystemService.cpp:1087
+#, kde-format
+msgid "This application is not allowed to be opened in Discover."
+msgstr "No se permite abrir esta aplicación en Discover."
+
+#: src/services/SystemService.cpp:1092
+#, kde-format
+msgid "Discover was not found. Install KDE Discover to open this application."
+msgstr ""
+"No se ha encontrado Discover. Instale KDE Discover para abrir esta "
+"aplicación."
+
+#: src/services/SystemService.cpp:1098
+#, kde-format
+msgid "Could not open the page in Discover. Try again."
+msgstr "No se ha podido abrir la página en Discover. Inténtelo de nuevo."
+
+#: src/services/SystemService.cpp:1101
+#, kde-format
+msgid ""
+"Requested Discover to open the page. Confirm the installation in Discover; "
+"if the application is not found, check Flathub and try again."
+msgstr ""
+"Se ha solicitado a Discover que abra la página. Confirme la instalación en "
+"Discover; si no se encuentra la aplicación, compruebe Flathub e inténtelo de "
+"nuevo."
+
+#: src/services/SystemService.cpp:1109
+#, kde-format
+msgid "No Pix key is configured."
+msgstr "No hay ninguna clave Pix configurada."
+
+#: src/services/SystemService.cpp:1113
+#, kde-format
+msgid "Clipboard unavailable."
+msgstr "Portapapeles no disponible."
+
+#: src/services/UserAvatar.cpp:70
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "no se permite actualizar el avatar como administrador"
+
+#: src/services/UserAvatar.cpp:76
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr "falta el archivo .face de origen, no se puede leer o no es seguro"
+
+#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the source avatar"
+msgstr "no se ha podido leer el avatar de origen"
+
+#: src/services/UserAvatar.cpp:93
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid ""
+"the .face file does not contain a valid image (SVG requires the Qt SVG "
+"plugin)"
+msgstr ""
+"el archivo .face no contiene una imagen válida (SVG requiere el complemento "
+"Qt SVG)"
+
+#: src/services/UserAvatar.cpp:100
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "home folder unavailable or with unsafe permissions"
+msgstr "carpeta personal no disponible o con permisos inseguros"
+
+#: src/services/UserAvatar.cpp:106
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "~/.face is not a safe regular file; avatar preserved"
+msgstr "~/.face no es un archivo normal seguro; se conserva el avatar"
+
+#: src/services/UserAvatar.cpp:112
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "unsafe avatar backup; avatar preserved"
+msgstr "copia de seguridad del avatar insegura; se conserva el avatar"
+
+#: src/services/UserAvatar.cpp:120
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely open the previous avatar"
+msgstr "no se ha podido abrir de forma segura el avatar anterior"
+
+#: src/services/UserAvatar.cpp:124
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the previous avatar"
+msgstr "no se ha podido leer el avatar anterior"
+
+#: src/services/UserAvatar.cpp:128
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not preserve the previous avatar"
+msgstr "no se ha podido conservar el avatar anterior"
+
+#: src/services/UserAvatar.cpp:132
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the backup; avatar preserved"
+msgstr "no se ha podido escribir la copia de seguridad; se conserva el avatar"
+
+#: src/services/UserAvatar.cpp:138
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not publish the backup; avatar preserved"
+msgstr "no se ha podido publicar la copia de seguridad; se conserva el avatar"
+
+#: src/services/UserAvatar.cpp:146
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the new avatar; avatar preserved"
+msgstr "no se ha podido escribir el nuevo avatar; se conserva el avatar"
+
+#: src/services/UserAvatar.cpp:155
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely replace ~/.face; avatar preserved"
+msgstr ""
+"no se ha podido sustituir ~/.face de forma segura; se conserva el avatar"
+
+#: src/services/UserAvatar.cpp:158
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but writing to disk could not be confirmed"
+msgstr ""
+"avatar actualizado, pero no se ha podido confirmar la escritura en el disco"
+
+#: src/services/UserAvatar.cpp:165
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be checked"
+msgstr "avatar actualizado, pero no se ha podido comprobar ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:168
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be created"
+msgstr "avatar actualizado, pero no se ha podido crear ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:171
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
+msgstr ""
+"avatar actualizado, pero no se ha podido confirmar ~/.face.icon en el disco"

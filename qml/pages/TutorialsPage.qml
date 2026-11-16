@@ -20,7 +20,7 @@ Kirigami.Page {
     property string currentTitle: ""
     property var hostWindow
 
-    title: "Tutoriais"
+    title: i18nc("@title navigation page", "Tutorials")
     padding: 0
     background: Rectangle { color: page.pageColor }
 
@@ -30,10 +30,10 @@ Kirigami.Page {
     PageContainer {
         contentSpacing: 14
 
-        Kirigami.Heading { text: "Tutoriais em vídeo"; level: 1 }
+        Kirigami.Heading { text: i18n("Video Tutorials"); level: 1 }
         Controls.Label {
             Layout.fillWidth: true
-            text: "Aprenda o essencial do Mainuan. Vídeos ausentes ficam desativados sem impedir a navegação."
+            text: i18n("Learn the essentials of Mainuan. Missing videos are disabled without blocking navigation.")
             color: page.mutedColor
             wrapMode: Text.WordWrap
         }
@@ -70,7 +70,7 @@ Kirigami.Page {
                 anchors.top: parent.top
                 anchors.right: parent.right
                 anchors.margins: 10
-                text: "Fechar"
+                text: i18nc("@action:button", "Close")
                 onClicked: { if (page.mediaPlayer) page.mediaPlayer.stop(); page.playerVisible = false }
             }
             Controls.Label {
@@ -86,7 +86,7 @@ Kirigami.Page {
         RowLayout {
             visible: page.playerVisible
             Layout.fillWidth: true
-            Controls.Button { text: page.mediaPlayer && page.mediaPlayer.playbackState === MediaPlayer.PlayingState ? "Pausar" : "Reproduzir"; onClicked: { if (page.mediaPlayer) page.mediaPlayer.playbackState === MediaPlayer.PlayingState ? page.mediaPlayer.pause() : page.mediaPlayer.play() } }
+            Controls.Button { text: page.mediaPlayer && page.mediaPlayer.playbackState === MediaPlayer.PlayingState ? i18nc("@action:button", "Pause") : i18nc("@action:button", "Play"); onClicked: { if (page.mediaPlayer) page.mediaPlayer.playbackState === MediaPlayer.PlayingState ? page.mediaPlayer.pause() : page.mediaPlayer.play() } }
             Controls.Slider {
                 Layout.fillWidth: true
                 from: 0
@@ -94,8 +94,8 @@ Kirigami.Page {
                 value: page.mediaPlayer ? page.mediaPlayer.position : 0
                 onMoved: if (page.mediaPlayer) page.mediaPlayer.position = value
             }
-            Controls.Slider { implicitWidth: 120; from: 0; to: 1; value: page.audioOutput ? page.audioOutput.volume : 1; onMoved: if (page.audioOutput) page.audioOutput.volume = value; Accessible.name: "Volume" }
-            Controls.Button { text: "Tela cheia"; onClicked: page.hostWindow.visibility = page.hostWindow.visibility === Window.FullScreen ? Window.Windowed : Window.FullScreen }
+            Controls.Slider { implicitWidth: 120; from: 0; to: 1; value: page.audioOutput ? page.audioOutput.volume : 1; onMoved: if (page.audioOutput) page.audioOutput.volume = value; Accessible.name: i18n("Volume") }
+            Controls.Button { text: i18nc("@action:button", "Full Screen"); onClicked: page.hostWindow.visibility = page.hostWindow.visibility === Window.FullScreen ? Window.Windowed : Window.FullScreen }
         }
 
         Flow {
@@ -131,10 +131,10 @@ Kirigami.Page {
                             Image { anchors.fill: parent; anchors.margins: 16; source: model.iconSource; fillMode: Image.PreserveAspectFit; asynchronous: true }
                             Controls.Button {
                                 anchors.centerIn: parent
-                                text: model.available ? "Reproduzir" : "Indisponível"
+                                text: model.available ? i18nc("@action:button", "Play") : i18nc("@info video status", "Unavailable")
                                 icon.name: model.available ? "media-playback-start" : "dialog-warning"
                                 display: Controls.AbstractButton.TextBesideIcon
-                                implicitWidth: model.available ? 126 : 120
+                                implicitWidth: Math.max(model.available ? 126 : 120, implicitContentWidth + leftPadding + rightPadding)
                                 implicitHeight: 38
                                 enabled: model.available
                                 onClicked: {
@@ -147,11 +147,11 @@ Kirigami.Page {
                                         }
                                     })
                                 }
-                                Accessible.name: model.available ? "Reproduzir " + model.title : model.title + ": vídeo ausente"
+                                Accessible.name: model.available ? i18n("Play %1", model.title) : i18n("%1: video missing", model.title)
                             }
                         }
                         Controls.Label { Layout.fillWidth: true; text: model.title; color: page.textColor; font.weight: Font.DemiBold; horizontalAlignment: Text.AlignHCenter; wrapMode: Text.WordWrap }
-                        Controls.Label { Layout.fillWidth: true; text: model.available ? model.fileName : "Arquivo não encontrado"; color: page.mutedColor; font.pixelSize: 11; horizontalAlignment: Text.AlignHCenter; elide: Text.ElideMiddle }
+                        Controls.Label { Layout.fillWidth: true; text: model.available ? model.fileName : i18n("File not found"); color: page.mutedColor; font.pixelSize: 11; horizontalAlignment: Text.AlignHCenter; elide: Text.ElideMiddle }
                     }
                 }
             }
@@ -160,7 +160,7 @@ Kirigami.Page {
         Controls.Label {
             visible: !page.playerVisible && videoRepeater.count === 0
             Layout.fillWidth: true
-            text: "Nenhum tutorial foi cadastrado."
+            text: i18n("No tutorials have been added.")
             color: page.mutedColor
             horizontalAlignment: Text.AlignHCenter
         }

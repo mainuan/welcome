@@ -10,7 +10,7 @@ Kirigami.ApplicationWindow {
     height: 600
     minimumWidth: 760
     minimumHeight: 520
-    title: "Mainuan — Boas-vindas"
+    title: i18n("Mainuan — Welcome")
     property bool dark: systemService.darkTheme
     property color accent: systemService.accentColor.length > 0 ? systemService.accentColor : "#3daee9"
     // Kirigami supplies the controls and icon theme; these explicit surfaces keep
@@ -39,10 +39,10 @@ Kirigami.ApplicationWindow {
             installDialog.requestClose();
         } else if (systemService.busy) {
             close.accepted = false;
-            root.showPassiveNotification("Aguarde a aplicação da aparência terminar antes de fechar o Welcome.");
+            root.showPassiveNotification(i18n("Wait for the appearance changes to finish before closing the Welcome."));
         } else if (layoutService.busy) {
             close.accepted = false;
-            root.showPassiveNotification("Aguarde a aplicação ou restauração do layout terminar antes de fechar o Welcome.");
+            root.showPassiveNotification(i18n("Wait for the layout to finish applying or restoring before closing the Welcome."));
         }
     }
 
@@ -75,16 +75,17 @@ Kirigami.ApplicationWindow {
         errorColor: root.errorColor
     }
 
-    ListModel {
-        id: navigationModel
-        ListElement { label: "Início"; iconName: "house" }
-        ListElement { label: "Aparência"; iconName: "palette" }
-        ListElement { label: "Office"; iconName: "briefcase" }
-        ListElement { label: "Navegadores"; iconName: "globe" }
-        ListElement { label: "Tutoriais"; iconName: "circle-play" }
-        ListElement { label: "Sobre"; iconName: "info" }
-        ListElement { label: "Contribuir"; iconName: "heart" }
-    }
+    // A plain array rather than ListElements: ListElement values must be
+    // constants, so they cannot carry translated labels.
+    readonly property var navigationItems: [
+        { label: i18nc("@title navigation page", "Home"), iconName: "house" },
+        { label: i18nc("@title navigation page", "Appearance"), iconName: "palette" },
+        { label: i18nc("@title navigation page", "Office"), iconName: "briefcase" },
+        { label: i18nc("@title navigation page", "Browsers"), iconName: "globe" },
+        { label: i18nc("@title navigation page", "Tutorials"), iconName: "circle-play" },
+        { label: i18nc("@title navigation page", "About"), iconName: "info" },
+        { label: i18nc("@title navigation page", "Contribute"), iconName: "heart" }
+    ]
 
     RowLayout {
         anchors.fill: parent
@@ -136,7 +137,7 @@ Kirigami.ApplicationWindow {
                     id: navigation
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    model: navigationModel
+                    model: root.navigationItems
                     spacing: 4
                     interactive: false
                     delegate: SidebarButton {
@@ -146,8 +147,8 @@ Kirigami.ApplicationWindow {
                         accent: root.accent
                         mutedColor: root.mutedColor
                         textColor: root.textColor
-                        label: model.label
-                        iconName: model.iconName
+                        label: modelData.label
+                        iconName: modelData.iconName
                         selected: root.currentPage === index
                         onClicked: root.currentPage = index
                     }
@@ -176,11 +177,11 @@ Kirigami.ApplicationWindow {
                     anchors.fill: parent
                     anchors.leftMargin: 24
                     anchors.rightMargin: 24
-                    Controls.Label { text: navigationModel.get(root.currentPage).label; color: root.textColor; font.pixelSize: 18; font.weight: Font.DemiBold }
+                    Controls.Label { text: root.navigationItems[root.currentPage].label; color: root.textColor; font.pixelSize: 18; font.weight: Font.DemiBold }
                     Item { Layout.fillWidth: true }
                     Controls.CheckBox {
                         id: startupCheck
-                        text: "Mostrar esta tela ao iniciar o sistema"
+                        text: i18n("Show this screen at system startup")
                         checked: startupPreference.showAtStartup
                         // onToggled is not emitted for accessibility actions (screen readers),
                         // so react to every user change of `checked`.
@@ -192,7 +193,7 @@ Kirigami.ApplicationWindow {
                             // which also reverts the box if saving failed.
                             checked = Qt.binding(() => startupPreference.showAtStartup);
                         }
-                        Accessible.description: "Abre esta tela automaticamente quando você entra na sua sessão"
+                        Accessible.description: i18n("Opens this screen automatically when you log in to your session")
                     }
                 }
             }
@@ -203,8 +204,8 @@ Kirigami.ApplicationWindow {
                 currentIndex: root.currentPage
                 HomePage { system: systemService; installer: installService; dark: root.dark; accent: root.accent; pageColor: root.pageColor; surfaceColor: root.surfaceColor; elevatedColor: root.elevatedColor; borderColor: root.borderColor; textColor: root.textColor; mutedColor: root.mutedColor; successColor: root.successColor; warningColor: root.warningColor; onInstallRequested: (profileId) => root.openInstallDialog(profileId) }
                 AppearancePage { system: systemService; layouts: layoutModel; layoutManager: layoutService; dark: root.dark; accent: root.accent; pageColor: root.pageColor; surfaceColor: root.surfaceColor; elevatedColor: root.elevatedColor; borderColor: root.borderColor; textColor: root.textColor; mutedColor: root.mutedColor; successColor: root.successColor }
-                AppsPage { appModel: officeModel; pkgService: packageService; installer: installService; system: systemService; onInstallRequested: (profileId) => root.openInstallDialog(profileId); pageTitle: "Office"; pageDescription: "Instale ferramentas de produtividade ou abra serviços online."; dark: root.dark; accent: root.accent; pageColor: root.pageColor; surfaceColor: root.surfaceColor; elevatedColor: root.elevatedColor; borderColor: root.borderColor; textColor: root.textColor; mutedColor: root.mutedColor; successColor: root.successColor }
-                AppsPage { appModel: browserModel; pkgService: packageService; installer: installService; system: systemService; onInstallRequested: (profileId) => root.openInstallDialog(profileId); pageTitle: "Navegadores"; pageDescription: "Escolha seu navegador preferido para navegar na web."; dark: root.dark; accent: root.accent; pageColor: root.pageColor; surfaceColor: root.surfaceColor; elevatedColor: root.elevatedColor; borderColor: root.borderColor; textColor: root.textColor; mutedColor: root.mutedColor; successColor: root.successColor }
+                AppsPage { appModel: officeModel; pkgService: packageService; installer: installService; system: systemService; onInstallRequested: (profileId) => root.openInstallDialog(profileId); pageTitle: i18nc("@title navigation page", "Office"); pageDescription: i18n("Install productivity tools or open online services."); dark: root.dark; accent: root.accent; pageColor: root.pageColor; surfaceColor: root.surfaceColor; elevatedColor: root.elevatedColor; borderColor: root.borderColor; textColor: root.textColor; mutedColor: root.mutedColor; successColor: root.successColor }
+                AppsPage { appModel: browserModel; pkgService: packageService; installer: installService; system: systemService; onInstallRequested: (profileId) => root.openInstallDialog(profileId); pageTitle: i18nc("@title navigation page", "Browsers"); pageDescription: i18n("Choose your preferred browser to surf the web."); dark: root.dark; accent: root.accent; pageColor: root.pageColor; surfaceColor: root.surfaceColor; elevatedColor: root.elevatedColor; borderColor: root.borderColor; textColor: root.textColor; mutedColor: root.mutedColor; successColor: root.successColor }
                 TutorialsPage { tutorialModel: videoModel; hostWindow: root; dark: root.dark; accent: root.accent; pageColor: root.pageColor; surfaceColor: root.surfaceColor; elevatedColor: root.elevatedColor; borderColor: root.borderColor; textColor: root.textColor; mutedColor: root.mutedColor }
                 AboutPage { system: systemService; report: systemReport; dark: root.dark; accent: root.accent; pageColor: root.pageColor; surfaceColor: root.surfaceColor; elevatedColor: root.elevatedColor; borderColor: root.borderColor; textColor: root.textColor; mutedColor: root.mutedColor; successColor: root.successColor }
                 ContributePage { system: systemService; dark: root.dark; accent: root.accent; pageColor: root.pageColor; surfaceColor: root.surfaceColor; borderColor: root.borderColor; textColor: root.textColor; mutedColor: root.mutedColor; successColor: root.successColor }

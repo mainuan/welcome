@@ -1,0 +1,2614 @@
+# Bengali translations for mainuan-welcome package.
+# Copyright (C) 2026 Mainuan
+# This file is distributed under the same license as the mainuan-welcome package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mainuan-welcome\n"
+"Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"PO-Revision-Date: 2026-11-16 11:52-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: bn <https://github.com/mainuan>\n"
+"Language: bn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: qml/Main.qml:13
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — স্বাগতম"
+
+#: qml/Main.qml:42
+msgid "Wait for the appearance changes to finish before closing the Welcome."
+msgstr "স্বাগতম অ্যাপটি বন্ধ করার আগে চেহারার পরিবর্তন শেষ হওয়া পর্যন্ত অপেক্ষা করুন।"
+
+#: qml/Main.qml:45
+msgid ""
+"Wait for the layout to finish applying or restoring before closing the "
+"Welcome."
+msgstr ""
+"স্বাগতম অ্যাপটি বন্ধ করার আগে বিন্যাস প্রয়োগ বা পুনরুদ্ধার শেষ হওয়া পর্যন্ত অপেক্ষা করুন।"
+
+#: qml/Main.qml:81 qml/pages/HomePage.qml:23
+msgctxt "@title navigation page"
+msgid "Home"
+msgstr "হোম"
+
+#: qml/Main.qml:82 qml/pages/AppearancePage.qml:23
+#: qml/pages/AppearancePage.qml:38
+msgctxt "@title navigation page"
+msgid "Appearance"
+msgstr "চেহারা"
+
+#: qml/Main.qml:83 qml/Main.qml:207
+msgctxt "@title navigation page"
+msgid "Office"
+msgstr "অফিস"
+
+#: qml/Main.qml:84 qml/Main.qml:208
+msgctxt "@title navigation page"
+msgid "Browsers"
+msgstr "ব্রাউজার"
+
+#: qml/Main.qml:85 qml/pages/TutorialsPage.qml:23
+msgctxt "@title navigation page"
+msgid "Tutorials"
+msgstr "টিউটোরিয়াল"
+
+#: qml/Main.qml:86 qml/pages/AboutPage.qml:22
+msgctxt "@title navigation page"
+msgid "About"
+msgstr "পরিচিতি"
+
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
+#: qml/pages/ContributePage.qml:32
+msgctxt "@title navigation page"
+msgid "Contribute"
+msgstr "অবদান"
+
+# reviewed: স্ক্রিন: o compêndio e o restante do lote usam স্ক্রিন para screen
+# (LayoutService); unificado
+#: qml/Main.qml:184
+msgid "Show this screen at system startup"
+msgstr "সিস্টেম চালুর সময় এই স্ক্রিনটি দেখান"
+
+# reviewed: স্ক্রিন: o compêndio e o restante do lote usam স্ক্রিন para screen
+# (LayoutService); unificado
+#: qml/Main.qml:196
+msgid "Opens this screen automatically when you log in to your session"
+msgstr "আপনার সেশনে লগ ইন করলে এই স্ক্রিনটি স্বয়ংক্রিয়ভাবে খোলে"
+
+#: qml/Main.qml:207
+msgid "Install productivity tools or open online services."
+msgstr "কাজের টুল ইনস্টল করুন বা অনলাইন পরিষেবা খুলুন।"
+
+#: qml/Main.qml:208
+msgid "Choose your preferred browser to surf the web."
+msgstr "ওয়েব ব্রাউজ করার জন্য আপনার পছন্দের ব্রাউজার বেছে নিন।"
+
+#. i18n: AppCard.qml compares this text with its own i18n("Available"); keep both identical.
+#: qml/components/AppCard.qml:92 src/models/ApplicationModel.cpp:104
+#, kde-format
+msgid "Available"
+msgstr "উপলব্ধ"
+
+#: qml/components/AppCard.qml:104 qml/components/InstallDialog.qml:352
+msgid "Open"
+msgstr "খুলুন"
+
+#: qml/components/AppCard.qml:105
+msgid "Installed"
+msgstr "ইনস্টল করা আছে"
+
+#: qml/components/AppCard.qml:106 qml/components/InstallDialog.qml:339
+msgid "Install"
+msgstr "ইনস্টল করুন"
+
+#: qml/components/AppCard.qml:106
+msgid "Please wait…"
+msgstr "অনুগ্রহ করে অপেক্ষা করুন…"
+
+#: qml/components/AppCard.qml:106
+msgid "Remove"
+msgstr "সরান"
+
+#: qml/components/AppCard.qml:120 qml/components/InfoTile.qml:24
+#: qml/components/ReportDialog.qml:164 qml/components/ReportDialog.qml:302
+#: qml/components/SegmentedChoice.qml:45 qml/components/StatusRow.qml:79
+#: qml/components/StatusRow.qml:97 qml/components/StatusRow.qml:108
+msgctxt "@info:accessible label and value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/components/InstallDialog.qml:186
+msgid "Installation"
+msgstr "ইনস্টলেশন"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install %1"
+msgstr "%1 ইনস্টল করুন"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install components"
+msgstr "উপাদান ইনস্টল করুন"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing %1"
+msgstr "%1 ইনস্টল করা হচ্ছে"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing components"
+msgstr "উপাদান ইনস্টল করা হচ্ছে"
+
+#: qml/components/InstallDialog.qml:198
+msgid "Installation completed successfully."
+msgstr "ইনস্টলেশন সফলভাবে সম্পন্ন হয়েছে।"
+
+#: qml/components/InstallDialog.qml:208
+msgid "Source: %1"
+msgstr "উৎস: %1"
+
+#: qml/components/InstallDialog.qml:245
+msgid "Installation progress"
+msgstr "ইনস্টলেশনের অগ্রগতি"
+
+#: qml/components/InstallDialog.qml:246
+msgid "In progress"
+msgstr "চলছে"
+
+#: qml/components/InstallDialog.qml:247 qml/components/InstallDialog.qml:254
+msgctxt "@info progress percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/components/InstallDialog.qml:280
+msgid "For security reasons, the installation cannot be cancelled."
+msgstr "নিরাপত্তার কারণে ইনস্টলেশন বাতিল করা যাবে না।"
+
+#: qml/components/InstallDialog.qml:293
+msgid "Hide Details"
+msgstr "বিস্তারিত লুকান"
+
+#: qml/components/InstallDialog.qml:293
+msgid "Show Details"
+msgstr "বিস্তারিত দেখান"
+
+#: qml/components/InstallDialog.qml:296
+msgid "Shows the technical output of the installation"
+msgstr "ইনস্টলেশনের প্রযুক্তিগত আউটপুট দেখায়"
+
+#: qml/components/InstallDialog.qml:325
+msgid "Technical details of the installation"
+msgstr "ইনস্টলেশনের প্রযুক্তিগত বিবরণ"
+
+#: qml/components/InstallDialog.qml:345
+msgid "Install FreeOffice from SoftMaker"
+msgstr "SoftMaker থেকে FreeOffice ইনস্টল করুন"
+
+#: qml/components/InstallDialog.qml:363
+msgid "Try Again"
+msgstr "আবার চেষ্টা করুন"
+
+#: qml/components/InstallDialog.qml:375
+msgid "Cancel"
+msgstr "বাতিল করুন"
+
+#: qml/components/InstallDialog.qml:375 qml/components/ReportDialog.qml:206
+msgid "Close"
+msgstr "বন্ধ করুন"
+
+#: qml/components/ReportDialog.qml:75
+msgid "Save System Report"
+msgstr "সিস্টেম রিপোর্ট সংরক্ষণ করুন"
+
+#: qml/components/ReportDialog.qml:78
+msgid "Text (*.txt)"
+msgstr "টেক্সট (*.txt)"
+
+#: qml/components/ReportDialog.qml:80
+msgid "Report saved."
+msgstr "রিপোর্ট সংরক্ষিত হয়েছে।"
+
+#: qml/components/ReportDialog.qml:81
+msgid "Could not save the report."
+msgstr "রিপোর্ট সংরক্ষণ করা যায়নি।"
+
+#: qml/components/ReportDialog.qml:87 qml/components/ReportDialog.qml:141
+#: qml/pages/AboutPage.qml:121
+msgid "System Report"
+msgstr "সিস্টেম রিপোর্ট"
+
+#: qml/components/ReportDialog.qml:136
+msgid "System summary"
+msgstr "সিস্টেমের সারসংক্ষেপ"
+
+#: qml/components/ReportDialog.qml:146
+msgctxt "@label system report summary"
+msgid "Desktop"
+msgstr "ডেস্কটপ"
+
+#: qml/components/ReportDialog.qml:147
+msgctxt "@label system report summary"
+msgid "Kernel"
+msgstr "কার্নেল"
+
+#: qml/components/ReportDialog.qml:148
+msgctxt "@label system report summary"
+msgid "CPU"
+msgstr "CPU"
+
+#: qml/components/ReportDialog.qml:149
+msgctxt "@label system report summary"
+msgid "GPU"
+msgstr "GPU"
+
+#: qml/components/ReportDialog.qml:150
+msgctxt "@label system report summary"
+msgid "Memory"
+msgstr "মেমরি"
+
+#: qml/components/ReportDialog.qml:151
+msgctxt "@label system report summary"
+msgid "Uptime"
+msgstr "চালু থাকার সময়"
+
+#: qml/components/ReportDialog.qml:174
+msgid "Copy Report"
+msgstr "রিপোর্ট কপি করুন"
+
+#: qml/components/ReportDialog.qml:179
+msgid "Report copied."
+msgstr "রিপোর্ট কপি করা হয়েছে।"
+
+#: qml/components/ReportDialog.qml:180
+msgid "Could not copy the report."
+msgstr "রিপোর্ট কপি করা যায়নি।"
+
+#: qml/components/ReportDialog.qml:184
+msgid "Save Report"
+msgstr "রিপোর্ট সংরক্ষণ করুন"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refresh"
+msgstr "রিফ্রেশ করুন"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refreshing…"
+msgstr "রিফ্রেশ করা হচ্ছে…"
+
+#: qml/pages/AboutPage.qml:81
+msgid "Mainuan logo"
+msgstr "Mainuan লোগো"
+
+#: qml/pages/AboutPage.qml:125
+msgid "Opens the hardware and software information for technical support"
+msgstr "প্রযুক্তিগত সহায়তার জন্য হার্ডওয়্যার ও সফটওয়্যারের তথ্য খোলে"
+
+#: qml/pages/AboutPage.qml:128
+msgid "Repository"
+msgstr "রিপোজিটরি"
+
+#: qml/pages/AboutPage.qml:139
+msgid "This Computer"
+msgstr "এই কম্পিউটার"
+
+# from mainuan-gestao-drivers
+#: qml/pages/AboutPage.qml:154
+msgid "Processor"
+msgstr "প্রসেসর"
+
+#: qml/pages/AboutPage.qml:155
+msgid "Graphics"
+msgstr "গ্রাফিক্স"
+
+#: qml/pages/AboutPage.qml:156
+msgid "Memory in use"
+msgstr "ব্যবহৃত মেমরি"
+
+#: qml/pages/AboutPage.qml:157
+msgid "Storage (system)"
+msgstr "স্টোরেজ (সিস্টেম)"
+
+#: qml/pages/AboutPage.qml:158
+msgctxt "@label installation date"
+msgid "Installation"
+msgstr "ইনস্টলেশন"
+
+#: qml/pages/AboutPage.qml:158
+msgid "Installation (estimated)"
+msgstr "ইনস্টলেশন (আনুমানিক)"
+
+#: qml/pages/AboutPage.qml:159
+msgid "Uptime"
+msgstr "চালু থাকার সময়"
+
+#: qml/pages/AboutPage.qml:178
+msgid "Credits"
+msgstr "কৃতজ্ঞতা"
+
+#: qml/pages/AboutPage.qml:189
+msgid "Desktop environment and integration components."
+msgstr "ডেস্কটপ পরিবেশ ও ইন্টিগ্রেশন উপাদান।"
+
+#: qml/pages/AboutPage.qml:201
+msgid "Distribution base and package repositories."
+msgstr "ডিস্ট্রিবিউশনের ভিত্তি ও প্যাকেজ রিপোজিটরি।"
+
+#: qml/pages/AboutPage.qml:210
+msgid ""
+"Free software. The license and the project history are in the repository."
+msgstr "মুক্ত সফটওয়্যার। লাইসেন্স ও প্রকল্পের ইতিহাস রিপোজিটরিতে রয়েছে।"
+
+#: qml/pages/AppearancePage.qml:41
+msgid "Customize the colors, transparency and arrangement of your desktop."
+msgstr "আপনার ডেস্কটপের রং, স্বচ্ছতা ও বিন্যাস নিজের মতো করে নিন।"
+
+#: qml/pages/AppearancePage.qml:57
+msgid "System Appearance"
+msgstr "সিস্টেমের চেহারা"
+
+#: qml/pages/AppearancePage.qml:79 qml/pages/AppearancePage.qml:89
+msgid "Visual Style"
+msgstr "ভিজ্যুয়াল স্টাইল"
+
+#: qml/pages/AppearancePage.qml:81
+msgid ""
+"Changes the Plasma style and keeps the Mainuan color and your selected icons."
+msgstr ""
+"Plasma স্টাইল পরিবর্তন করে এবং Mainuan-এর রং ও আপনার বেছে নেওয়া আইকন বজায় রাখে।"
+
+#: qml/pages/AppearancePage.qml:82
+msgid "Available only on KDE Plasma."
+msgstr "শুধু KDE Plasma-তে উপলব্ধ।"
+
+#: qml/pages/AppearancePage.qml:93
+msgctxt "@option visual style"
+msgid "Blurred"
+msgstr "ঝাপসা"
+
+#: qml/pages/AppearancePage.qml:93
+msgid "Dream theme: translucent panels with blur"
+msgstr "Dream থিম: ঝাপসা প্রভাবসহ অর্ধস্বচ্ছ প্যানেল"
+
+#: qml/pages/AppearancePage.qml:94
+msgctxt "@option visual style"
+msgid "Glass"
+msgstr "কাচ"
+
+#: qml/pages/AppearancePage.qml:94
+msgid "Tahoe theme: light panels with a glass effect"
+msgstr "Tahoe থিম: কাচের প্রভাবসহ হালকা প্যানেল"
+
+#: qml/pages/AppearancePage.qml:95
+msgid "Breeze theme: the default KDE look, without transparency"
+msgstr "Breeze থিম: স্বচ্ছতা ছাড়া KDE-র ডিফল্ট চেহারা"
+
+#: qml/pages/AppearancePage.qml:95
+msgctxt "@option visual style"
+msgid "Solid"
+msgstr "নিরেট"
+
+#: qml/pages/AppearancePage.qml:105 qml/pages/AppearancePage.qml:112
+msgid "System Theme"
+msgstr "সিস্টেম থিম"
+
+#: qml/pages/AppearancePage.qml:106
+msgid "Light or dark colors across the whole system."
+msgstr "পুরো সিস্টেমজুড়ে হালকা বা গাঢ় রং।"
+
+#: qml/pages/AppearancePage.qml:115
+msgctxt "@option color theme"
+msgid "Light"
+msgstr "হালকা"
+
+#: qml/pages/AppearancePage.qml:116
+msgctxt "@option color theme"
+msgid "Dark"
+msgstr "গাঢ়"
+
+#: qml/pages/AppearancePage.qml:126 qml/pages/AppearancePage.qml:134
+msgid "Accent Color"
+msgstr "অ্যাকসেন্ট রং"
+
+#: qml/pages/AppearancePage.qml:127
+msgid ""
+"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
+"Keeps the choice when you change style or theme."
+msgstr ""
+"KDE রং স্কিম, Kora আইকন, ওয়ালপেপার ও অ্যাভাটার প্রয়োগ করে। স্টাইল বা থিম পরিবর্তন "
+"করলেও পছন্দটি বজায় থাকে।"
+
+#. i18n: %1 is the accent color name
+#: qml/pages/AppearancePage.qml:158
+msgid "Accent color %1"
+msgstr "অ্যাকসেন্ট রং %1"
+
+#: qml/pages/AppearancePage.qml:191
+msgid "Desktop Layout"
+msgstr "ডেস্কটপ বিন্যাস"
+
+# reviewed: স্ক্রিন: o compêndio e o restante do lote usam স্ক্রিন para screen
+# (LayoutService); unificado
+#: qml/pages/AppearancePage.qml:200
+msgid ""
+"Choose how the panels are placed on the screen. Before each change the "
+"Welcome keeps a copy of the current layout."
+msgstr ""
+"স্ক্রিনে প্যানেলগুলো কীভাবে সাজানো হবে তা বেছে নিন। প্রতিটি পরিবর্তনের আগে স্বাগতম "
+"অ্যাপটি বর্তমান বিন্যাসের একটি কপি রেখে দেয়।"
+
+#: qml/pages/AppearancePage.qml:201
+msgid "Layouts can only be applied inside a KDE Plasma session."
+msgstr "বিন্যাস শুধু KDE Plasma সেশনের ভেতরে প্রয়োগ করা যায়।"
+
+#: qml/pages/AppearancePage.qml:278
+msgctxt "@info layout status"
+msgid "In use"
+msgstr "ব্যবহৃত হচ্ছে"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button layout already applied"
+msgid "Applied"
+msgstr "প্রয়োগ হয়েছে"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button"
+msgid "Apply"
+msgstr "প্রয়োগ করুন"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Apply layout %1"
+msgstr "%1 বিন্যাস প্রয়োগ করুন"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Layout in use: %1"
+msgstr "ব্যবহৃত বিন্যাস: %1"
+
+#: qml/pages/AppearancePage.qml:315
+msgid ""
+"Returns to the layout that was in use before the last change. Plasma "
+"restarts for a few seconds."
+msgstr ""
+"শেষ পরিবর্তনের আগে যে বিন্যাস ব্যবহৃত হচ্ছিল, সেটিতে ফিরে যায়। Plasma কয়েক "
+"সেকেন্ডের জন্য পুনরায় চালু হয়।"
+
+#: qml/pages/AppearancePage.qml:321
+msgid "Restore Previous Layout"
+msgstr "আগের বিন্যাস পুনরুদ্ধার করুন"
+
+#: qml/pages/AppearancePage.qml:334
+msgid "Restore previous layout?"
+msgstr "আগের বিন্যাস পুনরুদ্ধার করবেন?"
+
+#: qml/pages/AppearancePage.qml:335
+msgid ""
+"The panels go back to how they were before the last layout change. Plasma "
+"will restart for a few seconds."
+msgstr ""
+"শেষ বিন্যাস পরিবর্তনের আগে প্যানেলগুলো যেমন ছিল, তেমন অবস্থায় ফিরে যাবে। Plasma "
+"কয়েক সেকেন্ডের জন্য পুনরায় চালু হবে।"
+
+#: qml/pages/AppearancePage.qml:339
+msgctxt "@action:button"
+msgid "Restore"
+msgstr "পুনরুদ্ধার করুন"
+
+#: qml/pages/AppearancePage.qml:347
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr "বাতিল করুন"
+
+#: qml/pages/AppsPage.qml:43
+msgid ""
+"Flatpak was not found. Flatpak applications are unavailable. FreeOffice and "
+"the online services remain independent of Flatpak."
+msgstr ""
+"Flatpak পাওয়া যায়নি। Flatpak অ্যাপলিকেশন উপলব্ধ নয়। FreeOffice ও অনলাইন "
+"পরিষেবাগুলো Flatpak-এর ওপর নির্ভর করে না।"
+
+#: qml/pages/ContributePage.qml:35
+msgid ""
+"Mainuan is made by its community. You can help with a donation, with code or "
+"by reporting problems."
+msgstr ""
+"Mainuan তৈরি হয় এর কমিউনিটির হাতে। অনুদান, কোড বা সমস্যার রিপোর্ট দিয়ে আপনি "
+"সাহায্য করতে পারেন।"
+
+#. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
+#: qml/pages/ContributePage.qml:78
+msgid "Pix QR code. Key: %1"
+msgstr "Pix QR কোড। কী: %1"
+
+#: qml/pages/ContributePage.qml:79
+msgid "Pix key QR code. Key: %1"
+msgstr "Pix কী-এর QR কোড। কী: %1"
+
+#: qml/pages/ContributePage.qml:97
+msgid "Support Mainuan"
+msgstr "Mainuan-কে সহায়তা করুন"
+
+#: qml/pages/ContributePage.qml:104
+msgid ""
+"Your donation helps sustain development, infrastructure and the community."
+msgstr "আপনার অনুদান উন্নয়ন, পরিকাঠামো ও কমিউনিটিকে টিকিয়ে রাখতে সাহায্য করে।"
+
+#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+msgid "Pix Key"
+msgstr "Pix কী"
+
+#: qml/pages/ContributePage.qml:143
+msgid "Copy Pix Key"
+msgstr "Pix কী কপি করুন"
+
+#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#, kde-format
+msgid "Pix key copied."
+msgstr "Pix কী কপি করা হয়েছে।"
+
+#: qml/pages/ContributePage.qml:168
+msgid "Scan the QR code with your bank's app, using the Pix option."
+msgstr "আপনার ব্যাংকের অ্যাপে Pix অপশন ব্যবহার করে QR কোডটি স্ক্যান করুন।"
+
+#: qml/pages/ContributePage.qml:169
+msgid ""
+"The QR code contains the Pix key. In your bank's app, use the Pix option "
+"with the copied key or the one read from the code."
+msgstr ""
+"QR কোডে Pix কী রয়েছে। আপনার ব্যাংকের অ্যাপে Pix অপশনে কপি করা কী অথবা কোড থেকে "
+"পড়া কী ব্যবহার করুন।"
+
+#: qml/pages/ContributePage.qml:177
+msgid "The Pix key has not been set up on this installation yet."
+msgstr "এই ইনস্টলেশনে Pix কী এখনও সেট করা হয়নি।"
+
+#: qml/pages/ContributePage.qml:187
+msgid "Other Ways to Help"
+msgstr "সাহায্যের অন্যান্য উপায়"
+
+#: qml/pages/ContributePage.qml:196
+msgid "Contribute Code"
+msgstr "কোড দিয়ে অবদান রাখুন"
+
+#: qml/pages/ContributePage.qml:197
+msgid "Code, translations and improvements on GitHub."
+msgstr "GitHub-এ কোড, অনুবাদ ও উন্নতি।"
+
+#: qml/pages/ContributePage.qml:205
+msgid "Report a Problem"
+msgstr "সমস্যা রিপোর্ট করুন"
+
+#: qml/pages/ContributePage.qml:206
+msgid ""
+"Describe what happened; attaching the system report (in About) helps a lot."
+msgstr ""
+"কী ঘটেছে তা বর্ণনা করুন; সিস্টেম রিপোর্ট (পরিচিতি পাতায়) সংযুক্ত করলে অনেক সাহায্য "
+"হয়।"
+
+#: qml/pages/ContributePage.qml:214
+msgid "Telegram Community"
+msgstr "Telegram কমিউনিটি"
+
+#: qml/pages/ContributePage.qml:215
+msgid "Chat with Mainuan users and developers."
+msgstr "Mainuan ব্যবহারকারী ও ডেভেলপারদের সাথে চ্যাট করুন।"
+
+#: qml/pages/ContributePage.qml:222
+msgid ""
+"Links open in the browser only when you click them. The QR code is generated "
+"on this computer, without internet access."
+msgstr ""
+"লিঙ্কগুলো শুধু আপনি ক্লিক করলেই ব্রাউজারে খোলে। QR কোডটি ইন্টারনেট সংযোগ ছাড়াই এই "
+"কম্পিউটারে তৈরি হয়।"
+
+#: qml/pages/HomePage.qml:48 qml/pages/HomePage.qml:62
+msgid "Installing…"
+msgstr "ইনস্টল করা হচ্ছে…"
+
+#: qml/pages/HomePage.qml:51
+msgctxt "@info status"
+msgid "Installed"
+msgstr "ইনস্টল করা আছে"
+
+#. i18n: %1 is a short note such as "startup: enabled"
+#: qml/pages/HomePage.qml:51
+msgid "Installed · %1"
+msgstr "ইনস্টল করা আছে · %1"
+
+#: qml/pages/HomePage.qml:53
+msgid "Unavailable on this system"
+msgstr "এই সিস্টেমে উপলব্ধ নয়"
+
+#: qml/pages/HomePage.qml:62
+msgctxt "@action:button"
+msgid "Install"
+msgstr "ইনস্টল করুন"
+
+#. i18n: %1 is a colour code; keep the <font> markup around the product name
+#: qml/pages/HomePage.qml:87
+msgid "Welcome to <font color='%1'>Mainuan</font>"
+msgstr "<font color='%1'>Mainuan</font>-এ স্বাগতম"
+
+#: qml/pages/HomePage.qml:92
+msgid "Set up your system your way, with native Plasma tools."
+msgstr "নেটিভ Plasma টুল দিয়ে নিজের মতো করে আপনার সিস্টেম সাজিয়ে নিন।"
+
+#: qml/pages/HomePage.qml:105
+msgid "Hardware & Media"
+msgstr "হার্ডওয়্যার ও মিডিয়া"
+
+#: qml/pages/HomePage.qml:113
+msgid "Additional Drivers"
+msgstr "অতিরিক্ত ড্রাইভার"
+
+#: qml/pages/HomePage.qml:114
+msgid "View and manage the drivers available for your computer."
+msgstr "আপনার কম্পিউটারের জন্য উপলব্ধ ড্রাইভার দেখুন ও পরিচালনা করুন।"
+
+#: qml/pages/HomePage.qml:117
+msgctxt "@action:button"
+msgid "Manage"
+msgstr "পরিচালনা করুন"
+
+#: qml/pages/HomePage.qml:126 src/services/InstallService.cpp:221
+#, kde-format
+msgid "Media Codecs"
+msgstr "মিডিয়া কোডেক"
+
+#: qml/pages/HomePage.qml:127
+msgid "Play audio and video in the most common formats."
+msgstr "সবচেয়ে প্রচলিত ফরম্যাটের অডিও ও ভিডিও চালান।"
+
+#: qml/pages/HomePage.qml:131
+msgid "Security & Privacy"
+msgstr "নিরাপত্তা ও গোপনীয়তা"
+
+#: qml/pages/HomePage.qml:136 src/services/InstallService.cpp:175
+#, kde-format
+msgid "Antivirus"
+msgstr "অ্যান্টিভাইরাস"
+
+#: qml/pages/HomePage.qml:137 src/services/InstallService.cpp:177
+#, kde-format
+msgid "ClamAV protection with the ClamUI graphical interface."
+msgstr "ClamUI গ্রাফিক্যাল ইন্টারফেসসহ ClamAV সুরক্ষা।"
+
+#: qml/pages/HomePage.qml:139 qml/pages/HomePage.qml:147
+msgctxt "@action:button"
+msgid "Configure"
+msgstr "কনফিগার করুন"
+
+#: qml/pages/HomePage.qml:144 src/services/InstallService.cpp:200
+#, kde-format
+msgid "Firewall"
+msgstr "ফায়ারওয়াল"
+
+#: qml/pages/HomePage.qml:145
+msgid "Control network connections with UFW and the KDE Plasma module."
+msgstr "UFW ও KDE Plasma মডিউল দিয়ে নেটওয়ার্ক সংযোগ নিয়ন্ত্রণ করুন।"
+
+#. i18n: %1 is the session type (wayland/x11), %2 the Plasma version
+#: qml/pages/HomePage.qml:156
+msgid "Session: %1  ·  %2"
+msgstr "সেশন: %1  ·  %2"
+
+#: qml/pages/HomePage.qml:157
+msgid "Session: %1"
+msgstr "সেশন: %1"
+
+#: qml/pages/TutorialsPage.qml:33
+msgid "Video Tutorials"
+msgstr "ভিডিও টিউটোরিয়াল"
+
+#: qml/pages/TutorialsPage.qml:36
+msgid ""
+"Learn the essentials of Mainuan. Missing videos are disabled without "
+"blocking navigation."
+msgstr ""
+"Mainuan-এর মূল বিষয়গুলো শিখুন। অনুপস্থিত ভিডিওগুলো নিষ্ক্রিয় থাকে, তবে নেভিগেশনে "
+"বাধা দেয় না।"
+
+#: qml/pages/TutorialsPage.qml:73
+msgctxt "@action:button"
+msgid "Close"
+msgstr "বন্ধ করুন"
+
+# reviewed: botão de ação: forma verbal polida como o par Play = চালান (বিরতি
+# sozinho é substantivo)
+#: qml/pages/TutorialsPage.qml:89
+msgctxt "@action:button"
+msgid "Pause"
+msgstr "বিরতি দিন"
+
+#: qml/pages/TutorialsPage.qml:89 qml/pages/TutorialsPage.qml:134
+msgctxt "@action:button"
+msgid "Play"
+msgstr "চালান"
+
+#: qml/pages/TutorialsPage.qml:97
+msgid "Volume"
+msgstr "ভলিউম"
+
+# reviewed: স্ক্রিন: o compêndio e o restante do lote usam স্ক্রিন para screen
+# (LayoutService); unificado
+#: qml/pages/TutorialsPage.qml:98
+msgctxt "@action:button"
+msgid "Full Screen"
+msgstr "পূর্ণ স্ক্রিন"
+
+#: qml/pages/TutorialsPage.qml:134
+msgctxt "@info video status"
+msgid "Unavailable"
+msgstr "উপলব্ধ নয়"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "%1: video missing"
+msgstr "%1: ভিডিও অনুপস্থিত"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "Play %1"
+msgstr "%1 চালান"
+
+#: qml/pages/TutorialsPage.qml:154
+msgid "File not found"
+msgstr "ফাইল পাওয়া যায়নি"
+
+#: qml/pages/TutorialsPage.qml:163
+msgid "No tutorials have been added."
+msgstr "কোনো টিউটোরিয়াল যোগ করা হয়নি।"
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:4
+msgid "Mainuan Welcome"
+msgstr "Mainuan স্বাগতম"
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:4
+msgid "Show the Mainuan Welcome when the session starts"
+msgstr "সেশন শুরু হলে Mainuan স্বাগতম দেখান"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:4
+msgid "Welcome Center"
+msgstr "স্বাগতম কেন্দ্র"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:5
+msgid "Set up and get to know Mainuan"
+msgstr "Mainuan সেট আপ করুন ও জেনে নিন"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:6
+msgid "welcome;setup;appearance;drivers;codecs;antivirus;firewall;"
+msgstr "স্বাগতম;সেটআপ;চেহারা;ড্রাইভার;কোডেক;অ্যান্টিভাইরাস;ফায়ারওয়াল;welcome;setup;appearance;drivers;codecs;antivirus;firewall;"
+
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:5
+msgid "Set up Mainuan and get to know the features of your desktop"
+msgstr "Mainuan সেট আপ করুন এবং আপনার ডেস্কটপের ফিচারগুলো জেনে নিন"
+
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:7
+msgid ""
+"Welcome application of the Mainuan desktop. It helps new users choose the "
+"look of the desktop, install media codecs, the antivirus, the firewall, "
+"office suites and web browsers, and find the video tutorials."
+msgstr ""
+"Mainuan ডেস্কটপের স্বাগতম অ্যাপলিকেশন। এটি নতুন ব্যবহারকারীদের ডেস্কটপের চেহারা "
+"বেছে নিতে, মিডিয়া কোডেক, অ্যান্টিভাইরাস, ফায়ারওয়াল, অফিস স্যুট ও ওয়েব ব্রাউজার "
+"ইনস্টল করতে এবং ভিডিও টিউটোরিয়াল খুঁজে পেতে সাহায্য করে।"
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:9
+msgid "Install system components recommended by Mainuan Welcome"
+msgstr "Mainuan স্বাগতমের প্রস্তাবিত সিস্টেম উপাদান ইনস্টল করুন"
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:10
+msgid ""
+"Authentication is required to install system components such as the "
+"antivirus, the firewall or media codecs"
+msgstr ""
+"অ্যান্টিভাইরাস, ফায়ারওয়াল বা মিডিয়া কোডেকের মতো সিস্টেম উপাদান ইনস্টল করতে "
+"প্রমাণীকরণ প্রয়োজন"
+
+#: src/main.cpp:53
+#, kde-format
+msgctxt "@title application display name"
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — স্বাগতম"
+
+#: src/main.cpp:96
+#, kde-format
+msgctxt "@info application description"
+msgid "Complete suite: Writer, Calc and Impress"
+msgstr "সম্পূর্ণ স্যুট: Writer, Calc ও Impress"
+
+#: src/main.cpp:99
+#, kde-format
+msgctxt "@info application description"
+msgid "Interface familiar to Microsoft Office users"
+msgstr "Microsoft Office ব্যবহারকারীদের পরিচিত ইন্টারফেস"
+
+# reviewed: FreeOffice é gratuito, não software livre: মুক্ত (livre) →
+# বিনামূল্যের (pt_BR: gratuita)
+#: src/main.cpp:102
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Free office suite with word processor, spreadsheet and presentation editors."
+msgstr "ওয়ার্ড প্রসেসর, স্প্রেডশিট ও প্রেজেন্টেশন এডিটরসহ বিনামূল্যের অফিস স্যুট।"
+
+#: src/main.cpp:105
+#, kde-format
+msgctxt "@info application description"
+msgid "Online documents with collaboration"
+msgstr "সহযোগিতার সুবিধাসহ অনলাইন ডকুমেন্ট"
+
+#: src/main.cpp:108
+#, kde-format
+msgctxt "@info application description"
+msgid "Microsoft suite right in the browser"
+msgstr "সরাসরি ব্রাউজারে Microsoft-এর স্যুট"
+
+#: src/main.cpp:114
+#, kde-format
+msgctxt "@info application description"
+msgid "Google's web browser"
+msgstr "Google-এর ওয়েব ব্রাউজার"
+
+#: src/main.cpp:117
+#, kde-format
+msgctxt "@info application description"
+msgid "Compatibility with Microsoft applications"
+msgstr "Microsoft অ্যাপলিকেশনের সাথে সামঞ্জস্যপূর্ণ"
+
+#: src/main.cpp:120
+#, kde-format
+msgctxt "@info application description"
+msgid "Built-in ad blocking"
+msgstr "বিল্ট-ইন বিজ্ঞাপন ব্লকার"
+
+#: src/main.cpp:123
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Browser with advanced customization, tab management and privacy features."
+msgstr "উন্নত কাস্টমাইজেশন, ট্যাব ব্যবস্থাপনা ও গোপনীয়তা ফিচারসহ ব্রাউজার।"
+
+#: src/main.cpp:126
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser focused on privacy, productivity and vertical tab organization."
+msgstr "গোপনীয়তা, উৎপাদনশীলতা ও উল্লম্ব ট্যাব বিন্যাসে মনোযোগী ব্রাউজার।"
+
+#: src/main.cpp:129
+#, kde-format
+msgctxt "@info application description"
+msgid "Privacy-focused browser"
+msgstr "গোপনীয়তাকেন্দ্রিক ব্রাউজার"
+
+#: src/main.cpp:132
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser with resource controls"
+msgstr "রিসোর্স নিয়ন্ত্রণসহ ব্রাউজার"
+
+#: src/main.cpp:135
+#, kde-format
+msgctxt "@info application description"
+msgid "Browsing through the Tor network"
+msgstr "Tor নেটওয়ার্কের মাধ্যমে ব্রাউজিং"
+
+#: src/models/ApplicationModel.cpp:88
+#, kde-format
+msgctxt "@info:status application"
+msgid "Checking…"
+msgstr "পরীক্ষা করা হচ্ছে…"
+
+#: src/models/ApplicationModel.cpp:91
+#, kde-format
+msgctxt "@info:status application"
+msgid "Unavailable"
+msgstr "উপলব্ধ নয়"
+
+#: src/models/ApplicationModel.cpp:94
+#, kde-format
+msgctxt "@info:status application"
+msgid "Online"
+msgstr "অনলাইন"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installing…"
+msgstr "ইনস্টল করা হচ্ছে…"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Removing…"
+msgstr "সরানো হচ্ছে…"
+
+#: src/models/ApplicationModel.cpp:100
+#, kde-format
+msgctxt "@info:status application"
+msgid "Error"
+msgstr "ত্রুটি"
+
+#: src/models/ApplicationModel.cpp:102
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installed"
+msgstr "ইনস্টল করা আছে"
+
+#: src/models/LayoutModel.cpp:10
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"The Mainuan look: floating islands at the bottom with menu, tasks, system "
+"tray and clock."
+msgstr "Mainuan-এর চেহারা: নিচে মেনু, টাস্ক, সিস্টেম ট্রে ও ঘড়িসহ ভাসমান দ্বীপ।"
+
+#: src/models/LayoutModel.cpp:11
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Three floating segments at the bottom: menu and information, tasks, and "
+"system controls."
+msgstr "নিচে তিনটি ভাসমান অংশ: মেনু ও তথ্য, টাস্ক এবং সিস্টেম নিয়ন্ত্রণ।"
+
+#: src/models/LayoutModel.cpp:12
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"A floating bottom bar with side margins, widgets and pinned applications."
+msgstr "দুই পাশে মার্জিন, উইজেট ও পিন করা অ্যাপলিকেশনসহ নিচে একটি ভাসমান বার।"
+
+#: src/models/LayoutModel.cpp:13
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Floating top panel with TahoeLauncher, search, tasks and controls."
+msgstr "TahoeLauncher, অনুসন্ধান, টাস্ক ও নিয়ন্ত্রণসহ ওপরে ভাসমান প্যানেল।"
+
+#: src/models/LayoutModel.cpp:14
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Full-width bottom bar, not floating, with Kickoff and pinned applications."
+msgstr "Kickoff ও পিন করা অ্যাপলিকেশনসহ নিচে পূর্ণ-প্রস্থের স্থির বার।"
+
+#: src/models/LayoutModel.cpp:15
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Global menu at the top and a vertical panel on the left with Orbit Start "
+"Menu."
+msgstr "ওপরে গ্লোবাল মেনু এবং বাঁ দিকে Orbit Start Menu-সহ একটি উল্লম্ব প্যানেল।"
+
+#: src/models/LayoutModel.cpp:16
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Compact bar at the top and KWin tiles to arrange windows side by side."
+msgstr "ওপরে কমপ্যাক্ট বার এবং উইন্ডো পাশাপাশি সাজানোর জন্য KWin টাইল।"
+
+#: src/models/VideoModel.cpp:12
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Getting to know the system"
+msgstr "সিস্টেমের সাথে পরিচিতি"
+
+#: src/models/VideoModel.cpp:13
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Connecting to the internet"
+msgstr "ইন্টারনেটে সংযোগ করা"
+
+#: src/models/VideoModel.cpp:14
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Customizing the system"
+msgstr "সিস্টেম নিজের মতো করে সাজানো"
+
+#: src/models/VideoModel.cpp:15
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Installing software"
+msgstr "সফটওয়্যার ইনস্টল করা"
+
+#: src/models/VideoModel.cpp:16
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Online lessons"
+msgstr "অনলাইন পাঠ"
+
+#: src/services/AccentProfile.cpp:8
+msgctxt "accent color"
+msgid "Brown"
+msgstr "বাদামি"
+
+#: src/services/AccentProfile.cpp:10
+msgctxt "accent color"
+msgid "Cyan"
+msgstr "সায়ান"
+
+#: src/services/AccentProfile.cpp:12
+msgctxt "accent color"
+msgid "Magenta"
+msgstr "ম্যাজেন্টা"
+
+#: src/services/AccentProfile.cpp:14
+msgctxt "accent color"
+msgid "Lime"
+msgstr "লাইম"
+
+#: src/services/AccentProfile.cpp:16
+msgctxt "accent color"
+msgid "Gray"
+msgstr "ধূসর"
+
+#: src/services/AccentProfile.cpp:18
+msgctxt "accent color"
+msgid "Violet"
+msgstr "বেগুনি"
+
+#: src/services/InstallService.cpp:54
+#, kde-format
+msgid ""
+"Another program is installing or updating the system right now. Wait for it "
+"to finish and try again."
+msgstr ""
+"অন্য একটি প্রোগ্রাম এই মুহূর্তে সিস্টেম ইনস্টল বা আপডেট করছে। সেটি শেষ হওয়া পর্যন্ত "
+"অপেক্ষা করে আবার চেষ্টা করুন।"
+
+#: src/services/InstallService.cpp:57
+#, kde-format
+msgid ""
+"Could not download the files. Check your internet connection and try again."
+msgstr ""
+"ফাইলগুলো ডাউনলোড করা যায়নি। আপনার ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।"
+
+#: src/services/InstallService.cpp:60
+#, kde-format
+msgid "There is not enough free disk space to complete the installation."
+msgstr "ইনস্টলেশন সম্পন্ন করার মতো পর্যাপ্ত খালি ডিস্ক স্পেস নেই।"
+
+#: src/services/InstallService.cpp:63
+#, kde-format
+msgid ""
+"The required components were not found in the repositories configured on "
+"this system."
+msgstr "প্রয়োজনীয় উপাদানগুলো এই সিস্টেমে কনফিগার করা রিপোজিটরিতে পাওয়া যায়নি।"
+
+#: src/services/InstallService.cpp:66
+#, kde-format
+msgid ""
+"A previous installation was interrupted and must be repaired before new "
+"programs can be installed."
+msgstr ""
+"আগের একটি ইনস্টলেশন মাঝপথে থেমে গেছে; নতুন প্রোগ্রাম ইনস্টল করার আগে সেটি মেরামত "
+"করতে হবে।"
+
+#: src/services/InstallService.cpp:69
+#, kde-format
+msgid ""
+"The package system found a conflict that prevents the installation without "
+"removing other programs."
+msgstr ""
+"প্যাকেজ সিস্টেম এমন একটি দ্বন্দ্ব পেয়েছে যার কারণে অন্য প্রোগ্রাম না সরিয়ে ইনস্টলেশন "
+"করা সম্ভব নয়।"
+
+#: src/services/InstallService.cpp:72
+#, kde-format
+msgid ""
+"Authentication failed or your user does not have administrator privileges."
+msgstr "প্রমাণীকরণ ব্যর্থ হয়েছে অথবা আপনার ব্যবহারকারীর অ্যাডমিনিস্ট্রেটর সুবিধা নেই।"
+
+#: src/services/InstallService.cpp:75
+#, kde-format
+msgid ""
+"Automatic installation of these components requires a Debian- or Ubuntu-"
+"based system."
+msgstr ""
+"এই উপাদানগুলোর স্বয়ংক্রিয় ইনস্টলেশনের জন্য Debian বা Ubuntu-ভিত্তিক সিস্টেম প্রয়োজন।"
+
+#: src/services/InstallService.cpp:78
+#, kde-format
+msgid "Flatpak is not available on this system."
+msgstr "এই সিস্টেমে Flatpak উপলব্ধ নয়।"
+
+#: src/services/InstallService.cpp:81
+#, kde-format
+msgid ""
+"Could not download FreeOffice from the authorized official source. Check the "
+"connection and try again. Redirects and other versions are refused."
+msgstr ""
+"অনুমোদিত অফিসিয়াল উৎস থেকে FreeOffice ডাউনলোড করা যায়নি। সংযোগ পরীক্ষা করে "
+"আবার চেষ্টা করুন। রিডাইরেক্ট ও অন্য সংস্করণ গ্রহণ করা হয় না।"
+
+#: src/services/InstallService.cpp:84
+#, kde-format
+msgid ""
+"The FreeOffice file does not match the authorized package (integrity, size, "
+"name, version or architecture). The installation was stopped."
+msgstr ""
+"FreeOffice ফাইলটি অনুমোদিত প্যাকেজের সাথে মেলে না (অখণ্ডতা, আকার, নাম, সংস্করণ "
+"বা আর্কিটেকচার)। ইনস্টলেশন থামানো হয়েছে।"
+
+#: src/services/InstallService.cpp:87
+#, kde-format
+msgid ""
+"The installer finished, but it could not be confirmed that the application "
+"is installed. Check the details and try again."
+msgstr ""
+"ইনস্টলার শেষ হয়েছে, কিন্তু অ্যাপলিকেশনটি ইনস্টল হয়েছে কি না তা নিশ্চিত করা যায়নি। "
+"বিস্তারিত দেখে আবার চেষ্টা করুন।"
+
+#. i18n: “Show Details” must match the label of the details button in the installation dialog.
+#: src/services/InstallService.cpp:90
+#, kde-format
+msgid ""
+"The system could not install all components. Try again; if the problem "
+"persists, use “Show Details” to get the technical information."
+msgstr ""
+"সিস্টেম সব উপাদান ইনস্টল করতে পারেনি। আবার চেষ্টা করুন; সমস্যা থেকে গেলে প্রযুক্তিগত "
+"তথ্য পেতে “বিস্তারিত দেখান” ব্যবহার করুন।"
+
+#. i18n: joins the names of two components installed in the same step, e.g. "ClamAV and Flatpak".
+#: src/services/InstallService.cpp:144
+#, kde-format
+msgctxt "@item:intext two components"
+msgid "%1 and %2"
+msgstr "%1 ও %2"
+
+#: src/services/InstallService.cpp:176
+#, kde-format
+msgid "Configured repositories / Flathub"
+msgstr "কনফিগার করা রিপোজিটরি / Flathub"
+
+#: src/services/InstallService.cpp:179
+#, kde-format
+msgid "Installing ClamAV + ClamUI"
+msgstr "ClamAV + ClamUI ইনস্টল করা হচ্ছে"
+
+#: src/services/InstallService.cpp:180
+#, kde-format
+msgid "Antivirus installed successfully"
+msgstr "অ্যান্টিভাইরাস সফলভাবে ইনস্টল করা হয়েছে"
+
+#: src/services/InstallService.cpp:181
+#, kde-format
+msgid "ClamAV and ClamUI are ready to use."
+msgstr "ClamAV ও ClamUI ব্যবহারের জন্য প্রস্তুত।"
+
+#: src/services/InstallService.cpp:182 src/services/InstallService.cpp:208
+#, kde-format
+msgctxt "@action:button open the settings of the installed component"
+msgid "Configure"
+msgstr "কনফিগার করুন"
+
+#: src/services/InstallService.cpp:201 src/services/InstallService.cpp:222
+#, kde-format
+msgid "Configured repositories"
+msgstr "কনফিগার করা রিপোজিটরি"
+
+#: src/services/InstallService.cpp:202
+#, kde-format
+msgid "UFW with the KDE Plasma firewall module."
+msgstr "KDE Plasma ফায়ারওয়াল মডিউলসহ UFW।"
+
+#: src/services/InstallService.cpp:204
+#, kde-format
+msgid "Installing Firewall"
+msgstr "ফায়ারওয়াল ইনস্টল করা হচ্ছে"
+
+#: src/services/InstallService.cpp:205
+#, kde-format
+msgid "Firewall installed successfully"
+msgstr "ফায়ারওয়াল সফলভাবে ইনস্টল করা হয়েছে"
+
+#: src/services/InstallService.cpp:206
+#, kde-format
+msgid ""
+"UFW and the KDE Plasma integration are installed. The firewall was not "
+"enabled automatically: use Configure to enable it and choose the rules."
+msgstr ""
+"UFW ও KDE Plasma ইন্টিগ্রেশন ইনস্টল করা হয়েছে। ফায়ারওয়াল স্বয়ংক্রিয়ভাবে সক্রিয় করা "
+"হয়নি: সক্রিয় করতে ও নিয়ম বেছে নিতে “কনফিগার করুন” ব্যবহার করুন।"
+
+#: src/services/InstallService.cpp:213 src/services/InstallService.cpp:217
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "KDE Plasma integration"
+msgstr "KDE Plasma ইন্টিগ্রেশন"
+
+#: src/services/InstallService.cpp:223
+#, kde-format
+msgid "Support for the most common audio and video formats."
+msgstr "সবচেয়ে প্রচলিত অডিও ও ভিডিও ফরম্যাটের সমর্থন।"
+
+#: src/services/InstallService.cpp:225
+#, kde-format
+msgid "Installing media codecs"
+msgstr "মিডিয়া কোডেক ইনস্টল করা হচ্ছে"
+
+#: src/services/InstallService.cpp:226
+#, kde-format
+msgid "Codecs installed successfully"
+msgstr "কোডেক সফলভাবে ইনস্টল করা হয়েছে"
+
+#: src/services/InstallService.cpp:227
+#, kde-format
+msgid "Audio and video in the most common formats can now be played."
+msgstr "এখন সবচেয়ে প্রচলিত ফরম্যাটের অডিও ও ভিডিও চালানো যাবে।"
+
+#: src/services/InstallService.cpp:230
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "media codecs"
+msgstr "মিডিয়া কোডেক"
+
+#: src/services/InstallService.cpp:236
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "GStreamer codecs"
+msgstr "GStreamer কোডেক"
+
+# reviewed: FreeOffice é gratuito, não software livre: মুক্ত (livre) →
+# বিনামূল্যের (pt_BR: gratuita)
+#: src/services/InstallService.cpp:244
+#, kde-format
+msgid "Free office suite from SoftMaker."
+msgstr "SoftMaker-এর বিনামূল্যের অফিস স্যুট।"
+
+#: src/services/InstallService.cpp:246
+#, kde-format
+msgid "Installing FreeOffice"
+msgstr "FreeOffice ইনস্টল করা হচ্ছে"
+
+#: src/services/InstallService.cpp:247
+#, kde-format
+msgid "FreeOffice installed successfully"
+msgstr "FreeOffice সফলভাবে ইনস্টল করা হয়েছে"
+
+#: src/services/InstallService.cpp:248
+#, kde-format
+msgid "FreeOffice is installed and available in the application menu."
+msgstr "FreeOffice ইনস্টল করা হয়েছে এবং অ্যাপলিকেশন মেনুতে উপলব্ধ।"
+
+#: src/services/InstallService.cpp:249
+#, kde-format
+msgid ""
+"This package is provided by SoftMaker and may ask for administrator "
+"authorization."
+msgstr ""
+"এই প্যাকেজটি SoftMaker সরবরাহ করে এবং এটি অ্যাডমিনিস্ট্রেটরের অনুমোদন চাইতে পারে।"
+
+#: src/services/InstallService.cpp:314
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "Installing %1"
+msgstr "%1 ইনস্টল করা হচ্ছে"
+
+#: src/services/InstallService.cpp:315
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "%1 installed successfully"
+msgstr "%1 সফলভাবে ইনস্টল করা হয়েছে"
+
+#: src/services/InstallService.cpp:316
+#, kde-format
+msgid "The application is now available in the application menu."
+msgstr "অ্যাপলিকেশনটি এখন অ্যাপলিকেশন মেনুতে উপলব্ধ।"
+
+#: src/services/InstallService.cpp:317
+#, kde-format
+msgctxt "@action:button open the installed application"
+msgid "Open"
+msgstr "খুলুন"
+
+#: src/services/InstallService.cpp:435
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Checking…"
+msgstr "পরীক্ষা করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:438
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Installed"
+msgstr "ইনস্টল করা আছে"
+
+#. i18n: %1 is the name of the only component that is not installed yet.
+#: src/services/InstallService.cpp:442
+#, kde-format
+msgctxt "@info:status one component"
+msgid "Missing: %1"
+msgstr "অনুপস্থিত: %1"
+
+#. i18n: %1 is a comma-separated list of components that are not installed yet.
+#: src/services/InstallService.cpp:444
+#, kde-format
+msgctxt "@info:status several components"
+msgid "Missing: %1"
+msgstr "অনুপস্থিত: %1"
+
+#: src/services/InstallService.cpp:447
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Not installed"
+msgstr "ইনস্টল করা নেই"
+
+#: src/services/InstallService.cpp:593
+#, kde-format
+msgid "Preparing the installation…"
+msgstr "ইনস্টলেশন প্রস্তুত করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:707 src/services/InstallService.cpp:741
+#, kde-format
+msgid "Downloading FreeOffice from SoftMaker…"
+msgstr "SoftMaker থেকে FreeOffice ডাউনলোড করা হচ্ছে…"
+
+#. i18n: technical details: %1 URL, %2 package name, %3 version, %4 architecture, %5 size in bytes, %6 checksum.
+#: src/services/InstallService.cpp:709
+#, kde-format
+msgid ""
+"Authorized source: %1\n"
+"Package: %2 · version %3 · %4 · %5 bytes\n"
+"Pinned SHA-256: %6"
+msgstr ""
+"অনুমোদিত উৎস: %1\n"
+"প্যাকেজ: %2 · সংস্করণ %3 · %4 · %5 বাইট\n"
+"নির্ধারিত SHA-256: %6"
+
+#: src/services/InstallService.cpp:727
+#, kde-format
+msgid "The file exceeds the authorized size."
+msgstr "ফাইলটি অনুমোদিত আকারের চেয়ে বড়।"
+
+#: src/services/InstallService.cpp:759
+#, kde-format
+msgid "Size or SHA-256 mismatch."
+msgstr "আকার বা SHA-256 মেলেনি।"
+
+#: src/services/InstallService.cpp:768
+#, kde-format
+msgid "Validating the FreeOffice Debian package…"
+msgstr "FreeOffice-এর Debian প্যাকেজ যাচাই করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:812
+#, kde-format
+msgid "Confirming the FreeOffice installation…"
+msgstr "FreeOffice-এর ইনস্টলেশন নিশ্চিত করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:824
+#, kde-format
+msgid "Confirming the browser installation…"
+msgstr "ব্রাউজারের ইনস্টলেশন নিশ্চিত করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:857
+#, kde-format
+msgid "Waiting for administrator authorization…"
+msgstr "অ্যাডমিনিস্ট্রেটরের অনুমোদনের জন্য অপেক্ষা করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:883
+#, kde-format
+msgctxt "@info %1 is a program path, %2 the system error"
+msgid "Could not run %1: %2"
+msgstr "%1 চালানো যায়নি: %2"
+
+#: src/services/InstallService.cpp:917
+#, kde-format
+msgctxt "@item:intext generic component label"
+msgid "required components"
+msgstr "প্রয়োজনীয় উপাদান"
+
+#: src/services/InstallService.cpp:933
+#, kde-format
+msgid "Checking the required components…"
+msgstr "প্রয়োজনীয় উপাদানগুলো পরীক্ষা করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:935
+#, kde-format
+msgid ""
+"Waiting for another program to finish installing or updating the system…"
+msgstr ""
+"অন্য একটি প্রোগ্রামের সিস্টেম ইনস্টল বা আপডেট শেষ হওয়ার জন্য অপেক্ষা করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:937
+#, kde-format
+msgid "Updating the list of available programs…"
+msgstr "উপলব্ধ প্রোগ্রামের তালিকা আপডেট করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:939
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Preparing the download of %1…"
+msgstr "%1 ডাউনলোডের প্রস্তুতি নেওয়া হচ্ছে…"
+
+#: src/services/InstallService.cpp:941
+#, kde-format
+msgid "Updating the virus definitions…"
+msgstr "ভাইরাস সংজ্ঞা আপডেট করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:945
+#, kde-format
+msgctxt "@info %1 is a list of package names"
+msgid "Packages to install: %1"
+msgstr "ইনস্টল করার প্যাকেজ: %1"
+
+#: src/services/InstallService.cpp:954 src/services/InstallService.cpp:1061
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1…"
+msgstr "%1 ডাউনলোড করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:956
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1 (file %2 of %3)…"
+msgstr "%1 ডাউনলোড করা হচ্ছে (%3টির মধ্যে %2 নং ফাইল)…"
+
+#: src/services/InstallService.cpp:970
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Configuring %1…"
+msgstr "%1 কনফিগার করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:971
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Installing %1…"
+msgstr "%1 ইনস্টল করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:988
+#, kde-format
+msgid ""
+"The virus definitions could not be downloaded now; ClamAV will retry "
+"automatically in the background."
+msgstr ""
+"ভাইরাস সংজ্ঞা এখন ডাউনলোড করা যায়নি; ClamAV পটভূমিতে স্বয়ংক্রিয়ভাবে আবার চেষ্টা "
+"করবে।"
+
+#: src/services/InstallService.cpp:990
+#, kde-format
+msgid "freshclam did not finish updating the definitions."
+msgstr "freshclam সংজ্ঞা আপডেট শেষ করেনি।"
+
+#: src/services/InstallService.cpp:1012
+#, kde-format
+msgid "Checking Flathub…"
+msgstr "Flathub পরীক্ষা করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:1034
+#, kde-format
+msgid "Setting up Flathub…"
+msgstr "Flathub সেট আপ করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:1119
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1 (component %2 of %3)…"
+msgstr "%1 ডাউনলোড ও ইনস্টল করা হচ্ছে (%3টির মধ্যে %2 নং উপাদান)…"
+
+#: src/services/InstallService.cpp:1121
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1…"
+msgstr "%1 ডাউনলোড ও ইনস্টল করা হচ্ছে…"
+
+#: src/services/InstallService.cpp:1144
+#, kde-format
+msgctxt "@info technical detail"
+msgid "Exit code: %1"
+msgstr "প্রস্থান কোড: %1"
+
+#: src/services/InstallService.cpp:1232
+#, kde-format
+msgctxt "@info technical detail; %3 is an internal error code"
+msgid "Step: %1 of %2 · reason: %3"
+msgstr "ধাপ: %2টির মধ্যে %1 · কারণ: %3"
+
+#: src/services/InstallService.cpp:1241
+#, kde-format
+msgid ""
+"The authorization was canceled. The components installed in the previous "
+"steps were kept."
+msgstr ""
+"অনুমোদন বাতিল করা হয়েছে। আগের ধাপগুলোতে ইনস্টল করা উপাদান রেখে দেওয়া হয়েছে।"
+
+#: src/services/InstallService.cpp:1242
+#, kde-format
+msgid "The authorization was canceled. No changes were made to the system."
+msgstr "অনুমোদন বাতিল করা হয়েছে। সিস্টেমে কোনো পরিবর্তন করা হয়নি।"
+
+#: src/services/InstallService.cpp:1266
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid ""
+"Cannot open %1: the required components are not installed or the tool is "
+"unavailable."
+msgstr "%1 খোলা যাচ্ছে না: প্রয়োজনীয় উপাদান ইনস্টল করা নেই অথবা টুলটি উপলব্ধ নয়।"
+
+#: src/services/InstallService.cpp:1300
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid "Could not open %1."
+msgstr "%1 খোলা যায়নি।"
+
+#: src/services/LayoutService.cpp:36 src/services/LayoutService.cpp:409
+#, kde-format
+msgid "Invalid layout."
+msgstr "অবৈধ বিন্যাস।"
+
+#. i18n: %1 is one or more Plasma widget ids joined by " or ".
+#: src/services/LayoutService.cpp:44
+#, kde-format
+msgid "Required launcher missing: %1. The previous panels were preserved."
+msgstr "প্রয়োজনীয় লঞ্চার অনুপস্থিত: %1। আগের প্যানেলগুলো অক্ষত রাখা হয়েছে।"
+
+#: src/services/LayoutService.cpp:45
+#, kde-format
+msgctxt "separator between alternative widget ids"
+msgid " or "
+msgstr " বা "
+
+#. i18n: %1 is a Plasma widget id, e.g. org.kde.plasma.kickoff.
+#: src/services/LayoutService.cpp:49
+#, kde-format
+msgid "Required widget missing: %1. The previous panels were preserved."
+msgstr "প্রয়োজনীয় উইজেট অনুপস্থিত: %1। আগের প্যানেলগুলো অক্ষত রাখা হয়েছে।"
+
+#: src/services/LayoutService.cpp:53
+#, kde-format
+msgid "No screen available in Plasma."
+msgstr "Plasma-তে কোনো স্ক্রিন উপলব্ধ নেই।"
+
+#: src/services/LayoutService.cpp:56
+#, kde-format
+msgid "Could not query the screen geometry."
+msgstr "স্ক্রিনের জ্যামিতি জানা যায়নি।"
+
+#: src/services/LayoutService.cpp:58
+#, kde-format
+msgid ""
+"Could not check the required widgets; the previous panels were preserved."
+msgstr "প্রয়োজনীয় উইজেট পরীক্ষা করা যায়নি; আগের প্যানেলগুলো অক্ষত রাখা হয়েছে।"
+
+#: src/services/LayoutService.cpp:132
+msgctxt "desktop layout name"
+msgid "Classic — 5 panels"
+msgstr "ক্লাসিক — ৫টি প্যানেল"
+
+#: src/services/LayoutService.cpp:133
+msgctxt "desktop layout name"
+msgid "3 panels"
+msgstr "৩টি প্যানেল"
+
+#: src/services/LayoutService.cpp:134
+msgctxt "desktop layout name"
+msgid "Single panel"
+msgstr "একক প্যানেল"
+
+#: src/services/LayoutService.cpp:135
+msgctxt "desktop layout name"
+msgid "Top panel"
+msgstr "ওপরের প্যানেল"
+
+#: src/services/LayoutService.cpp:136
+msgctxt "desktop layout name"
+msgid "Floating"
+msgstr "ভাসমান"
+
+#. i18n: "W7" refers to a Windows 7 style taskbar.
+#: src/services/LayoutService.cpp:138
+msgctxt "desktop layout name"
+msgid "W7 panel"
+msgstr "W7 প্যানেল"
+
+#: src/services/LayoutService.cpp:139
+msgctxt "desktop layout name"
+msgid "Tiling"
+msgstr "টাইলিং"
+
+#: src/services/LayoutService.cpp:394
+#, kde-format
+msgid "Could not measure the layout segments."
+msgstr "বিন্যাসের অংশগুলো মাপা যায়নি।"
+
+#: src/services/LayoutService.cpp:400
+#, kde-format
+msgid "The segments did not settle without overlapping on this screen."
+msgstr "এই স্ক্রিনে অংশগুলো একে অপরের ওপর না পড়ে স্থির হয়নি।"
+
+#: src/services/LayoutService.cpp:416
+#, kde-format
+msgid "Plasma did not respond; open the Welcome inside a KDE Plasma session."
+msgstr "Plasma সাড়া দেয়নি; KDE Plasma সেশনের ভেতরে স্বাগতম অ্যাপটি খুলুন।"
+
+#: src/services/LayoutService.cpp:423
+#, kde-format
+msgid "Checking the launcher of the %1 layout…"
+msgstr "%1 বিন্যাসের লঞ্চার পরীক্ষা করা হচ্ছে…"
+
+#: src/services/LayoutService.cpp:426
+#, kde-format
+msgid "Could not load the layout scripts; nothing was changed."
+msgstr "বিন্যাসের স্ক্রিপ্ট লোড করা যায়নি; কিছুই পরিবর্তন করা হয়নি।"
+
+#: src/services/LayoutService.cpp:437
+#, kde-format
+msgid "Could not save a copy of the current layout; nothing was changed."
+msgstr "বর্তমান বিন্যাসের কপি সংরক্ষণ করা যায়নি; কিছুই পরিবর্তন করা হয়নি।"
+
+#: src/services/LayoutService.cpp:440
+#, kde-format
+msgid "Applying the %1 layout…"
+msgstr "%1 বিন্যাস প্রয়োগ করা হচ্ছে…"
+
+#. i18n: %1 is a complete sentence explaining why the layout failed.
+#: src/services/LayoutService.cpp:445
+#, kde-format
+msgid "%1 The previous layout was restored."
+msgstr "%1 আগের বিন্যাস পুনরুদ্ধার করা হয়েছে।"
+
+#. i18n: “Restore Previous Layout” is the button on the Appearance page.
+#: src/services/LayoutService.cpp:447
+#, kde-format
+msgid "%1 Could not restore automatically; use “Restore Previous Layout”."
+msgstr ""
+"%1 স্বয়ংক্রিয়ভাবে পুনরুদ্ধার করা যায়নি; “আগের বিন্যাস পুনরুদ্ধার করুন” ব্যবহার করুন।"
+
+#. i18n: %2 is the raw error reported by Plasma.
+#: src/services/LayoutService.cpp:459
+#, kde-format
+msgid "Could not apply the %1 layout (%2)."
+msgstr "%1 বিন্যাস প্রয়োগ করা যায়নি (%2)।"
+
+#: src/services/LayoutService.cpp:469
+#, kde-format
+msgid "The %1 layout was not completed."
+msgstr "%1 বিন্যাস সম্পূর্ণ হয়নি।"
+
+#: src/services/LayoutService.cpp:474
+#, kde-format
+msgid "%1 layout applied."
+msgstr "%1 বিন্যাস প্রয়োগ করা হয়েছে।"
+
+#: src/services/LayoutService.cpp:478
+#, kde-format
+msgid ""
+"%1 layout applied. Drag windows while holding Shift to snap them into the "
+"tiles."
+msgstr ""
+"%1 বিন্যাস প্রয়োগ করা হয়েছে। উইন্ডোগুলো টাইলে বসাতে Shift চেপে ধরে টেনে আনুন।"
+
+#: src/services/LayoutService.cpp:479
+#, kde-format
+msgid "%1 layout applied, but the KWin tiles could not be configured."
+msgstr "%1 বিন্যাস প্রয়োগ করা হয়েছে, কিন্তু KWin টাইল কনফিগার করা যায়নি।"
+
+#: src/services/LayoutService.cpp:554
+#, kde-format
+msgid "Restoring the previous layout; Plasma will be restarted…"
+msgstr "আগের বিন্যাস পুনরুদ্ধার করা হচ্ছে; Plasma পুনরায় চালু করা হবে…"
+
+#: src/services/LayoutService.cpp:556
+#, kde-format
+msgid "Previous layout restored."
+msgstr "আগের বিন্যাস পুনরুদ্ধার করা হয়েছে।"
+
+#: src/services/LayoutService.cpp:557
+#, kde-format
+msgid "Could not restore the previous layout."
+msgstr "আগের বিন্যাস পুনরুদ্ধার করা যায়নি।"
+
+#: src/services/PackageService.cpp:111 src/services/PackageService.cpp:161
+#, kde-format
+msgid "Flatpak is not installed."
+msgstr "Flatpak ইনস্টল করা নেই।"
+
+#: src/services/PackageService.cpp:140
+#, kde-format
+msgid "Could not query Flatpak."
+msgstr "Flatpak-এর তথ্য জানা যায়নি।"
+
+#: src/services/PackageService.cpp:151
+#, kde-format
+msgid "This application is not in the allowed list."
+msgstr "এই অ্যাপলিকেশনটি অনুমোদিত তালিকায় নেই।"
+
+#: src/services/PackageService.cpp:155
+#, kde-format
+msgid "Another Flatpak operation is in progress."
+msgstr "আরেকটি Flatpak প্রক্রিয়া চলছে।"
+
+#: src/services/PackageService.cpp:176
+#, kde-format
+msgctxt "@info:status %1 is a Flatpak application ID"
+msgid "Removing %1…"
+msgstr "%1 সরানো হচ্ছে…"
+
+#: src/services/PackageService.cpp:182
+#, kde-format
+msgid "Removal finished."
+msgstr "অপসারণ সম্পন্ন হয়েছে।"
+
+#: src/services/PackageService.cpp:184
+#, kde-format
+msgctxt "@info:status %1 is the error output of Flatpak"
+msgid "Failed: %1"
+msgstr "ব্যর্থ: %1"
+
+#: src/services/PackageService.cpp:195
+#, kde-format
+msgid "Could not start Flatpak."
+msgstr "Flatpak চালু করা যায়নি।"
+
+#: src/services/StartupPreference.cpp:75 src/services/StartupPreference.cpp:92
+#, kde-format
+msgid "Could not change the startup preference."
+msgstr "চালুর সময়ের পছন্দ পরিবর্তন করা যায়নি।"
+
+#: src/services/SystemReportService.cpp:38
+#, kde-format
+msgctxt "@info system report value"
+msgid "Not available"
+msgstr "উপলব্ধ নয়"
+
+#: src/services/SystemReportService.cpp:186
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 দিন"
+msgstr[1] "%1 দিন"
+
+#: src/services/SystemReportService.cpp:189
+#, kde-format
+msgid "%1 hour"
+msgid_plural "%1 hours"
+msgstr[0] "%1 ঘণ্টা"
+msgstr[1] "%1 ঘণ্টা"
+
+#: src/services/SystemReportService.cpp:192
+#, kde-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 মিনিট"
+msgstr[1] "%1 মিনিট"
+
+#: src/services/SystemReportService.cpp:195
+#, kde-format
+msgid "less than a minute"
+msgstr "এক মিনিটের কম"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration"
+msgid "%1 and %2"
+msgstr "%1 ও %2"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration list separator"
+msgid ", "
+msgstr ", "
+
+#: src/services/SystemReportService.cpp:333
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (64-bit)"
+msgstr "%1 (৬৪-বিট)"
+
+#: src/services/SystemReportService.cpp:334
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (32-bit)"
+msgstr "%1 (৩২-বিট)"
+
+#: src/services/SystemReportService.cpp:341
+#, kde-format
+msgctxt "@title system report section"
+msgid "System"
+msgstr "সিস্টেম"
+
+#: src/services/SystemReportService.cpp:342
+#, kde-format
+msgctxt "@label system report item"
+msgid "Distribution"
+msgstr "ডিস্ট্রিবিউশন"
+
+#: src/services/SystemReportService.cpp:344
+#, kde-format
+msgctxt "@label system report item"
+msgid "Version"
+msgstr "সংস্করণ"
+
+#: src/services/SystemReportService.cpp:347
+#: src/services/SystemReportService.cpp:349
+#, kde-format
+msgctxt "@label system report item"
+msgid "Base"
+msgstr "ভিত্তি"
+
+#: src/services/SystemReportService.cpp:353
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation media"
+msgstr "ইনস্টলেশন মিডিয়া"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Estimated installation date"
+msgstr "আনুমানিক ইনস্টলেশনের তারিখ"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation date"
+msgstr "ইনস্টলেশনের তারিখ"
+
+#: src/services/SystemReportService.cpp:366
+#, kde-format
+msgctxt "@label system report item"
+msgid "Architecture"
+msgstr "আর্কিটেকচার"
+
+#: src/services/SystemReportService.cpp:368
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer name"
+msgstr "কম্পিউটারের নাম"
+
+#: src/services/SystemReportService.cpp:370
+#, kde-format
+msgctxt "@label system report item"
+msgid "Language"
+msgstr "ভাষা"
+
+#: src/services/SystemReportService.cpp:371
+#, kde-format
+msgctxt "@label system report item"
+msgid "Date and time"
+msgstr "তারিখ ও সময়"
+
+#: src/services/SystemReportService.cpp:374
+#, kde-format
+msgctxt "@title system report section"
+msgid "Desktop"
+msgstr "ডেস্কটপ"
+
+#: src/services/SystemReportService.cpp:378
+#, kde-format
+msgctxt "@label system report item"
+msgid "Session"
+msgstr "সেশন"
+
+#: src/services/SystemReportService.cpp:379
+#, kde-format
+msgctxt "@label system report item"
+msgid "Environment"
+msgstr "পরিবেশ"
+
+#: src/services/SystemReportService.cpp:382
+#, kde-format
+msgctxt "@title system report section"
+msgid "Hardware"
+msgstr "হার্ডওয়্যার"
+
+#: src/services/SystemReportService.cpp:386
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer"
+msgstr "কম্পিউটার"
+
+#: src/services/SystemReportService.cpp:388
+#, kde-format
+msgctxt "@label system report item"
+msgid "Processor"
+msgstr "প্রসেসর"
+
+#: src/services/SystemReportService.cpp:389
+#, kde-format
+msgctxt "@label system report item"
+msgid "Cores / threads"
+msgstr "কোর / থ্রেড"
+
+#: src/services/SystemReportService.cpp:391
+#, kde-format
+msgctxt "@info firmware type"
+msgid "BIOS (legacy)"
+msgstr "BIOS (লিগ্যাসি)"
+
+#: src/services/SystemReportService.cpp:392
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Not applicable (BIOS)"
+msgstr "প্রযোজ্য নয় (BIOS)"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Disabled"
+msgstr "নিষ্ক্রিয়"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Enabled"
+msgstr "সক্রিয়"
+
+#: src/services/SystemReportService.cpp:399
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Could not be determined"
+msgstr "নির্ধারণ করা যায়নি"
+
+#: src/services/SystemReportService.cpp:406
+#, kde-format
+msgctxt "@title system report section"
+msgid "Graphics"
+msgstr "গ্রাফিক্স"
+
+#: src/services/SystemReportService.cpp:430
+#, kde-format
+msgctxt "@info appended to a device name"
+msgid " · driver %1"
+msgstr " · ড্রাইভার %1"
+
+#: src/services/SystemReportService.cpp:438
+#, kde-format
+msgctxt "@label system report item"
+msgid "OpenGL renderer"
+msgstr "OpenGL রেন্ডারার"
+
+#: src/services/SystemReportService.cpp:445
+#, kde-format
+msgctxt "@label system report item"
+msgid "Monitor %1"
+msgstr "মনিটর %1"
+
+#. i18n: screen name · width×height · refresh rate · scale percentage
+#: src/services/SystemReportService.cpp:447
+#, kde-format
+msgctxt "@info monitor details"
+msgid "%1 · %2×%3 · %4 Hz · scale %5%"
+msgstr "%1 · %2×%3 · %4 Hz · স্কেল %5%"
+
+#: src/services/SystemReportService.cpp:455
+#, kde-format
+msgctxt "@title system report section"
+msgid "Memory"
+msgstr "মেমরি"
+
+#: src/services/SystemReportService.cpp:457
+#, kde-format
+msgctxt "@label system report item"
+msgid "Total"
+msgstr "মোট"
+
+#: src/services/SystemReportService.cpp:458
+#, kde-format
+msgctxt "@label system report item"
+msgid "In use"
+msgstr "ব্যবহৃত"
+
+#: src/services/SystemReportService.cpp:459
+#, kde-format
+msgctxt "@label system report item"
+msgid "Available"
+msgstr "উপলব্ধ"
+
+#: src/services/SystemReportService.cpp:461
+#, kde-format
+msgctxt "@info swap usage"
+msgid "%1 of %2 in use"
+msgstr "%2-এর মধ্যে %1 ব্যবহৃত"
+
+#: src/services/SystemReportService.cpp:462
+#, kde-format
+msgid "No swap"
+msgstr "সোয়াপ নেই"
+
+#: src/services/SystemReportService.cpp:466
+#, kde-format
+msgctxt "@title system report section"
+msgid "Storage"
+msgstr "স্টোরেজ"
+
+#: src/services/SystemReportService.cpp:478
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disk %1"
+msgstr "ডিস্ক %1"
+
+#: src/services/SystemReportService.cpp:497
+#, kde-format
+msgctxt "@label system report item"
+msgid "Other volume %1"
+msgstr "অন্য ভলিউম %1"
+
+#: src/services/SystemReportService.cpp:500
+#, kde-format
+msgctxt "@info volume usage"
+msgid "%1 used of %2 · %3 free"
+msgstr "%2-এর মধ্যে %1 ব্যবহৃত · %3 খালি"
+
+#: src/services/SystemReportService.cpp:503
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disks"
+msgstr "ডিস্ক"
+
+#: src/services/SystemReportService.cpp:508
+#, kde-format
+msgctxt "@title system report section"
+msgid "Packages"
+msgstr "প্যাকেজ"
+
+#: src/services/SystemReportService.cpp:511
+#: src/services/SystemReportService.cpp:526
+#, kde-format
+msgid "%1 package"
+msgid_plural "%1 packages"
+msgstr[0] "%1টি প্যাকেজ"
+msgstr[1] "%1টি প্যাকেজ"
+
+#: src/services/SystemReportService.cpp:523
+#, kde-format
+msgid "%1 application"
+msgid_plural "%1 applications"
+msgstr[0] "%1টি অ্যাপলিকেশন"
+msgstr[1] "%1টি অ্যাপলিকেশন"
+
+#: src/services/SystemReportService.cpp:527
+#, kde-format
+msgid "Snap not installed"
+msgstr "Snap ইনস্টল করা নেই"
+
+#: src/services/SystemReportService.cpp:532
+#, kde-format
+msgctxt "@info kernel version"
+msgid "%1 (in use)"
+msgstr "%1 (ব্যবহৃত হচ্ছে)"
+
+#: src/services/SystemReportService.cpp:534
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installed kernels"
+msgstr "ইনস্টল করা কার্নেল"
+
+#: src/services/SystemReportService.cpp:537
+#, kde-format
+msgctxt "@title system report section"
+msgid "Startup"
+msgstr "স্টার্টআপ"
+
+#: src/services/SystemReportService.cpp:538
+#, kde-format
+msgctxt "@label system report item"
+msgid "Uptime"
+msgstr "চালু থাকার সময়"
+
+#: src/services/SystemReportService.cpp:539
+#, kde-format
+msgctxt "@label system report item"
+msgid "Last boot"
+msgstr "সর্বশেষ বুট"
+
+#: src/services/SystemReportService.cpp:543
+#, kde-format
+msgctxt "@title system report section"
+msgid "Network"
+msgstr "নেটওয়ার্ক"
+
+#: src/services/SystemReportService.cpp:556
+#, kde-format
+msgctxt "@info network adapter"
+msgid "driver %1"
+msgstr "ড্রাইভার %1"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "connected"
+msgstr "সংযুক্ত"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "disconnected"
+msgstr "সংযোগ বিচ্ছিন্ন"
+
+#: src/services/SystemReportService.cpp:569
+#, kde-format
+msgctxt "@label system report item"
+msgid "Adapters"
+msgstr "অ্যাডাপ্টার"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "32-bit"
+msgstr "৩২-বিট"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "64-bit"
+msgstr "৬৪-বিট"
+
+#: src/services/SystemReportService.cpp:581
+#, kde-format
+msgctxt "@info memory usage summary"
+msgid "%1 of %2"
+msgstr "%2-এর মধ্যে %1"
+
+#: src/services/SystemReportService.cpp:582
+#, kde-format
+msgctxt "@info storage summary"
+msgid "%1 free of %2"
+msgstr "%2-এর মধ্যে %1 খালি"
+
+#: src/services/SystemReportService.cpp:593
+#, kde-format
+msgctxt "@info system report header"
+msgid "Generated on: %1"
+msgstr "তৈরির সময়: %1"
+
+#: src/services/SystemReportService.cpp:598
+#, kde-format
+msgctxt "@info system report line: label, value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: src/services/SystemReportService.cpp:603
+#, kde-format
+msgctxt "@info system report footer"
+msgid "No network addresses, serial numbers or computer name."
+msgstr "কোনো নেটওয়ার্ক ঠিকানা, সিরিয়াল নম্বর বা কম্পিউটারের নাম নেই।"
+
+#: src/services/SystemService.cpp:93
+#, kde-format
+msgid "The %1 decoration engine is not installed."
+msgstr "%1 ডেকোরেশন ইঞ্জিন ইনস্টল করা নেই।"
+
+#: src/services/SystemService.cpp:108
+#, kde-format
+msgid "The %1 decoration is not installed or its resources are incomplete."
+msgstr "%1 ডেকোরেশন ইনস্টল করা নেই অথবা এর রিসোর্স অসম্পূর্ণ।"
+
+#. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
+#: src/services/SystemService.cpp:480
+#, kde-format
+msgid "Driver Manager available"
+msgstr "ড্রাইভার ম্যানেজার উপলব্ধ"
+
+#: src/services/SystemService.cpp:481
+#, kde-format
+msgid "Driver Manager not installed"
+msgstr "ড্রাইভার ম্যানেজার ইনস্টল করা নেই"
+
+#: src/services/SystemService.cpp:497
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Active"
+msgstr "সক্রিয়"
+
+#: src/services/SystemService.cpp:498
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Inactive"
+msgstr "নিষ্ক্রিয়"
+
+#: src/services/SystemService.cpp:501
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: active"
+msgstr "চালুর সময়: সক্রিয়"
+
+#: src/services/SystemService.cpp:502
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: inactive"
+msgstr "চালুর সময়: নিষ্ক্রিয়"
+
+#. i18n: %1 is an error message shown in the page banner.
+#: src/services/SystemService.cpp:538
+#, kde-format
+msgid "Error: %1"
+msgstr "ত্রুটি: %1"
+
+#: src/services/SystemService.cpp:557
+#, kde-format
+msgid "Invalid theme."
+msgstr "অবৈধ থিম।"
+
+#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
+#: src/services/SystemService.cpp:858
+#, kde-format
+msgid "Wait for the current operation to finish."
+msgstr "বর্তমান প্রক্রিয়া শেষ হওয়া পর্যন্ত অপেক্ষা করুন।"
+
+# reviewed: variant ≠ version: সংস্করণ é o termo do glossário para Version;
+# ভ্যারিয়েন্ট (variante clara/escura do esquema)
+#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#, kde-format
+msgid ""
+"The current external color scheme has no known variant. Select a Mainuan "
+"color first."
+msgstr ""
+"বর্তমান বাহ্যিক রং স্কিমের কোনো পরিচিত ভ্যারিয়েন্ট নেই। প্রথমে একটি Mainuan রং "
+"বেছে নিন।"
+
+#: src/services/SystemService.cpp:578
+#, kde-format
+msgid "Dark theme applied."
+msgstr "গাঢ় থিম প্রয়োগ করা হয়েছে।"
+
+#: src/services/SystemService.cpp:579
+#, kde-format
+msgid "Light theme applied."
+msgstr "হালকা থিম প্রয়োগ করা হয়েছে।"
+
+#. i18n: %1 is an accent color name (Brown, Cyan…).
+#: src/services/SystemService.cpp:596
+#, kde-format
+msgid "Theme and %1 color applied."
+msgstr "থিম ও %1 রং প্রয়োগ করা হয়েছে।"
+
+#: src/services/SystemService.cpp:608
+#, kde-format
+msgid "Invalid accent color."
+msgstr "অবৈধ অ্যাকসেন্ট রং।"
+
+#: src/services/SystemService.cpp:618
+#, kde-format
+msgid "Applying %1 color…"
+msgstr "%1 রং প্রয়োগ করা হচ্ছে…"
+
+#: src/services/SystemService.cpp:629
+#, kde-format
+msgid "%1 color, icons, wallpaper and avatar applied."
+msgstr "%1 রং, আইকন, ওয়ালপেপার ও অ্যাভাটার প্রয়োগ করা হয়েছে।"
+
+#: src/services/SystemService.cpp:640
+#, kde-format
+msgid "Color scheme %1.colors is missing or unreadable."
+msgstr "%1.colors রং স্কিম অনুপস্থিত বা পড়া যাচ্ছে না।"
+
+#: src/services/SystemService.cpp:646
+#, kde-format
+msgid "Color scheme %1.colors is invalid."
+msgstr "%1.colors রং স্কিম অবৈধ।"
+
+#: src/services/SystemService.cpp:651
+#, kde-format
+msgid "plasma-apply-colorscheme is not available."
+msgstr "plasma-apply-colorscheme উপলব্ধ নয়।"
+
+#: src/services/SystemService.cpp:658
+#, kde-format
+msgid "Plasma did not recognize the %1.colors color scheme."
+msgstr "Plasma %1.colors রং স্কিমটি চিনতে পারেনি।"
+
+#: src/services/SystemService.cpp:704
+#, kde-format
+msgid "Could not prepare the KDE color configuration."
+msgstr "KDE রং কনফিগারেশন প্রস্তুত করা যায়নি।"
+
+#: src/services/SystemService.cpp:715
+#, kde-format
+msgid "Plasma did not confirm the %1 color scheme without a color override."
+msgstr "Plasma রং ওভাররাইড ছাড়া %1 রং স্কিম নিশ্চিত করেনি।"
+
+#. i18n: Item of a list of failed adjustments (lowercase, no final period).
+#: src/services/SystemService.cpp:729
+#, kde-format
+msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
+msgstr "আইকন থিম %1 অনুপস্থিত বা index.theme অবৈধ (আগের আইকন অক্ষত রাখা হয়েছে)"
+
+#: src/services/SystemService.cpp:732
+#, kde-format
+msgctxt "failed adjustment list item; %1 is an icon theme"
+msgid "icons %1"
+msgstr "আইকন %1"
+
+#: src/services/SystemService.cpp:737
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper %1 missing"
+msgstr "ওয়ালপেপার %1 অনুপস্থিত"
+
+#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
+#: src/services/SystemService.cpp:1022
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper"
+msgstr "ওয়ালপেপার"
+
+#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "Plasma did not confirm the %1 icons"
+msgstr "Plasma %1 আইকন নিশ্চিত করেনি"
+
+#: src/services/SystemService.cpp:758
+#, kde-format
+msgctxt "failed adjustment list item; %1 is the avatar error"
+msgid "avatar: %1"
+msgstr "অ্যাভাটার: %1"
+
+#: src/services/SystemService.cpp:764
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "color scheme changed during the operation; avatar preserved"
+msgstr "প্রক্রিয়ার সময় রং স্কিম পরিবর্তিত হয়েছে; অ্যাভাটার অক্ষত রাখা হয়েছে"
+
+#: src/services/SystemService.cpp:779
+#, kde-format
+msgid "Could not complete all adjustments: %1."
+msgstr "সব সমন্বয় সম্পন্ন করা যায়নি: %1।"
+
+#: src/services/SystemService.cpp:780
+#, kde-format
+msgctxt "separator between failed adjustment list items"
+msgid "; "
+msgstr "; "
+
+#: src/services/SystemService.cpp:795
+#, kde-format
+msgid "Could not communicate with KWin to update the window decoration."
+msgstr "উইন্ডো ডেকোরেশন আপডেট করতে KWin-এর সাথে যোগাযোগ করা যায়নি।"
+
+#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
+#: src/services/SystemService.cpp:830
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "could not restore the previous window decoration"
+msgstr "আগের উইন্ডো ডেকোরেশন পুনরুদ্ধার করা যায়নি"
+
+#: src/services/SystemService.cpp:821
+#, kde-format
+msgid "Could not save the requested window decoration in KWin."
+msgstr "অনুরোধ করা উইন্ডো ডেকোরেশন KWin-এ সংরক্ষণ করা যায়নি।"
+
+#: src/services/SystemService.cpp:831
+#, kde-format
+msgid ""
+"The final window decoration configuration was changed during the operation."
+msgstr "প্রক্রিয়ার সময় উইন্ডো ডেকোরেশনের চূড়ান্ত কনফিগারেশন পরিবর্তিত হয়েছে।"
+
+#: src/services/SystemService.cpp:854
+#, kde-format
+msgid "Invalid visual style."
+msgstr "অবৈধ ভিজ্যুয়াল স্টাইল।"
+
+#: src/services/SystemService.cpp:862
+#, kde-format
+msgid "%1 style applied."
+msgstr "%1 স্টাইল প্রয়োগ করা হয়েছে।"
+
+#: src/services/SystemService.cpp:895
+#, kde-format
+msgid ""
+"This system's Plasma does not provide plasma-apply-lookandfeel; the style "
+"cannot be changed."
+msgstr ""
+"এই সিস্টেমের Plasma-তে plasma-apply-lookandfeel নেই; স্টাইল পরিবর্তন করা যাবে "
+"না।"
+
+#: src/services/SystemService.cpp:900
+#, kde-format
+msgid "The %1 style is not installed on this system."
+msgstr "%1 স্টাইল এই সিস্টেমে ইনস্টল করা নেই।"
+
+#. i18n: %1 is a complete sentence describing the problem.
+#: src/services/SystemService.cpp:911
+#, kde-format
+msgid "%1 Previous appearance preserved."
+msgstr "%1 আগের চেহারা অক্ষত রাখা হয়েছে।"
+
+#: src/services/SystemService.cpp:927
+#, kde-format
+msgid "Could not preserve the %1 icon theme. Previous style preserved."
+msgstr "%1 আইকন থিম অক্ষত রাখা যায়নি। আগের স্টাইল অক্ষত রাখা হয়েছে।"
+
+#: src/services/SystemService.cpp:931
+#, kde-format
+msgid "Applying %1 style…"
+msgstr "%1 স্টাইল প্রয়োগ করা হচ্ছে…"
+
+#: src/services/SystemService.cpp:948
+#, kde-format
+msgid "Could not apply the %1 style."
+msgstr "%1 স্টাইল প্রয়োগ করা যায়নি।"
+
+#: src/services/SystemService.cpp:956
+#, kde-format
+msgid "Plasma did not confirm the %1 style."
+msgstr "Plasma %1 স্টাইল নিশ্চিত করেনি।"
+
+#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "icons"
+msgstr "আইকন"
+
+#: src/services/SystemService.cpp:986
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "cursor"
+msgstr "কার্সর"
+
+#: src/services/SystemService.cpp:1057
+#, kde-format
+msgid "Driver Manager is not installed."
+msgstr "ড্রাইভার ম্যানেজার ইনস্টল করা নেই।"
+
+#: src/services/SystemService.cpp:1061
+#, kde-format
+msgid "Could not open Driver Manager."
+msgstr "ড্রাইভার ম্যানেজার খোলা যায়নি।"
+
+#: src/services/SystemService.cpp:1066
+#, kde-format
+msgid "Unknown action."
+msgstr "অজ্ঞাত কাজ।"
+
+#: src/services/SystemService.cpp:1075
+#, kde-format
+msgid "URL blocked for security reasons."
+msgstr "নিরাপত্তার কারণে URL আটকানো হয়েছে।"
+
+#: src/services/SystemService.cpp:1079
+#, kde-format
+msgid "Requested the web browser to open the page."
+msgstr "পাতাটি খোলার জন্য ওয়েব ব্রাউজারকে অনুরোধ করা হয়েছে।"
+
+#: src/services/SystemService.cpp:1080
+#, kde-format
+msgid "Could not open the URL in the default web browser."
+msgstr "ডিফল্ট ওয়েব ব্রাউজারে URL খোলা যায়নি।"
+
+#: src/services/SystemService.cpp:1087
+#, kde-format
+msgid "This application is not allowed to be opened in Discover."
+msgstr "এই অ্যাপলিকেশনটি Discover-এ খোলার অনুমতি নেই।"
+
+#: src/services/SystemService.cpp:1092
+#, kde-format
+msgid "Discover was not found. Install KDE Discover to open this application."
+msgstr "Discover পাওয়া যায়নি। এই অ্যাপলিকেশনটি খুলতে KDE Discover ইনস্টল করুন।"
+
+#: src/services/SystemService.cpp:1098
+#, kde-format
+msgid "Could not open the page in Discover. Try again."
+msgstr "Discover-এ পাতাটি খোলা যায়নি। আবার চেষ্টা করুন।"
+
+#: src/services/SystemService.cpp:1101
+#, kde-format
+msgid ""
+"Requested Discover to open the page. Confirm the installation in Discover; "
+"if the application is not found, check Flathub and try again."
+msgstr ""
+"পাতাটি খোলার জন্য Discover-কে অনুরোধ করা হয়েছে। Discover-এ ইনস্টলেশন নিশ্চিত "
+"করুন; অ্যাপলিকেশনটি পাওয়া না গেলে Flathub পরীক্ষা করে আবার চেষ্টা করুন।"
+
+#: src/services/SystemService.cpp:1109
+#, kde-format
+msgid "No Pix key is configured."
+msgstr "কোনো Pix কী কনফিগার করা নেই।"
+
+#: src/services/SystemService.cpp:1113
+#, kde-format
+msgid "Clipboard unavailable."
+msgstr "ক্লিপবোর্ড উপলব্ধ নয়।"
+
+#: src/services/UserAvatar.cpp:70
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "অ্যাডমিনিস্ট্রেটর হিসেবে অ্যাভাটার আপডেটের অনুমতি নেই"
+
+#: src/services/UserAvatar.cpp:76
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr "উৎস .face ফাইল অনুপস্থিত, পড়া যাচ্ছে না বা অনিরাপদ"
+
+#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the source avatar"
+msgstr "উৎস অ্যাভাটার পড়া যায়নি"
+
+#: src/services/UserAvatar.cpp:93
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid ""
+"the .face file does not contain a valid image (SVG requires the Qt SVG "
+"plugin)"
+msgstr ".face ফাইলে কোনো বৈধ ছবি নেই (SVG-এর জন্য Qt SVG প্লাগইন প্রয়োজন)"
+
+#: src/services/UserAvatar.cpp:100
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "home folder unavailable or with unsafe permissions"
+msgstr "হোম ফোল্ডার উপলব্ধ নয় বা এর অনুমতি অনিরাপদ"
+
+#: src/services/UserAvatar.cpp:106
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "~/.face is not a safe regular file; avatar preserved"
+msgstr "~/.face কোনো নিরাপদ সাধারণ ফাইল নয়; অ্যাভাটার অক্ষত রাখা হয়েছে"
+
+#: src/services/UserAvatar.cpp:112
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "unsafe avatar backup; avatar preserved"
+msgstr "অ্যাভাটারের ব্যাকআপ অনিরাপদ; অ্যাভাটার অক্ষত রাখা হয়েছে"
+
+#: src/services/UserAvatar.cpp:120
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely open the previous avatar"
+msgstr "আগের অ্যাভাটার নিরাপদে খোলা যায়নি"
+
+#: src/services/UserAvatar.cpp:124
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the previous avatar"
+msgstr "আগের অ্যাভাটার পড়া যায়নি"
+
+#: src/services/UserAvatar.cpp:128
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not preserve the previous avatar"
+msgstr "আগের অ্যাভাটার অক্ষত রাখা যায়নি"
+
+#: src/services/UserAvatar.cpp:132
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the backup; avatar preserved"
+msgstr "ব্যাকআপ লেখা যায়নি; অ্যাভাটার অক্ষত রাখা হয়েছে"
+
+#: src/services/UserAvatar.cpp:138
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not publish the backup; avatar preserved"
+msgstr "ব্যাকআপ প্রকাশ করা যায়নি; অ্যাভাটার অক্ষত রাখা হয়েছে"
+
+#: src/services/UserAvatar.cpp:146
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the new avatar; avatar preserved"
+msgstr "নতুন অ্যাভাটার লেখা যায়নি; অ্যাভাটার অক্ষত রাখা হয়েছে"
+
+#: src/services/UserAvatar.cpp:155
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely replace ~/.face; avatar preserved"
+msgstr "~/.face নিরাপদে প্রতিস্থাপন করা যায়নি; অ্যাভাটার অক্ষত রাখা হয়েছে"
+
+#: src/services/UserAvatar.cpp:158
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but writing to disk could not be confirmed"
+msgstr "অ্যাভাটার আপডেট হয়েছে, কিন্তু ডিস্কে লেখা নিশ্চিত করা যায়নি"
+
+#: src/services/UserAvatar.cpp:165
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be checked"
+msgstr "অ্যাভাটার আপডেট হয়েছে, কিন্তু ~/.face.icon পরীক্ষা করা যায়নি"
+
+#: src/services/UserAvatar.cpp:168
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be created"
+msgstr "অ্যাভাটার আপডেট হয়েছে, কিন্তু ~/.face.icon তৈরি করা যায়নি"
+
+#: src/services/UserAvatar.cpp:171
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
+msgstr "অ্যাভাটার আপডেট হয়েছে, কিন্তু ডিস্কে ~/.face.icon নিশ্চিত করা যায়নি"
