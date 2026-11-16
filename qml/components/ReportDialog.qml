@@ -72,19 +72,19 @@ Controls.Popup {
 
     Dialogs.FileDialog {
         id: saveDialog
-        title: "Salvar relatório da máquina"
+        title: i18n("Save System Report")
         fileMode: Dialogs.FileDialog.SaveFile
         defaultSuffix: "txt"
-        nameFilters: ["Texto (*.txt)"]
+        nameFilters: [i18n("Text (*.txt)")]
         onAccepted: dialog.report.saveReport(selectedFile)
-                    ? dialog.showFeedback("Relatório salvo.", false)
-                    : dialog.showFeedback("Não foi possível salvar o relatório.", true)
+                    ? dialog.showFeedback(i18n("Report saved."), false)
+                    : dialog.showFeedback(i18n("Could not save the report."), true)
     }
 
     contentItem: ColumnLayout {
         spacing: 0
         Accessible.role: Accessible.Dialog
-        Accessible.name: "Relatório da máquina"
+        Accessible.name: i18n("System Report")
 
         // Header: summary and actions.
         Rectangle {
@@ -133,22 +133,22 @@ Controls.Popup {
                     columnSpacing: 14
                     rowSpacing: 3
                     Accessible.role: Accessible.List
-                    Accessible.name: "Resumo do sistema"
+                    Accessible.name: i18n("System summary")
 
                     Kirigami.Heading {
                         Layout.columnSpan: 2
                         level: 2
-                        text: dialog.report.summary.os || "Relatório da máquina"
+                        text: dialog.report.summary.os || i18n("System Report")
                         color: dialog.textColor
                     }
                     Repeater {
                         model: [
-                            { label: "Desktop", value: dialog.report.summary.plasma },
-                            { label: "Kernel", value: (dialog.report.summary.kernel || "").replace("Kernel ", "") },
-                            { label: "CPU", value: dialog.report.summary.cpu },
-                            { label: "GPU", value: dialog.report.summary.gpu },
-                            { label: "Memória", value: dialog.report.summary.memory },
-                            { label: "Ligado há", value: dialog.report.summary.uptime }
+                            { label: i18nc("@label system report summary", "Desktop"), value: dialog.report.summary.plasma },
+                            { label: i18nc("@label system report summary", "Kernel"), value: (dialog.report.summary.kernel || "").replace("Kernel ", "") },
+                            { label: i18nc("@label system report summary", "CPU"), value: dialog.report.summary.cpu },
+                            { label: i18nc("@label system report summary", "GPU"), value: dialog.report.summary.gpu },
+                            { label: i18nc("@label system report summary", "Memory"), value: dialog.report.summary.memory },
+                            { label: i18nc("@label system report summary", "Uptime"), value: dialog.report.summary.uptime }
                         ]
                         delegate: Controls.Label {
                             required property var modelData
@@ -161,7 +161,7 @@ Controls.Popup {
                             color: dialog.textColor
                             elide: Text.ElideRight
                             font.pixelSize: 13
-                            Accessible.name: modelData.label + ": " + modelData.value
+                            Accessible.name: i18nc("@info:accessible label and value", "%1: %2", modelData.label, modelData.value)
                         }
                     }
                 }
@@ -171,17 +171,17 @@ Controls.Popup {
                     spacing: 6
                     Controls.Button {
                         Layout.fillWidth: true
-                        text: "Copiar relatório"
+                        text: i18n("Copy Report")
                         icon.name: "edit-copy"
                         highlighted: true
                         enabled: dialog.report.ready
                         onClicked: dialog.report.copyReport()
-                                   ? dialog.showFeedback("Relatório copiado.", false)
-                                   : dialog.showFeedback("Não foi possível copiar o relatório.", true)
+                                   ? dialog.showFeedback(i18n("Report copied."), false)
+                                   : dialog.showFeedback(i18n("Could not copy the report."), true)
                     }
                     Controls.Button {
                         Layout.fillWidth: true
-                        text: "Salvar relatório"
+                        text: i18n("Save Report")
                         icon.name: "document-save"
                         enabled: dialog.report.ready
                         onClicked: {
@@ -195,7 +195,7 @@ Controls.Popup {
                     }
                     Controls.Button {
                         Layout.fillWidth: true
-                        text: dialog.report.busy ? "Atualizando…" : "Atualizar"
+                        text: dialog.report.busy ? i18n("Refreshing…") : i18n("Refresh")
                         icon.name: "view-refresh"
                         enabled: !dialog.report.busy
                         onClicked: dialog.report.refresh()
@@ -203,7 +203,7 @@ Controls.Popup {
                     Controls.Button {
                         id: closeButton
                         Layout.fillWidth: true
-                        text: "Fechar"
+                        text: i18n("Close")
                         icon.name: "window-close"
                         onClicked: dialog.close()
                     }
@@ -299,7 +299,7 @@ Controls.Popup {
                                         Layout.fillWidth: true
                                         implicitHeight: Math.max(entryLabel.implicitHeight, entryValue.implicitHeight)
                                         Accessible.role: Accessible.StaticText
-                                        Accessible.name: modelData.label + ": " + modelData.value
+                                        Accessible.name: i18nc("@info:accessible label and value", "%1: %2", modelData.label, modelData.value)
                                         Controls.Label {
                                             id: entryLabel
                                             width: Math.min(150, parent.width * 0.4)

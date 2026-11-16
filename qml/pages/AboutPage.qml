@@ -19,7 +19,7 @@ Kirigami.Page {
 
     readonly property var summary: report ? report.summary : ({})
 
-    title: "Sobre"
+    title: i18nc("@title navigation page", "About")
     padding: 0
     background: Rectangle { color: page.pageColor }
 
@@ -78,7 +78,7 @@ Kirigami.Page {
                     smooth: true
                     mipmap: true
                     Accessible.role: Accessible.Graphic
-                    Accessible.name: "Logotipo do Mainuan"
+                    Accessible.name: i18n("Mainuan logo")
                 }
                 Kirigami.Icon {
                     visible: !heroLogo.visible
@@ -118,14 +118,14 @@ Kirigami.Page {
                         Layout.topMargin: 8
                         spacing: 8
                         Controls.Button {
-                            text: "Relatório da máquina"
+                            text: i18n("System Report")
                             icon.name: "view-list-details"
                             highlighted: true
                             onClicked: reportDialog.open()
-                            Accessible.description: "Abre as informações de hardware e software para suporte técnico"
+                            Accessible.description: i18n("Opens the hardware and software information for technical support")
                         }
                         Controls.Button {
-                            text: "Repositório"
+                            text: i18n("Repository")
                             icon.name: "internet-web-browser"
                             onClicked: page.system.openUrl("https://github.com/mainuan/welcome")
                         }
@@ -136,7 +136,7 @@ Kirigami.Page {
 
         Controls.Label {
             Layout.topMargin: 6
-            text: "Este computador"
+            text: i18n("This Computer")
             color: page.mutedColor
             font.pixelSize: 12
             font.weight: Font.DemiBold
@@ -151,12 +151,12 @@ Kirigami.Page {
 
             Repeater {
                 model: [
-                    { icon: "cpu", label: "Processador", value: page.summary.cpu },
-                    { icon: "monitor", label: "Gráficos", value: page.summary.gpu },
-                    { icon: "memory-stick", label: "Memória em uso", value: page.summary.memory },
-                    { icon: "hard-drive", label: "Armazenamento (sistema)", value: page.summary.storage },
-                    { icon: "calendar-clock", label: page.summary.installEstimated ? "Instalação (estimada)" : "Instalação", value: page.summary.installDate },
-                    { icon: "power", label: "Ligado há", value: page.summary.uptime }
+                    { icon: "cpu", label: i18n("Processor"), value: page.summary.cpu },
+                    { icon: "monitor", label: i18n("Graphics"), value: page.summary.gpu },
+                    { icon: "memory-stick", label: i18n("Memory in use"), value: page.summary.memory },
+                    { icon: "hard-drive", label: i18n("Storage (system)"), value: page.summary.storage },
+                    { icon: "calendar-clock", label: page.summary.installEstimated ? i18n("Installation (estimated)") : i18nc("@label installation date", "Installation"), value: page.summary.installDate },
+                    { icon: "power", label: i18n("Uptime"), value: page.summary.uptime }
                 ]
                 delegate: InfoTile {
                     required property var modelData
@@ -175,7 +175,7 @@ Kirigami.Page {
 
         Controls.Label {
             Layout.topMargin: 6
-            text: "Créditos"
+            text: i18n("Credits")
             color: page.mutedColor
             font.pixelSize: 12
             font.weight: Font.DemiBold
@@ -186,7 +186,7 @@ Kirigami.Page {
             surfaceColor: page.surfaceColor; borderColor: page.borderColor; accent: page.accent
             textColor: page.textColor; mutedColor: page.mutedColor
             title: "KDE Plasma"
-            description: "Ambiente de desktop e componentes de integração."
+            description: i18n("Desktop environment and integration components.")
             iconName: "kde"
             primaryText: "kde.org"
             primaryIcon: "internet-web-browser"
@@ -198,7 +198,7 @@ Kirigami.Page {
             surfaceColor: page.surfaceColor; borderColor: page.borderColor; accent: page.accent
             textColor: page.textColor; mutedColor: page.mutedColor
             title: "Ubuntu / Kubuntu"
-            description: "Base da distribuição e repositórios de pacotes."
+            description: i18n("Distribution base and package repositories.")
             iconName: "distributor-logo-ubuntu"
             primaryText: "ubuntu.com"
             primaryIcon: "internet-web-browser"
@@ -207,7 +207,7 @@ Kirigami.Page {
         }
         Controls.Label {
             Layout.fillWidth: true
-            text: "Software livre. A licença e o histórico do projeto estão no repositório."
+            text: i18n("Free software. The license and the project history are in the repository.")
             color: page.mutedColor
             font.pixelSize: 12
             wrapMode: Text.WordWrap

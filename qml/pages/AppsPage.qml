@@ -40,7 +40,7 @@ Kirigami.Page {
         Controls.Label {
             visible: !page.pkgService.flatpakAvailable
             Layout.fillWidth: true
-            text: "Flatpak não foi encontrado. Os aplicativos Flatpak estão indisponíveis. O FreeOffice e os serviços online continuam independentes do Flatpak."
+            text: i18n("Flatpak was not found. Flatpak applications are unavailable. FreeOffice and the online services remain independent of Flatpak.")
             color: page.mutedColor
             wrapMode: Text.WordWrap
         }
@@ -48,7 +48,8 @@ Kirigami.Page {
             visible: page.pkgService.lastMessage.length > 0
             Layout.fillWidth: true
             text: page.pkgService.lastMessage
-            color: page.pkgService.lastMessage.indexOf("Falha") === 0 ? "#c94444" : page.mutedColor
+            // Must match the prefix PackageService puts on failure messages.
+            color: page.pkgService.lastMessage.indexOf(i18nc("prefix of a failure message", "Failed:")) === 0 ? "#c94444" : page.mutedColor
             wrapMode: Text.WordWrap
         }
 
@@ -58,7 +59,7 @@ Kirigami.Page {
             dark: page.dark
             accent: page.accent
             textColor: page.textColor
-            error: text.indexOf("Erro:") === 0
+            error: page.system.lastMessageIsError === true
         }
 
         Flow {

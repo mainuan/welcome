@@ -20,7 +20,7 @@ Kirigami.Page {
 
     readonly property var accentPalette: page.system.accentProfiles
 
-    title: "Aparência"
+    title: i18nc("@title navigation page", "Appearance")
     padding: 0
     background: Rectangle { color: page.pageColor }
     // Plasma may not have answered yet when the Welcome starts at login.
@@ -35,10 +35,10 @@ Kirigami.Page {
     PageContainer {
         contentSpacing: 12
 
-        Kirigami.Heading { text: "Aparência"; level: 1 }
+        Kirigami.Heading { text: i18nc("@title navigation page", "Appearance"); level: 1 }
         Controls.Label {
             Layout.fillWidth: true
-            text: "Personalize as cores, a transparência e a disposição da sua área de trabalho."
+            text: i18n("Customize the colors, transparency and arrangement of your desktop.")
             color: page.mutedColor
             wrapMode: Text.WordWrap
         }
@@ -49,12 +49,12 @@ Kirigami.Page {
             dark: page.dark
             accent: page.accent
             textColor: page.textColor
-            error: text.indexOf("Erro:") === 0
+            error: page.system.lastMessageIsError === true
         }
 
         Controls.Label {
             Layout.topMargin: 12
-            text: "Aparência do sistema"
+            text: i18n("System Appearance")
             color: page.mutedColor
             font.pixelSize: 12
             font.weight: Font.DemiBold
@@ -76,23 +76,23 @@ Kirigami.Page {
 
                 SettingRow {
                     Layout.fillWidth: true
-                    title: "Estilo visual"
+                    title: i18n("Visual Style")
                     subtitle: page.system.visualStyleAvailable
-                              ? "Muda o estilo do Plasma e mantém a cor Mainuan e seus ícones selecionados."
-                              : "Disponível apenas no KDE Plasma."
+                              ? i18n("Changes the Plasma style and keeps the Mainuan color and your selected icons.")
+                              : i18n("Available only on KDE Plasma.")
                     iconName: "preferences-desktop-effects"
                     accent: page.accent; textColor: page.textColor; mutedColor: page.mutedColor
                     compactWidth: 720
 
                     SegmentedChoice {
                         enabled: page.system.visualStyleAvailable && !page.system.busy
-                        groupName: "Estilo visual"
+                        groupName: i18n("Visual Style")
                         current: page.system.visualStyle
                         availableValues: page.system.installedVisualStyles
                         options: [
-                            { value: "blur", label: "Desfocado", icon: "blur", tooltip: "Tema Dream: painéis translúcidos com desfoque" },
-                            { value: "glass", label: "Vítreo", icon: "window", tooltip: "Tema Tahoe: painéis claros com efeito de vidro" },
-                            { value: "solid", label: "Sólido", icon: "object-fill", tooltip: "Tema Breeze: o visual padrão do KDE, sem transparência" }
+                            { value: "blur", label: i18nc("@option visual style", "Blurred"), icon: "blur", tooltip: i18n("Dream theme: translucent panels with blur") },
+                            { value: "glass", label: i18nc("@option visual style", "Glass"), icon: "window", tooltip: i18n("Tahoe theme: light panels with a glass effect") },
+                            { value: "solid", label: i18nc("@option visual style", "Solid"), icon: "object-fill", tooltip: i18n("Breeze theme: the default KDE look, without transparency") }
                         ]
                         onActivated: (value) => page.system.setVisualStyle(value)
                     }
@@ -102,18 +102,18 @@ Kirigami.Page {
 
                 SettingRow {
                     Layout.fillWidth: true
-                    title: "Tema do sistema"
-                    subtitle: "Cores claras ou escuras em todo o sistema."
+                    title: i18n("System Theme")
+                    subtitle: i18n("Light or dark colors across the whole system.")
                     iconName: "preferences-desktop-theme"
                     accent: page.accent; textColor: page.textColor; mutedColor: page.mutedColor
 
                     SegmentedChoice {
                         enabled: !page.system.busy
-                        groupName: "Tema do sistema"
+                        groupName: i18n("System Theme")
                         current: page.dark ? "dark" : "light"
                         options: [
-                            { value: "light", label: "Claro", icon: "weather-clear" },
-                            { value: "dark", label: "Escuro", icon: "weather-clear-night" }
+                            { value: "light", label: i18nc("@option color theme", "Light"), icon: "weather-clear" },
+                            { value: "dark", label: i18nc("@option color theme", "Dark"), icon: "weather-clear-night" }
                         ]
                         onActivated: (value) => page.system.setTheme(value)
                     }
@@ -123,15 +123,15 @@ Kirigami.Page {
 
                 SettingRow {
                     Layout.fillWidth: true
-                    title: "Cor de destaque"
-                    subtitle: "Aplica o esquema KDE, os ícones Kora, o papel de parede e o avatar. Mantém a escolha ao trocar estilo ou tema."
+                    title: i18n("Accent Color")
+                    subtitle: i18n("Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. Keeps the choice when you change style or theme.")
                     iconName: "color-picker"
                     accent: page.accent; textColor: page.textColor; mutedColor: page.mutedColor
 
                     Row {
                         spacing: 8
                         Accessible.role: Accessible.Grouping
-                        Accessible.name: "Cor de destaque"
+                        Accessible.name: i18n("Accent Color")
                         Repeater {
                             model: page.accentPalette
                             delegate: Controls.AbstractButton {
@@ -154,7 +154,8 @@ Kirigami.Page {
                                         page.system.setAccent(modelData.id);
                                 }
                                 Accessible.role: Accessible.RadioButton
-                                Accessible.name: "Cor de destaque " + modelData.name
+                                // i18n: %1 is the accent color name
+                                Accessible.name: i18n("Accent color %1", modelData.name)
                                 Controls.ToolTip.visible: hovered
                                 Controls.ToolTip.text: modelData.name
                                 Controls.ToolTip.delay: 400
@@ -187,7 +188,7 @@ Kirigami.Page {
 
         Controls.Label {
             Layout.topMargin: 16
-            text: "Layout do desktop"
+            text: i18n("Desktop Layout")
             color: page.mutedColor
             font.pixelSize: 12
             font.weight: Font.DemiBold
@@ -196,8 +197,8 @@ Kirigami.Page {
         Controls.Label {
             Layout.fillWidth: true
             text: page.layoutManager.available
-                  ? "Escolha como os painéis ficam na tela. Antes de cada troca o Welcome guarda uma cópia do layout atual."
-                  : "Os layouts só podem ser aplicados dentro de uma sessão do KDE Plasma."
+                  ? i18n("Choose how the panels are placed on the screen. Before each change the Welcome keeps a copy of the current layout.")
+                  : i18n("Layouts can only be applied inside a KDE Plasma session.")
             color: page.mutedColor
             wrapMode: Text.WordWrap
         }
@@ -274,7 +275,7 @@ Kirigami.Page {
                             }
                             Controls.Label {
                                 visible: layoutCard.active
-                                text: "Em uso"
+                                text: i18nc("@info layout status", "In use")
                                 color: page.successColor
                                 font.pixelSize: 12
                                 font.weight: Font.DemiBold
@@ -293,11 +294,11 @@ Kirigami.Page {
                         Controls.Button {
                             objectName: "applyLayout-" + layoutCard.layoutId
                             Layout.alignment: Qt.AlignRight
-                            text: layoutCard.active ? "Aplicado" : "Aplicar"
+                            text: layoutCard.active ? i18nc("@action:button layout already applied", "Applied") : i18nc("@action:button", "Apply")
                             icon.name: layoutCard.active ? "checkmark" : "dialog-ok-apply"
                             enabled: page.layoutManager.available && !page.layoutManager.busy && !layoutCard.active
                             onClicked: page.layoutManager.apply(layoutCard.layoutId)
-                            Accessible.name: (layoutCard.active ? "Layout em uso: " : "Aplicar layout ") + layoutCard.name
+                            Accessible.name: layoutCard.active ? i18n("Layout in use: %1", layoutCard.name) : i18n("Apply layout %1", layoutCard.name)
                             Accessible.description: layoutCard.description
                         }
                     }
@@ -311,13 +312,13 @@ Kirigami.Page {
             spacing: 10
             Controls.Label {
                 Layout.fillWidth: true
-                text: "Volta ao layout que estava em uso antes da última troca. O Plasma é reiniciado por alguns segundos."
+                text: i18n("Returns to the layout that was in use before the last change. Plasma restarts for a few seconds.")
                 color: page.mutedColor
                 font.pixelSize: 12
                 wrapMode: Text.WordWrap
             }
             Controls.Button {
-                text: "Restaurar layout anterior"
+                text: i18n("Restore Previous Layout")
                 icon.name: "edit-undo"
                 enabled: !page.layoutManager.busy
                 onClicked: restoreDialog.open()
@@ -330,12 +331,12 @@ Kirigami.Page {
         objectName: "restoreLayoutDialog"
         parent: page.Controls.Overlay.overlay
         preferredWidth: Kirigami.Units.gridUnit * 28
-        title: "Restaurar layout anterior?"
-        subtitle: "Os painéis voltam a ser como estavam antes da última troca de layout. O Plasma será reiniciado por alguns segundos."
+        title: i18n("Restore previous layout?")
+        subtitle: i18n("The panels go back to how they were before the last layout change. Plasma will restart for a few seconds.")
         standardButtons: Kirigami.Dialog.NoButton
         customFooterActions: [
             Kirigami.Action {
-                text: "Restaurar"
+                text: i18nc("@action:button", "Restore")
                 icon.name: "edit-undo"
                 onTriggered: {
                     restoreDialog.close();
@@ -343,7 +344,7 @@ Kirigami.Page {
                 }
             },
             Kirigami.Action {
-                text: "Cancelar"
+                text: i18nc("@action:button", "Cancel")
                 icon.name: "dialog-cancel"
                 onTriggered: restoreDialog.close()
             }

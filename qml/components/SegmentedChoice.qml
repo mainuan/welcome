@@ -42,7 +42,7 @@ RowLayout {
                     choice.activated(modelData.value);
             }
             Accessible.role: Accessible.RadioButton
-            Accessible.name: choice.groupName + ": " + modelData.label
+            Accessible.name: i18nc("@info:accessible label and value", "%1: %2", choice.groupName, modelData.label)
             Accessible.description: modelData.tooltip || ""
             Controls.ToolTip.visible: hovered && (modelData.tooltip || "").length > 0
             Controls.ToolTip.text: modelData.tooltip || ""

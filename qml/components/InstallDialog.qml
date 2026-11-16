@@ -183,8 +183,10 @@ Controls.Popup {
                         level: 3
                         wrapMode: Text.WordWrap
                         color: dialog.textColor
-                        text: dialog.finished ? (dialog.info.name || "Instalação")
-                            : (dialog.awaitingConfirmation ? "Instalar " : "Instalando ") + (dialog.info.name || "componentes")
+                        text: dialog.finished ? (dialog.info.name || i18n("Installation"))
+                            : dialog.awaitingConfirmation
+                              ? (dialog.info.name ? i18n("Install %1", dialog.info.name) : i18n("Install components"))
+                              : (dialog.info.name ? i18n("Installing %1", dialog.info.name) : i18n("Installing components"))
                     }
                     Controls.Label {
                         objectName: "installationResultMessage"
@@ -193,7 +195,7 @@ Controls.Popup {
                         wrapMode: Text.WordWrap
                         textFormat: Text.PlainText
                         color: dialog.mutedColor
-                        text: dialog.succeeded ? "Instalação concluída com sucesso."
+                        text: dialog.succeeded ? i18n("Installation completed successfully.")
                             : dialog.finished ? dialog.installer.resultMessage : ""
                         Accessible.role: Accessible.StaticText
                     }
@@ -203,7 +205,7 @@ Controls.Popup {
             Controls.Label {
                 objectName: "installationSource"
                 Layout.fillWidth: true
-                text: "Origem: " + (dialog.info.source || "")
+                text: i18n("Source: %1", dialog.info.source || "")
                 textFormat: Text.PlainText
                 wrapMode: Text.WordWrap
                 color: dialog.mutedColor
@@ -240,15 +242,16 @@ Controls.Popup {
                     indeterminate: dialog.running && !dialog.hasProgress
                     value: dialog.succeeded ? 100 : (dialog.hasProgress ? dialog.installer.percent : 0)
                     Behavior on value { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
-                    Accessible.name: "Progresso da instalação"
-                    Accessible.description: indeterminate ? "Em andamento" : (dialog.succeeded ? 100 : dialog.installer.percent) + "%"
+                    Accessible.name: i18n("Installation progress")
+                    Accessible.description: indeterminate ? i18n("In progress")
+                        : i18nc("@info progress percentage", "%1%", dialog.succeeded ? 100 : dialog.installer.percent)
                 }
 
                 Controls.Label {
                     objectName: "installationPercentage"
                     Layout.alignment: Qt.AlignRight
                     visible: dialog.succeeded || dialog.hasProgress
-                    text: (dialog.succeeded ? 100 : dialog.installer.percent) + "%"
+                    text: i18nc("@info progress percentage", "%1%", dialog.succeeded ? 100 : dialog.installer.percent)
                     color: dialog.mutedColor
                     font.features: { "tnum": 1 }
                     Accessible.name: text
@@ -274,7 +277,7 @@ Controls.Popup {
                     wrapMode: Text.WordWrap
                     font.pixelSize: 12
                     color: dialog.mutedColor
-                    text: "Por segurança, a instalação não pode ser cancelada."
+                    text: i18n("For security reasons, the installation cannot be cancelled.")
                     Accessible.role: Accessible.StaticText
                 }
             }
@@ -287,10 +290,10 @@ Controls.Popup {
                 Controls.Button {
                     objectName: "installationDetailsToggle"
                     flat: true
-                    text: dialog.showDetails ? "Ocultar detalhes" : "Ver detalhes"
+                    text: dialog.showDetails ? i18n("Hide Details") : i18n("Show Details")
                     icon.name: dialog.showDetails ? "arrow-up" : "arrow-down"
                     onClicked: dialog.showDetails = !dialog.showDetails
-                    Accessible.description: "Mostra a saída técnica da instalação"
+                    Accessible.description: i18n("Shows the technical output of the installation")
                 }
                 Rectangle {
                     objectName: "installationDetailsPanel"
@@ -319,7 +322,7 @@ Controls.Popup {
                             color: dialog.textColor
                             selectionColor: dialog.accent
                             Accessible.role: Accessible.EditableText
-                            Accessible.name: "Detalhes técnicos da instalação"
+                            Accessible.name: i18n("Technical details of the installation")
                         }
                     }
                 }
@@ -333,20 +336,20 @@ Controls.Popup {
                 Controls.Button {
                     objectName: "confirmVendorInstallation"
                     visible: dialog.awaitingConfirmation
-                    text: "Instalar"
+                    text: i18n("Install")
                     highlighted: true
                     onClicked: {
                         dialog.awaitingConfirmation = false;
                         dialog.installer.start(dialog.profileId);
                     }
-                    Accessible.name: "Instalar FreeOffice da SoftMaker"
+                    Accessible.name: i18n("Install FreeOffice from SoftMaker")
                 }
                 Controls.Button {
                     id: actionButton
                     objectName: "installationResultAction"
                     visible: dialog.canRunAction
                     text: dialog.info.actionLabel || ""
-                    icon.name: text === "Abrir" ? "system-run" : "configure"
+                    icon.name: text === i18n("Open") ? "system-run" : "configure"
                     highlighted: true
                     onClicked: {
                         dialog.installer.launch(dialog.profileId);
@@ -357,7 +360,7 @@ Controls.Popup {
                     id: retryButton
                     objectName: "retryInstallation"
                     visible: dialog.failed || dialog.cancelled
-                    text: "Tentar novamente"
+                    text: i18n("Try Again")
                     icon.name: "view-refresh"
                     highlighted: true
                     onClicked: {
@@ -369,7 +372,7 @@ Controls.Popup {
                 Controls.Button {
                     id: closeButton
                     objectName: "closeInstallation"
-                    text: dialog.awaitingConfirmation ? "Cancelar" : "Fechar"
+                    text: dialog.awaitingConfirmation ? i18n("Cancel") : i18n("Close")
                     icon.name: "window-close"
                     onClicked: dialog.close()
                 }
