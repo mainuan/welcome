@@ -259,7 +259,10 @@ set(MAINUAN_GETTEXT_ENV ${CMAKE_COMMAND} -E env "GETTEXTDATADIRS=${MAINUAN_PO_DI
 file(GLOB MAINUAN_ITS_FILES CONFIGURE_DEPENDS "${MAINUAN_PO_DIR}/its/*")
 list(APPEND MAINUAN_ITS_FILES "${MAINUAN_PO_DIR}/polkit-lang.cmake")
 function(mainuan_translate_metadata mode template output)
+    get_filename_component(output_dir "${output}" DIRECTORY)
     add_custom_command(OUTPUT "${output}"
+        # msgfmt does not create the output directory (clean build trees)
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${output_dir}"
         COMMAND ${MAINUAN_GETTEXT_ENV} ${MAINUAN_MSGFMT} --${mode} --template "${template}" -d "${MAINUAN_PO_DIR}" -o "${output}"
         ${ARGN}
         DEPENDS "${template}" ${MAINUAN_PO_FILES} "${MAINUAN_PO_DIR}/LINGUAS" ${MAINUAN_ITS_FILES}
