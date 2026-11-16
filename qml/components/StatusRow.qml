@@ -71,6 +71,10 @@ Rectangle {
                      : (root.statusKind === "warn" ? root.warningColor : root.mutedColor)
                 font.pixelSize: 12
                 font.weight: root.statusKind === "ok" ? Font.DemiBold : Font.Normal
+                // Translations run up to ~40 % longer than Portuguese (German,
+                // Russian): wrap onto a second line before eliding.
+                wrapMode: Text.WordWrap
+                maximumLineCount: 2
                 elide: Text.ElideRight
                 Accessible.name: i18nc("@info:accessible label and value", "%1: %2", root.title, root.statusText)
                 Accessible.description: root.statusTooltip
