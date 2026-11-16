@@ -1,0 +1,2634 @@
+# Vietnamese translations for mainuan-welcome package.
+# Copyright (C) 2026 Mainuan
+# This file is distributed under the same license as the mainuan-welcome package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mainuan-welcome\n"
+"Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"PO-Revision-Date: 2026-11-16 12:18-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: vi <https://github.com/mainuan>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: qml/Main.qml:13
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — Chào mừng"
+
+#: qml/Main.qml:42
+msgid "Wait for the appearance changes to finish before closing the Welcome."
+msgstr ""
+"Hãy đợi các thay đổi diện mạo hoàn tất trước khi đóng ứng dụng Chào mừng."
+
+#: qml/Main.qml:45
+msgid ""
+"Wait for the layout to finish applying or restoring before closing the "
+"Welcome."
+msgstr ""
+"Hãy đợi bố cục áp dụng hoặc khôi phục xong trước khi đóng ứng dụng Chào mừng."
+
+#: qml/Main.qml:81 qml/pages/HomePage.qml:23
+msgctxt "@title navigation page"
+msgid "Home"
+msgstr "Trang chủ"
+
+#: qml/Main.qml:82 qml/pages/AppearancePage.qml:23
+#: qml/pages/AppearancePage.qml:38
+msgctxt "@title navigation page"
+msgid "Appearance"
+msgstr "Diện mạo"
+
+#: qml/Main.qml:83 qml/Main.qml:207
+msgctxt "@title navigation page"
+msgid "Office"
+msgstr "Văn phòng"
+
+#: qml/Main.qml:84 qml/Main.qml:208
+msgctxt "@title navigation page"
+msgid "Browsers"
+msgstr "Trình duyệt"
+
+#: qml/Main.qml:85 qml/pages/TutorialsPage.qml:23
+msgctxt "@title navigation page"
+msgid "Tutorials"
+msgstr "Hướng dẫn"
+
+#: qml/Main.qml:86 qml/pages/AboutPage.qml:22
+msgctxt "@title navigation page"
+msgid "About"
+msgstr "Thông tin"
+
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
+#: qml/pages/ContributePage.qml:32
+msgctxt "@title navigation page"
+msgid "Contribute"
+msgstr "Đóng góp"
+
+#: qml/Main.qml:184
+msgid "Show this screen at system startup"
+msgstr "Hiện màn hình này khi khởi động hệ thống"
+
+#: qml/Main.qml:196
+msgid "Opens this screen automatically when you log in to your session"
+msgstr "Tự động mở màn hình này khi bạn đăng nhập vào phiên làm việc"
+
+#: qml/Main.qml:207
+msgid "Install productivity tools or open online services."
+msgstr "Cài đặt công cụ năng suất hoặc mở các dịch vụ trực tuyến."
+
+#: qml/Main.qml:208
+msgid "Choose your preferred browser to surf the web."
+msgstr "Chọn trình duyệt bạn ưa thích để lướt web."
+
+#. i18n: AppCard.qml compares this text with its own i18n("Available"); keep both identical.
+#: qml/components/AppCard.qml:92 src/models/ApplicationModel.cpp:104
+#, kde-format
+msgid "Available"
+msgstr "Có sẵn"
+
+#: qml/components/AppCard.qml:104 qml/components/InstallDialog.qml:352
+msgid "Open"
+msgstr "Mở"
+
+#: qml/components/AppCard.qml:105
+msgid "Installed"
+msgstr "Đã cài"
+
+#: qml/components/AppCard.qml:106 qml/components/InstallDialog.qml:339
+msgid "Install"
+msgstr "Cài đặt"
+
+#: qml/components/AppCard.qml:106
+msgid "Please wait…"
+msgstr "Vui lòng đợi…"
+
+#: qml/components/AppCard.qml:106
+msgid "Remove"
+msgstr "Gỡ bỏ"
+
+#: qml/components/AppCard.qml:120 qml/components/InfoTile.qml:24
+#: qml/components/ReportDialog.qml:164 qml/components/ReportDialog.qml:302
+#: qml/components/SegmentedChoice.qml:45 qml/components/StatusRow.qml:79
+#: qml/components/StatusRow.qml:97 qml/components/StatusRow.qml:108
+msgctxt "@info:accessible label and value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/components/InstallDialog.qml:186
+msgid "Installation"
+msgstr "Cài đặt"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install %1"
+msgstr "Cài đặt %1"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install components"
+msgstr "Cài đặt thành phần"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing %1"
+msgstr "Đang cài đặt %1"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing components"
+msgstr "Đang cài đặt thành phần"
+
+#: qml/components/InstallDialog.qml:198
+msgid "Installation completed successfully."
+msgstr "Đã cài đặt thành công."
+
+#: qml/components/InstallDialog.qml:208
+msgid "Source: %1"
+msgstr "Nguồn: %1"
+
+#: qml/components/InstallDialog.qml:245
+msgid "Installation progress"
+msgstr "Tiến độ cài đặt"
+
+#: qml/components/InstallDialog.qml:246
+msgid "In progress"
+msgstr "Đang tiến hành"
+
+#: qml/components/InstallDialog.qml:247 qml/components/InstallDialog.qml:254
+msgctxt "@info progress percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/components/InstallDialog.qml:280
+msgid "For security reasons, the installation cannot be cancelled."
+msgstr "Vì lý do bảo mật, không thể huỷ việc cài đặt."
+
+#: qml/components/InstallDialog.qml:293
+msgid "Hide Details"
+msgstr "Ẩn chi tiết"
+
+#: qml/components/InstallDialog.qml:293
+msgid "Show Details"
+msgstr "Hiện chi tiết"
+
+#: qml/components/InstallDialog.qml:296
+msgid "Shows the technical output of the installation"
+msgstr "Hiện đầu ra kỹ thuật của việc cài đặt"
+
+#: qml/components/InstallDialog.qml:325
+msgid "Technical details of the installation"
+msgstr "Chi tiết kỹ thuật của việc cài đặt"
+
+#: qml/components/InstallDialog.qml:345
+msgid "Install FreeOffice from SoftMaker"
+msgstr "Cài đặt FreeOffice của SoftMaker"
+
+#: qml/components/InstallDialog.qml:363
+msgid "Try Again"
+msgstr "Thử lại"
+
+#: qml/components/InstallDialog.qml:375
+msgid "Cancel"
+msgstr "Huỷ"
+
+#: qml/components/InstallDialog.qml:375 qml/components/ReportDialog.qml:206
+msgid "Close"
+msgstr "Đóng"
+
+#: qml/components/ReportDialog.qml:75
+msgid "Save System Report"
+msgstr "Lưu báo cáo hệ thống"
+
+#: qml/components/ReportDialog.qml:78
+msgid "Text (*.txt)"
+msgstr "Văn bản (*.txt)"
+
+#: qml/components/ReportDialog.qml:80
+msgid "Report saved."
+msgstr "Đã lưu báo cáo."
+
+#: qml/components/ReportDialog.qml:81
+msgid "Could not save the report."
+msgstr "Không lưu được báo cáo."
+
+#: qml/components/ReportDialog.qml:87 qml/components/ReportDialog.qml:141
+#: qml/pages/AboutPage.qml:121
+msgid "System Report"
+msgstr "Báo cáo hệ thống"
+
+#: qml/components/ReportDialog.qml:136
+msgid "System summary"
+msgstr "Tóm tắt hệ thống"
+
+#: qml/components/ReportDialog.qml:146
+msgctxt "@label system report summary"
+msgid "Desktop"
+msgstr "Bàn làm việc"
+
+#: qml/components/ReportDialog.qml:147
+msgctxt "@label system report summary"
+msgid "Kernel"
+msgstr "Nhân"
+
+#: qml/components/ReportDialog.qml:148
+msgctxt "@label system report summary"
+msgid "CPU"
+msgstr "CPU"
+
+#: qml/components/ReportDialog.qml:149
+msgctxt "@label system report summary"
+msgid "GPU"
+msgstr "GPU"
+
+#: qml/components/ReportDialog.qml:150
+msgctxt "@label system report summary"
+msgid "Memory"
+msgstr "Bộ nhớ"
+
+#: qml/components/ReportDialog.qml:151
+msgctxt "@label system report summary"
+msgid "Uptime"
+msgstr "Thời gian hoạt động"
+
+#: qml/components/ReportDialog.qml:174
+msgid "Copy Report"
+msgstr "Chép báo cáo"
+
+#: qml/components/ReportDialog.qml:179
+msgid "Report copied."
+msgstr "Đã chép báo cáo."
+
+#: qml/components/ReportDialog.qml:180
+msgid "Could not copy the report."
+msgstr "Không chép được báo cáo."
+
+#: qml/components/ReportDialog.qml:184
+msgid "Save Report"
+msgstr "Lưu báo cáo"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refresh"
+msgstr "Làm mới"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refreshing…"
+msgstr "Đang làm mới…"
+
+#: qml/pages/AboutPage.qml:81
+msgid "Mainuan logo"
+msgstr "Logo Mainuan"
+
+#: qml/pages/AboutPage.qml:125
+msgid "Opens the hardware and software information for technical support"
+msgstr "Mở thông tin phần cứng và phần mềm để hỗ trợ kỹ thuật"
+
+#: qml/pages/AboutPage.qml:128
+msgid "Repository"
+msgstr "Kho mã nguồn"
+
+#: qml/pages/AboutPage.qml:139
+msgid "This Computer"
+msgstr "Máy tính này"
+
+# from mainuan-gestao-drivers
+#: qml/pages/AboutPage.qml:154
+msgid "Processor"
+msgstr "CPU"
+
+#: qml/pages/AboutPage.qml:155
+msgid "Graphics"
+msgstr "Đồ hoạ"
+
+#: qml/pages/AboutPage.qml:156
+msgid "Memory in use"
+msgstr "Bộ nhớ đang dùng"
+
+#: qml/pages/AboutPage.qml:157
+msgid "Storage (system)"
+msgstr "Lưu trữ (hệ thống)"
+
+#: qml/pages/AboutPage.qml:158
+msgctxt "@label installation date"
+msgid "Installation"
+msgstr "Ngày cài đặt"
+
+#: qml/pages/AboutPage.qml:158
+msgid "Installation (estimated)"
+msgstr "Ngày cài đặt (ước tính)"
+
+#: qml/pages/AboutPage.qml:159
+msgid "Uptime"
+msgstr "Thời gian hoạt động"
+
+#: qml/pages/AboutPage.qml:178
+msgid "Credits"
+msgstr "Ghi nhận"
+
+#: qml/pages/AboutPage.qml:189
+msgid "Desktop environment and integration components."
+msgstr "Môi trường bàn làm việc và các thành phần tích hợp."
+
+#: qml/pages/AboutPage.qml:201
+msgid "Distribution base and package repositories."
+msgstr "Nền tảng bản phân phối và các kho phần mềm."
+
+#: qml/pages/AboutPage.qml:210
+msgid ""
+"Free software. The license and the project history are in the repository."
+msgstr "Phần mềm tự do. Giấy phép và lịch sử dự án có trong kho mã nguồn."
+
+#: qml/pages/AppearancePage.qml:41
+msgid "Customize the colors, transparency and arrangement of your desktop."
+msgstr "Tuỳ biến màu sắc, độ trong suốt và cách sắp xếp bàn làm việc của bạn."
+
+#: qml/pages/AppearancePage.qml:57
+msgid "System Appearance"
+msgstr "Diện mạo hệ thống"
+
+#: qml/pages/AppearancePage.qml:79 qml/pages/AppearancePage.qml:89
+msgid "Visual Style"
+msgstr "Phong cách hiển thị"
+
+#: qml/pages/AppearancePage.qml:81
+msgid ""
+"Changes the Plasma style and keeps the Mainuan color and your selected icons."
+msgstr ""
+"Thay đổi kiểu cách Plasma, giữ nguyên màu Mainuan và các biểu tượng bạn đã "
+"chọn."
+
+#: qml/pages/AppearancePage.qml:82
+msgid "Available only on KDE Plasma."
+msgstr "Chỉ khả dụng trên KDE Plasma."
+
+#: qml/pages/AppearancePage.qml:93
+msgctxt "@option visual style"
+msgid "Blurred"
+msgstr "Mờ nhoè"
+
+#: qml/pages/AppearancePage.qml:93
+msgid "Dream theme: translucent panels with blur"
+msgstr "Chủ đề Dream: bảng trong mờ có hiệu ứng làm mờ"
+
+#: qml/pages/AppearancePage.qml:94
+msgctxt "@option visual style"
+msgid "Glass"
+msgstr "Kính"
+
+#: qml/pages/AppearancePage.qml:94
+msgid "Tahoe theme: light panels with a glass effect"
+msgstr "Chủ đề Tahoe: bảng sáng có hiệu ứng kính"
+
+#: qml/pages/AppearancePage.qml:95
+msgid "Breeze theme: the default KDE look, without transparency"
+msgstr "Chủ đề Breeze: diện mạo mặc định của KDE, không trong suốt"
+
+#: qml/pages/AppearancePage.qml:95
+msgctxt "@option visual style"
+msgid "Solid"
+msgstr "Đặc"
+
+#: qml/pages/AppearancePage.qml:105 qml/pages/AppearancePage.qml:112
+msgid "System Theme"
+msgstr "Chủ đề hệ thống"
+
+#: qml/pages/AppearancePage.qml:106
+msgid "Light or dark colors across the whole system."
+msgstr "Màu sáng hoặc tối trên toàn hệ thống."
+
+#: qml/pages/AppearancePage.qml:115
+msgctxt "@option color theme"
+msgid "Light"
+msgstr "Sáng"
+
+#: qml/pages/AppearancePage.qml:116
+msgctxt "@option color theme"
+msgid "Dark"
+msgstr "Tối"
+
+#: qml/pages/AppearancePage.qml:126 qml/pages/AppearancePage.qml:134
+msgid "Accent Color"
+msgstr "Màu nhấn"
+
+#: qml/pages/AppearancePage.qml:127
+msgid ""
+"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
+"Keeps the choice when you change style or theme."
+msgstr ""
+"Áp dụng quy hoạch màu KDE, biểu tượng Kora, phông nền và ảnh đại diện. Lựa "
+"chọn được giữ lại khi bạn đổi phong cách hoặc chủ đề."
+
+#. i18n: %1 is the accent color name
+#: qml/pages/AppearancePage.qml:158
+msgid "Accent color %1"
+msgstr "Màu nhấn %1"
+
+#: qml/pages/AppearancePage.qml:191
+msgid "Desktop Layout"
+msgstr "Bố cục bàn làm việc"
+
+#: qml/pages/AppearancePage.qml:200
+msgid ""
+"Choose how the panels are placed on the screen. Before each change the "
+"Welcome keeps a copy of the current layout."
+msgstr ""
+"Chọn cách sắp xếp các bảng trên màn hình. Trước mỗi lần thay đổi, ứng dụng "
+"Chào mừng sẽ lưu một bản sao của bố cục hiện tại."
+
+#: qml/pages/AppearancePage.qml:201
+msgid "Layouts can only be applied inside a KDE Plasma session."
+msgstr "Chỉ có thể áp dụng bố cục trong phiên KDE Plasma."
+
+#: qml/pages/AppearancePage.qml:278
+msgctxt "@info layout status"
+msgid "In use"
+msgstr "Đang dùng"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button layout already applied"
+msgid "Applied"
+msgstr "Đã áp dụng"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button"
+msgid "Apply"
+msgstr "Áp dụng"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Apply layout %1"
+msgstr "Áp dụng bố cục %1"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Layout in use: %1"
+msgstr "Bố cục đang dùng: %1"
+
+#: qml/pages/AppearancePage.qml:315
+msgid ""
+"Returns to the layout that was in use before the last change. Plasma "
+"restarts for a few seconds."
+msgstr ""
+"Quay về bố cục đã dùng trước lần thay đổi gần nhất. Plasma sẽ khởi động lại "
+"trong vài giây."
+
+#: qml/pages/AppearancePage.qml:321
+msgid "Restore Previous Layout"
+msgstr "Khôi phục bố cục trước đó"
+
+#: qml/pages/AppearancePage.qml:334
+msgid "Restore previous layout?"
+msgstr "Khôi phục bố cục trước đó?"
+
+#: qml/pages/AppearancePage.qml:335
+msgid ""
+"The panels go back to how they were before the last layout change. Plasma "
+"will restart for a few seconds."
+msgstr ""
+"Các bảng sẽ trở lại như trước lần thay đổi bố cục gần nhất. Plasma sẽ khởi "
+"động lại trong vài giây."
+
+#: qml/pages/AppearancePage.qml:339
+msgctxt "@action:button"
+msgid "Restore"
+msgstr "Khôi phục"
+
+#: qml/pages/AppearancePage.qml:347
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr "Huỷ"
+
+#: qml/pages/AppsPage.qml:43
+msgid ""
+"Flatpak was not found. Flatpak applications are unavailable. FreeOffice and "
+"the online services remain independent of Flatpak."
+msgstr ""
+"Không tìm thấy Flatpak. Các ứng dụng Flatpak không khả dụng. FreeOffice và "
+"các dịch vụ trực tuyến vẫn hoạt động độc lập với Flatpak."
+
+#: qml/pages/ContributePage.qml:35
+msgid ""
+"Mainuan is made by its community. You can help with a donation, with code or "
+"by reporting problems."
+msgstr ""
+"Mainuan được xây dựng bởi cộng đồng. Bạn có thể giúp đỡ bằng cách quyên góp, "
+"đóng góp mã nguồn hoặc báo cáo sự cố."
+
+#. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
+#: qml/pages/ContributePage.qml:78
+msgid "Pix QR code. Key: %1"
+msgstr "Mã QR Pix. Khoá: %1"
+
+#: qml/pages/ContributePage.qml:79
+msgid "Pix key QR code. Key: %1"
+msgstr "Mã QR của khoá Pix. Khoá: %1"
+
+#: qml/pages/ContributePage.qml:97
+msgid "Support Mainuan"
+msgstr "Ủng hộ Mainuan"
+
+#: qml/pages/ContributePage.qml:104
+msgid ""
+"Your donation helps sustain development, infrastructure and the community."
+msgstr ""
+"Khoản quyên góp của bạn giúp duy trì việc phát triển, hạ tầng và cộng đồng."
+
+#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+msgid "Pix Key"
+msgstr "Khoá Pix"
+
+#: qml/pages/ContributePage.qml:143
+msgid "Copy Pix Key"
+msgstr "Chép khoá Pix"
+
+#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#, kde-format
+msgid "Pix key copied."
+msgstr "Đã chép khoá Pix."
+
+#: qml/pages/ContributePage.qml:168
+msgid "Scan the QR code with your bank's app, using the Pix option."
+msgstr "Quét mã QR bằng ứng dụng ngân hàng của bạn, dùng tuỳ chọn Pix."
+
+#: qml/pages/ContributePage.qml:169
+msgid ""
+"The QR code contains the Pix key. In your bank's app, use the Pix option "
+"with the copied key or the one read from the code."
+msgstr ""
+"Mã QR chứa khoá Pix. Trong ứng dụng ngân hàng, hãy dùng tuỳ chọn Pix với "
+"khoá đã chép hoặc khoá đọc được từ mã."
+
+#: qml/pages/ContributePage.qml:177
+msgid "The Pix key has not been set up on this installation yet."
+msgstr "Khoá Pix chưa được thiết lập trên bản cài đặt này."
+
+#: qml/pages/ContributePage.qml:187
+msgid "Other Ways to Help"
+msgstr "Các cách giúp đỡ khác"
+
+#: qml/pages/ContributePage.qml:196
+msgid "Contribute Code"
+msgstr "Đóng góp mã nguồn"
+
+#: qml/pages/ContributePage.qml:197
+msgid "Code, translations and improvements on GitHub."
+msgstr "Mã nguồn, bản dịch và cải tiến trên GitHub."
+
+#: qml/pages/ContributePage.qml:205
+msgid "Report a Problem"
+msgstr "Báo cáo sự cố"
+
+#: qml/pages/ContributePage.qml:206
+msgid ""
+"Describe what happened; attaching the system report (in About) helps a lot."
+msgstr ""
+"Mô tả những gì đã xảy ra; đính kèm báo cáo hệ thống (trong mục Thông tin) sẽ "
+"giúp ích rất nhiều."
+
+#: qml/pages/ContributePage.qml:214
+msgid "Telegram Community"
+msgstr "Cộng đồng Telegram"
+
+#: qml/pages/ContributePage.qml:215
+msgid "Chat with Mainuan users and developers."
+msgstr "Trò chuyện với người dùng và nhà phát triển Mainuan."
+
+#: qml/pages/ContributePage.qml:222
+msgid ""
+"Links open in the browser only when you click them. The QR code is generated "
+"on this computer, without internet access."
+msgstr ""
+"Liên kết chỉ mở trong trình duyệt khi bạn nhấn vào. Mã QR được tạo trên máy "
+"tính này, không cần truy cập internet."
+
+#: qml/pages/HomePage.qml:48 qml/pages/HomePage.qml:62
+msgid "Installing…"
+msgstr "Đang cài đặt…"
+
+#: qml/pages/HomePage.qml:51
+msgctxt "@info status"
+msgid "Installed"
+msgstr "Đã cài"
+
+#. i18n: %1 is a short note such as "startup: enabled"
+#: qml/pages/HomePage.qml:51
+msgid "Installed · %1"
+msgstr "Đã cài · %1"
+
+#: qml/pages/HomePage.qml:53
+msgid "Unavailable on this system"
+msgstr "Không khả dụng trên hệ thống này"
+
+#: qml/pages/HomePage.qml:62
+msgctxt "@action:button"
+msgid "Install"
+msgstr "Cài đặt"
+
+#. i18n: %1 is a colour code; keep the <font> markup around the product name
+#: qml/pages/HomePage.qml:87
+msgid "Welcome to <font color='%1'>Mainuan</font>"
+msgstr "Chào mừng đến với <font color='%1'>Mainuan</font>"
+
+#: qml/pages/HomePage.qml:92
+msgid "Set up your system your way, with native Plasma tools."
+msgstr "Thiết lập hệ thống theo cách của bạn, với các công cụ gốc của Plasma."
+
+#: qml/pages/HomePage.qml:105
+msgid "Hardware & Media"
+msgstr "Phần cứng & đa phương tiện"
+
+#: qml/pages/HomePage.qml:113
+msgid "Additional Drivers"
+msgstr "Trình điều khiển bổ sung"
+
+#: qml/pages/HomePage.qml:114
+msgid "View and manage the drivers available for your computer."
+msgstr "Xem và quản lý các trình điều khiển có sẵn cho máy tính của bạn."
+
+#: qml/pages/HomePage.qml:117
+msgctxt "@action:button"
+msgid "Manage"
+msgstr "Quản lý"
+
+#: qml/pages/HomePage.qml:126 src/services/InstallService.cpp:221
+#, kde-format
+msgid "Media Codecs"
+msgstr "Codec đa phương tiện"
+
+#: qml/pages/HomePage.qml:127
+msgid "Play audio and video in the most common formats."
+msgstr "Phát âm thanh và video ở các định dạng phổ biến nhất."
+
+#: qml/pages/HomePage.qml:131
+msgid "Security & Privacy"
+msgstr "Bảo mật & riêng tư"
+
+#: qml/pages/HomePage.qml:136 src/services/InstallService.cpp:175
+#, kde-format
+msgid "Antivirus"
+msgstr "Diệt virus"
+
+#: qml/pages/HomePage.qml:137 src/services/InstallService.cpp:177
+#, kde-format
+msgid "ClamAV protection with the ClamUI graphical interface."
+msgstr "Bảo vệ bằng ClamAV với giao diện đồ hoạ ClamUI."
+
+#: qml/pages/HomePage.qml:139 qml/pages/HomePage.qml:147
+msgctxt "@action:button"
+msgid "Configure"
+msgstr "Cấu hình"
+
+#: qml/pages/HomePage.qml:144 src/services/InstallService.cpp:200
+#, kde-format
+msgid "Firewall"
+msgstr "Tường lửa"
+
+#: qml/pages/HomePage.qml:145
+msgid "Control network connections with UFW and the KDE Plasma module."
+msgstr "Kiểm soát kết nối mạng bằng UFW và mô-đun của KDE Plasma."
+
+#. i18n: %1 is the session type (wayland/x11), %2 the Plasma version
+#: qml/pages/HomePage.qml:156
+msgid "Session: %1  ·  %2"
+msgstr "Phiên: %1  ·  %2"
+
+#: qml/pages/HomePage.qml:157
+msgid "Session: %1"
+msgstr "Phiên: %1"
+
+#: qml/pages/TutorialsPage.qml:33
+msgid "Video Tutorials"
+msgstr "Video hướng dẫn"
+
+#: qml/pages/TutorialsPage.qml:36
+msgid ""
+"Learn the essentials of Mainuan. Missing videos are disabled without "
+"blocking navigation."
+msgstr ""
+"Tìm hiểu những điều cơ bản về Mainuan. Các video bị thiếu sẽ bị vô hiệu hoá "
+"mà không cản trở việc điều hướng."
+
+#: qml/pages/TutorialsPage.qml:73
+msgctxt "@action:button"
+msgid "Close"
+msgstr "Đóng"
+
+#: qml/pages/TutorialsPage.qml:89
+msgctxt "@action:button"
+msgid "Pause"
+msgstr "Tạm dừng"
+
+#: qml/pages/TutorialsPage.qml:89 qml/pages/TutorialsPage.qml:134
+msgctxt "@action:button"
+msgid "Play"
+msgstr "Phát"
+
+#: qml/pages/TutorialsPage.qml:97
+msgid "Volume"
+msgstr "Âm lượng"
+
+#: qml/pages/TutorialsPage.qml:98
+msgctxt "@action:button"
+msgid "Full Screen"
+msgstr "Toàn màn hình"
+
+#: qml/pages/TutorialsPage.qml:134
+msgctxt "@info video status"
+msgid "Unavailable"
+msgstr "Không khả dụng"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "%1: video missing"
+msgstr "%1: thiếu video"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "Play %1"
+msgstr "Phát %1"
+
+#: qml/pages/TutorialsPage.qml:154
+msgid "File not found"
+msgstr "Không tìm thấy tệp"
+
+#: qml/pages/TutorialsPage.qml:163
+msgid "No tutorials have been added."
+msgstr "Chưa có video hướng dẫn nào được thêm."
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:4
+msgid "Mainuan Welcome"
+msgstr "Chào mừng Mainuan"
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:4
+msgid "Show the Mainuan Welcome when the session starts"
+msgstr "Hiện ứng dụng Chào mừng Mainuan khi bắt đầu phiên làm việc"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:4
+msgid "Welcome Center"
+msgstr "Trung tâm chào mừng"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:5
+msgid "Set up and get to know Mainuan"
+msgstr "Thiết lập và làm quen với Mainuan"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:6
+msgid "welcome;setup;appearance;drivers;codecs;antivirus;firewall;"
+msgstr ""
+"chào mừng;thiết lập;diện mạo;trình điều khiển;codec;diệt virus;tường "
+"lửa;welcome;setup;appearance;drivers;codecs;antivirus;firewall;"
+
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:5
+msgid "Set up Mainuan and get to know the features of your desktop"
+msgstr "Thiết lập Mainuan và làm quen với các tính năng của bàn làm việc"
+
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:7
+msgid ""
+"Welcome application of the Mainuan desktop. It helps new users choose the "
+"look of the desktop, install media codecs, the antivirus, the firewall, "
+"office suites and web browsers, and find the video tutorials."
+msgstr ""
+"Ứng dụng chào mừng của bàn làm việc Mainuan. Ứng dụng giúp người dùng mới "
+"chọn diện mạo bàn làm việc, cài đặt codec đa phương tiện, phần mềm diệt "
+"virus, tường lửa, bộ ứng dụng văn phòng và trình duyệt web, cũng như tìm các "
+"video hướng dẫn."
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:9
+msgid "Install system components recommended by Mainuan Welcome"
+msgstr ""
+"Cài đặt các thành phần hệ thống do ứng dụng Chào mừng của Mainuan khuyến nghị"
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:10
+msgid ""
+"Authentication is required to install system components such as the "
+"antivirus, the firewall or media codecs"
+msgstr ""
+"Cần xác thực để cài đặt các thành phần hệ thống như phần mềm diệt virus, "
+"tường lửa hoặc codec đa phương tiện"
+
+#: src/main.cpp:53
+#, kde-format
+msgctxt "@title application display name"
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — Chào mừng"
+
+#: src/main.cpp:96
+#, kde-format
+msgctxt "@info application description"
+msgid "Complete suite: Writer, Calc and Impress"
+msgstr "Bộ ứng dụng đầy đủ: Writer, Calc và Impress"
+
+#: src/main.cpp:99
+#, kde-format
+msgctxt "@info application description"
+msgid "Interface familiar to Microsoft Office users"
+msgstr "Giao diện quen thuộc với người dùng Microsoft Office"
+
+#: src/main.cpp:102
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Free office suite with word processor, spreadsheet and presentation editors."
+msgstr ""
+"Bộ ứng dụng văn phòng miễn phí gồm trình xử lý văn bản, bảng tính và trình "
+"soạn bài trình chiếu."
+
+#: src/main.cpp:105
+#, kde-format
+msgctxt "@info application description"
+msgid "Online documents with collaboration"
+msgstr "Tài liệu trực tuyến có cộng tác"
+
+#: src/main.cpp:108
+#, kde-format
+msgctxt "@info application description"
+msgid "Microsoft suite right in the browser"
+msgstr "Bộ ứng dụng của Microsoft ngay trong trình duyệt"
+
+#: src/main.cpp:114
+#, kde-format
+msgctxt "@info application description"
+msgid "Google's web browser"
+msgstr "Trình duyệt web của Google"
+
+#: src/main.cpp:117
+#, kde-format
+msgctxt "@info application description"
+msgid "Compatibility with Microsoft applications"
+msgstr "Tương thích với các ứng dụng của Microsoft"
+
+#: src/main.cpp:120
+#, kde-format
+msgctxt "@info application description"
+msgid "Built-in ad blocking"
+msgstr "Tích hợp chặn quảng cáo"
+
+#: src/main.cpp:123
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Browser with advanced customization, tab management and privacy features."
+msgstr ""
+"Trình duyệt có khả năng tuỳ biến nâng cao, quản lý thẻ và các tính năng bảo "
+"vệ quyền riêng tư."
+
+#: src/main.cpp:126
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser focused on privacy, productivity and vertical tab organization."
+msgstr ""
+"Trình duyệt tập trung vào quyền riêng tư, năng suất và sắp xếp thẻ theo "
+"chiều dọc."
+
+#: src/main.cpp:129
+#, kde-format
+msgctxt "@info application description"
+msgid "Privacy-focused browser"
+msgstr "Trình duyệt chú trọng quyền riêng tư"
+
+#: src/main.cpp:132
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser with resource controls"
+msgstr "Trình duyệt có khả năng kiểm soát tài nguyên"
+
+#: src/main.cpp:135
+#, kde-format
+msgctxt "@info application description"
+msgid "Browsing through the Tor network"
+msgstr "Duyệt web qua mạng Tor"
+
+#: src/models/ApplicationModel.cpp:88
+#, kde-format
+msgctxt "@info:status application"
+msgid "Checking…"
+msgstr "Đang kiểm tra…"
+
+#: src/models/ApplicationModel.cpp:91
+#, kde-format
+msgctxt "@info:status application"
+msgid "Unavailable"
+msgstr "Không khả dụng"
+
+#: src/models/ApplicationModel.cpp:94
+#, kde-format
+msgctxt "@info:status application"
+msgid "Online"
+msgstr "Trực tuyến"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installing…"
+msgstr "Đang cài đặt…"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Removing…"
+msgstr "Đang gỡ bỏ…"
+
+#: src/models/ApplicationModel.cpp:100
+#, kde-format
+msgctxt "@info:status application"
+msgid "Error"
+msgstr "Lỗi"
+
+#: src/models/ApplicationModel.cpp:102
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installed"
+msgstr "Đã cài"
+
+#: src/models/LayoutModel.cpp:10
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"The Mainuan look: floating islands at the bottom with menu, tasks, system "
+"tray and clock."
+msgstr ""
+"Phong cách Mainuan: các đảo nổi ở phía dưới với trình đơn, tác vụ, khay hệ "
+"thống và đồng hồ."
+
+#: src/models/LayoutModel.cpp:11
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Three floating segments at the bottom: menu and information, tasks, and "
+"system controls."
+msgstr ""
+"Ba phân đoạn nổi ở phía dưới: trình đơn và thông tin, tác vụ, và các điều "
+"khiển hệ thống."
+
+#: src/models/LayoutModel.cpp:12
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"A floating bottom bar with side margins, widgets and pinned applications."
+msgstr ""
+"Thanh nổi ở phía dưới có lề hai bên, các phụ kiện và ứng dụng được ghim."
+
+#: src/models/LayoutModel.cpp:13
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Floating top panel with TahoeLauncher, search, tasks and controls."
+msgstr ""
+"Bảng nổi ở phía trên với TahoeLauncher, tìm kiếm, tác vụ và các điều khiển."
+
+#: src/models/LayoutModel.cpp:14
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Full-width bottom bar, not floating, with Kickoff and pinned applications."
+msgstr ""
+"Thanh dưới cùng rộng hết màn hình, không nổi, với Kickoff và các ứng dụng "
+"được ghim."
+
+#: src/models/LayoutModel.cpp:15
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Global menu at the top and a vertical panel on the left with Orbit Start "
+"Menu."
+msgstr ""
+"Trình đơn toàn cục ở phía trên và một bảng dọc bên trái với Orbit Start Menu."
+
+#: src/models/LayoutModel.cpp:16
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Compact bar at the top and KWin tiles to arrange windows side by side."
+msgstr ""
+"Thanh gọn ở phía trên và chế độ xếp ô của KWin để sắp xếp các cửa sổ cạnh "
+"nhau."
+
+#: src/models/VideoModel.cpp:12
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Getting to know the system"
+msgstr "Làm quen với hệ thống"
+
+#: src/models/VideoModel.cpp:13
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Connecting to the internet"
+msgstr "Kết nối internet"
+
+#: src/models/VideoModel.cpp:14
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Customizing the system"
+msgstr "Tuỳ biến hệ thống"
+
+#: src/models/VideoModel.cpp:15
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Installing software"
+msgstr "Cài đặt phần mềm"
+
+#: src/models/VideoModel.cpp:16
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Online lessons"
+msgstr "Bài học trực tuyến"
+
+#: src/services/AccentProfile.cpp:8
+msgctxt "accent color"
+msgid "Brown"
+msgstr "Nâu"
+
+#: src/services/AccentProfile.cpp:10
+msgctxt "accent color"
+msgid "Cyan"
+msgstr "Lục lam"
+
+#: src/services/AccentProfile.cpp:12
+msgctxt "accent color"
+msgid "Magenta"
+msgstr "Đỏ tươi"
+
+# reviewed: Lime = verde-limão (cor de destaque verde); "vàng chanh" =
+# amarelo; coerente com esquemas de cores
+#: src/services/AccentProfile.cpp:14
+msgctxt "accent color"
+msgid "Lime"
+msgstr "Xanh chanh"
+
+#: src/services/AccentProfile.cpp:16
+msgctxt "accent color"
+msgid "Gray"
+msgstr "Xám"
+
+#: src/services/AccentProfile.cpp:18
+msgctxt "accent color"
+msgid "Violet"
+msgstr "Tím"
+
+#: src/services/InstallService.cpp:54
+#, kde-format
+msgid ""
+"Another program is installing or updating the system right now. Wait for it "
+"to finish and try again."
+msgstr ""
+"Một chương trình khác đang cài đặt hoặc cập nhật hệ thống. Hãy đợi chương "
+"trình đó hoàn tất rồi thử lại."
+
+#: src/services/InstallService.cpp:57
+#, kde-format
+msgid ""
+"Could not download the files. Check your internet connection and try again."
+msgstr "Không tải được các tệp. Hãy kiểm tra kết nối internet rồi thử lại."
+
+#: src/services/InstallService.cpp:60
+#, kde-format
+msgid "There is not enough free disk space to complete the installation."
+msgstr "Không đủ dung lượng đĩa trống để hoàn tất việc cài đặt."
+
+#: src/services/InstallService.cpp:63
+#, kde-format
+msgid ""
+"The required components were not found in the repositories configured on "
+"this system."
+msgstr ""
+"Không tìm thấy các thành phần cần thiết trong các kho phần mềm được cấu hình "
+"trên hệ thống này."
+
+#: src/services/InstallService.cpp:66
+#, kde-format
+msgid ""
+"A previous installation was interrupted and must be repaired before new "
+"programs can be installed."
+msgstr ""
+"Một lần cài đặt trước đã bị gián đoạn và cần được sửa chữa trước khi có thể "
+"cài đặt chương trình mới."
+
+#: src/services/InstallService.cpp:69
+#, kde-format
+msgid ""
+"The package system found a conflict that prevents the installation without "
+"removing other programs."
+msgstr ""
+"Hệ thống gói phát hiện xung đột khiến không thể cài đặt nếu không gỡ bỏ các "
+"chương trình khác."
+
+#: src/services/InstallService.cpp:72
+#, kde-format
+msgid ""
+"Authentication failed or your user does not have administrator privileges."
+msgstr ""
+"Xác thực thất bại hoặc người dùng của bạn không có quyền quản trị viên."
+
+#: src/services/InstallService.cpp:75
+#, kde-format
+msgid ""
+"Automatic installation of these components requires a Debian- or Ubuntu-"
+"based system."
+msgstr ""
+"Việc cài đặt tự động các thành phần này cần một hệ thống dựa trên Debian "
+"hoặc Ubuntu."
+
+#: src/services/InstallService.cpp:78
+#, kde-format
+msgid "Flatpak is not available on this system."
+msgstr "Flatpak không có sẵn trên hệ thống này."
+
+#: src/services/InstallService.cpp:81
+#, kde-format
+msgid ""
+"Could not download FreeOffice from the authorized official source. Check the "
+"connection and try again. Redirects and other versions are refused."
+msgstr ""
+"Không tải được FreeOffice từ nguồn chính thức được cấp phép. Hãy kiểm tra "
+"kết nối rồi thử lại. Chuyển hướng và các phiên bản khác đều bị từ chối."
+
+#: src/services/InstallService.cpp:84
+#, kde-format
+msgid ""
+"The FreeOffice file does not match the authorized package (integrity, size, "
+"name, version or architecture). The installation was stopped."
+msgstr ""
+"Tệp FreeOffice không khớp với gói được cấp phép (tính toàn vẹn, kích thước, "
+"tên, phiên bản hoặc kiến trúc). Đã dừng cài đặt."
+
+#: src/services/InstallService.cpp:87
+#, kde-format
+msgid ""
+"The installer finished, but it could not be confirmed that the application "
+"is installed. Check the details and try again."
+msgstr ""
+"Trình cài đặt đã kết thúc nhưng không xác nhận được ứng dụng đã được cài "
+"đặt. Hãy kiểm tra phần chi tiết rồi thử lại."
+
+#. i18n: “Show Details” must match the label of the details button in the installation dialog.
+#: src/services/InstallService.cpp:90
+#, kde-format
+msgid ""
+"The system could not install all components. Try again; if the problem "
+"persists, use “Show Details” to get the technical information."
+msgstr ""
+"Hệ thống không cài đặt được tất cả các thành phần. Hãy thử lại; nếu sự cố "
+"vẫn tiếp diễn, hãy dùng “Hiện chi tiết” để lấy thông tin kỹ thuật."
+
+#. i18n: joins the names of two components installed in the same step, e.g. "ClamAV and Flatpak".
+#: src/services/InstallService.cpp:144
+#, kde-format
+msgctxt "@item:intext two components"
+msgid "%1 and %2"
+msgstr "%1 và %2"
+
+#: src/services/InstallService.cpp:176
+#, kde-format
+msgid "Configured repositories / Flathub"
+msgstr "Các kho phần mềm đã cấu hình / Flathub"
+
+#: src/services/InstallService.cpp:179
+#, kde-format
+msgid "Installing ClamAV + ClamUI"
+msgstr "Đang cài đặt ClamAV + ClamUI"
+
+#: src/services/InstallService.cpp:180
+#, kde-format
+msgid "Antivirus installed successfully"
+msgstr "Đã cài đặt phần mềm diệt virus thành công"
+
+#: src/services/InstallService.cpp:181
+#, kde-format
+msgid "ClamAV and ClamUI are ready to use."
+msgstr "ClamAV và ClamUI đã sẵn sàng để sử dụng."
+
+#: src/services/InstallService.cpp:182 src/services/InstallService.cpp:208
+#, kde-format
+msgctxt "@action:button open the settings of the installed component"
+msgid "Configure"
+msgstr "Cấu hình"
+
+#: src/services/InstallService.cpp:201 src/services/InstallService.cpp:222
+#, kde-format
+msgid "Configured repositories"
+msgstr "Các kho phần mềm đã cấu hình"
+
+#: src/services/InstallService.cpp:202
+#, kde-format
+msgid "UFW with the KDE Plasma firewall module."
+msgstr "UFW với mô-đun tường lửa của KDE Plasma."
+
+#: src/services/InstallService.cpp:204
+#, kde-format
+msgid "Installing Firewall"
+msgstr "Đang cài đặt tường lửa"
+
+#: src/services/InstallService.cpp:205
+#, kde-format
+msgid "Firewall installed successfully"
+msgstr "Đã cài đặt tường lửa thành công"
+
+#: src/services/InstallService.cpp:206
+#, kde-format
+msgid ""
+"UFW and the KDE Plasma integration are installed. The firewall was not "
+"enabled automatically: use Configure to enable it and choose the rules."
+msgstr ""
+"UFW và tích hợp KDE Plasma đã được cài đặt. Tường lửa chưa được bật tự động: "
+"hãy dùng Cấu hình để bật và chọn các quy tắc."
+
+#: src/services/InstallService.cpp:213 src/services/InstallService.cpp:217
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "KDE Plasma integration"
+msgstr "tích hợp KDE Plasma"
+
+#: src/services/InstallService.cpp:223
+#, kde-format
+msgid "Support for the most common audio and video formats."
+msgstr "Hỗ trợ các định dạng âm thanh và video phổ biến nhất."
+
+#: src/services/InstallService.cpp:225
+#, kde-format
+msgid "Installing media codecs"
+msgstr "Đang cài đặt codec đa phương tiện"
+
+#: src/services/InstallService.cpp:226
+#, kde-format
+msgid "Codecs installed successfully"
+msgstr "Đã cài đặt codec thành công"
+
+#: src/services/InstallService.cpp:227
+#, kde-format
+msgid "Audio and video in the most common formats can now be played."
+msgstr "Giờ đây có thể phát âm thanh và video ở các định dạng phổ biến nhất."
+
+#: src/services/InstallService.cpp:230
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "media codecs"
+msgstr "codec đa phương tiện"
+
+#: src/services/InstallService.cpp:236
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "GStreamer codecs"
+msgstr "codec GStreamer"
+
+#: src/services/InstallService.cpp:244
+#, kde-format
+msgid "Free office suite from SoftMaker."
+msgstr "Bộ ứng dụng văn phòng miễn phí của SoftMaker."
+
+#: src/services/InstallService.cpp:246
+#, kde-format
+msgid "Installing FreeOffice"
+msgstr "Đang cài đặt FreeOffice"
+
+#: src/services/InstallService.cpp:247
+#, kde-format
+msgid "FreeOffice installed successfully"
+msgstr "Đã cài đặt FreeOffice thành công"
+
+#: src/services/InstallService.cpp:248
+#, kde-format
+msgid "FreeOffice is installed and available in the application menu."
+msgstr "FreeOffice đã được cài đặt và có sẵn trong trình đơn ứng dụng."
+
+#: src/services/InstallService.cpp:249
+#, kde-format
+msgid ""
+"This package is provided by SoftMaker and may ask for administrator "
+"authorization."
+msgstr ""
+"Gói này do SoftMaker cung cấp và có thể yêu cầu cấp quyền quản trị viên."
+
+#: src/services/InstallService.cpp:314
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "Installing %1"
+msgstr "Đang cài đặt %1"
+
+#: src/services/InstallService.cpp:315
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "%1 installed successfully"
+msgstr "Đã cài đặt %1 thành công"
+
+#: src/services/InstallService.cpp:316
+#, kde-format
+msgid "The application is now available in the application menu."
+msgstr "Ứng dụng giờ đã có sẵn trong trình đơn ứng dụng."
+
+#: src/services/InstallService.cpp:317
+#, kde-format
+msgctxt "@action:button open the installed application"
+msgid "Open"
+msgstr "Mở"
+
+#: src/services/InstallService.cpp:435
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Checking…"
+msgstr "Đang kiểm tra…"
+
+#: src/services/InstallService.cpp:438
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Installed"
+msgstr "Đã cài"
+
+#. i18n: %1 is the name of the only component that is not installed yet.
+#: src/services/InstallService.cpp:442
+#, kde-format
+msgctxt "@info:status one component"
+msgid "Missing: %1"
+msgstr "Còn thiếu: %1"
+
+#. i18n: %1 is a comma-separated list of components that are not installed yet.
+#: src/services/InstallService.cpp:444
+#, kde-format
+msgctxt "@info:status several components"
+msgid "Missing: %1"
+msgstr "Còn thiếu: %1"
+
+#: src/services/InstallService.cpp:447
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Not installed"
+msgstr "Chưa cài đặt"
+
+#: src/services/InstallService.cpp:593
+#, kde-format
+msgid "Preparing the installation…"
+msgstr "Đang chuẩn bị cài đặt…"
+
+#: src/services/InstallService.cpp:707 src/services/InstallService.cpp:741
+#, kde-format
+msgid "Downloading FreeOffice from SoftMaker…"
+msgstr "Đang tải FreeOffice từ SoftMaker…"
+
+#. i18n: technical details: %1 URL, %2 package name, %3 version, %4 architecture, %5 size in bytes, %6 checksum.
+#: src/services/InstallService.cpp:709
+#, kde-format
+msgid ""
+"Authorized source: %1\n"
+"Package: %2 · version %3 · %4 · %5 bytes\n"
+"Pinned SHA-256: %6"
+msgstr ""
+"Nguồn được cấp phép: %1\n"
+"Gói: %2 · phiên bản %3 · %4 · %5 byte\n"
+"SHA-256 được ghim: %6"
+
+#: src/services/InstallService.cpp:727
+#, kde-format
+msgid "The file exceeds the authorized size."
+msgstr "Tệp vượt quá kích thước được cấp phép."
+
+#: src/services/InstallService.cpp:759
+#, kde-format
+msgid "Size or SHA-256 mismatch."
+msgstr "Kích thước hoặc SHA-256 không khớp."
+
+#: src/services/InstallService.cpp:768
+#, kde-format
+msgid "Validating the FreeOffice Debian package…"
+msgstr "Đang xác thực gói Debian của FreeOffice…"
+
+#: src/services/InstallService.cpp:812
+#, kde-format
+msgid "Confirming the FreeOffice installation…"
+msgstr "Đang xác nhận việc cài đặt FreeOffice…"
+
+#: src/services/InstallService.cpp:824
+#, kde-format
+msgid "Confirming the browser installation…"
+msgstr "Đang xác nhận việc cài đặt trình duyệt…"
+
+#: src/services/InstallService.cpp:857
+#, kde-format
+msgid "Waiting for administrator authorization…"
+msgstr "Đang chờ quản trị viên cấp quyền…"
+
+#: src/services/InstallService.cpp:883
+#, kde-format
+msgctxt "@info %1 is a program path, %2 the system error"
+msgid "Could not run %1: %2"
+msgstr "Không chạy được %1: %2"
+
+#: src/services/InstallService.cpp:917
+#, kde-format
+msgctxt "@item:intext generic component label"
+msgid "required components"
+msgstr "các thành phần cần thiết"
+
+#: src/services/InstallService.cpp:933
+#, kde-format
+msgid "Checking the required components…"
+msgstr "Đang kiểm tra các thành phần cần thiết…"
+
+#: src/services/InstallService.cpp:935
+#, kde-format
+msgid ""
+"Waiting for another program to finish installing or updating the system…"
+msgstr "Đang chờ một chương trình khác cài đặt hoặc cập nhật hệ thống xong…"
+
+#: src/services/InstallService.cpp:937
+#, kde-format
+msgid "Updating the list of available programs…"
+msgstr "Đang cập nhật danh sách chương trình có sẵn…"
+
+#: src/services/InstallService.cpp:939
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Preparing the download of %1…"
+msgstr "Đang chuẩn bị tải về %1…"
+
+#: src/services/InstallService.cpp:941
+#, kde-format
+msgid "Updating the virus definitions…"
+msgstr "Đang cập nhật cơ sở dữ liệu virus…"
+
+#: src/services/InstallService.cpp:945
+#, kde-format
+msgctxt "@info %1 is a list of package names"
+msgid "Packages to install: %1"
+msgstr "Các gói sẽ cài đặt: %1"
+
+#: src/services/InstallService.cpp:954 src/services/InstallService.cpp:1061
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1…"
+msgstr "Đang tải về %1…"
+
+#: src/services/InstallService.cpp:956
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1 (file %2 of %3)…"
+msgstr "Đang tải về %1 (tệp %2 trên %3)…"
+
+#: src/services/InstallService.cpp:970
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Configuring %1…"
+msgstr "Đang cấu hình %1…"
+
+#: src/services/InstallService.cpp:971
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Installing %1…"
+msgstr "Đang cài đặt %1…"
+
+#: src/services/InstallService.cpp:988
+#, kde-format
+msgid ""
+"The virus definitions could not be downloaded now; ClamAV will retry "
+"automatically in the background."
+msgstr ""
+"Hiện chưa tải được cơ sở dữ liệu virus; ClamAV sẽ tự động thử lại ở chế độ "
+"nền."
+
+#: src/services/InstallService.cpp:990
+#, kde-format
+msgid "freshclam did not finish updating the definitions."
+msgstr "freshclam chưa cập nhật xong cơ sở dữ liệu virus."
+
+#: src/services/InstallService.cpp:1012
+#, kde-format
+msgid "Checking Flathub…"
+msgstr "Đang kiểm tra Flathub…"
+
+#: src/services/InstallService.cpp:1034
+#, kde-format
+msgid "Setting up Flathub…"
+msgstr "Đang thiết lập Flathub…"
+
+#: src/services/InstallService.cpp:1119
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1 (component %2 of %3)…"
+msgstr "Đang tải về và cài đặt %1 (thành phần %2 trên %3)…"
+
+#: src/services/InstallService.cpp:1121
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1…"
+msgstr "Đang tải về và cài đặt %1…"
+
+#: src/services/InstallService.cpp:1144
+#, kde-format
+msgctxt "@info technical detail"
+msgid "Exit code: %1"
+msgstr "Mã thoát: %1"
+
+#: src/services/InstallService.cpp:1232
+#, kde-format
+msgctxt "@info technical detail; %3 is an internal error code"
+msgid "Step: %1 of %2 · reason: %3"
+msgstr "Bước: %1 trên %2 · lý do: %3"
+
+#: src/services/InstallService.cpp:1241
+#, kde-format
+msgid ""
+"The authorization was canceled. The components installed in the previous "
+"steps were kept."
+msgstr ""
+"Việc cấp quyền đã bị huỷ. Các thành phần đã cài ở các bước trước được giữ "
+"lại."
+
+#: src/services/InstallService.cpp:1242
+#, kde-format
+msgid "The authorization was canceled. No changes were made to the system."
+msgstr "Việc cấp quyền đã bị huỷ. Hệ thống không bị thay đổi."
+
+#: src/services/InstallService.cpp:1266
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid ""
+"Cannot open %1: the required components are not installed or the tool is "
+"unavailable."
+msgstr ""
+"Không thể mở %1: các thành phần cần thiết chưa được cài đặt hoặc công cụ "
+"không khả dụng."
+
+#: src/services/InstallService.cpp:1300
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid "Could not open %1."
+msgstr "Không mở được %1."
+
+#: src/services/LayoutService.cpp:36 src/services/LayoutService.cpp:409
+#, kde-format
+msgid "Invalid layout."
+msgstr "Bố cục không hợp lệ."
+
+#. i18n: %1 is one or more Plasma widget ids joined by " or ".
+#: src/services/LayoutService.cpp:44
+#, kde-format
+msgid "Required launcher missing: %1. The previous panels were preserved."
+msgstr ""
+"Thiếu trình khởi chạy cần thiết: %1. Các bảng trước đó được giữ nguyên."
+
+#: src/services/LayoutService.cpp:45
+#, kde-format
+msgctxt "separator between alternative widget ids"
+msgid " or "
+msgstr " hoặc "
+
+#. i18n: %1 is a Plasma widget id, e.g. org.kde.plasma.kickoff.
+#: src/services/LayoutService.cpp:49
+#, kde-format
+msgid "Required widget missing: %1. The previous panels were preserved."
+msgstr "Thiếu phụ kiện cần thiết: %1. Các bảng trước đó được giữ nguyên."
+
+#: src/services/LayoutService.cpp:53
+#, kde-format
+msgid "No screen available in Plasma."
+msgstr "Không có màn hình nào trong Plasma."
+
+#: src/services/LayoutService.cpp:56
+#, kde-format
+msgid "Could not query the screen geometry."
+msgstr "Không truy vấn được kích thước màn hình."
+
+#: src/services/LayoutService.cpp:58
+#, kde-format
+msgid ""
+"Could not check the required widgets; the previous panels were preserved."
+msgstr ""
+"Không kiểm tra được các phụ kiện cần thiết; các bảng trước đó được giữ "
+"nguyên."
+
+#: src/services/LayoutService.cpp:132
+msgctxt "desktop layout name"
+msgid "Classic — 5 panels"
+msgstr "Cổ điển — 5 bảng"
+
+#: src/services/LayoutService.cpp:133
+msgctxt "desktop layout name"
+msgid "3 panels"
+msgstr "3 bảng"
+
+#: src/services/LayoutService.cpp:134
+msgctxt "desktop layout name"
+msgid "Single panel"
+msgstr "Một bảng"
+
+#: src/services/LayoutService.cpp:135
+msgctxt "desktop layout name"
+msgid "Top panel"
+msgstr "Bảng phía trên"
+
+#: src/services/LayoutService.cpp:136
+msgctxt "desktop layout name"
+msgid "Floating"
+msgstr "Nổi"
+
+#. i18n: "W7" refers to a Windows 7 style taskbar.
+#: src/services/LayoutService.cpp:138
+msgctxt "desktop layout name"
+msgid "W7 panel"
+msgstr "Bảng kiểu W7"
+
+#: src/services/LayoutService.cpp:139
+msgctxt "desktop layout name"
+msgid "Tiling"
+msgstr "Xếp ô"
+
+#: src/services/LayoutService.cpp:394
+#, kde-format
+msgid "Could not measure the layout segments."
+msgstr "Không đo được các phân đoạn của bố cục."
+
+#: src/services/LayoutService.cpp:400
+#, kde-format
+msgid "The segments did not settle without overlapping on this screen."
+msgstr ""
+"Các phân đoạn không thể sắp xếp mà không chồng lên nhau trên màn hình này."
+
+#: src/services/LayoutService.cpp:416
+#, kde-format
+msgid "Plasma did not respond; open the Welcome inside a KDE Plasma session."
+msgstr ""
+"Plasma không phản hồi; hãy mở ứng dụng Chào mừng trong một phiên KDE Plasma."
+
+#: src/services/LayoutService.cpp:423
+#, kde-format
+msgid "Checking the launcher of the %1 layout…"
+msgstr "Đang kiểm tra trình khởi chạy của bố cục %1…"
+
+#: src/services/LayoutService.cpp:426
+#, kde-format
+msgid "Could not load the layout scripts; nothing was changed."
+msgstr "Không nạp được các tập lệnh bố cục; không có gì bị thay đổi."
+
+#: src/services/LayoutService.cpp:437
+#, kde-format
+msgid "Could not save a copy of the current layout; nothing was changed."
+msgstr "Không lưu được bản sao của bố cục hiện tại; không có gì bị thay đổi."
+
+#: src/services/LayoutService.cpp:440
+#, kde-format
+msgid "Applying the %1 layout…"
+msgstr "Đang áp dụng bố cục %1…"
+
+#. i18n: %1 is a complete sentence explaining why the layout failed.
+#: src/services/LayoutService.cpp:445
+#, kde-format
+msgid "%1 The previous layout was restored."
+msgstr "%1 Bố cục trước đó đã được khôi phục."
+
+#. i18n: “Restore Previous Layout” is the button on the Appearance page.
+#: src/services/LayoutService.cpp:447
+#, kde-format
+msgid "%1 Could not restore automatically; use “Restore Previous Layout”."
+msgstr "%1 Không thể khôi phục tự động; hãy dùng “Khôi phục bố cục trước đó”."
+
+#. i18n: %2 is the raw error reported by Plasma.
+#: src/services/LayoutService.cpp:459
+#, kde-format
+msgid "Could not apply the %1 layout (%2)."
+msgstr "Không áp dụng được bố cục %1 (%2)."
+
+#: src/services/LayoutService.cpp:469
+#, kde-format
+msgid "The %1 layout was not completed."
+msgstr "Bố cục %1 chưa hoàn tất."
+
+#: src/services/LayoutService.cpp:474
+#, kde-format
+msgid "%1 layout applied."
+msgstr "Đã áp dụng bố cục %1."
+
+#: src/services/LayoutService.cpp:478
+#, kde-format
+msgid ""
+"%1 layout applied. Drag windows while holding Shift to snap them into the "
+"tiles."
+msgstr ""
+"Đã áp dụng bố cục %1. Kéo cửa sổ trong khi giữ Shift để gắn chúng vào các ô."
+
+#: src/services/LayoutService.cpp:479
+#, kde-format
+msgid "%1 layout applied, but the KWin tiles could not be configured."
+msgstr "Đã áp dụng bố cục %1, nhưng không cấu hình được các ô của KWin."
+
+#: src/services/LayoutService.cpp:554
+#, kde-format
+msgid "Restoring the previous layout; Plasma will be restarted…"
+msgstr "Đang khôi phục bố cục trước đó; Plasma sẽ được khởi động lại…"
+
+#: src/services/LayoutService.cpp:556
+#, kde-format
+msgid "Previous layout restored."
+msgstr "Đã khôi phục bố cục trước đó."
+
+#: src/services/LayoutService.cpp:557
+#, kde-format
+msgid "Could not restore the previous layout."
+msgstr "Không khôi phục được bố cục trước đó."
+
+#: src/services/PackageService.cpp:111 src/services/PackageService.cpp:161
+#, kde-format
+msgid "Flatpak is not installed."
+msgstr "Flatpak chưa được cài đặt."
+
+#: src/services/PackageService.cpp:140
+#, kde-format
+msgid "Could not query Flatpak."
+msgstr "Không truy vấn được Flatpak."
+
+#: src/services/PackageService.cpp:151
+#, kde-format
+msgid "This application is not in the allowed list."
+msgstr "Ứng dụng này không có trong danh sách được phép."
+
+#: src/services/PackageService.cpp:155
+#, kde-format
+msgid "Another Flatpak operation is in progress."
+msgstr "Một thao tác Flatpak khác đang diễn ra."
+
+#: src/services/PackageService.cpp:176
+#, kde-format
+msgctxt "@info:status %1 is a Flatpak application ID"
+msgid "Removing %1…"
+msgstr "Đang gỡ bỏ %1…"
+
+#: src/services/PackageService.cpp:182
+#, kde-format
+msgid "Removal finished."
+msgstr "Đã gỡ bỏ xong."
+
+#: src/services/PackageService.cpp:184
+#, kde-format
+msgctxt "@info:status %1 is the error output of Flatpak"
+msgid "Failed: %1"
+msgstr "Thất bại: %1"
+
+#: src/services/PackageService.cpp:195
+#, kde-format
+msgid "Could not start Flatpak."
+msgstr "Không khởi động được Flatpak."
+
+#: src/services/StartupPreference.cpp:75 src/services/StartupPreference.cpp:92
+#, kde-format
+msgid "Could not change the startup preference."
+msgstr "Không thay đổi được tuỳ chọn khởi động."
+
+#: src/services/SystemReportService.cpp:38
+#, kde-format
+msgctxt "@info system report value"
+msgid "Not available"
+msgstr "Không có sẵn"
+
+#: src/services/SystemReportService.cpp:186
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 ngày"
+
+#: src/services/SystemReportService.cpp:189
+#, kde-format
+msgid "%1 hour"
+msgid_plural "%1 hours"
+msgstr[0] "%1 giờ"
+
+#: src/services/SystemReportService.cpp:192
+#, kde-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 phút"
+
+#: src/services/SystemReportService.cpp:195
+#, kde-format
+msgid "less than a minute"
+msgstr "chưa đến một phút"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration"
+msgid "%1 and %2"
+msgstr "%1 và %2"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration list separator"
+msgid ", "
+msgstr ", "
+
+#: src/services/SystemReportService.cpp:333
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (64-bit)"
+msgstr "%1 (64 bit)"
+
+#: src/services/SystemReportService.cpp:334
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (32-bit)"
+msgstr "%1 (32 bit)"
+
+#: src/services/SystemReportService.cpp:341
+#, kde-format
+msgctxt "@title system report section"
+msgid "System"
+msgstr "Hệ thống"
+
+#: src/services/SystemReportService.cpp:342
+#, kde-format
+msgctxt "@label system report item"
+msgid "Distribution"
+msgstr "Bản phân phối"
+
+#: src/services/SystemReportService.cpp:344
+#, kde-format
+msgctxt "@label system report item"
+msgid "Version"
+msgstr "Phiên bản"
+
+#: src/services/SystemReportService.cpp:347
+#: src/services/SystemReportService.cpp:349
+#, kde-format
+msgctxt "@label system report item"
+msgid "Base"
+msgstr "Nền tảng"
+
+#: src/services/SystemReportService.cpp:353
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation media"
+msgstr "Phương tiện cài đặt"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Estimated installation date"
+msgstr "Ngày cài đặt ước tính"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation date"
+msgstr "Ngày cài đặt"
+
+#: src/services/SystemReportService.cpp:366
+#, kde-format
+msgctxt "@label system report item"
+msgid "Architecture"
+msgstr "Kiến trúc"
+
+#: src/services/SystemReportService.cpp:368
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer name"
+msgstr "Tên máy tính"
+
+#: src/services/SystemReportService.cpp:370
+#, kde-format
+msgctxt "@label system report item"
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+#: src/services/SystemReportService.cpp:371
+#, kde-format
+msgctxt "@label system report item"
+msgid "Date and time"
+msgstr "Ngày và giờ"
+
+#: src/services/SystemReportService.cpp:374
+#, kde-format
+msgctxt "@title system report section"
+msgid "Desktop"
+msgstr "Bàn làm việc"
+
+#: src/services/SystemReportService.cpp:378
+#, kde-format
+msgctxt "@label system report item"
+msgid "Session"
+msgstr "Phiên"
+
+#: src/services/SystemReportService.cpp:379
+#, kde-format
+msgctxt "@label system report item"
+msgid "Environment"
+msgstr "Môi trường"
+
+#: src/services/SystemReportService.cpp:382
+#, kde-format
+msgctxt "@title system report section"
+msgid "Hardware"
+msgstr "Phần cứng"
+
+#: src/services/SystemReportService.cpp:386
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer"
+msgstr "Máy tính"
+
+#: src/services/SystemReportService.cpp:388
+#, kde-format
+msgctxt "@label system report item"
+msgid "Processor"
+msgstr "Bộ xử lý"
+
+#: src/services/SystemReportService.cpp:389
+#, kde-format
+msgctxt "@label system report item"
+msgid "Cores / threads"
+msgstr "Nhân / luồng"
+
+#: src/services/SystemReportService.cpp:391
+#, kde-format
+msgctxt "@info firmware type"
+msgid "BIOS (legacy)"
+msgstr "BIOS (cũ)"
+
+#: src/services/SystemReportService.cpp:392
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Not applicable (BIOS)"
+msgstr "Không áp dụng (BIOS)"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Disabled"
+msgstr "Đang tắt"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Enabled"
+msgstr "Đang bật"
+
+#: src/services/SystemReportService.cpp:399
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Could not be determined"
+msgstr "Không xác định được"
+
+#: src/services/SystemReportService.cpp:406
+#, kde-format
+msgctxt "@title system report section"
+msgid "Graphics"
+msgstr "Đồ hoạ"
+
+#: src/services/SystemReportService.cpp:430
+#, kde-format
+msgctxt "@info appended to a device name"
+msgid " · driver %1"
+msgstr " · trình điều khiển %1"
+
+#: src/services/SystemReportService.cpp:438
+#, kde-format
+msgctxt "@label system report item"
+msgid "OpenGL renderer"
+msgstr "Bộ kết xuất OpenGL"
+
+#: src/services/SystemReportService.cpp:445
+#, kde-format
+msgctxt "@label system report item"
+msgid "Monitor %1"
+msgstr "Màn hình %1"
+
+#. i18n: screen name · width×height · refresh rate · scale percentage
+#: src/services/SystemReportService.cpp:447
+#, kde-format
+msgctxt "@info monitor details"
+msgid "%1 · %2×%3 · %4 Hz · scale %5%"
+msgstr "%1 · %2×%3 · %4 Hz · tỉ lệ %5%"
+
+#: src/services/SystemReportService.cpp:455
+#, kde-format
+msgctxt "@title system report section"
+msgid "Memory"
+msgstr "Bộ nhớ"
+
+#: src/services/SystemReportService.cpp:457
+#, kde-format
+msgctxt "@label system report item"
+msgid "Total"
+msgstr "Tổng"
+
+#: src/services/SystemReportService.cpp:458
+#, kde-format
+msgctxt "@label system report item"
+msgid "In use"
+msgstr "Đang dùng"
+
+#: src/services/SystemReportService.cpp:459
+#, kde-format
+msgctxt "@label system report item"
+msgid "Available"
+msgstr "Có sẵn"
+
+#: src/services/SystemReportService.cpp:461
+#, kde-format
+msgctxt "@info swap usage"
+msgid "%1 of %2 in use"
+msgstr "Đang dùng %1 trên %2"
+
+#: src/services/SystemReportService.cpp:462
+#, kde-format
+msgid "No swap"
+msgstr "Không có swap"
+
+#: src/services/SystemReportService.cpp:466
+#, kde-format
+msgctxt "@title system report section"
+msgid "Storage"
+msgstr "Lưu trữ"
+
+#: src/services/SystemReportService.cpp:478
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disk %1"
+msgstr "Đĩa %1"
+
+#: src/services/SystemReportService.cpp:497
+#, kde-format
+msgctxt "@label system report item"
+msgid "Other volume %1"
+msgstr "Ổ đĩa khác %1"
+
+#: src/services/SystemReportService.cpp:500
+#, kde-format
+msgctxt "@info volume usage"
+msgid "%1 used of %2 · %3 free"
+msgstr "Đã dùng %1 trên %2 · còn trống %3"
+
+#: src/services/SystemReportService.cpp:503
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disks"
+msgstr "Đĩa"
+
+#: src/services/SystemReportService.cpp:508
+#, kde-format
+msgctxt "@title system report section"
+msgid "Packages"
+msgstr "Gói"
+
+#: src/services/SystemReportService.cpp:511
+#: src/services/SystemReportService.cpp:526
+#, kde-format
+msgid "%1 package"
+msgid_plural "%1 packages"
+msgstr[0] "%1 gói"
+
+#: src/services/SystemReportService.cpp:523
+#, kde-format
+msgid "%1 application"
+msgid_plural "%1 applications"
+msgstr[0] "%1 ứng dụng"
+
+#: src/services/SystemReportService.cpp:527
+#, kde-format
+msgid "Snap not installed"
+msgstr "Chưa cài đặt Snap"
+
+#: src/services/SystemReportService.cpp:532
+#, kde-format
+msgctxt "@info kernel version"
+msgid "%1 (in use)"
+msgstr "%1 (đang dùng)"
+
+#: src/services/SystemReportService.cpp:534
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installed kernels"
+msgstr "Các nhân đã cài"
+
+#: src/services/SystemReportService.cpp:537
+#, kde-format
+msgctxt "@title system report section"
+msgid "Startup"
+msgstr "Khởi động"
+
+#: src/services/SystemReportService.cpp:538
+#, kde-format
+msgctxt "@label system report item"
+msgid "Uptime"
+msgstr "Thời gian hoạt động"
+
+#: src/services/SystemReportService.cpp:539
+#, kde-format
+msgctxt "@label system report item"
+msgid "Last boot"
+msgstr "Lần khởi động gần nhất"
+
+#: src/services/SystemReportService.cpp:543
+#, kde-format
+msgctxt "@title system report section"
+msgid "Network"
+msgstr "Mạng"
+
+#: src/services/SystemReportService.cpp:556
+#, kde-format
+msgctxt "@info network adapter"
+msgid "driver %1"
+msgstr "trình điều khiển %1"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "connected"
+msgstr "đã kết nối"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "disconnected"
+msgstr "đã ngắt kết nối"
+
+#: src/services/SystemReportService.cpp:569
+#, kde-format
+msgctxt "@label system report item"
+msgid "Adapters"
+msgstr "Bộ điều hợp"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "32-bit"
+msgstr "32 bit"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "64-bit"
+msgstr "64 bit"
+
+#: src/services/SystemReportService.cpp:581
+#, kde-format
+msgctxt "@info memory usage summary"
+msgid "%1 of %2"
+msgstr "%1 trên %2"
+
+#: src/services/SystemReportService.cpp:582
+#, kde-format
+msgctxt "@info storage summary"
+msgid "%1 free of %2"
+msgstr "%1 trống trong %2"
+
+#: src/services/SystemReportService.cpp:593
+#, kde-format
+msgctxt "@info system report header"
+msgid "Generated on: %1"
+msgstr "Tạo lúc: %1"
+
+#: src/services/SystemReportService.cpp:598
+#, kde-format
+msgctxt "@info system report line: label, value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: src/services/SystemReportService.cpp:603
+#, kde-format
+msgctxt "@info system report footer"
+msgid "No network addresses, serial numbers or computer name."
+msgstr "Không có địa chỉ mạng, số sê-ri hay tên máy tính."
+
+#: src/services/SystemService.cpp:93
+#, kde-format
+msgid "The %1 decoration engine is not installed."
+msgstr "Bộ máy trang trí %1 chưa được cài đặt."
+
+#: src/services/SystemService.cpp:108
+#, kde-format
+msgid "The %1 decoration is not installed or its resources are incomplete."
+msgstr "Trang trí %1 chưa được cài đặt hoặc tài nguyên của nó chưa đầy đủ."
+
+# reviewed: status "available" (instalado); "… có sẵn" lia-se como rótulo "o
+# Driver Manager disponível"; par com "Chưa cài đặt …"
+#. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
+#: src/services/SystemService.cpp:480
+#, kde-format
+msgid "Driver Manager available"
+msgstr "Đã có Trình quản lý trình điều khiển"
+
+#: src/services/SystemService.cpp:481
+#, kde-format
+msgid "Driver Manager not installed"
+msgstr "Chưa cài đặt Trình quản lý trình điều khiển"
+
+#: src/services/SystemService.cpp:497
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Active"
+msgstr "Bật"
+
+#: src/services/SystemService.cpp:498
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Inactive"
+msgstr "Tắt"
+
+#: src/services/SystemService.cpp:501
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: active"
+msgstr "khởi động: bật"
+
+#: src/services/SystemService.cpp:502
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: inactive"
+msgstr "khởi động: tắt"
+
+#. i18n: %1 is an error message shown in the page banner.
+#: src/services/SystemService.cpp:538
+#, kde-format
+msgid "Error: %1"
+msgstr "Lỗi: %1"
+
+#: src/services/SystemService.cpp:557
+#, kde-format
+msgid "Invalid theme."
+msgstr "Chủ đề không hợp lệ."
+
+#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
+#: src/services/SystemService.cpp:858
+#, kde-format
+msgid "Wait for the current operation to finish."
+msgstr "Hãy đợi thao tác hiện tại hoàn tất."
+
+#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#, kde-format
+msgid ""
+"The current external color scheme has no known variant. Select a Mainuan "
+"color first."
+msgstr ""
+"Quy hoạch màu bên ngoài hiện tại không có biến thể nào đã biết. Hãy chọn một "
+"màu Mainuan trước."
+
+#: src/services/SystemService.cpp:578
+#, kde-format
+msgid "Dark theme applied."
+msgstr "Đã áp dụng chủ đề tối."
+
+#: src/services/SystemService.cpp:579
+#, kde-format
+msgid "Light theme applied."
+msgstr "Đã áp dụng chủ đề sáng."
+
+#. i18n: %1 is an accent color name (Brown, Cyan…).
+#: src/services/SystemService.cpp:596
+#, kde-format
+msgid "Theme and %1 color applied."
+msgstr "Đã áp dụng chủ đề và màu %1."
+
+#: src/services/SystemService.cpp:608
+#, kde-format
+msgid "Invalid accent color."
+msgstr "Màu nhấn không hợp lệ."
+
+#: src/services/SystemService.cpp:618
+#, kde-format
+msgid "Applying %1 color…"
+msgstr "Đang áp dụng màu %1…"
+
+#: src/services/SystemService.cpp:629
+#, kde-format
+msgid "%1 color, icons, wallpaper and avatar applied."
+msgstr "Đã áp dụng màu %1, biểu tượng, phông nền và ảnh đại diện."
+
+#: src/services/SystemService.cpp:640
+#, kde-format
+msgid "Color scheme %1.colors is missing or unreadable."
+msgstr "Quy hoạch màu %1.colors bị thiếu hoặc không đọc được."
+
+#: src/services/SystemService.cpp:646
+#, kde-format
+msgid "Color scheme %1.colors is invalid."
+msgstr "Quy hoạch màu %1.colors không hợp lệ."
+
+#: src/services/SystemService.cpp:651
+#, kde-format
+msgid "plasma-apply-colorscheme is not available."
+msgstr "plasma-apply-colorscheme không có sẵn."
+
+#: src/services/SystemService.cpp:658
+#, kde-format
+msgid "Plasma did not recognize the %1.colors color scheme."
+msgstr "Plasma không nhận ra quy hoạch màu %1.colors."
+
+#: src/services/SystemService.cpp:704
+#, kde-format
+msgid "Could not prepare the KDE color configuration."
+msgstr "Không chuẩn bị được cấu hình màu KDE."
+
+#: src/services/SystemService.cpp:715
+#, kde-format
+msgid "Plasma did not confirm the %1 color scheme without a color override."
+msgstr "Plasma không xác nhận quy hoạch màu %1 khi không có màu ghi đè."
+
+#. i18n: Item of a list of failed adjustments (lowercase, no final period).
+#: src/services/SystemService.cpp:729
+#, kde-format
+msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
+msgstr ""
+"chủ đề biểu tượng %1 bị thiếu hoặc index.theme không hợp lệ (giữ nguyên biểu "
+"tượng trước đó)"
+
+#: src/services/SystemService.cpp:732
+#, kde-format
+msgctxt "failed adjustment list item; %1 is an icon theme"
+msgid "icons %1"
+msgstr "biểu tượng %1"
+
+#: src/services/SystemService.cpp:737
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper %1 missing"
+msgstr "thiếu phông nền %1"
+
+#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
+#: src/services/SystemService.cpp:1022
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper"
+msgstr "phông nền"
+
+#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "Plasma did not confirm the %1 icons"
+msgstr "Plasma không xác nhận biểu tượng %1"
+
+#: src/services/SystemService.cpp:758
+#, kde-format
+msgctxt "failed adjustment list item; %1 is the avatar error"
+msgid "avatar: %1"
+msgstr "ảnh đại diện: %1"
+
+#: src/services/SystemService.cpp:764
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "color scheme changed during the operation; avatar preserved"
+msgstr "quy hoạch màu đã thay đổi trong khi thao tác; giữ nguyên ảnh đại diện"
+
+#: src/services/SystemService.cpp:779
+#, kde-format
+msgid "Could not complete all adjustments: %1."
+msgstr "Không hoàn tất được mọi điều chỉnh: %1."
+
+#: src/services/SystemService.cpp:780
+#, kde-format
+msgctxt "separator between failed adjustment list items"
+msgid "; "
+msgstr "; "
+
+#: src/services/SystemService.cpp:795
+#, kde-format
+msgid "Could not communicate with KWin to update the window decoration."
+msgstr "Không giao tiếp được với KWin để cập nhật trang trí cửa sổ."
+
+#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
+#: src/services/SystemService.cpp:830
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "could not restore the previous window decoration"
+msgstr "không khôi phục được trang trí cửa sổ trước đó"
+
+#: src/services/SystemService.cpp:821
+#, kde-format
+msgid "Could not save the requested window decoration in KWin."
+msgstr "Không lưu được trang trí cửa sổ được yêu cầu vào KWin."
+
+#: src/services/SystemService.cpp:831
+#, kde-format
+msgid ""
+"The final window decoration configuration was changed during the operation."
+msgstr "Cấu hình trang trí cửa sổ cuối cùng đã bị thay đổi trong khi thao tác."
+
+#: src/services/SystemService.cpp:854
+#, kde-format
+msgid "Invalid visual style."
+msgstr "Phong cách hiển thị không hợp lệ."
+
+#: src/services/SystemService.cpp:862
+#, kde-format
+msgid "%1 style applied."
+msgstr "Đã áp dụng phong cách %1."
+
+#: src/services/SystemService.cpp:895
+#, kde-format
+msgid ""
+"This system's Plasma does not provide plasma-apply-lookandfeel; the style "
+"cannot be changed."
+msgstr ""
+"Plasma của hệ thống này không cung cấp plasma-apply-lookandfeel; không thể "
+"thay đổi phong cách."
+
+#: src/services/SystemService.cpp:900
+#, kde-format
+msgid "The %1 style is not installed on this system."
+msgstr "Phong cách %1 chưa được cài đặt trên hệ thống này."
+
+#. i18n: %1 is a complete sentence describing the problem.
+#: src/services/SystemService.cpp:911
+#, kde-format
+msgid "%1 Previous appearance preserved."
+msgstr "%1 Giữ nguyên diện mạo trước đó."
+
+#: src/services/SystemService.cpp:927
+#, kde-format
+msgid "Could not preserve the %1 icon theme. Previous style preserved."
+msgstr "Không giữ được chủ đề biểu tượng %1. Giữ nguyên phong cách trước đó."
+
+#: src/services/SystemService.cpp:931
+#, kde-format
+msgid "Applying %1 style…"
+msgstr "Đang áp dụng phong cách %1…"
+
+#: src/services/SystemService.cpp:948
+#, kde-format
+msgid "Could not apply the %1 style."
+msgstr "Không áp dụng được phong cách %1."
+
+#: src/services/SystemService.cpp:956
+#, kde-format
+msgid "Plasma did not confirm the %1 style."
+msgstr "Plasma không xác nhận phong cách %1."
+
+#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "icons"
+msgstr "biểu tượng"
+
+#: src/services/SystemService.cpp:986
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "cursor"
+msgstr "con trỏ"
+
+#: src/services/SystemService.cpp:1057
+#, kde-format
+msgid "Driver Manager is not installed."
+msgstr "Trình quản lý trình điều khiển chưa được cài đặt."
+
+#: src/services/SystemService.cpp:1061
+#, kde-format
+msgid "Could not open Driver Manager."
+msgstr "Không mở được Trình quản lý trình điều khiển."
+
+#: src/services/SystemService.cpp:1066
+#, kde-format
+msgid "Unknown action."
+msgstr "Hành động không xác định."
+
+#: src/services/SystemService.cpp:1075
+#, kde-format
+msgid "URL blocked for security reasons."
+msgstr "URL bị chặn vì lý do bảo mật."
+
+#: src/services/SystemService.cpp:1079
+#, kde-format
+msgid "Requested the web browser to open the page."
+msgstr "Đã yêu cầu trình duyệt web mở trang."
+
+#: src/services/SystemService.cpp:1080
+#, kde-format
+msgid "Could not open the URL in the default web browser."
+msgstr "Không mở được URL trong trình duyệt web mặc định."
+
+#: src/services/SystemService.cpp:1087
+#, kde-format
+msgid "This application is not allowed to be opened in Discover."
+msgstr "Không được phép mở ứng dụng này trong Discover."
+
+#: src/services/SystemService.cpp:1092
+#, kde-format
+msgid "Discover was not found. Install KDE Discover to open this application."
+msgstr "Không tìm thấy Discover. Hãy cài đặt KDE Discover để mở ứng dụng này."
+
+#: src/services/SystemService.cpp:1098
+#, kde-format
+msgid "Could not open the page in Discover. Try again."
+msgstr "Không mở được trang trong Discover. Hãy thử lại."
+
+#: src/services/SystemService.cpp:1101
+#, kde-format
+msgid ""
+"Requested Discover to open the page. Confirm the installation in Discover; "
+"if the application is not found, check Flathub and try again."
+msgstr ""
+"Đã yêu cầu Discover mở trang. Hãy xác nhận việc cài đặt trong Discover; nếu "
+"không tìm thấy ứng dụng, hãy kiểm tra Flathub rồi thử lại."
+
+#: src/services/SystemService.cpp:1109
+#, kde-format
+msgid "No Pix key is configured."
+msgstr "Chưa cấu hình khoá Pix."
+
+#: src/services/SystemService.cpp:1113
+#, kde-format
+msgid "Clipboard unavailable."
+msgstr "Bảng nháp không khả dụng."
+
+#: src/services/UserAvatar.cpp:70
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "không được phép cập nhật ảnh đại diện với quyền quản trị viên"
+
+#: src/services/UserAvatar.cpp:76
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr "tệp .face nguồn bị thiếu, không đọc được hoặc không an toàn"
+
+#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the source avatar"
+msgstr "không đọc được ảnh đại diện nguồn"
+
+#: src/services/UserAvatar.cpp:93
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid ""
+"the .face file does not contain a valid image (SVG requires the Qt SVG "
+"plugin)"
+msgstr "tệp .face không chứa ảnh hợp lệ (SVG cần phần bổ trợ Qt SVG)"
+
+#: src/services/UserAvatar.cpp:100
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "home folder unavailable or with unsafe permissions"
+msgstr "thư mục nhà không khả dụng hoặc có quyền truy cập không an toàn"
+
+#: src/services/UserAvatar.cpp:106
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "~/.face is not a safe regular file; avatar preserved"
+msgstr ""
+"~/.face không phải là tệp thông thường an toàn; giữ nguyên ảnh đại diện"
+
+#: src/services/UserAvatar.cpp:112
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "unsafe avatar backup; avatar preserved"
+msgstr "bản sao lưu ảnh đại diện không an toàn; giữ nguyên ảnh đại diện"
+
+#: src/services/UserAvatar.cpp:120
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely open the previous avatar"
+msgstr "không mở được ảnh đại diện trước đó một cách an toàn"
+
+#: src/services/UserAvatar.cpp:124
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the previous avatar"
+msgstr "không đọc được ảnh đại diện trước đó"
+
+#: src/services/UserAvatar.cpp:128
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not preserve the previous avatar"
+msgstr "không giữ được ảnh đại diện trước đó"
+
+#: src/services/UserAvatar.cpp:132
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the backup; avatar preserved"
+msgstr "không ghi được bản sao lưu; giữ nguyên ảnh đại diện"
+
+#: src/services/UserAvatar.cpp:138
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not publish the backup; avatar preserved"
+msgstr "không công bố được bản sao lưu; giữ nguyên ảnh đại diện"
+
+#: src/services/UserAvatar.cpp:146
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the new avatar; avatar preserved"
+msgstr "không ghi được ảnh đại diện mới; giữ nguyên ảnh đại diện"
+
+#: src/services/UserAvatar.cpp:155
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely replace ~/.face; avatar preserved"
+msgstr "không thay thế được ~/.face một cách an toàn; giữ nguyên ảnh đại diện"
+
+#: src/services/UserAvatar.cpp:158
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but writing to disk could not be confirmed"
+msgstr "đã cập nhật ảnh đại diện, nhưng không xác nhận được việc ghi ra đĩa"
+
+#: src/services/UserAvatar.cpp:165
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be checked"
+msgstr "đã cập nhật ảnh đại diện, nhưng không kiểm tra được ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:168
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be created"
+msgstr "đã cập nhật ảnh đại diện, nhưng không tạo được ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:171
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
+msgstr ""
+"đã cập nhật ảnh đại diện, nhưng không xác nhận được ~/.face.icon trên đĩa"
