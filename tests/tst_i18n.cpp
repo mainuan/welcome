@@ -1,12 +1,14 @@
 // Proves that the real models and services are translated through the
 // mainuan-welcome catalog: Portuguese with LANGUAGE=pt_BR, the English source
 // text with LANGUAGE=en (CTest runs this binary once per language).
+#include "CatalogLayoutDirection.h"
 #include "models/LayoutModel.h"
 #include "services/LayoutService.h"
 #include "services/SystemReportService.h"
 
 #include <KLocalizedString>
 
+#include <QGuiApplication>
 #include <QtTest>
 
 #include <clocale>
@@ -61,7 +63,37 @@ private slots:
         // The same call main() makes for the window title.
         QCOMPARE(i18nc("@title application display name", "Mainuan — Welcome"), pick("Mainuan — Boas-vindas", "Mainuan — Welcome"));
     }
+
+    void rightToLeftCatalogMirrorsLayout()
+    {
+        auto *app = qobject_cast<QGuiApplication *>(QCoreApplication::instance());
+        QVERIFY(app != nullptr);
+        // No qtbase_ar translator in this process (LANGUAGE is pt_BR or en):
+        // Qt by itself keeps the layout left to right.
+        QVERIFY(QCoreApplication::translate("QGuiApplication", "QT_LAYOUT_DIRECTION") != QStringLiteral("RTL"));
+        QCOMPARE(QGuiApplication::layoutDirection(), Qt::LeftToRight);
+
+        // The application's own Arabic catalog is used: mirror (same call as main()).
+        KLocalizedString::setLanguages({QStringLiteral("ar"), QStringLiteral("en")});
+        QVERIFY(KLocalizedString::isApplicationTranslatedInto(QStringLiteral("ar")));
+        QCOMPARE(CatalogLayoutDirection::effectiveLanguage(), QStringLiteral("ar"));
+        CatalogLayoutDirection::apply(*app);
+        QCOMPARE(QGuiApplication::layoutDirection(), Qt::RightToLeft);
+
+        // Urdu is written right to left, but there is no mainuan-welcome catalog
+        // for it: the interface falls back to English and stays left to right.
+        app->setLayoutDirection(Qt::LeftToRight);
+        KLocalizedString::setLanguages({QStringLiteral("ur"), QStringLiteral("en")});
+        QCOMPARE(QLocale(QStringLiteral("ur")).textDirection(), Qt::RightToLeft);
+        QVERIFY(!KLocalizedString::isApplicationTranslatedInto(QStringLiteral("ur")));
+        QCOMPARE(CatalogLayoutDirection::effectiveLanguage(), QString());
+        CatalogLayoutDirection::apply(*app);
+        QCOMPARE(QGuiApplication::layoutDirection(), Qt::LeftToRight);
+
+        KLocalizedString::clearLanguages();
+        app->setLayoutDirection(Qt::LayoutDirectionAuto);
+    }
 };
 
-QTEST_GUILESS_MAIN(I18nTest)
+QTEST_MAIN(I18nTest)
 #include "tst_i18n.moc"

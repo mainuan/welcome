@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:10-0300\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -770,87 +770,87 @@ msgid ""
 "antivirus, the firewall or media codecs"
 msgstr ""
 
-#: src/main.cpp:49
+#: src/main.cpp:53
 #, kde-format
 msgctxt "@title application display name"
 msgid "Mainuan — Welcome"
 msgstr ""
 
-#: src/main.cpp:92
+#: src/main.cpp:96
 #, kde-format
 msgctxt "@info application description"
 msgid "Complete suite: Writer, Calc and Impress"
 msgstr ""
 
-#: src/main.cpp:95
+#: src/main.cpp:99
 #, kde-format
 msgctxt "@info application description"
 msgid "Interface familiar to Microsoft Office users"
 msgstr ""
 
-#: src/main.cpp:98
+#: src/main.cpp:102
 #, kde-format
 msgctxt "@info application description"
 msgid ""
 "Free office suite with word processor, spreadsheet and presentation editors."
 msgstr ""
 
-#: src/main.cpp:101
+#: src/main.cpp:105
 #, kde-format
 msgctxt "@info application description"
 msgid "Online documents with collaboration"
 msgstr ""
 
-#: src/main.cpp:104
+#: src/main.cpp:108
 #, kde-format
 msgctxt "@info application description"
 msgid "Microsoft suite right in the browser"
 msgstr ""
 
-#: src/main.cpp:110
+#: src/main.cpp:114
 #, kde-format
 msgctxt "@info application description"
 msgid "Google's web browser"
 msgstr ""
 
-#: src/main.cpp:113
+#: src/main.cpp:117
 #, kde-format
 msgctxt "@info application description"
 msgid "Compatibility with Microsoft applications"
 msgstr ""
 
-#: src/main.cpp:116
+#: src/main.cpp:120
 #, kde-format
 msgctxt "@info application description"
 msgid "Built-in ad blocking"
 msgstr ""
 
-#: src/main.cpp:119
+#: src/main.cpp:123
 #, kde-format
 msgctxt "@info application description"
 msgid ""
 "Browser with advanced customization, tab management and privacy features."
 msgstr ""
 
-#: src/main.cpp:122
+#: src/main.cpp:126
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser focused on privacy, productivity and vertical tab organization."
 msgstr ""
 
-#: src/main.cpp:125
+#: src/main.cpp:129
 #, kde-format
 msgctxt "@info application description"
 msgid "Privacy-focused browser"
 msgstr ""
 
-#: src/main.cpp:128
+#: src/main.cpp:132
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser with resource controls"
 msgstr ""
 
-#: src/main.cpp:131
+#: src/main.cpp:135
 #, kde-format
 msgctxt "@info application description"
 msgid "Browsing through the Tor network"

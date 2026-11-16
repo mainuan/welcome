@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:10-0300\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
 "PO-Revision-Date: 2026-11-16 11:52-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: zh_TW <https://github.com/mainuan>\n"
@@ -785,87 +785,87 @@ msgid ""
 "antivirus, the firewall or media codecs"
 msgstr "安裝防毒軟體、防火牆或媒體編解碼器等系統元件需要驗證"
 
-#: src/main.cpp:49
+#: src/main.cpp:53
 #, kde-format
 msgctxt "@title application display name"
 msgid "Mainuan — Welcome"
 msgstr "Mainuan — 歡迎"
 
-#: src/main.cpp:92
+#: src/main.cpp:96
 #, kde-format
 msgctxt "@info application description"
 msgid "Complete suite: Writer, Calc and Impress"
 msgstr "完整套件：Writer、Calc 與 Impress"
 
-#: src/main.cpp:95
+#: src/main.cpp:99
 #, kde-format
 msgctxt "@info application description"
 msgid "Interface familiar to Microsoft Office users"
 msgstr "Microsoft Office 使用者熟悉的介面"
 
-#: src/main.cpp:98
+#: src/main.cpp:102
 #, kde-format
 msgctxt "@info application description"
 msgid ""
 "Free office suite with word processor, spreadsheet and presentation editors."
 msgstr "免費辦公套件，內含文書處理器、試算表與簡報編輯器。"
 
-#: src/main.cpp:101
+#: src/main.cpp:105
 #, kde-format
 msgctxt "@info application description"
 msgid "Online documents with collaboration"
 msgstr "支援協作的線上文件"
 
-#: src/main.cpp:104
+#: src/main.cpp:108
 #, kde-format
 msgctxt "@info application description"
 msgid "Microsoft suite right in the browser"
 msgstr "直接在瀏覽器中使用的 Microsoft 套件"
 
-#: src/main.cpp:110
+#: src/main.cpp:114
 #, kde-format
 msgctxt "@info application description"
 msgid "Google's web browser"
 msgstr "Google 的網頁瀏覽器"
 
-#: src/main.cpp:113
+#: src/main.cpp:117
 #, kde-format
 msgctxt "@info application description"
 msgid "Compatibility with Microsoft applications"
 msgstr "與 Microsoft 應用程式相容"
 
-#: src/main.cpp:116
+#: src/main.cpp:120
 #, kde-format
 msgctxt "@info application description"
 msgid "Built-in ad blocking"
 msgstr "內建廣告封鎖"
 
-#: src/main.cpp:119
+#: src/main.cpp:123
 #, kde-format
 msgctxt "@info application description"
 msgid ""
 "Browser with advanced customization, tab management and privacy features."
 msgstr "具備進階自訂、分頁管理與隱私功能的瀏覽器。"
 
-#: src/main.cpp:122
+#: src/main.cpp:126
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser focused on privacy, productivity and vertical tab organization."
 msgstr "注重隱私、生產力與垂直分頁整理的瀏覽器。"
 
-#: src/main.cpp:125
+#: src/main.cpp:129
 #, kde-format
 msgctxt "@info application description"
 msgid "Privacy-focused browser"
 msgstr "注重隱私的瀏覽器"
 
-#: src/main.cpp:128
+#: src/main.cpp:132
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser with resource controls"
 msgstr "可控制資源用量的瀏覽器"
 
-#: src/main.cpp:131
+#: src/main.cpp:135
 #, kde-format
 msgctxt "@info application description"
 msgid "Browsing through the Tor network"

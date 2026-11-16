@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:10-0300\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
 "PO-Revision-Date: 2026-11-16 11:52-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: ko <https://github.com/mainuan>\n"
@@ -805,25 +805,25 @@ msgstr ""
 
 # reviewed: 앱 이름은 .desktop(“Mainuan 환영 화면”)과 본문(“환영 화면을 닫으십시오”)에서 환영 화면으로 통일;
 # 환영합니다는 인사말이지 앱 이름이 아님
-#: src/main.cpp:49
+#: src/main.cpp:53
 #, kde-format
 msgctxt "@title application display name"
 msgid "Mainuan — Welcome"
 msgstr "Mainuan — 환영 화면"
 
-#: src/main.cpp:92
+#: src/main.cpp:96
 #, kde-format
 msgctxt "@info application description"
 msgid "Complete suite: Writer, Calc and Impress"
 msgstr "Writer, Calc, Impress를 모두 갖춘 제품군"
 
-#: src/main.cpp:95
+#: src/main.cpp:99
 #, kde-format
 msgctxt "@info application description"
 msgid "Interface familiar to Microsoft Office users"
 msgstr "Microsoft Office 사용자에게 익숙한 인터페이스"
 
-#: src/main.cpp:98
+#: src/main.cpp:102
 #, kde-format
 msgctxt "@info application description"
 msgid ""
@@ -832,37 +832,37 @@ msgstr ""
 "워드 프로세서, 스프레드시트, 프레젠테이션 편집기를 갖춘 무료 오피스 제품군입"
 "니다."
 
-#: src/main.cpp:101
+#: src/main.cpp:105
 #, kde-format
 msgctxt "@info application description"
 msgid "Online documents with collaboration"
 msgstr "공동 작업이 가능한 온라인 문서"
 
-#: src/main.cpp:104
+#: src/main.cpp:108
 #, kde-format
 msgctxt "@info application description"
 msgid "Microsoft suite right in the browser"
 msgstr "브라우저에서 바로 사용하는 Microsoft 제품군"
 
-#: src/main.cpp:110
+#: src/main.cpp:114
 #, kde-format
 msgctxt "@info application description"
 msgid "Google's web browser"
 msgstr "Google의 웹 브라우저"
 
-#: src/main.cpp:113
+#: src/main.cpp:117
 #, kde-format
 msgctxt "@info application description"
 msgid "Compatibility with Microsoft applications"
 msgstr "Microsoft 앱과의 호환성"
 
-#: src/main.cpp:116
+#: src/main.cpp:120
 #, kde-format
 msgctxt "@info application description"
 msgid "Built-in ad blocking"
 msgstr "광고 차단 기능 내장"
 
-#: src/main.cpp:119
+#: src/main.cpp:123
 #, kde-format
 msgctxt "@info application description"
 msgid ""
@@ -870,25 +870,25 @@ msgid ""
 msgstr ""
 "고급 사용자 정의, 탭 관리 및 개인 정보 보호 기능을 갖춘 브라우저입니다."
 
-#: src/main.cpp:122
+#: src/main.cpp:126
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser focused on privacy, productivity and vertical tab organization."
 msgstr "개인 정보 보호, 생산성 및 세로 탭 정리에 중점을 둔 브라우저입니다."
 
-#: src/main.cpp:125
+#: src/main.cpp:129
 #, kde-format
 msgctxt "@info application description"
 msgid "Privacy-focused browser"
 msgstr "개인 정보 보호 중심 브라우저"
 
-#: src/main.cpp:128
+#: src/main.cpp:132
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser with resource controls"
 msgstr "리소스 제어 기능이 있는 브라우저"
 
-#: src/main.cpp:131
+#: src/main.cpp:135
 #, kde-format
 msgctxt "@info application description"
 msgid "Browsing through the Tor network"

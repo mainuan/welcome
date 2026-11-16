@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:10-0300\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
 "PO-Revision-Date: 2026-11-16 11:52-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: fr <https://github.com/mainuan>\n"
@@ -820,19 +820,19 @@ msgstr ""
 "Une authentification est nécessaire pour installer des composants système "
 "tels que l'antivirus, le pare-feu ou les codecs multimédias"
 
-#: src/main.cpp:49
+#: src/main.cpp:53
 #, kde-format
 msgctxt "@title application display name"
 msgid "Mainuan — Welcome"
 msgstr "Mainuan — Bienvenue"
 
-#: src/main.cpp:92
+#: src/main.cpp:96
 #, kde-format
 msgctxt "@info application description"
 msgid "Complete suite: Writer, Calc and Impress"
 msgstr "Suite complète : Writer, Calc et Impress"
 
-#: src/main.cpp:95
+#: src/main.cpp:99
 #, kde-format
 msgctxt "@info application description"
 msgid "Interface familiar to Microsoft Office users"
@@ -840,7 +840,7 @@ msgstr "Interface familière aux utilisateurs de Microsoft Office"
 
 # reviewed: FreeOffice est gratuit (freeware), pas libre ; cohérent avec «
 # Suite bureautique gratuite de SoftMaker »
-#: src/main.cpp:98
+#: src/main.cpp:102
 #, kde-format
 msgctxt "@info application description"
 msgid ""
@@ -849,37 +849,37 @@ msgstr ""
 "Suite bureautique gratuite avec traitement de texte, tableur et éditeur de "
 "présentations."
 
-#: src/main.cpp:101
+#: src/main.cpp:105
 #, kde-format
 msgctxt "@info application description"
 msgid "Online documents with collaboration"
 msgstr "Documents en ligne avec collaboration"
 
-#: src/main.cpp:104
+#: src/main.cpp:108
 #, kde-format
 msgctxt "@info application description"
 msgid "Microsoft suite right in the browser"
 msgstr "La suite Microsoft directement dans le navigateur"
 
-#: src/main.cpp:110
+#: src/main.cpp:114
 #, kde-format
 msgctxt "@info application description"
 msgid "Google's web browser"
 msgstr "Le navigateur web de Google"
 
-#: src/main.cpp:113
+#: src/main.cpp:117
 #, kde-format
 msgctxt "@info application description"
 msgid "Compatibility with Microsoft applications"
 msgstr "Compatibilité avec les applications Microsoft"
 
-#: src/main.cpp:116
+#: src/main.cpp:120
 #, kde-format
 msgctxt "@info application description"
 msgid "Built-in ad blocking"
 msgstr "Bloqueur de publicités intégré"
 
-#: src/main.cpp:119
+#: src/main.cpp:123
 #, kde-format
 msgctxt "@info application description"
 msgid ""
@@ -888,7 +888,7 @@ msgstr ""
 "Navigateur avec personnalisation avancée, gestion des onglets et fonctions "
 "de confidentialité."
 
-#: src/main.cpp:122
+#: src/main.cpp:126
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser focused on privacy, productivity and vertical tab organization."
@@ -896,19 +896,19 @@ msgstr ""
 "Navigateur axé sur la confidentialité, la productivité et l'organisation "
 "verticale des onglets."
 
-#: src/main.cpp:125
+#: src/main.cpp:129
 #, kde-format
 msgctxt "@info application description"
 msgid "Privacy-focused browser"
 msgstr "Navigateur axé sur la confidentialité"
 
-#: src/main.cpp:128
+#: src/main.cpp:132
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser with resource controls"
 msgstr "Navigateur avec contrôle des ressources"
 
-#: src/main.cpp:131
+#: src/main.cpp:135
 #, kde-format
 msgctxt "@info application description"
 msgid "Browsing through the Tor network"

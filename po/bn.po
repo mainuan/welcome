@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:10-0300\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
 "PO-Revision-Date: 2026-11-16 11:52-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: bn <https://github.com/mainuan>\n"
@@ -807,19 +807,19 @@ msgstr ""
 "অ্যান্টিভাইরাস, ফায়ারওয়াল বা মিডিয়া কোডেকের মতো সিস্টেম উপাদান ইনস্টল করতে "
 "প্রমাণীকরণ প্রয়োজন"
 
-#: src/main.cpp:49
+#: src/main.cpp:53
 #, kde-format
 msgctxt "@title application display name"
 msgid "Mainuan — Welcome"
 msgstr "Mainuan — স্বাগতম"
 
-#: src/main.cpp:92
+#: src/main.cpp:96
 #, kde-format
 msgctxt "@info application description"
 msgid "Complete suite: Writer, Calc and Impress"
 msgstr "সম্পূর্ণ স্যুট: Writer, Calc ও Impress"
 
-#: src/main.cpp:95
+#: src/main.cpp:99
 #, kde-format
 msgctxt "@info application description"
 msgid "Interface familiar to Microsoft Office users"
@@ -827,69 +827,69 @@ msgstr "Microsoft Office ব্যবহারকারীদের পরিচ
 
 # reviewed: FreeOffice é gratuito, não software livre: মুক্ত (livre) →
 # বিনামূল্যের (pt_BR: gratuita)
-#: src/main.cpp:98
+#: src/main.cpp:102
 #, kde-format
 msgctxt "@info application description"
 msgid ""
 "Free office suite with word processor, spreadsheet and presentation editors."
 msgstr "ওয়ার্ড প্রসেসর, স্প্রেডশিট ও প্রেজেন্টেশন এডিটরসহ বিনামূল্যের অফিস স্যুট।"
 
-#: src/main.cpp:101
+#: src/main.cpp:105
 #, kde-format
 msgctxt "@info application description"
 msgid "Online documents with collaboration"
 msgstr "সহযোগিতার সুবিধাসহ অনলাইন ডকুমেন্ট"
 
-#: src/main.cpp:104
+#: src/main.cpp:108
 #, kde-format
 msgctxt "@info application description"
 msgid "Microsoft suite right in the browser"
 msgstr "সরাসরি ব্রাউজারে Microsoft-এর স্যুট"
 
-#: src/main.cpp:110
+#: src/main.cpp:114
 #, kde-format
 msgctxt "@info application description"
 msgid "Google's web browser"
 msgstr "Google-এর ওয়েব ব্রাউজার"
 
-#: src/main.cpp:113
+#: src/main.cpp:117
 #, kde-format
 msgctxt "@info application description"
 msgid "Compatibility with Microsoft applications"
 msgstr "Microsoft অ্যাপলিকেশনের সাথে সামঞ্জস্যপূর্ণ"
 
-#: src/main.cpp:116
+#: src/main.cpp:120
 #, kde-format
 msgctxt "@info application description"
 msgid "Built-in ad blocking"
 msgstr "বিল্ট-ইন বিজ্ঞাপন ব্লকার"
 
-#: src/main.cpp:119
+#: src/main.cpp:123
 #, kde-format
 msgctxt "@info application description"
 msgid ""
 "Browser with advanced customization, tab management and privacy features."
 msgstr "উন্নত কাস্টমাইজেশন, ট্যাব ব্যবস্থাপনা ও গোপনীয়তা ফিচারসহ ব্রাউজার।"
 
-#: src/main.cpp:122
+#: src/main.cpp:126
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser focused on privacy, productivity and vertical tab organization."
 msgstr "গোপনীয়তা, উৎপাদনশীলতা ও উল্লম্ব ট্যাব বিন্যাসে মনোযোগী ব্রাউজার।"
 
-#: src/main.cpp:125
+#: src/main.cpp:129
 #, kde-format
 msgctxt "@info application description"
 msgid "Privacy-focused browser"
 msgstr "গোপনীয়তাকেন্দ্রিক ব্রাউজার"
 
-#: src/main.cpp:128
+#: src/main.cpp:132
 #, kde-format
 msgctxt "@info application description"
 msgid "Browser with resource controls"
 msgstr "রিসোর্স নিয়ন্ত্রণসহ ব্রাউজার"
 
-#: src/main.cpp:131
+#: src/main.cpp:135
 #, kde-format
 msgctxt "@info application description"
 msgid "Browsing through the Tor network"

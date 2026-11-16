@@ -12,6 +12,8 @@
 
 #include <KLocalizedQmlContext>
 #include <KLocalizedString>
+// After KLocalizedQmlContext: KLocalizedString defines i18nd() as a macro.
+#include "CatalogLayoutDirection.h"
 
 #include <QApplication>
 #include <QDir>
@@ -45,6 +47,8 @@ int main(int argc, char *argv[])
     if (QFileInfo(localeDir).isDir()) {
         KLocalizedString::addDomainLocaleDir(TRANSLATION_DOMAIN, localeDir);
     }
+    // Mirror the interface for a right-to-left catalog even without qtbase_<lang>.
+    CatalogLayoutDirection::apply(app);
     app.setApplicationName(QStringLiteral("Mainuan Welcome"));
     app.setApplicationDisplayName(i18nc("@title application display name", "Mainuan — Welcome"));
     app.setOrganizationName(QStringLiteral("Mainuan"));
