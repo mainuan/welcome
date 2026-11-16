@@ -1801,7 +1801,7 @@ void MainuanTest::disablesAptProfilesOnNonDebianSystems()
         QVERIFY(!codecs.value(QStringLiteral("unavailableReason")).toString().isEmpty());
         QVERIFY(runToEnd(installer, QStringLiteral("codecs")));
         QCOMPARE(installer.phase(), QStringLiteral("error"));
-        QVERIFY(installer.resultMessage().contains(QStringLiteral("Debian ou Ubuntu")));
+        QVERIFY(installer.resultMessage().contains(QStringLiteral("Debian- or Ubuntu-based")));
     }
     // Any profile that cannot be installed explains why; Flatpak-only gaps stay installable.
     for (const QString &profile : {QStringLiteral("antivirus"), QStringLiteral("firewall"), QStringLiteral("codecs")}) {
