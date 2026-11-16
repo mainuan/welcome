@@ -1,5 +1,7 @@
 #include "StartupPreference.h"
 
+#include <KLocalizedString>
+
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -70,7 +72,7 @@ void StartupPreference::setShowAtStartup(bool show)
     if (show) {
         if (QFileInfo::exists(path) && !QFile::remove(path)) {
             qCWarning(lcStartup) << "could not remove" << path;
-            emit failed(QStringLiteral("Não foi possível alterar a preferência de inicialização."));
+            emit failed(i18n("Could not change the startup preference."));
             emit showAtStartupChanged(); // restore the checkbox to the real state
             return;
         }
@@ -87,7 +89,7 @@ void StartupPreference::setShowAtStartup(bool show)
             "Hidden=true\n";
         if (!file.open(QIODevice::WriteOnly) || file.write(contents) != contents.size() || !file.commit()) {
             qCWarning(lcStartup) << "could not write" << path << file.errorString();
-            emit failed(QStringLiteral("Não foi possível alterar a preferência de inicialização."));
+            emit failed(i18n("Could not change the startup preference."));
             emit showAtStartupChanged();
             return;
         }

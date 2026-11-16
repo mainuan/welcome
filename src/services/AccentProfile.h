@@ -1,5 +1,7 @@
 #pragma once
 
+#include <KLazyLocalizedString>
+
 #include <QList>
 #include <QString>
 
@@ -8,7 +10,7 @@
 struct AccentProfile
 {
     QString id;
-    QString name;
+    KLazyLocalizedString name; // translated with name.toString()
     QString color;
     QString lightScheme;
     QString darkScheme;

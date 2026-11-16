@@ -339,7 +339,7 @@ void MainuanTest::backsUpAndRestoresPanelConfiguration()
     QVERIFY(service.messageIsError());
     QCOMPARE(service.backups().size(), before);
     service.apply(QStringLiteral("rm -rf"));
-    QCOMPARE(service.message(), QStringLiteral("Layout inválido."));
+    QCOMPARE(service.message(), QStringLiteral("Invalid layout."));
 }
 
 void MainuanTest::mapsVisualStylesToMainuanThemes()
@@ -360,7 +360,7 @@ void MainuanTest::mapsVisualStylesToMainuanThemes()
     QCOMPARE(VisualStyles::profiles().size(), 3);
 
     const QStringList ids = {"brown", "cyan", "magenta", "lime", "gray", "violet"};
-    const QStringList names = {"Marrom", "Ciano", "Magenta", "Lima", "Cinza", "Violeta"};
+    const QStringList names = {"Brown", "Cyan", "Magenta", "Lime", "Gray", "Violet"};
     const QStringList stems = {"DreamBrown", "DreamCyan", "DreamMagenta", "DreamLime", "DreamGray", "DreamViolet"};
     const QStringList icons = {"kora-brown", "kora-cyan", "kora-magenta", "kora-lima", "kora-grey", "kora-violet"};
     const QStringList wallpapers = {"05marrom.png", "01ciano.png", "03magenta.png", "06lima.png", "02cinza.png", "04violet.png"};
@@ -368,7 +368,7 @@ void MainuanTest::mapsVisualStylesToMainuanThemes()
     for (int i = 0; i < ids.size(); ++i) {
         const AccentProfile *profile = AccentProfiles::find(ids[i]);
         QVERIFY(profile);
-        QCOMPARE(profile->name, names[i]);
+        QCOMPARE(profile->name.toString(), names[i]);
         QCOMPARE(profile->lightScheme, stems[i] + "LightColor");
         QCOMPARE(profile->darkScheme, stems[i] + "DarkColor");
         QCOMPARE(profile->iconTheme, icons[i]);
@@ -489,7 +489,7 @@ public:
                   + accent.color.toUtf8() + "\"/></svg>");
             for (bool dark : {false, true}) {
                 write(data() + "/color-schemes/" + accent.scheme(dark) + ".colors",
-                    "[General]\nName=" + accent.name.toUtf8() + "\n[Colors:Window]\nBackgroundNormal="
+                    "[General]\nName=" + accent.name.toString().toUtf8() + "\n[Colors:Window]\nBackgroundNormal="
                     + (dark ? QByteArray("30,30,46") : QByteArray("239,240,241"))
                     // Swatch values deliberately differ from the selection color.
                     + "\n[Colors:Selection]\nBackgroundNormal=17,99,155\n");
@@ -605,7 +605,7 @@ void MainuanTest::appliesOfficialDecorations()
             const int before = sandbox.kwin.calls;
             service.setTheme(dark ? "dark" : "light");
             QVERIFY(waitIdle(service));
-            QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+            QVERIFY2(!service.lastMessage().startsWith("Error:"), qPrintable(service.lastMessage()));
             QCOMPARE(service.accentId(), QStringLiteral("cyan"));
             QCOMPARE(sandbox.kwin.applied.library, style.decoration(dark).library);
             QCOMPARE(sandbox.kwin.applied.theme, style.decoration(dark).theme);
@@ -640,7 +640,7 @@ void MainuanTest::preservesCustomAndInheritedDecorations()
         "[org.kde.kdecoration2]\nlibrary=org.example.custom\ntheme=Personal\n[User]\nPreference=keep\n");
     service.setTheme("light");
     QVERIFY(waitIdle(service));
-    QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+    QVERIFY2(!service.lastMessage().startsWith("Error:"), qPrintable(service.lastMessage()));
     QCOMPARE(sandbox.kwin.applied.library, QStringLiteral("org.example.custom"));
     QCOMPARE(sandbox.kwin.applied.theme, QStringLiteral("Personal"));
     QCOMPARE(service.colorScheme(), QStringLiteral("DreamVioletLightColor"));
@@ -663,7 +663,7 @@ void MainuanTest::reportsDecorationFailures()
         service.setTheme("dark");
         QVERIFY(waitIdle(service));
         QVERIFY(service.lastMessage().contains("Lavanda-Dark"));
-        QVERIFY(service.lastMessage().startsWith("Erro:"));
+        QVERIFY(service.lastMessage().startsWith("Error:"));
         QCOMPARE(PlasmaSandbox::read(kwin), before);
         QVERIFY(sandbox.takeCalls().isEmpty());
         QVERIFY(!service.darkTheme());
@@ -681,7 +681,7 @@ void MainuanTest::reportsDecorationFailures()
     sandbox.kwin.failReloadAcknowledgement = true;
     service.setTheme("dark");
     QVERIFY(waitIdle(service));
-    QVERIFY(service.lastMessage().startsWith("Erro:"));
+    QVERIFY(service.lastMessage().startsWith("Error:"));
     QVERIFY(service.lastMessage().contains("KWin"));
     const KConfig config(kwin, KConfig::SimpleConfig);
     QCOMPARE(KConfigGroup(&config, "org.kde.kdecoration2").readEntry("theme", QString()),
@@ -750,7 +750,7 @@ void MainuanTest::switchesInitialMainuanTheme()
         for (bool targetDark : {!initialDark, initialDark}) {
             service.setTheme(targetDark ? "dark" : "light");
             QVERIFY(waitIdle(service));
-            QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+            QVERIFY2(!service.lastMessage().startsWith("Error:"), qPrintable(service.lastMessage()));
             QCOMPARE(service.accentId(), accentId);
             QCOMPARE(service.visualStyle(), styleId);
             QCOMPARE(service.darkTheme(), targetDark);
@@ -780,7 +780,7 @@ void MainuanTest::preservesUnknownSchemeWhenSwitchingTheme()
         service.setToolSearchPaths({PlasmaSandbox::tools()});
         service.setTheme("dark");
         QVERIFY(waitIdle(service));
-        QVERIFY(service.lastMessage().startsWith("Erro:"));
+        QVERIFY(service.lastMessage().startsWith("Error:"));
         QCOMPARE(service.colorScheme(), QStringLiteral("ExternalScheme"));
         QCOMPARE(PlasmaSandbox::read(sandbox.config() + "/kdeglobals"), before);
         QVERIFY(sandbox.takeCalls().isEmpty());
@@ -820,7 +820,7 @@ void MainuanTest::reportsInitialThemeFailures()
     QVERIFY(QFile::remove(target));
     service.setTheme("dark");
     QVERIFY(waitIdle(service));
-    QVERIFY(service.lastMessage().startsWith("Erro:"));
+    QVERIFY(service.lastMessage().startsWith("Error:"));
     QCOMPARE(service.colorScheme(), QStringLiteral("DreamCyanLightColor"));
     QVERIFY(!service.darkTheme());
     QVERIFY(sandbox.takeCalls().isEmpty());
@@ -828,14 +828,14 @@ void MainuanTest::reportsInitialThemeFailures()
     qputenv("MOCK_LNF_FAIL", "1");
     service.setTheme("dark");
     QVERIFY(waitIdle(service));
-    QVERIFY(service.lastMessage().startsWith("Erro:"));
+    QVERIFY(service.lastMessage().startsWith("Error:"));
     QCOMPARE(service.colorScheme(), QStringLiteral("DreamCyanLightColor"));
     QVERIFY(!service.darkTheme());
     qunsetenv("MOCK_LNF_FAIL");
     qputenv("MOCK_SCHEME_FAIL", "1");
     service.setTheme("dark");
     QVERIFY(waitIdle(service));
-    QVERIFY(service.lastMessage().startsWith("Erro:"));
+    QVERIFY(service.lastMessage().startsWith("Error:"));
     QVERIFY(!sandbox.takeCalls().join('\n').contains("plasma-apply-wallpaperimage"));
     // Report the actual state, even if the global theme changed before a failure.
     const KConfigGroup general(KSharedConfig::openConfig("kdeglobals"), "General");
@@ -902,7 +902,7 @@ void MainuanTest::opensIndependentDriverManagerVersions()
     qputenv("XDG_SESSION_TYPE", "wayland");
     SystemService service(nullptr, sandbox.home());
     QVERIFY(service.driversAvailable());
-    QCOMPARE(service.driversStatus(), QStringLiteral("Gestão de Drivers disponível"));
+    QCOMPARE(service.driversStatus(), QStringLiteral("Driver Manager available"));
     QVERIFY(!QFile::exists(sandbox.log())); // Opening Welcome does not launch the tool.
     service.performAction(QStringLiteral("drivers"));
     QByteArray expected = toolVersion + "\n0\n" + QByteArray::number(getuid()) + '\n' + QByteArray::number(geteuid()) + '\n';
@@ -911,7 +911,7 @@ void MainuanTest::opensIndependentDriverManagerVersions()
     }
     // No version probe, command-line options, elevation or session replacement.
     QTRY_COMPARE(PlasmaSandbox::read(sandbox.log()), expected);
-    QVERIFY(!service.lastMessage().startsWith(QStringLiteral("Erro:")));
+    QVERIFY(!service.lastMessage().startsWith(QStringLiteral("Error:")));
 }
 
 void MainuanTest::reportsMissingOrBrokenDriverManager()
@@ -928,9 +928,9 @@ void MainuanTest::reportsMissingOrBrokenDriverManager()
     qputenv("MOCK_DRIVERS_LOG", sandbox.log().toUtf8());
     SystemService service(nullptr, sandbox.home());
     QVERIFY(!service.driversAvailable());
-    QCOMPARE(service.driversStatus(), QStringLiteral("Gestão de Drivers não instalada"));
+    QCOMPARE(service.driversStatus(), QStringLiteral("Driver Manager not installed"));
     service.performAction(QStringLiteral("drivers"));
-    QVERIFY(service.lastMessage().contains(QStringLiteral("Gestão de Drivers não está instalada")));
+    QVERIFY(service.lastMessage().contains(QStringLiteral("Driver Manager is not installed")));
     QVERIFY(!QFile::exists(sandbox.log()));
     const QString executable = bin + "/mainuan-gestao-drivers";
     PlasmaSandbox::write(executable, "#!/nonexistent/mainuan-drivers-interpreter\n");
@@ -938,7 +938,7 @@ void MainuanTest::reportsMissingOrBrokenDriverManager()
     service.refresh();
     QVERIFY(service.driversAvailable());
     service.performAction(QStringLiteral("drivers"));
-    QVERIFY(service.lastMessage().contains(QStringLiteral("Não foi possível abrir a Gestão de Drivers")));
+    QVERIFY(service.lastMessage().contains(QStringLiteral("Could not open Driver Manager")));
     QVERIFY(QFile::remove(executable));
     service.refresh();
     QVERIFY(!service.driversAvailable());
@@ -971,7 +971,7 @@ void MainuanTest::appliesVisualStyleProfiles()
         const int icons = calls.indexOf("plasma-changeicons kora-brown");
         QVERIFY(theme >= 0 && scheme > theme && icons > scheme);
         QVERIFY(!calls.contains(QStringLiteral("plasma-apply-colorscheme DreamCyanDarkColor")));
-        QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+        QVERIFY2(!service.lastMessage().startsWith("Error:"), qPrintable(service.lastMessage()));
         QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), PlasmaSandbox::read(sandbox.data() + "/" + AccentProfiles::find("brown")->avatar()));
     }
     SystemService reopened(nullptr, sandbox.home());
@@ -998,17 +998,17 @@ void MainuanTest::reportsVisualStyleFailures()
     service.setToolSearchPaths({PlasmaSandbox::tools()});
     service.setVisualStyle("unknown");
     QVERIFY(!service.busy());
-    QVERIFY(service.lastMessage().contains("inválido"));
+    QVERIFY(service.lastMessage().contains("Invalid"));
     qputenv("MOCK_LNF_FAIL", "1");
     service.setVisualStyle("blur");
     QVERIFY(waitIdle(service));
     QCOMPARE(service.visualStyle(), QStringLiteral("solid"));
-    QVERIFY(service.lastMessage().contains("Não foi possível aplicar o estilo Dream"));
+    QVERIFY(service.lastMessage().contains("Could not apply the Dream style"));
     qunsetenv("MOCK_LNF_FAIL");
     qputenv("MOCK_LNF_NOOP", "1");
     service.setVisualStyle("glass");
     QVERIFY(waitIdle(service));
-    QVERIFY(service.lastMessage().contains("não confirmou o estilo Tahoe"));
+    QVERIFY(service.lastMessage().contains("did not confirm the Tahoe style"));
     qunsetenv("MOCK_LNF_NOOP");
     QVERIFY(QFile::remove(sandbox.data() + "/color-schemes/DreamVioletDarkColor.colors"));
     sandbox.takeCalls();
@@ -1021,11 +1021,11 @@ void MainuanTest::reportsVisualStyleFailures()
     service.setVisualStyle("blur");
     QVERIFY(!service.busy());
     QCOMPARE(service.iconTheme(), QStringLiteral("kora-violet"));
-    QVERIFY(service.lastMessage().contains("ícones kora-violet"));
+    QVERIFY(service.lastMessage().contains("kora-violet icon theme"));
     QVERIFY(QFile::remove(sandbox.data() + "/plasma/look-and-feel/org.kde.breeze.desktop/metadata.json"));
     service.setVisualStyle("solid");
     QVERIFY(!service.busy());
-    QVERIFY(service.lastMessage().contains("não está instalado"));
+    QVERIFY(service.lastMessage().contains("is not installed"));
     QTemporaryDir noTools;
     service.setToolSearchPaths({noTools.path()});
     service.setVisualStyle("glass");
@@ -1052,7 +1052,7 @@ void MainuanTest::switchesThemeWithinTheActiveStyle()
                 QCOMPARE(service.accentId(), id);
                 QCOMPARE(service.colorScheme(), AccentProfiles::find(id)->scheme(variant == "dark"));
                 QCOMPARE(service.iconTheme(), AccentProfiles::find(id)->iconTheme);
-                QVERIFY(!service.lastMessage().startsWith("Erro:"));
+                QVERIFY(!service.lastMessage().startsWith("Error:"));
             }
         }
     }
@@ -1079,7 +1079,7 @@ void MainuanTest::recordsTheChosenAccentColor()
             QCOMPARE(sandbox.takeCalls(), expected);
             QVERIFY(!PlasmaSandbox::read(sandbox.config() + "/kdeglobals").contains("AccentColor="));
             QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), PlasmaSandbox::read(sandbox.data() + "/" + profile.avatar()));
-            QVERIFY(!service.lastMessage().startsWith("Erro:"));
+            QVERIFY(!service.lastMessage().startsWith("Error:"));
             SystemService reopened(nullptr, sandbox.home());
             QCOMPARE(reopened.accentId(), profile.id);
         }
@@ -1107,7 +1107,7 @@ void MainuanTest::detectsAppearanceWithoutChangingUserResources()
     QVERIFY(sandbox.takeCalls().isEmpty());
     service.setTheme("dark");
     QVERIFY(!service.busy());
-    QVERIFY(service.lastMessage().contains("esquema externo"));
+    QVERIFY(service.lastMessage().contains("external color scheme"));
     QCOMPARE(PlasmaSandbox::read(globals), before);
     // A known Dream scheme is recognized without copying anything on startup.
     for (const AccentProfile &profile : AccentProfiles::profiles()) {
@@ -1131,26 +1131,26 @@ void MainuanTest::reportsPartialAccentFailures()
     QVERIFY(waitIdle(service));
     QCOMPARE(service.colorScheme(), QStringLiteral("DreamMagentaLightColor"));
     QCOMPARE(service.iconTheme(), QStringLiteral("breeze"));
-    QVERIFY(service.lastMessage().contains("ícones kora-magenta"));
+    QVERIFY(service.lastMessage().contains("icon theme kora-magenta"));
     QVERIFY(!sandbox.takeCalls().contains("plasma-changeicons kora-magenta"));
     QVERIFY(QFileInfo::exists(sandbox.home() + "/.face"));
     PlasmaSandbox::write(index, "[Icon Theme]\nName=Broken\n");
     service.setAccent("magenta");
     QVERIFY(waitIdle(service));
     QCOMPARE(service.iconTheme(), QStringLiteral("breeze"));
-    QVERIFY(service.lastMessage().contains("index.theme inválido"));
+    QVERIFY(service.lastMessage().contains("invalid index.theme"));
     QVERIFY(QFile::remove(sandbox.data() + "/wallpapers/01ciano.png"));
     service.setAccent("cyan");
     QVERIFY(waitIdle(service));
     QCOMPARE(service.colorScheme(), QStringLiteral("DreamCyanLightColor"));
     QCOMPARE(service.iconTheme(), QStringLiteral("kora-cyan"));
-    QVERIFY(service.lastMessage().contains("papel de parede 01ciano.png ausente"));
+    QVERIFY(service.lastMessage().contains("wallpaper 01ciano.png missing"));
     qputenv("MOCK_WALLPAPER_FAIL", "1");
     service.setAccent("violet");
     QVERIFY(waitIdle(service));
     QCOMPARE(service.accentId(), QStringLiteral("violet"));
-    QVERIFY(service.lastMessage().startsWith("Erro:"));
-    QVERIFY(service.lastMessage().contains("papel de parede"));
+    QVERIFY(service.lastMessage().startsWith("Error:"));
+    QVERIFY(service.lastMessage().contains("wallpaper"));
     qunsetenv("MOCK_WALLPAPER_FAIL");
     QVERIFY(QFile::remove(sandbox.data() + "/" + AccentProfiles::find("brown")->avatar()));
     service.setAccent("brown");
@@ -1162,7 +1162,7 @@ void MainuanTest::reportsPartialAccentFailures()
     service.setAccent("gray");
     QVERIFY(waitIdle(service));
     QCOMPARE(service.iconTheme(), QStringLiteral("kora-brown"));
-    QVERIFY(service.lastMessage().contains("não confirmou os ícones kora-grey"));
+    QVERIFY(service.lastMessage().contains("did not confirm the kora-grey icons"));
 }
 
 void MainuanTest::preservesAccentOverridesOnFailure()
@@ -1177,7 +1177,7 @@ void MainuanTest::preservesAccentOverridesOnFailure()
     qputenv("MOCK_SCHEME_HIDDEN", "DreamBrownLightColor");
     service.setAccent("brown");
     QVERIFY(waitIdle(service));
-    QVERIFY(service.lastMessage().contains("não reconheceu"));
+    QVERIFY(service.lastMessage().contains("did not recognize"));
     QCOMPARE(service.colorScheme(), QStringLiteral("DreamCyanLightColor"));
     qunsetenv("MOCK_SCHEME_HIDDEN");
     for (const char *flag : {"MOCK_SCHEME_FAIL", "MOCK_SCHEME_NOOP"}) {
@@ -1189,13 +1189,13 @@ void MainuanTest::preservesAccentOverridesOnFailure()
         QCOMPARE(general.readEntry("AccentColor", QString()), QStringLiteral("232,23,125"));
         QCOMPARE(general.readEntry("CustomPreference", QString()), QStringLiteral("keep"));
         QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), QByteArray("old avatar"));
-        QVERIFY(service.lastMessage().startsWith("Erro:"));
+        QVERIFY(service.lastMessage().startsWith("Error:"));
         qunsetenv(flag);
     }
     // Same-scheme selection must fully reload, clearing the old tint.
     service.setAccent("cyan");
     QVERIFY(waitIdle(service));
-    QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+    QVERIFY2(!service.lastMessage().startsWith("Error:"), qPrintable(service.lastMessage()));
     QVERIFY(!PlasmaSandbox::read(globals).contains("AccentColor="));
     QVERIFY(PlasmaSandbox::read(globals).contains("CustomPreference=keep"));
     QCOMPARE(service.accentColor(), QStringLiteral("#11639b"));
@@ -1204,7 +1204,7 @@ void MainuanTest::preservesAccentOverridesOnFailure()
     PlasmaSandbox::write(defaults, "[General]\nAccentColor=255,0,0\n");
     service.setAccent("magenta");
     QVERIFY(waitIdle(service));
-    QVERIFY2(!service.lastMessage().startsWith("Erro:"), qPrintable(service.lastMessage()));
+    QVERIFY2(!service.lastMessage().startsWith("Error:"), qPrintable(service.lastMessage()));
     QCOMPARE(PlasmaSandbox::read(defaults), QByteArray("[General]\nAccentColor=255,0,0\n"));
     QVERIFY(!PlasmaSandbox::read(globals).contains("AccentColor=255,0,0"));
 }
@@ -1309,7 +1309,7 @@ void MainuanTest::exposesModelRolesAndLocalVideoCatalog()
     QCOMPARE(videos.rowCount(), 5);
     const QModelIndex videoIndex = videos.index(0, 0);
     QCOMPARE(videos.data(videoIndex, VideoModel::TitleRole).toString(),
-             QStringLiteral("Conhecendo o sistema"));
+             QStringLiteral("Getting to know the system"));
     QCOMPARE(videos.data(videoIndex, VideoModel::IconSourceRole).toString(),
              QStringLiteral("qrc:/assets/icone-videoaulas_g204.svg"));
     QVERIFY(videos.data(videoIndex, VideoModel::FileSourceRole).toString().startsWith(
@@ -1365,7 +1365,7 @@ void MainuanTest::refreshesExternalFlatpaksAsynchronously()
     packages.refresh();
     QTRY_VERIFY(model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
     QTRY_VERIFY(model.data(model.index(1), ApplicationModel::InstalledRole).toBool());
-    QCOMPARE(model.data(model.index(1), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Instalado"));
+    QCOMPARE(model.data(model.index(1), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Installed"));
     system.setFlatpaks({});
     packages.refresh();
     QTRY_VERIFY(!model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
@@ -1382,7 +1382,7 @@ void MainuanTest::opensSpecificDiscoverPagesAndHandlesErrors()
     });
     service.setToolSearchPaths({temp.path()});
     QVERIFY(!service.openDiscover(QStringLiteral("com.vivaldi.Vivaldi")));
-    QVERIFY(service.lastMessage().contains(QStringLiteral("Discover não foi encontrado")));
+    QVERIFY(service.lastMessage().contains(QStringLiteral("Discover was not found")));
     service.setToolSearchPaths({fixture(QStringLiteral("discover"))});
     QVERIFY(!service.openDiscover(QStringLiteral("com.vivaldi.Vivaldi; touch /tmp/untrusted")));
     const QString log = temp.filePath(QStringLiteral("arguments"));
@@ -1400,7 +1400,7 @@ void MainuanTest::opensSpecificDiscoverPagesAndHandlesErrors()
     QVERIFY(service.openDiscover(QStringLiteral("app.zen_browser.zen")));
     QTRY_VERIFY(QFile::exists(log));
     QVERIFY(!model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
-    QCOMPARE(model.data(model.index(0), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Indisponível"));
+    QCOMPARE(model.data(model.index(0), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Unavailable"));
     QFile::remove(log);
     QVERIFY(service.openDiscover(QStringLiteral("app.zen_browser.zen"))); // Retry stays available.
     QTRY_VERIFY(QFile::exists(log));
@@ -1412,7 +1412,7 @@ void MainuanTest::opensSpecificDiscoverPagesAndHandlesErrors()
     QVERIFY(broken.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ExeOwner));
     service.setToolSearchPaths({temp.path()});
     QVERIFY(!service.openDiscover(QStringLiteral("app.zen_browser.zen")));
-    QVERIFY(service.lastMessage().startsWith(QStringLiteral("Erro:")));
+    QVERIFY(service.lastMessage().startsWith(QStringLiteral("Error:")));
 }
 
 void MainuanTest::requestsExternalDownloadThroughDesktopServices()
@@ -1425,12 +1425,12 @@ void MainuanTest::requestsExternalDownloadThroughDesktopServices()
     QDesktopServices::unsetUrlHandler(QStringLiteral("https"));
     QVERIFY(opened);
     QCOMPARE(receiver.received, QUrl(url));
-    QCOMPARE(service.lastMessage(), QStringLiteral("Abertura solicitada ao navegador."));
+    QCOMPARE(service.lastMessage(), QStringLiteral("Requested the web browser to open the page."));
     QVERIFY(!service.openUrl(QStringLiteral("file:///tmp/unsafe.deb")));
-    QVERIFY(service.lastMessage().startsWith(QStringLiteral("Erro:")));
+    QVERIFY(service.lastMessage().startsWith(QStringLiteral("Error:")));
     // With no GUI application/default-browser integration, a rejected handoff is reported.
     QVERIFY(!service.openUrl(url));
-    QVERIFY(service.lastMessage().contains(QStringLiteral("Não foi possível abrir a URL")));
+    QVERIFY(service.lastMessage().contains(QStringLiteral("Could not open the URL")));
 }
 
 void MainuanTest::parsesHelperProtocol()
@@ -1544,7 +1544,7 @@ void MainuanTest::installsMissingComponentsWithRealProgress()
     QCOMPARE(installer.phase(), QStringLiteral("success"));
     QCOMPARE(installer.percent(), 100);
     QCOMPARE(installer.stepCount(), 2);
-    QVERIFY(installer.resultMessage().contains(QStringLiteral("ClamAV e ClamUI")));
+    QVERIFY(installer.resultMessage().contains(QStringLiteral("ClamAV and ClamUI")));
 
     // Phases are reported in order and stages without data stay indeterminate.
     QStringList phases;
@@ -1617,13 +1617,13 @@ void MainuanTest::treatsDismissedAuthenticationAsCancelled()
     QVERIFY(runToEnd(installer, QStringLiteral("firewall")));
     QCOMPARE(installer.phase(), QStringLiteral("cancelled"));
     QVERIFY(!installer.busy());
-    QVERIFY(installer.resultMessage().contains(QStringLiteral("Nenhuma alteração")));
+    QVERIFY(installer.resultMessage().contains(QStringLiteral("No changes")));
     QVERIFY(system.lines(QStringLiteral("deb")).isEmpty());
 
     qputenv("MOCK_SCENARIO", "auth");
     QVERIFY(runToEnd(installer, QStringLiteral("firewall")));
     QCOMPARE(installer.phase(), QStringLiteral("error"));
-    QVERIFY(installer.resultMessage().contains(QStringLiteral("autenticação")));
+    QVERIFY(installer.resultMessage().contains(QStringLiteral("Authentication failed")));
 }
 
 void MainuanTest::reportsPackageManagerErrors()
@@ -1652,13 +1652,13 @@ void MainuanTest::explainsNetworkAndLockFailures()
     qputenv("MOCK_SCENARIO", "network");
     QVERIFY(runToEnd(installer, QStringLiteral("firewall")));
     QCOMPARE(installer.phase(), QStringLiteral("error"));
-    QVERIFY(installer.resultMessage().contains(QStringLiteral("conexão com a internet")));
+    QVERIFY(installer.resultMessage().contains(QStringLiteral("internet connection")));
     QVERIFY(installer.details().contains(QStringLiteral("Temporary failure resolving")));
 
     qputenv("MOCK_SCENARIO", "locked");
     QVERIFY(runToEnd(installer, QStringLiteral("firewall")));
     QCOMPARE(installer.phase(), QStringLiteral("error"));
-    QVERIFY(installer.resultMessage().contains(QStringLiteral("Outro programa")));
+    QVERIFY(installer.resultMessage().contains(QStringLiteral("Another program")));
 
     qputenv("MOCK_SCENARIO", "flatpak-network");
     MockSystem withClamAv(kClamAv, {});
@@ -1666,7 +1666,7 @@ void MainuanTest::explainsNetworkAndLockFailures()
     QVERIFY(waitForDetection(*second.installer));
     QVERIFY(runToEnd(*second.installer, QStringLiteral("antivirus")));
     QCOMPARE(second.installer->phase(), QStringLiteral("error"));
-    QVERIFY(second.installer->resultMessage().contains(QStringLiteral("conexão com a internet")));
+    QVERIFY(second.installer->resultMessage().contains(QStringLiteral("internet connection")));
 }
 
 void MainuanTest::rejectsConcurrentStarts()
@@ -1714,13 +1714,13 @@ void MainuanTest::installsOnlyClamUiWhenClamAvExists()
         return stateOf(installer, QStringLiteral("antivirus")).value(QStringLiteral("state")) == QStringLiteral("partial");
     }, 5000));
     QCOMPARE(stateOf(installer, QStringLiteral("antivirus")).value(QStringLiteral("summary")).toString(),
-             QStringLiteral("Falta: ClamUI"));
+             QStringLiteral("Missing: ClamUI"));
     QVERIFY(!stateOf(installer, QStringLiteral("antivirus")).value(QStringLiteral("canLaunch")).toBool());
 
     QVERIFY(runToEnd(installer, QStringLiteral("antivirus")));
     QCOMPARE(installer.phase(), QStringLiteral("success"));
     QCOMPARE(installer.stepCount(), 1);
-    QVERIFY(!installer.details().contains(QStringLiteral("Pacotes a instalar")));
+    QVERIFY(!installer.details().contains(QStringLiteral("Packages to install")));
     QCOMPARE(system.lines(QStringLiteral("deb")), kClamAv);
 }
 
@@ -1753,7 +1753,7 @@ void MainuanTest::completesFirewallWithPlasmaIntegration()
 
     QVERIFY(runToEnd(installer, QStringLiteral("firewall")));
     QCOMPARE(installer.phase(), QStringLiteral("success"));
-    QVERIFY(installer.details().contains(QStringLiteral("Pacotes a instalar: plasma-firewall")));
+    QVERIFY(installer.details().contains(QStringLiteral("Packages to install: plasma-firewall")));
     QCOMPARE(system.lines(QStringLiteral("deb")), (QStringList{QStringLiteral("ufw"), QStringLiteral("plasma-firewall")}));
 }
 
@@ -1770,7 +1770,7 @@ void MainuanTest::doesNotLaunchPartiallyInstalledFirewall()
     QSignalSpy launchFailed(&installer, &InstallService::launchFailed);
     QVERIFY(!installer.launch(QStringLiteral("firewall")));
     QCOMPARE(launchFailed.count(), 1);
-    QVERIFY(launchFailed.constFirst().constFirst().toString().contains(QStringLiteral("não estão instalados")));
+    QVERIFY(launchFailed.constFirst().constFirst().toString().contains(QStringLiteral("are not installed")));
 }
 
 void MainuanTest::treatsDeniedFlatpakAuthorizationAsCancelled()
@@ -1878,10 +1878,10 @@ void MainuanTest::parsesSystemReportSources()
     QVERIFY(SystemReportService::publicMountPoint(QStringLiteral("/run/media/ana/Fotos")).isEmpty());
     QVERIFY(SystemReportService::publicMountPoint(QStringLiteral("/home/ana/dados")).isEmpty());
 
-    QCOMPARE(SystemReportService::humanDuration(30), QStringLiteral("menos de um minuto"));
-    QCOMPARE(SystemReportService::humanDuration(60), QStringLiteral("1 minuto"));
-    QCOMPARE(SystemReportService::humanDuration(2 * 3600 + 18 * 60), QStringLiteral("2 horas e 18 minutos"));
-    QCOMPARE(SystemReportService::humanDuration(86400 + 3 * 3600), QStringLiteral("1 dia e 3 horas"));
+    QCOMPARE(SystemReportService::humanDuration(30), QStringLiteral("less than a minute"));
+    QCOMPARE(SystemReportService::humanDuration(60), QStringLiteral("1 minute"));
+    QCOMPARE(SystemReportService::humanDuration(2 * 3600 + 18 * 60), QStringLiteral("2 hours and 18 minutes"));
+    QCOMPARE(SystemReportService::humanDuration(86400 + 3 * 3600), QStringLiteral("1 day and 3 hours"));
 
     const auto pci = SystemReportService::parseLspci(QStringLiteral(
         "00:01.0 \"VGA compatible controller\" \"Red Hat, Inc.\" \"Virtio 1.0 GPU\" -r01 \"Red Hat, Inc.\" \"QEMU\"\n"
@@ -1920,20 +1920,20 @@ void MainuanTest::collectsSystemReportWithoutSecrets()
 
     const QString text = report.reportText();
     QVERIFY(text.startsWith(QStringLiteral("Mainuan System Report\n")));
-    QVERIFY(text.contains(QStringLiteral("Distribuição: Mainuan 2026 LTS")));
+    QVERIFY(text.contains(QStringLiteral("Distribution: Mainuan 2026 LTS")));
     QVERIFY(text.contains(QStringLiteral("Base: Ubuntu resolute")));
-    QVERIFY(text.contains(QStringLiteral("Mídia de instalação: Mainuan 2026 \"MAO Tite\" - Release amd64")));
-    QVERIFY(text.contains(QStringLiteral("Data da instalação: ")));        // from the installer log
-    QVERIFY(!text.contains(QStringLiteral("Data estimada")));
-    QVERIFY(text.contains(QStringLiteral("Processador: Test CPU")));
-    QVERIFY(text.contains(QStringLiteral("APT / dpkg: 1 pacotes")));
-    QVERIFY(text.contains(QStringLiteral("Ligado há: 2 horas e 18 minutos")));
-    QVERIFY(text.contains(QStringLiteral("Kernels instalados: 7.0.0-30-generic")));
-    QVERIFY(text.contains(QStringLiteral("Snap: Snap não instalado")));
+    QVERIFY(text.contains(QStringLiteral("Installation media: Mainuan 2026 \"MAO Tite\" - Release amd64")));
+    QVERIFY(text.contains(QStringLiteral("Installation date: ")));        // from the installer log
+    QVERIFY(!text.contains(QStringLiteral("Estimated installation date")));
+    QVERIFY(text.contains(QStringLiteral("Processor: Test CPU")));
+    QVERIFY(text.contains(QStringLiteral("APT / dpkg: 1 package")));
+    QVERIFY(text.contains(QStringLiteral("Uptime: 2 hours and 18 minutes")));
+    QVERIFY(text.contains(QStringLiteral("Installed kernels: 7.0.0-30-generic")));
+    QVERIFY(text.contains(QStringLiteral("Snap: Snap not installed")));
     QVERIFY(text.contains(QStringLiteral("eth0: Ethernet")));
     QVERIFY(text.contains(QStringLiteral("MAC 52:54:00:xx:xx:xx")));
     QVERIFY(!text.contains(QStringLiteral("12:34:56")));
-    QVERIFY(!text.contains(QStringLiteral("Nome do computador")));
+    QVERIFY(!text.contains(QStringLiteral("Computer name")));
     // A hostname such as "Mainuan" may also be part of the distribution name.
     // Reject it as a complete exported field value, rather than a substring.
     QVERIFY(!text.contains(QRegularExpression(QStringLiteral("(?:^|\\n)[^:\\n]+: *")
@@ -1963,8 +1963,8 @@ void MainuanTest::collectsSystemReportWithoutSecrets()
     QVERIFY(QFile::remove(root.filePath(QStringLiteral("var/log/installer/media-info"))));
     QVERIFY(QDir(root.filePath(QStringLiteral("var/log/installer"))).removeRecursively());
     report.refresh();
-    QVERIFY(!report.reportText().contains(QStringLiteral("Data da instalação:")));
-    QVERIFY(report.reportText().contains(QStringLiteral("Data estimada da instalação:")));
+    QVERIFY(!report.reportText().contains(QStringLiteral("Installation date:")));
+    QVERIFY(report.reportText().contains(QStringLiteral("Estimated installation date:")));
 }
 
 void MainuanTest::startupPreferenceDefaultsToShown()

@@ -171,10 +171,10 @@ private slots:
         InstallService installer(&packages, backendWithoutNetwork());
         QCOMPARE(installer.profileInfo("freeoffice").value("source").toString(), QStringLiteral("SoftMaker"));
         QCOMPARE(installer.profileInfo("freeoffice").value("sourceNotice").toString(),
-                 QStringLiteral("Este pacote é fornecido pela SoftMaker e poderá solicitar autorização de administrador."));
-        QCOMPARE(installer.profileInfo("firewall").value("source").toString(), QStringLiteral("Repositórios configurados"));
-        QCOMPARE(installer.profileInfo("codecs").value("source").toString(), QStringLiteral("Repositórios configurados"));
-        QCOMPARE(installer.profileInfo("antivirus").value("source").toString(), QStringLiteral("Repositórios configurados / Flathub"));
+                 QStringLiteral("This package is provided by SoftMaker and may ask for administrator authorization."));
+        QCOMPARE(installer.profileInfo("firewall").value("source").toString(), QStringLiteral("Configured repositories"));
+        QCOMPARE(installer.profileInfo("codecs").value("source").toString(), QStringLiteral("Configured repositories"));
+        QCOMPARE(installer.profileInfo("antivirus").value("source").toString(), QStringLiteral("Configured repositories / Flathub"));
         for (const QString &id : {"com.vivaldi.Vivaldi", "app.zen_browser.zen", "com.brave.Browser", "com.google.Chrome",
              "io.gitlab.librewolf-community", "org.libreoffice.LibreOffice", "com.wps.Office", "com.microsoft.Edge",
              "com.opera.opera-gx", "org.torproject.torbrowser-launcher", "io.github.linx_systems.ClamUI"}) {
@@ -207,7 +207,7 @@ private slots:
         QVERIFY(installer.start(profile));
         QVERIFY(!installer.start(profile));
         QVERIFY(model.data(model.index(0), ApplicationModel::BusyRole).toBool());
-        QCOMPARE(model.data(model.index(0), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Instalando…"));
+        QCOMPARE(model.data(model.index(0), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Installing…"));
         QVERIFY(done.wait(10000));
         QCOMPARE(installer.phase(), QStringLiteral("success"));
         QTRY_VERIFY(model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
@@ -305,7 +305,7 @@ private slots:
         QVERIFY(done.wait(10000));
         QVERIFY(installer.phase() == "error" || installer.phase() == "cancelled");
         QVERIFY(!model.data(model.index(0), ApplicationModel::InstalledRole).toBool());
-        QCOMPARE(model.data(model.index(0), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Erro"));
+        QCOMPARE(model.data(model.index(0), ApplicationModel::InstallStateRole).toString(), QStringLiteral("Error"));
         qunsetenv("MOCK_SCENARIO");
         QVERIFY(installer.start("app:app.zen_browser.zen"));
         QVERIFY(done.wait(10000));

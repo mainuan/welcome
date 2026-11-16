@@ -1,5 +1,7 @@
 #include "UserAvatar.h"
 
+#include <KLocalizedString>
+
 #include <QBuffer>
 #include <QFile>
 #include <QImageReader>
@@ -65,21 +67,21 @@ QString UserAvatar::update(const QString &source, const QString &home)
 {
     // This feature is a session operation, never an administrator operation.
     if (::geteuid() == 0) {
-        return QStringLiteral("atualização do avatar não permitida como administrador");
+        return i18nc("avatar error in a list of failed adjustments", "avatar update not allowed as administrator");
     }
     const Descriptor input(::open(QFile::encodeName(source).constData(), O_RDONLY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC));
     struct stat sourceInfo {};
     if (input.fd < 0 || ::fstat(input.fd, &sourceInfo) != 0 || !S_ISREG(sourceInfo.st_mode)
         || sourceInfo.st_size <= 0 || sourceInfo.st_size > maxImageBytes) {
-        return QStringLiteral("arquivo .face de origem ausente, ilegível ou inseguro");
+        return i18nc("avatar error in a list of failed adjustments", "source .face file missing, unreadable or unsafe");
     }
     QFile sourceFile;
     if (!sourceFile.open(input.fd, QIODevice::ReadOnly)) {
-        return QStringLiteral("não foi possível ler o avatar de origem");
+        return i18nc("avatar error in a list of failed adjustments", "could not read the source avatar");
     }
     const QByteArray bytes = sourceFile.read(maxImageBytes + 1);
     if (bytes.size() > maxImageBytes || sourceFile.error() != QFileDevice::NoError) {
-        return QStringLiteral("não foi possível ler o avatar de origem");
+        return i18nc("avatar error in a list of failed adjustments", "could not read the source avatar");
     }
     QBuffer buffer;
     buffer.setData(bytes);
@@ -88,26 +90,26 @@ QString UserAvatar::update(const QString &source, const QString &home)
     reader.setDecideFormatFromContent(true);
     const QSize size = reader.size();
     if (!size.isValid() || size.width() > 8192 || size.height() > 8192 || reader.read().isNull()) {
-        return QStringLiteral("o arquivo .face não contém uma imagem válida (SVG requer o plugin Qt SVG)");
+        return i18nc("avatar error in a list of failed adjustments", "the .face file does not contain a valid image (SVG requires the Qt SVG plugin)");
     }
 
     const Descriptor directory(::open(QFile::encodeName(home).constData(), O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC));
     struct stat homeInfo {};
     if (directory.fd < 0 || ::fstat(directory.fd, &homeInfo) != 0 || homeInfo.st_uid != ::geteuid()
         || (homeInfo.st_mode & (S_IWGRP | S_IWOTH)) != 0) {
-        return QStringLiteral("diretório pessoal indisponível ou com permissões inseguras");
+        return i18nc("avatar error in a list of failed adjustments", "home folder unavailable or with unsafe permissions");
     }
 
     struct stat previous {};
     const bool exists = ::fstatat(directory.fd, faceName, &previous, AT_SYMLINK_NOFOLLOW) == 0;
     if ((!exists && errno != ENOENT) || (exists && !regularOwnedFile(previous))) {
-        return QStringLiteral("~/.face não é um arquivo regular seguro; avatar preservado");
+        return i18nc("avatar error in a list of failed adjustments", "~/.face is not a safe regular file; avatar preserved");
     }
     if (exists) {
         struct stat backup {};
         const bool hasBackup = ::fstatat(directory.fd, backupName, &backup, AT_SYMLINK_NOFOLLOW) == 0;
         if ((!hasBackup && errno != ENOENT) || (hasBackup && !regularOwnedFile(backup))) {
-            return QStringLiteral("backup do avatar inseguro; avatar preservado");
+            return i18nc("avatar error in a list of failed adjustments", "unsafe avatar backup; avatar preserved");
         }
         if (!hasBackup) {
             const Descriptor old(::openat(directory.fd, faceName, O_RDONLY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC));
@@ -115,25 +117,25 @@ QString UserAvatar::update(const QString &source, const QString &home)
             if (old.fd < 0 || ::fstat(old.fd, &opened) != 0 || !regularOwnedFile(opened)
                 || opened.st_dev != previous.st_dev || opened.st_ino != previous.st_ino
                 || opened.st_size > maxImageBytes) {
-                return QStringLiteral("não foi possível abrir o avatar anterior com segurança");
+                return i18nc("avatar error in a list of failed adjustments", "could not safely open the previous avatar");
             }
             QFile oldFile;
             if (!oldFile.open(old.fd, QIODevice::ReadOnly)) {
-                return QStringLiteral("não foi possível ler o avatar anterior");
+                return i18nc("avatar error in a list of failed adjustments", "could not read the previous avatar");
             }
             const QByteArray original = oldFile.read(maxImageBytes + 1);
             if (original.size() > maxImageBytes || oldFile.error() != QFileDevice::NoError) {
-                return QStringLiteral("não foi possível preservar o avatar anterior");
+                return i18nc("avatar error in a list of failed adjustments", "could not preserve the previous avatar");
             }
             const QByteArray temporary = stage(directory.fd, original, 0600);
             if (temporary.isEmpty()) {
-                return QStringLiteral("não foi possível gravar o backup; avatar preservado");
+                return i18nc("avatar error in a list of failed adjustments", "could not write the backup; avatar preserved");
             }
             // linkat publishes the completed backup without overwriting any entry.
             const bool saved = ::linkat(directory.fd, temporary.constData(), directory.fd, backupName, 0) == 0;
             ::unlinkat(directory.fd, temporary.constData(), 0);
             if (!saved || ::fsync(directory.fd) != 0) {
-                return QStringLiteral("não foi possível publicar o backup; avatar preservado");
+                return i18nc("avatar error in a list of failed adjustments", "could not publish the backup; avatar preserved");
             }
         }
     }
@@ -141,7 +143,7 @@ QString UserAvatar::update(const QString &source, const QString &home)
     const mode_t permissions = exists ? (previous.st_mode & 0644) | 0600 : 0644;
     const QByteArray temporary = stage(directory.fd, bytes, permissions);
     if (temporary.isEmpty()) {
-        return QStringLiteral("não foi possível gravar o novo avatar; avatar preservado");
+        return i18nc("avatar error in a list of failed adjustments", "could not write the new avatar; avatar preserved");
     }
     struct stat current {};
     const bool stillExists = ::fstatat(directory.fd, faceName, &current, AT_SYMLINK_NOFOLLOW) == 0;
@@ -150,23 +152,23 @@ QString UserAvatar::update(const QString &source, const QString &home)
         : !stillExists && errno == ENOENT;
     if (!unchanged || ::renameat(directory.fd, temporary.constData(), directory.fd, faceName) != 0) {
         ::unlinkat(directory.fd, temporary.constData(), 0);
-        return QStringLiteral("não foi possível substituir ~/.face com segurança; avatar preservado");
+        return i18nc("avatar error in a list of failed adjustments", "could not safely replace ~/.face; avatar preserved");
     }
     if (::fsync(directory.fd) != 0) {
-        return QStringLiteral("avatar atualizado, mas não foi possível confirmar a gravação em disco");
+        return i18nc("avatar error in a list of failed adjustments", "avatar updated, but writing to disk could not be confirmed");
     }
     // Existing links (including .face.icon -> .face) and independent files stay
     // untouched. symlinkat cannot overwrite an entry created concurrently.
     struct stat icon {};
     if (::fstatat(directory.fd, ".face.icon", &icon, AT_SYMLINK_NOFOLLOW) != 0) {
         if (errno != ENOENT) {
-            return QStringLiteral("avatar atualizado, mas não foi possível consultar ~/.face.icon");
+            return i18nc("avatar error in a list of failed adjustments", "avatar updated, but ~/.face.icon could not be checked");
         }
         if (::symlinkat(".face", directory.fd, ".face.icon") != 0 && errno != EEXIST) {
-            return QStringLiteral("avatar atualizado, mas não foi possível criar ~/.face.icon");
+            return i18nc("avatar error in a list of failed adjustments", "avatar updated, but ~/.face.icon could not be created");
         }
         if (::fsync(directory.fd) != 0) {
-            return QStringLiteral("avatar atualizado, mas não foi possível confirmar ~/.face.icon em disco");
+            return i18nc("avatar error in a list of failed adjustments", "avatar updated, but ~/.face.icon could not be confirmed on disk");
         }
     }
     return {};

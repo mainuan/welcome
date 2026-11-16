@@ -4,6 +4,7 @@
 #include "services/PackageService.h"
 
 #include <QVariant>
+#include <KLocalizedString>
 
 ApplicationModel::ApplicationModel(PackageService *service, QList<ApplicationEntry> entries,
                                    QObject *parent)
@@ -84,21 +85,23 @@ QVariant ApplicationModel::data(const QModelIndex &index, int role) const
     case AvailableRole: return available;
     case InstallStateRole:
         if (debian && state.value(QStringLiteral("state")) == QStringLiteral("checking")) {
-            return QStringLiteral("Verificando…");
+            return i18nc("@info:status application", "Checking…");
         }
         if (!available) {
-            return QStringLiteral("Indisponível");
+            return i18nc("@info:status application", "Unavailable");
         }
         if (online) {
-            return QStringLiteral("Online");
+            return i18nc("@info:status application", "Online");
         }
         if (busy) {
-            return installing ? QStringLiteral("Instalando…") : QStringLiteral("Removendo…");
+            return installing ? i18nc("@info:status application", "Installing…") : i18nc("@info:status application", "Removing…");
         }
         if (failed || m_errors.contains(entry.packageId)) {
-            return QStringLiteral("Erro");
+            return i18nc("@info:status application", "Error");
         }
-        return installed ? QStringLiteral("Instalado") : QStringLiteral("Disponível");
+        return installed ? i18nc("@info:status application", "Installed")
+                         // i18n: AppCard.qml compares this text with its own i18n("Available"); keep both identical.
+                         : i18n("Available");
     case WebUrlRole: return entry.webUrl;
     case InstallProfileRole: return profile;
     case ActionTypeRole:

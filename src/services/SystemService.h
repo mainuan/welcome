@@ -38,6 +38,9 @@ class SystemService final : public QObject
     Q_PROPERTY(QString driversStatus READ driversStatus NOTIFY diagnosticsChanged)
     Q_PROPERTY(bool driversAvailable READ driversAvailable NOTIFY diagnosticsChanged)
     Q_PROPERTY(QString lastMessage READ lastMessage NOTIFY lastMessageChanged)
+    // True when lastMessage reports an error (the translated "Error:" prefix
+    // cannot be used to recognise it).
+    Q_PROPERTY(bool lastMessageIsError READ lastMessageIsError NOTIFY lastMessageChanged)
     Q_PROPERTY(bool busy READ busy NOTIFY busyChanged)
 
 public:
@@ -63,6 +66,7 @@ public:
     QString driversStatus() const;
     bool driversAvailable() const;
     QString lastMessage() const;
+    bool lastMessageIsError() const;
     bool busy() const;
 
     static bool isValidAccent(const QString &value);
@@ -146,6 +150,7 @@ private:
     QString m_firewallStatus;
     QString m_driversStatus;
     QString m_lastMessage;
+    bool m_lastMessageIsError = false;
     QString m_sessionType;
     QString m_logoSource;
     bool m_darkTheme = false;

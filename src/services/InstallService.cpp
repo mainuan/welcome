@@ -14,6 +14,8 @@
 #include <QStandardPaths>
 #include <QTimer>
 
+#include <KLocalizedString>
+
 #include <algorithm>
 #include <utility>
 
@@ -49,47 +51,43 @@ QString lastLines(const QString &text, int count)
 QString friendlyError(const QString &kind)
 {
     if (kind == QStringLiteral("locked")) {
-        return QStringLiteral("Outro programa está instalando ou atualizando o sistema agora. "
-                              "Aguarde ele terminar e tente novamente.");
+        return i18n("Another program is installing or updating the system right now. Wait for it to finish and try again.");
     }
     if (kind == QStringLiteral("network")) {
-        return QStringLiteral("Não foi possível baixar os arquivos. Verifique sua conexão com a internet e tente novamente.");
+        return i18n("Could not download the files. Check your internet connection and try again.");
     }
     if (kind == QStringLiteral("space")) {
-        return QStringLiteral("Não há espaço livre suficiente no disco para concluir a instalação.");
+        return i18n("There is not enough free disk space to complete the installation.");
     }
     if (kind == QStringLiteral("unavailable")) {
-        return QStringLiteral("Os componentes necessários não foram encontrados nos repositórios configurados neste sistema.");
+        return i18n("The required components were not found in the repositories configured on this system.");
     }
     if (kind == QStringLiteral("interrupted")) {
-        return QStringLiteral("Uma instalação anterior foi interrompida e precisa ser reparada antes de instalar novos programas.");
+        return i18n("A previous installation was interrupted and must be repaired before new programs can be installed.");
     }
     if (kind == QStringLiteral("dependencies")) {
-        return QStringLiteral("O sistema de pacotes encontrou um conflito que impede a instalação sem remover outros programas.");
+        return i18n("The package system found a conflict that prevents the installation without removing other programs.");
     }
     if (kind == QStringLiteral("auth")) {
-        return QStringLiteral("A autenticação falhou ou o seu usuário não tem permissão de administrador.");
+        return i18n("Authentication failed or your user does not have administrator privileges.");
     }
     if (kind == QStringLiteral("unsupported")) {
-        return QStringLiteral("A instalação automática destes componentes requer um sistema baseado em Debian ou Ubuntu.");
+        return i18n("Automatic installation of these components requires a Debian- or Ubuntu-based system.");
     }
     if (kind == QStringLiteral("flatpak-missing")) {
-        return QStringLiteral("O Flatpak não está disponível neste sistema.");
+        return i18n("Flatpak is not available on this system.");
     }
     if (kind == QStringLiteral("freeoffice-download")) {
-        return QStringLiteral("Não foi possível baixar o FreeOffice da origem oficial autorizada. "
-                              "Verifique a conexão e tente novamente. Redirecionamentos e outras versões são recusados.");
+        return i18n("Could not download FreeOffice from the authorized official source. Check the connection and try again. Redirects and other versions are refused.");
     }
     if (kind == QStringLiteral("freeoffice-invalid")) {
-        return QStringLiteral("O arquivo do FreeOffice não corresponde ao pacote autorizado "
-                              "(integridade, tamanho, nome, versão ou arquitetura). A instalação foi interrompida.");
+        return i18n("The FreeOffice file does not match the authorized package (integrity, size, name, version or architecture). The installation was stopped.");
     }
     if (kind == QStringLiteral("verification")) {
-        return QStringLiteral("O instalador terminou, mas não foi possível confirmar que o aplicativo está instalado. "
-                              "Verifique os detalhes e tente novamente.");
+        return i18n("The installer finished, but it could not be confirmed that the application is installed. Check the details and try again.");
     }
-    return QStringLiteral("O sistema não conseguiu instalar todos os componentes. Tente novamente; se o problema "
-                          "continuar, use “Ver detalhes” para obter as informações técnicas.");
+    // i18n: “Show Details” must match the label of the details button in the installation dialog.
+    return i18n("The system could not install all components. Try again; if the problem persists, use “Show Details” to get the technical information.");
 }
 
 QString classifyFlatpakError(const QString &output)
@@ -137,6 +135,17 @@ QString phaseName(InstallService::Phase phase)
     return QStringLiteral("idle");
 }
 
+// "A e B" (and "A e B e C" for longer lists), as the steps were always worded.
+QString joinWithAnd(const QStringList &labels)
+{
+    QString result = labels.value(0);
+    for (qsizetype i = 1; i < labels.size(); ++i) {
+        // i18n: joins the names of two components installed in the same step, e.g. "ClamAV and Flatpak".
+        result = i18nc("@item:intext two components", "%1 and %2", result, labels.at(i));
+    }
+    return result;
+}
+
 bool isRunningPhase(InstallService::Phase phase)
 {
     return phase != InstallService::Phase::Idle && phase != InstallService::Phase::Success
@@ -163,14 +172,14 @@ InstallService::InstallService(PackageService *packages, Backend backend, QObjec
 
     Profile antivirus;
     antivirus.id = QStringLiteral("antivirus");
-    antivirus.name = QStringLiteral("Antivírus");
-    antivirus.source = QStringLiteral("Repositórios configurados / Flathub");
-    antivirus.description = QStringLiteral("Proteção ClamAV com a interface gráfica ClamUI.");
+    antivirus.name = i18n("Antivirus");
+    antivirus.source = i18n("Configured repositories / Flathub");
+    antivirus.description = i18n("ClamAV protection with the ClamUI graphical interface.");
     antivirus.iconName = QStringLiteral("security-high");
-    antivirus.runningTitle = QStringLiteral("Instalando ClamAV + ClamUI");
-    antivirus.successTitle = QStringLiteral("Antivírus instalado com sucesso");
-    antivirus.successMessage = QStringLiteral("ClamAV e ClamUI estão prontos para uso.");
-    antivirus.actionLabel = QStringLiteral("Configurar");
+    antivirus.runningTitle = i18n("Installing ClamAV + ClamUI");
+    antivirus.successTitle = i18n("Antivirus installed successfully");
+    antivirus.successMessage = i18n("ClamAV and ClamUI are ready to use.");
+    antivirus.actionLabel = i18nc("@action:button open the settings of the installed component", "Configure");
     antivirus.launcher = Launcher::ClamUi;
     antivirus.launchTarget = kClamUiId;
     antivirus.usesHelper = true;
@@ -188,43 +197,43 @@ InstallService::InstallService(PackageService *packages, Backend backend, QObjec
 
     Profile firewall;
     firewall.id = QStringLiteral("firewall");
-    firewall.name = QStringLiteral("Firewall");
-    firewall.source = QStringLiteral("Repositórios configurados");
-    firewall.description = QStringLiteral("UFW com o módulo de firewall do KDE Plasma.");
+    firewall.name = i18n("Firewall");
+    firewall.source = i18n("Configured repositories");
+    firewall.description = i18n("UFW with the KDE Plasma firewall module.");
     firewall.iconName = QStringLiteral("security-medium");
-    firewall.runningTitle = QStringLiteral("Instalando Firewall");
-    firewall.successTitle = QStringLiteral("Firewall instalado com sucesso");
-    firewall.successMessage = QStringLiteral("O UFW e a integração com o KDE Plasma estão instalados. O firewall não foi "
-                                             "ativado automaticamente: use Configurar para ativá-lo e escolher as regras.");
-    firewall.actionLabel = QStringLiteral("Configurar");
+    firewall.runningTitle = i18n("Installing Firewall");
+    firewall.successTitle = i18n("Firewall installed successfully");
+    firewall.successMessage = i18n("UFW and the KDE Plasma integration are installed. The firewall was not enabled "
+                                   "automatically: use Configure to enable it and choose the rules.");
+    firewall.actionLabel = i18nc("@action:button open the settings of the installed component", "Configure");
     firewall.launcher = Launcher::FirewallKcm;
     firewall.usesHelper = true;
     firewall.components = {
         {QStringLiteral("UFW"), {QStringLiteral("ufw")}, QString(), {QStringLiteral("ufw")}},
-        {QStringLiteral("integração com o KDE Plasma"), {QStringLiteral("plasma-firewall")}, QString(),
+        {i18nc("@item:intext component label", "KDE Plasma integration"), {QStringLiteral("plasma-firewall")}, QString(),
          {QStringLiteral("kcm:kcm_firewall")}}
     };
     firewall.packageLabels = {{QStringLiteral("ufw"), QStringLiteral("UFW")},
-                              {QStringLiteral("plasma-firewall"), QStringLiteral("integração com o KDE Plasma")}};
+                              {QStringLiteral("plasma-firewall"), i18nc("@item:intext component label", "KDE Plasma integration")}};
 
     Profile codecs;
     codecs.id = QStringLiteral("codecs");
-    codecs.name = QStringLiteral("Codecs de mídia");
-    codecs.source = QStringLiteral("Repositórios configurados");
-    codecs.description = QStringLiteral("Suporte aos formatos de áudio e vídeo mais usados.");
+    codecs.name = i18n("Media Codecs");
+    codecs.source = i18n("Configured repositories");
+    codecs.description = i18n("Support for the most common audio and video formats.");
     codecs.iconName = QStringLiteral("applications-multimedia");
-    codecs.runningTitle = QStringLiteral("Instalando codecs de mídia");
-    codecs.successTitle = QStringLiteral("Codecs instalados com sucesso");
-    codecs.successMessage = QStringLiteral("Áudio e vídeo nos formatos mais comuns já podem ser reproduzidos.");
+    codecs.runningTitle = i18n("Installing media codecs");
+    codecs.successTitle = i18n("Codecs installed successfully");
+    codecs.successMessage = i18n("Audio and video in the most common formats can now be played.");
     codecs.usesHelper = true;
     codecs.components = {
-        {QStringLiteral("codecs de mídia"),
+        {i18nc("@item:intext component label", "media codecs"),
          {QStringLiteral("gstreamer1.0-libav"), QStringLiteral("gstreamer1.0-plugins-ugly"),
           QStringLiteral("gstreamer1.0-plugins-bad"), QStringLiteral("ffmpeg")},
          QString(),
          {QStringLiteral("ffmpeg"), QStringLiteral("gst-launch-1.0")}}
     };
-    codecs.packageLabels = {{QStringLiteral("gstreamer"), QStringLiteral("codecs GStreamer")},
+    codecs.packageLabels = {{QStringLiteral("gstreamer"), i18nc("@item:intext component label", "GStreamer codecs")},
                             {QStringLiteral("ffmpeg"), QStringLiteral("FFmpeg")},
                             {QStringLiteral("libav"), QStringLiteral("FFmpeg")}};
 
@@ -232,12 +241,12 @@ InstallService::InstallService(PackageService *packages, Backend backend, QObjec
     freeoffice.id = QStringLiteral("freeoffice");
     freeoffice.name = QStringLiteral("FreeOffice");
     freeoffice.source = QStringLiteral("SoftMaker");
-    freeoffice.description = QStringLiteral("Suíte de escritório gratuita da SoftMaker.");
+    freeoffice.description = i18n("Free office suite from SoftMaker.");
     freeoffice.iconSource = QStringLiteral("qrc:/assets/freeOffice.png");
-    freeoffice.runningTitle = QStringLiteral("Instalando FreeOffice");
-    freeoffice.successTitle = QStringLiteral("FreeOffice instalado com sucesso");
-    freeoffice.successMessage = QStringLiteral("O FreeOffice está instalado e disponível no menu de aplicativos.");
-    freeoffice.sourceNotice = QStringLiteral("Este pacote é fornecido pela SoftMaker e poderá solicitar autorização de administrador.");
+    freeoffice.runningTitle = i18n("Installing FreeOffice");
+    freeoffice.successTitle = i18n("FreeOffice installed successfully");
+    freeoffice.successMessage = i18n("FreeOffice is installed and available in the application menu.");
+    freeoffice.sourceNotice = i18n("This package is provided by SoftMaker and may ask for administrator authorization.");
     freeoffice.usesHelper = true;
     freeoffice.components = {{QStringLiteral("FreeOffice"), {QStringLiteral("softmaker-freeoffice-2024")}, {}, {}}};
     freeoffice.packageLabels = {{QStringLiteral("softmaker-freeoffice-2024"), QStringLiteral("FreeOffice")}};
@@ -302,10 +311,10 @@ bool InstallService::registerApplication(const QString &flatpakId, const QString
     profile.source = QStringLiteral("Flathub");
     profile.description = description;
     profile.iconSource = iconSource;
-    profile.runningTitle = QStringLiteral("Instalando %1").arg(name);
-    profile.successTitle = QStringLiteral("%1 instalado com sucesso").arg(name);
-    profile.successMessage = QStringLiteral("O aplicativo já está disponível no menu de aplicativos.");
-    profile.actionLabel = QStringLiteral("Abrir");
+    profile.runningTitle = i18nc("@title %1 is an application name", "Installing %1", name);
+    profile.successTitle = i18nc("@title %1 is an application name", "%1 installed successfully", name);
+    profile.successMessage = i18n("The application is now available in the application menu.");
+    profile.actionLabel = i18nc("@action:button open the installed application", "Open");
     profile.launcher = Launcher::FlatpakApp;
     profile.launchTarget = flatpakId;
     profile.components = {{name, {}, flatpakId, {}}};
@@ -423,17 +432,19 @@ QVariantMap InstallService::profileState(const Profile &profile) const
     QString summary;
     if (hasAptComponents && !m_detected) {
         state = QStringLiteral("checking");
-        summary = QStringLiteral("Verificando…");
+        summary = i18nc("@info:status installation state", "Checking…");
     } else if (missing.isEmpty()) {
         state = QStringLiteral("installed");
-        summary = QStringLiteral("Instalado");
+        summary = i18nc("@info:status installation state", "Installed");
     } else if (installedCount > 0) {
         state = QStringLiteral("partial");
-        summary = missing.size() == 1 ? QStringLiteral("Falta: %1").arg(missing.constFirst())
-                                      : QStringLiteral("Faltam: %1").arg(missing.join(QStringLiteral(", ")));
+        // i18n: %1 is the name of the only component that is not installed yet.
+        summary = missing.size() == 1 ? i18nc("@info:status one component", "Missing: %1", missing.constFirst())
+                                      // i18n: %1 is a comma-separated list of components that are not installed yet.
+                                      : i18nc("@info:status several components", "Missing: %1", missing.join(QStringLiteral(", ")));
     } else {
         state = QStringLiteral("missing");
-        summary = QStringLiteral("Não instalado");
+        summary = i18nc("@info:status installation state", "Not installed");
     }
 
     QString unavailableReason;
@@ -579,7 +590,7 @@ bool InstallService::start(const QString &profileId)
     m_errorKind.clear();
     m_resultMessage.clear();
     m_flatpakScope.clear();
-    setPhase(Phase::Preparing, QStringLiteral("Preparando a instalação…"));
+    setPhase(Phase::Preparing, i18n("Preparing the installation…"));
     emit profilesChanged();
     detect([this]() { planJob(); });
     return true;
@@ -638,7 +649,7 @@ void InstallService::planJob()
             }
             m_steps.append({StepKind::FreeOfficeDownload, {}, QStringLiteral("FreeOffice")});
         }
-        m_steps.append({StepKind::Helper, QString(), helperLabels.join(QStringLiteral(" e "))});
+        m_steps.append({StepKind::Helper, QString(), joinWithAnd(helperLabels)});
     }
     m_steps.append(flatpakSteps);
 
@@ -693,10 +704,11 @@ void InstallService::downloadFreeOffice()
     }
     m_downloadFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner);
     m_downloadHash.reset();
-    setPhase(Phase::Downloading, QStringLiteral("Baixando FreeOffice da SoftMaker…"));
-    appendDetails(QStringLiteral("Origem autorizada: %1\nPacote: %2 · versão %3 · %4 · %5 bytes\nSHA-256 fixado: %6")
-        .arg(profile.url.toString(), profile.package, profile.version, profile.architecture)
-        .arg(profile.size).arg(QString::fromLatin1(profile.sha256)));
+    setPhase(Phase::Downloading, i18n("Downloading FreeOffice from SoftMaker…"));
+    // i18n: technical details: %1 URL, %2 package name, %3 version, %4 architecture, %5 size in bytes, %6 checksum.
+    appendDetails(i18n("Authorized source: %1\nPackage: %2 · version %3 · %4 · %5 bytes\nPinned SHA-256: %6",
+        profile.url.toString(), profile.package, profile.version, profile.architecture,
+        QString::number(profile.size), QString::fromLatin1(profile.sha256)));
 
     QNetworkRequest request(profile.url);
     request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
@@ -712,7 +724,7 @@ void InstallService::downloadFreeOffice()
         }
         const auto bytes = reply->readAll();
         if (m_downloadFile.size() + bytes.size() > m_backend.freeOffice.size) {
-            *failure = QStringLiteral("O arquivo excede o tamanho autorizado.");
+            *failure = i18n("The file exceeds the authorized size.");
         } else if (m_downloadFile.write(bytes) != bytes.size()) {
             *failure = m_downloadFile.errorString();
         } else {
@@ -726,7 +738,7 @@ void InstallService::downloadFreeOffice()
     connect(reply, &QNetworkReply::downloadProgress, this, [this](qint64 received, qint64 total) {
         const int progress = total == m_backend.freeOffice.size
             ? static_cast<int>(std::min<qint64>(100, received * 100 / total)) : -1;
-        setProgress(progress, QStringLiteral("Baixando FreeOffice da SoftMaker…"));
+        setProgress(progress, i18n("Downloading FreeOffice from SoftMaker…"));
     });
     // Bound the complete transfer as well as individual network stalls.
     QTimer::singleShot(15 * 60 * 1000, reply, [reply]() { if (!reply->isFinished()) reply->abort(); });
@@ -744,7 +756,7 @@ void InstallService::downloadFreeOffice()
         }
         if (!m_downloadFile.flush() || m_downloadFile.size() != m_backend.freeOffice.size
             || m_downloadHash.result().toHex() != m_backend.freeOffice.sha256) {
-            finishError(QStringLiteral("freeoffice-invalid"), QStringLiteral("Tamanho ou SHA-256 divergente."));
+            finishError(QStringLiteral("freeoffice-invalid"), i18n("Size or SHA-256 mismatch."));
             return;
         }
         validateFreeOffice();
@@ -753,7 +765,7 @@ void InstallService::downloadFreeOffice()
 
 void InstallService::validateFreeOffice()
 {
-    setPhase(Phase::Preparing, QStringLiteral("Validando o pacote Debian do FreeOffice…"));
+    setPhase(Phase::Preparing, i18n("Validating the FreeOffice Debian package…"));
     auto *process = new QProcess(this);
     process->setStandardInputFile(QProcess::nullDevice());
     connect(process, &QProcess::finished, this, [this, process](int code, QProcess::ExitStatus status) {
@@ -797,7 +809,7 @@ void InstallService::transferFreeOffice()
 
 void InstallService::verifyFreeOfficeInstalled()
 {
-    setPhase(Phase::Preparing, QStringLiteral("Confirmando a instalação do FreeOffice…"));
+    setPhase(Phase::Preparing, i18n("Confirming the FreeOffice installation…"));
     detect([this]() {
         if (m_dpkgAvailable && m_debInstalled.value(QStringLiteral("softmaker-freeoffice-2024"))) {
             finishSuccess();
@@ -809,7 +821,7 @@ void InstallService::verifyFreeOfficeInstalled()
 
 void InstallService::verifyBrowserInstalled()
 {
-    setPhase(Phase::Preparing, QStringLiteral("Confirmando a instalação do navegador…"));
+    setPhase(Phase::Preparing, i18n("Confirming the browser installation…"));
     m_process = new QProcess(this);
     m_process->setStandardInputFile(QProcess::nullDevice());
     connect(m_process, &QProcess::finished, this, [this](int code, QProcess::ExitStatus status) {
@@ -842,7 +854,7 @@ void InstallService::runHelperStep()
     m_errorKind.clear();
     m_stdoutBuffer.clear();
     m_stderrBuffer.clear();
-    setPhase(Phase::Authenticating, QStringLiteral("Aguardando autorização do administrador…"));
+    setPhase(Phase::Authenticating, i18n("Waiting for administrator authorization…"));
 
     m_process = new QProcess(this);
     if (m_profileId == QStringLiteral("freeoffice")) {
@@ -867,8 +879,8 @@ void InstallService::runHelperStep()
     connect(m_process, &QProcess::finished, this, &InstallService::finishStep);
     connect(m_process, &QProcess::errorOccurred, this, [this](QProcess::ProcessError error) {
         if (error == QProcess::FailedToStart && m_process != nullptr) {
-            const QString technical = QStringLiteral("Não foi possível executar %1: %2")
-                                          .arg(m_backend.pkexec, m_process->errorString());
+            const QString technical = i18nc("@info %1 is a program path, %2 the system error",
+                                                 "Could not run %1: %2", m_backend.pkexec, m_process->errorString());
             m_process->deleteLater();
             m_process = nullptr;
             finishError(QStringLiteral("unsupported"), technical);
@@ -902,7 +914,7 @@ QString InstallService::labelForPackage(const QString &package) const
             }
         }
     }
-    return QStringLiteral("componentes necessários");
+    return i18nc("@item:intext generic component label", "required components");
 }
 
 void InstallService::handleHelperLine(const QString &line)
@@ -918,19 +930,19 @@ void InstallService::handleHelperLine(const QString &line)
     switch (event.type) {
     case HelperEvent::Type::Phase:
         if (event.name == QStringLiteral("preparing")) {
-            setPhase(Phase::Preparing, QStringLiteral("Verificando os componentes necessários…"));
+            setPhase(Phase::Preparing, i18n("Checking the required components…"));
         } else if (event.name == QStringLiteral("waiting")) {
-            setPhase(Phase::Waiting, QStringLiteral("Aguardando outro programa terminar de instalar ou atualizar o sistema…"));
+            setPhase(Phase::Waiting, i18n("Waiting for another program to finish installing or updating the system…"));
         } else if (event.name == QStringLiteral("updating")) {
-            setPhase(Phase::Updating, QStringLiteral("Atualizando a lista de programas disponíveis…"));
+            setPhase(Phase::Updating, i18n("Updating the list of available programs…"));
         } else if (event.name == QStringLiteral("installing")) {
-            setPhase(Phase::Downloading, QStringLiteral("Preparando o download de %1…").arg(stepLabel));
+            setPhase(Phase::Downloading, i18nc("@info:status %1 is a component label", "Preparing the download of %1…", stepLabel));
         } else if (event.name == QStringLiteral("signatures")) {
-            setPhase(Phase::Configuring, QStringLiteral("Atualizando as definições de vírus…"));
+            setPhase(Phase::Configuring, i18n("Updating the virus definitions…"));
         }
         break;
     case HelperEvent::Type::Packages:
-        appendDetails(QStringLiteral("Pacotes a instalar: %1").arg(event.text));
+        appendDetails(i18nc("@info %1 is a list of package names", "Packages to install: %1", event.text));
         break;
     case HelperEvent::Type::Download: {
         if (m_phase == Phase::Updating) {
@@ -939,9 +951,9 @@ void InstallService::handleHelperLine(const QString &line)
         }
         int current = 0;
         int total = 0;
-        QString text = QStringLiteral("Baixando %1…").arg(stepLabel);
+        QString text = i18nc("@info:status %1 is a component label", "Downloading %1…", stepLabel);
         if (InstallProgress::parseAptFileCounter(event.text, &current, &total)) {
-            text = QStringLiteral("Baixando %1 (arquivo %2 de %3)…").arg(stepLabel).arg(current).arg(total);
+            text = i18nc("@info:status %1 is a component label", "Downloading %1 (file %2 of %3)…", stepLabel, current, total);
         }
         if (m_phase != Phase::Downloading) {
             setPhase(Phase::Downloading, text, static_cast<int>(event.percent));
@@ -955,8 +967,8 @@ void InstallService::handleHelperLine(const QString &line)
         QString text = m_message;
         if (event.name != QStringLiteral("dpkg-exec")) {
             const QString label = labelForPackage(event.name);
-            text = event.configuring ? QStringLiteral("Configurando %1…").arg(label)
-                                     : QStringLiteral("Instalando %1…").arg(label);
+            text = event.configuring ? i18nc("@info:status %1 is a component label", "Configuring %1…", label)
+                                     : i18nc("@info:status %1 is a component label", "Installing %1…", label);
         }
         if (m_phase != target) {
             setPhase(target, text, static_cast<int>(event.percent));
@@ -973,9 +985,9 @@ void InstallService::handleHelperLine(const QString &line)
         break;
     case HelperEvent::Type::Warning:
         if (event.name == QStringLiteral("signatures")) {
-            m_warning = QStringLiteral("As definições de vírus não puderam ser baixadas agora; o ClamAV tentará "
-                                       "novamente automaticamente em segundo plano.");
-            appendDetails(QStringLiteral("freshclam não concluiu a atualização das definições."));
+            m_warning = i18n("The virus definitions could not be downloaded now; ClamAV will retry "
+                             "automatically in the background.");
+            appendDetails(i18n("freshclam did not finish updating the definitions."));
         }
         break;
     case HelperEvent::Type::Done:
@@ -997,7 +1009,7 @@ void InstallService::runFlatpakStep(const Step &step)
     if (m_flatpakScope.isEmpty()) {
         // Install where Flathub is configured: --user needs no administrator,
         // --system is authorized by Flatpak's own polkit helper.
-        setPhase(Phase::Preparing, QStringLiteral("Verificando o Flathub…"));
+        setPhase(Phase::Preparing, i18n("Checking Flathub…"));
         auto *remotes = new QProcess(this);
         remotes->setStandardInputFile(QProcess::nullDevice());
         connect(remotes, &QProcess::finished, this, [this, remotes, step, flatpak](int exitCode, QProcess::ExitStatus) {
@@ -1019,7 +1031,7 @@ void InstallService::runFlatpakStep(const Step &step)
                 return;
             }
 
-            setPhase(Phase::Preparing, QStringLiteral("Configurando o Flathub…"));
+            setPhase(Phase::Preparing, i18n("Setting up Flathub…"));
             auto *add = new QProcess(this);
             add->setStandardInputFile(QProcess::nullDevice());
             connect(add, &QProcess::finished, this, [this, add, step](int addExit, QProcess::ExitStatus) {
@@ -1046,7 +1058,7 @@ void InstallService::runFlatpakStep(const Step &step)
     m_flatpakOperation = 0;
     m_flatpakOperations = 0;
     m_flatpakPercent = -1;
-    setPhase(Phase::Downloading, QStringLiteral("Baixando %1…").arg(step.label));
+    setPhase(Phase::Downloading, i18nc("@info:status %1 is a component label", "Downloading %1…", step.label));
 
     m_process = new QProcess(this);
     m_process->setStandardInputFile(QProcess::nullDevice());
@@ -1104,9 +1116,9 @@ void InstallService::handleFlatpakLine(const QString &line)
 
     const QString label = m_steps.value(m_stepIndex).label;
     const QString text = m_flatpakOperations > 1
-        ? QStringLiteral("Baixando e instalando %1 (componente %2 de %3)…")
-              .arg(label).arg(m_flatpakOperation).arg(m_flatpakOperations)
-        : QStringLiteral("Baixando e instalando %1…").arg(label);
+        ? i18nc("@info:status %1 is a component label", "Downloading and installing %1 (component %2 of %3)…",
+                label, m_flatpakOperation, m_flatpakOperations)
+        : i18nc("@info:status %1 is a component label", "Downloading and installing %1…", label);
     setProgress(m_flatpakPercent, text);
 }
 
@@ -1129,7 +1141,7 @@ void InstallService::finishStep(int exitCode, QProcess::ExitStatus status)
     m_process->deleteLater();
     m_process = nullptr;
 
-    const QString technical = QStringLiteral("Código de saída: %1").arg(exitCode)
+    const QString technical = i18nc("@info technical detail", "Exit code: %1", exitCode)
         + (errorOutput.isEmpty() ? QString() : QStringLiteral("\n") + lastLines(errorOutput, 80));
 
     if (status == QProcess::CrashExit) {
@@ -1217,7 +1229,7 @@ void InstallService::finishSuccess()
 void InstallService::finishError(const QString &kind, const QString &technical)
 {
     m_resultMessage = friendlyError(kind);
-    appendDetails(QStringLiteral("Etapa: %1 de %2 · motivo: %3").arg(step()).arg(stepCount()).arg(kind));
+    appendDetails(i18nc("@info technical detail; %3 is an internal error code", "Step: %1 of %2 · reason: %3", step(), stepCount(), kind));
     appendDetails(technical);
     setPhase(Phase::Error, QString());
     endJob();
@@ -1226,8 +1238,8 @@ void InstallService::finishError(const QString &kind, const QString &technical)
 void InstallService::finishCancelled()
 {
     m_resultMessage = m_stepIndex > 0 && m_profileId != QStringLiteral("freeoffice")
-        ? QStringLiteral("A autorização foi cancelada. Os componentes instalados nas etapas anteriores foram mantidos.")
-        : QStringLiteral("A autorização foi cancelada. Nenhuma alteração foi feita no sistema.");
+        ? i18n("The authorization was canceled. The components installed in the previous steps were kept.")
+        : i18n("The authorization was canceled. No changes were made to the system.");
     setPhase(Phase::Cancelled, QString());
     endJob();
 }
@@ -1250,8 +1262,9 @@ bool InstallService::launch(const QString &profileId)
         return false;
     }
     if (!profileState(*profile).value(QStringLiteral("canLaunch")).toBool()) {
-        emit launchFailed(QStringLiteral("Não é possível abrir %1: os componentes necessários não estão instalados ou a ferramenta está indisponível.")
-                              .arg(profile->name));
+        emit launchFailed(i18nc("@info %1 is an application or component name",
+                                "Cannot open %1: the required components are not installed or the tool is unavailable.",
+                                profile->name));
         return false;
     }
 
@@ -1284,7 +1297,7 @@ bool InstallService::launch(const QString &profileId)
     }
 
     if (program.isEmpty() || !QProcess::startDetached(program, arguments)) {
-        emit launchFailed(QStringLiteral("Não foi possível abrir %1.").arg(profile->name));
+        emit launchFailed(i18nc("@info %1 is an application or component name", "Could not open %1.", profile->name));
         return false;
     }
     return true;

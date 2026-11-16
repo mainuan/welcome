@@ -1,5 +1,7 @@
 #include "PackageService.h"
 
+#include <KLocalizedString>
+
 #include <QFileInfo>
 #include <QStandardPaths>
 #include <QTimer>
@@ -100,7 +102,7 @@ void PackageService::refresh()
     if (!available) {
         m_installations.clear();
         emit installedApplicationsChanged();
-        setMessage(QStringLiteral("Flatpak não está instalado."));
+        setMessage(i18n("Flatpak is not installed."));
         return;
     }
 
@@ -129,7 +131,7 @@ void PackageService::refresh()
     });
     connect(process, &QProcess::errorOccurred, this, [this, process](QProcess::ProcessError error) {
         if (error == QProcess::FailedToStart) {
-            setMessage(QStringLiteral("Não foi possível consultar o Flatpak."));
+            setMessage(i18n("Could not query Flatpak."));
         }
         process->deleteLater();
     });
@@ -140,17 +142,17 @@ void PackageService::refresh()
 bool PackageService::remove(const QString &applicationId)
 {
     if (!isAllowedApplication(applicationId)) {
-        setMessage(QStringLiteral("Aplicação fora da lista permitida."));
+        setMessage(i18n("This application is not in the allowed list."));
         return false;
     }
     if (m_process != nullptr) {
-        setMessage(QStringLiteral("Outra operação do Flatpak está em andamento."));
+        setMessage(i18n("Another Flatpak operation is in progress."));
         return false;
     }
 
     const QString flatpak = flatpakExecutable();
     if (flatpak.isEmpty()) {
-        setMessage(QStringLiteral("Flatpak não está instalado."));
+        setMessage(i18n("Flatpak is not installed."));
         return false;
     }
 
@@ -165,15 +167,15 @@ bool PackageService::remove(const QString &applicationId)
     m_process->setStandardInputFile(QProcess::nullDevice());
     emit operationChanged();
     emit operationStarted(applicationId);
-    setMessage(QStringLiteral("Removendo %1…").arg(applicationId));
+    setMessage(i18nc("@info:status %1 is a Flatpak application ID", "Removing %1…", applicationId));
 
     connect(m_process, &QProcess::finished, this, [this](int exitCode, QProcess::ExitStatus) {
         const QString stderrText = QString::fromLocal8Bit(m_process->readAllStandardError()).trimmed();
         const QString stdoutText = QString::fromLocal8Bit(m_process->readAllStandardOutput()).trimmed();
         const bool success = exitCode == 0;
-        const QString message = success ? QStringLiteral("Remoção concluída.")
+        const QString message = success ? i18n("Removal finished.")
                                         : (stderrText.isEmpty() ? stdoutText : stderrText);
-        setMessage(success ? message : QStringLiteral("Falha: ") + message);
+        setMessage(success ? message : i18nc("@info:status %1 is the error output of Flatpak", "Failed: %1", message));
         const QString completedApplicationId = m_currentApplication;
         m_process->deleteLater();
         m_process = nullptr;
@@ -184,7 +186,7 @@ bool PackageService::remove(const QString &applicationId)
     });
     connect(m_process, &QProcess::errorOccurred, this, [this](QProcess::ProcessError error) {
         if (error == QProcess::FailedToStart && m_process != nullptr) {
-            setMessage(QStringLiteral("Não foi possível iniciar o Flatpak."));
+            setMessage(i18n("Could not start Flatpak."));
             const QString completedApplicationId = m_currentApplication;
             m_process->deleteLater();
             m_process = nullptr;

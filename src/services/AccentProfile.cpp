@@ -5,17 +5,17 @@ namespace AccentProfiles {
 const QList<AccentProfile> &profiles()
 {
     static const QList<AccentProfile> list = {
-        {QStringLiteral("brown"), QStringLiteral("Marrom"), QStringLiteral("#d08040"),
+        {QStringLiteral("brown"), kli18nc("accent color", "Brown"), QStringLiteral("#d08040"),
          QStringLiteral("DreamBrownLightColor"), QStringLiteral("DreamBrownDarkColor"), QStringLiteral("kora-brown"), QStringLiteral("05marrom.png")},
-        {QStringLiteral("cyan"), QStringLiteral("Ciano"), QStringLiteral("#3daee9"),
+        {QStringLiteral("cyan"), kli18nc("accent color", "Cyan"), QStringLiteral("#3daee9"),
          QStringLiteral("DreamCyanLightColor"), QStringLiteral("DreamCyanDarkColor"), QStringLiteral("kora-cyan"), QStringLiteral("01ciano.png")},
-        {QStringLiteral("magenta"), QStringLiteral("Magenta"), QStringLiteral("#e8177d"),
+        {QStringLiteral("magenta"), kli18nc("accent color", "Magenta"), QStringLiteral("#e8177d"),
          QStringLiteral("DreamMagentaLightColor"), QStringLiteral("DreamMagentaDarkColor"), QStringLiteral("kora-magenta"), QStringLiteral("03magenta.png")},
-        {QStringLiteral("lime"), QStringLiteral("Lima"), QStringLiteral("#3dd425"),
+        {QStringLiteral("lime"), kli18nc("accent color", "Lime"), QStringLiteral("#3dd425"),
          QStringLiteral("DreamLimeLightColor"), QStringLiteral("DreamLimeDarkColor"), QStringLiteral("kora-lima"), QStringLiteral("06lima.png")},
-        {QStringLiteral("gray"), QStringLiteral("Cinza"), QStringLiteral("#aab6b9"),
+        {QStringLiteral("gray"), kli18nc("accent color", "Gray"), QStringLiteral("#aab6b9"),
          QStringLiteral("DreamGrayLightColor"), QStringLiteral("DreamGrayDarkColor"), QStringLiteral("kora-grey"), QStringLiteral("02cinza.png")},
-        {QStringLiteral("violet"), QStringLiteral("Violeta"), QStringLiteral("#a588cb"),
+        {QStringLiteral("violet"), kli18nc("accent color", "Violet"), QStringLiteral("#a588cb"),
          QStringLiteral("DreamVioletLightColor"), QStringLiteral("DreamVioletDarkColor"), QStringLiteral("kora-violet"), QStringLiteral("04violet.png")},
     };
     return list;

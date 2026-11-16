@@ -10,7 +10,12 @@
 #include "services/SystemReportService.h"
 #include "services/SystemService.h"
 
+#include <KLocalizedQmlContext>
+#include <KLocalizedString>
+
 #include <QApplication>
+#include <QDir>
+#include <QFileInfo>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlComponent>
@@ -24,11 +29,24 @@
 
 int main(int argc, char *argv[])
 {
+    // The catalog domain is the Debian package name; set before any i18n() call.
+    KLocalizedString::setApplicationDomain(TRANSLATION_DOMAIN);
+
     // QApplication rather than QGuiApplication: Plasma's platform integration only
-    // offers its native file dialogs (used by "Salvar relatório") to widget apps.
+    // offers its native file dialogs (used by "Save Report") to widget apps.
     QApplication app(argc, argv);
+
+    // Installed: /usr/bin/../share/locale is the system catalog directory. From a
+    // build tree, <build>/bin/../share/locale holds the catalogs compiled by CMake.
+    // MAINUAN_LOCALE_DIR overrides both (development only).
+    const QString localeDir = qEnvironmentVariableIsSet("MAINUAN_LOCALE_DIR")
+        ? qEnvironmentVariable("MAINUAN_LOCALE_DIR")
+        : QDir::cleanPath(QCoreApplication::applicationDirPath() + QStringLiteral("/../share/locale"));
+    if (QFileInfo(localeDir).isDir()) {
+        KLocalizedString::addDomainLocaleDir(TRANSLATION_DOMAIN, localeDir);
+    }
     app.setApplicationName(QStringLiteral("Mainuan Welcome"));
-    app.setApplicationDisplayName(QStringLiteral("Mainuan — Boas-vindas"));
+    app.setApplicationDisplayName(i18nc("@title application display name", "Mainuan — Welcome"));
     app.setOrganizationName(QStringLiteral("Mainuan"));
     app.setOrganizationDomain(QStringLiteral("mainuan.org"));
     app.setApplicationVersion(QStringLiteral(MAINUAN_VERSION));
@@ -71,46 +89,46 @@ int main(int argc, char *argv[])
     };
     ApplicationModel officeModel(&packageService, {
         {QStringLiteral("libreoffice"), QStringLiteral("LibreOffice"),
-         QStringLiteral("Suite completa: Writer, Calc e Impress"), QStringLiteral("org.libreoffice.LibreOffice"),
+         i18nc("@info application description", "Complete suite: Writer, Calc and Impress"), QStringLiteral("org.libreoffice.LibreOffice"),
          asset(QStringLiteral("org.libreoffice.LibreOffice.png")), QString()},
         {QStringLiteral("wps"), QStringLiteral("WPS Office"),
-         QStringLiteral("Interface familiar ao Microsoft Office"), QStringLiteral("com.wps.Office"),
+         i18nc("@info application description", "Interface familiar to Microsoft Office users"), QStringLiteral("com.wps.Office"),
          asset(QStringLiteral("com.wps.Office.png")), QString()},
         {QStringLiteral("freeoffice"), QStringLiteral("FreeOffice"),
-         QStringLiteral("Suíte de escritório gratuita com editores de textos, planilhas e apresentações."), QStringLiteral("softmaker-freeoffice-2024"),
+         i18nc("@info application description", "Free office suite with word processor, spreadsheet and presentation editors."), QStringLiteral("softmaker-freeoffice-2024"),
          asset(QStringLiteral("freeOffice.png")), QString(), ApplicationAction::InternalDebian},
         {QStringLiteral("gdocs"), QStringLiteral("Google Docs"),
-         QStringLiteral("Documentos online com colaboração"), QString(),
+         i18nc("@info application description", "Online documents with collaboration"), QString(),
          asset(QStringLiteral("webapp.gdocs.png")), QStringLiteral("https://docs.google.com/"), ApplicationAction::WebPage},
         {QStringLiteral("office365"), QStringLiteral("Office 365 Online"),
-         QStringLiteral("Suite Microsoft direto no navegador"), QString(),
+         i18nc("@info application description", "Microsoft suite right in the browser"), QString(),
          asset(QStringLiteral("webapp.office365.png")), QStringLiteral("https://www.office.com/"), ApplicationAction::WebPage}
     });
 
     ApplicationModel browserModel(&packageService, {
         {QStringLiteral("chrome"), QStringLiteral("Google Chrome"),
-         QStringLiteral("Navegador do Google"), QStringLiteral("com.google.Chrome"),
+         i18nc("@info application description", "Google's web browser"), QStringLiteral("com.google.Chrome"),
          asset(QStringLiteral("com.google.Chrome.png")), QString()},
         {QStringLiteral("edge"), QStringLiteral("Microsoft Edge"),
-         QStringLiteral("Compatibilidade com aplicações Microsoft"), QStringLiteral("com.microsoft.Edge"),
+         i18nc("@info application description", "Compatibility with Microsoft applications"), QStringLiteral("com.microsoft.Edge"),
          asset(QStringLiteral("com.microsoft.Edge.png")), QString()},
         {QStringLiteral("brave"), QStringLiteral("Brave"),
-         QStringLiteral("Bloqueio de anúncios integrado"), QStringLiteral("com.brave.Browser"),
+         i18nc("@info application description", "Built-in ad blocking"), QStringLiteral("com.brave.Browser"),
          asset(QStringLiteral("com.brave.Browser.png")), QString()},
         {QStringLiteral("vivaldi"), QStringLiteral("Vivaldi"),
-         QStringLiteral("Navegador com recursos avançados de personalização, organização de abas e privacidade."),
+         i18nc("@info application description", "Browser with advanced customization, tab management and privacy features."),
          QStringLiteral("com.vivaldi.Vivaldi"), asset(QStringLiteral("vivaldi.png")), QString(), ApplicationAction::InternalFlatpak},
         {QStringLiteral("zen"), QStringLiteral("Zen Browser"),
-         QStringLiteral("Navegador focado em privacidade, produtividade e organização por abas verticais."),
+         i18nc("@info application description", "Browser focused on privacy, productivity and vertical tab organization."),
          QStringLiteral("app.zen_browser.zen"), asset(QStringLiteral("zenBrowser.png")), QString(), ApplicationAction::InternalFlatpak},
         {QStringLiteral("librewolf"), QStringLiteral("LibreWolf"),
-         QStringLiteral("Navegador focado em privacidade"), QStringLiteral("io.gitlab.librewolf-community"),
+         i18nc("@info application description", "Privacy-focused browser"), QStringLiteral("io.gitlab.librewolf-community"),
          asset(QStringLiteral("io.gitlab.librewolf-community.png")), QString()},
         {QStringLiteral("opera"), QStringLiteral("Opera GX"),
-         QStringLiteral("Navegador com controles de recursos"), QStringLiteral("com.opera.opera-gx"),
+         i18nc("@info application description", "Browser with resource controls"), QStringLiteral("com.opera.opera-gx"),
          asset(QStringLiteral("com.opera.opera-gx.png")), QString()},
         {QStringLiteral("tor"), QStringLiteral("Tor Browser"),
-         QStringLiteral("Navegação pela rede Tor"), QStringLiteral("org.torproject.torbrowser-launcher"),
+         i18nc("@info application description", "Browsing through the Tor network"), QStringLiteral("org.torproject.torbrowser-launcher"),
          asset(QStringLiteral("org.torproject.torbrowser-launcher.png")), QString()}
     });
 
@@ -125,6 +143,8 @@ int main(int argc, char *argv[])
     LayoutModel layoutModel;
 
     QQmlApplicationEngine engine;
+    // i18n(), i18nc(), i18np()… in QML, resolved against the same domain.
+    KLocalization::setupLocalizedContext(&engine);
     engine.rootContext()->setContextProperty(QStringLiteral("systemService"), &systemService);
     engine.rootContext()->setContextProperty(QStringLiteral("packageService"), &packageService);
     engine.rootContext()->setContextProperty(QStringLiteral("installService"), &installService);
