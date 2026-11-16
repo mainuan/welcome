@@ -97,7 +97,9 @@ Rectangle {
             }
             Controls.Button {
                 objectName: "installApplicationButton"
-                Layout.preferredWidth: card.actionType === "web" ? 78 : 102
+                // Keep the original width as a minimum, but let longer
+                // translations ("Bitte warten …", "インストール済み") grow the button.
+                Layout.preferredWidth: Math.max(card.actionType === "web" ? 78 : 102, implicitWidth)
                 Layout.minimumWidth: card.actionType === "web" ? 72 : 94
                 text: card.actionType === "web" ? i18n("Open")
                     : card.actionType === "debian" && card.installed ? i18n("Installed")

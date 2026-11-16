@@ -134,7 +134,7 @@ Kirigami.Page {
                                 text: model.available ? i18nc("@action:button", "Play") : i18nc("@info video status", "Unavailable")
                                 icon.name: model.available ? "media-playback-start" : "dialog-warning"
                                 display: Controls.AbstractButton.TextBesideIcon
-                                implicitWidth: model.available ? 126 : 120
+                                implicitWidth: Math.max(model.available ? 126 : 120, implicitContentWidth + leftPadding + rightPadding)
                                 implicitHeight: 38
                                 enabled: model.available
                                 onClicked: {

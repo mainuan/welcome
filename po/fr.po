@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 11:52-0300\n"
+"POT-Creation-Date: 2026-11-16 12:10-0300\n"
 "PO-Revision-Date: 2026-11-16 11:52-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: fr <https://github.com/mainuan>\n"
@@ -94,31 +94,31 @@ msgstr "Choisissez votre navigateur préféré pour surfer sur le Web."
 msgid "Available"
 msgstr "Disponible"
 
-#: qml/components/AppCard.qml:102 qml/components/InstallDialog.qml:352
+#: qml/components/AppCard.qml:104 qml/components/InstallDialog.qml:352
 msgid "Open"
 msgstr "Ouvrir"
 
-#: qml/components/AppCard.qml:103
+#: qml/components/AppCard.qml:105
 msgid "Installed"
 msgstr "Installé"
 
-#: qml/components/AppCard.qml:104 qml/components/InstallDialog.qml:339
+#: qml/components/AppCard.qml:106 qml/components/InstallDialog.qml:339
 msgid "Install"
 msgstr "Installer"
 
-#: qml/components/AppCard.qml:104
+#: qml/components/AppCard.qml:106
 msgid "Please wait…"
 msgstr "Veuillez patienter…"
 
 # from mainuan-grub-editor
-#: qml/components/AppCard.qml:104
+#: qml/components/AppCard.qml:106
 msgid "Remove"
 msgstr "Supprimer"
 
-#: qml/components/AppCard.qml:118 qml/components/InfoTile.qml:24
+#: qml/components/AppCard.qml:120 qml/components/InfoTile.qml:24
 #: qml/components/ReportDialog.qml:164 qml/components/ReportDialog.qml:302
-#: qml/components/SegmentedChoice.qml:45 qml/components/StatusRow.qml:75
-#: qml/components/StatusRow.qml:93 qml/components/StatusRow.qml:104
+#: qml/components/SegmentedChoice.qml:45 qml/components/StatusRow.qml:79
+#: qml/components/StatusRow.qml:97 qml/components/StatusRow.qml:108
 msgctxt "@info:accessible label and value"
 msgid "%1: %2"
 msgstr "%1 : %2"
