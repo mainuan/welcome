@@ -6,7 +6,7 @@
 
 Os controles são Qt Quick Controls/Kirigami, têm foco nativo, nomes acessíveis nos botões e não dependem apenas de cor para os estados principais. A navegação usa botões reais, o player possui controles de play/pause, seek e volume, e itens indisponíveis ficam com texto explicativo.
 
-O idioma inicial está em português do Brasil. A camada de tradução completa com `qsTr`/TS ainda é uma pendência objetiva: as strings da primeira migração continuam literais em QML/C++. Antes de publicar traduções adicionais, deve-se extrair as strings com `lupdate`, criar `i18n/mainuan-welcome_pt_BR.ts` e substituir mensagens de backend por `tr()`.
+A interface usa KI18n com msgid em inglês e o catálogo `po/pt_BR.po`; veja [i18n/README.md](i18n/README.md). (O plano antigo com `qsTr`/TS foi substituído.)
 
 ## Revisão necessária em sessão real
 
