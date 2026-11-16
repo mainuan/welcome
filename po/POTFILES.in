@@ -1,0 +1,31 @@
+# Files with translatable strings, relative to the repository root.
+# Optional [Language] prefix: [C++] [JavaScript] [Desktop] [ITS].
+src/main.cpp
+src/models/ApplicationModel.cpp
+src/models/LayoutModel.cpp
+src/models/VideoModel.cpp
+src/services/AccentProfile.cpp
+src/services/InstallService.cpp
+src/services/LayoutService.cpp
+src/services/PackageService.cpp
+src/services/StartupPreference.cpp
+src/services/SystemReportService.cpp
+src/services/SystemService.cpp
+src/services/UserAvatar.cpp
+qml/components/AppCard.qml
+qml/components/InfoTile.qml
+qml/components/InstallDialog.qml
+qml/components/ReportDialog.qml
+qml/components/SegmentedChoice.qml
+qml/components/StatusRow.qml
+qml/Main.qml
+qml/pages/AboutPage.qml
+qml/pages/AppearancePage.qml
+qml/pages/AppsPage.qml
+qml/pages/ContributePage.qml
+qml/pages/HomePage.qml
+qml/pages/TutorialsPage.qml
+rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in
+rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in
+rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in
+rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in

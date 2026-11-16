@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- Lets xgettext and msgfmt find the ITS rules for the build templates
+     (*.in) as well as for the generated files. Used through GETTEXTDATADIRS. -->
+<locatingRules>
+  <locatingRule name="polkit policy" pattern="*.policy.in">
+    <documentRule localName="policyconfig" target="mainuan-polkit.its"/>
+  </locatingRule>
+  <locatingRule name="polkit policy" pattern="*.policy">
+    <documentRule localName="policyconfig" target="mainuan-polkit.its"/>
+  </locatingRule>
+  <locatingRule name="AppStream metainfo" pattern="*.metainfo.xml.in">
+    <documentRule localName="component" target="mainuan-metainfo.its"/>
+  </locatingRule>
+  <locatingRule name="AppStream metainfo" pattern="*.metainfo.xml">
+    <documentRule localName="component" target="mainuan-metainfo.its"/>
+  </locatingRule>
+</locatingRules>
