@@ -35,6 +35,8 @@ class SystemService final : public QObject
     Q_PROPERTY(QString pixQrSource READ pixQrSource NOTIFY pixKeyChanged)
     Q_PROPERTY(bool pixQrIsPayload READ pixQrIsPayload NOTIFY pixKeyChanged)
     Q_PROPERTY(QString firewallStatus READ firewallStatus NOTIFY diagnosticsChanged)
+    // Complete sentence for the firewall row ("startup: active"); empty when unknown.
+    Q_PROPERTY(QString firewallStartupNote READ firewallStartupNote NOTIFY diagnosticsChanged)
     Q_PROPERTY(QString driversStatus READ driversStatus NOTIFY diagnosticsChanged)
     Q_PROPERTY(bool driversAvailable READ driversAvailable NOTIFY diagnosticsChanged)
     Q_PROPERTY(QString lastMessage READ lastMessage NOTIFY lastMessageChanged)
@@ -63,6 +65,7 @@ public:
     QString pixQrSource() const;
     bool pixQrIsPayload() const;
     QString firewallStatus() const;
+    QString firewallStartupNote() const;
     QString driversStatus() const;
     bool driversAvailable() const;
     QString lastMessage() const;
@@ -148,6 +151,7 @@ private:
     QString m_pixPayload;
     QString m_pixQrSource;
     QString m_firewallStatus;
+    QString m_firewallStartupNote;
     QString m_driversStatus;
     QString m_lastMessage;
     bool m_lastMessageIsError = false;

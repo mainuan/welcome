@@ -49,7 +49,7 @@ Kirigami.Page {
             Layout.fillWidth: true
             text: page.pkgService.lastMessage
             // Must match the prefix PackageService puts on failure messages.
-            color: page.pkgService.lastMessage.indexOf(i18nc("prefix of a failure message", "Failed:")) === 0 ? "#c94444" : page.mutedColor
+            color: page.pkgService.lastMessageIsError ? "#c94444" : page.mutedColor
             wrapMode: Text.WordWrap
         }
 

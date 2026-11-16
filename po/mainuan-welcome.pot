@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 11:40-0300\n"
+"POT-Creation-Date: 2026-11-16 11:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -491,11 +491,6 @@ msgid ""
 "the online services remain independent of Flatpak."
 msgstr ""
 
-#: qml/pages/AppsPage.qml:52
-msgctxt "prefix of a failure message"
-msgid "Failed:"
-msgstr ""
-
 #: qml/pages/ContributePage.qml:35
 msgid ""
 "Mainuan is made by its community. You can help with a donation, with code or "
@@ -528,7 +523,7 @@ msgstr ""
 msgid "Copy Pix Key"
 msgstr ""
 
-#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1106
+#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
 #, kde-format
 msgid "Pix key copied."
 msgstr ""
@@ -668,17 +663,12 @@ msgstr ""
 msgid "Control network connections with UFW and the KDE Plasma module."
 msgstr ""
 
-#. i18n: %1 is the firewall boot preference, e.g. "enabled"/"disabled"
-#: qml/pages/HomePage.qml:150
-msgid "startup: %1"
-msgstr ""
-
 #. i18n: %1 is the session type (wayland/x11), %2 the Plasma version
-#: qml/pages/HomePage.qml:157
+#: qml/pages/HomePage.qml:156
 msgid "Session: %1  ·  %2"
 msgstr ""
 
-#: qml/pages/HomePage.qml:158
+#: qml/pages/HomePage.qml:157
 msgid "Session: %1"
 msgstr ""
 
@@ -1639,44 +1629,44 @@ msgstr ""
 msgid "Could not restore the previous layout."
 msgstr ""
 
-#: src/services/PackageService.cpp:105 src/services/PackageService.cpp:155
+#: src/services/PackageService.cpp:111 src/services/PackageService.cpp:161
 #, kde-format
 msgid "Flatpak is not installed."
 msgstr ""
 
-#: src/services/PackageService.cpp:134
+#: src/services/PackageService.cpp:140
 #, kde-format
 msgid "Could not query Flatpak."
 msgstr ""
 
-#: src/services/PackageService.cpp:145
+#: src/services/PackageService.cpp:151
 #, kde-format
 msgid "This application is not in the allowed list."
 msgstr ""
 
-#: src/services/PackageService.cpp:149
+#: src/services/PackageService.cpp:155
 #, kde-format
 msgid "Another Flatpak operation is in progress."
 msgstr ""
 
-#: src/services/PackageService.cpp:170
+#: src/services/PackageService.cpp:176
 #, kde-format
 msgctxt "@info:status %1 is a Flatpak application ID"
 msgid "Removing %1…"
 msgstr ""
 
-#: src/services/PackageService.cpp:176
+#: src/services/PackageService.cpp:182
 #, kde-format
 msgid "Removal finished."
 msgstr ""
 
-#: src/services/PackageService.cpp:178
+#: src/services/PackageService.cpp:184
 #, kde-format
 msgctxt "@info:status %1 is the error output of Flatpak"
 msgid "Failed: %1"
 msgstr ""
 
-#: src/services/PackageService.cpp:189
+#: src/services/PackageService.cpp:195
 #, kde-format
 msgid "Could not start Flatpak."
 msgstr ""
@@ -2118,308 +2108,320 @@ msgid "The %1 decoration is not installed or its resources are incomplete."
 msgstr ""
 
 #. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
-#: src/services/SystemService.cpp:475
+#: src/services/SystemService.cpp:480
 #, kde-format
 msgid "Driver Manager available"
 msgstr ""
 
-#: src/services/SystemService.cpp:476
+#: src/services/SystemService.cpp:481
 #, kde-format
 msgid "Driver Manager not installed"
 msgstr ""
 
-#: src/services/SystemService.cpp:483 src/services/SystemService.cpp:489
-#, kde-format
-msgctxt "firewall state at boot"
-msgid "Inactive"
-msgstr ""
-
-#: src/services/SystemService.cpp:488
+#: src/services/SystemService.cpp:497
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Active"
 msgstr ""
 
+#: src/services/SystemService.cpp:498
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Inactive"
+msgstr ""
+
+#: src/services/SystemService.cpp:501
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: active"
+msgstr ""
+
+#: src/services/SystemService.cpp:502
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: inactive"
+msgstr ""
+
 #. i18n: %1 is an error message shown in the page banner.
-#: src/services/SystemService.cpp:527
+#: src/services/SystemService.cpp:538
 #, kde-format
 msgid "Error: %1"
 msgstr ""
 
-#: src/services/SystemService.cpp:546
+#: src/services/SystemService.cpp:557
 #, kde-format
 msgid "Invalid theme."
 msgstr ""
 
-#: src/services/SystemService.cpp:551 src/services/SystemService.cpp:601
-#: src/services/SystemService.cpp:847
+#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
+#: src/services/SystemService.cpp:858
 #, kde-format
 msgid "Wait for the current operation to finish."
 msgstr ""
 
-#: src/services/SystemService.cpp:560 src/services/SystemService.cpp:589
+#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
 #, kde-format
 msgid ""
 "The current external color scheme has no known variant. Select a Mainuan "
 "color first."
 msgstr ""
 
-#: src/services/SystemService.cpp:567
+#: src/services/SystemService.cpp:578
 #, kde-format
 msgid "Dark theme applied."
 msgstr ""
 
-#: src/services/SystemService.cpp:568
+#: src/services/SystemService.cpp:579
 #, kde-format
 msgid "Light theme applied."
 msgstr ""
 
 #. i18n: %1 is an accent color name (Brown, Cyan…).
-#: src/services/SystemService.cpp:585
+#: src/services/SystemService.cpp:596
 #, kde-format
 msgid "Theme and %1 color applied."
 msgstr ""
 
-#: src/services/SystemService.cpp:597
+#: src/services/SystemService.cpp:608
 #, kde-format
 msgid "Invalid accent color."
 msgstr ""
 
-#: src/services/SystemService.cpp:607
+#: src/services/SystemService.cpp:618
 #, kde-format
 msgid "Applying %1 color…"
 msgstr ""
 
-#: src/services/SystemService.cpp:618
+#: src/services/SystemService.cpp:629
 #, kde-format
 msgid "%1 color, icons, wallpaper and avatar applied."
 msgstr ""
 
-#: src/services/SystemService.cpp:629
+#: src/services/SystemService.cpp:640
 #, kde-format
 msgid "Color scheme %1.colors is missing or unreadable."
 msgstr ""
 
-#: src/services/SystemService.cpp:635
+#: src/services/SystemService.cpp:646
 #, kde-format
 msgid "Color scheme %1.colors is invalid."
 msgstr ""
 
-#: src/services/SystemService.cpp:640
+#: src/services/SystemService.cpp:651
 #, kde-format
 msgid "plasma-apply-colorscheme is not available."
 msgstr ""
 
-#: src/services/SystemService.cpp:647
+#: src/services/SystemService.cpp:658
 #, kde-format
 msgid "Plasma did not recognize the %1.colors color scheme."
 msgstr ""
 
-#: src/services/SystemService.cpp:693
+#: src/services/SystemService.cpp:704
 #, kde-format
 msgid "Could not prepare the KDE color configuration."
 msgstr ""
 
-#: src/services/SystemService.cpp:704
+#: src/services/SystemService.cpp:715
 #, kde-format
 msgid "Plasma did not confirm the %1 color scheme without a color override."
 msgstr ""
 
 #. i18n: Item of a list of failed adjustments (lowercase, no final period).
-#: src/services/SystemService.cpp:718
+#: src/services/SystemService.cpp:729
 #, kde-format
 msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
 msgstr ""
 
-#: src/services/SystemService.cpp:721
+#: src/services/SystemService.cpp:732
 #, kde-format
 msgctxt "failed adjustment list item; %1 is an icon theme"
 msgid "icons %1"
 msgstr ""
 
-#: src/services/SystemService.cpp:726
+#: src/services/SystemService.cpp:737
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper %1 missing"
 msgstr ""
 
-#: src/services/SystemService.cpp:728 src/services/SystemService.cpp:996
-#: src/services/SystemService.cpp:1011
+#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
+#: src/services/SystemService.cpp:1022
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper"
 msgstr ""
 
-#: src/services/SystemService.cpp:733 src/services/SystemService.cpp:1001
+#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "Plasma did not confirm the %1 icons"
 msgstr ""
 
-#: src/services/SystemService.cpp:747
+#: src/services/SystemService.cpp:758
 #, kde-format
 msgctxt "failed adjustment list item; %1 is the avatar error"
 msgid "avatar: %1"
 msgstr ""
 
-#: src/services/SystemService.cpp:753
+#: src/services/SystemService.cpp:764
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "color scheme changed during the operation; avatar preserved"
 msgstr ""
 
-#: src/services/SystemService.cpp:768
+#: src/services/SystemService.cpp:779
 #, kde-format
 msgid "Could not complete all adjustments: %1."
 msgstr ""
 
-#: src/services/SystemService.cpp:769
+#: src/services/SystemService.cpp:780
 #, kde-format
 msgctxt "separator between failed adjustment list items"
 msgid "; "
 msgstr ""
 
-#: src/services/SystemService.cpp:784
+#: src/services/SystemService.cpp:795
 #, kde-format
 msgid "Could not communicate with KWin to update the window decoration."
 msgstr ""
 
-#: src/services/SystemService.cpp:793 src/services/SystemService.cpp:800
-#: src/services/SystemService.cpp:819
+#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
+#: src/services/SystemService.cpp:830
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "could not restore the previous window decoration"
 msgstr ""
 
-#: src/services/SystemService.cpp:810
+#: src/services/SystemService.cpp:821
 #, kde-format
 msgid "Could not save the requested window decoration in KWin."
 msgstr ""
 
-#: src/services/SystemService.cpp:820
+#: src/services/SystemService.cpp:831
 #, kde-format
 msgid ""
 "The final window decoration configuration was changed during the operation."
 msgstr ""
 
-#: src/services/SystemService.cpp:843
+#: src/services/SystemService.cpp:854
 #, kde-format
 msgid "Invalid visual style."
 msgstr ""
 
-#: src/services/SystemService.cpp:851
+#: src/services/SystemService.cpp:862
 #, kde-format
 msgid "%1 style applied."
 msgstr ""
 
-#: src/services/SystemService.cpp:884
+#: src/services/SystemService.cpp:895
 #, kde-format
 msgid ""
 "This system's Plasma does not provide plasma-apply-lookandfeel; the style "
 "cannot be changed."
 msgstr ""
 
-#: src/services/SystemService.cpp:889
+#: src/services/SystemService.cpp:900
 #, kde-format
 msgid "The %1 style is not installed on this system."
 msgstr ""
 
 #. i18n: %1 is a complete sentence describing the problem.
-#: src/services/SystemService.cpp:900
+#: src/services/SystemService.cpp:911
 #, kde-format
 msgid "%1 Previous appearance preserved."
 msgstr ""
 
-#: src/services/SystemService.cpp:916
+#: src/services/SystemService.cpp:927
 #, kde-format
 msgid "Could not preserve the %1 icon theme. Previous style preserved."
 msgstr ""
 
-#: src/services/SystemService.cpp:920
+#: src/services/SystemService.cpp:931
 #, kde-format
 msgid "Applying %1 style…"
 msgstr ""
 
-#: src/services/SystemService.cpp:937
+#: src/services/SystemService.cpp:948
 #, kde-format
 msgid "Could not apply the %1 style."
 msgstr ""
 
-#: src/services/SystemService.cpp:945
+#: src/services/SystemService.cpp:956
 #, kde-format
 msgid "Plasma did not confirm the %1 style."
 msgstr ""
 
-#: src/services/SystemService.cpp:970 src/services/SystemService.cpp:991
+#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "icons"
 msgstr ""
 
-#: src/services/SystemService.cpp:975
+#: src/services/SystemService.cpp:986
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "cursor"
 msgstr ""
 
-#: src/services/SystemService.cpp:1046
+#: src/services/SystemService.cpp:1057
 #, kde-format
 msgid "Driver Manager is not installed."
 msgstr ""
 
-#: src/services/SystemService.cpp:1050
+#: src/services/SystemService.cpp:1061
 #, kde-format
 msgid "Could not open Driver Manager."
 msgstr ""
 
-#: src/services/SystemService.cpp:1055
+#: src/services/SystemService.cpp:1066
 #, kde-format
 msgid "Unknown action."
 msgstr ""
 
-#: src/services/SystemService.cpp:1064
+#: src/services/SystemService.cpp:1075
 #, kde-format
 msgid "URL blocked for security reasons."
 msgstr ""
 
-#: src/services/SystemService.cpp:1068
+#: src/services/SystemService.cpp:1079
 #, kde-format
 msgid "Requested the web browser to open the page."
 msgstr ""
 
-#: src/services/SystemService.cpp:1069
+#: src/services/SystemService.cpp:1080
 #, kde-format
 msgid "Could not open the URL in the default web browser."
 msgstr ""
 
-#: src/services/SystemService.cpp:1076
+#: src/services/SystemService.cpp:1087
 #, kde-format
 msgid "This application is not allowed to be opened in Discover."
 msgstr ""
 
-#: src/services/SystemService.cpp:1081
+#: src/services/SystemService.cpp:1092
 #, kde-format
 msgid "Discover was not found. Install KDE Discover to open this application."
 msgstr ""
 
-#: src/services/SystemService.cpp:1087
+#: src/services/SystemService.cpp:1098
 #, kde-format
 msgid "Could not open the page in Discover. Try again."
 msgstr ""
 
-#: src/services/SystemService.cpp:1090
+#: src/services/SystemService.cpp:1101
 #, kde-format
 msgid ""
 "Requested Discover to open the page. Confirm the installation in Discover; "
 "if the application is not found, check Flathub and try again."
 msgstr ""
 
-#: src/services/SystemService.cpp:1098
+#: src/services/SystemService.cpp:1109
 #, kde-format
 msgid "No Pix key is configured."
 msgstr ""
 
-#: src/services/SystemService.cpp:1102
+#: src/services/SystemService.cpp:1113
 #, kde-format
 msgid "Clipboard unavailable."
 msgstr ""

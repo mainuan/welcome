@@ -20,6 +20,7 @@ Item {
         property bool driversAvailable: false
         property string driversStatus: driversAvailable ? "Gestão de Drivers disponível" : "Gestão de Drivers não instalada"
         property string firewallStatus: ""
+        property string firewallStartupNote: ""
         property string sessionType: "wayland"
         property string plasmaVersion: ""
         property string lastAction: ""
@@ -111,6 +112,7 @@ Item {
             mockSystem.driversAvailable = false
             mockSystem.lastAction = ""
             mockSystem.firewallStatus = ""
+            mockSystem.firewallStartupNote = ""
         }
         function test_cardsUseProfilesAndPreserveIcons() {
             const profiles = ["freeoffice", "app:com.vivaldi.Vivaldi", "app:app.zen_browser.zen"]
@@ -230,9 +232,9 @@ Item {
             mockInstaller.profiles = {firewall: {state: "installed", canInstall: false}}
             const row = findChild(homePage, "profileRow-firewall")
             compare(row.statusText, "Installed")
-            mockSystem.firewallStatus = "Inactive"
+            mockSystem.firewallStartupNote = "startup: inactive"
             compare(row.statusText, "Installed · startup: inactive")
-            mockSystem.firewallStatus = "Active"
+            mockSystem.firewallStartupNote = "startup: active"
             compare(row.statusText, "Installed · startup: active")
             verify(!/active protection/.test(row.statusText))
         }

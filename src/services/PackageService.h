@@ -11,6 +11,8 @@ class PackageService final : public QObject
     Q_OBJECT
     Q_PROPERTY(bool flatpakAvailable READ flatpakAvailable NOTIFY flatpakAvailableChanged)
     Q_PROPERTY(QString lastMessage READ lastMessage NOTIFY lastMessageChanged)
+    // True when lastMessage reports a failed operation (the UI must not parse translated text).
+    Q_PROPERTY(bool lastMessageIsError READ lastMessageIsError NOTIFY lastMessageChanged)
     Q_PROPERTY(QString currentApplication READ currentApplication NOTIFY operationChanged)
     Q_PROPERTY(bool busy READ busy NOTIFY operationChanged)
 
@@ -20,6 +22,7 @@ public:
 
     bool flatpakAvailable() const;
     QString lastMessage() const;
+    bool lastMessageIsError() const;
     QString currentApplication() const;
     bool busy() const;
 
@@ -43,7 +46,7 @@ signals:
     void operationFinished(const QString &applicationId, bool success, const QString &message);
 
 private:
-    void setMessage(const QString &message);
+    void setMessage(const QString &message, bool isError = false);
 
     QProcess *m_process = nullptr;
     QPointer<QProcess> m_refreshProcess;
@@ -51,6 +54,7 @@ private:
     QString m_flatpakOverride;
     QHash<QString, QString> m_installations;
     QString m_lastMessage;
+    bool m_lastMessageIsError = false;
     QString m_currentApplication;
     bool m_flatpakAvailable = false;
 };

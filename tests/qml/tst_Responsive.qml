@@ -25,7 +25,8 @@ Item {
         property var installedVisualStyles: ["blur", "glass", "solid"]
         property string driversStatus: "Gestão de Drivers não instalada"
         property bool driversAvailable: false
-        property string firewallStatus: "Inativo"
+        property string firewallStatus: "Inactive"
+        property string firewallStartupNote: "startup: inactive"
         property string sessionType: "wayland"
         property string plasmaVersion: "plasmashell 6.6"
         property string logoSource: ""

@@ -331,6 +331,11 @@ QString SystemService::firewallStatus() const
     return m_firewallStatus;
 }
 
+QString SystemService::firewallStartupNote() const
+{
+    return m_firewallStartupNote;
+}
+
 QString SystemService::driversStatus() const
 {
     return m_driversStatus;
@@ -479,16 +484,22 @@ void SystemService::refreshDiagnostics()
     QFile ufwConfig(QStringLiteral("/etc/ufw/ufw.conf"));
     if (!ufwConfig.open(QIODevice::ReadOnly | QIODevice::Text)) {
         m_firewallStatus.clear();
+        m_firewallStartupNote.clear();
     } else {
-        m_firewallStatus = i18nc("firewall state at boot", "Inactive");
+        bool enabled = false;
         while (!ufwConfig.atEnd()) {
             const QString line = QString::fromUtf8(ufwConfig.readLine()).trimmed();
             if (line.startsWith(QStringLiteral("ENABLED="))) {
                 const QString value = line.mid(8).remove(QLatin1Char('"')).trimmed().toLower();
-                m_firewallStatus = value == QStringLiteral("yes") ? i18nc("firewall state at boot", "Active")
-                                                                 : i18nc("firewall state at boot", "Inactive");
+                enabled = value == QStringLiteral("yes");
             }
         }
+        m_firewallStatus = enabled ? i18nc("firewall state at boot", "Active")
+                                   : i18nc("firewall state at boot", "Inactive");
+        // Whole sentences: lower-casing a translated word breaks languages
+        // such as German (nouns are capitalised) or scripts without case.
+        m_firewallStartupNote = enabled ? i18nc("@info firewall preference at boot", "startup: active")
+                                        : i18nc("@info firewall preference at boot", "startup: inactive");
     }
     emit diagnosticsChanged();
 }

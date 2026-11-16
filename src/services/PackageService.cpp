@@ -76,10 +76,16 @@ QString PackageService::installation(const QString &applicationId) const
     return m_installations.value(applicationId);
 }
 
-void PackageService::setMessage(const QString &message)
+bool PackageService::lastMessageIsError() const
 {
-    if (message != m_lastMessage) {
+    return m_lastMessageIsError;
+}
+
+void PackageService::setMessage(const QString &message, bool isError)
+{
+    if (message != m_lastMessage || isError != m_lastMessageIsError) {
         m_lastMessage = message;
+        m_lastMessageIsError = isError;
         emit lastMessageChanged();
     }
 }
@@ -175,7 +181,7 @@ bool PackageService::remove(const QString &applicationId)
         const bool success = exitCode == 0;
         const QString message = success ? i18n("Removal finished.")
                                         : (stderrText.isEmpty() ? stdoutText : stderrText);
-        setMessage(success ? message : i18nc("@info:status %1 is the error output of Flatpak", "Failed: %1", message));
+        setMessage(success ? message : i18nc("@info:status %1 is the error output of Flatpak", "Failed: %1", message), !success);
         const QString completedApplicationId = m_currentApplication;
         m_process->deleteLater();
         m_process = nullptr;

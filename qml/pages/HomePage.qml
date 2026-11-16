@@ -146,8 +146,7 @@ Kirigami.Page {
             iconName: "security-medium"
             configureText: i18nc("@action:button", "Configure")
             // The service reads ufw.conf's boot preference, not live protection.
-            // i18n: %1 is the firewall boot preference, e.g. "enabled"/"disabled"
-            installedNote: page.system.firewallStatus.length > 0 ? i18n("startup: %1", page.system.firewallStatus.toLowerCase()) : ""
+            installedNote: page.system.firewallStartupNote
         }
 
         Controls.Label {
