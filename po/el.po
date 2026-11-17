@@ -1,0 +1,2704 @@
+# Greek translations for mainuan-welcome package.
+# Copyright (C) 2026 Mainuan
+# This file is distributed under the same license as the mainuan-welcome package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mainuan-welcome\n"
+"Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"PO-Revision-Date: 2026-11-16 12:18-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: el <https://github.com/mainuan>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: qml/Main.qml:13
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — Καλωσόρισμα"
+
+#: qml/Main.qml:42
+msgid "Wait for the appearance changes to finish before closing the Welcome."
+msgstr ""
+"Περιμένετε να ολοκληρωθούν οι αλλαγές εμφάνισης πριν κλείσετε την εφαρμογή "
+"καλωσορίσματος."
+
+#: qml/Main.qml:45
+msgid ""
+"Wait for the layout to finish applying or restoring before closing the "
+"Welcome."
+msgstr ""
+"Περιμένετε να ολοκληρωθεί η εφαρμογή ή η επαναφορά της διάταξης πριν "
+"κλείσετε την εφαρμογή καλωσορίσματος."
+
+#: qml/Main.qml:81 qml/pages/HomePage.qml:23
+msgctxt "@title navigation page"
+msgid "Home"
+msgstr "Αρχική"
+
+#: qml/Main.qml:82 qml/pages/AppearancePage.qml:23
+#: qml/pages/AppearancePage.qml:38
+msgctxt "@title navigation page"
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+#: qml/Main.qml:83 qml/Main.qml:207
+msgctxt "@title navigation page"
+msgid "Office"
+msgstr "Γραφείο"
+
+#: qml/Main.qml:84 qml/Main.qml:208
+msgctxt "@title navigation page"
+msgid "Browsers"
+msgstr "Περιηγητές"
+
+#: qml/Main.qml:85 qml/pages/TutorialsPage.qml:23
+msgctxt "@title navigation page"
+msgid "Tutorials"
+msgstr "Οδηγοί χρήσης"
+
+#: qml/Main.qml:86 qml/pages/AboutPage.qml:22
+msgctxt "@title navigation page"
+msgid "About"
+msgstr "Σχετικά"
+
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
+#: qml/pages/ContributePage.qml:32
+msgctxt "@title navigation page"
+msgid "Contribute"
+msgstr "Συνεισφορά"
+
+#: qml/Main.qml:184
+msgid "Show this screen at system startup"
+msgstr "Εμφάνιση αυτής της οθόνης κατά την εκκίνηση του συστήματος"
+
+#: qml/Main.qml:196
+msgid "Opens this screen automatically when you log in to your session"
+msgstr "Ανοίγει αυτόματα αυτή την οθόνη όταν συνδέεστε στη συνεδρία σας"
+
+#: qml/Main.qml:207
+msgid "Install productivity tools or open online services."
+msgstr ""
+"Εγκαταστήστε εργαλεία παραγωγικότητας ή ανοίξτε διαδικτυακές υπηρεσίες."
+
+#: qml/Main.qml:208
+msgid "Choose your preferred browser to surf the web."
+msgstr "Επιλέξτε τον προτιμώμενο περιηγητή σας για να περιηγηθείτε στον ιστό."
+
+#. i18n: AppCard.qml compares this text with its own i18n("Available"); keep both identical.
+#: qml/components/AppCard.qml:92 src/models/ApplicationModel.cpp:104
+#, kde-format
+msgid "Available"
+msgstr "Διαθέσιμο"
+
+#: qml/components/AppCard.qml:104 qml/components/InstallDialog.qml:352
+msgid "Open"
+msgstr "Άνοιγμα"
+
+#: qml/components/AppCard.qml:105
+msgid "Installed"
+msgstr "Εγκατεστημένος"
+
+#: qml/components/AppCard.qml:106 qml/components/InstallDialog.qml:339
+msgid "Install"
+msgstr "Εγκατάσταση"
+
+#: qml/components/AppCard.qml:106
+msgid "Please wait…"
+msgstr "Παρακαλώ περιμένετε…"
+
+#: qml/components/AppCard.qml:106
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+#: qml/components/AppCard.qml:120 qml/components/InfoTile.qml:24
+#: qml/components/ReportDialog.qml:164 qml/components/ReportDialog.qml:302
+#: qml/components/SegmentedChoice.qml:45 qml/components/StatusRow.qml:79
+#: qml/components/StatusRow.qml:97 qml/components/StatusRow.qml:108
+msgctxt "@info:accessible label and value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/components/InstallDialog.qml:186
+msgid "Installation"
+msgstr "Εγκατάσταση"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install %1"
+msgstr "Εγκατάσταση του %1"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install components"
+msgstr "Εγκατάσταση στοιχείων"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing %1"
+msgstr "Εγκατάσταση του %1"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing components"
+msgstr "Εγκατάσταση στοιχείων σε εξέλιξη"
+
+#: qml/components/InstallDialog.qml:198
+msgid "Installation completed successfully."
+msgstr "Η εγκατάσταση ολοκληρώθηκε με επιτυχία."
+
+#: qml/components/InstallDialog.qml:208
+msgid "Source: %1"
+msgstr "Πηγή: %1"
+
+#: qml/components/InstallDialog.qml:245
+msgid "Installation progress"
+msgstr "Πρόοδος εγκατάστασης"
+
+#: qml/components/InstallDialog.qml:246
+msgid "In progress"
+msgstr "Σε εξέλιξη"
+
+#: qml/components/InstallDialog.qml:247 qml/components/InstallDialog.qml:254
+msgctxt "@info progress percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/components/InstallDialog.qml:280
+msgid "For security reasons, the installation cannot be cancelled."
+msgstr "Για λόγους ασφαλείας, η εγκατάσταση δεν μπορεί να ακυρωθεί."
+
+#: qml/components/InstallDialog.qml:293
+msgid "Hide Details"
+msgstr "Απόκρυψη λεπτομερειών"
+
+#: qml/components/InstallDialog.qml:293
+msgid "Show Details"
+msgstr "Εμφάνιση λεπτομερειών"
+
+#: qml/components/InstallDialog.qml:296
+msgid "Shows the technical output of the installation"
+msgstr "Εμφανίζει την τεχνική έξοδο της εγκατάστασης"
+
+#: qml/components/InstallDialog.qml:325
+msgid "Technical details of the installation"
+msgstr "Τεχνικές λεπτομέρειες της εγκατάστασης"
+
+#: qml/components/InstallDialog.qml:345
+msgid "Install FreeOffice from SoftMaker"
+msgstr "Εγκατάσταση του FreeOffice από τη SoftMaker"
+
+#: qml/components/InstallDialog.qml:363
+msgid "Try Again"
+msgstr "Δοκιμή ξανά"
+
+#: qml/components/InstallDialog.qml:375
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: qml/components/InstallDialog.qml:375 qml/components/ReportDialog.qml:206
+msgid "Close"
+msgstr "Κλείσιμο"
+
+#: qml/components/ReportDialog.qml:75
+msgid "Save System Report"
+msgstr "Αποθήκευση αναφοράς συστήματος"
+
+#: qml/components/ReportDialog.qml:78
+msgid "Text (*.txt)"
+msgstr "Κείμενο (*.txt)"
+
+#: qml/components/ReportDialog.qml:80
+msgid "Report saved."
+msgstr "Η αναφορά αποθηκεύτηκε."
+
+#: qml/components/ReportDialog.qml:81
+msgid "Could not save the report."
+msgstr "Δεν ήταν δυνατή η αποθήκευση της αναφοράς."
+
+#: qml/components/ReportDialog.qml:87 qml/components/ReportDialog.qml:141
+#: qml/pages/AboutPage.qml:121
+msgid "System Report"
+msgstr "Αναφορά συστήματος"
+
+#: qml/components/ReportDialog.qml:136
+msgid "System summary"
+msgstr "Σύνοψη συστήματος"
+
+#: qml/components/ReportDialog.qml:146
+msgctxt "@label system report summary"
+msgid "Desktop"
+msgstr "Επιφάνεια εργασίας"
+
+#: qml/components/ReportDialog.qml:147
+msgctxt "@label system report summary"
+msgid "Kernel"
+msgstr "Πυρήνας"
+
+#: qml/components/ReportDialog.qml:148
+msgctxt "@label system report summary"
+msgid "CPU"
+msgstr "Επεξεργαστής"
+
+#: qml/components/ReportDialog.qml:149
+msgctxt "@label system report summary"
+msgid "GPU"
+msgstr "Κάρτα γραφικών"
+
+#: qml/components/ReportDialog.qml:150
+msgctxt "@label system report summary"
+msgid "Memory"
+msgstr "Μνήμη"
+
+#: qml/components/ReportDialog.qml:151
+msgctxt "@label system report summary"
+msgid "Uptime"
+msgstr "Χρόνος λειτουργίας"
+
+#: qml/components/ReportDialog.qml:174
+msgid "Copy Report"
+msgstr "Αντιγραφή αναφοράς"
+
+#: qml/components/ReportDialog.qml:179
+msgid "Report copied."
+msgstr "Η αναφορά αντιγράφηκε."
+
+#: qml/components/ReportDialog.qml:180
+msgid "Could not copy the report."
+msgstr "Δεν ήταν δυνατή η αντιγραφή της αναφοράς."
+
+#: qml/components/ReportDialog.qml:184
+msgid "Save Report"
+msgstr "Αποθήκευση αναφοράς"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refresh"
+msgstr "Ανανέωση"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refreshing…"
+msgstr "Ανανέωση…"
+
+#: qml/pages/AboutPage.qml:81
+msgid "Mainuan logo"
+msgstr "Λογότυπο του Mainuan"
+
+#: qml/pages/AboutPage.qml:125
+msgid "Opens the hardware and software information for technical support"
+msgstr "Ανοίγει τις πληροφορίες υλικού και λογισμικού για τεχνική υποστήριξη"
+
+#: qml/pages/AboutPage.qml:128
+msgid "Repository"
+msgstr "Αποθετήριο"
+
+#: qml/pages/AboutPage.qml:139
+msgid "This Computer"
+msgstr "Αυτός ο υπολογιστής"
+
+# from mainuan-gestao-drivers
+#: qml/pages/AboutPage.qml:154
+msgid "Processor"
+msgstr "Επεξεργαστής"
+
+#: qml/pages/AboutPage.qml:155
+msgid "Graphics"
+msgstr "Γραφικά"
+
+#: qml/pages/AboutPage.qml:156
+msgid "Memory in use"
+msgstr "Μνήμη σε χρήση"
+
+#: qml/pages/AboutPage.qml:157
+msgid "Storage (system)"
+msgstr "Αποθηκευτικός χώρος (σύστημα)"
+
+#: qml/pages/AboutPage.qml:158
+msgctxt "@label installation date"
+msgid "Installation"
+msgstr "Εγκατάσταση"
+
+#: qml/pages/AboutPage.qml:158
+msgid "Installation (estimated)"
+msgstr "Εγκατάσταση (κατ’ εκτίμηση)"
+
+#: qml/pages/AboutPage.qml:159
+msgid "Uptime"
+msgstr "Χρόνος λειτουργίας"
+
+#: qml/pages/AboutPage.qml:178
+msgid "Credits"
+msgstr "Εύσημα"
+
+#: qml/pages/AboutPage.qml:189
+msgid "Desktop environment and integration components."
+msgstr "Περιβάλλον επιφάνειας εργασίας και στοιχεία ενοποίησης."
+
+#: qml/pages/AboutPage.qml:201
+msgid "Distribution base and package repositories."
+msgstr "Βάση της διανομής και αποθετήρια πακέτων."
+
+#: qml/pages/AboutPage.qml:210
+msgid ""
+"Free software. The license and the project history are in the repository."
+msgstr ""
+"Ελεύθερο λογισμικό. Η άδεια χρήσης και το ιστορικό του έργου βρίσκονται στο "
+"αποθετήριο."
+
+#: qml/pages/AppearancePage.qml:41
+msgid "Customize the colors, transparency and arrangement of your desktop."
+msgstr ""
+"Προσαρμόστε τα χρώματα, τη διαφάνεια και τη διάταξη της επιφάνειας εργασίας "
+"σας."
+
+#: qml/pages/AppearancePage.qml:57
+msgid "System Appearance"
+msgstr "Εμφάνιση συστήματος"
+
+#: qml/pages/AppearancePage.qml:79 qml/pages/AppearancePage.qml:89
+msgid "Visual Style"
+msgstr "Οπτικό στυλ"
+
+#: qml/pages/AppearancePage.qml:81
+msgid ""
+"Changes the Plasma style and keeps the Mainuan color and your selected icons."
+msgstr ""
+"Αλλάζει το στυλ Plasma και διατηρεί το χρώμα του Mainuan και τα εικονίδια "
+"που έχετε επιλέξει."
+
+#: qml/pages/AppearancePage.qml:82
+msgid "Available only on KDE Plasma."
+msgstr "Διαθέσιμο μόνο στο KDE Plasma."
+
+#: qml/pages/AppearancePage.qml:93
+msgctxt "@option visual style"
+msgid "Blurred"
+msgstr "Θολωμένο"
+
+#: qml/pages/AppearancePage.qml:93
+msgid "Dream theme: translucent panels with blur"
+msgstr "Θέμα Dream: ημιδιαφανείς πίνακες με θόλωση"
+
+#: qml/pages/AppearancePage.qml:94
+msgctxt "@option visual style"
+msgid "Glass"
+msgstr "Γυάλινο"
+
+#: qml/pages/AppearancePage.qml:94
+msgid "Tahoe theme: light panels with a glass effect"
+msgstr "Θέμα Tahoe: ανοιχτόχρωμοι πίνακες με εφέ γυαλιού"
+
+#: qml/pages/AppearancePage.qml:95
+msgid "Breeze theme: the default KDE look, without transparency"
+msgstr "Θέμα Breeze: η προεπιλεγμένη εμφάνιση του KDE, χωρίς διαφάνεια"
+
+#: qml/pages/AppearancePage.qml:95
+msgctxt "@option visual style"
+msgid "Solid"
+msgstr "Συμπαγές"
+
+#: qml/pages/AppearancePage.qml:105 qml/pages/AppearancePage.qml:112
+msgid "System Theme"
+msgstr "Θέμα συστήματος"
+
+#: qml/pages/AppearancePage.qml:106
+msgid "Light or dark colors across the whole system."
+msgstr "Ανοιχτά ή σκούρα χρώματα σε όλο το σύστημα."
+
+#: qml/pages/AppearancePage.qml:115
+msgctxt "@option color theme"
+msgid "Light"
+msgstr "Ανοιχτό"
+
+#: qml/pages/AppearancePage.qml:116
+msgctxt "@option color theme"
+msgid "Dark"
+msgstr "Σκούρο"
+
+#: qml/pages/AppearancePage.qml:126 qml/pages/AppearancePage.qml:134
+msgid "Accent Color"
+msgstr "Χρώμα έμφασης"
+
+#: qml/pages/AppearancePage.qml:127
+msgid ""
+"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
+"Keeps the choice when you change style or theme."
+msgstr ""
+"Εφαρμόζει τον χρωματικό συνδυασμό του KDE, τα εικονίδια Kora, την ταπετσαρία "
+"και το άβαταρ. Διατηρεί την επιλογή όταν αλλάζετε στυλ ή θέμα."
+
+#. i18n: %1 is the accent color name
+#: qml/pages/AppearancePage.qml:158
+msgid "Accent color %1"
+msgstr "Χρώμα έμφασης %1"
+
+#: qml/pages/AppearancePage.qml:191
+msgid "Desktop Layout"
+msgstr "Διάταξη επιφάνειας εργασίας"
+
+#: qml/pages/AppearancePage.qml:200
+msgid ""
+"Choose how the panels are placed on the screen. Before each change the "
+"Welcome keeps a copy of the current layout."
+msgstr ""
+"Επιλέξτε πώς τοποθετούνται οι πίνακες στην οθόνη. Πριν από κάθε αλλαγή, η "
+"εφαρμογή καλωσορίσματος κρατά αντίγραφο της τρέχουσας διάταξης."
+
+#: qml/pages/AppearancePage.qml:201
+msgid "Layouts can only be applied inside a KDE Plasma session."
+msgstr "Οι διατάξεις μπορούν να εφαρμοστούν μόνο μέσα σε συνεδρία KDE Plasma."
+
+#: qml/pages/AppearancePage.qml:278
+msgctxt "@info layout status"
+msgid "In use"
+msgstr "Σε χρήση"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button layout already applied"
+msgid "Applied"
+msgstr "Εφαρμόστηκε"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button"
+msgid "Apply"
+msgstr "Εφαρμογή"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Apply layout %1"
+msgstr "Εφαρμογή της διάταξης %1"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Layout in use: %1"
+msgstr "Διάταξη σε χρήση: %1"
+
+#: qml/pages/AppearancePage.qml:315
+msgid ""
+"Returns to the layout that was in use before the last change. Plasma "
+"restarts for a few seconds."
+msgstr ""
+"Επιστρέφει στη διάταξη που χρησιμοποιούνταν πριν από την τελευταία αλλαγή. "
+"Το Plasma επανεκκινείται για λίγα δευτερόλεπτα."
+
+#: qml/pages/AppearancePage.qml:321
+msgid "Restore Previous Layout"
+msgstr "Επαναφορά προηγούμενης διάταξης"
+
+#: qml/pages/AppearancePage.qml:334
+msgid "Restore previous layout?"
+msgstr "Επαναφορά της προηγούμενης διάταξης;"
+
+#: qml/pages/AppearancePage.qml:335
+msgid ""
+"The panels go back to how they were before the last layout change. Plasma "
+"will restart for a few seconds."
+msgstr ""
+"Οι πίνακες επιστρέφουν όπως ήταν πριν από την τελευταία αλλαγή διάταξης. Το "
+"Plasma θα επανεκκινηθεί για λίγα δευτερόλεπτα."
+
+#: qml/pages/AppearancePage.qml:339
+msgctxt "@action:button"
+msgid "Restore"
+msgstr "Επαναφορά"
+
+#: qml/pages/AppearancePage.qml:347
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: qml/pages/AppsPage.qml:43
+msgid ""
+"Flatpak was not found. Flatpak applications are unavailable. FreeOffice and "
+"the online services remain independent of Flatpak."
+msgstr ""
+"Το Flatpak δεν βρέθηκε. Οι εφαρμογές Flatpak δεν είναι διαθέσιμες. Το "
+"FreeOffice και οι διαδικτυακές υπηρεσίες παραμένουν ανεξάρτητα από το "
+"Flatpak."
+
+#: qml/pages/ContributePage.qml:35
+msgid ""
+"Mainuan is made by its community. You can help with a donation, with code or "
+"by reporting problems."
+msgstr ""
+"Το Mainuan δημιουργείται από την κοινότητά του. Μπορείτε να βοηθήσετε με μια "
+"δωρεά, με κώδικα ή αναφέροντας προβλήματα."
+
+#. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
+#: qml/pages/ContributePage.qml:78
+msgid "Pix QR code. Key: %1"
+msgstr "Κωδικός QR Pix. Κλειδί: %1"
+
+#: qml/pages/ContributePage.qml:79
+msgid "Pix key QR code. Key: %1"
+msgstr "Κωδικός QR κλειδιού Pix. Κλειδί: %1"
+
+#: qml/pages/ContributePage.qml:97
+msgid "Support Mainuan"
+msgstr "Υποστηρίξτε το Mainuan"
+
+#: qml/pages/ContributePage.qml:104
+msgid ""
+"Your donation helps sustain development, infrastructure and the community."
+msgstr ""
+"Η δωρεά σας βοηθά στη συντήρηση της ανάπτυξης, της υποδομής και της "
+"κοινότητας."
+
+#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+msgid "Pix Key"
+msgstr "Κλειδί Pix"
+
+#: qml/pages/ContributePage.qml:143
+msgid "Copy Pix Key"
+msgstr "Αντιγραφή κλειδιού Pix"
+
+#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#, kde-format
+msgid "Pix key copied."
+msgstr "Το κλειδί Pix αντιγράφηκε."
+
+#: qml/pages/ContributePage.qml:168
+msgid "Scan the QR code with your bank's app, using the Pix option."
+msgstr ""
+"Σαρώστε τον κωδικό QR με την εφαρμογή της τράπεζάς σας, χρησιμοποιώντας την "
+"επιλογή Pix."
+
+#: qml/pages/ContributePage.qml:169
+msgid ""
+"The QR code contains the Pix key. In your bank's app, use the Pix option "
+"with the copied key or the one read from the code."
+msgstr ""
+"Ο κωδικός QR περιέχει το κλειδί Pix. Στην εφαρμογή της τράπεζάς σας, "
+"χρησιμοποιήστε την επιλογή Pix με το κλειδί που αντιγράψατε ή με αυτό που "
+"διαβάστηκε από τον κωδικό."
+
+#: qml/pages/ContributePage.qml:177
+msgid "The Pix key has not been set up on this installation yet."
+msgstr "Το κλειδί Pix δεν έχει ρυθμιστεί ακόμη σε αυτή την εγκατάσταση."
+
+#: qml/pages/ContributePage.qml:187
+msgid "Other Ways to Help"
+msgstr "Άλλοι τρόποι βοήθειας"
+
+#: qml/pages/ContributePage.qml:196
+msgid "Contribute Code"
+msgstr "Συνεισφορά κώδικα"
+
+#: qml/pages/ContributePage.qml:197
+msgid "Code, translations and improvements on GitHub."
+msgstr "Κώδικας, μεταφράσεις και βελτιώσεις στο GitHub."
+
+#: qml/pages/ContributePage.qml:205
+msgid "Report a Problem"
+msgstr "Αναφορά προβλήματος"
+
+#: qml/pages/ContributePage.qml:206
+msgid ""
+"Describe what happened; attaching the system report (in About) helps a lot."
+msgstr ""
+"Περιγράψτε τι συνέβη· η επισύναψη της αναφοράς συστήματος (στο «Σχετικά») "
+"βοηθά πολύ."
+
+#: qml/pages/ContributePage.qml:214
+msgid "Telegram Community"
+msgstr "Κοινότητα στο Telegram"
+
+#: qml/pages/ContributePage.qml:215
+msgid "Chat with Mainuan users and developers."
+msgstr "Συνομιλήστε με χρήστες και προγραμματιστές του Mainuan."
+
+#: qml/pages/ContributePage.qml:222
+msgid ""
+"Links open in the browser only when you click them. The QR code is generated "
+"on this computer, without internet access."
+msgstr ""
+"Οι σύνδεσμοι ανοίγουν στον περιηγητή μόνο όταν κάνετε κλικ σε αυτούς. Ο "
+"κωδικός QR δημιουργείται σε αυτόν τον υπολογιστή, χωρίς πρόσβαση στο "
+"διαδίκτυο."
+
+#: qml/pages/HomePage.qml:48 qml/pages/HomePage.qml:62
+msgid "Installing…"
+msgstr "Εγκατάσταση…"
+
+#: qml/pages/HomePage.qml:51
+msgctxt "@info status"
+msgid "Installed"
+msgstr "Εγκατεστημένο"
+
+#. i18n: %1 is a short note such as "startup: enabled"
+#: qml/pages/HomePage.qml:51
+msgid "Installed · %1"
+msgstr "Εγκατεστημένο · %1"
+
+#: qml/pages/HomePage.qml:53
+msgid "Unavailable on this system"
+msgstr "Μη διαθέσιμο σε αυτό το σύστημα"
+
+#: qml/pages/HomePage.qml:62
+msgctxt "@action:button"
+msgid "Install"
+msgstr "Εγκατάσταση"
+
+#. i18n: %1 is a colour code; keep the <font> markup around the product name
+#: qml/pages/HomePage.qml:87
+msgid "Welcome to <font color='%1'>Mainuan</font>"
+msgstr "Καλώς ήρθατε στο <font color='%1'>Mainuan</font>"
+
+#: qml/pages/HomePage.qml:92
+msgid "Set up your system your way, with native Plasma tools."
+msgstr "Ρυθμίστε το σύστημά σας όπως θέλετε, με τα εγγενή εργαλεία του Plasma."
+
+#: qml/pages/HomePage.qml:105
+msgid "Hardware & Media"
+msgstr "Υλικό και πολυμέσα"
+
+#: qml/pages/HomePage.qml:113
+msgid "Additional Drivers"
+msgstr "Πρόσθετοι οδηγοί"
+
+#: qml/pages/HomePage.qml:114
+msgid "View and manage the drivers available for your computer."
+msgstr ""
+"Προβάλετε και διαχειριστείτε τους διαθέσιμους οδηγούς για τον υπολογιστή σας."
+
+#: qml/pages/HomePage.qml:117
+msgctxt "@action:button"
+msgid "Manage"
+msgstr "Διαχείριση"
+
+#: qml/pages/HomePage.qml:126 src/services/InstallService.cpp:221
+#, kde-format
+msgid "Media Codecs"
+msgstr "Κωδικοποιητές πολυμέσων"
+
+#: qml/pages/HomePage.qml:127
+msgid "Play audio and video in the most common formats."
+msgstr "Αναπαράγετε ήχο και βίντεο στις πιο συνηθισμένες μορφές."
+
+#: qml/pages/HomePage.qml:131
+msgid "Security & Privacy"
+msgstr "Ασφάλεια και ιδιωτικότητα"
+
+#: qml/pages/HomePage.qml:136 src/services/InstallService.cpp:175
+#, kde-format
+msgid "Antivirus"
+msgstr "Προστασία από ιούς"
+
+#: qml/pages/HomePage.qml:137 src/services/InstallService.cpp:177
+#, kde-format
+msgid "ClamAV protection with the ClamUI graphical interface."
+msgstr "Προστασία ClamAV με τη γραφική διεπαφή ClamUI."
+
+#: qml/pages/HomePage.qml:139 qml/pages/HomePage.qml:147
+msgctxt "@action:button"
+msgid "Configure"
+msgstr "Διαμόρφωση"
+
+#: qml/pages/HomePage.qml:144 src/services/InstallService.cpp:200
+#, kde-format
+msgid "Firewall"
+msgstr "Τείχος προστασίας"
+
+#: qml/pages/HomePage.qml:145
+msgid "Control network connections with UFW and the KDE Plasma module."
+msgstr ""
+"Ελέγξτε τις συνδέσεις δικτύου με το UFW και την ενότητα του KDE Plasma."
+
+#. i18n: %1 is the session type (wayland/x11), %2 the Plasma version
+#: qml/pages/HomePage.qml:156
+msgid "Session: %1  ·  %2"
+msgstr "Συνεδρία: %1  ·  %2"
+
+#: qml/pages/HomePage.qml:157
+msgid "Session: %1"
+msgstr "Συνεδρία: %1"
+
+# reviewed: 'Βίντεο οδηγών χρήσης' is a word-by-word calque; natural Greek for
+# video tutorials
+#: qml/pages/TutorialsPage.qml:33
+msgid "Video Tutorials"
+msgstr "Εκπαιδευτικά βίντεο"
+
+#: qml/pages/TutorialsPage.qml:36
+msgid ""
+"Learn the essentials of Mainuan. Missing videos are disabled without "
+"blocking navigation."
+msgstr ""
+"Μάθετε τα βασικά του Mainuan. Τα βίντεο που λείπουν απενεργοποιούνται χωρίς "
+"να εμποδίζουν την πλοήγηση."
+
+#: qml/pages/TutorialsPage.qml:73
+msgctxt "@action:button"
+msgid "Close"
+msgstr "Κλείσιμο"
+
+#: qml/pages/TutorialsPage.qml:89
+msgctxt "@action:button"
+msgid "Pause"
+msgstr "Παύση"
+
+#: qml/pages/TutorialsPage.qml:89 qml/pages/TutorialsPage.qml:134
+msgctxt "@action:button"
+msgid "Play"
+msgstr "Αναπαραγωγή"
+
+#: qml/pages/TutorialsPage.qml:97
+msgid "Volume"
+msgstr "Ένταση"
+
+#: qml/pages/TutorialsPage.qml:98
+msgctxt "@action:button"
+msgid "Full Screen"
+msgstr "Πλήρης οθόνη"
+
+#: qml/pages/TutorialsPage.qml:134
+msgctxt "@info video status"
+msgid "Unavailable"
+msgstr "Μη διαθέσιμο"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "%1: video missing"
+msgstr "%1: το βίντεο λείπει"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "Play %1"
+msgstr "Αναπαραγωγή %1"
+
+#: qml/pages/TutorialsPage.qml:154
+msgid "File not found"
+msgstr "Το αρχείο δεν βρέθηκε"
+
+#: qml/pages/TutorialsPage.qml:163
+msgid "No tutorials have been added."
+msgstr "Δεν έχουν προστεθεί οδηγοί χρήσης."
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:4
+msgid "Mainuan Welcome"
+msgstr "Καλωσόρισμα Mainuan"
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:4
+msgid "Show the Mainuan Welcome when the session starts"
+msgstr "Εμφάνιση του Καλωσορίσματος Mainuan κατά την έναρξη της συνεδρίας"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:4
+msgid "Welcome Center"
+msgstr "Κέντρο καλωσορίσματος"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:5
+msgid "Set up and get to know Mainuan"
+msgstr "Ρυθμίστε και γνωρίστε το Mainuan"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:6
+msgid "welcome;setup;appearance;drivers;codecs;antivirus;firewall;"
+msgstr ""
+"καλωσόρισμα;ρύθμιση;εμφάνιση;οδηγοί;κωδικοποιητές;προστασία από ιούς;τείχος "
+"προστασίας;welcome;drivers;codecs;antivirus;firewall;"
+
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:5
+msgid "Set up Mainuan and get to know the features of your desktop"
+msgstr ""
+"Ρυθμίστε το Mainuan και γνωρίστε τις δυνατότητες της επιφάνειας εργασίας σας"
+
+# reviewed: consistency with the 'Video Tutorials' page title fix
+# (Εκπαιδευτικά βίντεο)
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:7
+msgid ""
+"Welcome application of the Mainuan desktop. It helps new users choose the "
+"look of the desktop, install media codecs, the antivirus, the firewall, "
+"office suites and web browsers, and find the video tutorials."
+msgstr ""
+"Εφαρμογή καλωσορίσματος της επιφάνειας εργασίας Mainuan. Βοηθά τους νέους "
+"χρήστες να επιλέξουν την εμφάνιση της επιφάνειας εργασίας, να εγκαταστήσουν "
+"κωδικοποιητές πολυμέσων, προστασία από ιούς, τείχος προστασίας, σουίτες "
+"γραφείου και περιηγητές ιστού, και να βρουν τα εκπαιδευτικά βίντεο."
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:9
+msgid "Install system components recommended by Mainuan Welcome"
+msgstr "Εγκατάσταση στοιχείων συστήματος που προτείνει το Καλωσόρισμα Mainuan"
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:10
+msgid ""
+"Authentication is required to install system components such as the "
+"antivirus, the firewall or media codecs"
+msgstr ""
+"Απαιτείται ταυτοποίηση για την εγκατάσταση στοιχείων συστήματος όπως η "
+"προστασία από ιούς, το τείχος προστασίας ή οι κωδικοποιητές πολυμέσων"
+
+#: src/main.cpp:53
+#, kde-format
+msgctxt "@title application display name"
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — Καλωσόρισμα"
+
+#: src/main.cpp:96
+#, kde-format
+msgctxt "@info application description"
+msgid "Complete suite: Writer, Calc and Impress"
+msgstr "Πλήρης σουίτα: Writer, Calc και Impress"
+
+#: src/main.cpp:99
+#, kde-format
+msgctxt "@info application description"
+msgid "Interface familiar to Microsoft Office users"
+msgstr "Διεπαφή οικεία στους χρήστες του Microsoft Office"
+
+#: src/main.cpp:102
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Free office suite with word processor, spreadsheet and presentation editors."
+msgstr ""
+"Δωρεάν σουίτα γραφείου με επεξεργαστή κειμένου, λογιστικά φύλλα και "
+"επεξεργαστή παρουσιάσεων."
+
+#: src/main.cpp:105
+#, kde-format
+msgctxt "@info application description"
+msgid "Online documents with collaboration"
+msgstr "Διαδικτυακά έγγραφα με συνεργασία"
+
+#: src/main.cpp:108
+#, kde-format
+msgctxt "@info application description"
+msgid "Microsoft suite right in the browser"
+msgstr "Η σουίτα της Microsoft απευθείας στον περιηγητή"
+
+#: src/main.cpp:114
+#, kde-format
+msgctxt "@info application description"
+msgid "Google's web browser"
+msgstr "Ο περιηγητής ιστού της Google"
+
+#: src/main.cpp:117
+#, kde-format
+msgctxt "@info application description"
+msgid "Compatibility with Microsoft applications"
+msgstr "Συμβατότητα με εφαρμογές της Microsoft"
+
+#: src/main.cpp:120
+#, kde-format
+msgctxt "@info application description"
+msgid "Built-in ad blocking"
+msgstr "Ενσωματωμένος αποκλεισμός διαφημίσεων"
+
+#: src/main.cpp:123
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Browser with advanced customization, tab management and privacy features."
+msgstr ""
+"Περιηγητής με προηγμένη προσαρμογή, διαχείριση καρτελών και λειτουργίες "
+"ιδιωτικότητας."
+
+#: src/main.cpp:126
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser focused on privacy, productivity and vertical tab organization."
+msgstr ""
+"Περιηγητής με έμφαση στην ιδιωτικότητα, την παραγωγικότητα και την κάθετη "
+"οργάνωση καρτελών."
+
+#: src/main.cpp:129
+#, kde-format
+msgctxt "@info application description"
+msgid "Privacy-focused browser"
+msgstr "Περιηγητής με έμφαση στην ιδιωτικότητα"
+
+#: src/main.cpp:132
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser with resource controls"
+msgstr "Περιηγητής με έλεγχο πόρων"
+
+#: src/main.cpp:135
+#, kde-format
+msgctxt "@info application description"
+msgid "Browsing through the Tor network"
+msgstr "Περιήγηση μέσω του δικτύου Tor"
+
+#: src/models/ApplicationModel.cpp:88
+#, kde-format
+msgctxt "@info:status application"
+msgid "Checking…"
+msgstr "Έλεγχος…"
+
+#: src/models/ApplicationModel.cpp:91
+#, kde-format
+msgctxt "@info:status application"
+msgid "Unavailable"
+msgstr "Μη διαθέσιμο"
+
+#: src/models/ApplicationModel.cpp:94
+#, kde-format
+msgctxt "@info:status application"
+msgid "Online"
+msgstr "Διαδικτυακό"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installing…"
+msgstr "Εγκατάσταση…"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Removing…"
+msgstr "Αφαίρεση…"
+
+#: src/models/ApplicationModel.cpp:100
+#, kde-format
+msgctxt "@info:status application"
+msgid "Error"
+msgstr "Σφάλμα"
+
+#: src/models/ApplicationModel.cpp:102
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installed"
+msgstr "Εγκατεστημένο"
+
+#: src/models/LayoutModel.cpp:10
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"The Mainuan look: floating islands at the bottom with menu, tasks, system "
+"tray and clock."
+msgstr ""
+"Η εμφάνιση του Mainuan: αιωρούμενα νησιά στο κάτω μέρος με μενού, εργασίες, "
+"πλαίσιο συστήματος και ρολόι."
+
+#: src/models/LayoutModel.cpp:11
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Three floating segments at the bottom: menu and information, tasks, and "
+"system controls."
+msgstr ""
+"Τρία αιωρούμενα τμήματα στο κάτω μέρος: μενού και πληροφορίες, εργασίες και "
+"στοιχεία ελέγχου συστήματος."
+
+#: src/models/LayoutModel.cpp:12
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"A floating bottom bar with side margins, widgets and pinned applications."
+msgstr ""
+"Αιωρούμενη κάτω γραμμή με πλευρικά περιθώρια, γραφικά συστατικά και "
+"καρφιτσωμένες εφαρμογές."
+
+#: src/models/LayoutModel.cpp:13
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Floating top panel with TahoeLauncher, search, tasks and controls."
+msgstr ""
+"Αιωρούμενος επάνω πίνακας με TahoeLauncher, αναζήτηση, εργασίες και στοιχεία "
+"ελέγχου."
+
+#: src/models/LayoutModel.cpp:14
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Full-width bottom bar, not floating, with Kickoff and pinned applications."
+msgstr ""
+"Κάτω γραμμή σε όλο το πλάτος, μη αιωρούμενη, με Kickoff και καρφιτσωμένες "
+"εφαρμογές."
+
+#: src/models/LayoutModel.cpp:15
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Global menu at the top and a vertical panel on the left with Orbit Start "
+"Menu."
+msgstr ""
+"Καθολικό μενού στο επάνω μέρος και κάθετος πίνακας στα αριστερά με το Orbit "
+"Start Menu."
+
+#: src/models/LayoutModel.cpp:16
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Compact bar at the top and KWin tiles to arrange windows side by side."
+msgstr ""
+"Συμπαγής γραμμή στο επάνω μέρος και παράθεση παραθύρων του KWin για "
+"τοποθέτηση παραθύρων δίπλα-δίπλα."
+
+#: src/models/VideoModel.cpp:12
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Getting to know the system"
+msgstr "Γνωριμία με το σύστημα"
+
+#: src/models/VideoModel.cpp:13
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Connecting to the internet"
+msgstr "Σύνδεση στο διαδίκτυο"
+
+#: src/models/VideoModel.cpp:14
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Customizing the system"
+msgstr "Προσαρμογή του συστήματος"
+
+#: src/models/VideoModel.cpp:15
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Installing software"
+msgstr "Εγκατάσταση λογισμικού"
+
+#: src/models/VideoModel.cpp:16
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Online lessons"
+msgstr "Διαδικτυακά μαθήματα"
+
+#: src/services/AccentProfile.cpp:8
+msgctxt "accent color"
+msgid "Brown"
+msgstr "Καφέ"
+
+#: src/services/AccentProfile.cpp:10
+msgctxt "accent color"
+msgid "Cyan"
+msgstr "Κυανό"
+
+#: src/services/AccentProfile.cpp:12
+msgctxt "accent color"
+msgid "Magenta"
+msgstr "Ματζέντα"
+
+#: src/services/AccentProfile.cpp:14
+msgctxt "accent color"
+msgid "Lime"
+msgstr "Λάιμ"
+
+#: src/services/AccentProfile.cpp:16
+msgctxt "accent color"
+msgid "Gray"
+msgstr "Γκρι"
+
+#: src/services/AccentProfile.cpp:18
+msgctxt "accent color"
+msgid "Violet"
+msgstr "Βιολετί"
+
+#: src/services/InstallService.cpp:54
+#, kde-format
+msgid ""
+"Another program is installing or updating the system right now. Wait for it "
+"to finish and try again."
+msgstr ""
+"Ένα άλλο πρόγραμμα εγκαθιστά ή ενημερώνει το σύστημα αυτή τη στιγμή. "
+"Περιμένετε να ολοκληρωθεί και δοκιμάστε ξανά."
+
+#: src/services/InstallService.cpp:57
+#, kde-format
+msgid ""
+"Could not download the files. Check your internet connection and try again."
+msgstr ""
+"Δεν ήταν δυνατή η λήψη των αρχείων. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και "
+"δοκιμάστε ξανά."
+
+#: src/services/InstallService.cpp:60
+#, kde-format
+msgid "There is not enough free disk space to complete the installation."
+msgstr ""
+"Δεν υπάρχει αρκετός ελεύθερος χώρος στον δίσκο για να ολοκληρωθεί η "
+"εγκατάσταση."
+
+#: src/services/InstallService.cpp:63
+#, kde-format
+msgid ""
+"The required components were not found in the repositories configured on "
+"this system."
+msgstr ""
+"Τα απαιτούμενα στοιχεία δεν βρέθηκαν στα αποθετήρια που έχουν ρυθμιστεί σε "
+"αυτό το σύστημα."
+
+#: src/services/InstallService.cpp:66
+#, kde-format
+msgid ""
+"A previous installation was interrupted and must be repaired before new "
+"programs can be installed."
+msgstr ""
+"Μια προηγούμενη εγκατάσταση διακόπηκε και πρέπει να επιδιορθωθεί πριν "
+"εγκατασταθούν νέα προγράμματα."
+
+#: src/services/InstallService.cpp:69
+#, kde-format
+msgid ""
+"The package system found a conflict that prevents the installation without "
+"removing other programs."
+msgstr ""
+"Το σύστημα πακέτων εντόπισε μια διένεξη που εμποδίζει την εγκατάσταση χωρίς "
+"αφαίρεση άλλων προγραμμάτων."
+
+#: src/services/InstallService.cpp:72
+#, kde-format
+msgid ""
+"Authentication failed or your user does not have administrator privileges."
+msgstr "Η ταυτοποίηση απέτυχε ή ο χρήστης σας δεν έχει δικαιώματα διαχειριστή."
+
+#: src/services/InstallService.cpp:75
+#, kde-format
+msgid ""
+"Automatic installation of these components requires a Debian- or Ubuntu-"
+"based system."
+msgstr ""
+"Η αυτόματη εγκατάσταση αυτών των στοιχείων απαιτεί σύστημα βασισμένο σε "
+"Debian ή Ubuntu."
+
+#: src/services/InstallService.cpp:78
+#, kde-format
+msgid "Flatpak is not available on this system."
+msgstr "Το Flatpak δεν είναι διαθέσιμο σε αυτό το σύστημα."
+
+#: src/services/InstallService.cpp:81
+#, kde-format
+msgid ""
+"Could not download FreeOffice from the authorized official source. Check the "
+"connection and try again. Redirects and other versions are refused."
+msgstr ""
+"Δεν ήταν δυνατή η λήψη του FreeOffice από την εξουσιοδοτημένη επίσημη πηγή. "
+"Ελέγξτε τη σύνδεση και δοκιμάστε ξανά. Οι ανακατευθύνσεις και άλλες εκδόσεις "
+"απορρίπτονται."
+
+#: src/services/InstallService.cpp:84
+#, kde-format
+msgid ""
+"The FreeOffice file does not match the authorized package (integrity, size, "
+"name, version or architecture). The installation was stopped."
+msgstr ""
+"Το αρχείο του FreeOffice δεν αντιστοιχεί στο εξουσιοδοτημένο πακέτο "
+"(ακεραιότητα, μέγεθος, όνομα, έκδοση ή αρχιτεκτονική). Η εγκατάσταση "
+"διακόπηκε."
+
+#: src/services/InstallService.cpp:87
+#, kde-format
+msgid ""
+"The installer finished, but it could not be confirmed that the application "
+"is installed. Check the details and try again."
+msgstr ""
+"Ο εγκαταστάτης ολοκληρώθηκε, αλλά δεν ήταν δυνατό να επιβεβαιωθεί ότι η "
+"εφαρμογή είναι εγκατεστημένη. Ελέγξτε τις λεπτομέρειες και δοκιμάστε ξανά."
+
+#. i18n: “Show Details” must match the label of the details button in the installation dialog.
+#: src/services/InstallService.cpp:90
+#, kde-format
+msgid ""
+"The system could not install all components. Try again; if the problem "
+"persists, use “Show Details” to get the technical information."
+msgstr ""
+"Το σύστημα δεν μπόρεσε να εγκαταστήσει όλα τα στοιχεία. Δοκιμάστε ξανά· αν "
+"το πρόβλημα επιμένει, χρησιμοποιήστε το «Εμφάνιση λεπτομερειών» για να "
+"λάβετε τις τεχνικές πληροφορίες."
+
+#. i18n: joins the names of two components installed in the same step, e.g. "ClamAV and Flatpak".
+#: src/services/InstallService.cpp:144
+#, kde-format
+msgctxt "@item:intext two components"
+msgid "%1 and %2"
+msgstr "%1 και %2"
+
+#: src/services/InstallService.cpp:176
+#, kde-format
+msgid "Configured repositories / Flathub"
+msgstr "Ρυθμισμένα αποθετήρια / Flathub"
+
+#: src/services/InstallService.cpp:179
+#, kde-format
+msgid "Installing ClamAV + ClamUI"
+msgstr "Εγκατάσταση ClamAV + ClamUI"
+
+#: src/services/InstallService.cpp:180
+#, kde-format
+msgid "Antivirus installed successfully"
+msgstr "Η προστασία από ιούς εγκαταστάθηκε με επιτυχία"
+
+#: src/services/InstallService.cpp:181
+#, kde-format
+msgid "ClamAV and ClamUI are ready to use."
+msgstr "Τα ClamAV και ClamUI είναι έτοιμα για χρήση."
+
+#: src/services/InstallService.cpp:182 src/services/InstallService.cpp:208
+#, kde-format
+msgctxt "@action:button open the settings of the installed component"
+msgid "Configure"
+msgstr "Διαμόρφωση"
+
+#: src/services/InstallService.cpp:201 src/services/InstallService.cpp:222
+#, kde-format
+msgid "Configured repositories"
+msgstr "Ρυθμισμένα αποθετήρια"
+
+#: src/services/InstallService.cpp:202
+#, kde-format
+msgid "UFW with the KDE Plasma firewall module."
+msgstr "UFW με την ενότητα τείχους προστασίας του KDE Plasma."
+
+#: src/services/InstallService.cpp:204
+#, kde-format
+msgid "Installing Firewall"
+msgstr "Εγκατάσταση τείχους προστασίας"
+
+#: src/services/InstallService.cpp:205
+#, kde-format
+msgid "Firewall installed successfully"
+msgstr "Το τείχος προστασίας εγκαταστάθηκε με επιτυχία"
+
+#: src/services/InstallService.cpp:206
+#, kde-format
+msgid ""
+"UFW and the KDE Plasma integration are installed. The firewall was not "
+"enabled automatically: use Configure to enable it and choose the rules."
+msgstr ""
+"Το UFW και η ενοποίηση με το KDE Plasma εγκαταστάθηκαν. Το τείχος προστασίας "
+"δεν ενεργοποιήθηκε αυτόματα: χρησιμοποιήστε τη Διαμόρφωση για να το "
+"ενεργοποιήσετε και να επιλέξετε τους κανόνες."
+
+#: src/services/InstallService.cpp:213 src/services/InstallService.cpp:217
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "KDE Plasma integration"
+msgstr "ενοποίηση με το KDE Plasma"
+
+#: src/services/InstallService.cpp:223
+#, kde-format
+msgid "Support for the most common audio and video formats."
+msgstr "Υποστήριξη για τις πιο συνηθισμένες μορφές ήχου και βίντεο."
+
+#: src/services/InstallService.cpp:225
+#, kde-format
+msgid "Installing media codecs"
+msgstr "Εγκατάσταση κωδικοποιητών πολυμέσων"
+
+#: src/services/InstallService.cpp:226
+#, kde-format
+msgid "Codecs installed successfully"
+msgstr "Οι κωδικοποιητές εγκαταστάθηκαν με επιτυχία"
+
+#: src/services/InstallService.cpp:227
+#, kde-format
+msgid "Audio and video in the most common formats can now be played."
+msgstr ""
+"Ο ήχος και το βίντεο στις πιο συνηθισμένες μορφές μπορούν πλέον να "
+"αναπαραχθούν."
+
+#: src/services/InstallService.cpp:230
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "media codecs"
+msgstr "κωδικοποιητές πολυμέσων"
+
+#: src/services/InstallService.cpp:236
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "GStreamer codecs"
+msgstr "κωδικοποιητές GStreamer"
+
+#: src/services/InstallService.cpp:244
+#, kde-format
+msgid "Free office suite from SoftMaker."
+msgstr "Δωρεάν σουίτα γραφείου από τη SoftMaker."
+
+#: src/services/InstallService.cpp:246
+#, kde-format
+msgid "Installing FreeOffice"
+msgstr "Εγκατάσταση του FreeOffice"
+
+#: src/services/InstallService.cpp:247
+#, kde-format
+msgid "FreeOffice installed successfully"
+msgstr "Το FreeOffice εγκαταστάθηκε με επιτυχία"
+
+#: src/services/InstallService.cpp:248
+#, kde-format
+msgid "FreeOffice is installed and available in the application menu."
+msgstr "Το FreeOffice είναι εγκατεστημένο και διαθέσιμο στο μενού εφαρμογών."
+
+#: src/services/InstallService.cpp:249
+#, kde-format
+msgid ""
+"This package is provided by SoftMaker and may ask for administrator "
+"authorization."
+msgstr ""
+"Αυτό το πακέτο παρέχεται από τη SoftMaker και ενδέχεται να ζητήσει "
+"εξουσιοδότηση διαχειριστή."
+
+#: src/services/InstallService.cpp:314
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "Installing %1"
+msgstr "Εγκατάσταση του %1"
+
+#: src/services/InstallService.cpp:315
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "%1 installed successfully"
+msgstr "Το %1 εγκαταστάθηκε με επιτυχία"
+
+#: src/services/InstallService.cpp:316
+#, kde-format
+msgid "The application is now available in the application menu."
+msgstr "Η εφαρμογή είναι πλέον διαθέσιμη στο μενού εφαρμογών."
+
+#: src/services/InstallService.cpp:317
+#, kde-format
+msgctxt "@action:button open the installed application"
+msgid "Open"
+msgstr "Άνοιγμα"
+
+#: src/services/InstallService.cpp:435
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Checking…"
+msgstr "Έλεγχος…"
+
+#: src/services/InstallService.cpp:438
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Installed"
+msgstr "Εγκατεστημένο"
+
+#. i18n: %1 is the name of the only component that is not installed yet.
+#: src/services/InstallService.cpp:442
+#, kde-format
+msgctxt "@info:status one component"
+msgid "Missing: %1"
+msgstr "Λείπει: %1"
+
+#. i18n: %1 is a comma-separated list of components that are not installed yet.
+#: src/services/InstallService.cpp:444
+#, kde-format
+msgctxt "@info:status several components"
+msgid "Missing: %1"
+msgstr "Λείπουν: %1"
+
+#: src/services/InstallService.cpp:447
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Not installed"
+msgstr "Δεν είναι εγκατεστημένο"
+
+#: src/services/InstallService.cpp:593
+#, kde-format
+msgid "Preparing the installation…"
+msgstr "Προετοιμασία της εγκατάστασης…"
+
+#: src/services/InstallService.cpp:707 src/services/InstallService.cpp:741
+#, kde-format
+msgid "Downloading FreeOffice from SoftMaker…"
+msgstr "Λήψη του FreeOffice από τη SoftMaker…"
+
+#. i18n: technical details: %1 URL, %2 package name, %3 version, %4 architecture, %5 size in bytes, %6 checksum.
+#: src/services/InstallService.cpp:709
+#, kde-format
+msgid ""
+"Authorized source: %1\n"
+"Package: %2 · version %3 · %4 · %5 bytes\n"
+"Pinned SHA-256: %6"
+msgstr ""
+"Εξουσιοδοτημένη πηγή: %1\n"
+"Πακέτο: %2 · έκδοση %3 · %4 · %5 byte\n"
+"Καθηλωμένο SHA-256: %6"
+
+#: src/services/InstallService.cpp:727
+#, kde-format
+msgid "The file exceeds the authorized size."
+msgstr "Το αρχείο υπερβαίνει το εξουσιοδοτημένο μέγεθος."
+
+#: src/services/InstallService.cpp:759
+#, kde-format
+msgid "Size or SHA-256 mismatch."
+msgstr "Αναντιστοιχία μεγέθους ή SHA-256."
+
+#: src/services/InstallService.cpp:768
+#, kde-format
+msgid "Validating the FreeOffice Debian package…"
+msgstr "Επικύρωση του πακέτου Debian του FreeOffice…"
+
+#: src/services/InstallService.cpp:812
+#, kde-format
+msgid "Confirming the FreeOffice installation…"
+msgstr "Επιβεβαίωση της εγκατάστασης του FreeOffice…"
+
+#: src/services/InstallService.cpp:824
+#, kde-format
+msgid "Confirming the browser installation…"
+msgstr "Επιβεβαίωση της εγκατάστασης του περιηγητή…"
+
+#: src/services/InstallService.cpp:857
+#, kde-format
+msgid "Waiting for administrator authorization…"
+msgstr "Αναμονή για εξουσιοδότηση διαχειριστή…"
+
+#: src/services/InstallService.cpp:883
+#, kde-format
+msgctxt "@info %1 is a program path, %2 the system error"
+msgid "Could not run %1: %2"
+msgstr "Δεν ήταν δυνατή η εκτέλεση του %1: %2"
+
+#: src/services/InstallService.cpp:917
+#, kde-format
+msgctxt "@item:intext generic component label"
+msgid "required components"
+msgstr "απαιτούμενα στοιχεία"
+
+#: src/services/InstallService.cpp:933
+#, kde-format
+msgid "Checking the required components…"
+msgstr "Έλεγχος των απαιτούμενων στοιχείων…"
+
+#: src/services/InstallService.cpp:935
+#, kde-format
+msgid ""
+"Waiting for another program to finish installing or updating the system…"
+msgstr ""
+"Αναμονή για να ολοκληρώσει ένα άλλο πρόγραμμα την εγκατάσταση ή την "
+"ενημέρωση του συστήματος…"
+
+#: src/services/InstallService.cpp:937
+#, kde-format
+msgid "Updating the list of available programs…"
+msgstr "Ενημέρωση της λίστας διαθέσιμων προγραμμάτων…"
+
+#: src/services/InstallService.cpp:939
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Preparing the download of %1…"
+msgstr "Προετοιμασία της λήψης: %1…"
+
+#: src/services/InstallService.cpp:941
+#, kde-format
+msgid "Updating the virus definitions…"
+msgstr "Ενημέρωση των ορισμών ιών…"
+
+#: src/services/InstallService.cpp:945
+#, kde-format
+msgctxt "@info %1 is a list of package names"
+msgid "Packages to install: %1"
+msgstr "Πακέτα προς εγκατάσταση: %1"
+
+#: src/services/InstallService.cpp:954 src/services/InstallService.cpp:1061
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1…"
+msgstr "Λήψη: %1…"
+
+#: src/services/InstallService.cpp:956
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1 (file %2 of %3)…"
+msgstr "Λήψη: %1 (αρχείο %2 από %3)…"
+
+#: src/services/InstallService.cpp:970
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Configuring %1…"
+msgstr "Διαμόρφωση: %1…"
+
+#: src/services/InstallService.cpp:971
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Installing %1…"
+msgstr "Εγκατάσταση: %1…"
+
+#: src/services/InstallService.cpp:988
+#, kde-format
+msgid ""
+"The virus definitions could not be downloaded now; ClamAV will retry "
+"automatically in the background."
+msgstr ""
+"Δεν ήταν δυνατή η λήψη των ορισμών ιών αυτή τη στιγμή· το ClamAV θα "
+"προσπαθήσει ξανά αυτόματα στο παρασκήνιο."
+
+#: src/services/InstallService.cpp:990
+#, kde-format
+msgid "freshclam did not finish updating the definitions."
+msgstr "Το freshclam δεν ολοκλήρωσε την ενημέρωση των ορισμών."
+
+#: src/services/InstallService.cpp:1012
+#, kde-format
+msgid "Checking Flathub…"
+msgstr "Έλεγχος του Flathub…"
+
+#: src/services/InstallService.cpp:1034
+#, kde-format
+msgid "Setting up Flathub…"
+msgstr "Ρύθμιση του Flathub…"
+
+#: src/services/InstallService.cpp:1119
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1 (component %2 of %3)…"
+msgstr "Λήψη και εγκατάσταση: %1 (στοιχείο %2 από %3)…"
+
+#: src/services/InstallService.cpp:1121
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1…"
+msgstr "Λήψη και εγκατάσταση: %1…"
+
+#: src/services/InstallService.cpp:1144
+#, kde-format
+msgctxt "@info technical detail"
+msgid "Exit code: %1"
+msgstr "Κωδικός εξόδου: %1"
+
+#: src/services/InstallService.cpp:1232
+#, kde-format
+msgctxt "@info technical detail; %3 is an internal error code"
+msgid "Step: %1 of %2 · reason: %3"
+msgstr "Βήμα: %1 από %2 · αιτία: %3"
+
+#: src/services/InstallService.cpp:1241
+#, kde-format
+msgid ""
+"The authorization was canceled. The components installed in the previous "
+"steps were kept."
+msgstr ""
+"Η εξουσιοδότηση ακυρώθηκε. Τα στοιχεία που εγκαταστάθηκαν στα προηγούμενα "
+"βήματα διατηρήθηκαν."
+
+#: src/services/InstallService.cpp:1242
+#, kde-format
+msgid "The authorization was canceled. No changes were made to the system."
+msgstr "Η εξουσιοδότηση ακυρώθηκε. Δεν έγιναν αλλαγές στο σύστημα."
+
+#: src/services/InstallService.cpp:1266
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid ""
+"Cannot open %1: the required components are not installed or the tool is "
+"unavailable."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του %1: τα απαιτούμενα στοιχεία δεν είναι "
+"εγκατεστημένα ή το εργαλείο δεν είναι διαθέσιμο."
+
+#: src/services/InstallService.cpp:1300
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid "Could not open %1."
+msgstr "Δεν ήταν δυνατό το άνοιγμα του %1."
+
+#: src/services/LayoutService.cpp:36 src/services/LayoutService.cpp:409
+#, kde-format
+msgid "Invalid layout."
+msgstr "Μη έγκυρη διάταξη."
+
+#. i18n: %1 is one or more Plasma widget ids joined by " or ".
+#: src/services/LayoutService.cpp:44
+#, kde-format
+msgid "Required launcher missing: %1. The previous panels were preserved."
+msgstr ""
+"Λείπει ο απαιτούμενος εκκινητής: %1. Οι προηγούμενοι πίνακες διατηρήθηκαν."
+
+#: src/services/LayoutService.cpp:45
+#, kde-format
+msgctxt "separator between alternative widget ids"
+msgid " or "
+msgstr " ή "
+
+#. i18n: %1 is a Plasma widget id, e.g. org.kde.plasma.kickoff.
+#: src/services/LayoutService.cpp:49
+#, kde-format
+msgid "Required widget missing: %1. The previous panels were preserved."
+msgstr ""
+"Λείπει το απαιτούμενο γραφικό συστατικό: %1. Οι προηγούμενοι πίνακες "
+"διατηρήθηκαν."
+
+#: src/services/LayoutService.cpp:53
+#, kde-format
+msgid "No screen available in Plasma."
+msgstr "Δεν υπάρχει διαθέσιμη οθόνη στο Plasma."
+
+#: src/services/LayoutService.cpp:56
+#, kde-format
+msgid "Could not query the screen geometry."
+msgstr "Δεν ήταν δυνατό το ερώτημα για τη γεωμετρία της οθόνης."
+
+#: src/services/LayoutService.cpp:58
+#, kde-format
+msgid ""
+"Could not check the required widgets; the previous panels were preserved."
+msgstr ""
+"Δεν ήταν δυνατός ο έλεγχος των απαιτούμενων γραφικών συστατικών· οι "
+"προηγούμενοι πίνακες διατηρήθηκαν."
+
+#: src/services/LayoutService.cpp:132
+msgctxt "desktop layout name"
+msgid "Classic — 5 panels"
+msgstr "Κλασική — 5 πίνακες"
+
+#: src/services/LayoutService.cpp:133
+msgctxt "desktop layout name"
+msgid "3 panels"
+msgstr "3 πίνακες"
+
+#: src/services/LayoutService.cpp:134
+msgctxt "desktop layout name"
+msgid "Single panel"
+msgstr "Ένας πίνακας"
+
+#: src/services/LayoutService.cpp:135
+msgctxt "desktop layout name"
+msgid "Top panel"
+msgstr "Επάνω πίνακας"
+
+#: src/services/LayoutService.cpp:136
+msgctxt "desktop layout name"
+msgid "Floating"
+msgstr "Αιωρούμενη"
+
+#. i18n: "W7" refers to a Windows 7 style taskbar.
+#: src/services/LayoutService.cpp:138
+msgctxt "desktop layout name"
+msgid "W7 panel"
+msgstr "Πίνακας W7"
+
+#: src/services/LayoutService.cpp:139
+msgctxt "desktop layout name"
+msgid "Tiling"
+msgstr "Παράθεση"
+
+#: src/services/LayoutService.cpp:394
+#, kde-format
+msgid "Could not measure the layout segments."
+msgstr "Δεν ήταν δυνατή η μέτρηση των τμημάτων της διάταξης."
+
+#: src/services/LayoutService.cpp:400
+#, kde-format
+msgid "The segments did not settle without overlapping on this screen."
+msgstr ""
+"Τα τμήματα δεν μπόρεσαν να τοποθετηθούν χωρίς επικάλυψη σε αυτή την οθόνη."
+
+#: src/services/LayoutService.cpp:416
+#, kde-format
+msgid "Plasma did not respond; open the Welcome inside a KDE Plasma session."
+msgstr ""
+"Το Plasma δεν απάντησε· ανοίξτε την εφαρμογή καλωσορίσματος μέσα σε συνεδρία "
+"KDE Plasma."
+
+#: src/services/LayoutService.cpp:423
+#, kde-format
+msgid "Checking the launcher of the %1 layout…"
+msgstr "Έλεγχος του εκκινητή της διάταξης %1…"
+
+#: src/services/LayoutService.cpp:426
+#, kde-format
+msgid "Could not load the layout scripts; nothing was changed."
+msgstr ""
+"Δεν ήταν δυνατή η φόρτωση των σεναρίων της διάταξης· δεν άλλαξε τίποτα."
+
+#: src/services/LayoutService.cpp:437
+#, kde-format
+msgid "Could not save a copy of the current layout; nothing was changed."
+msgstr ""
+"Δεν ήταν δυνατή η αποθήκευση αντιγράφου της τρέχουσας διάταξης· δεν άλλαξε "
+"τίποτα."
+
+#: src/services/LayoutService.cpp:440
+#, kde-format
+msgid "Applying the %1 layout…"
+msgstr "Εφαρμογή της διάταξης %1…"
+
+#. i18n: %1 is a complete sentence explaining why the layout failed.
+#: src/services/LayoutService.cpp:445
+#, kde-format
+msgid "%1 The previous layout was restored."
+msgstr "%1 Η προηγούμενη διάταξη επαναφέρθηκε."
+
+#. i18n: “Restore Previous Layout” is the button on the Appearance page.
+#: src/services/LayoutService.cpp:447
+#, kde-format
+msgid "%1 Could not restore automatically; use “Restore Previous Layout”."
+msgstr ""
+"%1 Δεν ήταν δυνατή η αυτόματη επαναφορά· χρησιμοποιήστε το «Επαναφορά "
+"προηγούμενης διάταξης»."
+
+#. i18n: %2 is the raw error reported by Plasma.
+#: src/services/LayoutService.cpp:459
+#, kde-format
+msgid "Could not apply the %1 layout (%2)."
+msgstr "Δεν ήταν δυνατή η εφαρμογή της διάταξης %1 (%2)."
+
+#: src/services/LayoutService.cpp:469
+#, kde-format
+msgid "The %1 layout was not completed."
+msgstr "Η διάταξη %1 δεν ολοκληρώθηκε."
+
+#: src/services/LayoutService.cpp:474
+#, kde-format
+msgid "%1 layout applied."
+msgstr "Η διάταξη %1 εφαρμόστηκε."
+
+#: src/services/LayoutService.cpp:478
+#, kde-format
+msgid ""
+"%1 layout applied. Drag windows while holding Shift to snap them into the "
+"tiles."
+msgstr ""
+"Η διάταξη %1 εφαρμόστηκε. Σύρετε τα παράθυρα κρατώντας πατημένο το Shift για "
+"να τα προσαρτήσετε στις θέσεις παράθεσης."
+
+#: src/services/LayoutService.cpp:479
+#, kde-format
+msgid "%1 layout applied, but the KWin tiles could not be configured."
+msgstr ""
+"Η διάταξη %1 εφαρμόστηκε, αλλά δεν ήταν δυνατή η διαμόρφωση της παράθεσης "
+"του KWin."
+
+#: src/services/LayoutService.cpp:554
+#, kde-format
+msgid "Restoring the previous layout; Plasma will be restarted…"
+msgstr "Επαναφορά της προηγούμενης διάταξης· το Plasma θα επανεκκινηθεί…"
+
+#: src/services/LayoutService.cpp:556
+#, kde-format
+msgid "Previous layout restored."
+msgstr "Η προηγούμενη διάταξη επαναφέρθηκε."
+
+#: src/services/LayoutService.cpp:557
+#, kde-format
+msgid "Could not restore the previous layout."
+msgstr "Δεν ήταν δυνατή η επαναφορά της προηγούμενης διάταξης."
+
+#: src/services/PackageService.cpp:111 src/services/PackageService.cpp:161
+#, kde-format
+msgid "Flatpak is not installed."
+msgstr "Το Flatpak δεν είναι εγκατεστημένο."
+
+#: src/services/PackageService.cpp:140
+#, kde-format
+msgid "Could not query Flatpak."
+msgstr "Δεν ήταν δυνατό το ερώτημα στο Flatpak."
+
+#: src/services/PackageService.cpp:151
+#, kde-format
+msgid "This application is not in the allowed list."
+msgstr "Αυτή η εφαρμογή δεν βρίσκεται στη λίστα επιτρεπόμενων."
+
+#: src/services/PackageService.cpp:155
+#, kde-format
+msgid "Another Flatpak operation is in progress."
+msgstr "Μια άλλη λειτουργία Flatpak βρίσκεται σε εξέλιξη."
+
+#: src/services/PackageService.cpp:176
+#, kde-format
+msgctxt "@info:status %1 is a Flatpak application ID"
+msgid "Removing %1…"
+msgstr "Αφαίρεση του %1…"
+
+#: src/services/PackageService.cpp:182
+#, kde-format
+msgid "Removal finished."
+msgstr "Η αφαίρεση ολοκληρώθηκε."
+
+#: src/services/PackageService.cpp:184
+#, kde-format
+msgctxt "@info:status %1 is the error output of Flatpak"
+msgid "Failed: %1"
+msgstr "Απέτυχε: %1"
+
+#: src/services/PackageService.cpp:195
+#, kde-format
+msgid "Could not start Flatpak."
+msgstr "Δεν ήταν δυνατή η εκκίνηση του Flatpak."
+
+#: src/services/StartupPreference.cpp:75 src/services/StartupPreference.cpp:92
+#, kde-format
+msgid "Could not change the startup preference."
+msgstr "Δεν ήταν δυνατή η αλλαγή της προτίμησης εκκίνησης."
+
+#: src/services/SystemReportService.cpp:38
+#, kde-format
+msgctxt "@info system report value"
+msgid "Not available"
+msgstr "Μη διαθέσιμο"
+
+#: src/services/SystemReportService.cpp:186
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 ημέρα"
+msgstr[1] "%1 ημέρες"
+
+#: src/services/SystemReportService.cpp:189
+#, kde-format
+msgid "%1 hour"
+msgid_plural "%1 hours"
+msgstr[0] "%1 ώρα"
+msgstr[1] "%1 ώρες"
+
+#: src/services/SystemReportService.cpp:192
+#, kde-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 λεπτό"
+msgstr[1] "%1 λεπτά"
+
+#: src/services/SystemReportService.cpp:195
+#, kde-format
+msgid "less than a minute"
+msgstr "λιγότερο από ένα λεπτό"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration"
+msgid "%1 and %2"
+msgstr "%1 και %2"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration list separator"
+msgid ", "
+msgstr ", "
+
+#: src/services/SystemReportService.cpp:333
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (64-bit)"
+msgstr "%1 (64-bit)"
+
+#: src/services/SystemReportService.cpp:334
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (32-bit)"
+msgstr "%1 (32-bit)"
+
+#: src/services/SystemReportService.cpp:341
+#, kde-format
+msgctxt "@title system report section"
+msgid "System"
+msgstr "Σύστημα"
+
+#: src/services/SystemReportService.cpp:342
+#, kde-format
+msgctxt "@label system report item"
+msgid "Distribution"
+msgstr "Διανομή"
+
+#: src/services/SystemReportService.cpp:344
+#, kde-format
+msgctxt "@label system report item"
+msgid "Version"
+msgstr "Έκδοση"
+
+#: src/services/SystemReportService.cpp:347
+#: src/services/SystemReportService.cpp:349
+#, kde-format
+msgctxt "@label system report item"
+msgid "Base"
+msgstr "Βάση"
+
+#: src/services/SystemReportService.cpp:353
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation media"
+msgstr "Μέσο εγκατάστασης"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Estimated installation date"
+msgstr "Εκτιμώμενη ημερομηνία εγκατάστασης"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation date"
+msgstr "Ημερομηνία εγκατάστασης"
+
+#: src/services/SystemReportService.cpp:366
+#, kde-format
+msgctxt "@label system report item"
+msgid "Architecture"
+msgstr "Αρχιτεκτονική"
+
+#: src/services/SystemReportService.cpp:368
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer name"
+msgstr "Όνομα υπολογιστή"
+
+#: src/services/SystemReportService.cpp:370
+#, kde-format
+msgctxt "@label system report item"
+msgid "Language"
+msgstr "Γλώσσα"
+
+#: src/services/SystemReportService.cpp:371
+#, kde-format
+msgctxt "@label system report item"
+msgid "Date and time"
+msgstr "Ημερομηνία και ώρα"
+
+#: src/services/SystemReportService.cpp:374
+#, kde-format
+msgctxt "@title system report section"
+msgid "Desktop"
+msgstr "Επιφάνεια εργασίας"
+
+#: src/services/SystemReportService.cpp:378
+#, kde-format
+msgctxt "@label system report item"
+msgid "Session"
+msgstr "Συνεδρία"
+
+#: src/services/SystemReportService.cpp:379
+#, kde-format
+msgctxt "@label system report item"
+msgid "Environment"
+msgstr "Περιβάλλον"
+
+#: src/services/SystemReportService.cpp:382
+#, kde-format
+msgctxt "@title system report section"
+msgid "Hardware"
+msgstr "Υλικό"
+
+#: src/services/SystemReportService.cpp:386
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer"
+msgstr "Υπολογιστής"
+
+#: src/services/SystemReportService.cpp:388
+#, kde-format
+msgctxt "@label system report item"
+msgid "Processor"
+msgstr "Επεξεργαστής"
+
+#: src/services/SystemReportService.cpp:389
+#, kde-format
+msgctxt "@label system report item"
+msgid "Cores / threads"
+msgstr "Πυρήνες / νήματα"
+
+#: src/services/SystemReportService.cpp:391
+#, kde-format
+msgctxt "@info firmware type"
+msgid "BIOS (legacy)"
+msgstr "BIOS (παλαιού τύπου)"
+
+#: src/services/SystemReportService.cpp:392
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Not applicable (BIOS)"
+msgstr "Δεν εφαρμόζεται (BIOS)"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Disabled"
+msgstr "Ανενεργό"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Enabled"
+msgstr "Ενεργό"
+
+#: src/services/SystemReportService.cpp:399
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Could not be determined"
+msgstr "Δεν ήταν δυνατός ο προσδιορισμός"
+
+#: src/services/SystemReportService.cpp:406
+#, kde-format
+msgctxt "@title system report section"
+msgid "Graphics"
+msgstr "Γραφικά"
+
+#: src/services/SystemReportService.cpp:430
+#, kde-format
+msgctxt "@info appended to a device name"
+msgid " · driver %1"
+msgstr " · οδηγός %1"
+
+# reviewed: 'Αποδόσεις' (plural 'renderings/performances') is a
+# mistranslation; KDE kwin uses 'Απεικονιστής' for renderer
+#: src/services/SystemReportService.cpp:438
+#, kde-format
+msgctxt "@label system report item"
+msgid "OpenGL renderer"
+msgstr "Απεικονιστής OpenGL"
+
+#: src/services/SystemReportService.cpp:445
+#, kde-format
+msgctxt "@label system report item"
+msgid "Monitor %1"
+msgstr "Οθόνη %1"
+
+#. i18n: screen name · width×height · refresh rate · scale percentage
+#: src/services/SystemReportService.cpp:447
+#, kde-format
+msgctxt "@info monitor details"
+msgid "%1 · %2×%3 · %4 Hz · scale %5%"
+msgstr "%1 · %2×%3 · %4 Hz · κλίμακα %5%"
+
+#: src/services/SystemReportService.cpp:455
+#, kde-format
+msgctxt "@title system report section"
+msgid "Memory"
+msgstr "Μνήμη"
+
+#: src/services/SystemReportService.cpp:457
+#, kde-format
+msgctxt "@label system report item"
+msgid "Total"
+msgstr "Σύνολο"
+
+#: src/services/SystemReportService.cpp:458
+#, kde-format
+msgctxt "@label system report item"
+msgid "In use"
+msgstr "Σε χρήση"
+
+#: src/services/SystemReportService.cpp:459
+#, kde-format
+msgctxt "@label system report item"
+msgid "Available"
+msgstr "Διαθέσιμη"
+
+#: src/services/SystemReportService.cpp:461
+#, kde-format
+msgctxt "@info swap usage"
+msgid "%1 of %2 in use"
+msgstr "%1 από %2 σε χρήση"
+
+#: src/services/SystemReportService.cpp:462
+#, kde-format
+msgid "No swap"
+msgstr "Χωρίς swap"
+
+#: src/services/SystemReportService.cpp:466
+#, kde-format
+msgctxt "@title system report section"
+msgid "Storage"
+msgstr "Αποθηκευτικός χώρος"
+
+#: src/services/SystemReportService.cpp:478
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disk %1"
+msgstr "Δίσκος %1"
+
+#: src/services/SystemReportService.cpp:497
+#, kde-format
+msgctxt "@label system report item"
+msgid "Other volume %1"
+msgstr "Άλλος τόμος %1"
+
+#: src/services/SystemReportService.cpp:500
+#, kde-format
+msgctxt "@info volume usage"
+msgid "%1 used of %2 · %3 free"
+msgstr "%1 σε χρήση από %2 · %3 ελεύθερα"
+
+#: src/services/SystemReportService.cpp:503
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disks"
+msgstr "Δίσκοι"
+
+#: src/services/SystemReportService.cpp:508
+#, kde-format
+msgctxt "@title system report section"
+msgid "Packages"
+msgstr "Πακέτα"
+
+#: src/services/SystemReportService.cpp:511
+#: src/services/SystemReportService.cpp:526
+#, kde-format
+msgid "%1 package"
+msgid_plural "%1 packages"
+msgstr[0] "%1 πακέτο"
+msgstr[1] "%1 πακέτα"
+
+#: src/services/SystemReportService.cpp:523
+#, kde-format
+msgid "%1 application"
+msgid_plural "%1 applications"
+msgstr[0] "%1 εφαρμογή"
+msgstr[1] "%1 εφαρμογές"
+
+#: src/services/SystemReportService.cpp:527
+#, kde-format
+msgid "Snap not installed"
+msgstr "Το Snap δεν είναι εγκατεστημένο"
+
+#: src/services/SystemReportService.cpp:532
+#, kde-format
+msgctxt "@info kernel version"
+msgid "%1 (in use)"
+msgstr "%1 (σε χρήση)"
+
+#: src/services/SystemReportService.cpp:534
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installed kernels"
+msgstr "Εγκατεστημένοι πυρήνες"
+
+#: src/services/SystemReportService.cpp:537
+#, kde-format
+msgctxt "@title system report section"
+msgid "Startup"
+msgstr "Εκκίνηση"
+
+#: src/services/SystemReportService.cpp:538
+#, kde-format
+msgctxt "@label system report item"
+msgid "Uptime"
+msgstr "Χρόνος λειτουργίας"
+
+#: src/services/SystemReportService.cpp:539
+#, kde-format
+msgctxt "@label system report item"
+msgid "Last boot"
+msgstr "Τελευταία εκκίνηση"
+
+#: src/services/SystemReportService.cpp:543
+#, kde-format
+msgctxt "@title system report section"
+msgid "Network"
+msgstr "Δίκτυο"
+
+#: src/services/SystemReportService.cpp:556
+#, kde-format
+msgctxt "@info network adapter"
+msgid "driver %1"
+msgstr "οδηγός %1"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "connected"
+msgstr "συνδεδεμένος"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "disconnected"
+msgstr "αποσυνδεδεμένος"
+
+#: src/services/SystemReportService.cpp:569
+#, kde-format
+msgctxt "@label system report item"
+msgid "Adapters"
+msgstr "Προσαρμογείς"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "32-bit"
+msgstr "32-bit"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "64-bit"
+msgstr "64-bit"
+
+#: src/services/SystemReportService.cpp:581
+#, kde-format
+msgctxt "@info memory usage summary"
+msgid "%1 of %2"
+msgstr "%1 από %2"
+
+#: src/services/SystemReportService.cpp:582
+#, kde-format
+msgctxt "@info storage summary"
+msgid "%1 free of %2"
+msgstr "%1 ελεύθερα από %2"
+
+#: src/services/SystemReportService.cpp:593
+#, kde-format
+msgctxt "@info system report header"
+msgid "Generated on: %1"
+msgstr "Δημιουργήθηκε στις: %1"
+
+#: src/services/SystemReportService.cpp:598
+#, kde-format
+msgctxt "@info system report line: label, value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: src/services/SystemReportService.cpp:603
+#, kde-format
+msgctxt "@info system report footer"
+msgid "No network addresses, serial numbers or computer name."
+msgstr "Χωρίς διευθύνσεις δικτύου, σειριακούς αριθμούς ή όνομα υπολογιστή."
+
+#: src/services/SystemService.cpp:93
+#, kde-format
+msgid "The %1 decoration engine is not installed."
+msgstr "Η μηχανή διακόσμησης %1 δεν είναι εγκατεστημένη."
+
+#: src/services/SystemService.cpp:108
+#, kde-format
+msgid "The %1 decoration is not installed or its resources are incomplete."
+msgstr "Η διακόσμηση %1 δεν είναι εγκατεστημένη ή οι πόροι της είναι ελλιπείς."
+
+#. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
+#: src/services/SystemService.cpp:480
+#, kde-format
+msgid "Driver Manager available"
+msgstr "Η Διαχείριση οδηγών είναι διαθέσιμη"
+
+#: src/services/SystemService.cpp:481
+#, kde-format
+msgid "Driver Manager not installed"
+msgstr "Η Διαχείριση οδηγών δεν είναι εγκατεστημένη"
+
+#: src/services/SystemService.cpp:497
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Active"
+msgstr "Ενεργό"
+
+#: src/services/SystemService.cpp:498
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Inactive"
+msgstr "Ανενεργό"
+
+#: src/services/SystemService.cpp:501
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: active"
+msgstr "εκκίνηση: ενεργό"
+
+#: src/services/SystemService.cpp:502
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: inactive"
+msgstr "εκκίνηση: ανενεργό"
+
+#. i18n: %1 is an error message shown in the page banner.
+#: src/services/SystemService.cpp:538
+#, kde-format
+msgid "Error: %1"
+msgstr "Σφάλμα: %1"
+
+#: src/services/SystemService.cpp:557
+#, kde-format
+msgid "Invalid theme."
+msgstr "Μη έγκυρο θέμα."
+
+#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
+#: src/services/SystemService.cpp:858
+#, kde-format
+msgid "Wait for the current operation to finish."
+msgstr "Περιμένετε να ολοκληρωθεί η τρέχουσα λειτουργία."
+
+#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#, kde-format
+msgid ""
+"The current external color scheme has no known variant. Select a Mainuan "
+"color first."
+msgstr ""
+"Ο τρέχων εξωτερικός χρωματικός συνδυασμός δεν έχει γνωστή παραλλαγή. "
+"Επιλέξτε πρώτα ένα χρώμα του Mainuan."
+
+#: src/services/SystemService.cpp:578
+#, kde-format
+msgid "Dark theme applied."
+msgstr "Το σκούρο θέμα εφαρμόστηκε."
+
+#: src/services/SystemService.cpp:579
+#, kde-format
+msgid "Light theme applied."
+msgstr "Το ανοιχτό θέμα εφαρμόστηκε."
+
+#. i18n: %1 is an accent color name (Brown, Cyan…).
+#: src/services/SystemService.cpp:596
+#, kde-format
+msgid "Theme and %1 color applied."
+msgstr "Εφαρμόστηκαν το θέμα και το χρώμα %1."
+
+#: src/services/SystemService.cpp:608
+#, kde-format
+msgid "Invalid accent color."
+msgstr "Μη έγκυρο χρώμα έμφασης."
+
+#: src/services/SystemService.cpp:618
+#, kde-format
+msgid "Applying %1 color…"
+msgstr "Εφαρμογή του χρώματος %1…"
+
+#: src/services/SystemService.cpp:629
+#, kde-format
+msgid "%1 color, icons, wallpaper and avatar applied."
+msgstr "Εφαρμόστηκαν το χρώμα %1, τα εικονίδια, η ταπετσαρία και το άβαταρ."
+
+#: src/services/SystemService.cpp:640
+#, kde-format
+msgid "Color scheme %1.colors is missing or unreadable."
+msgstr "Ο χρωματικός συνδυασμός %1.colors λείπει ή δεν είναι αναγνώσιμος."
+
+#: src/services/SystemService.cpp:646
+#, kde-format
+msgid "Color scheme %1.colors is invalid."
+msgstr "Ο χρωματικός συνδυασμός %1.colors δεν είναι έγκυρος."
+
+#: src/services/SystemService.cpp:651
+#, kde-format
+msgid "plasma-apply-colorscheme is not available."
+msgstr "Το plasma-apply-colorscheme δεν είναι διαθέσιμο."
+
+#: src/services/SystemService.cpp:658
+#, kde-format
+msgid "Plasma did not recognize the %1.colors color scheme."
+msgstr "Το Plasma δεν αναγνώρισε τον χρωματικό συνδυασμό %1.colors."
+
+#: src/services/SystemService.cpp:704
+#, kde-format
+msgid "Could not prepare the KDE color configuration."
+msgstr "Δεν ήταν δυνατή η προετοιμασία της διαμόρφωσης χρωμάτων του KDE."
+
+#: src/services/SystemService.cpp:715
+#, kde-format
+msgid "Plasma did not confirm the %1 color scheme without a color override."
+msgstr ""
+"Το Plasma δεν επιβεβαίωσε τον χρωματικό συνδυασμό %1 χωρίς παράκαμψη "
+"χρώματος."
+
+#. i18n: Item of a list of failed adjustments (lowercase, no final period).
+#: src/services/SystemService.cpp:729
+#, kde-format
+msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
+msgstr ""
+"το θέμα εικονιδίων %1 λείπει ή έχει μη έγκυρο index.theme (τα προηγούμενα "
+"εικονίδια διατηρήθηκαν)"
+
+#: src/services/SystemService.cpp:732
+#, kde-format
+msgctxt "failed adjustment list item; %1 is an icon theme"
+msgid "icons %1"
+msgstr "εικονίδια %1"
+
+#: src/services/SystemService.cpp:737
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper %1 missing"
+msgstr "η ταπετσαρία %1 λείπει"
+
+#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
+#: src/services/SystemService.cpp:1022
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper"
+msgstr "ταπετσαρία"
+
+#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "Plasma did not confirm the %1 icons"
+msgstr "το Plasma δεν επιβεβαίωσε τα εικονίδια %1"
+
+#: src/services/SystemService.cpp:758
+#, kde-format
+msgctxt "failed adjustment list item; %1 is the avatar error"
+msgid "avatar: %1"
+msgstr "άβαταρ: %1"
+
+#: src/services/SystemService.cpp:764
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "color scheme changed during the operation; avatar preserved"
+msgstr ""
+"ο χρωματικός συνδυασμός άλλαξε κατά τη λειτουργία· το άβαταρ διατηρήθηκε"
+
+#: src/services/SystemService.cpp:779
+#, kde-format
+msgid "Could not complete all adjustments: %1."
+msgstr "Δεν ήταν δυνατή η ολοκλήρωση όλων των προσαρμογών: %1."
+
+#: src/services/SystemService.cpp:780
+#, kde-format
+msgctxt "separator between failed adjustment list items"
+msgid "; "
+msgstr "· "
+
+#: src/services/SystemService.cpp:795
+#, kde-format
+msgid "Could not communicate with KWin to update the window decoration."
+msgstr ""
+"Δεν ήταν δυνατή η επικοινωνία με το KWin για την ενημέρωση της διακόσμησης "
+"παραθύρων."
+
+#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
+#: src/services/SystemService.cpp:830
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "could not restore the previous window decoration"
+msgstr "δεν ήταν δυνατή η επαναφορά της προηγούμενης διακόσμησης παραθύρων"
+
+#: src/services/SystemService.cpp:821
+#, kde-format
+msgid "Could not save the requested window decoration in KWin."
+msgstr ""
+"Δεν ήταν δυνατή η αποθήκευση της ζητούμενης διακόσμησης παραθύρων στο KWin."
+
+#: src/services/SystemService.cpp:831
+#, kde-format
+msgid ""
+"The final window decoration configuration was changed during the operation."
+msgstr ""
+"Η τελική διαμόρφωση της διακόσμησης παραθύρων άλλαξε κατά τη λειτουργία."
+
+#: src/services/SystemService.cpp:854
+#, kde-format
+msgid "Invalid visual style."
+msgstr "Μη έγκυρο οπτικό στυλ."
+
+#: src/services/SystemService.cpp:862
+#, kde-format
+msgid "%1 style applied."
+msgstr "Το στυλ %1 εφαρμόστηκε."
+
+#: src/services/SystemService.cpp:895
+#, kde-format
+msgid ""
+"This system's Plasma does not provide plasma-apply-lookandfeel; the style "
+"cannot be changed."
+msgstr ""
+"Το Plasma αυτού του συστήματος δεν παρέχει το plasma-apply-lookandfeel· το "
+"στυλ δεν μπορεί να αλλάξει."
+
+#: src/services/SystemService.cpp:900
+#, kde-format
+msgid "The %1 style is not installed on this system."
+msgstr "Το στυλ %1 δεν είναι εγκατεστημένο σε αυτό το σύστημα."
+
+#. i18n: %1 is a complete sentence describing the problem.
+#: src/services/SystemService.cpp:911
+#, kde-format
+msgid "%1 Previous appearance preserved."
+msgstr "%1 Η προηγούμενη εμφάνιση διατηρήθηκε."
+
+#: src/services/SystemService.cpp:927
+#, kde-format
+msgid "Could not preserve the %1 icon theme. Previous style preserved."
+msgstr ""
+"Δεν ήταν δυνατή η διατήρηση του θέματος εικονιδίων %1. Το προηγούμενο στυλ "
+"διατηρήθηκε."
+
+#: src/services/SystemService.cpp:931
+#, kde-format
+msgid "Applying %1 style…"
+msgstr "Εφαρμογή του στυλ %1…"
+
+#: src/services/SystemService.cpp:948
+#, kde-format
+msgid "Could not apply the %1 style."
+msgstr "Δεν ήταν δυνατή η εφαρμογή του στυλ %1."
+
+#: src/services/SystemService.cpp:956
+#, kde-format
+msgid "Plasma did not confirm the %1 style."
+msgstr "Το Plasma δεν επιβεβαίωσε το στυλ %1."
+
+#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "icons"
+msgstr "εικονίδια"
+
+#: src/services/SystemService.cpp:986
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "cursor"
+msgstr "δρομέας"
+
+#: src/services/SystemService.cpp:1057
+#, kde-format
+msgid "Driver Manager is not installed."
+msgstr "Η Διαχείριση οδηγών δεν είναι εγκατεστημένη."
+
+#: src/services/SystemService.cpp:1061
+#, kde-format
+msgid "Could not open Driver Manager."
+msgstr "Δεν ήταν δυνατό το άνοιγμα της Διαχείρισης οδηγών."
+
+#: src/services/SystemService.cpp:1066
+#, kde-format
+msgid "Unknown action."
+msgstr "Άγνωστη ενέργεια."
+
+#: src/services/SystemService.cpp:1075
+#, kde-format
+msgid "URL blocked for security reasons."
+msgstr "Το URL αποκλείστηκε για λόγους ασφαλείας."
+
+#: src/services/SystemService.cpp:1079
+#, kde-format
+msgid "Requested the web browser to open the page."
+msgstr "Ζητήθηκε από τον περιηγητή ιστού να ανοίξει τη σελίδα."
+
+#: src/services/SystemService.cpp:1080
+#, kde-format
+msgid "Could not open the URL in the default web browser."
+msgstr "Δεν ήταν δυνατό το άνοιγμα του URL στον προεπιλεγμένο περιηγητή ιστού."
+
+#: src/services/SystemService.cpp:1087
+#, kde-format
+msgid "This application is not allowed to be opened in Discover."
+msgstr "Δεν επιτρέπεται το άνοιγμα αυτής της εφαρμογής στο Discover."
+
+#: src/services/SystemService.cpp:1092
+#, kde-format
+msgid "Discover was not found. Install KDE Discover to open this application."
+msgstr ""
+"Το Discover δεν βρέθηκε. Εγκαταστήστε το KDE Discover για να ανοίξετε αυτή "
+"την εφαρμογή."
+
+#: src/services/SystemService.cpp:1098
+#, kde-format
+msgid "Could not open the page in Discover. Try again."
+msgstr "Δεν ήταν δυνατό το άνοιγμα της σελίδας στο Discover. Δοκιμάστε ξανά."
+
+#: src/services/SystemService.cpp:1101
+#, kde-format
+msgid ""
+"Requested Discover to open the page. Confirm the installation in Discover; "
+"if the application is not found, check Flathub and try again."
+msgstr ""
+"Ζητήθηκε από το Discover να ανοίξει τη σελίδα. Επιβεβαιώστε την εγκατάσταση "
+"στο Discover· αν η εφαρμογή δεν βρεθεί, ελέγξτε το Flathub και δοκιμάστε "
+"ξανά."
+
+#: src/services/SystemService.cpp:1109
+#, kde-format
+msgid "No Pix key is configured."
+msgstr "Δεν έχει ρυθμιστεί κλειδί Pix."
+
+#: src/services/SystemService.cpp:1113
+#, kde-format
+msgid "Clipboard unavailable."
+msgstr "Το πρόχειρο δεν είναι διαθέσιμο."
+
+#: src/services/UserAvatar.cpp:70
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "η ενημέρωση του άβαταρ δεν επιτρέπεται ως διαχειριστής"
+
+#: src/services/UserAvatar.cpp:76
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr ""
+"το αρχείο προέλευσης .face λείπει, δεν είναι αναγνώσιμο ή δεν είναι ασφαλές"
+
+#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the source avatar"
+msgstr "δεν ήταν δυνατή η ανάγνωση του άβαταρ προέλευσης"
+
+#: src/services/UserAvatar.cpp:93
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid ""
+"the .face file does not contain a valid image (SVG requires the Qt SVG "
+"plugin)"
+msgstr ""
+"το αρχείο .face δεν περιέχει έγκυρη εικόνα (το SVG απαιτεί το πρόσθετο Qt "
+"SVG)"
+
+#: src/services/UserAvatar.cpp:100
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "home folder unavailable or with unsafe permissions"
+msgstr "ο προσωπικός φάκελος δεν είναι διαθέσιμος ή έχει μη ασφαλή δικαιώματα"
+
+#: src/services/UserAvatar.cpp:106
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "~/.face is not a safe regular file; avatar preserved"
+msgstr "το ~/.face δεν είναι ασφαλές κανονικό αρχείο· το άβαταρ διατηρήθηκε"
+
+#: src/services/UserAvatar.cpp:112
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "unsafe avatar backup; avatar preserved"
+msgstr "μη ασφαλές αντίγραφο ασφαλείας του άβαταρ· το άβαταρ διατηρήθηκε"
+
+#: src/services/UserAvatar.cpp:120
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely open the previous avatar"
+msgstr "δεν ήταν δυνατό το ασφαλές άνοιγμα του προηγούμενου άβαταρ"
+
+#: src/services/UserAvatar.cpp:124
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the previous avatar"
+msgstr "δεν ήταν δυνατή η ανάγνωση του προηγούμενου άβαταρ"
+
+#: src/services/UserAvatar.cpp:128
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not preserve the previous avatar"
+msgstr "δεν ήταν δυνατή η διατήρηση του προηγούμενου άβαταρ"
+
+#: src/services/UserAvatar.cpp:132
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the backup; avatar preserved"
+msgstr ""
+"δεν ήταν δυνατή η εγγραφή του αντιγράφου ασφαλείας· το άβαταρ διατηρήθηκε"
+
+#: src/services/UserAvatar.cpp:138
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not publish the backup; avatar preserved"
+msgstr ""
+"δεν ήταν δυνατή η δημοσίευση του αντιγράφου ασφαλείας· το άβαταρ διατηρήθηκε"
+
+#: src/services/UserAvatar.cpp:146
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the new avatar; avatar preserved"
+msgstr "δεν ήταν δυνατή η εγγραφή του νέου άβαταρ· το άβαταρ διατηρήθηκε"
+
+#: src/services/UserAvatar.cpp:155
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely replace ~/.face; avatar preserved"
+msgstr ""
+"δεν ήταν δυνατή η ασφαλής αντικατάσταση του ~/.face· το άβαταρ διατηρήθηκε"
+
+#: src/services/UserAvatar.cpp:158
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but writing to disk could not be confirmed"
+msgstr ""
+"το άβαταρ ενημερώθηκε, αλλά δεν ήταν δυνατό να επιβεβαιωθεί η εγγραφή στον "
+"δίσκο"
+
+#: src/services/UserAvatar.cpp:165
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be checked"
+msgstr ""
+"το άβαταρ ενημερώθηκε, αλλά δεν ήταν δυνατός ο έλεγχος του ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:168
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be created"
+msgstr ""
+"το άβαταρ ενημερώθηκε, αλλά δεν ήταν δυνατή η δημιουργία του ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:171
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
+msgstr ""
+"το άβαταρ ενημερώθηκε, αλλά δεν ήταν δυνατό να επιβεβαιωθεί το ~/.face.icon "
+"στον δίσκο"

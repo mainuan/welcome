@@ -80,12 +80,12 @@ private slots:
         CatalogLayoutDirection::apply(*app);
         QCOMPARE(QGuiApplication::layoutDirection(), Qt::RightToLeft);
 
-        // Urdu is written right to left, but there is no mainuan-welcome catalog
+        // Yiddish is written right to left, but there is no mainuan-welcome catalog
         // for it: the interface falls back to English and stays left to right.
         app->setLayoutDirection(Qt::LeftToRight);
-        KLocalizedString::setLanguages({QStringLiteral("ur"), QStringLiteral("en")});
-        QCOMPARE(QLocale(QStringLiteral("ur")).textDirection(), Qt::RightToLeft);
-        QVERIFY(!KLocalizedString::isApplicationTranslatedInto(QStringLiteral("ur")));
+        KLocalizedString::setLanguages({QStringLiteral("yi"), QStringLiteral("en")});
+        QCOMPARE(QLocale(QStringLiteral("yi")).textDirection(), Qt::RightToLeft);
+        QVERIFY(!KLocalizedString::isApplicationTranslatedInto(QStringLiteral("yi")));
         QCOMPARE(CatalogLayoutDirection::effectiveLanguage(), QString());
         CatalogLayoutDirection::apply(*app);
         QCOMPARE(QGuiApplication::layoutDirection(), Qt::LeftToRight);
