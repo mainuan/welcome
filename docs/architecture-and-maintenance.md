@@ -132,3 +132,29 @@ aceitam os overrides `MAINUAN_DEV_*` descritos nos fontes e nas fixtures.
 Os temas, esquemas, plasmoids e recursos Mainuan são externos. Ausências e
 limitações gráficas devem ser avaliadas na distribuição; os testes simulados não
 provam a renderização final em todas as escalas, monitores e temas Wayland.
+
+## Isolamento dos testes
+
+As suítes C++ recebem um barramento D-Bus privado por `dbus-run-session`
+(dependência de compilação `dbus-daemon`), sem ativação de serviços instalados,
+além de HOME e diretórios XDG temporários. Execute-as pelo CTest para manter esse
+isolamento também durante `dh_auto_test`. O workflow verifica as suítes
+sequencialmente e em paralelo; o empacotamento repete os testes obrigatórios, e
+`.github/scripts/check_release.py tests` recusa testes ausentes, ignorados ou com
+falhas.
+
+Isso evita depender do socket da sessão do host: o debhelper cria outro
+`XDG_RUNTIME_DIR`, sem esse socket. Sem barramento conectado, a consulta
+assíncrona de wallpaper podia ficar sem sinal de conclusão antes mesmo de
+executar o comando Plasma simulado. O barramento privado devolve o erro esperado
+de serviço ausente; não inicia o Plasma, não exige serialização e mantém os
+timeouts e as verificações de aparência existentes.
+
+A lista de bibliotecas Qt6, KF6/KConfig, KI18n, Kirigami e libqrencode e dos
+módulos QML fica somente em `debian/control`; o workflow a instala com
+`apt-get build-dep ./`.
+
+`dpkg-buildpackage` grava os pacotes na pasta acima do código. Os diretórios
+gerados são ignorados pelo Git. Para limpar, use `debian/rules clean` para o
+empacotamento e remova somente diretórios de build previamente conferidos; eles
+podem conter arquivos que você tenha guardado manualmente.
