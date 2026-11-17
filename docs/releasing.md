@@ -64,7 +64,13 @@ catálogo interno; `.github/actionlint.yaml` acrescenta esse label validado na
 Essa configuração do linter não muda os jobs para runners self-hosted.
 
 O job `build` tem somente `contents: read` e não persiste credenciais Git. O job
-`release`, dependente do sucesso do build e restrito a push de tag no repositório
+`install-test` baixa o mesmo artefato num contêiner Ubuntu 26.04 limpo (sem
+ferramentas de build), instala o `.deb` com `apt`, confere que todo arquivo
+listado pelo dpkg existe, inicia o aplicativo instalado como usuário comum (sem
+display nem barramento de sessão, mesmo critério de `tests/smoke.sh`), confere
+que o helper recusa perfis desconhecidos, reinstala, remove e expurga, falhando
+se sobrar arquivo do pacote. O job
+`release`, dependente do sucesso do build e do teste de instalação e restrito a push de tag no repositório
 oficial, tem `contents: write`, sem checkout nem execução de scripts do projeto.
 Baixa o artefato pelo ID da mesma execução, verifica checksum, versão e commit
 atual da tag e chama `gh release create --verify-tag`. Não usa `--clobber`, não
