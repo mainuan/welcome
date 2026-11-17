@@ -1,175 +1,146 @@
-# Mainuan Welcome 1.0.1
+<div align="center">
 
-Aplicação nativa de boas-vindas do Mainuan Linux, baseada em C++17, Qt 6/QML e
-Kirigami. Destino suportado: **Mainuan / Kubuntu 26.04 LTS, KDE Plasma 6 e Wayland,
-amd64**. Não utiliza Electron, Node.js, Chromium embarcado ou WebView.
+<img src="https://raw.githubusercontent.com/mainuan/.github/main/profile/assets/mainuan-logo.svg" width="96" alt="Logotipo do Mainuan">
 
-O pacote de distribuição tem como alvo **x86-64 básico (v1/SSE2)**. O CI usa
-uma base Ubuntu 26.04 sem variantes amd64v3, audita ELF/flags e testa o pacote
-sob QEMU sem AVX/AVX2. A ISO e suas bibliotecas também precisam respeitar esse
-alvo: consulte [o diagnóstico e os gates de CPU](docs/cpu-compatibility.md).
+# Mainuan Welcome
 
-Repositório oficial: https://github.com/mainuan/welcome
+Tela de boas-vindas do **Mainuan Linux**: aparência, layout do painel, aplicativos essenciais e informações do sistema num só lugar.
+
+[![CI](https://github.com/mainuan/welcome/actions/workflows/build-deb.yml/badge.svg)](https://github.com/mainuan/welcome/actions/workflows/build-deb.yml)
+[![Release](https://img.shields.io/github/v/release/mainuan/welcome)](https://github.com/mainuan/welcome/releases/latest)
+[![Licença](https://img.shields.io/github/license/mainuan/welcome)](LICENSE)
+![Plataforma](https://img.shields.io/badge/Kubuntu%2026.04%20%7C%20Plasma%206.6-1d99f3)
+
+**Português** · [English](README.en.md)
+
+</div>
+
+---
+
+## O que é
+
+O Mainuan Welcome abre no primeiro login e ajuda a deixar o sistema do jeito do usuário: estilo visual, cores, layout dos painéis do Plasma e instalação de codecs, antivírus, firewall, suítes de escritório e navegadores. Cada usuário pode desativar a abertura automática.
+
+É um aplicativo nativo em C++17, Qt 6/QML e Kirigami, sem Electron, Node.js, Chromium embarcado ou WebView. As ações administrativas passam por um helper com perfis fechados, autorizado pelo Polkit; o Welcome nunca pede nem guarda senhas e não tem telemetria.
+
+Os temas, esquemas Dream, ícones Kora, wallpapers, avatares e plasmoides personalizados pertencem ao Mainuan e não são duplicados no pacote. Sem esses recursos, os serviços tratam a ausência, mas instalar o Welcome num Kubuntu comum não reproduz toda a personalização do Mainuan.
 
 ## Funcionalidades
 
-- Estilos Dream, Tahoe e Breeze, com variantes clara/escura e seis esquemas KDE.
-- Sincronização de ícones Kora, wallpaper e avatar, preservando preferências e backups.
-- Sete layouts: Clássico — 5 barras, 3 barras, Barra única, Tiling, Painel superior,
-  Lomiri e Barra W7, com verificação de widgets, backup e restauração.
-- Instalação de suítes Office e navegadores, incluindo FreeOffice, Vivaldi e Zen,
-  com progresso, erros acessíveis e autenticação pelo sistema quando necessária.
-- Perfis de antivírus, firewall e codecs; serviços online Google Docs e Office 365.
-- Acesso à ferramenta independente Mainuan Gestão de Drivers, quando instalada.
-- Relatório da máquina, tutoriais locais, contribuição Pix e opção de abrir no login.
+- Estilos Dream, Tahoe e Breeze, com variantes clara e escura e seis cores (Marrom, Ciano, Magenta, Lima, Cinza e Violeta), cada uma com esquema KDE, ícones Kora, wallpaper e avatar correspondentes.
+- Sete layouts do Plasma: Clássico (5 barras), 3 barras, Barra única, Tiling, Painel superior, Lomiri e Barra W7, com verificação de widgets, backup automático e restauração.
+- Instalação de suítes de escritório e navegadores (entre eles FreeOffice, Vivaldi e Zen) via Flatpak ou pacote Debian, com progresso, mensagens de erro acessíveis e autenticação do sistema quando necessária.
+- Perfis de antivírus, firewall e codecs; atalhos para Google Docs e Office 365.
+- Atalho para o [Mainuan Gestão de Drivers](https://github.com/mainuan/mainuan-gestao-drivers), quando instalado.
+- Relatório da máquina (coletado só quando pedido, sem identificadores sensíveis), tutoriais locais, página de contribuição por Pix com QR Code gerado localmente e opção de abrir no login.
 
-| Início | Aparência |
-|---|---|
-| ![Início](docs/screenshots/welcome-home.png) | ![Aparência](docs/screenshots/welcome-appearance.png) |
+## Instalação
 
-As capturas documentam o desenvolvimento; pequenos detalhes visuais podem diferir.
-Os temas, esquemas Dream, ícones Kora, wallpapers, avatares de origem e plasmoids
-personalizados pertencem ao Mainuan e não são duplicados no pacote Welcome.
-A ausência de recursos é tratada pelos serviços; instalar no Kubuntu sem esses
-recursos não reproduz toda a personalização do Mainuan.
-
-## Obter e instalar
-
-A versão corretiva **1.0.1 está em preparação**. Após o envio manual do código,
-obtenha `mainuan-welcome_1.0.1_amd64.deb` e `SHA256SUMS` no artefato do commit
-aprovado em [GitHub Actions](https://github.com/mainuan/welcome/actions/workflows/build-deb.yml).
-A futura tag será `v1.0.1`, somente após aprovação do mantenedor.
-A [Release v1.0 existente](https://github.com/mainuan/welcome/releases/tag/v1.0)
-permanece intacta; seus assets são da versão anterior. Veja o
-[procedimento de publicação](docs/releasing.md).
-
-Esta correção reconhece a cor Mainuan já configurada, inclusive em `kdedefaults`,
-para alternar diretamente entre Claro e Escuro sem selecionar novamente a cor.
-Esquemas externos desconhecidos são preservados.
-
-A janela abre normalmente em 870 × 600, com mínimo de 760 × 520 e adaptação à
-área útil de telas menores. A versão também simplifica os indicadores de
-instalação e corrige a decoração Lavanda no Dream, mantendo as decorações
-próprias de Tahoe e Breeze. Veja a [validação e as limitações gráficas](docs/22-final-1.0.1-ux-decoration.md).
-
-Na pasta dos dois arquivos:
+O Welcome já vem instalado na ISO do Mainuan. Para instalar ou atualizar manualmente, baixe `mainuan-welcome_1.0.1_amd64.deb` e `SHA256SUMS` da [última release](https://github.com/mainuan/welcome/releases/latest) e, na pasta dos dois arquivos:
 
 ```bash
-sha256sum --check SHA256SUMS
+sha256sum --check --ignore-missing SHA256SUMS
 sudo apt install ./mainuan-welcome_1.0.1_amd64.deb
 ```
 
-A versão 1.0.1 é superior a 1.0 para o APT. Para reinstalar a mesma versão,
-acrescente `--reinstall`. O pacote abre o Welcome
-no login; cada usuário pode desativar “Mostrar esta tela ao iniciar o sistema”.
+Para reinstalar a mesma versão, acrescente `--reinstall`. As Releases do GitHub não são um repositório APT: atualizações não chegam sozinhas por `apt upgrade`.
 
-### Migração das versões experimentais superiores
+> **Vindo de uma versão experimental 2.x?** A 1.0 foi a primeira versão oficial e é numericamente inferior à série 2.x (`dpkg --compare-versions 2.3.1.5 gt 1.0` retorna zero). Confira a versão instalada com `dpkg-query -W -f='${Version}\n' mainuan-welcome` e autorize o downgrade explicitamente com `sudo apt install --allow-downgrades ./mainuan-welcome_1.0.1_amd64.deb`. Não há epoch nem migração automática; se uma fonte APT ainda oferecer 2.x, o APT pode voltar a preferi-la. Detalhes em [docs/releasing.md](docs/releasing.md).
 
-**1.0 é a primeira versão oficial, mas é numericamente inferior às versões 2.x
-experimentais.** O Debian confirma a comparação; o comando abaixo retorna zero:
+## Uso
 
-```bash
-dpkg --compare-versions 2.3.1.5 gt 1.0
-```
-
-Se já houver uma versão experimental instalada, confira o número e autorize o
-downgrade explicitamente, após verificar o checksum:
+Abra **Mainuan Welcome** no menu de aplicativos (categoria Configurações) ou execute:
 
 ```bash
-dpkg-query -W -f='${Version}\n' mainuan-welcome
-sudo apt install --allow-downgrades ./mainuan-welcome_1.0.1_amd64.deb
+mainuan-welcome
 ```
 
-Não foi acrescentado epoch nem feita uma migração automática. Se um repositório
-APT ainda oferecer uma versão 2.x, ele poderá voltar a ser preferido pelo APT.
-O mantenedor deve coordenar esses canais; usuários que permanecerem em 2.x não
-receberão automaticamente versões oficiais inferiores, como 1.0 ou 1.1.
-Veja a [política de publicação e migração](docs/releasing.md).
+O comando não tem opções. Iniciar uma segunda cópia traz a janela aberta para a frente. A janela abre em 870 × 600 (mínimo 760 × 520) e se adapta a telas menores.
 
-## Compilações automáticas
+| Arquivo | Função |
+|---|---|
+| `/etc/xdg/autostart/org.mainuan.Welcome.desktop` | abre o Welcome no login, para todos os usuários |
+| `~/.config/autostart/org.mainuan.Welcome.desktop` | criado com `Hidden=true` quando o usuário desmarca "Mostrar esta tela ao iniciar o sistema" |
+| `/etc/mainuan/welcome.conf` | chave Pix da página Contribuir (com configuração pessoal como alternativa) |
+| `/usr/libexec/mainuan-welcome/mainuan-welcome-helper` | helper privilegiado, executado por `pkexec`; aceita só perfis fixos |
+| `/var/log/mainuan-welcome/install.log` | saída da última instalação de pacote (legível pelo root) |
+| `~/.local/share/mainuan-welcome/layout-backups/` | backups dos arquivos do Plasma antes de trocar o layout (até cinco) |
 
-O workflow [Build Debian package](https://github.com/mainuan/welcome/actions/workflows/build-deb.yml)
-usa exclusivamente `ubuntu-26.04`:
+Página de manual: `man mainuan-welcome`.
 
-- Push em `main`, PR para `main` ou execução manual: compila, testa e disponibiliza
-  o pacote e `SHA256SUMS` como artefato por 30 dias, somente após validação.
-- Push de uma tag versionada: faz as mesmas verificações e publica uma Release
-  somente quando a tag corresponde exatamente à versão interna do pacote.
-- PRs e execuções manuais nunca publicam Releases. Uma Release existente não é
-  substituída; o workflow não cria versões nem tags.
+## Informações técnicas
 
-Para uma compilação temporária, abra a execução aprovada, baixe o artefato em
-**Artifacts**, extraia o arquivo e confira `SHA256SUMS`. Artefatos do Actions são
-transitórios; Releases são publicações oficiais deliberadas pelo mantenedor.
-**Disponibilizar um `.deb` no GitHub não cria um repositório de atualizações APT.**
+| Item | Valor |
+|---|---|
+| Linguagem | C++17 e QML |
+| Toolkit | Qt 6, Kirigami, KF6 (KConfig, KI18n), libqrencode |
+| Base | Kubuntu 26.04 LTS, KDE Plasma 6.6, Wayland |
+| Pacote | `mainuan-welcome` (Debian, `amd64`) |
+| Dependências principais | módulos QML do Qt 6 e Kirigami, `pkexec`, `psmisc` (lista completa em [`debian/control`](debian/control)) |
+| Arquitetura | amd64, x86-64 básico (v1/SSE2), sem exigir AVX/AVX2 |
 
-## Compilar e testar localmente
+O pacote é auditado para rodar em x86-64 básico: o CI compila num contêiner Ubuntu 26.04 sem variantes `amd64v3`, confere as flags de compilação e as notas ELF do pacote e das bibliotecas que ele carrega, e inicia o `.deb` sob QEMU com CPU sem AVX/AVX2. A ISO e suas bibliotecas também precisam respeitar esse alvo; veja [os gates de CPU](docs/cpu-compatibility.md).
 
-Use o Mainuan/Kubuntu 26.04 e instale as dependências declaradas em `debian/control`:
+Mais documentação:
+
+- [Arquitetura, segurança, backups e isolamento dos testes](docs/architecture-and-maintenance.md)
+- [Publicação, tags, checksums e migração Debian](docs/releasing.md)
+- [Consolidação da 1.0.1](docs/22-final-1.0.1-ux-decoration.md) e [correção de Claro/Escuro](docs/21-initial-theme-detection.md)
+- [Índice da documentação e histórico](docs/README.md)
+
+## Compilação e testes
+
+Num Mainuan ou Kubuntu 26.04, com as dependências de [`debian/control`](debian/control). São os mesmos comandos do workflow [Build Debian package](.github/workflows/build-deb.yml):
 
 ```bash
 git clone https://github.com/mainuan/welcome.git
 cd welcome
-sudo apt-get update
 sudo apt-get install build-essential dpkg-dev fakeroot lintian
 sudo apt-get build-dep --no-install-recommends ./
 dpkg-checkbuilddeps
+
+# metadados, versão e scripts de verificação
+python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+python3 .github/scripts/check_release.py metadata --tag v1.0.1
+
+# catálogos de tradução
+po/i18n.sh check-pot && po/i18n.sh validate && po/i18n.sh coverage
+
+# compilação e testes QtTest, QML e de inicialização (offscreen)
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DMAINUAN_DEVELOPER_MODE=OFF
 cmake --build build --parallel 2
-ctest --test-dir build --output-on-failure --output-junit release-tests.xml
+QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software \
+  ctest --test-dir build --output-on-failure --output-junit release-tests.xml
 python3 .github/scripts/check_release.py tests build/release-tests.xml
-python3 -m unittest discover -s .github/scripts -p 'test_*.py'
-```
 
-A lista de bibliotecas Qt6, KF6/KConfig, Kirigami e libqrencode e dos módulos QML
-fica em `debian/control`; não há outra lista de bibliotecas no workflow. Os testes
-QtTest, QML e de inicialização usam diretórios temporários, ferramentas simuladas
-e renderização offscreen. Não instalam aplicativos nem alteram a sessão Plasma.
-O verificador de release recusa testes ausentes, ignorados ou com falhas.
-As suítes C++ recebem um barramento D-Bus privado por `dbus-run-session`
-(dependência de compilação `dbus-daemon`), sem ativação de serviços instalados,
-além de HOME e diretórios XDG temporários. Execute-as pelo CTest para manter esse
-isolamento também durante `dh_auto_test`. O workflow verifica as seis suítes
-sequencialmente e em paralelo; o empacotamento repete os testes obrigatórios.
-Isso evita depender do socket da sessão do host: o debhelper cria outro
-`XDG_RUNTIME_DIR`, sem esse socket. Sem barramento conectado, a consulta
-assíncrona de wallpaper podia ficar sem sinal de conclusão antes mesmo de
-executar o comando Plasma simulado. O barramento privado devolve o erro esperado
-de serviço ausente; não inicia o Plasma, não exige serialização e mantém os
-timeouts e as verificações de aparência existentes.
-
-Para executar a aplicação compilada: `./build/bin/mainuan-welcome`.
-Para gerar o pacote:
-
-```bash
-python3 .github/scripts/check_release.py metadata --tag v1.0.1
+# pacote
 dpkg-buildpackage -us -uc -b
 python3 .github/scripts/check_release.py package ../mainuan-welcome_1.0.1_amd64.deb --version 1.0.1
 lintian --fail-on error ../mainuan-welcome_1.0.1_amd64.deb
-mkdir -p dist
-cp ../mainuan-welcome_1.0.1_amd64.deb dist/
-(cd dist && sha256sum mainuan-welcome_1.0.1_amd64.deb > SHA256SUMS)
 ```
 
-`dpkg-buildpackage` repete os testes e grava os pacotes na pasta acima do código.
-Os diretórios gerados são ignorados pelo Git. Para limpar, use `debian/rules clean`
-para o empacotamento e remova somente diretórios de build previamente conferidos;
-eles podem conter arquivos que você tenha guardado manualmente.
+Para rodar sem instalar: `./build/bin/mainuan-welcome`. Os testes usam diretórios temporários, ferramentas simuladas e um D-Bus privado; não instalam aplicativos nem alteram a sessão Plasma.
 
-## Manutenção, segurança e publicação
+O CI também confere a CPU básica (`.github/scripts/check_cpu.py` e `cpu_smoke.py`) e instala o `.deb` num contêiner Ubuntu 26.04 limpo: confere os arquivos, abre o app como usuário comum, testa o helper, reinstala, remove e expurga sem sobras. A Release só é publicada por tag `v*` igual à versão do pacote e nunca substitui uma Release existente.
 
-- [Arquitetura, segurança, backups e recursos do sistema](docs/architecture-and-maintenance.md).
-- [Checklist de publicação, comandos Git e downgrade](docs/releasing.md).
-- [Inventário e limpeza da preparação 1.0](docs/cleanup-1.0.md).
-- [Índice da documentação e histórico experimental](docs/README.md).
+## Traduções
 
-A configuração Pix fica em `/etc/mainuan/welcome.conf`, com fallback por usuário;
-não há telemetria. O helper aceita apenas perfis fechados e usa Polkit, sem senha
-administrativa no Welcome. Os testes reais de integração gráfica, autenticação e
-recursos específicos da distribuição continuam sendo responsabilidade do Mainuan.
+A interface está em 33 idiomas (catálogos em [`po/`](po), com inglês como idioma-fonte e `pt_BR` como interface brasileira): ar, bn, cs, da, de, el, es, fa, fi, fr, he, hi, hu, id, it, ja, ko, nb, nl, pl, pt, pt_BR, ro, ru, sv, sw, th, tr, uk, ur, vi, zh_CN e zh_TW. O idioma segue o do Plasma (*Região e idioma*).
 
-Licença: GPL-3.0-or-later, conforme [LICENSE](LICENSE) e
-[debian/copyright](debian/copyright). Créditos originais preservados: Mainuan
-contributors; ícones Lucide sob ISC em [qml/icons/LICENSE.lucide](qml/icons/LICENSE.lucide).
-O campo Debian Maintainer permanece `ruscher <rruscher@gmail.com>`; esta preparação
-não presume uma transferência de manutenção.
+Como traduzir e manter os catálogos: [docs/i18n/README.md](docs/i18n/README.md).
+
+## Contribuição
+
+Relate problemas e sugestões em [Issues](https://github.com/mainuan/welcome/issues). Pull requests para `main` passam pelo CI completo (compilação, testes, CPU, lintian e teste de instalação limpa) antes da revisão. Ao mudar textos da interface, atualize os catálogos com `po/i18n.sh extract` e `po/i18n.sh update`.
+
+## Créditos
+
+- **Natanael Barbosa Santos** ([@natanael-art](https://github.com/natanael-art))
+- **Rafael Ruscher** ([@ruscher](https://github.com/ruscher)), mantenedor do pacote Debian
+- **Daigo** ([@daigoasuka](https://github.com/daigoasuka))
+
+Ícones de linha do [Lucide](https://lucide.dev), sob licença ISC ([qml/icons/LICENSE.lucide](qml/icons/LICENSE.lucide)).
+
+## Licença
+
+[GPL-3.0-or-later](LICENSE). Detalhes por arquivo em [`debian/copyright`](debian/copyright).
