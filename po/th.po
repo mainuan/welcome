@@ -1,0 +1,2566 @@
+# Thai translations for mainuan-welcome package.
+# Copyright (C) 2026 Mainuan
+# This file is distributed under the same license as the mainuan-welcome package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mainuan-welcome\n"
+"Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
+"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"PO-Revision-Date: 2026-11-16 12:18-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: th <https://github.com/mainuan>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: qml/Main.qml:13
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — ยินดีต้อนรับ"
+
+#: qml/Main.qml:42
+msgid "Wait for the appearance changes to finish before closing the Welcome."
+msgstr "โปรดรอให้การเปลี่ยนรูปลักษณ์เสร็จสิ้นก่อนปิดแอปต้อนรับ"
+
+#: qml/Main.qml:45
+msgid ""
+"Wait for the layout to finish applying or restoring before closing the "
+"Welcome."
+msgstr "โปรดรอให้การใช้หรือคืนค่าการจัดวางเสร็จสิ้นก่อนปิดแอปต้อนรับ"
+
+#: qml/Main.qml:81 qml/pages/HomePage.qml:23
+msgctxt "@title navigation page"
+msgid "Home"
+msgstr "หน้าหลัก"
+
+#: qml/Main.qml:82 qml/pages/AppearancePage.qml:23
+#: qml/pages/AppearancePage.qml:38
+msgctxt "@title navigation page"
+msgid "Appearance"
+msgstr "รูปลักษณ์"
+
+#: qml/Main.qml:83 qml/Main.qml:207
+msgctxt "@title navigation page"
+msgid "Office"
+msgstr "สำนักงาน"
+
+#: qml/Main.qml:84 qml/Main.qml:208
+msgctxt "@title navigation page"
+msgid "Browsers"
+msgstr "เบราว์เซอร์"
+
+#: qml/Main.qml:85 qml/pages/TutorialsPage.qml:23
+msgctxt "@title navigation page"
+msgid "Tutorials"
+msgstr "บทแนะนำ"
+
+#: qml/Main.qml:86 qml/pages/AboutPage.qml:22
+msgctxt "@title navigation page"
+msgid "About"
+msgstr "เกี่ยวกับ"
+
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
+#: qml/pages/ContributePage.qml:32
+msgctxt "@title navigation page"
+msgid "Contribute"
+msgstr "ร่วมสนับสนุน"
+
+#: qml/Main.qml:184
+msgid "Show this screen at system startup"
+msgstr "แสดงหน้าจอนี้เมื่อเริ่มระบบ"
+
+#: qml/Main.qml:196
+msgid "Opens this screen automatically when you log in to your session"
+msgstr "เปิดหน้าจอนี้โดยอัตโนมัติเมื่อคุณเข้าสู่เซสชัน"
+
+#: qml/Main.qml:207
+msgid "Install productivity tools or open online services."
+msgstr "ติดตั้งเครื่องมือเพิ่มประสิทธิภาพการทำงานหรือเปิดบริการออนไลน์"
+
+#: qml/Main.qml:208
+msgid "Choose your preferred browser to surf the web."
+msgstr "เลือกเบราว์เซอร์ที่คุณชอบเพื่อท่องเว็บ"
+
+#. i18n: AppCard.qml compares this text with its own i18n("Available"); keep both identical.
+#: qml/components/AppCard.qml:92 src/models/ApplicationModel.cpp:104
+#, kde-format
+msgid "Available"
+msgstr "มีให้ติดตั้ง"
+
+#: qml/components/AppCard.qml:104 qml/components/InstallDialog.qml:352
+msgid "Open"
+msgstr "เปิด"
+
+#: qml/components/AppCard.qml:105
+msgid "Installed"
+msgstr "ติดตั้งแล้ว"
+
+#: qml/components/AppCard.qml:106 qml/components/InstallDialog.qml:339
+msgid "Install"
+msgstr "ติดตั้ง"
+
+#: qml/components/AppCard.qml:106
+msgid "Please wait…"
+msgstr "โปรดรอสักครู่…"
+
+#: qml/components/AppCard.qml:106
+msgid "Remove"
+msgstr "เอาออก"
+
+#: qml/components/AppCard.qml:120 qml/components/InfoTile.qml:24
+#: qml/components/ReportDialog.qml:164 qml/components/ReportDialog.qml:302
+#: qml/components/SegmentedChoice.qml:45 qml/components/StatusRow.qml:79
+#: qml/components/StatusRow.qml:97 qml/components/StatusRow.qml:108
+msgctxt "@info:accessible label and value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/components/InstallDialog.qml:186
+msgid "Installation"
+msgstr "การติดตั้ง"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install %1"
+msgstr "ติดตั้ง %1"
+
+#: qml/components/InstallDialog.qml:188
+msgid "Install components"
+msgstr "ติดตั้งส่วนประกอบ"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing %1"
+msgstr "กำลังติดตั้ง %1"
+
+#: qml/components/InstallDialog.qml:189
+msgid "Installing components"
+msgstr "กำลังติดตั้งส่วนประกอบ"
+
+#: qml/components/InstallDialog.qml:198
+msgid "Installation completed successfully."
+msgstr "ติดตั้งเสร็จสมบูรณ์"
+
+#: qml/components/InstallDialog.qml:208
+msgid "Source: %1"
+msgstr "แหล่ง: %1"
+
+#: qml/components/InstallDialog.qml:245
+msgid "Installation progress"
+msgstr "ความคืบหน้าการติดตั้ง"
+
+#: qml/components/InstallDialog.qml:246
+msgid "In progress"
+msgstr "กำลังดำเนินการ"
+
+#: qml/components/InstallDialog.qml:247 qml/components/InstallDialog.qml:254
+msgctxt "@info progress percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/components/InstallDialog.qml:280
+msgid "For security reasons, the installation cannot be cancelled."
+msgstr "ไม่สามารถยกเลิกการติดตั้งได้เพื่อความปลอดภัย"
+
+#: qml/components/InstallDialog.qml:293
+msgid "Hide Details"
+msgstr "ซ่อนรายละเอียด"
+
+#: qml/components/InstallDialog.qml:293
+msgid "Show Details"
+msgstr "แสดงรายละเอียด"
+
+#: qml/components/InstallDialog.qml:296
+msgid "Shows the technical output of the installation"
+msgstr "แสดงเอาต์พุตทางเทคนิคของการติดตั้ง"
+
+#: qml/components/InstallDialog.qml:325
+msgid "Technical details of the installation"
+msgstr "รายละเอียดทางเทคนิคของการติดตั้ง"
+
+#: qml/components/InstallDialog.qml:345
+msgid "Install FreeOffice from SoftMaker"
+msgstr "ติดตั้ง FreeOffice จาก SoftMaker"
+
+#: qml/components/InstallDialog.qml:363
+msgid "Try Again"
+msgstr "ลองอีกครั้ง"
+
+#: qml/components/InstallDialog.qml:375
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: qml/components/InstallDialog.qml:375 qml/components/ReportDialog.qml:206
+msgid "Close"
+msgstr "ปิด"
+
+#: qml/components/ReportDialog.qml:75
+msgid "Save System Report"
+msgstr "บันทึกรายงานระบบ"
+
+#: qml/components/ReportDialog.qml:78
+msgid "Text (*.txt)"
+msgstr "ข้อความ (*.txt)"
+
+#: qml/components/ReportDialog.qml:80
+msgid "Report saved."
+msgstr "บันทึกรายงานแล้ว"
+
+#: qml/components/ReportDialog.qml:81
+msgid "Could not save the report."
+msgstr "ไม่สามารถบันทึกรายงาน"
+
+#: qml/components/ReportDialog.qml:87 qml/components/ReportDialog.qml:141
+#: qml/pages/AboutPage.qml:121
+msgid "System Report"
+msgstr "รายงานระบบ"
+
+#: qml/components/ReportDialog.qml:136
+msgid "System summary"
+msgstr "สรุประบบ"
+
+#: qml/components/ReportDialog.qml:146
+msgctxt "@label system report summary"
+msgid "Desktop"
+msgstr "เดสก์ท็อป"
+
+#: qml/components/ReportDialog.qml:147
+msgctxt "@label system report summary"
+msgid "Kernel"
+msgstr "เคอร์เนล"
+
+#: qml/components/ReportDialog.qml:148
+msgctxt "@label system report summary"
+msgid "CPU"
+msgstr "CPU"
+
+#: qml/components/ReportDialog.qml:149
+msgctxt "@label system report summary"
+msgid "GPU"
+msgstr "GPU"
+
+#: qml/components/ReportDialog.qml:150
+msgctxt "@label system report summary"
+msgid "Memory"
+msgstr "หน่วยความจำ"
+
+#: qml/components/ReportDialog.qml:151
+msgctxt "@label system report summary"
+msgid "Uptime"
+msgstr "เวลาทำงาน"
+
+#: qml/components/ReportDialog.qml:174
+msgid "Copy Report"
+msgstr "คัดลอกรายงาน"
+
+#: qml/components/ReportDialog.qml:179
+msgid "Report copied."
+msgstr "คัดลอกรายงานแล้ว"
+
+#: qml/components/ReportDialog.qml:180
+msgid "Could not copy the report."
+msgstr "ไม่สามารถคัดลอกรายงาน"
+
+#: qml/components/ReportDialog.qml:184
+msgid "Save Report"
+msgstr "บันทึกรายงาน"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refresh"
+msgstr "โหลดใหม่"
+
+#: qml/components/ReportDialog.qml:198
+msgid "Refreshing…"
+msgstr "กำลังโหลดใหม่…"
+
+#: qml/pages/AboutPage.qml:81
+msgid "Mainuan logo"
+msgstr "โลโก้ Mainuan"
+
+#: qml/pages/AboutPage.qml:125
+msgid "Opens the hardware and software information for technical support"
+msgstr "เปิดข้อมูลฮาร์ดแวร์และซอฟต์แวร์สำหรับการสนับสนุนทางเทคนิค"
+
+#: qml/pages/AboutPage.qml:128
+msgid "Repository"
+msgstr "รีโพสิทอรี"
+
+#: qml/pages/AboutPage.qml:139
+msgid "This Computer"
+msgstr "คอมพิวเตอร์เครื่องนี้"
+
+# from mainuan-gestao-drivers
+#: qml/pages/AboutPage.qml:154
+msgid "Processor"
+msgstr "หน่วยประมวณผล"
+
+#: qml/pages/AboutPage.qml:155
+msgid "Graphics"
+msgstr "กราฟิก"
+
+#: qml/pages/AboutPage.qml:156
+msgid "Memory in use"
+msgstr "หน่วยความจำที่ใช้"
+
+#: qml/pages/AboutPage.qml:157
+msgid "Storage (system)"
+msgstr "พื้นที่จัดเก็บ (ระบบ)"
+
+#: qml/pages/AboutPage.qml:158
+msgctxt "@label installation date"
+msgid "Installation"
+msgstr "การติดตั้ง"
+
+#: qml/pages/AboutPage.qml:158
+msgid "Installation (estimated)"
+msgstr "การติดตั้ง (โดยประมาณ)"
+
+#: qml/pages/AboutPage.qml:159
+msgid "Uptime"
+msgstr "เวลาทำงาน"
+
+#: qml/pages/AboutPage.qml:178
+msgid "Credits"
+msgstr "เครดิต"
+
+#: qml/pages/AboutPage.qml:189
+msgid "Desktop environment and integration components."
+msgstr "สภาพแวดล้อมเดสก์ท็อปและส่วนประกอบการผสานรวม"
+
+#: qml/pages/AboutPage.qml:201
+msgid "Distribution base and package repositories."
+msgstr "ฐานของดิสทริบิวชันและคลังแพ็กเกจ"
+
+#: qml/pages/AboutPage.qml:210
+msgid ""
+"Free software. The license and the project history are in the repository."
+msgstr "ซอฟต์แวร์เสรี สัญญาอนุญาตและประวัติของโครงการอยู่ในรีโพสิทอรี"
+
+#: qml/pages/AppearancePage.qml:41
+msgid "Customize the colors, transparency and arrangement of your desktop."
+msgstr "ปรับแต่งสี ความโปร่งใส และการจัดวางเดสก์ท็อปของคุณ"
+
+#: qml/pages/AppearancePage.qml:57
+msgid "System Appearance"
+msgstr "รูปลักษณ์ของระบบ"
+
+# reviewed: 'รูปแบบภาพ' lê-se como 'formato de imagem'; Visual Style = estilo
+# de exibição
+#: qml/pages/AppearancePage.qml:79 qml/pages/AppearancePage.qml:89
+msgid "Visual Style"
+msgstr "รูปแบบการแสดงผล"
+
+#: qml/pages/AppearancePage.qml:81
+msgid ""
+"Changes the Plasma style and keeps the Mainuan color and your selected icons."
+msgstr "เปลี่ยนรูปแบบ Plasma โดยคงสีของ Mainuan และไอคอนที่คุณเลือกไว้"
+
+#: qml/pages/AppearancePage.qml:82
+msgid "Available only on KDE Plasma."
+msgstr "ใช้ได้เฉพาะบน KDE Plasma"
+
+#: qml/pages/AppearancePage.qml:93
+msgctxt "@option visual style"
+msgid "Blurred"
+msgstr "เบลอ"
+
+#: qml/pages/AppearancePage.qml:93
+msgid "Dream theme: translucent panels with blur"
+msgstr "ธีม Dream: แผงโปร่งแสงพร้อมเอฟเฟกต์เบลอ"
+
+#: qml/pages/AppearancePage.qml:94
+msgctxt "@option visual style"
+msgid "Glass"
+msgstr "กระจก"
+
+#: qml/pages/AppearancePage.qml:94
+msgid "Tahoe theme: light panels with a glass effect"
+msgstr "ธีม Tahoe: แผงสีอ่อนพร้อมเอฟเฟกต์กระจก"
+
+#: qml/pages/AppearancePage.qml:95
+msgid "Breeze theme: the default KDE look, without transparency"
+msgstr "ธีม Breeze: รูปลักษณ์ค่าเริ่มต้นของ KDE ไม่มีความโปร่งใส"
+
+#: qml/pages/AppearancePage.qml:95
+msgctxt "@option visual style"
+msgid "Solid"
+msgstr "ทึบ"
+
+#: qml/pages/AppearancePage.qml:105 qml/pages/AppearancePage.qml:112
+msgid "System Theme"
+msgstr "ธีมของระบบ"
+
+#: qml/pages/AppearancePage.qml:106
+msgid "Light or dark colors across the whole system."
+msgstr "สีสว่างหรือมืดทั่วทั้งระบบ"
+
+#: qml/pages/AppearancePage.qml:115
+msgctxt "@option color theme"
+msgid "Light"
+msgstr "สว่าง"
+
+#: qml/pages/AppearancePage.qml:116
+msgctxt "@option color theme"
+msgid "Dark"
+msgstr "มืด"
+
+#: qml/pages/AppearancePage.qml:126 qml/pages/AppearancePage.qml:134
+msgid "Accent Color"
+msgstr "สีเน้น"
+
+#: qml/pages/AppearancePage.qml:127
+msgid ""
+"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
+"Keeps the choice when you change style or theme."
+msgstr ""
+"ใช้ชุดสี KDE, ไอคอน Kora, ภาพพื้นหลัง และรูปประจำตัว "
+"โดยคงตัวเลือกไว้เมื่อคุณเปลี่ยนรูปแบบหรือธีม"
+
+#. i18n: %1 is the accent color name
+#: qml/pages/AppearancePage.qml:158
+msgid "Accent color %1"
+msgstr "สีเน้น %1"
+
+#: qml/pages/AppearancePage.qml:191
+msgid "Desktop Layout"
+msgstr "การจัดวางเดสก์ท็อป"
+
+#: qml/pages/AppearancePage.qml:200
+msgid ""
+"Choose how the panels are placed on the screen. Before each change the "
+"Welcome keeps a copy of the current layout."
+msgstr ""
+"เลือกวิธีวางแผงบนหน้าจอ ก่อนการเปลี่ยนแปลงแต่ละครั้ง แอปต้อนรับจะเก็บสำเนาการจัดวางปัจจุบันไว้"
+
+#: qml/pages/AppearancePage.qml:201
+msgid "Layouts can only be applied inside a KDE Plasma session."
+msgstr "ใช้การจัดวางได้เฉพาะภายในเซสชัน KDE Plasma เท่านั้น"
+
+#: qml/pages/AppearancePage.qml:278
+msgctxt "@info layout status"
+msgid "In use"
+msgstr "ใช้งานอยู่"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button layout already applied"
+msgid "Applied"
+msgstr "ใช้แล้ว"
+
+#: qml/pages/AppearancePage.qml:297
+msgctxt "@action:button"
+msgid "Apply"
+msgstr "ใช้"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Apply layout %1"
+msgstr "ใช้การจัดวาง %1"
+
+#: qml/pages/AppearancePage.qml:301
+msgid "Layout in use: %1"
+msgstr "การจัดวางที่ใช้งานอยู่: %1"
+
+#: qml/pages/AppearancePage.qml:315
+msgid ""
+"Returns to the layout that was in use before the last change. Plasma "
+"restarts for a few seconds."
+msgstr "กลับไปใช้การจัดวางที่ใช้อยู่ก่อนการเปลี่ยนแปลงครั้งล่าสุด Plasma จะเริ่มใหม่สักครู่"
+
+#: qml/pages/AppearancePage.qml:321
+msgid "Restore Previous Layout"
+msgstr "คืนค่าการจัดวางก่อนหน้า"
+
+#: qml/pages/AppearancePage.qml:334
+msgid "Restore previous layout?"
+msgstr "คืนค่าการจัดวางก่อนหน้าหรือไม่?"
+
+#: qml/pages/AppearancePage.qml:335
+msgid ""
+"The panels go back to how they were before the last layout change. Plasma "
+"will restart for a few seconds."
+msgstr "แผงจะกลับไปเป็นแบบเดิมก่อนการเปลี่ยนการจัดวางครั้งล่าสุด Plasma จะเริ่มใหม่สักครู่"
+
+#: qml/pages/AppearancePage.qml:339
+msgctxt "@action:button"
+msgid "Restore"
+msgstr "คืนค่า"
+
+#: qml/pages/AppearancePage.qml:347
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: qml/pages/AppsPage.qml:43
+msgid ""
+"Flatpak was not found. Flatpak applications are unavailable. FreeOffice and "
+"the online services remain independent of Flatpak."
+msgstr ""
+"ไม่พบ Flatpak จึงไม่สามารถใช้แอปพลิเคชัน Flatpak ได้ ส่วน FreeOffice "
+"และบริการออนไลน์ยังใช้ได้โดยไม่ต้องพึ่ง Flatpak"
+
+#: qml/pages/ContributePage.qml:35
+msgid ""
+"Mainuan is made by its community. You can help with a donation, with code or "
+"by reporting problems."
+msgstr ""
+"Mainuan สร้างขึ้นโดยชุมชน คุณสามารถช่วยได้ด้วยการบริจาค การเขียนโค้ด หรือการรายงานปัญหา"
+
+#. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
+#: qml/pages/ContributePage.qml:78
+msgid "Pix QR code. Key: %1"
+msgstr "คิวอาร์โค้ด Pix คีย์: %1"
+
+#: qml/pages/ContributePage.qml:79
+msgid "Pix key QR code. Key: %1"
+msgstr "คิวอาร์โค้ดของคีย์ Pix คีย์: %1"
+
+#: qml/pages/ContributePage.qml:97
+msgid "Support Mainuan"
+msgstr "สนับสนุน Mainuan"
+
+#: qml/pages/ContributePage.qml:104
+msgid ""
+"Your donation helps sustain development, infrastructure and the community."
+msgstr "การบริจาคของคุณช่วยสนับสนุนการพัฒนา โครงสร้างพื้นฐาน และชุมชน"
+
+#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+msgid "Pix Key"
+msgstr "คีย์ Pix"
+
+#: qml/pages/ContributePage.qml:143
+msgid "Copy Pix Key"
+msgstr "คัดลอกคีย์ Pix"
+
+#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#, kde-format
+msgid "Pix key copied."
+msgstr "คัดลอกคีย์ Pix แล้ว"
+
+#: qml/pages/ContributePage.qml:168
+msgid "Scan the QR code with your bank's app, using the Pix option."
+msgstr "สแกนคิวอาร์โค้ดด้วยแอปธนาคารของคุณ โดยใช้ตัวเลือก Pix"
+
+#: qml/pages/ContributePage.qml:169
+msgid ""
+"The QR code contains the Pix key. In your bank's app, use the Pix option "
+"with the copied key or the one read from the code."
+msgstr ""
+"คิวอาร์โค้ดมีคีย์ Pix อยู่ ในแอปธนาคารของคุณ ให้ใช้ตัวเลือก Pix กับคีย์ที่คัดลอกหรือคีย์ที่อ่านจากโค้ด"
+
+#: qml/pages/ContributePage.qml:177
+msgid "The Pix key has not been set up on this installation yet."
+msgstr "ยังไม่ได้ตั้งค่าคีย์ Pix ในการติดตั้งนี้"
+
+#: qml/pages/ContributePage.qml:187
+msgid "Other Ways to Help"
+msgstr "วิธีอื่นในการช่วยเหลือ"
+
+#: qml/pages/ContributePage.qml:196
+msgid "Contribute Code"
+msgstr "ร่วมเขียนโค้ด"
+
+#: qml/pages/ContributePage.qml:197
+msgid "Code, translations and improvements on GitHub."
+msgstr "โค้ด การแปล และการปรับปรุงบน GitHub"
+
+#: qml/pages/ContributePage.qml:205
+msgid "Report a Problem"
+msgstr "รายงานปัญหา"
+
+# reviewed: nome da página sem aspas fica ambíguo
+#: qml/pages/ContributePage.qml:206
+msgid ""
+"Describe what happened; attaching the system report (in About) helps a lot."
+msgstr "อธิบายสิ่งที่เกิดขึ้น การแนบรายงานระบบ (ในหน้า “เกี่ยวกับ”) จะช่วยได้มาก"
+
+#: qml/pages/ContributePage.qml:214
+msgid "Telegram Community"
+msgstr "ชุมชน Telegram"
+
+#: qml/pages/ContributePage.qml:215
+msgid "Chat with Mainuan users and developers."
+msgstr "พูดคุยกับผู้ใช้และนักพัฒนา Mainuan"
+
+#: qml/pages/ContributePage.qml:222
+msgid ""
+"Links open in the browser only when you click them. The QR code is generated "
+"on this computer, without internet access."
+msgstr ""
+"ลิงก์จะเปิดในเบราว์เซอร์เมื่อคุณคลิกเท่านั้น "
+"คิวอาร์โค้ดสร้างขึ้นบนคอมพิวเตอร์เครื่องนี้โดยไม่ใช้อินเทอร์เน็ต"
+
+#: qml/pages/HomePage.qml:48 qml/pages/HomePage.qml:62
+msgid "Installing…"
+msgstr "กำลังติดตั้ง…"
+
+#: qml/pages/HomePage.qml:51
+msgctxt "@info status"
+msgid "Installed"
+msgstr "ติดตั้งแล้ว"
+
+#. i18n: %1 is a short note such as "startup: enabled"
+#: qml/pages/HomePage.qml:51
+msgid "Installed · %1"
+msgstr "ติดตั้งแล้ว · %1"
+
+#: qml/pages/HomePage.qml:53
+msgid "Unavailable on this system"
+msgstr "ไม่มีในระบบนี้"
+
+#: qml/pages/HomePage.qml:62
+msgctxt "@action:button"
+msgid "Install"
+msgstr "ติดตั้ง"
+
+#. i18n: %1 is a colour code; keep the <font> markup around the product name
+#: qml/pages/HomePage.qml:87
+msgid "Welcome to <font color='%1'>Mainuan</font>"
+msgstr "ยินดีต้อนรับสู่ <font color='%1'>Mainuan</font>"
+
+#: qml/pages/HomePage.qml:92
+msgid "Set up your system your way, with native Plasma tools."
+msgstr "ตั้งค่าระบบในแบบของคุณด้วยเครื่องมือดั้งเดิมของ Plasma"
+
+#: qml/pages/HomePage.qml:105
+msgid "Hardware & Media"
+msgstr "ฮาร์ดแวร์และสื่อ"
+
+#: qml/pages/HomePage.qml:113
+msgid "Additional Drivers"
+msgstr "ไดรเวอร์เพิ่มเติม"
+
+#: qml/pages/HomePage.qml:114
+msgid "View and manage the drivers available for your computer."
+msgstr "ดูและจัดการไดรเวอร์ที่มีให้สำหรับคอมพิวเตอร์ของคุณ"
+
+#: qml/pages/HomePage.qml:117
+msgctxt "@action:button"
+msgid "Manage"
+msgstr "จัดการ"
+
+#: qml/pages/HomePage.qml:126 src/services/InstallService.cpp:221
+#, kde-format
+msgid "Media Codecs"
+msgstr "ตัวแปลงสัญญาณสื่อ"
+
+#: qml/pages/HomePage.qml:127
+msgid "Play audio and video in the most common formats."
+msgstr "เล่นเสียงและวิดีโอในรูปแบบที่ใช้กันทั่วไป"
+
+#: qml/pages/HomePage.qml:131
+msgid "Security & Privacy"
+msgstr "ความปลอดภัยและความเป็นส่วนตัว"
+
+#: qml/pages/HomePage.qml:136 src/services/InstallService.cpp:175
+#, kde-format
+msgid "Antivirus"
+msgstr "แอนตี้ไวรัส"
+
+#: qml/pages/HomePage.qml:137 src/services/InstallService.cpp:177
+#, kde-format
+msgid "ClamAV protection with the ClamUI graphical interface."
+msgstr "การป้องกันด้วย ClamAV พร้อมอินเทอร์เฟซกราฟิก ClamUI"
+
+#: qml/pages/HomePage.qml:139 qml/pages/HomePage.qml:147
+msgctxt "@action:button"
+msgid "Configure"
+msgstr "กำหนดค่า"
+
+#: qml/pages/HomePage.qml:144 src/services/InstallService.cpp:200
+#, kde-format
+msgid "Firewall"
+msgstr "ไฟร์วอลล์"
+
+#: qml/pages/HomePage.qml:145
+msgid "Control network connections with UFW and the KDE Plasma module."
+msgstr "ควบคุมการเชื่อมต่อเครือข่ายด้วย UFW และโมดูลของ KDE Plasma"
+
+#. i18n: %1 is the session type (wayland/x11), %2 the Plasma version
+#: qml/pages/HomePage.qml:156
+msgid "Session: %1  ·  %2"
+msgstr "เซสชัน: %1  ·  %2"
+
+#: qml/pages/HomePage.qml:157
+msgid "Session: %1"
+msgstr "เซสชัน: %1"
+
+#: qml/pages/TutorialsPage.qml:33
+msgid "Video Tutorials"
+msgstr "วิดีโอแนะนำ"
+
+#: qml/pages/TutorialsPage.qml:36
+msgid ""
+"Learn the essentials of Mainuan. Missing videos are disabled without "
+"blocking navigation."
+msgstr "เรียนรู้สิ่งสำคัญของ Mainuan วิดีโอที่ขาดหายจะถูกปิดใช้งานโดยไม่ขัดขวางการใช้งาน"
+
+#: qml/pages/TutorialsPage.qml:73
+msgctxt "@action:button"
+msgid "Close"
+msgstr "ปิด"
+
+#: qml/pages/TutorialsPage.qml:89
+msgctxt "@action:button"
+msgid "Pause"
+msgstr "หยุดชั่วคราว"
+
+#: qml/pages/TutorialsPage.qml:89 qml/pages/TutorialsPage.qml:134
+msgctxt "@action:button"
+msgid "Play"
+msgstr "เล่น"
+
+#: qml/pages/TutorialsPage.qml:97
+msgid "Volume"
+msgstr "ระดับเสียง"
+
+#: qml/pages/TutorialsPage.qml:98
+msgctxt "@action:button"
+msgid "Full Screen"
+msgstr "เต็มหน้าจอ"
+
+#: qml/pages/TutorialsPage.qml:134
+msgctxt "@info video status"
+msgid "Unavailable"
+msgstr "ไม่พร้อมใช้งาน"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "%1: video missing"
+msgstr "%1: ไม่มีวิดีโอ"
+
+#: qml/pages/TutorialsPage.qml:150
+msgid "Play %1"
+msgstr "เล่น %1"
+
+#: qml/pages/TutorialsPage.qml:154
+msgid "File not found"
+msgstr "ไม่พบไฟล์"
+
+#: qml/pages/TutorialsPage.qml:163
+msgid "No tutorials have been added."
+msgstr "ยังไม่มีการเพิ่มบทแนะนำ"
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:3
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:4
+msgid "Mainuan Welcome"
+msgstr "แอปต้อนรับ Mainuan"
+
+#: rootfs/etc/xdg/autostart/org.mainuan.Welcome.desktop.in:4
+msgid "Show the Mainuan Welcome when the session starts"
+msgstr "แสดงแอปต้อนรับ Mainuan เมื่อเริ่มเซสชัน"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:4
+msgid "Welcome Center"
+msgstr "ศูนย์ต้อนรับ"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:5
+msgid "Set up and get to know Mainuan"
+msgstr "ตั้งค่าและทำความรู้จัก Mainuan"
+
+#: rootfs/usr/share/applications/org.mainuan.Welcome.desktop.in:6
+msgid "welcome;setup;appearance;drivers;codecs;antivirus;firewall;"
+msgstr "welcome;setup;appearance;drivers;codecs;antivirus;firewall;ต้อนรับ;ตั้งค่า;รูปลักษณ์;ไดรเวอร์;ตัวแปลงสัญญาณ;โคเดก;แอนตี้ไวรัส;ไฟร์วอลล์;"
+
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:5
+msgid "Set up Mainuan and get to know the features of your desktop"
+msgstr "ตั้งค่า Mainuan และทำความรู้จักกับฟีเจอร์ของเดสก์ท็อปของคุณ"
+
+#: rootfs/usr/share/metainfo/org.mainuan.Welcome.metainfo.xml.in:7
+msgid ""
+"Welcome application of the Mainuan desktop. It helps new users choose the "
+"look of the desktop, install media codecs, the antivirus, the firewall, "
+"office suites and web browsers, and find the video tutorials."
+msgstr ""
+"แอปพลิเคชันต้อนรับของเดสก์ท็อป Mainuan ช่วยให้ผู้ใช้ใหม่เลือกรูปลักษณ์ของเดสก์ท็อป "
+"ติดตั้งตัวแปลงสัญญาณสื่อ แอนตี้ไวรัส ไฟร์วอลล์ ชุดโปรแกรมสำนักงาน และเว็บเบราว์เซอร์ "
+"รวมถึงค้นหาวิดีโอแนะนำ"
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:9
+msgid "Install system components recommended by Mainuan Welcome"
+msgstr "ติดตั้งส่วนประกอบของระบบที่แนะนำโดยแอปต้อนรับ Mainuan"
+
+#: rootfs/usr/share/polkit-1/actions/org.mainuan.welcome.policy.in:10
+msgid ""
+"Authentication is required to install system components such as the "
+"antivirus, the firewall or media codecs"
+msgstr ""
+"ต้องยืนยันตัวตนเพื่อติดตั้งส่วนประกอบของระบบ เช่น แอนตี้ไวรัส ไฟร์วอลล์ หรือตัวแปลงสัญญาณสื่อ"
+
+#: src/main.cpp:53
+#, kde-format
+msgctxt "@title application display name"
+msgid "Mainuan — Welcome"
+msgstr "Mainuan — ยินดีต้อนรับ"
+
+#: src/main.cpp:96
+#, kde-format
+msgctxt "@info application description"
+msgid "Complete suite: Writer, Calc and Impress"
+msgstr "ชุดโปรแกรมครบชุด: Writer, Calc และ Impress"
+
+#: src/main.cpp:99
+#, kde-format
+msgctxt "@info application description"
+msgid "Interface familiar to Microsoft Office users"
+msgstr "อินเทอร์เฟซที่คุ้นเคยสำหรับผู้ใช้ Microsoft Office"
+
+#: src/main.cpp:102
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Free office suite with word processor, spreadsheet and presentation editors."
+msgstr "ชุดโปรแกรมสำนักงานฟรีพร้อมโปรแกรมประมวลผลคำ สเปรดชีต และงานนำเสนอ"
+
+#: src/main.cpp:105
+#, kde-format
+msgctxt "@info application description"
+msgid "Online documents with collaboration"
+msgstr "เอกสารออนไลน์ที่ทำงานร่วมกันได้"
+
+#: src/main.cpp:108
+#, kde-format
+msgctxt "@info application description"
+msgid "Microsoft suite right in the browser"
+msgstr "ชุดโปรแกรมของ Microsoft ในเบราว์เซอร์"
+
+#: src/main.cpp:114
+#, kde-format
+msgctxt "@info application description"
+msgid "Google's web browser"
+msgstr "เว็บเบราว์เซอร์ของ Google"
+
+#: src/main.cpp:117
+#, kde-format
+msgctxt "@info application description"
+msgid "Compatibility with Microsoft applications"
+msgstr "เข้ากันได้กับแอปพลิเคชันของ Microsoft"
+
+#: src/main.cpp:120
+#, kde-format
+msgctxt "@info application description"
+msgid "Built-in ad blocking"
+msgstr "ตัวบล็อกโฆษณาในตัว"
+
+#: src/main.cpp:123
+#, kde-format
+msgctxt "@info application description"
+msgid ""
+"Browser with advanced customization, tab management and privacy features."
+msgstr "เบราว์เซอร์ที่ปรับแต่งได้ขั้นสูง พร้อมการจัดการแท็บและฟีเจอร์ความเป็นส่วนตัว"
+
+#: src/main.cpp:126
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser focused on privacy, productivity and vertical tab organization."
+msgstr "เบราว์เซอร์ที่เน้นความเป็นส่วนตัว ประสิทธิภาพการทำงาน และการจัดแท็บแนวตั้ง"
+
+#: src/main.cpp:129
+#, kde-format
+msgctxt "@info application description"
+msgid "Privacy-focused browser"
+msgstr "เบราว์เซอร์ที่เน้นความเป็นส่วนตัว"
+
+#: src/main.cpp:132
+#, kde-format
+msgctxt "@info application description"
+msgid "Browser with resource controls"
+msgstr "เบราว์เซอร์ที่ควบคุมการใช้ทรัพยากรได้"
+
+#: src/main.cpp:135
+#, kde-format
+msgctxt "@info application description"
+msgid "Browsing through the Tor network"
+msgstr "ท่องเว็บผ่านเครือข่าย Tor"
+
+#: src/models/ApplicationModel.cpp:88
+#, kde-format
+msgctxt "@info:status application"
+msgid "Checking…"
+msgstr "กำลังตรวจสอบ…"
+
+#: src/models/ApplicationModel.cpp:91
+#, kde-format
+msgctxt "@info:status application"
+msgid "Unavailable"
+msgstr "ไม่พร้อมใช้งาน"
+
+#: src/models/ApplicationModel.cpp:94
+#, kde-format
+msgctxt "@info:status application"
+msgid "Online"
+msgstr "ออนไลน์"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installing…"
+msgstr "กำลังติดตั้ง…"
+
+#: src/models/ApplicationModel.cpp:97
+#, kde-format
+msgctxt "@info:status application"
+msgid "Removing…"
+msgstr "กำลังเอาออก…"
+
+#: src/models/ApplicationModel.cpp:100
+#, kde-format
+msgctxt "@info:status application"
+msgid "Error"
+msgstr "ข้อผิดพลาด"
+
+#: src/models/ApplicationModel.cpp:102
+#, kde-format
+msgctxt "@info:status application"
+msgid "Installed"
+msgstr "ติดตั้งแล้ว"
+
+#: src/models/LayoutModel.cpp:10
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"The Mainuan look: floating islands at the bottom with menu, tasks, system "
+"tray and clock."
+msgstr "รูปลักษณ์แบบ Mainuan: เกาะลอยที่ด้านล่างพร้อมเมนู งาน ถาดระบบ และนาฬิกา"
+
+#: src/models/LayoutModel.cpp:11
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Three floating segments at the bottom: menu and information, tasks, and "
+"system controls."
+msgstr "ส่วนลอยสามส่วนที่ด้านล่าง: เมนูและข้อมูล งาน และตัวควบคุมระบบ"
+
+#: src/models/LayoutModel.cpp:12
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"A floating bottom bar with side margins, widgets and pinned applications."
+msgstr "แถบลอยด้านล่างที่มีระยะขอบด้านข้าง วิดเจ็ต และแอปพลิเคชันที่ปักหมุดไว้"
+
+#: src/models/LayoutModel.cpp:13
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Floating top panel with TahoeLauncher, search, tasks and controls."
+msgstr "แผงลอยด้านบนพร้อม TahoeLauncher การค้นหา งาน และตัวควบคุม"
+
+#: src/models/LayoutModel.cpp:14
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Full-width bottom bar, not floating, with Kickoff and pinned applications."
+msgstr "แถบด้านล่างเต็มความกว้าง ไม่ลอย พร้อม Kickoff และแอปพลิเคชันที่ปักหมุดไว้"
+
+#: src/models/LayoutModel.cpp:15
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid ""
+"Global menu at the top and a vertical panel on the left with Orbit Start "
+"Menu."
+msgstr "เมนูส่วนกลางที่ด้านบนและแผงแนวตั้งทางซ้ายพร้อม Orbit Start Menu"
+
+#: src/models/LayoutModel.cpp:16
+#, kde-format
+msgctxt "@info desktop layout description"
+msgid "Compact bar at the top and KWin tiles to arrange windows side by side."
+msgstr "แถบขนาดกะทัดรัดที่ด้านบนและการจัดเรียงแบบไทล์ของ KWin เพื่อวางหน้าต่างเคียงกัน"
+
+#: src/models/VideoModel.cpp:12
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Getting to know the system"
+msgstr "ทำความรู้จักระบบ"
+
+#: src/models/VideoModel.cpp:13
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Connecting to the internet"
+msgstr "การเชื่อมต่ออินเทอร์เน็ต"
+
+#: src/models/VideoModel.cpp:14
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Customizing the system"
+msgstr "การปรับแต่งระบบ"
+
+#: src/models/VideoModel.cpp:15
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Installing software"
+msgstr "การติดตั้งซอฟต์แวร์"
+
+#: src/models/VideoModel.cpp:16
+#, kde-format
+msgctxt "@title video lesson"
+msgid "Online lessons"
+msgstr "บทเรียนออนไลน์"
+
+#: src/services/AccentProfile.cpp:8
+msgctxt "accent color"
+msgid "Brown"
+msgstr "น้ำตาล"
+
+#: src/services/AccentProfile.cpp:10
+msgctxt "accent color"
+msgid "Cyan"
+msgstr "ฟ้าอมเขียว"
+
+#: src/services/AccentProfile.cpp:12
+msgctxt "accent color"
+msgid "Magenta"
+msgstr "บานเย็น"
+
+#: src/services/AccentProfile.cpp:14
+msgctxt "accent color"
+msgid "Lime"
+msgstr "เขียวมะนาว"
+
+#: src/services/AccentProfile.cpp:16
+msgctxt "accent color"
+msgid "Gray"
+msgstr "เทา"
+
+#: src/services/AccentProfile.cpp:18
+msgctxt "accent color"
+msgid "Violet"
+msgstr "ม่วง"
+
+#: src/services/InstallService.cpp:54
+#, kde-format
+msgid ""
+"Another program is installing or updating the system right now. Wait for it "
+"to finish and try again."
+msgstr "มีโปรแกรมอื่นกำลังติดตั้งหรืออัปเดตระบบอยู่ในขณะนี้ โปรดรอให้เสร็จสิ้นแล้วลองอีกครั้ง"
+
+#: src/services/InstallService.cpp:57
+#, kde-format
+msgid ""
+"Could not download the files. Check your internet connection and try again."
+msgstr "ไม่สามารถดาวน์โหลดไฟล์ โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง"
+
+#: src/services/InstallService.cpp:60
+#, kde-format
+msgid "There is not enough free disk space to complete the installation."
+msgstr "พื้นที่ว่างในดิสก์ไม่เพียงพอสำหรับการติดตั้ง"
+
+#: src/services/InstallService.cpp:63
+#, kde-format
+msgid ""
+"The required components were not found in the repositories configured on "
+"this system."
+msgstr "ไม่พบส่วนประกอบที่จำเป็นในคลังแพ็กเกจที่กำหนดค่าไว้ในระบบนี้"
+
+#: src/services/InstallService.cpp:66
+#, kde-format
+msgid ""
+"A previous installation was interrupted and must be repaired before new "
+"programs can be installed."
+msgstr "การติดตั้งครั้งก่อนถูกขัดจังหวะและต้องซ่อมแซมก่อนจึงจะติดตั้งโปรแกรมใหม่ได้"
+
+#: src/services/InstallService.cpp:69
+#, kde-format
+msgid ""
+"The package system found a conflict that prevents the installation without "
+"removing other programs."
+msgstr "ระบบแพ็กเกจพบความขัดแย้งที่ทำให้ติดตั้งไม่ได้หากไม่เอาโปรแกรมอื่นออก"
+
+#: src/services/InstallService.cpp:72
+#, kde-format
+msgid ""
+"Authentication failed or your user does not have administrator privileges."
+msgstr "การยืนยันตัวตนล้มเหลว หรือผู้ใช้ของคุณไม่มีสิทธิ์ผู้ดูแลระบบ"
+
+#: src/services/InstallService.cpp:75
+#, kde-format
+msgid ""
+"Automatic installation of these components requires a Debian- or Ubuntu-"
+"based system."
+msgstr "การติดตั้งส่วนประกอบเหล่านี้โดยอัตโนมัติต้องใช้ระบบที่สร้างบน Debian หรือ Ubuntu"
+
+#: src/services/InstallService.cpp:78
+#, kde-format
+msgid "Flatpak is not available on this system."
+msgstr "Flatpak ไม่พร้อมใช้งานในระบบนี้"
+
+#: src/services/InstallService.cpp:81
+#, kde-format
+msgid ""
+"Could not download FreeOffice from the authorized official source. Check the "
+"connection and try again. Redirects and other versions are refused."
+msgstr ""
+"ไม่สามารถดาวน์โหลด FreeOffice จากแหล่งทางการที่ได้รับอนุญาต "
+"โปรดตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง การเปลี่ยนเส้นทางและรุ่นอื่นจะถูกปฏิเสธ"
+
+#: src/services/InstallService.cpp:84
+#, kde-format
+msgid ""
+"The FreeOffice file does not match the authorized package (integrity, size, "
+"name, version or architecture). The installation was stopped."
+msgstr ""
+"ไฟล์ FreeOffice ไม่ตรงกับแพ็กเกจที่ได้รับอนุญาต (ความสมบูรณ์ ขนาด ชื่อ รุ่น หรือสถาปัตยกรรม) "
+"การติดตั้งถูกหยุด"
+
+#: src/services/InstallService.cpp:87
+#, kde-format
+msgid ""
+"The installer finished, but it could not be confirmed that the application "
+"is installed. Check the details and try again."
+msgstr ""
+"ตัวติดตั้งทำงานเสร็จแล้ว แต่ไม่สามารถยืนยันได้ว่าแอปพลิเคชันได้รับการติดตั้ง "
+"โปรดตรวจสอบรายละเอียดแล้วลองอีกครั้ง"
+
+#. i18n: “Show Details” must match the label of the details button in the installation dialog.
+#: src/services/InstallService.cpp:90
+#, kde-format
+msgid ""
+"The system could not install all components. Try again; if the problem "
+"persists, use “Show Details” to get the technical information."
+msgstr ""
+"ระบบไม่สามารถติดตั้งส่วนประกอบทั้งหมดได้ โปรดลองอีกครั้ง หากปัญหายังคงอยู่ ให้ใช้ "
+"“แสดงรายละเอียด” เพื่อดูข้อมูลทางเทคนิค"
+
+#. i18n: joins the names of two components installed in the same step, e.g. "ClamAV and Flatpak".
+#: src/services/InstallService.cpp:144
+#, kde-format
+msgctxt "@item:intext two components"
+msgid "%1 and %2"
+msgstr "%1 และ %2"
+
+#: src/services/InstallService.cpp:176
+#, kde-format
+msgid "Configured repositories / Flathub"
+msgstr "คลังแพ็กเกจที่กำหนดค่าไว้ / Flathub"
+
+#: src/services/InstallService.cpp:179
+#, kde-format
+msgid "Installing ClamAV + ClamUI"
+msgstr "กำลังติดตั้ง ClamAV + ClamUI"
+
+#: src/services/InstallService.cpp:180
+#, kde-format
+msgid "Antivirus installed successfully"
+msgstr "ติดตั้งแอนตี้ไวรัสสำเร็จ"
+
+#: src/services/InstallService.cpp:181
+#, kde-format
+msgid "ClamAV and ClamUI are ready to use."
+msgstr "ClamAV และ ClamUI พร้อมใช้งานแล้ว"
+
+#: src/services/InstallService.cpp:182 src/services/InstallService.cpp:208
+#, kde-format
+msgctxt "@action:button open the settings of the installed component"
+msgid "Configure"
+msgstr "กำหนดค่า"
+
+#: src/services/InstallService.cpp:201 src/services/InstallService.cpp:222
+#, kde-format
+msgid "Configured repositories"
+msgstr "คลังแพ็กเกจที่กำหนดค่าไว้"
+
+#: src/services/InstallService.cpp:202
+#, kde-format
+msgid "UFW with the KDE Plasma firewall module."
+msgstr "UFW พร้อมโมดูลไฟร์วอลล์ของ KDE Plasma"
+
+#: src/services/InstallService.cpp:204
+#, kde-format
+msgid "Installing Firewall"
+msgstr "กำลังติดตั้งไฟร์วอลล์"
+
+#: src/services/InstallService.cpp:205
+#, kde-format
+msgid "Firewall installed successfully"
+msgstr "ติดตั้งไฟร์วอลล์สำเร็จ"
+
+# reviewed: rótulo do botão Configure sem aspas fica ambíguo
+#: src/services/InstallService.cpp:206
+#, kde-format
+msgid ""
+"UFW and the KDE Plasma integration are installed. The firewall was not "
+"enabled automatically: use Configure to enable it and choose the rules."
+msgstr ""
+"ติดตั้ง UFW และการผสานรวมกับ KDE Plasma แล้ว ไฟร์วอลล์ยังไม่ได้เปิดใช้งานโดยอัตโนมัติ ให้ใช้ "
+"“กำหนดค่า” เพื่อเปิดใช้งานและเลือกกฎ"
+
+#: src/services/InstallService.cpp:213 src/services/InstallService.cpp:217
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "KDE Plasma integration"
+msgstr "การผสานรวมกับ KDE Plasma"
+
+#: src/services/InstallService.cpp:223
+#, kde-format
+msgid "Support for the most common audio and video formats."
+msgstr "รองรับรูปแบบเสียงและวิดีโอที่ใช้กันทั่วไป"
+
+#: src/services/InstallService.cpp:225
+#, kde-format
+msgid "Installing media codecs"
+msgstr "กำลังติดตั้งตัวแปลงสัญญาณสื่อ"
+
+#: src/services/InstallService.cpp:226
+#, kde-format
+msgid "Codecs installed successfully"
+msgstr "ติดตั้งตัวแปลงสัญญาณสำเร็จ"
+
+#: src/services/InstallService.cpp:227
+#, kde-format
+msgid "Audio and video in the most common formats can now be played."
+msgstr "ตอนนี้สามารถเล่นเสียงและวิดีโอในรูปแบบที่ใช้กันทั่วไปได้แล้ว"
+
+#: src/services/InstallService.cpp:230
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "media codecs"
+msgstr "ตัวแปลงสัญญาณสื่อ"
+
+#: src/services/InstallService.cpp:236
+#, kde-format
+msgctxt "@item:intext component label"
+msgid "GStreamer codecs"
+msgstr "ตัวแปลงสัญญาณ GStreamer"
+
+#: src/services/InstallService.cpp:244
+#, kde-format
+msgid "Free office suite from SoftMaker."
+msgstr "ชุดโปรแกรมสำนักงานฟรีจาก SoftMaker"
+
+#: src/services/InstallService.cpp:246
+#, kde-format
+msgid "Installing FreeOffice"
+msgstr "กำลังติดตั้ง FreeOffice"
+
+#: src/services/InstallService.cpp:247
+#, kde-format
+msgid "FreeOffice installed successfully"
+msgstr "ติดตั้ง FreeOffice สำเร็จ"
+
+#: src/services/InstallService.cpp:248
+#, kde-format
+msgid "FreeOffice is installed and available in the application menu."
+msgstr "ติดตั้ง FreeOffice แล้วและพร้อมใช้งานในเมนูแอปพลิเคชัน"
+
+#: src/services/InstallService.cpp:249
+#, kde-format
+msgid ""
+"This package is provided by SoftMaker and may ask for administrator "
+"authorization."
+msgstr "แพ็กเกจนี้จัดทำโดย SoftMaker และอาจขอการอนุญาตจากผู้ดูแลระบบ"
+
+#: src/services/InstallService.cpp:314
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "Installing %1"
+msgstr "กำลังติดตั้ง %1"
+
+#: src/services/InstallService.cpp:315
+#, kde-format
+msgctxt "@title %1 is an application name"
+msgid "%1 installed successfully"
+msgstr "ติดตั้ง %1 สำเร็จ"
+
+#: src/services/InstallService.cpp:316
+#, kde-format
+msgid "The application is now available in the application menu."
+msgstr "ขณะนี้แอปพลิเคชันพร้อมใช้งานในเมนูแอปพลิเคชันแล้ว"
+
+#: src/services/InstallService.cpp:317
+#, kde-format
+msgctxt "@action:button open the installed application"
+msgid "Open"
+msgstr "เปิด"
+
+#: src/services/InstallService.cpp:435
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Checking…"
+msgstr "กำลังตรวจสอบ…"
+
+#: src/services/InstallService.cpp:438
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Installed"
+msgstr "ติดตั้งแล้ว"
+
+#. i18n: %1 is the name of the only component that is not installed yet.
+#: src/services/InstallService.cpp:442
+#, kde-format
+msgctxt "@info:status one component"
+msgid "Missing: %1"
+msgstr "ขาด: %1"
+
+#. i18n: %1 is a comma-separated list of components that are not installed yet.
+#: src/services/InstallService.cpp:444
+#, kde-format
+msgctxt "@info:status several components"
+msgid "Missing: %1"
+msgstr "ขาด: %1"
+
+#: src/services/InstallService.cpp:447
+#, kde-format
+msgctxt "@info:status installation state"
+msgid "Not installed"
+msgstr "ยังไม่ได้ติดตั้ง"
+
+#: src/services/InstallService.cpp:593
+#, kde-format
+msgid "Preparing the installation…"
+msgstr "กำลังเตรียมการติดตั้ง…"
+
+#: src/services/InstallService.cpp:707 src/services/InstallService.cpp:741
+#, kde-format
+msgid "Downloading FreeOffice from SoftMaker…"
+msgstr "กำลังดาวน์โหลด FreeOffice จาก SoftMaker…"
+
+#. i18n: technical details: %1 URL, %2 package name, %3 version, %4 architecture, %5 size in bytes, %6 checksum.
+#: src/services/InstallService.cpp:709
+#, kde-format
+msgid ""
+"Authorized source: %1\n"
+"Package: %2 · version %3 · %4 · %5 bytes\n"
+"Pinned SHA-256: %6"
+msgstr ""
+"แหล่งที่ได้รับอนุญาต: %1\n"
+"แพ็กเกจ: %2 · รุ่น %3 · %4 · %5 ไบต์\n"
+"SHA-256 ที่ตรึงไว้: %6"
+
+#: src/services/InstallService.cpp:727
+#, kde-format
+msgid "The file exceeds the authorized size."
+msgstr "ไฟล์เกินขนาดที่ได้รับอนุญาต"
+
+#: src/services/InstallService.cpp:759
+#, kde-format
+msgid "Size or SHA-256 mismatch."
+msgstr "ขนาดหรือ SHA-256 ไม่ตรงกัน"
+
+#: src/services/InstallService.cpp:768
+#, kde-format
+msgid "Validating the FreeOffice Debian package…"
+msgstr "กำลังตรวจสอบแพ็กเกจ Debian ของ FreeOffice…"
+
+#: src/services/InstallService.cpp:812
+#, kde-format
+msgid "Confirming the FreeOffice installation…"
+msgstr "กำลังยืนยันการติดตั้ง FreeOffice…"
+
+#: src/services/InstallService.cpp:824
+#, kde-format
+msgid "Confirming the browser installation…"
+msgstr "กำลังยืนยันการติดตั้งเบราว์เซอร์…"
+
+#: src/services/InstallService.cpp:857
+#, kde-format
+msgid "Waiting for administrator authorization…"
+msgstr "กำลังรอการอนุญาตจากผู้ดูแลระบบ…"
+
+#: src/services/InstallService.cpp:883
+#, kde-format
+msgctxt "@info %1 is a program path, %2 the system error"
+msgid "Could not run %1: %2"
+msgstr "ไม่สามารถเรียกใช้ %1: %2"
+
+#: src/services/InstallService.cpp:917
+#, kde-format
+msgctxt "@item:intext generic component label"
+msgid "required components"
+msgstr "ส่วนประกอบที่จำเป็น"
+
+#: src/services/InstallService.cpp:933
+#, kde-format
+msgid "Checking the required components…"
+msgstr "กำลังตรวจสอบส่วนประกอบที่จำเป็น…"
+
+#: src/services/InstallService.cpp:935
+#, kde-format
+msgid ""
+"Waiting for another program to finish installing or updating the system…"
+msgstr "กำลังรอให้โปรแกรมอื่นติดตั้งหรืออัปเดตระบบเสร็จ…"
+
+#: src/services/InstallService.cpp:937
+#, kde-format
+msgid "Updating the list of available programs…"
+msgstr "กำลังอัปเดตรายการโปรแกรมที่มีให้…"
+
+#: src/services/InstallService.cpp:939
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Preparing the download of %1…"
+msgstr "กำลังเตรียมดาวน์โหลด %1…"
+
+#: src/services/InstallService.cpp:941
+#, kde-format
+msgid "Updating the virus definitions…"
+msgstr "กำลังอัปเดตฐานข้อมูลไวรัส…"
+
+#: src/services/InstallService.cpp:945
+#, kde-format
+msgctxt "@info %1 is a list of package names"
+msgid "Packages to install: %1"
+msgstr "แพ็กเกจที่จะติดตั้ง: %1"
+
+#: src/services/InstallService.cpp:954 src/services/InstallService.cpp:1061
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1…"
+msgstr "กำลังดาวน์โหลด %1…"
+
+#: src/services/InstallService.cpp:956
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading %1 (file %2 of %3)…"
+msgstr "กำลังดาวน์โหลด %1 (ไฟล์ %2 จาก %3)…"
+
+#: src/services/InstallService.cpp:970
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Configuring %1…"
+msgstr "กำลังกำหนดค่า %1…"
+
+#: src/services/InstallService.cpp:971
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Installing %1…"
+msgstr "กำลังติดตั้ง %1…"
+
+#: src/services/InstallService.cpp:988
+#, kde-format
+msgid ""
+"The virus definitions could not be downloaded now; ClamAV will retry "
+"automatically in the background."
+msgstr ""
+"ไม่สามารถดาวน์โหลดฐานข้อมูลไวรัสได้ในขณะนี้ ClamAV จะลองอีกครั้งโดยอัตโนมัติในเบื้องหลัง"
+
+#: src/services/InstallService.cpp:990
+#, kde-format
+msgid "freshclam did not finish updating the definitions."
+msgstr "freshclam อัปเดตฐานข้อมูลไม่เสร็จ"
+
+#: src/services/InstallService.cpp:1012
+#, kde-format
+msgid "Checking Flathub…"
+msgstr "กำลังตรวจสอบ Flathub…"
+
+#: src/services/InstallService.cpp:1034
+#, kde-format
+msgid "Setting up Flathub…"
+msgstr "กำลังตั้งค่า Flathub…"
+
+#: src/services/InstallService.cpp:1119
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1 (component %2 of %3)…"
+msgstr "กำลังดาวน์โหลดและติดตั้ง %1 (ส่วนประกอบ %2 จาก %3)…"
+
+#: src/services/InstallService.cpp:1121
+#, kde-format
+msgctxt "@info:status %1 is a component label"
+msgid "Downloading and installing %1…"
+msgstr "กำลังดาวน์โหลดและติดตั้ง %1…"
+
+#: src/services/InstallService.cpp:1144
+#, kde-format
+msgctxt "@info technical detail"
+msgid "Exit code: %1"
+msgstr "รหัสการออก: %1"
+
+#: src/services/InstallService.cpp:1232
+#, kde-format
+msgctxt "@info technical detail; %3 is an internal error code"
+msgid "Step: %1 of %2 · reason: %3"
+msgstr "ขั้นตอน: %1 จาก %2 · สาเหตุ: %3"
+
+#: src/services/InstallService.cpp:1241
+#, kde-format
+msgid ""
+"The authorization was canceled. The components installed in the previous "
+"steps were kept."
+msgstr "การอนุญาตถูกยกเลิก ส่วนประกอบที่ติดตั้งในขั้นตอนก่อนหน้ายังคงอยู่"
+
+#: src/services/InstallService.cpp:1242
+#, kde-format
+msgid "The authorization was canceled. No changes were made to the system."
+msgstr "การอนุญาตถูกยกเลิก ไม่มีการเปลี่ยนแปลงใด ๆ กับระบบ"
+
+#: src/services/InstallService.cpp:1266
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid ""
+"Cannot open %1: the required components are not installed or the tool is "
+"unavailable."
+msgstr "ไม่สามารถเปิด %1: ส่วนประกอบที่จำเป็นยังไม่ได้ติดตั้งหรือเครื่องมือไม่พร้อมใช้งาน"
+
+#: src/services/InstallService.cpp:1300
+#, kde-format
+msgctxt "@info %1 is an application or component name"
+msgid "Could not open %1."
+msgstr "ไม่สามารถเปิด %1"
+
+#: src/services/LayoutService.cpp:36 src/services/LayoutService.cpp:409
+#, kde-format
+msgid "Invalid layout."
+msgstr "การจัดวางไม่ถูกต้อง"
+
+#. i18n: %1 is one or more Plasma widget ids joined by " or ".
+#: src/services/LayoutService.cpp:44
+#, kde-format
+msgid "Required launcher missing: %1. The previous panels were preserved."
+msgstr "ไม่มีตัวเรียกใช้ที่จำเป็น: %1 แผงเดิมยังคงอยู่"
+
+#: src/services/LayoutService.cpp:45
+#, kde-format
+msgctxt "separator between alternative widget ids"
+msgid " or "
+msgstr " หรือ "
+
+#. i18n: %1 is a Plasma widget id, e.g. org.kde.plasma.kickoff.
+#: src/services/LayoutService.cpp:49
+#, kde-format
+msgid "Required widget missing: %1. The previous panels were preserved."
+msgstr "ไม่มีวิดเจ็ตที่จำเป็น: %1 แผงเดิมยังคงอยู่"
+
+#: src/services/LayoutService.cpp:53
+#, kde-format
+msgid "No screen available in Plasma."
+msgstr "ไม่มีหน้าจอที่พร้อมใช้งานใน Plasma"
+
+#: src/services/LayoutService.cpp:56
+#, kde-format
+msgid "Could not query the screen geometry."
+msgstr "ไม่สามารถสอบถามขนาดและตำแหน่งของหน้าจอ"
+
+#: src/services/LayoutService.cpp:58
+#, kde-format
+msgid ""
+"Could not check the required widgets; the previous panels were preserved."
+msgstr "ไม่สามารถตรวจสอบวิดเจ็ตที่จำเป็น แผงเดิมยังคงอยู่"
+
+#: src/services/LayoutService.cpp:132
+msgctxt "desktop layout name"
+msgid "Classic — 5 panels"
+msgstr "คลาสสิก — 5 แผง"
+
+#: src/services/LayoutService.cpp:133
+msgctxt "desktop layout name"
+msgid "3 panels"
+msgstr "3 แผง"
+
+#: src/services/LayoutService.cpp:134
+msgctxt "desktop layout name"
+msgid "Single panel"
+msgstr "แผงเดียว"
+
+#: src/services/LayoutService.cpp:135
+msgctxt "desktop layout name"
+msgid "Top panel"
+msgstr "แผงด้านบน"
+
+#: src/services/LayoutService.cpp:136
+msgctxt "desktop layout name"
+msgid "Floating"
+msgstr "ลอย"
+
+#. i18n: "W7" refers to a Windows 7 style taskbar.
+#: src/services/LayoutService.cpp:138
+msgctxt "desktop layout name"
+msgid "W7 panel"
+msgstr "แผงแบบ W7"
+
+#: src/services/LayoutService.cpp:139
+msgctxt "desktop layout name"
+msgid "Tiling"
+msgstr "จัดเรียงแบบไทล์"
+
+#: src/services/LayoutService.cpp:394
+#, kde-format
+msgid "Could not measure the layout segments."
+msgstr "ไม่สามารถวัดส่วนต่าง ๆ ของการจัดวาง"
+
+#: src/services/LayoutService.cpp:400
+#, kde-format
+msgid "The segments did not settle without overlapping on this screen."
+msgstr "ส่วนต่าง ๆ ไม่สามารถจัดวางโดยไม่ซ้อนทับกันบนหน้าจอนี้"
+
+#: src/services/LayoutService.cpp:416
+#, kde-format
+msgid "Plasma did not respond; open the Welcome inside a KDE Plasma session."
+msgstr "Plasma ไม่ตอบสนอง โปรดเปิดแอปต้อนรับภายในเซสชัน KDE Plasma"
+
+#: src/services/LayoutService.cpp:423
+#, kde-format
+msgid "Checking the launcher of the %1 layout…"
+msgstr "กำลังตรวจสอบตัวเรียกใช้ของการจัดวาง %1…"
+
+#: src/services/LayoutService.cpp:426
+#, kde-format
+msgid "Could not load the layout scripts; nothing was changed."
+msgstr "ไม่สามารถโหลดสคริปต์การจัดวาง ไม่มีการเปลี่ยนแปลงใด ๆ"
+
+#: src/services/LayoutService.cpp:437
+#, kde-format
+msgid "Could not save a copy of the current layout; nothing was changed."
+msgstr "ไม่สามารถบันทึกสำเนาการจัดวางปัจจุบัน ไม่มีการเปลี่ยนแปลงใด ๆ"
+
+#: src/services/LayoutService.cpp:440
+#, kde-format
+msgid "Applying the %1 layout…"
+msgstr "กำลังใช้การจัดวาง %1…"
+
+#. i18n: %1 is a complete sentence explaining why the layout failed.
+#: src/services/LayoutService.cpp:445
+#, kde-format
+msgid "%1 The previous layout was restored."
+msgstr "%1 คืนค่าการจัดวางก่อนหน้าแล้ว"
+
+#. i18n: “Restore Previous Layout” is the button on the Appearance page.
+#: src/services/LayoutService.cpp:447
+#, kde-format
+msgid "%1 Could not restore automatically; use “Restore Previous Layout”."
+msgstr "%1 ไม่สามารถคืนค่าโดยอัตโนมัติ โปรดใช้ “คืนค่าการจัดวางก่อนหน้า”"
+
+#. i18n: %2 is the raw error reported by Plasma.
+#: src/services/LayoutService.cpp:459
+#, kde-format
+msgid "Could not apply the %1 layout (%2)."
+msgstr "ไม่สามารถใช้การจัดวาง %1 (%2)"
+
+#: src/services/LayoutService.cpp:469
+#, kde-format
+msgid "The %1 layout was not completed."
+msgstr "การจัดวาง %1 ไม่เสร็จสมบูรณ์"
+
+#: src/services/LayoutService.cpp:474
+#, kde-format
+msgid "%1 layout applied."
+msgstr "ใช้การจัดวาง %1 แล้ว"
+
+#: src/services/LayoutService.cpp:478
+#, kde-format
+msgid ""
+"%1 layout applied. Drag windows while holding Shift to snap them into the "
+"tiles."
+msgstr "ใช้การจัดวาง %1 แล้ว ลากหน้าต่างขณะกด Shift ค้างไว้เพื่อจัดให้เข้ากับไทล์"
+
+#: src/services/LayoutService.cpp:479
+#, kde-format
+msgid "%1 layout applied, but the KWin tiles could not be configured."
+msgstr "ใช้การจัดวาง %1 แล้ว แต่ไม่สามารถกำหนดค่าไทล์ของ KWin"
+
+#: src/services/LayoutService.cpp:554
+#, kde-format
+msgid "Restoring the previous layout; Plasma will be restarted…"
+msgstr "กำลังคืนค่าการจัดวางก่อนหน้า Plasma จะเริ่มใหม่…"
+
+#: src/services/LayoutService.cpp:556
+#, kde-format
+msgid "Previous layout restored."
+msgstr "คืนค่าการจัดวางก่อนหน้าแล้ว"
+
+#: src/services/LayoutService.cpp:557
+#, kde-format
+msgid "Could not restore the previous layout."
+msgstr "ไม่สามารถคืนค่าการจัดวางก่อนหน้า"
+
+#: src/services/PackageService.cpp:111 src/services/PackageService.cpp:161
+#, kde-format
+msgid "Flatpak is not installed."
+msgstr "ไม่ได้ติดตั้ง Flatpak"
+
+#: src/services/PackageService.cpp:140
+#, kde-format
+msgid "Could not query Flatpak."
+msgstr "ไม่สามารถสอบถาม Flatpak"
+
+#: src/services/PackageService.cpp:151
+#, kde-format
+msgid "This application is not in the allowed list."
+msgstr "แอปพลิเคชันนี้ไม่อยู่ในรายการที่อนุญาต"
+
+#: src/services/PackageService.cpp:155
+#, kde-format
+msgid "Another Flatpak operation is in progress."
+msgstr "มีการดำเนินการ Flatpak อื่นกำลังดำเนินอยู่"
+
+#: src/services/PackageService.cpp:176
+#, kde-format
+msgctxt "@info:status %1 is a Flatpak application ID"
+msgid "Removing %1…"
+msgstr "กำลังเอา %1 ออก…"
+
+#: src/services/PackageService.cpp:182
+#, kde-format
+msgid "Removal finished."
+msgstr "เอาออกเสร็จสิ้น"
+
+#: src/services/PackageService.cpp:184
+#, kde-format
+msgctxt "@info:status %1 is the error output of Flatpak"
+msgid "Failed: %1"
+msgstr "ล้มเหลว: %1"
+
+#: src/services/PackageService.cpp:195
+#, kde-format
+msgid "Could not start Flatpak."
+msgstr "ไม่สามารถเริ่ม Flatpak"
+
+#: src/services/StartupPreference.cpp:75 src/services/StartupPreference.cpp:92
+#, kde-format
+msgid "Could not change the startup preference."
+msgstr "ไม่สามารถเปลี่ยนการตั้งค่าการเริ่มต้นระบบ"
+
+#: src/services/SystemReportService.cpp:38
+#, kde-format
+msgctxt "@info system report value"
+msgid "Not available"
+msgstr "ไม่มีข้อมูล"
+
+#: src/services/SystemReportService.cpp:186
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 วัน"
+
+#: src/services/SystemReportService.cpp:189
+#, kde-format
+msgid "%1 hour"
+msgid_plural "%1 hours"
+msgstr[0] "%1 ชั่วโมง"
+
+#: src/services/SystemReportService.cpp:192
+#, kde-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 นาที"
+
+#: src/services/SystemReportService.cpp:195
+#, kde-format
+msgid "less than a minute"
+msgstr "น้อยกว่าหนึ่งนาที"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration"
+msgid "%1 and %2"
+msgstr "%1 และ %2"
+
+#. i18n: joins the leading parts of a duration ("2 days, 3 hours") with the last one
+#: src/services/SystemReportService.cpp:202
+#, kde-format
+msgctxt "@info duration list separator"
+msgid ", "
+msgstr ", "
+
+#: src/services/SystemReportService.cpp:333
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (64-bit)"
+msgstr "%1 (64 บิต)"
+
+#: src/services/SystemReportService.cpp:334
+#, kde-format
+msgctxt "@info CPU architecture"
+msgid "%1 (32-bit)"
+msgstr "%1 (32 บิต)"
+
+#: src/services/SystemReportService.cpp:341
+#, kde-format
+msgctxt "@title system report section"
+msgid "System"
+msgstr "ระบบ"
+
+#: src/services/SystemReportService.cpp:342
+#, kde-format
+msgctxt "@label system report item"
+msgid "Distribution"
+msgstr "ดิสทริบิวชัน"
+
+#: src/services/SystemReportService.cpp:344
+#, kde-format
+msgctxt "@label system report item"
+msgid "Version"
+msgstr "รุ่น"
+
+#: src/services/SystemReportService.cpp:347
+#: src/services/SystemReportService.cpp:349
+#, kde-format
+msgctxt "@label system report item"
+msgid "Base"
+msgstr "ฐาน"
+
+#: src/services/SystemReportService.cpp:353
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation media"
+msgstr "สื่อการติดตั้ง"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Estimated installation date"
+msgstr "วันที่ติดตั้งโดยประมาณ"
+
+#: src/services/SystemReportService.cpp:364
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installation date"
+msgstr "วันที่ติดตั้ง"
+
+#: src/services/SystemReportService.cpp:366
+#, kde-format
+msgctxt "@label system report item"
+msgid "Architecture"
+msgstr "สถาปัตยกรรม"
+
+#: src/services/SystemReportService.cpp:368
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer name"
+msgstr "ชื่อคอมพิวเตอร์"
+
+#: src/services/SystemReportService.cpp:370
+#, kde-format
+msgctxt "@label system report item"
+msgid "Language"
+msgstr "ภาษา"
+
+#: src/services/SystemReportService.cpp:371
+#, kde-format
+msgctxt "@label system report item"
+msgid "Date and time"
+msgstr "วันที่และเวลา"
+
+#: src/services/SystemReportService.cpp:374
+#, kde-format
+msgctxt "@title system report section"
+msgid "Desktop"
+msgstr "เดสก์ท็อป"
+
+#: src/services/SystemReportService.cpp:378
+#, kde-format
+msgctxt "@label system report item"
+msgid "Session"
+msgstr "เซสชัน"
+
+#: src/services/SystemReportService.cpp:379
+#, kde-format
+msgctxt "@label system report item"
+msgid "Environment"
+msgstr "สภาพแวดล้อม"
+
+#: src/services/SystemReportService.cpp:382
+#, kde-format
+msgctxt "@title system report section"
+msgid "Hardware"
+msgstr "ฮาร์ดแวร์"
+
+#: src/services/SystemReportService.cpp:386
+#, kde-format
+msgctxt "@label system report item"
+msgid "Computer"
+msgstr "คอมพิวเตอร์"
+
+#: src/services/SystemReportService.cpp:388
+#, kde-format
+msgctxt "@label system report item"
+msgid "Processor"
+msgstr "หน่วยประมวลผล"
+
+#: src/services/SystemReportService.cpp:389
+#, kde-format
+msgctxt "@label system report item"
+msgid "Cores / threads"
+msgstr "คอร์ / เธรด"
+
+#: src/services/SystemReportService.cpp:391
+#, kde-format
+msgctxt "@info firmware type"
+msgid "BIOS (legacy)"
+msgstr "BIOS (แบบดั้งเดิม)"
+
+#: src/services/SystemReportService.cpp:392
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Not applicable (BIOS)"
+msgstr "ไม่เกี่ยวข้อง (BIOS)"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Disabled"
+msgstr "ปิดใช้งาน"
+
+#: src/services/SystemReportService.cpp:397
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Enabled"
+msgstr "เปิดใช้งาน"
+
+#: src/services/SystemReportService.cpp:399
+#, kde-format
+msgctxt "@info Secure Boot state"
+msgid "Could not be determined"
+msgstr "ไม่สามารถระบุได้"
+
+#: src/services/SystemReportService.cpp:406
+#, kde-format
+msgctxt "@title system report section"
+msgid "Graphics"
+msgstr "กราฟิก"
+
+#: src/services/SystemReportService.cpp:430
+#, kde-format
+msgctxt "@info appended to a device name"
+msgid " · driver %1"
+msgstr " · ไดรเวอร์ %1"
+
+#: src/services/SystemReportService.cpp:438
+#, kde-format
+msgctxt "@label system report item"
+msgid "OpenGL renderer"
+msgstr "ตัวเรนเดอร์ OpenGL"
+
+#: src/services/SystemReportService.cpp:445
+#, kde-format
+msgctxt "@label system report item"
+msgid "Monitor %1"
+msgstr "จอภาพ %1"
+
+#. i18n: screen name · width×height · refresh rate · scale percentage
+#: src/services/SystemReportService.cpp:447
+#, kde-format
+msgctxt "@info monitor details"
+msgid "%1 · %2×%3 · %4 Hz · scale %5%"
+msgstr "%1 · %2×%3 · %4 Hz · สเกล %5%"
+
+#: src/services/SystemReportService.cpp:455
+#, kde-format
+msgctxt "@title system report section"
+msgid "Memory"
+msgstr "หน่วยความจำ"
+
+#: src/services/SystemReportService.cpp:457
+#, kde-format
+msgctxt "@label system report item"
+msgid "Total"
+msgstr "ทั้งหมด"
+
+#: src/services/SystemReportService.cpp:458
+#, kde-format
+msgctxt "@label system report item"
+msgid "In use"
+msgstr "ใช้งานอยู่"
+
+#: src/services/SystemReportService.cpp:459
+#, kde-format
+msgctxt "@label system report item"
+msgid "Available"
+msgstr "ว่าง"
+
+#: src/services/SystemReportService.cpp:461
+#, kde-format
+msgctxt "@info swap usage"
+msgid "%1 of %2 in use"
+msgstr "ใช้ %1 จาก %2"
+
+#: src/services/SystemReportService.cpp:462
+#, kde-format
+msgid "No swap"
+msgstr "ไม่มี swap"
+
+#: src/services/SystemReportService.cpp:466
+#, kde-format
+msgctxt "@title system report section"
+msgid "Storage"
+msgstr "พื้นที่จัดเก็บ"
+
+#: src/services/SystemReportService.cpp:478
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disk %1"
+msgstr "ดิสก์ %1"
+
+#: src/services/SystemReportService.cpp:497
+#, kde-format
+msgctxt "@label system report item"
+msgid "Other volume %1"
+msgstr "โวลุมอื่น %1"
+
+#: src/services/SystemReportService.cpp:500
+#, kde-format
+msgctxt "@info volume usage"
+msgid "%1 used of %2 · %3 free"
+msgstr "ใช้ %1 จาก %2 · ว่าง %3"
+
+#: src/services/SystemReportService.cpp:503
+#, kde-format
+msgctxt "@label system report item"
+msgid "Disks"
+msgstr "ดิสก์"
+
+#: src/services/SystemReportService.cpp:508
+#, kde-format
+msgctxt "@title system report section"
+msgid "Packages"
+msgstr "แพ็กเกจ"
+
+#: src/services/SystemReportService.cpp:511
+#: src/services/SystemReportService.cpp:526
+#, kde-format
+msgid "%1 package"
+msgid_plural "%1 packages"
+msgstr[0] "%1 แพ็กเกจ"
+
+#: src/services/SystemReportService.cpp:523
+#, kde-format
+msgid "%1 application"
+msgid_plural "%1 applications"
+msgstr[0] "%1 แอปพลิเคชัน"
+
+#: src/services/SystemReportService.cpp:527
+#, kde-format
+msgid "Snap not installed"
+msgstr "ไม่ได้ติดตั้ง Snap"
+
+#: src/services/SystemReportService.cpp:532
+#, kde-format
+msgctxt "@info kernel version"
+msgid "%1 (in use)"
+msgstr "%1 (ใช้งานอยู่)"
+
+#: src/services/SystemReportService.cpp:534
+#, kde-format
+msgctxt "@label system report item"
+msgid "Installed kernels"
+msgstr "เคอร์เนลที่ติดตั้ง"
+
+#: src/services/SystemReportService.cpp:537
+#, kde-format
+msgctxt "@title system report section"
+msgid "Startup"
+msgstr "การเริ่มระบบ"
+
+#: src/services/SystemReportService.cpp:538
+#, kde-format
+msgctxt "@label system report item"
+msgid "Uptime"
+msgstr "เวลาทำงาน"
+
+#: src/services/SystemReportService.cpp:539
+#, kde-format
+msgctxt "@label system report item"
+msgid "Last boot"
+msgstr "บูตครั้งล่าสุด"
+
+#: src/services/SystemReportService.cpp:543
+#, kde-format
+msgctxt "@title system report section"
+msgid "Network"
+msgstr "เครือข่าย"
+
+#: src/services/SystemReportService.cpp:556
+#, kde-format
+msgctxt "@info network adapter"
+msgid "driver %1"
+msgstr "ไดรเวอร์ %1"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "connected"
+msgstr "เชื่อมต่อแล้ว"
+
+#: src/services/SystemReportService.cpp:558
+#, kde-format
+msgctxt "@info network adapter"
+msgid "disconnected"
+msgstr "ไม่ได้เชื่อมต่อ"
+
+#: src/services/SystemReportService.cpp:569
+#, kde-format
+msgctxt "@label system report item"
+msgid "Adapters"
+msgstr "อะแดปเตอร์"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "32-bit"
+msgstr "32 บิต"
+
+#: src/services/SystemReportService.cpp:578
+#, kde-format
+msgctxt "@info CPU word size"
+msgid "64-bit"
+msgstr "64 บิต"
+
+#: src/services/SystemReportService.cpp:581
+#, kde-format
+msgctxt "@info memory usage summary"
+msgid "%1 of %2"
+msgstr "%1 จาก %2"
+
+#: src/services/SystemReportService.cpp:582
+#, kde-format
+msgctxt "@info storage summary"
+msgid "%1 free of %2"
+msgstr "ว่าง %1 จาก %2"
+
+#: src/services/SystemReportService.cpp:593
+#, kde-format
+msgctxt "@info system report header"
+msgid "Generated on: %1"
+msgstr "สร้างเมื่อ: %1"
+
+#: src/services/SystemReportService.cpp:598
+#, kde-format
+msgctxt "@info system report line: label, value"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: src/services/SystemReportService.cpp:603
+#, kde-format
+msgctxt "@info system report footer"
+msgid "No network addresses, serial numbers or computer name."
+msgstr "ไม่มีที่อยู่เครือข่าย หมายเลขซีเรียล หรือชื่อคอมพิวเตอร์"
+
+#: src/services/SystemService.cpp:93
+#, kde-format
+msgid "The %1 decoration engine is not installed."
+msgstr "ไม่ได้ติดตั้งเอนจินการตกแต่ง %1"
+
+#: src/services/SystemService.cpp:108
+#, kde-format
+msgid "The %1 decoration is not installed or its resources are incomplete."
+msgstr "ไม่ได้ติดตั้งการตกแต่ง %1 หรือทรัพยากรของการตกแต่งไม่ครบถ้วน"
+
+#. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
+#: src/services/SystemService.cpp:480
+#, kde-format
+msgid "Driver Manager available"
+msgstr "ตัวจัดการไดรเวอร์พร้อมใช้งาน"
+
+#: src/services/SystemService.cpp:481
+#, kde-format
+msgid "Driver Manager not installed"
+msgstr "ไม่ได้ติดตั้งตัวจัดการไดรเวอร์"
+
+#: src/services/SystemService.cpp:497
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Active"
+msgstr "ทำงานอยู่"
+
+#: src/services/SystemService.cpp:498
+#, kde-format
+msgctxt "firewall state at boot"
+msgid "Inactive"
+msgstr "ไม่ได้ทำงาน"
+
+#: src/services/SystemService.cpp:501
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: active"
+msgstr "เมื่อเริ่มระบบ: ทำงาน"
+
+#: src/services/SystemService.cpp:502
+#, kde-format
+msgctxt "@info firewall preference at boot"
+msgid "startup: inactive"
+msgstr "เมื่อเริ่มระบบ: ไม่ทำงาน"
+
+#. i18n: %1 is an error message shown in the page banner.
+#: src/services/SystemService.cpp:538
+#, kde-format
+msgid "Error: %1"
+msgstr "ข้อผิดพลาด: %1"
+
+#: src/services/SystemService.cpp:557
+#, kde-format
+msgid "Invalid theme."
+msgstr "ธีมไม่ถูกต้อง"
+
+#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
+#: src/services/SystemService.cpp:858
+#, kde-format
+msgid "Wait for the current operation to finish."
+msgstr "โปรดรอให้การดำเนินการปัจจุบันเสร็จสิ้น"
+
+#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#, kde-format
+msgid ""
+"The current external color scheme has no known variant. Select a Mainuan "
+"color first."
+msgstr "ชุดสีภายนอกปัจจุบันไม่มีรูปแบบย่อยที่รู้จัก โปรดเลือกสีของ Mainuan ก่อน"
+
+#: src/services/SystemService.cpp:578
+#, kde-format
+msgid "Dark theme applied."
+msgstr "ใช้ธีมมืดแล้ว"
+
+#: src/services/SystemService.cpp:579
+#, kde-format
+msgid "Light theme applied."
+msgstr "ใช้ธีมสว่างแล้ว"
+
+#. i18n: %1 is an accent color name (Brown, Cyan…).
+#: src/services/SystemService.cpp:596
+#, kde-format
+msgid "Theme and %1 color applied."
+msgstr "ใช้ธีมและสี%1แล้ว"
+
+#: src/services/SystemService.cpp:608
+#, kde-format
+msgid "Invalid accent color."
+msgstr "สีเน้นไม่ถูกต้อง"
+
+#: src/services/SystemService.cpp:618
+#, kde-format
+msgid "Applying %1 color…"
+msgstr "กำลังใช้สี%1…"
+
+#: src/services/SystemService.cpp:629
+#, kde-format
+msgid "%1 color, icons, wallpaper and avatar applied."
+msgstr "ใช้สี%1 ไอคอน ภาพพื้นหลัง และรูปประจำตัวแล้ว"
+
+#: src/services/SystemService.cpp:640
+#, kde-format
+msgid "Color scheme %1.colors is missing or unreadable."
+msgstr "ชุดสี %1.colors ขาดหายหรืออ่านไม่ได้"
+
+#: src/services/SystemService.cpp:646
+#, kde-format
+msgid "Color scheme %1.colors is invalid."
+msgstr "ชุดสี %1.colors ไม่ถูกต้อง"
+
+#: src/services/SystemService.cpp:651
+#, kde-format
+msgid "plasma-apply-colorscheme is not available."
+msgstr "plasma-apply-colorscheme ไม่พร้อมใช้งาน"
+
+#: src/services/SystemService.cpp:658
+#, kde-format
+msgid "Plasma did not recognize the %1.colors color scheme."
+msgstr "Plasma ไม่รู้จักชุดสี %1.colors"
+
+#: src/services/SystemService.cpp:704
+#, kde-format
+msgid "Could not prepare the KDE color configuration."
+msgstr "ไม่สามารถเตรียมการกำหนดค่าสีของ KDE"
+
+#: src/services/SystemService.cpp:715
+#, kde-format
+msgid "Plasma did not confirm the %1 color scheme without a color override."
+msgstr "Plasma ไม่ได้ยืนยันชุดสี %1 โดยไม่มีการแทนที่สี"
+
+#. i18n: Item of a list of failed adjustments (lowercase, no final period).
+#: src/services/SystemService.cpp:729
+#, kde-format
+msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
+msgstr "ชุดไอคอน %1 ขาดหายหรือ index.theme ไม่ถูกต้อง (ไอคอนเดิมยังคงอยู่)"
+
+#: src/services/SystemService.cpp:732
+#, kde-format
+msgctxt "failed adjustment list item; %1 is an icon theme"
+msgid "icons %1"
+msgstr "ไอคอน %1"
+
+#: src/services/SystemService.cpp:737
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper %1 missing"
+msgstr "ไม่มีภาพพื้นหลัง %1"
+
+#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
+#: src/services/SystemService.cpp:1022
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "wallpaper"
+msgstr "ภาพพื้นหลัง"
+
+#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "Plasma did not confirm the %1 icons"
+msgstr "Plasma ไม่ได้ยืนยันไอคอน %1"
+
+#: src/services/SystemService.cpp:758
+#, kde-format
+msgctxt "failed adjustment list item; %1 is the avatar error"
+msgid "avatar: %1"
+msgstr "รูปประจำตัว: %1"
+
+#: src/services/SystemService.cpp:764
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "color scheme changed during the operation; avatar preserved"
+msgstr "ชุดสีเปลี่ยนไประหว่างการดำเนินการ รูปประจำตัวยังคงเดิม"
+
+#: src/services/SystemService.cpp:779
+#, kde-format
+msgid "Could not complete all adjustments: %1."
+msgstr "ไม่สามารถปรับแต่งให้ครบทุกรายการ: %1"
+
+#: src/services/SystemService.cpp:780
+#, kde-format
+msgctxt "separator between failed adjustment list items"
+msgid "; "
+msgstr "; "
+
+#: src/services/SystemService.cpp:795
+#, kde-format
+msgid "Could not communicate with KWin to update the window decoration."
+msgstr "ไม่สามารถสื่อสารกับ KWin เพื่ออัปเดตการตกแต่งหน้าต่าง"
+
+#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
+#: src/services/SystemService.cpp:830
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "could not restore the previous window decoration"
+msgstr "ไม่สามารถคืนค่าการตกแต่งหน้าต่างก่อนหน้า"
+
+#: src/services/SystemService.cpp:821
+#, kde-format
+msgid "Could not save the requested window decoration in KWin."
+msgstr "ไม่สามารถบันทึกการตกแต่งหน้าต่างที่ร้องขอใน KWin"
+
+#: src/services/SystemService.cpp:831
+#, kde-format
+msgid ""
+"The final window decoration configuration was changed during the operation."
+msgstr "การกำหนดค่าการตกแต่งหน้าต่างขั้นสุดท้ายถูกเปลี่ยนระหว่างการดำเนินการ"
+
+# reviewed: consistência com 'Visual Style' = รูปแบบการแสดงผล (lote 6)
+#: src/services/SystemService.cpp:854
+#, kde-format
+msgid "Invalid visual style."
+msgstr "รูปแบบการแสดงผลไม่ถูกต้อง"
+
+#: src/services/SystemService.cpp:862
+#, kde-format
+msgid "%1 style applied."
+msgstr "ใช้รูปแบบ %1 แล้ว"
+
+#: src/services/SystemService.cpp:895
+#, kde-format
+msgid ""
+"This system's Plasma does not provide plasma-apply-lookandfeel; the style "
+"cannot be changed."
+msgstr "Plasma ของระบบนี้ไม่มี plasma-apply-lookandfeel จึงไม่สามารถเปลี่ยนรูปแบบได้"
+
+#: src/services/SystemService.cpp:900
+#, kde-format
+msgid "The %1 style is not installed on this system."
+msgstr "ไม่ได้ติดตั้งรูปแบบ %1 ในระบบนี้"
+
+#. i18n: %1 is a complete sentence describing the problem.
+#: src/services/SystemService.cpp:911
+#, kde-format
+msgid "%1 Previous appearance preserved."
+msgstr "%1 รูปลักษณ์เดิมยังคงอยู่"
+
+#: src/services/SystemService.cpp:927
+#, kde-format
+msgid "Could not preserve the %1 icon theme. Previous style preserved."
+msgstr "ไม่สามารถคงชุดไอคอน %1 ไว้ได้ รูปแบบเดิมยังคงอยู่"
+
+#: src/services/SystemService.cpp:931
+#, kde-format
+msgid "Applying %1 style…"
+msgstr "กำลังใช้รูปแบบ %1…"
+
+#: src/services/SystemService.cpp:948
+#, kde-format
+msgid "Could not apply the %1 style."
+msgstr "ไม่สามารถใช้รูปแบบ %1"
+
+#: src/services/SystemService.cpp:956
+#, kde-format
+msgid "Plasma did not confirm the %1 style."
+msgstr "Plasma ไม่ได้ยืนยันรูปแบบ %1"
+
+#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "icons"
+msgstr "ไอคอน"
+
+#: src/services/SystemService.cpp:986
+#, kde-format
+msgctxt "failed adjustment list item"
+msgid "cursor"
+msgstr "เคอร์เซอร์"
+
+#: src/services/SystemService.cpp:1057
+#, kde-format
+msgid "Driver Manager is not installed."
+msgstr "ไม่ได้ติดตั้งตัวจัดการไดรเวอร์"
+
+#: src/services/SystemService.cpp:1061
+#, kde-format
+msgid "Could not open Driver Manager."
+msgstr "ไม่สามารถเปิดตัวจัดการไดรเวอร์"
+
+#: src/services/SystemService.cpp:1066
+#, kde-format
+msgid "Unknown action."
+msgstr "การกระทำที่ไม่รู้จัก"
+
+#: src/services/SystemService.cpp:1075
+#, kde-format
+msgid "URL blocked for security reasons."
+msgstr "URL ถูกปิดกั้นด้วยเหตุผลด้านความปลอดภัย"
+
+#: src/services/SystemService.cpp:1079
+#, kde-format
+msgid "Requested the web browser to open the page."
+msgstr "ร้องขอให้เว็บเบราว์เซอร์เปิดหน้าแล้ว"
+
+#: src/services/SystemService.cpp:1080
+#, kde-format
+msgid "Could not open the URL in the default web browser."
+msgstr "ไม่สามารถเปิด URL ในเว็บเบราว์เซอร์ค่าเริ่มต้น"
+
+#: src/services/SystemService.cpp:1087
+#, kde-format
+msgid "This application is not allowed to be opened in Discover."
+msgstr "ไม่อนุญาตให้เปิดแอปพลิเคชันนี้ใน Discover"
+
+#: src/services/SystemService.cpp:1092
+#, kde-format
+msgid "Discover was not found. Install KDE Discover to open this application."
+msgstr "ไม่พบ Discover โปรดติดตั้ง KDE Discover เพื่อเปิดแอปพลิเคชันนี้"
+
+#: src/services/SystemService.cpp:1098
+#, kde-format
+msgid "Could not open the page in Discover. Try again."
+msgstr "ไม่สามารถเปิดหน้าใน Discover โปรดลองอีกครั้ง"
+
+#: src/services/SystemService.cpp:1101
+#, kde-format
+msgid ""
+"Requested Discover to open the page. Confirm the installation in Discover; "
+"if the application is not found, check Flathub and try again."
+msgstr ""
+"ร้องขอให้ Discover เปิดหน้าแล้ว โปรดยืนยันการติดตั้งใน Discover หากไม่พบแอปพลิเคชัน "
+"ให้ตรวจสอบ Flathub แล้วลองอีกครั้ง"
+
+#: src/services/SystemService.cpp:1109
+#, kde-format
+msgid "No Pix key is configured."
+msgstr "ไม่ได้กำหนดค่าคีย์ Pix"
+
+#: src/services/SystemService.cpp:1113
+#, kde-format
+msgid "Clipboard unavailable."
+msgstr "คลิปบอร์ดไม่พร้อมใช้งาน"
+
+#: src/services/UserAvatar.cpp:70
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "ไม่อนุญาตให้อัปเดตรูปประจำตัวในฐานะผู้ดูแลระบบ"
+
+#: src/services/UserAvatar.cpp:76
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr "ไฟล์ .face ต้นทางขาดหาย อ่านไม่ได้ หรือไม่ปลอดภัย"
+
+#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the source avatar"
+msgstr "ไม่สามารถอ่านรูปประจำตัวต้นทาง"
+
+#: src/services/UserAvatar.cpp:93
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid ""
+"the .face file does not contain a valid image (SVG requires the Qt SVG "
+"plugin)"
+msgstr "ไฟล์ .face ไม่มีภาพที่ถูกต้อง (SVG ต้องใช้ปลั๊กอิน Qt SVG)"
+
+#: src/services/UserAvatar.cpp:100
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "home folder unavailable or with unsafe permissions"
+msgstr "โฟลเดอร์บ้านไม่พร้อมใช้งานหรือมีสิทธิ์ที่ไม่ปลอดภัย"
+
+#: src/services/UserAvatar.cpp:106
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "~/.face is not a safe regular file; avatar preserved"
+msgstr "~/.face ไม่ใช่ไฟล์ปกติที่ปลอดภัย รูปประจำตัวยังคงเดิม"
+
+#: src/services/UserAvatar.cpp:112
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "unsafe avatar backup; avatar preserved"
+msgstr "ข้อมูลสำรองรูปประจำตัวไม่ปลอดภัย รูปประจำตัวยังคงเดิม"
+
+#: src/services/UserAvatar.cpp:120
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely open the previous avatar"
+msgstr "ไม่สามารถเปิดรูปประจำตัวเดิมได้อย่างปลอดภัย"
+
+#: src/services/UserAvatar.cpp:124
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the previous avatar"
+msgstr "ไม่สามารถอ่านรูปประจำตัวเดิม"
+
+#: src/services/UserAvatar.cpp:128
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not preserve the previous avatar"
+msgstr "ไม่สามารถเก็บรักษารูปประจำตัวเดิม"
+
+#: src/services/UserAvatar.cpp:132
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the backup; avatar preserved"
+msgstr "ไม่สามารถเขียนข้อมูลสำรอง รูปประจำตัวยังคงเดิม"
+
+#: src/services/UserAvatar.cpp:138
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not publish the backup; avatar preserved"
+msgstr "ไม่สามารถเผยแพร่ข้อมูลสำรอง รูปประจำตัวยังคงเดิม"
+
+#: src/services/UserAvatar.cpp:146
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the new avatar; avatar preserved"
+msgstr "ไม่สามารถเขียนรูปประจำตัวใหม่ รูปประจำตัวยังคงเดิม"
+
+#: src/services/UserAvatar.cpp:155
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely replace ~/.face; avatar preserved"
+msgstr "ไม่สามารถแทนที่ ~/.face ได้อย่างปลอดภัย รูปประจำตัวยังคงเดิม"
+
+#: src/services/UserAvatar.cpp:158
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but writing to disk could not be confirmed"
+msgstr "อัปเดตรูปประจำตัวแล้ว แต่ไม่สามารถยืนยันการเขียนลงดิสก์"
+
+#: src/services/UserAvatar.cpp:165
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be checked"
+msgstr "อัปเดตรูปประจำตัวแล้ว แต่ไม่สามารถตรวจสอบ ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:168
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be created"
+msgstr "อัปเดตรูปประจำตัวแล้ว แต่ไม่สามารถสร้าง ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:171
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
+msgstr "อัปเดตรูปประจำตัวแล้ว แต่ไม่สามารถยืนยัน ~/.face.icon บนดิสก์"
