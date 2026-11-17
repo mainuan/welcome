@@ -17,6 +17,9 @@ Welcome screen of **Mainuan Linux**: appearance, panel layout, essential applica
 
 ---
 
+<p align="center"><img src="docs/screenshots/mainuan-welcome-inicio.png" width="760" alt="Mainuan Welcome, Home page"></p>
+
+
 ## About
 
 Mainuan Welcome opens at first login and helps users set up the system: visual style, colours, Plasma panel layout, and installation of codecs, antivirus, firewall, office suites and browsers. Each user can turn off the automatic start.

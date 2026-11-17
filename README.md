@@ -17,6 +17,13 @@ Tela de boas-vindas do **Mainuan Linux**: aparência, layout do painel, aplicati
 
 ---
 
+<p align="center"><img src="docs/screenshots/mainuan-welcome-inicio.png" width="760" alt="Mainuan Welcome, página Início"></p>
+
+| Aparência | Office |
+|---|---|
+| <img src="docs/screenshots/mainuan-welcome-aparencia.png" width="400" alt="Página Aparência"> | <img src="docs/screenshots/mainuan-welcome-office.png" width="400" alt="Página Office"> |
+
+
 ## O que é
 
 O Mainuan Welcome abre no primeiro login e ajuda a deixar o sistema do jeito do usuário: estilo visual, cores, layout dos painéis do Plasma e instalação de codecs, antivírus, firewall, suítes de escritório e navegadores. Cada usuário pode desativar a abertura automática.
