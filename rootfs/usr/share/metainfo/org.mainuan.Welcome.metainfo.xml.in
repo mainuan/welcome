@@ -16,6 +16,11 @@
   <url type="homepage">https://github.com/mainuan/welcome</url>
   <url type="bugtracker">https://github.com/mainuan/welcome/issues</url>
   <releases>
+    <release version="1.1.0" date="2026-11-18" type="stable">
+      <description translate="no">
+        <p>Follow the system language: the interface is written in English and translated into 33 languages, with right-to-left layout for Arabic, Hebrew, Persian and Urdu.</p>
+      </description>
+    </release>
     <release version="1.0.1" date="2026-10-28" type="stable">
       <description translate="no">
         <p>Recognize inherited Mainuan color schemes at startup and preserve the current color when switching between light and dark modes.</p>
