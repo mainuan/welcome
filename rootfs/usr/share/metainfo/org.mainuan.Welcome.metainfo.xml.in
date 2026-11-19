@@ -16,6 +16,13 @@
   <url type="homepage">https://github.com/mainuan/welcome</url>
   <url type="bugtracker">https://github.com/mainuan/welcome/issues</url>
   <releases>
+    <release version="1.1.1" date="2026-11-19" type="stable">
+      <description translate="no">
+        <p>Every desktop layout keeps the Mainuan logo on the application launcher.</p>
+        <p>Choosing a color no longer reports an avatar error and never replaces a picture of your own; the Mainuan avatar is applied only over the default one.</p>
+        <p>Contribute links point to the official Mainuan organization, issue tracker and community, and the address is shown when the browser cannot be opened.</p>
+      </description>
+    </release>
     <release version="1.1.0" date="2026-11-18" type="stable">
       <description translate="no">
         <p>Follow the system language: the interface is written in English and translated into 33 languages, with right-to-left layout for Arabic, Hebrew, Persian and Urdu.</p>
