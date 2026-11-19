@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"POT-Creation-Date: 2026-11-19 01:41-0300\n"
 "PO-Revision-Date: 2026-11-16 12:18-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: da <https://github.com/mainuan>\n"
@@ -66,8 +66,8 @@ msgctxt "@title navigation page"
 msgid "About"
 msgstr "Om"
 
-#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
-#: qml/pages/ContributePage.qml:32
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:27
+#: qml/pages/ContributePage.qml:43
 msgctxt "@title navigation page"
 msgid "Contribute"
 msgstr "Bidrag"
@@ -414,11 +414,13 @@ msgstr "Accentfarve"
 
 #: qml/pages/AppearancePage.qml:127
 msgid ""
-"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
-"Keeps the choice when you change style or theme."
+"Applies the KDE color scheme, the Kora icons and the wallpaper, and the "
+"Mainuan avatar unless you use a picture of your own. Keeps the choice when "
+"you change style or theme."
 msgstr ""
-"Anvender KDE-farvetemaet, Kora-ikonerne, baggrundsbilledet og avataren. "
-"Valget bevares, når du skifter stil eller tema."
+"Anvender KDE-farvetemaet, Kora-ikonerne og baggrundsbilledet samt Mainuan-"
+"avataren, medmindre du bruger dit eget billede. Valget bevares, når du "
+"skifter stil eller tema."
 
 #. i18n: %1 is the accent color name
 #: qml/pages/AppearancePage.qml:158
@@ -506,7 +508,7 @@ msgstr ""
 "Flatpak blev ikke fundet. Flatpak-programmer er ikke tilgængelige. "
 "FreeOffice og onlinetjenesterne er uafhængige af Flatpak."
 
-#: qml/pages/ContributePage.qml:35
+#: qml/pages/ContributePage.qml:46
 msgid ""
 "Mainuan is made by its community. You can help with a donation, with code or "
 "by reporting problems."
@@ -515,43 +517,43 @@ msgstr ""
 "eller ved at rapportere problemer."
 
 #. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
-#: qml/pages/ContributePage.qml:78
+#: qml/pages/ContributePage.qml:89
 msgid "Pix QR code. Key: %1"
 msgstr "Pix-QR-kode. Nøgle: %1"
 
-#: qml/pages/ContributePage.qml:79
+#: qml/pages/ContributePage.qml:90
 msgid "Pix key QR code. Key: %1"
 msgstr "QR-kode til Pix-nøgle. Nøgle: %1"
 
-#: qml/pages/ContributePage.qml:97
+#: qml/pages/ContributePage.qml:108
 msgid "Support Mainuan"
 msgstr "Støt Mainuan"
 
-#: qml/pages/ContributePage.qml:104
+#: qml/pages/ContributePage.qml:115
 msgid ""
 "Your donation helps sustain development, infrastructure and the community."
 msgstr ""
 "Din donation hjælper med at opretholde udvikling, infrastruktur og "
 "fællesskabet."
 
-#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+#: qml/pages/ContributePage.qml:122 qml/pages/ContributePage.qml:147
 msgid "Pix Key"
 msgstr "Pix-nøgle"
 
-#: qml/pages/ContributePage.qml:143
+#: qml/pages/ContributePage.qml:154
 msgid "Copy Pix Key"
 msgstr "Kopiér Pix-nøgle"
 
-#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#: qml/pages/ContributePage.qml:169 src/services/SystemService.cpp:1171
 #, kde-format
 msgid "Pix key copied."
 msgstr "Pix-nøglen er kopieret."
 
-#: qml/pages/ContributePage.qml:168
+#: qml/pages/ContributePage.qml:179
 msgid "Scan the QR code with your bank's app, using the Pix option."
 msgstr "Scan QR-koden med din banks app ved hjælp af Pix-funktionen."
 
-#: qml/pages/ContributePage.qml:169
+#: qml/pages/ContributePage.qml:180
 msgid ""
 "The QR code contains the Pix key. In your bank's app, use the Pix option "
 "with the copied key or the one read from the code."
@@ -559,42 +561,63 @@ msgstr ""
 "QR-koden indeholder Pix-nøglen. Brug Pix-funktionen i din banks app med den "
 "kopierede nøgle eller den, der er læst fra koden."
 
-#: qml/pages/ContributePage.qml:177
+#: qml/pages/ContributePage.qml:188
 msgid "The Pix key has not been set up on this installation yet."
 msgstr "Pix-nøglen er endnu ikke sat op på denne installation."
 
-#: qml/pages/ContributePage.qml:187
+#: qml/pages/ContributePage.qml:198
 msgid "Other Ways to Help"
 msgstr "Andre måder at hjælpe på"
 
-#: qml/pages/ContributePage.qml:196
+#: qml/pages/ContributePage.qml:208
 msgid "Contribute Code"
 msgstr "Bidrag med kode"
 
-#: qml/pages/ContributePage.qml:197
+#: qml/pages/ContributePage.qml:209
 msgid "Code, translations and improvements on GitHub."
 msgstr "Kode, oversættelser og forbedringer på GitHub."
 
-#: qml/pages/ContributePage.qml:205
+#: qml/pages/ContributePage.qml:221
 msgid "Report a Problem"
 msgstr "Rapportér et problem"
 
-#: qml/pages/ContributePage.qml:206
+#: qml/pages/ContributePage.qml:222
 msgid ""
 "Describe what happened; attaching the system report (in About) helps a lot."
 msgstr ""
 "Beskriv, hvad der skete; det hjælper meget at vedhæfte systemrapporten "
 "(under Om)."
 
-#: qml/pages/ContributePage.qml:214
+#: qml/pages/ContributePage.qml:234
 msgid "Telegram Community"
 msgstr "Telegram-fællesskab"
 
-#: qml/pages/ContributePage.qml:215
+#: qml/pages/ContributePage.qml:235
 msgid "Chat with Mainuan users and developers."
 msgstr "Chat med Mainuan-brugere og -udviklere."
 
-#: qml/pages/ContributePage.qml:222
+#: qml/pages/ContributePage.qml:259
+msgid ""
+"The web browser could not be opened. Copy the address below and open it in "
+"your browser:"
+msgstr ""
+"Webbrowseren kunne ikke åbnes. Kopiér adressen nedenfor, og åbn den i din "
+"browser:"
+
+#: qml/pages/ContributePage.qml:275
+msgid "Page address"
+msgstr "Sidens adresse"
+
+#: qml/pages/ContributePage.qml:281
+msgid "Copy Address"
+msgstr "Kopiér adresse"
+
+#: qml/pages/ContributePage.qml:287 src/services/SystemService.cpp:1156
+#, kde-format
+msgid "Address copied."
+msgstr "Adressen er kopieret."
+
+#: qml/pages/ContributePage.qml:297
 msgid ""
 "Links open in the browser only when you click them. The QR code is generated "
 "on this computer, without internet access."
@@ -2193,58 +2216,58 @@ msgstr ""
 "Dekorationen %1 er ikke installeret, eller dens ressourcer er ufuldstændige."
 
 #. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
-#: src/services/SystemService.cpp:480
+#: src/services/SystemService.cpp:485
 #, kde-format
 msgid "Driver Manager available"
 msgstr "Driverhåndtering tilgængelig"
 
-#: src/services/SystemService.cpp:481
+#: src/services/SystemService.cpp:486
 #, kde-format
 msgid "Driver Manager not installed"
 msgstr "Driverhåndtering ikke installeret"
 
-#: src/services/SystemService.cpp:497
+#: src/services/SystemService.cpp:502
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Active"
 msgstr "Aktiv"
 
-#: src/services/SystemService.cpp:498
+#: src/services/SystemService.cpp:503
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: src/services/SystemService.cpp:501
+#: src/services/SystemService.cpp:506
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: active"
 msgstr "ved opstart: aktiv"
 
-#: src/services/SystemService.cpp:502
+#: src/services/SystemService.cpp:507
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: inactive"
 msgstr "ved opstart: inaktiv"
 
 #. i18n: %1 is an error message shown in the page banner.
-#: src/services/SystemService.cpp:538
+#: src/services/SystemService.cpp:543
 #, kde-format
 msgid "Error: %1"
 msgstr "Fejl: %1"
 
-#: src/services/SystemService.cpp:557
+#: src/services/SystemService.cpp:562
 #, kde-format
 msgid "Invalid theme."
 msgstr "Ugyldigt tema."
 
-#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
-#: src/services/SystemService.cpp:858
+#: src/services/SystemService.cpp:567 src/services/SystemService.cpp:617
+#: src/services/SystemService.cpp:886
 #, kde-format
 msgid "Wait for the current operation to finish."
 msgstr "Vent, til den aktuelle handling er færdig."
 
-#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#: src/services/SystemService.cpp:576 src/services/SystemService.cpp:605
 #, kde-format
 msgid ""
 "The current external color scheme has no known variant. Select a Mainuan "
@@ -2253,142 +2276,157 @@ msgstr ""
 "Det aktuelle eksterne farvetema har ingen kendt variant. Vælg først en "
 "Mainuan-farve."
 
-#: src/services/SystemService.cpp:578
+#: src/services/SystemService.cpp:583
 #, kde-format
 msgid "Dark theme applied."
 msgstr "Mørkt tema anvendt."
 
-#: src/services/SystemService.cpp:579
+#: src/services/SystemService.cpp:584
 #, kde-format
 msgid "Light theme applied."
 msgstr "Lyst tema anvendt."
 
 #. i18n: %1 is an accent color name (Brown, Cyan…).
-#: src/services/SystemService.cpp:596
+#: src/services/SystemService.cpp:601
 #, kde-format
 msgid "Theme and %1 color applied."
 msgstr "Tema og farven %1 anvendt."
 
-#: src/services/SystemService.cpp:608
+#: src/services/SystemService.cpp:613
 #, kde-format
 msgid "Invalid accent color."
 msgstr "Ugyldig accentfarve."
 
-#: src/services/SystemService.cpp:618
+#: src/services/SystemService.cpp:623
 #, kde-format
 msgid "Applying %1 color…"
 msgstr "Anvender farven %1…"
 
-#: src/services/SystemService.cpp:629
+#: src/services/SystemService.cpp:634
 #, kde-format
-msgid "%1 color, icons, wallpaper and avatar applied."
-msgstr "Farven %1, ikoner, baggrundsbillede og avatar anvendt."
+msgid "%1 color, icons and wallpaper applied."
+msgstr "Farven %1, ikoner og baggrundsbillede anvendt."
 
-#: src/services/SystemService.cpp:640
+#: src/services/SystemService.cpp:645
 #, kde-format
 msgid "Color scheme %1.colors is missing or unreadable."
 msgstr "Farvetemaet %1.colors mangler eller kan ikke læses."
 
-#: src/services/SystemService.cpp:646
+#: src/services/SystemService.cpp:651
 #, kde-format
 msgid "Color scheme %1.colors is invalid."
 msgstr "Farvetemaet %1.colors er ugyldigt."
 
-#: src/services/SystemService.cpp:651
+#: src/services/SystemService.cpp:656
 #, kde-format
 msgid "plasma-apply-colorscheme is not available."
 msgstr "plasma-apply-colorscheme er ikke tilgængelig."
 
-#: src/services/SystemService.cpp:658
+#: src/services/SystemService.cpp:663
 #, kde-format
 msgid "Plasma did not recognize the %1.colors color scheme."
 msgstr "Plasma genkendte ikke farvetemaet %1.colors."
 
-#: src/services/SystemService.cpp:704
+#: src/services/SystemService.cpp:709
 #, kde-format
 msgid "Could not prepare the KDE color configuration."
 msgstr "Kunne ikke forberede KDE-farvekonfigurationen."
 
-#: src/services/SystemService.cpp:715
+#: src/services/SystemService.cpp:720
 #, kde-format
 msgid "Plasma did not confirm the %1 color scheme without a color override."
 msgstr ""
 "Plasma bekræftede ikke farvetemaet %1 uden en tilsidesættelse af farver."
 
 #. i18n: Item of a list of failed adjustments (lowercase, no final period).
-#: src/services/SystemService.cpp:729
+#: src/services/SystemService.cpp:734
 #, kde-format
 msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
 msgstr ""
 "ikontemaet %1 mangler eller har en ugyldig index.theme (tidligere ikoner "
 "bevaret)"
 
-#: src/services/SystemService.cpp:732
+#: src/services/SystemService.cpp:737
 #, kde-format
 msgctxt "failed adjustment list item; %1 is an icon theme"
 msgid "icons %1"
 msgstr "ikoner %1"
 
-#: src/services/SystemService.cpp:737
+#: src/services/SystemService.cpp:742
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper %1 missing"
 msgstr "baggrundsbilledet %1 mangler"
 
-#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
-#: src/services/SystemService.cpp:1022
+#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1035
+#: src/services/SystemService.cpp:1050
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper"
 msgstr "baggrundsbillede"
 
-#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#: src/services/SystemService.cpp:749 src/services/SystemService.cpp:1040
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "Plasma did not confirm the %1 icons"
 msgstr "Plasma bekræftede ikke ikonerne %1"
 
-#: src/services/SystemService.cpp:758
+#: src/services/SystemService.cpp:773
+#, kde-format
+msgid "The Mainuan avatar was updated."
+msgstr "Mainuan-avataren er opdateret."
+
+#: src/services/SystemService.cpp:778
+#, kde-format
+msgid "Your own avatar was kept."
+msgstr "Dit eget billede er bevaret."
+
+#: src/services/SystemService.cpp:781
+#, kde-format
+msgid "The Mainuan avatar is not installed; the current avatar was kept."
+msgstr "Mainuan-avataren er ikke installeret; den nuværende avatar er bevaret."
+
+#: src/services/SystemService.cpp:784
 #, kde-format
 msgctxt "failed adjustment list item; %1 is the avatar error"
 msgid "avatar: %1"
 msgstr "avatar: %1"
 
-#: src/services/SystemService.cpp:764
+#: src/services/SystemService.cpp:792
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "color scheme changed during the operation; avatar preserved"
 msgstr "farvetemaet blev ændret under handlingen; avatar bevaret"
 
-#: src/services/SystemService.cpp:779
+#: src/services/SystemService.cpp:807
 #, kde-format
 msgid "Could not complete all adjustments: %1."
 msgstr "Kunne ikke fuldføre alle justeringer: %1."
 
-#: src/services/SystemService.cpp:780
+#: src/services/SystemService.cpp:808
 #, kde-format
 msgctxt "separator between failed adjustment list items"
 msgid "; "
 msgstr "; "
 
-#: src/services/SystemService.cpp:795
+#: src/services/SystemService.cpp:823
 #, kde-format
 msgid "Could not communicate with KWin to update the window decoration."
 msgstr "Kunne ikke kommunikere med KWin for at opdatere vinduesdekorationen."
 
-#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
-#: src/services/SystemService.cpp:830
+#: src/services/SystemService.cpp:832 src/services/SystemService.cpp:839
+#: src/services/SystemService.cpp:858
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "could not restore the previous window decoration"
 msgstr "kunne ikke gendanne den tidligere vinduesdekoration"
 
-#: src/services/SystemService.cpp:821
+#: src/services/SystemService.cpp:849
 #, kde-format
 msgid "Could not save the requested window decoration in KWin."
 msgstr "Kunne ikke gemme den ønskede vinduesdekoration i KWin."
 
-#: src/services/SystemService.cpp:831
+#: src/services/SystemService.cpp:859
 #, kde-format
 msgid ""
 "The final window decoration configuration was changed during the operation."
@@ -2396,17 +2434,17 @@ msgstr ""
 "Den endelige konfiguration af vinduesdekorationen blev ændret under "
 "handlingen."
 
-#: src/services/SystemService.cpp:854
+#: src/services/SystemService.cpp:882
 #, kde-format
 msgid "Invalid visual style."
 msgstr "Ugyldig visuel stil."
 
-#: src/services/SystemService.cpp:862
+#: src/services/SystemService.cpp:890
 #, kde-format
 msgid "%1 style applied."
 msgstr "Stilen %1 er anvendt."
 
-#: src/services/SystemService.cpp:895
+#: src/services/SystemService.cpp:923
 #, kde-format
 msgid ""
 "This system's Plasma does not provide plasma-apply-lookandfeel; the style "
@@ -2415,96 +2453,96 @@ msgstr ""
 "Plasma på dette system leverer ikke plasma-apply-lookandfeel; stilen kan "
 "ikke ændres."
 
-#: src/services/SystemService.cpp:900
+#: src/services/SystemService.cpp:928
 #, kde-format
 msgid "The %1 style is not installed on this system."
 msgstr "Stilen %1 er ikke installeret på dette system."
 
 #. i18n: %1 is a complete sentence describing the problem.
-#: src/services/SystemService.cpp:911
+#: src/services/SystemService.cpp:939
 #, kde-format
 msgid "%1 Previous appearance preserved."
 msgstr "%1 Det tidligere udseende er bevaret."
 
-#: src/services/SystemService.cpp:927
+#: src/services/SystemService.cpp:955
 #, kde-format
 msgid "Could not preserve the %1 icon theme. Previous style preserved."
 msgstr "Kunne ikke bevare ikontemaet %1. Den tidligere stil er bevaret."
 
-#: src/services/SystemService.cpp:931
+#: src/services/SystemService.cpp:959
 #, kde-format
 msgid "Applying %1 style…"
 msgstr "Anvender stilen %1…"
 
-#: src/services/SystemService.cpp:948
+#: src/services/SystemService.cpp:976
 #, kde-format
 msgid "Could not apply the %1 style."
 msgstr "Kunne ikke anvende stilen %1."
 
-#: src/services/SystemService.cpp:956
+#: src/services/SystemService.cpp:984
 #, kde-format
 msgid "Plasma did not confirm the %1 style."
 msgstr "Plasma bekræftede ikke stilen %1."
 
-#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#: src/services/SystemService.cpp:1009 src/services/SystemService.cpp:1030
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "icons"
 msgstr "ikoner"
 
-#: src/services/SystemService.cpp:986
+#: src/services/SystemService.cpp:1014
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "cursor"
 msgstr "markør"
 
-#: src/services/SystemService.cpp:1057
+#: src/services/SystemService.cpp:1085
 #, kde-format
 msgid "Driver Manager is not installed."
 msgstr "Driverhåndtering er ikke installeret."
 
-#: src/services/SystemService.cpp:1061
+#: src/services/SystemService.cpp:1089
 #, kde-format
 msgid "Could not open Driver Manager."
 msgstr "Kunne ikke åbne Driverhåndtering."
 
-#: src/services/SystemService.cpp:1066
+#: src/services/SystemService.cpp:1094
 #, kde-format
 msgid "Unknown action."
 msgstr "Ukendt handling."
 
-#: src/services/SystemService.cpp:1075
+#: src/services/SystemService.cpp:1103 src/services/SystemService.cpp:1148
 #, kde-format
 msgid "URL blocked for security reasons."
 msgstr "URL blokeret af sikkerhedshensyn."
 
-#: src/services/SystemService.cpp:1079
+#: src/services/SystemService.cpp:1107
 #, kde-format
 msgid "Requested the web browser to open the page."
 msgstr "Webbrowseren er blevet bedt om at åbne siden."
 
-#: src/services/SystemService.cpp:1080
+#: src/services/SystemService.cpp:1108
 #, kde-format
 msgid "Could not open the URL in the default web browser."
 msgstr "Kunne ikke åbne URL'en i standardwebbrowseren."
 
-#: src/services/SystemService.cpp:1087
+#: src/services/SystemService.cpp:1115
 #, kde-format
 msgid "This application is not allowed to be opened in Discover."
 msgstr "Dette program må ikke åbnes i Discover."
 
-#: src/services/SystemService.cpp:1092
+#: src/services/SystemService.cpp:1120
 #, kde-format
 msgid "Discover was not found. Install KDE Discover to open this application."
 msgstr ""
 "Discover blev ikke fundet. Installér KDE Discover for at åbne dette program."
 
-#: src/services/SystemService.cpp:1098
+#: src/services/SystemService.cpp:1126
 #, kde-format
 msgid "Could not open the page in Discover. Try again."
 msgstr "Kunne ikke åbne siden i Discover. Prøv igen."
 
-#: src/services/SystemService.cpp:1101
+#: src/services/SystemService.cpp:1129
 #, kde-format
 msgid ""
 "Requested Discover to open the page. Confirm the installation in Discover; "
@@ -2513,35 +2551,23 @@ msgstr ""
 "Discover er blevet bedt om at åbne siden. Bekræft installationen i Discover; "
 "hvis programmet ikke findes, så tjek Flathub, og prøv igen."
 
-#: src/services/SystemService.cpp:1109
-#, kde-format
-msgid "No Pix key is configured."
-msgstr "Der er ikke konfigureret nogen Pix-nøgle."
-
-#: src/services/SystemService.cpp:1113
+#: src/services/SystemService.cpp:1152 src/services/SystemService.cpp:1167
 #, kde-format
 msgid "Clipboard unavailable."
 msgstr "Udklipsholderen er ikke tilgængelig."
 
-#: src/services/UserAvatar.cpp:70
+#: src/services/SystemService.cpp:1163
 #, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar update not allowed as administrator"
-msgstr "opdatering af avatar er ikke tilladt som administrator"
+msgid "No Pix key is configured."
+msgstr "Der er ikke konfigureret nogen Pix-nøgle."
 
-#: src/services/UserAvatar.cpp:76
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "source .face file missing, unreadable or unsafe"
-msgstr "kilde-.face-filen mangler, kan ikke læses eller er usikker"
-
-#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#: src/services/UserAvatar.cpp:83 src/services/UserAvatar.cpp:87
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not read the source avatar"
 msgstr "kunne ikke læse kildeavataren"
 
-#: src/services/UserAvatar.cpp:93
+#: src/services/UserAvatar.cpp:98
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid ""
@@ -2550,87 +2576,99 @@ msgid ""
 msgstr ""
 ".face-filen indeholder ikke et gyldigt billede (SVG kræver Qt SVG-pluginet)"
 
-#: src/services/UserAvatar.cpp:100
+#: src/services/UserAvatar.cpp:182
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "home folder unavailable or with unsafe permissions"
 msgstr "hjemmemappen er ikke tilgængelig eller har usikre rettigheder"
 
-#: src/services/UserAvatar.cpp:106
+#: src/services/UserAvatar.cpp:196
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the new avatar; avatar preserved"
+msgstr "kunne ikke skrive den nye avatar; avatar bevaret"
+
+#: src/services/UserAvatar.cpp:206
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely replace ~/.face; avatar preserved"
+msgstr "kunne ikke sikkert erstatte ~/.face; avatar bevaret"
+
+#: src/services/UserAvatar.cpp:209
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but writing to disk could not be confirmed"
+msgstr "avatar opdateret, men skrivningen til disk kunne ikke bekræftes"
+
+#: src/services/UserAvatar.cpp:216
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be checked"
+msgstr "avatar opdateret, men ~/.face.icon kunne ikke tjekkes"
+
+#: src/services/UserAvatar.cpp:219
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be created"
+msgstr "avatar opdateret, men ~/.face.icon kunne ikke oprettes"
+
+#: src/services/UserAvatar.cpp:222
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
+msgstr "avatar opdateret, men ~/.face.icon kunne ikke bekræftes på disken"
+
+#: src/services/UserAvatar.cpp:250 src/services/UserAvatar.cpp:344
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "opdatering af avatar er ikke tilladt som administrator"
+
+#: src/services/UserAvatar.cpp:292 src/services/UserAvatar.cpp:368
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "~/.face is not a safe regular file; avatar preserved"
 msgstr "~/.face er ikke en sikker almindelig fil; avatar bevaret"
 
-#: src/services/UserAvatar.cpp:112
+#: src/services/UserAvatar.cpp:350
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr "kilde-.face-filen mangler, kan ikke læses eller er usikker"
+
+#: src/services/UserAvatar.cpp:374
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "unsafe avatar backup; avatar preserved"
 msgstr "usikker sikkerhedskopi af avatar; avatar bevaret"
 
-#: src/services/UserAvatar.cpp:120
+#: src/services/UserAvatar.cpp:382
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not safely open the previous avatar"
 msgstr "kunne ikke åbne den tidligere avatar sikkert"
 
-#: src/services/UserAvatar.cpp:124
+#: src/services/UserAvatar.cpp:386
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not read the previous avatar"
 msgstr "kunne ikke læse den tidligere avatar"
 
-#: src/services/UserAvatar.cpp:128
+#: src/services/UserAvatar.cpp:390
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not preserve the previous avatar"
 msgstr "kunne ikke bevare den tidligere avatar"
 
-#: src/services/UserAvatar.cpp:132
+#: src/services/UserAvatar.cpp:394
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not write the backup; avatar preserved"
 msgstr "kunne ikke skrive sikkerhedskopien; avatar bevaret"
 
 # reviewed: 'publish' here = commit the backup file, not 'udgive'
-#: src/services/UserAvatar.cpp:138
+#: src/services/UserAvatar.cpp:400
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not publish the backup; avatar preserved"
 msgstr "kunne ikke færdiggøre sikkerhedskopien; avatar bevaret"
-
-#: src/services/UserAvatar.cpp:146
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not write the new avatar; avatar preserved"
-msgstr "kunne ikke skrive den nye avatar; avatar bevaret"
-
-#: src/services/UserAvatar.cpp:155
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not safely replace ~/.face; avatar preserved"
-msgstr "kunne ikke sikkert erstatte ~/.face; avatar bevaret"
-
-#: src/services/UserAvatar.cpp:158
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar updated, but writing to disk could not be confirmed"
-msgstr "avatar opdateret, men skrivningen til disk kunne ikke bekræftes"
-
-#: src/services/UserAvatar.cpp:165
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar updated, but ~/.face.icon could not be checked"
-msgstr "avatar opdateret, men ~/.face.icon kunne ikke tjekkes"
-
-#: src/services/UserAvatar.cpp:168
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar updated, but ~/.face.icon could not be created"
-msgstr "avatar opdateret, men ~/.face.icon kunne ikke oprettes"
-
-#: src/services/UserAvatar.cpp:171
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
-msgstr "avatar opdateret, men ~/.face.icon kunne ikke bekræftes på disken"

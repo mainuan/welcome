@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"POT-Creation-Date: 2026-11-19 01:41-0300\n"
 "PO-Revision-Date: 2026-11-16 12:18-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: ro <https://github.com/mainuan>\n"
@@ -70,8 +70,8 @@ msgctxt "@title navigation page"
 msgid "About"
 msgstr "Despre"
 
-#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
-#: qml/pages/ContributePage.qml:32
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:27
+#: qml/pages/ContributePage.qml:43
 msgctxt "@title navigation page"
 msgid "Contribute"
 msgstr "Contribuie"
@@ -423,11 +423,13 @@ msgstr "Culoare de accent"
 
 #: qml/pages/AppearancePage.qml:127
 msgid ""
-"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
-"Keeps the choice when you change style or theme."
+"Applies the KDE color scheme, the Kora icons and the wallpaper, and the "
+"Mainuan avatar unless you use a picture of your own. Keeps the choice when "
+"you change style or theme."
 msgstr ""
-"Aplică schema de culori KDE, pictogramele Kora, tapetul și avatarul. "
-"Păstrează alegerea când schimbați stilul sau tematica."
+"Aplică schema de culori KDE, pictogramele Kora și tapetul, precum și "
+"avatarul Mainuan dacă nu folosiți o imagine proprie. Păstrează alegerea când "
+"schimbați stilul sau tematica."
 
 #. i18n: %1 is the accent color name
 #: qml/pages/AppearancePage.qml:158
@@ -515,7 +517,7 @@ msgstr ""
 "Flatpak nu a fost găsit. Aplicațiile Flatpak nu sunt disponibile. FreeOffice "
 "și serviciile online rămân independente de Flatpak."
 
-#: qml/pages/ContributePage.qml:35
+#: qml/pages/ContributePage.qml:46
 msgid ""
 "Mainuan is made by its community. You can help with a donation, with code or "
 "by reporting problems."
@@ -524,44 +526,44 @@ msgstr ""
 "raportând probleme."
 
 #. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
-#: qml/pages/ContributePage.qml:78
+#: qml/pages/ContributePage.qml:89
 msgid "Pix QR code. Key: %1"
 msgstr "Cod QR Pix. Cheie: %1"
 
-#: qml/pages/ContributePage.qml:79
+#: qml/pages/ContributePage.qml:90
 msgid "Pix key QR code. Key: %1"
 msgstr "Cod QR al cheii Pix. Cheie: %1"
 
-#: qml/pages/ContributePage.qml:97
+#: qml/pages/ContributePage.qml:108
 msgid "Support Mainuan"
 msgstr "Susțineți Mainuan"
 
-#: qml/pages/ContributePage.qml:104
+#: qml/pages/ContributePage.qml:115
 msgid ""
 "Your donation helps sustain development, infrastructure and the community."
 msgstr ""
 "Donația dumneavoastră ajută la susținerea dezvoltării, a infrastructurii și "
 "a comunității."
 
-#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+#: qml/pages/ContributePage.qml:122 qml/pages/ContributePage.qml:147
 msgid "Pix Key"
 msgstr "Cheie Pix"
 
-#: qml/pages/ContributePage.qml:143
+#: qml/pages/ContributePage.qml:154
 msgid "Copy Pix Key"
 msgstr "Copiază cheia Pix"
 
-#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#: qml/pages/ContributePage.qml:169 src/services/SystemService.cpp:1171
 #, kde-format
 msgid "Pix key copied."
 msgstr "Cheia Pix a fost copiată."
 
-#: qml/pages/ContributePage.qml:168
+#: qml/pages/ContributePage.qml:179
 msgid "Scan the QR code with your bank's app, using the Pix option."
 msgstr ""
 "Scanați codul QR cu aplicația băncii dumneavoastră, folosind opțiunea Pix."
 
-#: qml/pages/ContributePage.qml:169
+#: qml/pages/ContributePage.qml:180
 msgid ""
 "The QR code contains the Pix key. In your bank's app, use the Pix option "
 "with the copied key or the one read from the code."
@@ -569,42 +571,63 @@ msgstr ""
 "Codul QR conține cheia Pix. În aplicația băncii, folosiți opțiunea Pix cu "
 "cheia copiată sau cu cea citită din cod."
 
-#: qml/pages/ContributePage.qml:177
+#: qml/pages/ContributePage.qml:188
 msgid "The Pix key has not been set up on this installation yet."
 msgstr "Cheia Pix nu a fost încă configurată în această instalare."
 
-#: qml/pages/ContributePage.qml:187
+#: qml/pages/ContributePage.qml:198
 msgid "Other Ways to Help"
 msgstr "Alte moduri de a ajuta"
 
-#: qml/pages/ContributePage.qml:196
+#: qml/pages/ContributePage.qml:208
 msgid "Contribute Code"
 msgstr "Contribuiți cu cod"
 
-#: qml/pages/ContributePage.qml:197
+#: qml/pages/ContributePage.qml:209
 msgid "Code, translations and improvements on GitHub."
 msgstr "Cod, traduceri și îmbunătățiri pe GitHub."
 
-#: qml/pages/ContributePage.qml:205
+#: qml/pages/ContributePage.qml:221
 msgid "Report a Problem"
 msgstr "Raportați o problemă"
 
-#: qml/pages/ContributePage.qml:206
+#: qml/pages/ContributePage.qml:222
 msgid ""
 "Describe what happened; attaching the system report (in About) helps a lot."
 msgstr ""
 "Descrieți ce s-a întâmplat; atașarea raportului de sistem (din Despre) ajută "
 "foarte mult."
 
-#: qml/pages/ContributePage.qml:214
+#: qml/pages/ContributePage.qml:234
 msgid "Telegram Community"
 msgstr "Comunitatea Telegram"
 
-#: qml/pages/ContributePage.qml:215
+#: qml/pages/ContributePage.qml:235
 msgid "Chat with Mainuan users and developers."
 msgstr "Discutați cu utilizatorii și dezvoltatorii Mainuan."
 
-#: qml/pages/ContributePage.qml:222
+#: qml/pages/ContributePage.qml:259
+msgid ""
+"The web browser could not be opened. Copy the address below and open it in "
+"your browser:"
+msgstr ""
+"Navigatorul web nu a putut fi deschis. Copiați adresa de mai jos și "
+"deschideți-o în navigator:"
+
+#: qml/pages/ContributePage.qml:275
+msgid "Page address"
+msgstr "Adresa paginii"
+
+#: qml/pages/ContributePage.qml:281
+msgid "Copy Address"
+msgstr "Copiază adresa"
+
+#: qml/pages/ContributePage.qml:287 src/services/SystemService.cpp:1156
+#, kde-format
+msgid "Address copied."
+msgstr "Adresa a fost copiată."
+
+#: qml/pages/ContributePage.qml:297
 msgid ""
 "Links open in the browser only when you click them. The QR code is generated "
 "on this computer, without internet access."
@@ -2239,58 +2262,58 @@ msgid "The %1 decoration is not installed or its resources are incomplete."
 msgstr "Decorația %1 nu este instalată sau resursele ei sunt incomplete."
 
 #. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
-#: src/services/SystemService.cpp:480
+#: src/services/SystemService.cpp:485
 #, kde-format
 msgid "Driver Manager available"
 msgstr "Administrator drivere disponibil"
 
-#: src/services/SystemService.cpp:481
+#: src/services/SystemService.cpp:486
 #, kde-format
 msgid "Driver Manager not installed"
 msgstr "Administrator drivere nu este instalat"
 
-#: src/services/SystemService.cpp:497
+#: src/services/SystemService.cpp:502
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Active"
 msgstr "Activ"
 
-#: src/services/SystemService.cpp:498
+#: src/services/SystemService.cpp:503
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Inactive"
 msgstr "Inactiv"
 
-#: src/services/SystemService.cpp:501
+#: src/services/SystemService.cpp:506
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: active"
 msgstr "pornire: activ"
 
-#: src/services/SystemService.cpp:502
+#: src/services/SystemService.cpp:507
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: inactive"
 msgstr "pornire: inactiv"
 
 #. i18n: %1 is an error message shown in the page banner.
-#: src/services/SystemService.cpp:538
+#: src/services/SystemService.cpp:543
 #, kde-format
 msgid "Error: %1"
 msgstr "Eroare: %1"
 
-#: src/services/SystemService.cpp:557
+#: src/services/SystemService.cpp:562
 #, kde-format
 msgid "Invalid theme."
 msgstr "Tematică nevalidă."
 
-#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
-#: src/services/SystemService.cpp:858
+#: src/services/SystemService.cpp:567 src/services/SystemService.cpp:617
+#: src/services/SystemService.cpp:886
 #, kde-format
 msgid "Wait for the current operation to finish."
 msgstr "Așteptați terminarea operației curente."
 
-#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#: src/services/SystemService.cpp:576 src/services/SystemService.cpp:605
 #, kde-format
 msgid ""
 "The current external color scheme has no known variant. Select a Mainuan "
@@ -2299,144 +2322,159 @@ msgstr ""
 "Schema de culori externă curentă nu are o variantă cunoscută. Selectați mai "
 "întâi o culoare Mainuan."
 
-#: src/services/SystemService.cpp:578
+#: src/services/SystemService.cpp:583
 #, kde-format
 msgid "Dark theme applied."
 msgstr "Tematica întunecată a fost aplicată."
 
-#: src/services/SystemService.cpp:579
+#: src/services/SystemService.cpp:584
 #, kde-format
 msgid "Light theme applied."
 msgstr "Tematica luminoasă a fost aplicată."
 
 #. i18n: %1 is an accent color name (Brown, Cyan…).
-#: src/services/SystemService.cpp:596
+#: src/services/SystemService.cpp:601
 #, kde-format
 msgid "Theme and %1 color applied."
 msgstr "Tematica și culoarea %1 au fost aplicate."
 
-#: src/services/SystemService.cpp:608
+#: src/services/SystemService.cpp:613
 #, kde-format
 msgid "Invalid accent color."
 msgstr "Culoare de accent nevalidă."
 
-#: src/services/SystemService.cpp:618
+#: src/services/SystemService.cpp:623
 #, kde-format
 msgid "Applying %1 color…"
 msgstr "Se aplică culoarea %1…"
 
-#: src/services/SystemService.cpp:629
+#: src/services/SystemService.cpp:634
 #, kde-format
-msgid "%1 color, icons, wallpaper and avatar applied."
-msgstr "Culoarea %1, pictogramele, tapetul și avatarul au fost aplicate."
+msgid "%1 color, icons and wallpaper applied."
+msgstr "Culoarea %1, pictogramele și tapetul au fost aplicate."
 
-#: src/services/SystemService.cpp:640
+#: src/services/SystemService.cpp:645
 #, kde-format
 msgid "Color scheme %1.colors is missing or unreadable."
 msgstr "Schema de culori %1.colors lipsește sau nu poate fi citită."
 
-#: src/services/SystemService.cpp:646
+#: src/services/SystemService.cpp:651
 #, kde-format
 msgid "Color scheme %1.colors is invalid."
 msgstr "Schema de culori %1.colors este nevalidă."
 
-#: src/services/SystemService.cpp:651
+#: src/services/SystemService.cpp:656
 #, kde-format
 msgid "plasma-apply-colorscheme is not available."
 msgstr "plasma-apply-colorscheme nu este disponibil."
 
-#: src/services/SystemService.cpp:658
+#: src/services/SystemService.cpp:663
 #, kde-format
 msgid "Plasma did not recognize the %1.colors color scheme."
 msgstr "Plasma nu a recunoscut schema de culori %1.colors."
 
-#: src/services/SystemService.cpp:704
+#: src/services/SystemService.cpp:709
 #, kde-format
 msgid "Could not prepare the KDE color configuration."
 msgstr "Configurația de culori KDE nu a putut fi pregătită."
 
-#: src/services/SystemService.cpp:715
+#: src/services/SystemService.cpp:720
 #, kde-format
 msgid "Plasma did not confirm the %1 color scheme without a color override."
 msgstr ""
 "Plasma nu a confirmat schema de culori %1 fără suprascrierea culorilor."
 
 #. i18n: Item of a list of failed adjustments (lowercase, no final period).
-#: src/services/SystemService.cpp:729
+#: src/services/SystemService.cpp:734
 #, kde-format
 msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
 msgstr ""
 "tematica de pictograme %1 lipsește sau are index.theme nevalid (pictogramele "
 "anterioare au fost păstrate)"
 
-#: src/services/SystemService.cpp:732
+#: src/services/SystemService.cpp:737
 #, kde-format
 msgctxt "failed adjustment list item; %1 is an icon theme"
 msgid "icons %1"
 msgstr "pictogramele %1"
 
-#: src/services/SystemService.cpp:737
+#: src/services/SystemService.cpp:742
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper %1 missing"
 msgstr "tapetul %1 lipsește"
 
-#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
-#: src/services/SystemService.cpp:1022
+#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1035
+#: src/services/SystemService.cpp:1050
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper"
 msgstr "tapetul"
 
-#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#: src/services/SystemService.cpp:749 src/services/SystemService.cpp:1040
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "Plasma did not confirm the %1 icons"
 msgstr "Plasma nu a confirmat pictogramele %1"
 
-#: src/services/SystemService.cpp:758
+#: src/services/SystemService.cpp:773
+#, kde-format
+msgid "The Mainuan avatar was updated."
+msgstr "Avatarul Mainuan a fost actualizat."
+
+#: src/services/SystemService.cpp:778
+#, kde-format
+msgid "Your own avatar was kept."
+msgstr "Imaginea dumneavoastră a fost păstrată."
+
+#: src/services/SystemService.cpp:781
+#, kde-format
+msgid "The Mainuan avatar is not installed; the current avatar was kept."
+msgstr "Avatarul Mainuan nu este instalat; avatarul actual a fost păstrat."
+
+#: src/services/SystemService.cpp:784
 #, kde-format
 msgctxt "failed adjustment list item; %1 is the avatar error"
 msgid "avatar: %1"
 msgstr "avatar: %1"
 
-#: src/services/SystemService.cpp:764
+#: src/services/SystemService.cpp:792
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "color scheme changed during the operation; avatar preserved"
 msgstr ""
 "schema de culori s-a modificat în timpul operației; avatarul a fost păstrat"
 
-#: src/services/SystemService.cpp:779
+#: src/services/SystemService.cpp:807
 #, kde-format
 msgid "Could not complete all adjustments: %1."
 msgstr "Nu s-au putut finaliza toate ajustările: %1."
 
-#: src/services/SystemService.cpp:780
+#: src/services/SystemService.cpp:808
 #, kde-format
 msgctxt "separator between failed adjustment list items"
 msgid "; "
 msgstr "; "
 
-#: src/services/SystemService.cpp:795
+#: src/services/SystemService.cpp:823
 #, kde-format
 msgid "Could not communicate with KWin to update the window decoration."
 msgstr ""
 "Nu s-a putut comunica cu KWin pentru a actualiza decorația ferestrelor."
 
-#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
-#: src/services/SystemService.cpp:830
+#: src/services/SystemService.cpp:832 src/services/SystemService.cpp:839
+#: src/services/SystemService.cpp:858
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "could not restore the previous window decoration"
 msgstr "decorația anterioară a ferestrelor nu a putut fi restaurată"
 
-#: src/services/SystemService.cpp:821
+#: src/services/SystemService.cpp:849
 #, kde-format
 msgid "Could not save the requested window decoration in KWin."
 msgstr "Decorația ferestrelor solicitată nu a putut fi salvată în KWin."
 
-#: src/services/SystemService.cpp:831
+#: src/services/SystemService.cpp:859
 #, kde-format
 msgid ""
 "The final window decoration configuration was changed during the operation."
@@ -2444,17 +2482,17 @@ msgstr ""
 "Configurația finală a decorației ferestrelor a fost modificată în timpul "
 "operației."
 
-#: src/services/SystemService.cpp:854
+#: src/services/SystemService.cpp:882
 #, kde-format
 msgid "Invalid visual style."
 msgstr "Stil vizual nevalid."
 
-#: src/services/SystemService.cpp:862
+#: src/services/SystemService.cpp:890
 #, kde-format
 msgid "%1 style applied."
 msgstr "Stilul %1 a fost aplicat."
 
-#: src/services/SystemService.cpp:895
+#: src/services/SystemService.cpp:923
 #, kde-format
 msgid ""
 "This system's Plasma does not provide plasma-apply-lookandfeel; the style "
@@ -2463,46 +2501,46 @@ msgstr ""
 "Plasma din acest sistem nu oferă plasma-apply-lookandfeel; stilul nu poate "
 "fi schimbat."
 
-#: src/services/SystemService.cpp:900
+#: src/services/SystemService.cpp:928
 #, kde-format
 msgid "The %1 style is not installed on this system."
 msgstr "Stilul %1 nu este instalat în acest sistem."
 
 #. i18n: %1 is a complete sentence describing the problem.
-#: src/services/SystemService.cpp:911
+#: src/services/SystemService.cpp:939
 #, kde-format
 msgid "%1 Previous appearance preserved."
 msgstr "%1 Aspectul anterior a fost păstrat."
 
-#: src/services/SystemService.cpp:927
+#: src/services/SystemService.cpp:955
 #, kde-format
 msgid "Could not preserve the %1 icon theme. Previous style preserved."
 msgstr ""
 "Tematica de pictograme %1 nu a putut fi păstrată. Stilul anterior a fost "
 "păstrat."
 
-#: src/services/SystemService.cpp:931
+#: src/services/SystemService.cpp:959
 #, kde-format
 msgid "Applying %1 style…"
 msgstr "Se aplică stilul %1…"
 
-#: src/services/SystemService.cpp:948
+#: src/services/SystemService.cpp:976
 #, kde-format
 msgid "Could not apply the %1 style."
 msgstr "Stilul %1 nu a putut fi aplicat."
 
-#: src/services/SystemService.cpp:956
+#: src/services/SystemService.cpp:984
 #, kde-format
 msgid "Plasma did not confirm the %1 style."
 msgstr "Plasma nu a confirmat stilul %1."
 
-#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#: src/services/SystemService.cpp:1009 src/services/SystemService.cpp:1030
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "icons"
 msgstr "pictogramele"
 
-#: src/services/SystemService.cpp:986
+#: src/services/SystemService.cpp:1014
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "cursor"
@@ -2510,56 +2548,56 @@ msgstr "cursorul"
 
 # reviewed: nome de produto sem artigo como sujeito; 'Aplicația … nu este
 # instalată'
-#: src/services/SystemService.cpp:1057
+#: src/services/SystemService.cpp:1085
 #, kde-format
 msgid "Driver Manager is not installed."
 msgstr "Aplicația Administrator drivere nu este instalată."
 
 # reviewed: nome de produto sem artigo como sujeito; concordância com
 # 'aplicația'
-#: src/services/SystemService.cpp:1061
+#: src/services/SystemService.cpp:1089
 #, kde-format
 msgid "Could not open Driver Manager."
 msgstr "Aplicația Administrator drivere nu a putut fi deschisă."
 
-#: src/services/SystemService.cpp:1066
+#: src/services/SystemService.cpp:1094
 #, kde-format
 msgid "Unknown action."
 msgstr "Acțiune necunoscută."
 
-#: src/services/SystemService.cpp:1075
+#: src/services/SystemService.cpp:1103 src/services/SystemService.cpp:1148
 #, kde-format
 msgid "URL blocked for security reasons."
 msgstr "URL blocat din motive de securitate."
 
-#: src/services/SystemService.cpp:1079
+#: src/services/SystemService.cpp:1107
 #, kde-format
 msgid "Requested the web browser to open the page."
 msgstr "S-a cerut navigatorului web să deschidă pagina."
 
-#: src/services/SystemService.cpp:1080
+#: src/services/SystemService.cpp:1108
 #, kde-format
 msgid "Could not open the URL in the default web browser."
 msgstr "URL-ul nu a putut fi deschis în navigatorul web implicit."
 
-#: src/services/SystemService.cpp:1087
+#: src/services/SystemService.cpp:1115
 #, kde-format
 msgid "This application is not allowed to be opened in Discover."
 msgstr "Această aplicație nu are permisiunea de a fi deschisă în Discover."
 
-#: src/services/SystemService.cpp:1092
+#: src/services/SystemService.cpp:1120
 #, kde-format
 msgid "Discover was not found. Install KDE Discover to open this application."
 msgstr ""
 "Discover nu a fost găsit. Instalați KDE Discover pentru a deschide această "
 "aplicație."
 
-#: src/services/SystemService.cpp:1098
+#: src/services/SystemService.cpp:1126
 #, kde-format
 msgid "Could not open the page in Discover. Try again."
 msgstr "Pagina nu a putut fi deschisă în Discover. Încercați din nou."
 
-#: src/services/SystemService.cpp:1101
+#: src/services/SystemService.cpp:1129
 #, kde-format
 msgid ""
 "Requested Discover to open the page. Confirm the installation in Discover; "
@@ -2569,35 +2607,23 @@ msgstr ""
 "Discover; dacă aplicația nu este găsită, verificați Flathub și încercați din "
 "nou."
 
-#: src/services/SystemService.cpp:1109
-#, kde-format
-msgid "No Pix key is configured."
-msgstr "Nu este configurată nicio cheie Pix."
-
-#: src/services/SystemService.cpp:1113
+#: src/services/SystemService.cpp:1152 src/services/SystemService.cpp:1167
 #, kde-format
 msgid "Clipboard unavailable."
 msgstr "Clipboard indisponibil."
 
-#: src/services/UserAvatar.cpp:70
+#: src/services/SystemService.cpp:1163
 #, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar update not allowed as administrator"
-msgstr "actualizarea avatarului nu este permisă ca administrator"
+msgid "No Pix key is configured."
+msgstr "Nu este configurată nicio cheie Pix."
 
-#: src/services/UserAvatar.cpp:76
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "source .face file missing, unreadable or unsafe"
-msgstr "fișierul sursă .face lipsește, nu poate fi citit sau este nesigur"
-
-#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#: src/services/UserAvatar.cpp:83 src/services/UserAvatar.cpp:87
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not read the source avatar"
 msgstr "avatarul sursă nu a putut fi citit"
 
-#: src/services/UserAvatar.cpp:93
+#: src/services/UserAvatar.cpp:98
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid ""
@@ -2606,86 +2632,98 @@ msgid ""
 msgstr ""
 "fișierul .face nu conține o imagine validă (SVG necesită modulul Qt SVG)"
 
-#: src/services/UserAvatar.cpp:100
+#: src/services/UserAvatar.cpp:182
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "home folder unavailable or with unsafe permissions"
 msgstr "dosarul personal nu este disponibil sau are permisiuni nesigure"
 
-#: src/services/UserAvatar.cpp:106
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "~/.face is not a safe regular file; avatar preserved"
-msgstr "~/.face nu este un fișier obișnuit sigur; avatarul a fost păstrat"
-
-#: src/services/UserAvatar.cpp:112
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "unsafe avatar backup; avatar preserved"
-msgstr "copie de rezervă a avatarului nesigură; avatarul a fost păstrat"
-
-#: src/services/UserAvatar.cpp:120
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not safely open the previous avatar"
-msgstr "avatarul anterior nu a putut fi deschis în siguranță"
-
-#: src/services/UserAvatar.cpp:124
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not read the previous avatar"
-msgstr "avatarul anterior nu a putut fi citit"
-
-#: src/services/UserAvatar.cpp:128
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not preserve the previous avatar"
-msgstr "avatarul anterior nu a putut fi păstrat"
-
-#: src/services/UserAvatar.cpp:132
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not write the backup; avatar preserved"
-msgstr "copia de rezervă nu a putut fi scrisă; avatarul a fost păstrat"
-
-#: src/services/UserAvatar.cpp:138
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not publish the backup; avatar preserved"
-msgstr "copia de rezervă nu a putut fi publicată; avatarul a fost păstrat"
-
-#: src/services/UserAvatar.cpp:146
+#: src/services/UserAvatar.cpp:196
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not write the new avatar; avatar preserved"
 msgstr "noul avatar nu a putut fi scris; avatarul a fost păstrat"
 
-#: src/services/UserAvatar.cpp:155
+#: src/services/UserAvatar.cpp:206
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not safely replace ~/.face; avatar preserved"
 msgstr "~/.face nu a putut fi înlocuit în siguranță; avatarul a fost păstrat"
 
-#: src/services/UserAvatar.cpp:158
+#: src/services/UserAvatar.cpp:209
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but writing to disk could not be confirmed"
 msgstr "avatar actualizat, dar scrierea pe disc nu a putut fi confirmată"
 
-#: src/services/UserAvatar.cpp:165
+#: src/services/UserAvatar.cpp:216
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be checked"
 msgstr "avatar actualizat, dar ~/.face.icon nu a putut fi verificat"
 
-#: src/services/UserAvatar.cpp:168
+#: src/services/UserAvatar.cpp:219
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be created"
 msgstr "avatar actualizat, dar ~/.face.icon nu a putut fi creat"
 
-#: src/services/UserAvatar.cpp:171
+#: src/services/UserAvatar.cpp:222
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
 msgstr "avatar actualizat, dar ~/.face.icon nu a putut fi confirmat pe disc"
+
+#: src/services/UserAvatar.cpp:250 src/services/UserAvatar.cpp:344
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "actualizarea avatarului nu este permisă ca administrator"
+
+#: src/services/UserAvatar.cpp:292 src/services/UserAvatar.cpp:368
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "~/.face is not a safe regular file; avatar preserved"
+msgstr "~/.face nu este un fișier obișnuit sigur; avatarul a fost păstrat"
+
+#: src/services/UserAvatar.cpp:350
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr "fișierul sursă .face lipsește, nu poate fi citit sau este nesigur"
+
+#: src/services/UserAvatar.cpp:374
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "unsafe avatar backup; avatar preserved"
+msgstr "copie de rezervă a avatarului nesigură; avatarul a fost păstrat"
+
+#: src/services/UserAvatar.cpp:382
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely open the previous avatar"
+msgstr "avatarul anterior nu a putut fi deschis în siguranță"
+
+#: src/services/UserAvatar.cpp:386
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the previous avatar"
+msgstr "avatarul anterior nu a putut fi citit"
+
+#: src/services/UserAvatar.cpp:390
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not preserve the previous avatar"
+msgstr "avatarul anterior nu a putut fi păstrat"
+
+#: src/services/UserAvatar.cpp:394
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the backup; avatar preserved"
+msgstr "copia de rezervă nu a putut fi scrisă; avatarul a fost păstrat"
+
+#: src/services/UserAvatar.cpp:400
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not publish the backup; avatar preserved"
+msgstr "copia de rezervă nu a putut fi publicată; avatarul a fost păstrat"

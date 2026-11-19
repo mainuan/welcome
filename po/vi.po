@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"POT-Creation-Date: 2026-11-19 01:41-0300\n"
 "PO-Revision-Date: 2026-11-16 12:18-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: vi <https://github.com/mainuan>\n"
@@ -64,8 +64,8 @@ msgctxt "@title navigation page"
 msgid "About"
 msgstr "Thông tin"
 
-#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
-#: qml/pages/ContributePage.qml:32
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:27
+#: qml/pages/ContributePage.qml:43
 msgctxt "@title navigation page"
 msgid "Contribute"
 msgstr "Đóng góp"
@@ -413,11 +413,13 @@ msgstr "Màu nhấn"
 
 #: qml/pages/AppearancePage.qml:127
 msgid ""
-"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
-"Keeps the choice when you change style or theme."
+"Applies the KDE color scheme, the Kora icons and the wallpaper, and the "
+"Mainuan avatar unless you use a picture of your own. Keeps the choice when "
+"you change style or theme."
 msgstr ""
-"Áp dụng quy hoạch màu KDE, biểu tượng Kora, phông nền và ảnh đại diện. Lựa "
-"chọn được giữ lại khi bạn đổi phong cách hoặc chủ đề."
+"Áp dụng quy hoạch màu KDE, biểu tượng Kora và phông nền, cùng ảnh đại diện "
+"Mainuan nếu bạn không dùng ảnh của riêng mình. Lựa chọn được giữ lại khi bạn "
+"đổi phong cách hoặc chủ đề."
 
 #. i18n: %1 is the accent color name
 #: qml/pages/AppearancePage.qml:158
@@ -505,7 +507,7 @@ msgstr ""
 "Không tìm thấy Flatpak. Các ứng dụng Flatpak không khả dụng. FreeOffice và "
 "các dịch vụ trực tuyến vẫn hoạt động độc lập với Flatpak."
 
-#: qml/pages/ContributePage.qml:35
+#: qml/pages/ContributePage.qml:46
 msgid ""
 "Mainuan is made by its community. You can help with a donation, with code or "
 "by reporting problems."
@@ -514,42 +516,42 @@ msgstr ""
 "đóng góp mã nguồn hoặc báo cáo sự cố."
 
 #. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
-#: qml/pages/ContributePage.qml:78
+#: qml/pages/ContributePage.qml:89
 msgid "Pix QR code. Key: %1"
 msgstr "Mã QR Pix. Khoá: %1"
 
-#: qml/pages/ContributePage.qml:79
+#: qml/pages/ContributePage.qml:90
 msgid "Pix key QR code. Key: %1"
 msgstr "Mã QR của khoá Pix. Khoá: %1"
 
-#: qml/pages/ContributePage.qml:97
+#: qml/pages/ContributePage.qml:108
 msgid "Support Mainuan"
 msgstr "Ủng hộ Mainuan"
 
-#: qml/pages/ContributePage.qml:104
+#: qml/pages/ContributePage.qml:115
 msgid ""
 "Your donation helps sustain development, infrastructure and the community."
 msgstr ""
 "Khoản quyên góp của bạn giúp duy trì việc phát triển, hạ tầng và cộng đồng."
 
-#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+#: qml/pages/ContributePage.qml:122 qml/pages/ContributePage.qml:147
 msgid "Pix Key"
 msgstr "Khoá Pix"
 
-#: qml/pages/ContributePage.qml:143
+#: qml/pages/ContributePage.qml:154
 msgid "Copy Pix Key"
 msgstr "Chép khoá Pix"
 
-#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#: qml/pages/ContributePage.qml:169 src/services/SystemService.cpp:1171
 #, kde-format
 msgid "Pix key copied."
 msgstr "Đã chép khoá Pix."
 
-#: qml/pages/ContributePage.qml:168
+#: qml/pages/ContributePage.qml:179
 msgid "Scan the QR code with your bank's app, using the Pix option."
 msgstr "Quét mã QR bằng ứng dụng ngân hàng của bạn, dùng tuỳ chọn Pix."
 
-#: qml/pages/ContributePage.qml:169
+#: qml/pages/ContributePage.qml:180
 msgid ""
 "The QR code contains the Pix key. In your bank's app, use the Pix option "
 "with the copied key or the one read from the code."
@@ -557,42 +559,63 @@ msgstr ""
 "Mã QR chứa khoá Pix. Trong ứng dụng ngân hàng, hãy dùng tuỳ chọn Pix với "
 "khoá đã chép hoặc khoá đọc được từ mã."
 
-#: qml/pages/ContributePage.qml:177
+#: qml/pages/ContributePage.qml:188
 msgid "The Pix key has not been set up on this installation yet."
 msgstr "Khoá Pix chưa được thiết lập trên bản cài đặt này."
 
-#: qml/pages/ContributePage.qml:187
+#: qml/pages/ContributePage.qml:198
 msgid "Other Ways to Help"
 msgstr "Các cách giúp đỡ khác"
 
-#: qml/pages/ContributePage.qml:196
+#: qml/pages/ContributePage.qml:208
 msgid "Contribute Code"
 msgstr "Đóng góp mã nguồn"
 
-#: qml/pages/ContributePage.qml:197
+#: qml/pages/ContributePage.qml:209
 msgid "Code, translations and improvements on GitHub."
 msgstr "Mã nguồn, bản dịch và cải tiến trên GitHub."
 
-#: qml/pages/ContributePage.qml:205
+#: qml/pages/ContributePage.qml:221
 msgid "Report a Problem"
 msgstr "Báo cáo sự cố"
 
-#: qml/pages/ContributePage.qml:206
+#: qml/pages/ContributePage.qml:222
 msgid ""
 "Describe what happened; attaching the system report (in About) helps a lot."
 msgstr ""
 "Mô tả những gì đã xảy ra; đính kèm báo cáo hệ thống (trong mục Thông tin) sẽ "
 "giúp ích rất nhiều."
 
-#: qml/pages/ContributePage.qml:214
+#: qml/pages/ContributePage.qml:234
 msgid "Telegram Community"
 msgstr "Cộng đồng Telegram"
 
-#: qml/pages/ContributePage.qml:215
+#: qml/pages/ContributePage.qml:235
 msgid "Chat with Mainuan users and developers."
 msgstr "Trò chuyện với người dùng và nhà phát triển Mainuan."
 
-#: qml/pages/ContributePage.qml:222
+#: qml/pages/ContributePage.qml:259
+msgid ""
+"The web browser could not be opened. Copy the address below and open it in "
+"your browser:"
+msgstr ""
+"Không thể mở trình duyệt web. Hãy chép địa chỉ dưới đây và mở nó trong trình "
+"duyệt của bạn:"
+
+#: qml/pages/ContributePage.qml:275
+msgid "Page address"
+msgstr "Địa chỉ trang"
+
+#: qml/pages/ContributePage.qml:281
+msgid "Copy Address"
+msgstr "Chép địa chỉ"
+
+#: qml/pages/ContributePage.qml:287 src/services/SystemService.cpp:1156
+#, kde-format
+msgid "Address copied."
+msgstr "Đã chép địa chỉ."
+
+#: qml/pages/ContributePage.qml:297
 msgid ""
 "Links open in the browser only when you click them. The QR code is generated "
 "on this computer, without internet access."
@@ -2195,58 +2218,58 @@ msgstr "Trang trí %1 chưa được cài đặt hoặc tài nguyên của nó c
 # reviewed: status "available" (instalado); "… có sẵn" lia-se como rótulo "o
 # Driver Manager disponível"; par com "Chưa cài đặt …"
 #. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
-#: src/services/SystemService.cpp:480
+#: src/services/SystemService.cpp:485
 #, kde-format
 msgid "Driver Manager available"
 msgstr "Đã có Trình quản lý trình điều khiển"
 
-#: src/services/SystemService.cpp:481
+#: src/services/SystemService.cpp:486
 #, kde-format
 msgid "Driver Manager not installed"
 msgstr "Chưa cài đặt Trình quản lý trình điều khiển"
 
-#: src/services/SystemService.cpp:497
+#: src/services/SystemService.cpp:502
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Active"
 msgstr "Bật"
 
-#: src/services/SystemService.cpp:498
+#: src/services/SystemService.cpp:503
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Inactive"
 msgstr "Tắt"
 
-#: src/services/SystemService.cpp:501
+#: src/services/SystemService.cpp:506
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: active"
 msgstr "khởi động: bật"
 
-#: src/services/SystemService.cpp:502
+#: src/services/SystemService.cpp:507
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: inactive"
 msgstr "khởi động: tắt"
 
 #. i18n: %1 is an error message shown in the page banner.
-#: src/services/SystemService.cpp:538
+#: src/services/SystemService.cpp:543
 #, kde-format
 msgid "Error: %1"
 msgstr "Lỗi: %1"
 
-#: src/services/SystemService.cpp:557
+#: src/services/SystemService.cpp:562
 #, kde-format
 msgid "Invalid theme."
 msgstr "Chủ đề không hợp lệ."
 
-#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
-#: src/services/SystemService.cpp:858
+#: src/services/SystemService.cpp:567 src/services/SystemService.cpp:617
+#: src/services/SystemService.cpp:886
 #, kde-format
 msgid "Wait for the current operation to finish."
 msgstr "Hãy đợi thao tác hiện tại hoàn tất."
 
-#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#: src/services/SystemService.cpp:576 src/services/SystemService.cpp:605
 #, kde-format
 msgid ""
 "The current external color scheme has no known variant. Select a Mainuan "
@@ -2255,157 +2278,173 @@ msgstr ""
 "Quy hoạch màu bên ngoài hiện tại không có biến thể nào đã biết. Hãy chọn một "
 "màu Mainuan trước."
 
-#: src/services/SystemService.cpp:578
+#: src/services/SystemService.cpp:583
 #, kde-format
 msgid "Dark theme applied."
 msgstr "Đã áp dụng chủ đề tối."
 
-#: src/services/SystemService.cpp:579
+#: src/services/SystemService.cpp:584
 #, kde-format
 msgid "Light theme applied."
 msgstr "Đã áp dụng chủ đề sáng."
 
 #. i18n: %1 is an accent color name (Brown, Cyan…).
-#: src/services/SystemService.cpp:596
+#: src/services/SystemService.cpp:601
 #, kde-format
 msgid "Theme and %1 color applied."
 msgstr "Đã áp dụng chủ đề và màu %1."
 
-#: src/services/SystemService.cpp:608
+#: src/services/SystemService.cpp:613
 #, kde-format
 msgid "Invalid accent color."
 msgstr "Màu nhấn không hợp lệ."
 
-#: src/services/SystemService.cpp:618
+#: src/services/SystemService.cpp:623
 #, kde-format
 msgid "Applying %1 color…"
 msgstr "Đang áp dụng màu %1…"
 
-#: src/services/SystemService.cpp:629
+#: src/services/SystemService.cpp:634
 #, kde-format
-msgid "%1 color, icons, wallpaper and avatar applied."
-msgstr "Đã áp dụng màu %1, biểu tượng, phông nền và ảnh đại diện."
+msgid "%1 color, icons and wallpaper applied."
+msgstr "Đã áp dụng màu %1, biểu tượng và phông nền."
 
-#: src/services/SystemService.cpp:640
+#: src/services/SystemService.cpp:645
 #, kde-format
 msgid "Color scheme %1.colors is missing or unreadable."
 msgstr "Quy hoạch màu %1.colors bị thiếu hoặc không đọc được."
 
-#: src/services/SystemService.cpp:646
+#: src/services/SystemService.cpp:651
 #, kde-format
 msgid "Color scheme %1.colors is invalid."
 msgstr "Quy hoạch màu %1.colors không hợp lệ."
 
-#: src/services/SystemService.cpp:651
+#: src/services/SystemService.cpp:656
 #, kde-format
 msgid "plasma-apply-colorscheme is not available."
 msgstr "plasma-apply-colorscheme không có sẵn."
 
-#: src/services/SystemService.cpp:658
+#: src/services/SystemService.cpp:663
 #, kde-format
 msgid "Plasma did not recognize the %1.colors color scheme."
 msgstr "Plasma không nhận ra quy hoạch màu %1.colors."
 
-#: src/services/SystemService.cpp:704
+#: src/services/SystemService.cpp:709
 #, kde-format
 msgid "Could not prepare the KDE color configuration."
 msgstr "Không chuẩn bị được cấu hình màu KDE."
 
-#: src/services/SystemService.cpp:715
+#: src/services/SystemService.cpp:720
 #, kde-format
 msgid "Plasma did not confirm the %1 color scheme without a color override."
 msgstr "Plasma không xác nhận quy hoạch màu %1 khi không có màu ghi đè."
 
 #. i18n: Item of a list of failed adjustments (lowercase, no final period).
-#: src/services/SystemService.cpp:729
+#: src/services/SystemService.cpp:734
 #, kde-format
 msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
 msgstr ""
 "chủ đề biểu tượng %1 bị thiếu hoặc index.theme không hợp lệ (giữ nguyên biểu "
 "tượng trước đó)"
 
-#: src/services/SystemService.cpp:732
+#: src/services/SystemService.cpp:737
 #, kde-format
 msgctxt "failed adjustment list item; %1 is an icon theme"
 msgid "icons %1"
 msgstr "biểu tượng %1"
 
-#: src/services/SystemService.cpp:737
+#: src/services/SystemService.cpp:742
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper %1 missing"
 msgstr "thiếu phông nền %1"
 
-#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
-#: src/services/SystemService.cpp:1022
+#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1035
+#: src/services/SystemService.cpp:1050
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper"
 msgstr "phông nền"
 
-#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#: src/services/SystemService.cpp:749 src/services/SystemService.cpp:1040
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "Plasma did not confirm the %1 icons"
 msgstr "Plasma không xác nhận biểu tượng %1"
 
-#: src/services/SystemService.cpp:758
+#: src/services/SystemService.cpp:773
+#, kde-format
+msgid "The Mainuan avatar was updated."
+msgstr "Đã cập nhật ảnh đại diện Mainuan."
+
+#: src/services/SystemService.cpp:778
+#, kde-format
+msgid "Your own avatar was kept."
+msgstr "Đã giữ nguyên ảnh của riêng bạn."
+
+#: src/services/SystemService.cpp:781
+#, kde-format
+msgid "The Mainuan avatar is not installed; the current avatar was kept."
+msgstr ""
+"Ảnh đại diện Mainuan chưa được cài đặt; đã giữ nguyên ảnh đại diện hiện tại."
+
+#: src/services/SystemService.cpp:784
 #, kde-format
 msgctxt "failed adjustment list item; %1 is the avatar error"
 msgid "avatar: %1"
 msgstr "ảnh đại diện: %1"
 
-#: src/services/SystemService.cpp:764
+#: src/services/SystemService.cpp:792
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "color scheme changed during the operation; avatar preserved"
 msgstr "quy hoạch màu đã thay đổi trong khi thao tác; giữ nguyên ảnh đại diện"
 
-#: src/services/SystemService.cpp:779
+#: src/services/SystemService.cpp:807
 #, kde-format
 msgid "Could not complete all adjustments: %1."
 msgstr "Không hoàn tất được mọi điều chỉnh: %1."
 
-#: src/services/SystemService.cpp:780
+#: src/services/SystemService.cpp:808
 #, kde-format
 msgctxt "separator between failed adjustment list items"
 msgid "; "
 msgstr "; "
 
-#: src/services/SystemService.cpp:795
+#: src/services/SystemService.cpp:823
 #, kde-format
 msgid "Could not communicate with KWin to update the window decoration."
 msgstr "Không giao tiếp được với KWin để cập nhật trang trí cửa sổ."
 
-#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
-#: src/services/SystemService.cpp:830
+#: src/services/SystemService.cpp:832 src/services/SystemService.cpp:839
+#: src/services/SystemService.cpp:858
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "could not restore the previous window decoration"
 msgstr "không khôi phục được trang trí cửa sổ trước đó"
 
-#: src/services/SystemService.cpp:821
+#: src/services/SystemService.cpp:849
 #, kde-format
 msgid "Could not save the requested window decoration in KWin."
 msgstr "Không lưu được trang trí cửa sổ được yêu cầu vào KWin."
 
-#: src/services/SystemService.cpp:831
+#: src/services/SystemService.cpp:859
 #, kde-format
 msgid ""
 "The final window decoration configuration was changed during the operation."
 msgstr "Cấu hình trang trí cửa sổ cuối cùng đã bị thay đổi trong khi thao tác."
 
-#: src/services/SystemService.cpp:854
+#: src/services/SystemService.cpp:882
 #, kde-format
 msgid "Invalid visual style."
 msgstr "Phong cách hiển thị không hợp lệ."
 
-#: src/services/SystemService.cpp:862
+#: src/services/SystemService.cpp:890
 #, kde-format
 msgid "%1 style applied."
 msgstr "Đã áp dụng phong cách %1."
 
-#: src/services/SystemService.cpp:895
+#: src/services/SystemService.cpp:923
 #, kde-format
 msgid ""
 "This system's Plasma does not provide plasma-apply-lookandfeel; the style "
@@ -2414,95 +2453,95 @@ msgstr ""
 "Plasma của hệ thống này không cung cấp plasma-apply-lookandfeel; không thể "
 "thay đổi phong cách."
 
-#: src/services/SystemService.cpp:900
+#: src/services/SystemService.cpp:928
 #, kde-format
 msgid "The %1 style is not installed on this system."
 msgstr "Phong cách %1 chưa được cài đặt trên hệ thống này."
 
 #. i18n: %1 is a complete sentence describing the problem.
-#: src/services/SystemService.cpp:911
+#: src/services/SystemService.cpp:939
 #, kde-format
 msgid "%1 Previous appearance preserved."
 msgstr "%1 Giữ nguyên diện mạo trước đó."
 
-#: src/services/SystemService.cpp:927
+#: src/services/SystemService.cpp:955
 #, kde-format
 msgid "Could not preserve the %1 icon theme. Previous style preserved."
 msgstr "Không giữ được chủ đề biểu tượng %1. Giữ nguyên phong cách trước đó."
 
-#: src/services/SystemService.cpp:931
+#: src/services/SystemService.cpp:959
 #, kde-format
 msgid "Applying %1 style…"
 msgstr "Đang áp dụng phong cách %1…"
 
-#: src/services/SystemService.cpp:948
+#: src/services/SystemService.cpp:976
 #, kde-format
 msgid "Could not apply the %1 style."
 msgstr "Không áp dụng được phong cách %1."
 
-#: src/services/SystemService.cpp:956
+#: src/services/SystemService.cpp:984
 #, kde-format
 msgid "Plasma did not confirm the %1 style."
 msgstr "Plasma không xác nhận phong cách %1."
 
-#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#: src/services/SystemService.cpp:1009 src/services/SystemService.cpp:1030
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "icons"
 msgstr "biểu tượng"
 
-#: src/services/SystemService.cpp:986
+#: src/services/SystemService.cpp:1014
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "cursor"
 msgstr "con trỏ"
 
-#: src/services/SystemService.cpp:1057
+#: src/services/SystemService.cpp:1085
 #, kde-format
 msgid "Driver Manager is not installed."
 msgstr "Trình quản lý trình điều khiển chưa được cài đặt."
 
-#: src/services/SystemService.cpp:1061
+#: src/services/SystemService.cpp:1089
 #, kde-format
 msgid "Could not open Driver Manager."
 msgstr "Không mở được Trình quản lý trình điều khiển."
 
-#: src/services/SystemService.cpp:1066
+#: src/services/SystemService.cpp:1094
 #, kde-format
 msgid "Unknown action."
 msgstr "Hành động không xác định."
 
-#: src/services/SystemService.cpp:1075
+#: src/services/SystemService.cpp:1103 src/services/SystemService.cpp:1148
 #, kde-format
 msgid "URL blocked for security reasons."
 msgstr "URL bị chặn vì lý do bảo mật."
 
-#: src/services/SystemService.cpp:1079
+#: src/services/SystemService.cpp:1107
 #, kde-format
 msgid "Requested the web browser to open the page."
 msgstr "Đã yêu cầu trình duyệt web mở trang."
 
-#: src/services/SystemService.cpp:1080
+#: src/services/SystemService.cpp:1108
 #, kde-format
 msgid "Could not open the URL in the default web browser."
 msgstr "Không mở được URL trong trình duyệt web mặc định."
 
-#: src/services/SystemService.cpp:1087
+#: src/services/SystemService.cpp:1115
 #, kde-format
 msgid "This application is not allowed to be opened in Discover."
 msgstr "Không được phép mở ứng dụng này trong Discover."
 
-#: src/services/SystemService.cpp:1092
+#: src/services/SystemService.cpp:1120
 #, kde-format
 msgid "Discover was not found. Install KDE Discover to open this application."
 msgstr "Không tìm thấy Discover. Hãy cài đặt KDE Discover để mở ứng dụng này."
 
-#: src/services/SystemService.cpp:1098
+#: src/services/SystemService.cpp:1126
 #, kde-format
 msgid "Could not open the page in Discover. Try again."
 msgstr "Không mở được trang trong Discover. Hãy thử lại."
 
-#: src/services/SystemService.cpp:1101
+#: src/services/SystemService.cpp:1129
 #, kde-format
 msgid ""
 "Requested Discover to open the page. Confirm the installation in Discover; "
@@ -2511,35 +2550,23 @@ msgstr ""
 "Đã yêu cầu Discover mở trang. Hãy xác nhận việc cài đặt trong Discover; nếu "
 "không tìm thấy ứng dụng, hãy kiểm tra Flathub rồi thử lại."
 
-#: src/services/SystemService.cpp:1109
-#, kde-format
-msgid "No Pix key is configured."
-msgstr "Chưa cấu hình khoá Pix."
-
-#: src/services/SystemService.cpp:1113
+#: src/services/SystemService.cpp:1152 src/services/SystemService.cpp:1167
 #, kde-format
 msgid "Clipboard unavailable."
 msgstr "Bảng nháp không khả dụng."
 
-#: src/services/UserAvatar.cpp:70
+#: src/services/SystemService.cpp:1163
 #, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar update not allowed as administrator"
-msgstr "không được phép cập nhật ảnh đại diện với quyền quản trị viên"
+msgid "No Pix key is configured."
+msgstr "Chưa cấu hình khoá Pix."
 
-#: src/services/UserAvatar.cpp:76
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "source .face file missing, unreadable or unsafe"
-msgstr "tệp .face nguồn bị thiếu, không đọc được hoặc không an toàn"
-
-#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#: src/services/UserAvatar.cpp:83 src/services/UserAvatar.cpp:87
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not read the source avatar"
 msgstr "không đọc được ảnh đại diện nguồn"
 
-#: src/services/UserAvatar.cpp:93
+#: src/services/UserAvatar.cpp:98
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid ""
@@ -2547,88 +2574,100 @@ msgid ""
 "plugin)"
 msgstr "tệp .face không chứa ảnh hợp lệ (SVG cần phần bổ trợ Qt SVG)"
 
-#: src/services/UserAvatar.cpp:100
+#: src/services/UserAvatar.cpp:182
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "home folder unavailable or with unsafe permissions"
 msgstr "thư mục nhà không khả dụng hoặc có quyền truy cập không an toàn"
 
-#: src/services/UserAvatar.cpp:106
+#: src/services/UserAvatar.cpp:196
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the new avatar; avatar preserved"
+msgstr "không ghi được ảnh đại diện mới; giữ nguyên ảnh đại diện"
+
+#: src/services/UserAvatar.cpp:206
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely replace ~/.face; avatar preserved"
+msgstr "không thay thế được ~/.face một cách an toàn; giữ nguyên ảnh đại diện"
+
+#: src/services/UserAvatar.cpp:209
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but writing to disk could not be confirmed"
+msgstr "đã cập nhật ảnh đại diện, nhưng không xác nhận được việc ghi ra đĩa"
+
+#: src/services/UserAvatar.cpp:216
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be checked"
+msgstr "đã cập nhật ảnh đại diện, nhưng không kiểm tra được ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:219
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be created"
+msgstr "đã cập nhật ảnh đại diện, nhưng không tạo được ~/.face.icon"
+
+#: src/services/UserAvatar.cpp:222
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
+msgstr ""
+"đã cập nhật ảnh đại diện, nhưng không xác nhận được ~/.face.icon trên đĩa"
+
+#: src/services/UserAvatar.cpp:250 src/services/UserAvatar.cpp:344
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "không được phép cập nhật ảnh đại diện với quyền quản trị viên"
+
+#: src/services/UserAvatar.cpp:292 src/services/UserAvatar.cpp:368
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "~/.face is not a safe regular file; avatar preserved"
 msgstr ""
 "~/.face không phải là tệp thông thường an toàn; giữ nguyên ảnh đại diện"
 
-#: src/services/UserAvatar.cpp:112
+#: src/services/UserAvatar.cpp:350
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr "tệp .face nguồn bị thiếu, không đọc được hoặc không an toàn"
+
+#: src/services/UserAvatar.cpp:374
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "unsafe avatar backup; avatar preserved"
 msgstr "bản sao lưu ảnh đại diện không an toàn; giữ nguyên ảnh đại diện"
 
-#: src/services/UserAvatar.cpp:120
+#: src/services/UserAvatar.cpp:382
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not safely open the previous avatar"
 msgstr "không mở được ảnh đại diện trước đó một cách an toàn"
 
-#: src/services/UserAvatar.cpp:124
+#: src/services/UserAvatar.cpp:386
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not read the previous avatar"
 msgstr "không đọc được ảnh đại diện trước đó"
 
-#: src/services/UserAvatar.cpp:128
+#: src/services/UserAvatar.cpp:390
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not preserve the previous avatar"
 msgstr "không giữ được ảnh đại diện trước đó"
 
-#: src/services/UserAvatar.cpp:132
+#: src/services/UserAvatar.cpp:394
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not write the backup; avatar preserved"
 msgstr "không ghi được bản sao lưu; giữ nguyên ảnh đại diện"
 
-#: src/services/UserAvatar.cpp:138
+#: src/services/UserAvatar.cpp:400
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not publish the backup; avatar preserved"
 msgstr "không công bố được bản sao lưu; giữ nguyên ảnh đại diện"
-
-#: src/services/UserAvatar.cpp:146
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not write the new avatar; avatar preserved"
-msgstr "không ghi được ảnh đại diện mới; giữ nguyên ảnh đại diện"
-
-#: src/services/UserAvatar.cpp:155
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not safely replace ~/.face; avatar preserved"
-msgstr "không thay thế được ~/.face một cách an toàn; giữ nguyên ảnh đại diện"
-
-#: src/services/UserAvatar.cpp:158
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar updated, but writing to disk could not be confirmed"
-msgstr "đã cập nhật ảnh đại diện, nhưng không xác nhận được việc ghi ra đĩa"
-
-#: src/services/UserAvatar.cpp:165
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar updated, but ~/.face.icon could not be checked"
-msgstr "đã cập nhật ảnh đại diện, nhưng không kiểm tra được ~/.face.icon"
-
-#: src/services/UserAvatar.cpp:168
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar updated, but ~/.face.icon could not be created"
-msgstr "đã cập nhật ảnh đại diện, nhưng không tạo được ~/.face.icon"
-
-#: src/services/UserAvatar.cpp:171
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
-msgstr ""
-"đã cập nhật ảnh đại diện, nhưng không xác nhận được ~/.face.icon trên đĩa"
