@@ -12,6 +12,38 @@
 var LAYOUT_KEY = "MainuanLayout";
 var PANEL_THICKNESS = 40;
 
+// The one official Mainuan logo for every application launcher button. The
+// icon is hicolor/scalable/apps/mainuan.svg, installed by the
+// mainuan-desktop-defaults package (dot-files), the same name its
+// /etc/skel appletsrc and its Plasma update script use. Layout definitions
+// never carry their own launcher icon: brandLauncher() writes this one.
+var MAINUAN_LAUNCHER_ICON = "mainuan";
+
+// Application launchers (Plasma "Application Launchers" category) a layout may
+// place. All of them read General/icon; the ones listed in
+// LAUNCHER_CUSTOM_IMAGE prefer General/customButtonImage while
+// General/useCustomButtonImage is true, so that switch is turned off.
+var LAUNCHER_TYPES = ["org.kde.plasma.kickoff", "org.kde.plasma.kicker", "org.kde.plasma.kickerdash",
+                      "Orbit.Start.Menu", "TahoeLauncher", "DeepinMenu.Classic", "p-connor.plasma-drawer"];
+var LAUNCHER_CUSTOM_IMAGE = ["org.kde.plasma.kicker", "org.kde.plasma.kickerdash", "Orbit.Start.Menu",
+                             "TahoeLauncher", "DeepinMenu.Classic", "p-connor.plasma-drawer"];
+
+function isLauncher(type) {
+    return LAUNCHER_TYPES.indexOf(type) >= 0;
+}
+
+// Returns a copy of `config` whose General group shows the Mainuan logo.
+function brandLauncher(type, config) {
+    config = JSON.parse(JSON.stringify(config || {}));
+    var general = config.General || {};
+    delete general.customButtonImage;
+    delete general.useCustomButtonImage;
+    general.icon = MAINUAN_LAUNCHER_ICON;
+    if (LAUNCHER_CUSTOM_IMAGE.indexOf(type) >= 0) general.useCustomButtonImage = false;
+    config.General = general;
+    return config;
+}
+
 function hasWidget(type) {
     return knownWidgetTypes.indexOf(type) >= 0
         || (typeof installedWidgets !== "undefined" && installedWidgets.indexOf(type) >= 0);
@@ -24,7 +56,9 @@ function addWidget(panel, type, config) {
     }
     // Only documented per-widget options: there is no universal iconSize key.
     config = JSON.parse(JSON.stringify(config || {}));
-    if (type === "org.kde.plasma.systemtray") {
+    if (isLauncher(type)) {
+        config = brandLauncher(type, config);
+    } else if (type === "org.kde.plasma.systemtray") {
         config.General = config.General || {};
         config.General.scaleIconsToFit = true;
         config.General.iconSpacing = 1;
@@ -272,9 +306,8 @@ function describeMainuanLayout() {
     var same = all.every(function (panel) { return id !== "" && panel.readConfig(LAYOUT_KEY, "") === id; });
     if (!same || (!Object.prototype.hasOwnProperty.call(layouts, id) && id !== "floating")) id = "";
     var launchers = 0, matching = 0, structure = id !== "";
-    var launcherIds = ["org.kde.plasma.kickoff", "org.kde.plasma.kicker", "org.kde.plasma.kickerdash", "Orbit.Start.Menu", "TahoeLauncher"];
     all.forEach(function (panel) {
-        panel.widgets().forEach(function (widget) { if (launcherIds.indexOf(widget.type) >= 0) ++launchers; });
+        panel.widgets().forEach(function (widget) { if (isLauncher(widget.type)) ++launchers; });
     });
     if (id) {
         for (var screen = 0; screen < screenCount; ++screen) {
