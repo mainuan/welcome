@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
-"Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/mainuan/build/issues\n"
 "POT-Creation-Date: 2026-11-19 01:53-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
