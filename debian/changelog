@@ -1,3 +1,14 @@
+mainuan-welcome (1.1.2) resolute; urgency=medium
+
+  * Depende de mainuan-identity, a fonte oficial do avatar e do logotipo
+    (antes só recomendado). Sem ele, a cor de destaque não trocava o avatar.
+  * AppStream: endereço de problemas em mainuan/build/issues (o Issues de
+    mainuan/welcome está desabilitado).
+  * CI: o teste de instalação instala a release fixada de mainuan-identity,
+    conferida por SHA-256, como na ISO.
+
+ -- ruscher <rruscher@gmail.com>  Thu, 19 Nov 2026 14:00:00 -0300
+
 mainuan-welcome (1.1.1) resolute; urgency=medium
 
   * Layouts da área de trabalho: o botão do menu de todos os layouts mostra o

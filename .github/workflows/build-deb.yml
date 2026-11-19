@@ -170,7 +170,15 @@ jobs:
           cd dist
           sha256sum --check SHA256SUMS
           apt-get update
-          apt-get install --yes ./"${PACKAGE}_${PACKAGE_VERSION}_amd64.deb"
+          # mainuan-identity (official avatar sources) is not in the Ubuntu
+          # archive: the pinned release, checked by SHA-256, as in the ISO.
+          apt-get install --yes --no-install-recommends curl ca-certificates
+          identity=mainuan-identity_2026.11.19_all.deb
+          curl --fail --location --silent --show-error --proto '=https' --output "../${identity}" \
+            "https://github.com/mainuan/dot-files/releases/download/v2026.11.19/${identity}"
+          echo "0b0b84a06b2ae6811690dd4e332345124b5cd588fb603be82dfbe97ec283a139  ../${identity}" | sha256sum --check
+          apt-get install --yes ./"${PACKAGE}_${PACKAGE_VERSION}_amd64.deb" "../${identity}"
+          test -f /usr/share/mainuan/identity/avatars/cyan.svg
           dpkg -s "$PACKAGE" | grep -q '^Status: install ok installed'
           test "$(dpkg-query -W -f='${Version}' "$PACKAGE")" = "$PACKAGE_VERSION"
           dpkg -L "$PACKAGE" > ../installed-files.txt
