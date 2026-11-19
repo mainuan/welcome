@@ -124,7 +124,7 @@ Kirigami.Page {
                 SettingRow {
                     Layout.fillWidth: true
                     title: i18n("Accent Color")
-                    subtitle: i18n("Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. Keeps the choice when you change style or theme.")
+                    subtitle: i18n("Applies the KDE color scheme, the Kora icons and the wallpaper, and the Mainuan avatar unless you use a picture of your own. Keeps the choice when you change style or theme.")
                     iconName: "color-picker"
                     accent: page.accent; textColor: page.textColor; mutedColor: page.mutedColor
 

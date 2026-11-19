@@ -9,6 +9,8 @@
 #include <QStringList>
 #include <QVariantList>
 
+#include "UserAvatar.h"
+
 #include <functional>
 #include <memory>
 
@@ -77,6 +79,8 @@ public:
 
     // Directories searched for the Plasma tools instead of PATH (tests only).
     void setToolSearchPaths(const QStringList &paths);
+    // Where the official avatars are trusted from (tests only; /usr/share by default).
+    void setAvatarSourcePolicy(const UserAvatar::SourcePolicy &policy);
 
     Q_INVOKABLE void refresh();
     Q_INVOKABLE void setTheme(const QString &theme);
@@ -139,6 +143,7 @@ private:
     struct DecorationChange;
     std::shared_ptr<DecorationChange> m_decorationChange;
     QStringList m_toolPaths;
+    UserAvatar::SourcePolicy m_avatarPolicy = UserAvatar::SourcePolicy::system();
     QStringList m_installedVisualStyles;
     QString m_accentColor;
     QString m_accentId;
