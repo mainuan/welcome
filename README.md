@@ -34,7 +34,7 @@ Os temas, esquemas Dream, ícones Kora, wallpapers, avatares e plasmoides person
 
 ## Funcionalidades
 
-- Estilos Dream, Tahoe e Breeze, com variantes clara e escura e seis cores (Marrom, Ciano, Magenta, Lima, Cinza e Violeta), cada uma com esquema KDE, ícones Kora, wallpaper e avatar correspondentes.
+- Estilos Dream, Tahoe e Breeze, com variantes clara e escura e seis cores (Marrom, Ciano, Magenta, Lima, Cinza e Violeta), cada uma com esquema KDE, ícones Kora e wallpaper correspondentes; o avatar do Mainuan acompanha a cor apenas enquanto a conta não usa uma foto própria.
 - Sete layouts do Plasma: Clássico (5 barras), 3 barras, Barra única, Tiling, Painel superior, Lomiri e Barra W7, com verificação de widgets, backup automático e restauração.
 - Instalação de suítes de escritório e navegadores (entre eles FreeOffice, Vivaldi e Zen) via Flatpak ou pacote Debian, com progresso, mensagens de erro acessíveis e autenticação do sistema quando necessária.
 - Perfis de antivírus, firewall e codecs; atalhos para Google Docs e Office 365.
@@ -138,7 +138,7 @@ Como traduzir e manter os catálogos: [docs/i18n/README.md](docs/i18n/README.md)
 
 ## Contribuição
 
-Relate problemas e sugestões em [Issues](https://github.com/mainuan/welcome/issues). Pull requests para `main` passam pelo CI completo (compilação, testes, CPU, lintian e teste de instalação limpa) antes da revisão. Ao mudar textos da interface, atualize os catálogos com `po/i18n.sh extract` e `po/i18n.sh update`.
+Relate problemas e sugestões em [mainuan/build/issues](https://github.com/mainuan/build/issues) (este repositório não tem Issues habilitadas). Pull requests para `main` passam pelo CI completo (compilação, testes, CPU, lintian e teste de instalação limpa) antes da revisão. Ao mudar textos da interface, atualize os catálogos com `po/i18n.sh extract` e `po/i18n.sh update`.
 
 ## Créditos
 

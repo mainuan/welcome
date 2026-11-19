@@ -8,6 +8,7 @@
 #include <QString>
 #include <QStringList>
 #include <QVariantList>
+#include <QVariantMap>
 
 #include "UserAvatar.h"
 
@@ -46,6 +47,8 @@ class SystemService final : public QObject
     // cannot be used to recognise it).
     Q_PROPERTY(bool lastMessageIsError READ lastMessageIsError NOTIFY lastMessageChanged)
     Q_PROPERTY(bool busy READ busy NOTIFY busyChanged)
+    // Official Mainuan addresses used by the pages (one definition, tested).
+    Q_PROPERTY(QVariantMap projectLinks READ projectLinks CONSTANT)
 
 public:
     explicit SystemService(QObject *parent = nullptr, const QString &userHome = {});
@@ -75,6 +78,9 @@ public:
     bool busy() const;
 
     static bool isValidAccent(const QString &value);
+    // code: organization on GitHub; issues: where problems are reported;
+    // community: Telegram group; source: this application's repository.
+    static QVariantMap projectLinks();
     static bool isAllowedVisualStyle(const QString &value);
 
     // Directories searched for the Plasma tools instead of PATH (tests only).
@@ -90,6 +96,8 @@ public:
     Q_INVOKABLE bool openUrl(const QString &url);
     Q_INVOKABLE bool openDiscover(const QString &applicationId);
     Q_INVOKABLE bool copyText(const QString &text);
+    // Copies a web address shown when the browser could not be opened.
+    Q_INVOKABLE bool copyUrl(const QString &url);
 
 signals:
     void darkThemeChanged();

@@ -1131,6 +1131,32 @@ bool SystemService::openDiscover(const QString &applicationId)
     return true;
 }
 
+QVariantMap SystemService::projectLinks()
+{
+    // Checked against the live organization: mainuan/welcome has no issue
+    // tracker, mainuan/build (the distribution build) does.
+    return {{QStringLiteral("code"), QStringLiteral("https://github.com/mainuan")},
+            {QStringLiteral("issues"), QStringLiteral("https://github.com/mainuan/build/issues/new")},
+            {QStringLiteral("community"), QStringLiteral("https://t.me/mainuan_comunidade")},
+            {QStringLiteral("source"), QStringLiteral("https://github.com/mainuan/welcome")}};
+}
+
+bool SystemService::copyUrl(const QString &url)
+{
+    const QUrl parsed(url, QUrl::StrictMode);
+    if (!parsed.isValid() || (parsed.scheme() != QStringLiteral("https") && parsed.scheme() != QStringLiteral("http"))) {
+        setMessage(i18n("URL blocked for security reasons."), true);
+        return false;
+    }
+    if (QGuiApplication::clipboard() == nullptr) {
+        setMessage(i18n("Clipboard unavailable."), true);
+        return false;
+    }
+    QGuiApplication::clipboard()->setText(parsed.toString());
+    setMessage(i18n("Address copied."));
+    return true;
+}
+
 bool SystemService::copyText(const QString &text)
 {
     if (text.isEmpty()) {

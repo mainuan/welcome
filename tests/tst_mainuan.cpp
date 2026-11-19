@@ -26,6 +26,8 @@
 #include <QDBusConnectionInterface>
 #include <QDBusReply>
 #include <QProcess>
+#include <QRegularExpression>
+#include <QUrl>
 #include <QStandardPaths>
 #include <QTemporaryDir>
 #include <QTimer>
@@ -174,6 +176,7 @@ private slots:
     void backsUpAndSafelyReplacesAvatars();
     void rejectsUnsafeAvatarFilesAndWrites();
     void appliesTheOfficialAvatarOnlyOverDefaults();
+    void usesOnlyOfficialContributeLinks();
     void trustsOnlyProtectedOfficialAvatarSources();
     void keepsPersonalAvatarWhenTheColorChanges();
     void exposesModelRolesAndLocalVideoCatalog();
@@ -1335,6 +1338,46 @@ QStringList knownAvatars()
     for (const AccentProfile &profile : AccentProfiles::profiles()) known << UserAvatar::officialSources(profile.iconTheme);
     return known;
 }
+}
+
+// Contribute/About addresses: the official organization, an issue tracker
+// that is enabled, the community group; no retired project, no typo.
+void MainuanTest::usesOnlyOfficialContributeLinks()
+{
+    const QVariantMap links = SystemService::projectLinks();
+    const QVariantMap expected = {{"code", "https://github.com/mainuan"},
+                                  {"issues", "https://github.com/mainuan/build/issues/new"},
+                                  {"community", "https://t.me/mainuan_comunidade"},
+                                  {"source", "https://github.com/mainuan/welcome"}};
+    QCOMPARE(links, expected);
+    for (const QVariant &value : links) {
+        const QUrl url(value.toString(), QUrl::StrictMode);
+        QVERIFY2(url.isValid() && url.scheme() == "https", qPrintable(value.toString()));
+        QVERIFY2((url.host() == "github.com" && (url.path() == "/mainuan" || url.path().startsWith("/mainuan/")))
+                 || (url.host() == "t.me" && url.path() == "/mainuan_comunidade"), qPrintable(value.toString()));
+    }
+    const QDir root(QStringLiteral(MAINUAN_TEST_FIXTURES "/../.."));
+    QStringList files;
+    for (const QString &pattern : {QString("qml/pages/*.qml"), QString("qml/components/*.qml"), QString("qml/*.qml"),
+                                   QString("src/services/*.cpp"), QString("src/*.cpp"), QString("po/*.po"), QString("po/*.pot")}) {
+        const QFileInfo info(root.filePath(pattern));
+        for (const QString &name : QDir(info.absolutePath()).entryList({info.fileName()}, QDir::Files)) {
+            files << QDir(info.absolutePath()).filePath(name);
+        }
+    }
+    QVERIFY(files.size() > 40);
+    const QRegularExpression forbidden(QStringLiteral("github\\.com/mainuanos|t\\.me/mainuanos\\b|Contribue\\b|Prlblem|pronlem"),
+                                       QRegularExpression::CaseInsensitiveOption);
+    for (const QString &file : files) {
+        const QString text = QString::fromUtf8(PlasmaSandbox::read(file));
+        QVERIFY2(!text.isEmpty(), qPrintable(file));
+        const auto match = forbidden.match(text);
+        QVERIFY2(!match.hasMatch(), qPrintable(file + ": " + match.captured()));
+    }
+    const QString page = QString::fromUtf8(PlasmaSandbox::read(root.filePath("qml/pages/ContributePage.qml")));
+    QVERIFY(page.contains("i18n(\"Contribute Code\")"));
+    QVERIFY(page.contains("i18n(\"Report a Problem\")"));
+    QVERIFY(!page.contains("https://")); // addresses come only from projectLinks
 }
 
 // ~/.face missing or already a Mainuan avatar: the official image is applied,
