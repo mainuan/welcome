@@ -380,7 +380,7 @@ void MainuanTest::mapsVisualStylesToMainuanThemes()
         QCOMPARE(profile->darkScheme, stems[i] + "DarkColor");
         QCOMPARE(profile->iconTheme, icons[i]);
         QCOMPARE(profile->wallpaper, wallpapers[i]);
-        QCOMPARE(profile->avatar(), "icons/" + icons[i] + "/status/scalable/.face");
+        QCOMPARE(profile->avatar(), "mainuan/identity/avatars/" + ids[i] + ".svg");
         QCOMPARE(AccentProfiles::fromScheme(profile->scheme(false)), profile);
         QCOMPARE(AccentProfiles::fromScheme(profile->scheme(true)), profile);
     }
@@ -1180,10 +1180,17 @@ void MainuanTest::reportsPartialAccentFailures()
     service.setAccent("brown");
     QVERIFY(waitIdle(service));
     QCOMPARE(service.colorScheme(), QStringLiteral("DreamBrownLightColor"));
-    // A missing avatar is not a failed adjustment; the current one stays.
+    // Without the color's avatar the default Mainuan avatar (cyan) is used.
+    QVERIFY2(!service.lastMessage().startsWith("Error:"), qPrintable(service.lastMessage()));
+    QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), PlasmaSandbox::read(sandbox.data() + "/" + AccentProfiles::find("cyan")->avatar()));
+    // Without any official avatar it is not a failed adjustment; ~/.face stays.
+    QVERIFY(QFile::rename(sandbox.data() + "/mainuan/identity/avatars", sandbox.data() + "/mainuan/identity/avatars.hidden"));
+    service.setAccent("brown");
+    QVERIFY(waitIdle(service));
     QVERIFY2(!service.lastMessage().startsWith("Error:"), qPrintable(service.lastMessage()));
     QVERIFY(service.lastMessage().contains("avatar is not installed"));
-    QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), PlasmaSandbox::read(sandbox.data() + "/" + AccentProfiles::find("violet")->avatar()));
+    QCOMPARE(PlasmaSandbox::read(sandbox.home() + "/.face"), PlasmaSandbox::read(sandbox.data() + "/mainuan/identity/avatars.hidden/cyan.svg"));
+    QVERIFY(QFile::rename(sandbox.data() + "/mainuan/identity/avatars.hidden", sandbox.data() + "/mainuan/identity/avatars"));
     qputenv("MOCK_ICONS_NOOP", "1");
     service.setAccent("gray");
     QVERIFY(waitIdle(service));
@@ -1335,7 +1342,7 @@ ino_t inode(const QString &path)
 QStringList knownAvatars()
 {
     QStringList known;
-    for (const AccentProfile &profile : AccentProfiles::profiles()) known << UserAvatar::officialSources(profile.iconTheme);
+    for (const AccentProfile &profile : AccentProfiles::profiles()) known << UserAvatar::officialSources(profile.id);
     return known;
 }
 }
@@ -1390,39 +1397,40 @@ void MainuanTest::appliesTheOfficialAvatarOnlyOverDefaults()
     const AccentProfile &cyan = *AccentProfiles::find("cyan");
     const AccentProfile &brown = *AccentProfiles::find("brown");
     const QStringList known = knownAvatars();
-    QCOMPARE(UserAvatar::officialSources(cyan.iconTheme).constFirst(), cyan.avatar());
+    QCOMPARE(UserAvatar::officialSources(cyan.id).constFirst(), cyan.avatar());
     // No ~/.face: SVG source applied, ~/.face.icon created.
-    auto result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.iconTheme), known, sandbox.home(), policy);
+    auto result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.id), known, sandbox.home(), policy);
     QCOMPARE(result.outcome, UserAvatar::Outcome::Updated);
     QVERIFY(result.error.isEmpty());
     QCOMPARE(PlasmaSandbox::read(face), PlasmaSandbox::read(sandbox.data() + "/" + cyan.avatar()));
     QCOMPARE(QFileInfo(sandbox.home() + "/.face.icon").symLinkTarget(), face);
     // Idempotent: nothing is rewritten the second time.
     const ino_t written = inode(face);
-    result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.iconTheme), known, sandbox.home(), policy);
+    result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.id), known, sandbox.home(), policy);
     QCOMPARE(result.outcome, UserAvatar::Outcome::AlreadyCurrent);
     QCOMPARE(inode(face), written);
     // A Mainuan avatar follows the color, without a backup of the default.
-    result = UserAvatar::applyOfficial(UserAvatar::officialSources(brown.iconTheme), known, sandbox.home(), policy);
+    result = UserAvatar::applyOfficial(UserAvatar::officialSources(brown.id), known, sandbox.home(), policy);
     QCOMPARE(result.outcome, UserAvatar::Outcome::Updated);
     QCOMPARE(PlasmaSandbox::read(face), PlasmaSandbox::read(sandbox.data() + "/" + brown.avatar()));
     QVERIFY(!QFileInfo::exists(sandbox.home() + "/.face.mainuan-welcome-backup"));
-    // PNG fallback (logo of mainuan-desktop-defaults) when the color has none.
+    // PNG fallback (official logo of mainuan-identity) without any avatar.
     QVERIFY(QFile::remove(sandbox.data() + "/" + cyan.avatar()));
-    PlasmaSandbox::write(sandbox.data() + "/plasma/avatars/logoMainuan.png", pngBytes(Qt::blue));
-    result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.iconTheme), known, sandbox.home(), policy);
+    PlasmaSandbox::write(sandbox.data() + "/mainuan/identity/logo/mainuan-logo.png", pngBytes(Qt::blue));
+    result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.id), known, sandbox.home(), policy);
     QCOMPARE(result.outcome, UserAvatar::Outcome::Updated);
     QCOMPARE(PlasmaSandbox::read(face), pngBytes(Qt::blue));
-    // /etc/skel/.face is a link to /usr/share/mainuan-user-avatar/face.svg,
-    // itself possibly a link inside the trusted tree: both are official.
+    // Older mainuan-user-avatar: /etc/skel/.face is a link to
+    // /usr/share/mainuan-user-avatar/face.svg, itself possibly a link inside
+    // the trusted tree. Accounts created then keep a recognized link.
     PlasmaSandbox::write(sandbox.data() + "/mainuan-user-avatar/real/face.svg", svgBytes("#3daee9"));
     QVERIFY(QFile::link(sandbox.data() + "/mainuan-user-avatar/real/face.svg", sandbox.data() + "/mainuan-user-avatar/face.svg"));
     QVERIFY(QFile::remove(face));
     QVERIFY(QFile::link(sandbox.data() + "/mainuan-user-avatar/face.svg", face));
-    result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.iconTheme), known, sandbox.home(), policy);
+    result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.id), known, sandbox.home(), policy);
     QCOMPARE(result.outcome, UserAvatar::Outcome::AlreadyCurrent); // same image as the link shows
     QVERIFY(QFileInfo(face).isSymLink());
-    result = UserAvatar::applyOfficial(UserAvatar::officialSources(brown.iconTheme), known, sandbox.home(), policy);
+    result = UserAvatar::applyOfficial(UserAvatar::officialSources(brown.id), known, sandbox.home(), policy);
     QCOMPARE(result.outcome, UserAvatar::Outcome::Updated);
     QVERIFY(!QFileInfo(face).isSymLink());
     QCOMPARE(PlasmaSandbox::read(face), PlasmaSandbox::read(sandbox.data() + "/" + brown.avatar()));
@@ -1430,7 +1438,7 @@ void MainuanTest::appliesTheOfficialAvatarOnlyOverDefaults()
     // Nothing installed: skipped without an error, ~/.face untouched.
     QTemporaryDir empty;
     const QByteArray before = PlasmaSandbox::read(face);
-    result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.iconTheme), known, sandbox.home(), {{empty.path()}, ::geteuid()});
+    result = UserAvatar::applyOfficial(UserAvatar::officialSources(cyan.id), known, sandbox.home(), {{empty.path()}, ::geteuid()});
     QCOMPARE(result.outcome, UserAvatar::Outcome::SourceMissing);
     QVERIFY(result.error.isEmpty());
     QCOMPARE(PlasmaSandbox::read(face), before);
@@ -1446,7 +1454,7 @@ void MainuanTest::trustsOnlyProtectedOfficialAvatarSources()
     const AccentProfile &cyan = *AccentProfiles::find("cyan");
     const QString colored = sandbox.data() + "/" + cyan.avatar();
     const QString fallback = sandbox.data() + "/mainuan-user-avatar/face.svg";
-    const QStringList sources = UserAvatar::officialSources(cyan.iconTheme);
+    const QStringList sources = UserAvatar::officialSources(cyan.id);
     PlasmaSandbox::write(fallback, svgBytes("#123456"));
     const auto expectFallback = [&](const char *why) {
         QVERIFY(!QFileInfo::exists(face) || QFile::remove(face));
@@ -1505,7 +1513,7 @@ void MainuanTest::keepsPersonalAvatarWhenTheColorChanges()
     const QByteArray personal = pngBytes(Qt::red);
     PlasmaSandbox::write(face, personal);
     for (const AccentProfile &profile : AccentProfiles::profiles()) {
-        const auto result = UserAvatar::applyOfficial(UserAvatar::officialSources(profile.iconTheme), knownAvatars(), sandbox.home(), policy);
+        const auto result = UserAvatar::applyOfficial(UserAvatar::officialSources(profile.id), knownAvatars(), sandbox.home(), policy);
         QCOMPARE(result.outcome, UserAvatar::Outcome::KeptPersonal);
         QCOMPARE(PlasmaSandbox::read(face), personal);
     }
@@ -1516,7 +1524,7 @@ void MainuanTest::keepsPersonalAvatarWhenTheColorChanges()
     PlasmaSandbox::write(key, "PRIVATE KEY");
     QVERIFY(QFile::remove(face));
     QVERIFY(QFile::link(key, face));
-    auto result = UserAvatar::applyOfficial(UserAvatar::officialSources("kora-cyan"), knownAvatars(), sandbox.home(), policy);
+    auto result = UserAvatar::applyOfficial(UserAvatar::officialSources("cyan"), knownAvatars(), sandbox.home(), policy);
     QCOMPARE(result.outcome, UserAvatar::Outcome::KeptPersonal);
     QCOMPARE(QFileInfo(face).symLinkTarget(), key);
     QCOMPARE(PlasmaSandbox::read(key), QByteArray("PRIVATE KEY"));

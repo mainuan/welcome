@@ -19,11 +19,12 @@ struct SourcePolicy
     static SourcePolicy system();
 };
 
-// Official avatar sources for an icon theme, relative to a data root, in
-// order of preference: the avatar matching the Kora color (in the icon theme,
-// or as mainuan-user-avatar/<icon theme>.svg), the generic Mainuan avatar
-// (mainuan-user-avatar/face.svg) and the logo of mainuan-desktop-defaults.
-QStringList officialSources(const QString &iconTheme);
+// Official avatar sources for an accent color id (brown, cyan, ...), relative
+// to a data root, in order of preference: the color's avatar and the default
+// one (cyan) of mainuan-identity (mainuan/identity/avatars/<id>.svg), then the
+// avatar of older mainuan-user-avatar packages and the official logo
+// (mainuan-identity, then older mainuan-desktop-defaults).
+QStringList officialSources(const QString &accentId);
 
 enum class Outcome {
     Updated,        // ~/.face now holds the official avatar

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-19 01:41-0300\n"
+"POT-Creation-Date: 2026-11-19 01:53-0300\n"
 "PO-Revision-Date: 2026-11-16 11:52-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: zh_CN <https://github.com/mainuan>\n"
@@ -532,7 +532,7 @@ msgstr "Pix 密钥"
 msgid "Copy Pix Key"
 msgstr "复制 Pix 密钥"
 
-#: qml/pages/ContributePage.qml:169 src/services/SystemService.cpp:1171
+#: qml/pages/ContributePage.qml:169 src/services/SystemService.cpp:1181
 #, kde-format
 msgid "Pix key copied."
 msgstr "Pix 密钥已复制。"
@@ -596,7 +596,7 @@ msgstr "页面地址"
 msgid "Copy Address"
 msgstr "复制地址"
 
-#: qml/pages/ContributePage.qml:287 src/services/SystemService.cpp:1156
+#: qml/pages/ContributePage.qml:287 src/services/SystemService.cpp:1166
 #, kde-format
 msgid "Address copied."
 msgstr "地址已复制。"
@@ -2139,334 +2139,334 @@ msgctxt "@info system report footer"
 msgid "No network addresses, serial numbers or computer name."
 msgstr "不含网络地址、序列号或计算机名称。"
 
-#: src/services/SystemService.cpp:93
+#: src/services/SystemService.cpp:103
 #, kde-format
 msgid "The %1 decoration engine is not installed."
 msgstr "未安装 %1 装饰引擎。"
 
-#: src/services/SystemService.cpp:108
+#: src/services/SystemService.cpp:118
 #, kde-format
 msgid "The %1 decoration is not installed or its resources are incomplete."
 msgstr "未安装 %1 装饰，或其资源不完整。"
 
 #. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
-#: src/services/SystemService.cpp:485
+#: src/services/SystemService.cpp:495
 #, kde-format
 msgid "Driver Manager available"
 msgstr "驱动管理器可用"
 
-#: src/services/SystemService.cpp:486
+#: src/services/SystemService.cpp:496
 #, kde-format
 msgid "Driver Manager not installed"
 msgstr "未安装驱动管理器"
 
-#: src/services/SystemService.cpp:502
+#: src/services/SystemService.cpp:512
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Active"
 msgstr "已启用"
 
-#: src/services/SystemService.cpp:503
+#: src/services/SystemService.cpp:513
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Inactive"
 msgstr "未启用"
 
-#: src/services/SystemService.cpp:506
+#: src/services/SystemService.cpp:516
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: active"
 msgstr "开机启动：已启用"
 
-#: src/services/SystemService.cpp:507
+#: src/services/SystemService.cpp:517
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: inactive"
 msgstr "开机启动：未启用"
 
 #. i18n: %1 is an error message shown in the page banner.
-#: src/services/SystemService.cpp:543
+#: src/services/SystemService.cpp:553
 #, kde-format
 msgid "Error: %1"
 msgstr "错误：%1"
 
-#: src/services/SystemService.cpp:562
+#: src/services/SystemService.cpp:572
 #, kde-format
 msgid "Invalid theme."
 msgstr "无效的主题。"
 
-#: src/services/SystemService.cpp:567 src/services/SystemService.cpp:617
-#: src/services/SystemService.cpp:886
+#: src/services/SystemService.cpp:577 src/services/SystemService.cpp:627
+#: src/services/SystemService.cpp:896
 #, kde-format
 msgid "Wait for the current operation to finish."
 msgstr "请等待当前操作完成。"
 
-#: src/services/SystemService.cpp:576 src/services/SystemService.cpp:605
+#: src/services/SystemService.cpp:586 src/services/SystemService.cpp:615
 #, kde-format
 msgid ""
 "The current external color scheme has no known variant. Select a Mainuan "
 "color first."
 msgstr "当前的外部配色方案没有已知的变体。请先选择一种 Mainuan 颜色。"
 
-#: src/services/SystemService.cpp:583
+#: src/services/SystemService.cpp:593
 #, kde-format
 msgid "Dark theme applied."
 msgstr "已应用深色主题。"
 
-#: src/services/SystemService.cpp:584
+#: src/services/SystemService.cpp:594
 #, kde-format
 msgid "Light theme applied."
 msgstr "已应用浅色主题。"
 
 #. i18n: %1 is an accent color name (Brown, Cyan…).
-#: src/services/SystemService.cpp:601
+#: src/services/SystemService.cpp:611
 #, kde-format
 msgid "Theme and %1 color applied."
 msgstr "已应用主题和强调色“%1”。"
 
-#: src/services/SystemService.cpp:613
+#: src/services/SystemService.cpp:623
 #, kde-format
 msgid "Invalid accent color."
 msgstr "无效的强调色。"
 
-#: src/services/SystemService.cpp:623
+#: src/services/SystemService.cpp:633
 #, kde-format
 msgid "Applying %1 color…"
 msgstr "正在应用强调色“%1”…"
 
-#: src/services/SystemService.cpp:634
+#: src/services/SystemService.cpp:644
 #, kde-format
 msgid "%1 color, icons and wallpaper applied."
 msgstr "已应用强调色“%1”、图标和壁纸。"
 
-#: src/services/SystemService.cpp:645
+#: src/services/SystemService.cpp:655
 #, kde-format
 msgid "Color scheme %1.colors is missing or unreadable."
 msgstr "配色方案 %1.colors 缺失或无法读取。"
 
-#: src/services/SystemService.cpp:651
+#: src/services/SystemService.cpp:661
 #, kde-format
 msgid "Color scheme %1.colors is invalid."
 msgstr "配色方案 %1.colors 无效。"
 
-#: src/services/SystemService.cpp:656
+#: src/services/SystemService.cpp:666
 #, kde-format
 msgid "plasma-apply-colorscheme is not available."
 msgstr "plasma-apply-colorscheme 不可用。"
 
-#: src/services/SystemService.cpp:663
+#: src/services/SystemService.cpp:673
 #, kde-format
 msgid "Plasma did not recognize the %1.colors color scheme."
 msgstr "Plasma 无法识别 %1.colors 配色方案。"
 
-#: src/services/SystemService.cpp:709
+#: src/services/SystemService.cpp:719
 #, kde-format
 msgid "Could not prepare the KDE color configuration."
 msgstr "无法准备 KDE 颜色配置。"
 
-#: src/services/SystemService.cpp:720
+#: src/services/SystemService.cpp:730
 #, kde-format
 msgid "Plasma did not confirm the %1 color scheme without a color override."
 msgstr "Plasma 未确认在无颜色覆盖的情况下应用 %1 配色方案。"
 
 #. i18n: Item of a list of failed adjustments (lowercase, no final period).
-#: src/services/SystemService.cpp:734
+#: src/services/SystemService.cpp:744
 #, kde-format
 msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
 msgstr "图标主题 %1 缺失或 index.theme 无效（已保留先前的图标）"
 
-#: src/services/SystemService.cpp:737
+#: src/services/SystemService.cpp:747
 #, kde-format
 msgctxt "failed adjustment list item; %1 is an icon theme"
 msgid "icons %1"
 msgstr "图标 %1"
 
-#: src/services/SystemService.cpp:742
+#: src/services/SystemService.cpp:752
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper %1 missing"
 msgstr "壁纸 %1 缺失"
 
-#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1035
-#: src/services/SystemService.cpp:1050
+#: src/services/SystemService.cpp:754 src/services/SystemService.cpp:1045
+#: src/services/SystemService.cpp:1060
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper"
 msgstr "壁纸"
 
-#: src/services/SystemService.cpp:749 src/services/SystemService.cpp:1040
+#: src/services/SystemService.cpp:759 src/services/SystemService.cpp:1050
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "Plasma did not confirm the %1 icons"
 msgstr "Plasma 未确认 %1 图标"
 
-#: src/services/SystemService.cpp:773
+#: src/services/SystemService.cpp:783
 #, kde-format
 msgid "The Mainuan avatar was updated."
 msgstr "Mainuan 头像已更新。"
 
-#: src/services/SystemService.cpp:778
+#: src/services/SystemService.cpp:788
 #, kde-format
 msgid "Your own avatar was kept."
 msgstr "已保留您自己的头像。"
 
-#: src/services/SystemService.cpp:781
+#: src/services/SystemService.cpp:791
 #, kde-format
 msgid "The Mainuan avatar is not installed; the current avatar was kept."
 msgstr "未安装 Mainuan 头像；已保留当前头像。"
 
-#: src/services/SystemService.cpp:784
+#: src/services/SystemService.cpp:794
 #, kde-format
 msgctxt "failed adjustment list item; %1 is the avatar error"
 msgid "avatar: %1"
 msgstr "头像：%1"
 
-#: src/services/SystemService.cpp:792
+#: src/services/SystemService.cpp:802
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "color scheme changed during the operation; avatar preserved"
 msgstr "操作期间配色方案已更改；已保留头像"
 
-#: src/services/SystemService.cpp:807
+#: src/services/SystemService.cpp:817
 #, kde-format
 msgid "Could not complete all adjustments: %1."
 msgstr "无法完成所有调整：%1。"
 
-#: src/services/SystemService.cpp:808
+#: src/services/SystemService.cpp:818
 #, kde-format
 msgctxt "separator between failed adjustment list items"
 msgid "; "
 msgstr "；"
 
-#: src/services/SystemService.cpp:823
+#: src/services/SystemService.cpp:833
 #, kde-format
 msgid "Could not communicate with KWin to update the window decoration."
 msgstr "无法与 KWin 通信以更新窗口装饰。"
 
-#: src/services/SystemService.cpp:832 src/services/SystemService.cpp:839
-#: src/services/SystemService.cpp:858
+#: src/services/SystemService.cpp:842 src/services/SystemService.cpp:849
+#: src/services/SystemService.cpp:868
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "could not restore the previous window decoration"
 msgstr "无法恢复先前的窗口装饰"
 
-#: src/services/SystemService.cpp:849
+#: src/services/SystemService.cpp:859
 #, kde-format
 msgid "Could not save the requested window decoration in KWin."
 msgstr "无法在 KWin 中保存所请求的窗口装饰。"
 
-#: src/services/SystemService.cpp:859
+#: src/services/SystemService.cpp:869
 #, kde-format
 msgid ""
 "The final window decoration configuration was changed during the operation."
 msgstr "最终的窗口装饰配置在操作期间被更改。"
 
-#: src/services/SystemService.cpp:882
+#: src/services/SystemService.cpp:892
 #, kde-format
 msgid "Invalid visual style."
 msgstr "无效的视觉风格。"
 
-#: src/services/SystemService.cpp:890
+#: src/services/SystemService.cpp:900
 #, kde-format
 msgid "%1 style applied."
 msgstr "已应用“%1”风格。"
 
-#: src/services/SystemService.cpp:923
+#: src/services/SystemService.cpp:933
 #, kde-format
 msgid ""
 "This system's Plasma does not provide plasma-apply-lookandfeel; the style "
 "cannot be changed."
 msgstr "此系统的 Plasma 未提供 plasma-apply-lookandfeel；无法更改风格。"
 
-#: src/services/SystemService.cpp:928
+#: src/services/SystemService.cpp:938
 #, kde-format
 msgid "The %1 style is not installed on this system."
 msgstr "此系统上未安装“%1”风格。"
 
 #. i18n: %1 is a complete sentence describing the problem.
-#: src/services/SystemService.cpp:939
+#: src/services/SystemService.cpp:949
 #, kde-format
 msgid "%1 Previous appearance preserved."
 msgstr "%1已保留先前的外观。"
 
-#: src/services/SystemService.cpp:955
+#: src/services/SystemService.cpp:965
 #, kde-format
 msgid "Could not preserve the %1 icon theme. Previous style preserved."
 msgstr "无法保留 %1 图标主题。已保留先前的风格。"
 
-#: src/services/SystemService.cpp:959
+#: src/services/SystemService.cpp:969
 #, kde-format
 msgid "Applying %1 style…"
 msgstr "正在应用“%1”风格…"
 
-#: src/services/SystemService.cpp:976
+#: src/services/SystemService.cpp:986
 #, kde-format
 msgid "Could not apply the %1 style."
 msgstr "无法应用“%1”风格。"
 
-#: src/services/SystemService.cpp:984
+#: src/services/SystemService.cpp:994
 #, kde-format
 msgid "Plasma did not confirm the %1 style."
 msgstr "Plasma 未确认“%1”风格。"
 
-#: src/services/SystemService.cpp:1009 src/services/SystemService.cpp:1030
+#: src/services/SystemService.cpp:1019 src/services/SystemService.cpp:1040
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "icons"
 msgstr "图标"
 
-#: src/services/SystemService.cpp:1014
+#: src/services/SystemService.cpp:1024
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "cursor"
 msgstr "光标"
 
-#: src/services/SystemService.cpp:1085
+#: src/services/SystemService.cpp:1095
 #, kde-format
 msgid "Driver Manager is not installed."
 msgstr "未安装驱动管理器。"
 
-#: src/services/SystemService.cpp:1089
+#: src/services/SystemService.cpp:1099
 #, kde-format
 msgid "Could not open Driver Manager."
 msgstr "无法打开驱动管理器。"
 
-#: src/services/SystemService.cpp:1094
+#: src/services/SystemService.cpp:1104
 #, kde-format
 msgid "Unknown action."
 msgstr "未知操作。"
 
-#: src/services/SystemService.cpp:1103 src/services/SystemService.cpp:1148
+#: src/services/SystemService.cpp:1113 src/services/SystemService.cpp:1158
 #, kde-format
 msgid "URL blocked for security reasons."
 msgstr "出于安全原因，已阻止该 URL。"
 
-#: src/services/SystemService.cpp:1107
+#: src/services/SystemService.cpp:1117
 #, kde-format
 msgid "Requested the web browser to open the page."
 msgstr "已请求网页浏览器打开该页面。"
 
-#: src/services/SystemService.cpp:1108
+#: src/services/SystemService.cpp:1118
 #, kde-format
 msgid "Could not open the URL in the default web browser."
 msgstr "无法在默认网页浏览器中打开该 URL。"
 
-#: src/services/SystemService.cpp:1115
+#: src/services/SystemService.cpp:1125
 #, kde-format
 msgid "This application is not allowed to be opened in Discover."
 msgstr "不允许在 Discover 中打开此应用程序。"
 
-#: src/services/SystemService.cpp:1120
+#: src/services/SystemService.cpp:1130
 #, kde-format
 msgid "Discover was not found. Install KDE Discover to open this application."
 msgstr "未找到 Discover。请安装 KDE Discover 以打开此应用程序。"
 
-#: src/services/SystemService.cpp:1126
+#: src/services/SystemService.cpp:1136
 #, kde-format
 msgid "Could not open the page in Discover. Try again."
 msgstr "无法在 Discover 中打开该页面。请重试。"
 
-#: src/services/SystemService.cpp:1129
+#: src/services/SystemService.cpp:1139
 #, kde-format
 msgid ""
 "Requested Discover to open the page. Confirm the installation in Discover; "
@@ -2475,23 +2475,23 @@ msgstr ""
 "已请求 Discover 打开该页面。请在 Discover 中确认安装；如果找不到该应用程序，"
 "请检查 Flathub 后重试。"
 
-#: src/services/SystemService.cpp:1152 src/services/SystemService.cpp:1167
+#: src/services/SystemService.cpp:1162 src/services/SystemService.cpp:1177
 #, kde-format
 msgid "Clipboard unavailable."
 msgstr "剪贴板不可用。"
 
-#: src/services/SystemService.cpp:1163
+#: src/services/SystemService.cpp:1173
 #, kde-format
 msgid "No Pix key is configured."
 msgstr "未配置 Pix 密钥。"
 
-#: src/services/UserAvatar.cpp:83 src/services/UserAvatar.cpp:87
+#: src/services/UserAvatar.cpp:84 src/services/UserAvatar.cpp:88
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not read the source avatar"
 msgstr "无法读取源头像"
 
-#: src/services/UserAvatar.cpp:98
+#: src/services/UserAvatar.cpp:99
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid ""
@@ -2499,97 +2499,97 @@ msgid ""
 "plugin)"
 msgstr ".face 文件不包含有效图像（SVG 需要 Qt SVG 插件）"
 
-#: src/services/UserAvatar.cpp:182
+#: src/services/UserAvatar.cpp:183
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "home folder unavailable or with unsafe permissions"
 msgstr "主文件夹不可用或权限不安全"
 
-#: src/services/UserAvatar.cpp:196
+#: src/services/UserAvatar.cpp:197
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not write the new avatar; avatar preserved"
 msgstr "无法写入新头像；已保留头像"
 
-#: src/services/UserAvatar.cpp:206
+#: src/services/UserAvatar.cpp:207
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not safely replace ~/.face; avatar preserved"
 msgstr "无法安全替换 ~/.face；已保留头像"
 
-#: src/services/UserAvatar.cpp:209
+#: src/services/UserAvatar.cpp:210
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but writing to disk could not be confirmed"
 msgstr "头像已更新，但无法确认已写入磁盘"
 
-#: src/services/UserAvatar.cpp:216
+#: src/services/UserAvatar.cpp:217
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be checked"
 msgstr "头像已更新，但无法检查 ~/.face.icon"
 
-#: src/services/UserAvatar.cpp:219
+#: src/services/UserAvatar.cpp:220
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be created"
 msgstr "头像已更新，但无法创建 ~/.face.icon"
 
-#: src/services/UserAvatar.cpp:222
+#: src/services/UserAvatar.cpp:223
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
 msgstr "头像已更新，但无法确认 ~/.face.icon 已写入磁盘"
 
-#: src/services/UserAvatar.cpp:250 src/services/UserAvatar.cpp:344
+#: src/services/UserAvatar.cpp:254 src/services/UserAvatar.cpp:348
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar update not allowed as administrator"
 msgstr "不允许以管理员身份更新头像"
 
-#: src/services/UserAvatar.cpp:292 src/services/UserAvatar.cpp:368
+#: src/services/UserAvatar.cpp:296 src/services/UserAvatar.cpp:372
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "~/.face is not a safe regular file; avatar preserved"
 msgstr "~/.face 不是安全的常规文件；已保留头像"
 
-#: src/services/UserAvatar.cpp:350
+#: src/services/UserAvatar.cpp:354
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "source .face file missing, unreadable or unsafe"
 msgstr "源 .face 文件缺失、无法读取或不安全"
 
-#: src/services/UserAvatar.cpp:374
+#: src/services/UserAvatar.cpp:378
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "unsafe avatar backup; avatar preserved"
 msgstr "头像备份不安全；已保留头像"
 
-#: src/services/UserAvatar.cpp:382
+#: src/services/UserAvatar.cpp:386
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not safely open the previous avatar"
 msgstr "无法安全打开先前的头像"
 
-#: src/services/UserAvatar.cpp:386
+#: src/services/UserAvatar.cpp:390
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not read the previous avatar"
 msgstr "无法读取先前的头像"
 
-#: src/services/UserAvatar.cpp:390
+#: src/services/UserAvatar.cpp:394
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not preserve the previous avatar"
 msgstr "无法保留先前的头像"
 
-#: src/services/UserAvatar.cpp:394
+#: src/services/UserAvatar.cpp:398
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not write the backup; avatar preserved"
 msgstr "无法写入备份；已保留头像"
 
-#: src/services/UserAvatar.cpp:400
+#: src/services/UserAvatar.cpp:404
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not publish the backup; avatar preserved"

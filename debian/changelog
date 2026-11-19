@@ -6,9 +6,11 @@ mainuan-welcome (1.1.1) resolute; urgency=medium
     gravavam icon=kde ou deixavam o ícone padrão do lançador.
   * Aparência: escolher uma cor não mostra mais o erro "avatar: source .face
     file missing" (o pacote de ícones não instala o .face oculto). O avatar do
-    Mainuan vem de fontes oficiais em /usr/share, conferidas (dono root, sem
-    escrita de terceiros, SVG/PNG), e só substitui o avatar padrão ou ausente;
-    a foto própria do usuário é sempre mantida.
+    Mainuan vem do mainuan-identity (/usr/share/mainuan/identity/avatars/
+    <cor>.svg, padrão cyan.svg), conferido (dono root, sem escrita de
+    terceiros, SVG/PNG), e só substitui o avatar padrão ou ausente; a foto
+    própria do usuário é sempre mantida. O logotipo também vem de
+    /usr/share/mainuan/identity/logo. Recomenda mainuan-identity.
   * Contribuir: links para a organização mainuan no GitHub, para as issues do
     mainuan/build e para o grupo oficial no Telegram (os antigos apontavam
     para mainuanos/mainuan, que não existe). Se o navegador não abrir, o

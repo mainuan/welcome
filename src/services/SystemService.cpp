@@ -35,8 +35,18 @@ Q_LOGGING_CATEGORY(lcAppearance, "mainuan.welcome.appearance")
 
 namespace {
 
-// Shipped by the Mainuan artwork; referenced in place instead of bundling a copy.
-const QString kMainuanLogo = QStringLiteral("/usr/share/plasma/avatars/logoMainuan.png");
+// Official logo (mainuan-identity; older systems: mainuan-desktop-defaults),
+// referenced in place instead of bundling a copy.
+const QStringList kMainuanLogos = {QStringLiteral("/usr/share/mainuan/identity/logo/mainuan-logo.png"),
+                                   QStringLiteral("/usr/share/plasma/avatars/logoMainuan.png")};
+
+QString installedLogo()
+{
+    for (const QString &logo : kMainuanLogos) {
+        if (QFileInfo(logo).isReadable()) return QUrl::fromLocalFile(logo).toString();
+    }
+    return {};
+}
 // Stable public launcher; the driver tool manages its own version and permissions.
 const QString kDriverManager = QStringLiteral("mainuan-gestao-drivers");
 
@@ -232,7 +242,7 @@ SystemService::SystemService(QObject *parent, const QString &userHome)
     : QObject(parent)
     , m_userHome(userHome.isEmpty() ? QDir::homePath() : userHome)
     , m_sessionType(qEnvironmentVariable("XDG_SESSION_TYPE", QStringLiteral("unknown")).toLower())
-    , m_logoSource(QFileInfo(kMainuanLogo).isReadable() ? QUrl::fromLocalFile(kMainuanLogo).toString() : QString())
+    , m_logoSource(installedLogo())
 {
     // Plasma writes appearance settings with KConfig::Notify; follow changes made
     // elsewhere (System Settings, another tool) without polling.
@@ -756,9 +766,9 @@ void SystemService::applyAccentExtras(const AccentProfile &profile, const QStrin
             // never replaced, and a missing avatar package is not an error.
             QStringList known;
             for (const AccentProfile &other : AccentProfiles::profiles()) {
-                known << UserAvatar::officialSources(other.iconTheme);
+                known << UserAvatar::officialSources(other.id);
             }
-            const QStringList sources = UserAvatar::officialSources(profile.iconTheme);
+            const QStringList sources = UserAvatar::officialSources(profile.id);
             const auto result = std::make_shared<UserAvatar::Result>();
             // Image decoding, copying and fsync can be slow on a network home.
             // The worker owns only values; it never touches QML or this service.

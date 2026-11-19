@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QImageReader>
 #include <QLoggingCategory>
+#include <QRegularExpression>
 #include <QUuid>
 
 #include <cerrno>
@@ -232,14 +233,17 @@ UserAvatar::SourcePolicy UserAvatar::SourcePolicy::system()
     return {{QStringLiteral("/usr/share")}, 0};
 }
 
-QStringList UserAvatar::officialSources(const QString &iconTheme)
+QStringList UserAvatar::officialSources(const QString &accentId)
 {
+    static const QRegularExpression validId(QStringLiteral("^[a-z]{1,32}$"));
+    const QString avatars = QStringLiteral("mainuan/identity/avatars/");
     QStringList sources;
-    if (!iconTheme.isEmpty() && !iconTheme.contains(QLatin1Char('/')) && !iconTheme.startsWith(QLatin1Char('.'))) {
-        sources << QStringLiteral("icons/") + iconTheme + QStringLiteral("/status/scalable/.face")
-                << QStringLiteral("mainuan-user-avatar/") + iconTheme + QStringLiteral(".svg");
+    if (validId.match(accentId).hasMatch()) {
+        sources << avatars + accentId + QStringLiteral(".svg");
     }
-    sources << QStringLiteral("mainuan-user-avatar/face.svg") << QStringLiteral("plasma/avatars/logoMainuan.png");
+    sources << avatars + QStringLiteral("cyan.svg") << QStringLiteral("mainuan-user-avatar/face.svg")
+            << QStringLiteral("mainuan/identity/logo/mainuan-logo.png") << QStringLiteral("plasma/avatars/logoMainuan.png");
+    sources.removeDuplicates();
     return sources;
 }
 
