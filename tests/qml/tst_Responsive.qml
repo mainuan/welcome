@@ -36,8 +36,14 @@ Item {
         function setTheme(theme) {}
         function setAccent(id) {}
         function setVisualStyle(id) {}
-        function openUrl(url) {}
+        property var projectLinks: ({code: "https://github.com/mainuan", issues: "https://github.com/mainuan/build/issues/new",
+                                     community: "https://t.me/mainuan_comunidade", source: "https://github.com/mainuan/welcome"})
+        property bool browserWorks: true
+        property var openedUrls: []
+        property string copiedUrl: ""
+        function openUrl(url) { openedUrls = openedUrls.concat([url]); return browserWorks }
         function copyText(text) { return true }
+        function copyUrl(url) { copiedUrl = url; return true }
         function performAction(action) {}
     }
     QtObject {
@@ -196,6 +202,38 @@ Item {
             close.clicked()
             tryCompare(popup, "opened", false)
             installService.reset()
+        }
+        // Contribute: each card opens its official address; when the browser
+        // cannot be opened the address is shown and can be copied.
+        function test_contributeLinksAndBrowserFailure() {
+            welcome.width = 870
+            welcome.height = 600
+            welcome.currentPage = 6
+            wait(15)
+            const cards = {contributeCodeCard: "code", reportProblemCard: "issues", communityCard: "community"}
+            const failure = findChild(welcome.contentItem, "openUrlFailure")
+            verify(failure !== null)
+            systemService.browserWorks = true
+            for (const name in cards) {
+                const card = findChild(welcome.contentItem, name)
+                verify(card !== null, name)
+                verify(card.Accessible.name.length > 0)
+                verify(!/Contribue|Prlblem|pronlem/i.test(card.title + " " + card.Accessible.name), card.title)
+                card.clicked()
+                compare(systemService.openedUrls[systemService.openedUrls.length - 1], systemService.projectLinks[cards[name]])
+                compare(card.Controls.ToolTip.text, systemService.projectLinks[cards[name]])
+                verify(!failure.visible)
+            }
+            systemService.browserWorks = false
+            findChild(welcome.contentItem, "reportProblemCard").clicked()
+            tryCompare(failure, "visible", true)
+            compare(findChild(failure, "failedUrlText").text, systemService.projectLinks.issues)
+            findChild(failure, "copyFailedUrl").clicked()
+            compare(systemService.copiedUrl, systemService.projectLinks.issues)
+            systemService.browserWorks = true
+            findChild(welcome.contentItem, "communityCard").clicked()
+            tryCompare(failure, "visible", false)
+            welcome.currentPage = 0
         }
         function test_windowMaximizesAndRestores() {
             welcome.width = 870

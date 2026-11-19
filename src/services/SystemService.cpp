@@ -35,8 +35,18 @@ Q_LOGGING_CATEGORY(lcAppearance, "mainuan.welcome.appearance")
 
 namespace {
 
-// Shipped by the Mainuan artwork; referenced in place instead of bundling a copy.
-const QString kMainuanLogo = QStringLiteral("/usr/share/plasma/avatars/logoMainuan.png");
+// Official logo (mainuan-identity; older systems: mainuan-desktop-defaults),
+// referenced in place instead of bundling a copy.
+const QStringList kMainuanLogos = {QStringLiteral("/usr/share/mainuan/identity/logo/mainuan-logo.png"),
+                                   QStringLiteral("/usr/share/plasma/avatars/logoMainuan.png")};
+
+QString installedLogo()
+{
+    for (const QString &logo : kMainuanLogos) {
+        if (QFileInfo(logo).isReadable()) return QUrl::fromLocalFile(logo).toString();
+    }
+    return {};
+}
 // Stable public launcher; the driver tool manages its own version and permissions.
 const QString kDriverManager = QStringLiteral("mainuan-gestao-drivers");
 
@@ -232,7 +242,7 @@ SystemService::SystemService(QObject *parent, const QString &userHome)
     : QObject(parent)
     , m_userHome(userHome.isEmpty() ? QDir::homePath() : userHome)
     , m_sessionType(qEnvironmentVariable("XDG_SESSION_TYPE", QStringLiteral("unknown")).toLower())
-    , m_logoSource(QFileInfo(kMainuanLogo).isReadable() ? QUrl::fromLocalFile(kMainuanLogo).toString() : QString())
+    , m_logoSource(installedLogo())
 {
     // Plasma writes appearance settings with KConfig::Notify; follow changes made
     // elsewhere (System Settings, another tool) without polling.
@@ -295,6 +305,11 @@ void SystemService::setToolSearchPaths(const QStringList &paths)
 {
     m_toolPaths = paths;
     readVisualStyle();
+}
+
+void SystemService::setAvatarSourcePolicy(const UserAvatar::SourcePolicy &policy)
+{
+    m_avatarPolicy = policy;
 }
 
 QString SystemService::findTool(const QString &name) const
@@ -626,7 +641,7 @@ void SystemService::setAccent(const QString &id)
                 finishAppearance({}, {failure});
                 return;
             }
-            applyAccentExtras(*profile, i18n("%1 color, icons, wallpaper and avatar applied.", profile->name.toString()));
+            applyAccentExtras(*profile, i18n("%1 color, icons and wallpaper applied.", profile->name.toString()));
         });
     });
 }
@@ -746,17 +761,40 @@ void SystemService::applyAccentExtras(const AccentProfile &profile, const QStrin
         // External changes during the async operation must not select an avatar
         // for a scheme that is no longer active.
         if (AccentProfiles::fromScheme(m_colorScheme) == AccentProfiles::find(profile.id)) {
-            const QString source = QStandardPaths::locate(QStandardPaths::GenericDataLocation, profile.avatar());
-            const auto result = std::make_shared<QString>();
+            // The Mainuan avatar follows the color only while the account still
+            // uses a Mainuan avatar (or none): a picture of the user's own is
+            // never replaced, and a missing avatar package is not an error.
+            QStringList known;
+            for (const AccentProfile &other : AccentProfiles::profiles()) {
+                known << UserAvatar::officialSources(other.id);
+            }
+            const QStringList sources = UserAvatar::officialSources(profile.id);
+            const auto result = std::make_shared<UserAvatar::Result>();
             // Image decoding, copying and fsync can be slow on a network home.
             // The worker owns only values; it never touches QML or this service.
-            auto *worker = QThread::create([source, home = m_userHome, result]() {
-                *result = UserAvatar::update(source, home);
+            auto *worker = QThread::create([sources, known, home = m_userHome, policy = m_avatarPolicy, result]() {
+                *result = UserAvatar::applyOfficial(sources, known, home, policy);
             });
             connect(worker, &QThread::finished, worker, &QObject::deleteLater);
             connect(worker, &QThread::finished, this, [this, successMessage, errors, result]() mutable {
-                if (!result->isEmpty()) errors << i18nc("failed adjustment list item; %1 is the avatar error", "avatar: %1", *result);
-                finishAppearance(successMessage, errors);
+                QString message = successMessage;
+                switch (result->outcome) {
+                case UserAvatar::Outcome::Updated:
+                    message += QLatin1Char(' ') + i18n("The Mainuan avatar was updated.");
+                    break;
+                case UserAvatar::Outcome::AlreadyCurrent:
+                    break;
+                case UserAvatar::Outcome::KeptPersonal:
+                    message += QLatin1Char(' ') + i18n("Your own avatar was kept.");
+                    break;
+                case UserAvatar::Outcome::SourceMissing:
+                    message += QLatin1Char(' ') + i18n("The Mainuan avatar is not installed; the current avatar was kept.");
+                    break;
+                case UserAvatar::Outcome::Failed:
+                    errors << i18nc("failed adjustment list item; %1 is the avatar error", "avatar: %1", result->error);
+                    break;
+                }
+                finishAppearance(message, errors);
             });
             worker->start();
             return;
@@ -1100,6 +1138,32 @@ bool SystemService::openDiscover(const QString &applicationId)
     }
     setMessage(i18n("Requested Discover to open the page. Confirm the installation in Discover; "
                     "if the application is not found, check Flathub and try again."));
+    return true;
+}
+
+QVariantMap SystemService::projectLinks()
+{
+    // Checked against the live organization: mainuan/welcome has no issue
+    // tracker, mainuan/build (the distribution build) does.
+    return {{QStringLiteral("code"), QStringLiteral("https://github.com/mainuan")},
+            {QStringLiteral("issues"), QStringLiteral("https://github.com/mainuan/build/issues/new")},
+            {QStringLiteral("community"), QStringLiteral("https://t.me/mainuan_comunidade")},
+            {QStringLiteral("source"), QStringLiteral("https://github.com/mainuan/welcome")}};
+}
+
+bool SystemService::copyUrl(const QString &url)
+{
+    const QUrl parsed(url, QUrl::StrictMode);
+    if (!parsed.isValid() || (parsed.scheme() != QStringLiteral("https") && parsed.scheme() != QStringLiteral("http"))) {
+        setMessage(i18n("URL blocked for security reasons."), true);
+        return false;
+    }
+    if (QGuiApplication::clipboard() == nullptr) {
+        setMessage(i18n("Clipboard unavailable."), true);
+        return false;
+    }
+    QGuiApplication::clipboard()->setText(parsed.toString());
+    setMessage(i18n("Address copied."));
     return true;
 }
 

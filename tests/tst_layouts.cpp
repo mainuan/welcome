@@ -80,6 +80,7 @@ private slots:
     void classicTrayBounds_data();
     void classicTrayBounds();
     void normalizesSupportedIconSettings();
+    void brandsEveryLauncherWithTheMainuanLogo();
     void preservesLegacyFloatingWithoutApplyingIt();
     void checksRequiredAndOptionalWidgets();
     void rejectsIncompleteLayouts();
@@ -288,6 +289,51 @@ void LayoutTest::normalizesSupportedIconSettings() {
         plasma.reset(); plasma.apply(id);
         QVERIFY(plasma.run("panels().every(function(p){return p.items.every(function(w){if(w.type==='org.kde.plasma.systemtray')return w.config['General/scaleIconsToFit']===true && w.config['General/iconSpacing']===1;if(w.type==='org.kde.plasma.icontasks')return w.config['General/maxStripes']===1 && w.config['General/iconSpacing']===1 && (p.lengthMode!=='fit' || w.config['General/fill']===false);return w.config['General/iconSize']===undefined;});})").toBool());
     }
+}
+
+// Every layout, on every screen and with every launcher fallback, shows the
+// official Mainuan logo (hicolor "mainuan", installed by dot-files) on its
+// launcher button. Layout definitions must not carry an icon of their own.
+void LayoutTest::brandsEveryLauncherWithTheMainuanLogo() {
+    PlasmaMock plasma;
+    plasma.apply("minimal"); // Loads the layout library into the mock.
+    QCOMPARE(plasma.run("MAINUAN_LAUNCHER_ICON").toString(), QString("mainuan"));
+    const QString branded = "panels().every(function(p){return p.items.every(function(w){"
+        "if(!isLauncher(w.type))return true;"
+        "return w.config['General/icon']==='mainuan' && w.config['General/customButtonImage']===undefined"
+        " && (LAUNCHER_CUSTOM_IMAGE.indexOf(w.type)<0 || w.config['General/useCustomButtonImage']===false);});})";
+    const QString launchersPerScreen = "(function(){for(var s=0;s<screenCount;++s){var n=0;"
+        "panels().forEach(function(p){if(p.screen===s)p.items.forEach(function(w){if(isLauncher(w.type))++n;});});"
+        "if(n<1)return false;}return true;})()";
+    for (const QString &id : ids) {
+        // Future layouts only use launchers that brandLauncher() knows about.
+        QVERIFY2(plasma.run("launcherTypes('" + id + "').every(isLauncher)").toBool(), qPrintable(id));
+        for (const QString &screens : {QString("[{width:1920,height:1080}]"), QString("[{width:1366,height:768},{width:1280,height:720}]")}) {
+            // Kickoff, and Kicker when Kickoff is not installed.
+            for (const QString &without : {QString(), QString("org.kde.plasma.kickoff")}) {
+                plasma.reset(screens);
+                plasma.run("knownWidgetTypes=knownWidgetTypes.filter(function(t){return t!=='" + without + "';});");
+                plasma.apply(id);
+                QVERIFY2(LayoutService::matchesLayout(plasma.description(), id), qPrintable(id + " " + plasma.output()));
+                QVERIFY2(plasma.run(launchersPerScreen).toBool(), qPrintable(id));
+                QVERIFY2(plasma.run(branded).toBool(), qPrintable(id + " without " + without + ": "
+                    + plasma.run("JSON.stringify(panels().map(function(p){return p.items.filter(function(w){return isLauncher(w.type);}).map(function(w){return [w.type,w.config];});}))").toString()));
+            }
+        }
+    }
+    // Any launcher a layout may add gets the logo, whatever its reference config says.
+    plasma.reset();
+    plasma.run("panels().forEach(function(p){p.remove();});knownWidgetTypes=knownWidgetTypes.concat(LAUNCHER_TYPES);var mockPanel=new Panel('org.kde.panel');"
+               "LAUNCHER_TYPES.forEach(function(t){addWidget(mockPanel,t,{General:{icon:'start-here-kde',customButtonImage:'start-here-hexabee',useCustomButtonImage:true}});});");
+    QCOMPARE(plasma.run("mockPanel.items.length").toInt(), plasma.run("LAUNCHER_TYPES.length").toInt());
+    QVERIFY(plasma.run(branded).toBool());
+    QVERIFY(plasma.run("mockPanel.items.every(function(w){return w.currentConfigGroup.length===0;})").toBool());
+    // Reference layouts keep no launcher icon of their own (single definition).
+    const QString script = LayoutService::buildScript("plasma-default", {});
+    for (const QString &stray : {QString("start-here"), QString("hexabee"), QString("\"icon\": \"kde\"")})
+        QVERIFY2(!script.contains(stray), qPrintable(stray));
+    QVERIFY(plasma.run("Object.keys(REFERENCE_LAYOUTS).every(function(id){return REFERENCE_LAYOUTS[id].every(function(p){return p.widgets.every(function(w){"
+                       "return !isLauncher(w.type) || !w.config || !w.config.General || w.config.General.icon===undefined;});});})").toBool());
 }
 
 void LayoutTest::preservesLegacyFloatingWithoutApplyingIt() {

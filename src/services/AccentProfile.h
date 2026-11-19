@@ -18,7 +18,8 @@ struct AccentProfile
     QString wallpaper;
 
     QString scheme(bool dark) const { return dark ? darkScheme : lightScheme; }
-    QString avatar() const { return QStringLiteral("icons/") + iconTheme + QStringLiteral("/status/scalable/.face"); }
+    // Official avatar of this color, relative to /usr/share (mainuan-identity).
+    QString avatar() const { return QStringLiteral("mainuan/identity/avatars/") + id + QStringLiteral(".svg"); }
 };
 
 namespace AccentProfiles {

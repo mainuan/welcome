@@ -16,6 +16,13 @@ Kirigami.Page {
     property color successColor: "#2da65a"
 
     readonly property bool hasPix: system.pixKey.length > 0
+    readonly property var links: system.projectLinks || ({})
+    // Address the browser could not open; shown so it can be copied.
+    property string failedUrl: ""
+
+    function openLink(url) {
+        failedUrl = page.system.openUrl(url) ? "" : url
+    }
 
     title: i18nc("@title navigation page", "Contribute")
     padding: 0
@@ -23,6 +30,10 @@ Kirigami.Page {
 
     Timer {
         id: copiedTimer
+        interval: 2500
+    }
+    Timer {
+        id: addressCopiedTimer
         interval: 2500
     }
 
@@ -191,31 +202,95 @@ Kirigami.Page {
             Accessible.role: Accessible.Heading
         }
         ActionCard {
+            objectName: "contributeCodeCard"
             Layout.fillWidth: true
             iconName: "github"
             title: i18n("Contribute Code")
             description: i18n("Code, translations and improvements on GitHub.")
             accent: page.accent; surfaceColor: page.surfaceColor; borderColor: page.borderColor
             textColor: page.textColor; mutedColor: page.mutedColor
-            onClicked: page.system.openUrl("https://github.com/mainuanos/mainuan")
+            Controls.ToolTip.visible: hovered && page.links.code !== undefined
+            Controls.ToolTip.text: page.links.code || ""
+            Controls.ToolTip.delay: Kirigami.Units.toolTipDelay
+            onClicked: page.openLink(page.links.code)
         }
         ActionCard {
+            objectName: "reportProblemCard"
             Layout.fillWidth: true
             iconName: "bug"
             title: i18n("Report a Problem")
             description: i18n("Describe what happened; attaching the system report (in About) helps a lot.")
             accent: page.accent; surfaceColor: page.surfaceColor; borderColor: page.borderColor
             textColor: page.textColor; mutedColor: page.mutedColor
-            onClicked: page.system.openUrl("https://github.com/mainuanos/mainuan/issues/new")
+            Controls.ToolTip.visible: hovered && page.links.issues !== undefined
+            Controls.ToolTip.text: page.links.issues || ""
+            Controls.ToolTip.delay: Kirigami.Units.toolTipDelay
+            onClicked: page.openLink(page.links.issues)
         }
         ActionCard {
+            objectName: "communityCard"
             Layout.fillWidth: true
             iconName: "users"
             title: i18n("Telegram Community")
             description: i18n("Chat with Mainuan users and developers.")
             accent: page.accent; surfaceColor: page.surfaceColor; borderColor: page.borderColor
             textColor: page.textColor; mutedColor: page.mutedColor
-            onClicked: page.system.openUrl("https://t.me/mainuanos")
+            Controls.ToolTip.visible: hovered && page.links.community !== undefined
+            Controls.ToolTip.text: page.links.community || ""
+            Controls.ToolTip.delay: Kirigami.Units.toolTipDelay
+            onClicked: page.openLink(page.links.community)
+        }
+        // The browser did not open: show the address so it can be copied.
+        Rectangle {
+            objectName: "openUrlFailure"
+            visible: page.failedUrl.length > 0
+            Layout.fillWidth: true
+            implicitHeight: failureLayout.implicitHeight + 24
+            radius: 10
+            color: Qt.rgba(0.79, 0.27, 0.27, page.dark ? 0.15 : 0.10)
+            border.color: Qt.rgba(0.79, 0.27, 0.27, 0.35)
+            ColumnLayout {
+                id: failureLayout
+                anchors.fill: parent
+                anchors.margins: 12
+                spacing: 8
+                Controls.Label {
+                    Layout.fillWidth: true
+                    text: i18n("The web browser could not be opened. Copy the address below and open it in your browser:")
+                    color: page.textColor
+                    wrapMode: Text.WordWrap
+                    Accessible.role: Accessible.AlertMessage
+                }
+                TextEdit {
+                    objectName: "failedUrlText"
+                    Layout.fillWidth: true
+                    text: page.failedUrl
+                    readOnly: true
+                    selectByMouse: true
+                    wrapMode: TextEdit.WrapAnywhere
+                    color: page.textColor
+                    selectionColor: page.accent
+                    font.pixelSize: 14
+                    Accessible.role: Accessible.EditableText
+                    Accessible.name: i18n("Page address")
+                }
+                RowLayout {
+                    spacing: 10
+                    Controls.Button {
+                        objectName: "copyFailedUrl"
+                        text: i18n("Copy Address")
+                        icon.name: "edit-copy"
+                        onClicked: if (page.system.copyUrl(page.failedUrl)) addressCopiedTimer.restart()
+                    }
+                    Controls.Label {
+                        visible: addressCopiedTimer.running
+                        text: i18n("Address copied.")
+                        color: page.successColor
+                        font.weight: Font.DemiBold
+                        Accessible.role: Accessible.StaticText
+                    }
+                }
+            }
         }
         Controls.Label {
             Layout.fillWidth: true

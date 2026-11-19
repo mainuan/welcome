@@ -28,7 +28,7 @@ It is a native C++17, Qt 6/QML and Kirigami application, with no Electron, Node.
 
 ## Features
 
-- Dream, Tahoe and Breeze styles, light and dark, six accent colours, each with its own KDE colour scheme, Kora icons, wallpaper and avatar.
+- Dream, Tahoe and Breeze styles, light and dark, six accent colours, each with its own KDE colour scheme, Kora icons and wallpaper; the Mainuan avatar follows the colour only while the account has no picture of its own.
 - Seven Plasma layouts (Classic 5 panels, 3 panels, Single panel, Tiling, Top panel, Lomiri, W7 panel) with widget checks, automatic backup and restore.
 - Installation of office suites and browsers (FreeOffice, Vivaldi, Zen and others) through Flatpak or Debian packages, with progress and system authentication when needed.
 - Antivirus, firewall and codec profiles; Google Docs and Office 365 shortcuts.
@@ -78,7 +78,7 @@ The full sequence run by CI is in [`.github/workflows/build-deb.yml`](.github/wo
 
 ## Contributing
 
-Use [Issues](https://github.com/mainuan/welcome/issues) and pull requests to `main`; every PR runs the full CI.
+Report problems at [mainuan/build/issues](https://github.com/mainuan/build/issues) (this repository has no issue tracker) and send pull requests to `main`; every PR runs the full CI.
 
 ## Credits
 

@@ -127,7 +127,7 @@ Kirigami.Page {
                         Controls.Button {
                             text: i18n("Repository")
                             icon.name: "internet-web-browser"
-                            onClicked: page.system.openUrl("https://github.com/mainuan/welcome")
+                            onClicked: page.system.openUrl(page.system.projectLinks.source)
                         }
                     }
                 }

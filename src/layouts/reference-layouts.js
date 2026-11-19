@@ -46,7 +46,6 @@ var REFERENCE_LAYOUTS = {
                     "config": {
                         "General": {
                             "applicationsDisplay": 0,
-                            "icon": "kde",
                             "showAppsByName": true,
                             "systemFavorites": [
                                 "suspend",
@@ -181,12 +180,10 @@ var REFERENCE_LAYOUTS = {
                             "activationIndicator": false,
                             "appNameFormat": 0,
                             "applicationsDisplay": 0,
-                            "customButtonImage": "start-here-hexabee",
                             "customGreeting": "Breathe. Focus. Start.",
                             "displayPosition": 2,
                             "floating": true,
                             "glowColor": 1,
-                            "icon": "kde",
                             "launcherPosition": 1,
                             "offsetY": 10,
                             "systemFavorites": [
@@ -195,7 +192,6 @@ var REFERENCE_LAYOUTS = {
                                 "reboot",
                                 "shutdown"
                             ],
-                            "useCustomButtonImage": true,
                             "useSystemFontSettings": true
                         }
                     }
@@ -347,12 +343,10 @@ var REFERENCE_LAYOUTS = {
                             "activationIndicator": false,
                             "appNameFormat": 0,
                             "applicationsDisplay": 0,
-                            "customButtonImage": "start-here-hexabee",
                             "customGreeting": "Breathe. Focus. Start.",
                             "displayPosition": 2,
                             "floating": true,
                             "glowColor": 1,
-                            "icon": "kde",
                             "launcherPosition": 1,
                             "offsetY": 10,
                             "systemFavorites": [
@@ -361,7 +355,6 @@ var REFERENCE_LAYOUTS = {
                                 "reboot",
                                 "shutdown"
                             ],
-                            "useCustomButtonImage": true,
                             "useSystemFontSettings": true
                         }
                     }
@@ -627,7 +620,6 @@ var REFERENCE_LAYOUTS = {
                             "appNameFormat": 0,
                             "applicationsDisplay": 0,
                             "appsIconSize": 2,
-                            "customButtonImage": "start-here-hexabee",
                             "customGreeting": "Breathe. Focus. Start.",
                             "displayPosition": 2,
                             "glowColor": 1,
@@ -798,12 +790,10 @@ var REFERENCE_LAYOUTS = {
                             "activationIndicator": false,
                             "appNameFormat": 0,
                             "applicationsDisplay": 0,
-                            "customButtonImage": "start-here-hexabee",
                             "customGreeting": "Breathe. Focus. Start.",
                             "displayPosition": 2,
                             "floating": true,
                             "glowColor": 1,
-                            "icon": "kde",
                             "launcherPosition": 1,
                             "offsetY": 10,
                             "systemFavorites": [
@@ -812,7 +802,6 @@ var REFERENCE_LAYOUTS = {
                                 "reboot",
                                 "shutdown"
                             ],
-                            "useCustomButtonImage": true,
                             "useSystemFontSettings": true
                         }
                     }

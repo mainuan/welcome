@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"POT-Creation-Date: 2026-11-19 01:53-0300\n"
 "PO-Revision-Date: 2026-11-16 12:18-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: he <https://github.com/mainuan>\n"
@@ -63,8 +63,8 @@ msgctxt "@title navigation page"
 msgid "About"
 msgstr "על אודות"
 
-#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
-#: qml/pages/ContributePage.qml:32
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:27
+#: qml/pages/ContributePage.qml:43
 msgctxt "@title navigation page"
 msgid "Contribute"
 msgstr "תרומה"
@@ -411,11 +411,13 @@ msgstr "צבע הדגשה"
 
 #: qml/pages/AppearancePage.qml:127
 msgid ""
-"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
-"Keeps the choice when you change style or theme."
+"Applies the KDE color scheme, the Kora icons and the wallpaper, and the "
+"Mainuan avatar unless you use a picture of your own. Keeps the choice when "
+"you change style or theme."
 msgstr ""
-"מחיל את ערכת הצבעים של KDE, את הסמלים של Kora, את תמונת הרקע ואת התמונה "
-"האישית. הבחירה נשמרת גם בעת החלפת סגנון או ערכת עיצוב."
+"מחיל את ערכת הצבעים של KDE, את הסמלים של Kora ואת תמונת הרקע, ואת התמונה "
+"האישית של Mainuan אם אינך משתמש בתמונה משלך. הבחירה נשמרת גם בעת החלפת סגנון "
+"או ערכת עיצוב."
 
 #. i18n: %1 is the accent color name
 #: qml/pages/AppearancePage.qml:158
@@ -503,7 +505,7 @@ msgstr ""
 "Flatpak לא נמצא. יישומי Flatpak אינם זמינים. FreeOffice והשירותים המקוונים "
 "אינם תלויים ב־Flatpak."
 
-#: qml/pages/ContributePage.qml:35
+#: qml/pages/ContributePage.qml:46
 msgid ""
 "Mainuan is made by its community. You can help with a donation, with code or "
 "by reporting problems."
@@ -512,41 +514,41 @@ msgstr ""
 "בעיות."
 
 #. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
-#: qml/pages/ContributePage.qml:78
+#: qml/pages/ContributePage.qml:89
 msgid "Pix QR code. Key: %1"
 msgstr "קוד QR של Pix. מפתח: %1"
 
-#: qml/pages/ContributePage.qml:79
+#: qml/pages/ContributePage.qml:90
 msgid "Pix key QR code. Key: %1"
 msgstr "קוד QR של מפתח Pix. מפתח: %1"
 
-#: qml/pages/ContributePage.qml:97
+#: qml/pages/ContributePage.qml:108
 msgid "Support Mainuan"
 msgstr "תמיכה ב־Mainuan"
 
-#: qml/pages/ContributePage.qml:104
+#: qml/pages/ContributePage.qml:115
 msgid ""
 "Your donation helps sustain development, infrastructure and the community."
 msgstr "התרומה שלך עוזרת לקיים את הפיתוח, התשתית והקהילה."
 
-#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+#: qml/pages/ContributePage.qml:122 qml/pages/ContributePage.qml:147
 msgid "Pix Key"
 msgstr "מפתח Pix"
 
-#: qml/pages/ContributePage.qml:143
+#: qml/pages/ContributePage.qml:154
 msgid "Copy Pix Key"
 msgstr "העתקת מפתח ה־Pix"
 
-#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#: qml/pages/ContributePage.qml:169 src/services/SystemService.cpp:1181
 #, kde-format
 msgid "Pix key copied."
 msgstr "מפתח ה־Pix הועתק."
 
-#: qml/pages/ContributePage.qml:168
+#: qml/pages/ContributePage.qml:179
 msgid "Scan the QR code with your bank's app, using the Pix option."
 msgstr "יש לסרוק את קוד ה־QR ביישום הבנק שלך, דרך האפשרות Pix."
 
-#: qml/pages/ContributePage.qml:169
+#: qml/pages/ContributePage.qml:180
 msgid ""
 "The QR code contains the Pix key. In your bank's app, use the Pix option "
 "with the copied key or the one read from the code."
@@ -554,40 +556,59 @@ msgstr ""
 "קוד ה־QR מכיל את מפתח ה־Pix. ביישום הבנק שלך, יש להשתמש באפשרות Pix עם המפתח "
 "שהועתק או עם זה שנקרא מהקוד."
 
-#: qml/pages/ContributePage.qml:177
+#: qml/pages/ContributePage.qml:188
 msgid "The Pix key has not been set up on this installation yet."
 msgstr "מפתח ה־Pix עדיין לא הוגדר בהתקנה זו."
 
-#: qml/pages/ContributePage.qml:187
+#: qml/pages/ContributePage.qml:198
 msgid "Other Ways to Help"
 msgstr "דרכים נוספות לעזור"
 
-#: qml/pages/ContributePage.qml:196
+#: qml/pages/ContributePage.qml:208
 msgid "Contribute Code"
 msgstr "תרומת קוד"
 
-#: qml/pages/ContributePage.qml:197
+#: qml/pages/ContributePage.qml:209
 msgid "Code, translations and improvements on GitHub."
 msgstr "קוד, תרגומים ושיפורים ב־GitHub."
 
-#: qml/pages/ContributePage.qml:205
+#: qml/pages/ContributePage.qml:221
 msgid "Report a Problem"
 msgstr "דיווח על בעיה"
 
-#: qml/pages/ContributePage.qml:206
+#: qml/pages/ContributePage.qml:222
 msgid ""
 "Describe what happened; attaching the system report (in About) helps a lot."
 msgstr "יש לתאר מה קרה; צירוף דוח המערכת (בעמוד „על אודות”) עוזר מאוד."
 
-#: qml/pages/ContributePage.qml:214
+#: qml/pages/ContributePage.qml:234
 msgid "Telegram Community"
 msgstr "קהילת Telegram"
 
-#: qml/pages/ContributePage.qml:215
+#: qml/pages/ContributePage.qml:235
 msgid "Chat with Mainuan users and developers."
 msgstr "שיחה עם משתמשים ומפתחים של Mainuan."
 
-#: qml/pages/ContributePage.qml:222
+#: qml/pages/ContributePage.qml:259
+msgid ""
+"The web browser could not be opened. Copy the address below and open it in "
+"your browser:"
+msgstr "לא ניתן לפתוח את הדפדפן. יש להעתיק את הכתובת שלהלן ולפתוח אותה בדפדפן:"
+
+#: qml/pages/ContributePage.qml:275
+msgid "Page address"
+msgstr "כתובת הדף"
+
+#: qml/pages/ContributePage.qml:281
+msgid "Copy Address"
+msgstr "העתקת הכתובת"
+
+#: qml/pages/ContributePage.qml:287 src/services/SystemService.cpp:1166
+#, kde-format
+msgid "Address copied."
+msgstr "הכתובת הועתקה."
+
+#: qml/pages/ContributePage.qml:297
 msgid ""
 "Links open in the browser only when you click them. The QR code is generated "
 "on this computer, without internet access."
@@ -2148,71 +2169,71 @@ msgctxt "@info system report footer"
 msgid "No network addresses, serial numbers or computer name."
 msgstr "ללא כתובות רשת, מספרים סידוריים או שם המחשב."
 
-#: src/services/SystemService.cpp:93
+#: src/services/SystemService.cpp:103
 #, kde-format
 msgid "The %1 decoration engine is not installed."
 msgstr "מנוע העיטור %1 אינו מותקן."
 
-#: src/services/SystemService.cpp:108
+#: src/services/SystemService.cpp:118
 #, kde-format
 msgid "The %1 decoration is not installed or its resources are incomplete."
 msgstr "העיטור %1 אינו מותקן או שהמשאבים שלו אינם שלמים."
 
 #. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
-#: src/services/SystemService.cpp:480
+#: src/services/SystemService.cpp:495
 #, kde-format
 msgid "Driver Manager available"
 msgstr "מנהל מנהלי ההתקנים זמין"
 
-#: src/services/SystemService.cpp:481
+#: src/services/SystemService.cpp:496
 #, kde-format
 msgid "Driver Manager not installed"
 msgstr "מנהל מנהלי ההתקנים אינו מותקן"
 
-#: src/services/SystemService.cpp:497
+#: src/services/SystemService.cpp:512
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Active"
 msgstr "פעילה"
 
-#: src/services/SystemService.cpp:498
+#: src/services/SystemService.cpp:513
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Inactive"
 msgstr "לא פעילה"
 
 # reviewed: this is boot, not session (הפעלה is used for session)
-#: src/services/SystemService.cpp:501
+#: src/services/SystemService.cpp:516
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: active"
 msgstr "באתחול: פעילה"
 
 # reviewed: this is boot, not session (הפעלה is used for session)
-#: src/services/SystemService.cpp:502
+#: src/services/SystemService.cpp:517
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: inactive"
 msgstr "באתחול: לא פעילה"
 
 #. i18n: %1 is an error message shown in the page banner.
-#: src/services/SystemService.cpp:538
+#: src/services/SystemService.cpp:553
 #, kde-format
 msgid "Error: %1"
 msgstr "שגיאה: %1"
 
-#: src/services/SystemService.cpp:557
+#: src/services/SystemService.cpp:572
 #, kde-format
 msgid "Invalid theme."
 msgstr "ערכת עיצוב שגויה."
 
-#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
-#: src/services/SystemService.cpp:858
+#: src/services/SystemService.cpp:577 src/services/SystemService.cpp:627
+#: src/services/SystemService.cpp:896
 #, kde-format
 msgid "Wait for the current operation to finish."
 msgstr "יש להמתין לסיום הפעולה הנוכחית."
 
-#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#: src/services/SystemService.cpp:586 src/services/SystemService.cpp:615
 #, kde-format
 msgid ""
 "The current external color scheme has no known variant. Select a Mainuan "
@@ -2220,156 +2241,171 @@ msgid ""
 msgstr ""
 "לערכת הצבעים החיצונית הנוכחית אין גרסה מוכרת. יש לבחור תחילה צבע של Mainuan."
 
-#: src/services/SystemService.cpp:578
+#: src/services/SystemService.cpp:593
 #, kde-format
 msgid "Dark theme applied."
 msgstr "ערכת העיצוב הכהה הוחלה."
 
-#: src/services/SystemService.cpp:579
+#: src/services/SystemService.cpp:594
 #, kde-format
 msgid "Light theme applied."
 msgstr "ערכת העיצוב הבהירה הוחלה."
 
 #. i18n: %1 is an accent color name (Brown, Cyan…).
-#: src/services/SystemService.cpp:596
+#: src/services/SystemService.cpp:611
 #, kde-format
 msgid "Theme and %1 color applied."
 msgstr "ערכת העיצוב והצבע %1 הוחלו."
 
-#: src/services/SystemService.cpp:608
+#: src/services/SystemService.cpp:623
 #, kde-format
 msgid "Invalid accent color."
 msgstr "צבע הדגשה שגוי."
 
-#: src/services/SystemService.cpp:618
+#: src/services/SystemService.cpp:633
 #, kde-format
 msgid "Applying %1 color…"
 msgstr "מתבצעת החלה של הצבע %1…"
 
-#: src/services/SystemService.cpp:629
+#: src/services/SystemService.cpp:644
 #, kde-format
-msgid "%1 color, icons, wallpaper and avatar applied."
-msgstr "הצבע %1, הסמלים, תמונת הרקע והתמונה האישית הוחלו."
+msgid "%1 color, icons and wallpaper applied."
+msgstr "הצבע %1, הסמלים ותמונת הרקע הוחלו."
 
-#: src/services/SystemService.cpp:640
+#: src/services/SystemService.cpp:655
 #, kde-format
 msgid "Color scheme %1.colors is missing or unreadable."
 msgstr "ערכת הצבעים %1.colors חסרה או שלא ניתן לקרוא אותה."
 
-#: src/services/SystemService.cpp:646
+#: src/services/SystemService.cpp:661
 #, kde-format
 msgid "Color scheme %1.colors is invalid."
 msgstr "ערכת הצבעים %1.colors שגויה."
 
-#: src/services/SystemService.cpp:651
+#: src/services/SystemService.cpp:666
 #, kde-format
 msgid "plasma-apply-colorscheme is not available."
 msgstr "plasma-apply-colorscheme אינו זמין."
 
-#: src/services/SystemService.cpp:658
+#: src/services/SystemService.cpp:673
 #, kde-format
 msgid "Plasma did not recognize the %1.colors color scheme."
 msgstr "Plasma לא זיהה את ערכת הצבעים %1.colors."
 
-#: src/services/SystemService.cpp:704
+#: src/services/SystemService.cpp:719
 #, kde-format
 msgid "Could not prepare the KDE color configuration."
 msgstr "לא ניתן להכין את הגדרות הצבעים של KDE."
 
-#: src/services/SystemService.cpp:715
+#: src/services/SystemService.cpp:730
 #, kde-format
 msgid "Plasma did not confirm the %1 color scheme without a color override."
 msgstr "Plasma לא אישר את ערכת הצבעים %1 ללא דריסת צבע."
 
 #. i18n: Item of a list of failed adjustments (lowercase, no final period).
-#: src/services/SystemService.cpp:729
+#: src/services/SystemService.cpp:744
 #, kde-format
 msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
 msgstr ""
 "ערכת הסמלים %1 חסרה או שקובץ ה־index.theme שלה שגוי (הסמלים הקודמים נשמרו)"
 
-#: src/services/SystemService.cpp:732
+#: src/services/SystemService.cpp:747
 #, kde-format
 msgctxt "failed adjustment list item; %1 is an icon theme"
 msgid "icons %1"
 msgstr "סמלים %1"
 
-#: src/services/SystemService.cpp:737
+#: src/services/SystemService.cpp:752
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper %1 missing"
 msgstr "תמונת הרקע %1 חסרה"
 
-#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
-#: src/services/SystemService.cpp:1022
+#: src/services/SystemService.cpp:754 src/services/SystemService.cpp:1045
+#: src/services/SystemService.cpp:1060
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper"
 msgstr "תמונת רקע"
 
-#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#: src/services/SystemService.cpp:759 src/services/SystemService.cpp:1050
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "Plasma did not confirm the %1 icons"
 msgstr "Plasma לא אישר את הסמלים %1"
 
-#: src/services/SystemService.cpp:758
+#: src/services/SystemService.cpp:783
+#, kde-format
+msgid "The Mainuan avatar was updated."
+msgstr "התמונה האישית של Mainuan עודכנה."
+
+#: src/services/SystemService.cpp:788
+#, kde-format
+msgid "Your own avatar was kept."
+msgstr "התמונה שלך נשמרה."
+
+#: src/services/SystemService.cpp:791
+#, kde-format
+msgid "The Mainuan avatar is not installed; the current avatar was kept."
+msgstr "התמונה האישית של Mainuan אינה מותקנת; התמונה האישית הנוכחית נשמרה."
+
+#: src/services/SystemService.cpp:794
 #, kde-format
 msgctxt "failed adjustment list item; %1 is the avatar error"
 msgid "avatar: %1"
 msgstr "תמונה אישית: %1"
 
-#: src/services/SystemService.cpp:764
+#: src/services/SystemService.cpp:802
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "color scheme changed during the operation; avatar preserved"
 msgstr "ערכת הצבעים השתנתה במהלך הפעולה; התמונה האישית נשמרה"
 
-#: src/services/SystemService.cpp:779
+#: src/services/SystemService.cpp:817
 #, kde-format
 msgid "Could not complete all adjustments: %1."
 msgstr "לא ניתן להשלים את כל ההתאמות: %1."
 
-#: src/services/SystemService.cpp:780
+#: src/services/SystemService.cpp:818
 #, kde-format
 msgctxt "separator between failed adjustment list items"
 msgid "; "
 msgstr "; "
 
-#: src/services/SystemService.cpp:795
+#: src/services/SystemService.cpp:833
 #, kde-format
 msgid "Could not communicate with KWin to update the window decoration."
 msgstr "לא ניתן לתקשר עם KWin כדי לעדכן את עיטור החלונות."
 
-#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
-#: src/services/SystemService.cpp:830
+#: src/services/SystemService.cpp:842 src/services/SystemService.cpp:849
+#: src/services/SystemService.cpp:868
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "could not restore the previous window decoration"
 msgstr "לא ניתן לשחזר את עיטור החלונות הקודם"
 
-#: src/services/SystemService.cpp:821
+#: src/services/SystemService.cpp:859
 #, kde-format
 msgid "Could not save the requested window decoration in KWin."
 msgstr "לא ניתן לשמור ב־KWin את עיטור החלונות המבוקש."
 
-#: src/services/SystemService.cpp:831
+#: src/services/SystemService.cpp:869
 #, kde-format
 msgid ""
 "The final window decoration configuration was changed during the operation."
 msgstr "הגדרות עיטור החלונות הסופיות השתנו במהלך הפעולה."
 
-#: src/services/SystemService.cpp:854
+#: src/services/SystemService.cpp:892
 #, kde-format
 msgid "Invalid visual style."
 msgstr "סגנון חזותי שגוי."
 
-#: src/services/SystemService.cpp:862
+#: src/services/SystemService.cpp:900
 #, kde-format
 msgid "%1 style applied."
 msgstr "הסגנון %1 הוחל."
 
-#: src/services/SystemService.cpp:895
+#: src/services/SystemService.cpp:933
 #, kde-format
 msgid ""
 "This system's Plasma does not provide plasma-apply-lookandfeel; the style "
@@ -2378,95 +2414,95 @@ msgstr ""
 "ה־Plasma של מערכת זו אינו מספק את plasma-apply-lookandfeel; לא ניתן לשנות את "
 "הסגנון."
 
-#: src/services/SystemService.cpp:900
+#: src/services/SystemService.cpp:938
 #, kde-format
 msgid "The %1 style is not installed on this system."
 msgstr "הסגנון %1 אינו מותקן במערכת זו."
 
 #. i18n: %1 is a complete sentence describing the problem.
-#: src/services/SystemService.cpp:911
+#: src/services/SystemService.cpp:949
 #, kde-format
 msgid "%1 Previous appearance preserved."
 msgstr "%1 המראה הקודם נשמר."
 
-#: src/services/SystemService.cpp:927
+#: src/services/SystemService.cpp:965
 #, kde-format
 msgid "Could not preserve the %1 icon theme. Previous style preserved."
 msgstr "לא ניתן לשמור את ערכת הסמלים %1. הסגנון הקודם נשמר."
 
-#: src/services/SystemService.cpp:931
+#: src/services/SystemService.cpp:969
 #, kde-format
 msgid "Applying %1 style…"
 msgstr "מתבצעת החלה של הסגנון %1…"
 
-#: src/services/SystemService.cpp:948
+#: src/services/SystemService.cpp:986
 #, kde-format
 msgid "Could not apply the %1 style."
 msgstr "לא ניתן להחיל את הסגנון %1."
 
-#: src/services/SystemService.cpp:956
+#: src/services/SystemService.cpp:994
 #, kde-format
 msgid "Plasma did not confirm the %1 style."
 msgstr "Plasma לא אישר את הסגנון %1."
 
-#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#: src/services/SystemService.cpp:1019 src/services/SystemService.cpp:1040
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "icons"
 msgstr "סמלים"
 
-#: src/services/SystemService.cpp:986
+#: src/services/SystemService.cpp:1024
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "cursor"
 msgstr "סמן"
 
-#: src/services/SystemService.cpp:1057
+#: src/services/SystemService.cpp:1095
 #, kde-format
 msgid "Driver Manager is not installed."
 msgstr "מנהל מנהלי ההתקנים אינו מותקן."
 
-#: src/services/SystemService.cpp:1061
+#: src/services/SystemService.cpp:1099
 #, kde-format
 msgid "Could not open Driver Manager."
 msgstr "לא ניתן לפתוח את מנהל מנהלי ההתקנים."
 
-#: src/services/SystemService.cpp:1066
+#: src/services/SystemService.cpp:1104
 #, kde-format
 msgid "Unknown action."
 msgstr "פעולה לא ידועה."
 
-#: src/services/SystemService.cpp:1075
+#: src/services/SystemService.cpp:1113 src/services/SystemService.cpp:1158
 #, kde-format
 msgid "URL blocked for security reasons."
 msgstr "הכתובת נחסמה מטעמי אבטחה."
 
-#: src/services/SystemService.cpp:1079
+#: src/services/SystemService.cpp:1117
 #, kde-format
 msgid "Requested the web browser to open the page."
 msgstr "נשלחה בקשה לדפדפן לפתוח את הדף."
 
-#: src/services/SystemService.cpp:1080
+#: src/services/SystemService.cpp:1118
 #, kde-format
 msgid "Could not open the URL in the default web browser."
 msgstr "לא ניתן לפתוח את הכתובת בדפדפן ברירת המחדל."
 
-#: src/services/SystemService.cpp:1087
+#: src/services/SystemService.cpp:1125
 #, kde-format
 msgid "This application is not allowed to be opened in Discover."
 msgstr "אסור לפתוח יישום זה ב־Discover."
 
-#: src/services/SystemService.cpp:1092
+#: src/services/SystemService.cpp:1130
 #, kde-format
 msgid "Discover was not found. Install KDE Discover to open this application."
 msgstr "Discover לא נמצא. יש להתקין את KDE Discover כדי לפתוח יישום זה."
 
-#: src/services/SystemService.cpp:1098
+#: src/services/SystemService.cpp:1136
 #, kde-format
 msgid "Could not open the page in Discover. Try again."
 msgstr "לא ניתן לפתוח את הדף ב־Discover. יש לנסות שוב."
 
-#: src/services/SystemService.cpp:1101
+#: src/services/SystemService.cpp:1139
 #, kde-format
 msgid ""
 "Requested Discover to open the page. Confirm the installation in Discover; "
@@ -2475,35 +2511,23 @@ msgstr ""
 "נשלחה בקשה ל־Discover לפתוח את הדף. יש לאשר את ההתקנה ב־Discover; אם היישום "
 "לא נמצא, יש לבדוק ב־Flathub ולנסות שוב."
 
-#: src/services/SystemService.cpp:1109
-#, kde-format
-msgid "No Pix key is configured."
-msgstr "לא הוגדר מפתח Pix."
-
-#: src/services/SystemService.cpp:1113
+#: src/services/SystemService.cpp:1162 src/services/SystemService.cpp:1177
 #, kde-format
 msgid "Clipboard unavailable."
 msgstr "לוח הגזירים אינו זמין."
 
-#: src/services/UserAvatar.cpp:70
+#: src/services/SystemService.cpp:1173
 #, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar update not allowed as administrator"
-msgstr "עדכון התמונה האישית אינו מותר כמנהל מערכת"
+msgid "No Pix key is configured."
+msgstr "לא הוגדר מפתח Pix."
 
-#: src/services/UserAvatar.cpp:76
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "source .face file missing, unreadable or unsafe"
-msgstr "קובץ ה־.face המקורי חסר, אינו קריא או אינו בטוח"
-
-#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#: src/services/UserAvatar.cpp:84 src/services/UserAvatar.cpp:88
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not read the source avatar"
 msgstr "לא ניתן לקרוא את התמונה האישית המקורית"
 
-#: src/services/UserAvatar.cpp:93
+#: src/services/UserAvatar.cpp:99
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid ""
@@ -2511,86 +2535,98 @@ msgid ""
 "plugin)"
 msgstr "קובץ ה־.face אינו מכיל תמונה תקינה (SVG דורש את התוסף Qt SVG)"
 
-#: src/services/UserAvatar.cpp:100
+#: src/services/UserAvatar.cpp:183
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "home folder unavailable or with unsafe permissions"
 msgstr "תיקיית הבית אינה זמינה או שיש לה הרשאות לא בטוחות"
 
-#: src/services/UserAvatar.cpp:106
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "~/.face is not a safe regular file; avatar preserved"
-msgstr "~/.face אינו קובץ רגיל בטוח; התמונה האישית נשמרה"
-
-#: src/services/UserAvatar.cpp:112
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "unsafe avatar backup; avatar preserved"
-msgstr "גיבוי לא בטוח של התמונה האישית; התמונה האישית נשמרה"
-
-#: src/services/UserAvatar.cpp:120
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not safely open the previous avatar"
-msgstr "לא ניתן לפתוח בבטחה את התמונה האישית הקודמת"
-
-#: src/services/UserAvatar.cpp:124
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not read the previous avatar"
-msgstr "לא ניתן לקרוא את התמונה האישית הקודמת"
-
-#: src/services/UserAvatar.cpp:128
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not preserve the previous avatar"
-msgstr "לא ניתן לשמור את התמונה האישית הקודמת"
-
-#: src/services/UserAvatar.cpp:132
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not write the backup; avatar preserved"
-msgstr "לא ניתן לכתוב את הגיבוי; התמונה האישית נשמרה"
-
-#: src/services/UserAvatar.cpp:138
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not publish the backup; avatar preserved"
-msgstr "לא ניתן לפרסם את הגיבוי; התמונה האישית נשמרה"
-
-#: src/services/UserAvatar.cpp:146
+#: src/services/UserAvatar.cpp:197
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not write the new avatar; avatar preserved"
 msgstr "לא ניתן לכתוב את התמונה האישית החדשה; התמונה האישית נשמרה"
 
-#: src/services/UserAvatar.cpp:155
+#: src/services/UserAvatar.cpp:207
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not safely replace ~/.face; avatar preserved"
 msgstr "לא ניתן להחליף בבטחה את ~/.face; התמונה האישית נשמרה"
 
-#: src/services/UserAvatar.cpp:158
+#: src/services/UserAvatar.cpp:210
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but writing to disk could not be confirmed"
 msgstr "התמונה האישית עודכנה, אך לא ניתן לאשר את הכתיבה לכונן"
 
-#: src/services/UserAvatar.cpp:165
+#: src/services/UserAvatar.cpp:217
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be checked"
 msgstr "התמונה האישית עודכנה, אך לא ניתן לבדוק את ~/.face.icon"
 
-#: src/services/UserAvatar.cpp:168
+#: src/services/UserAvatar.cpp:220
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be created"
 msgstr "התמונה האישית עודכנה, אך לא ניתן ליצור את ~/.face.icon"
 
-#: src/services/UserAvatar.cpp:171
+#: src/services/UserAvatar.cpp:223
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
 msgstr "התמונה האישית עודכנה, אך לא ניתן לאשר את ~/.face.icon בכונן"
+
+#: src/services/UserAvatar.cpp:254 src/services/UserAvatar.cpp:348
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "עדכון התמונה האישית אינו מותר כמנהל מערכת"
+
+#: src/services/UserAvatar.cpp:296 src/services/UserAvatar.cpp:372
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "~/.face is not a safe regular file; avatar preserved"
+msgstr "~/.face אינו קובץ רגיל בטוח; התמונה האישית נשמרה"
+
+#: src/services/UserAvatar.cpp:354
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr "קובץ ה־.face המקורי חסר, אינו קריא או אינו בטוח"
+
+#: src/services/UserAvatar.cpp:378
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "unsafe avatar backup; avatar preserved"
+msgstr "גיבוי לא בטוח של התמונה האישית; התמונה האישית נשמרה"
+
+#: src/services/UserAvatar.cpp:386
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely open the previous avatar"
+msgstr "לא ניתן לפתוח בבטחה את התמונה האישית הקודמת"
+
+#: src/services/UserAvatar.cpp:390
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the previous avatar"
+msgstr "לא ניתן לקרוא את התמונה האישית הקודמת"
+
+#: src/services/UserAvatar.cpp:394
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not preserve the previous avatar"
+msgstr "לא ניתן לשמור את התמונה האישית הקודמת"
+
+#: src/services/UserAvatar.cpp:398
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the backup; avatar preserved"
+msgstr "לא ניתן לכתוב את הגיבוי; התמונה האישית נשמרה"
+
+#: src/services/UserAvatar.cpp:404
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not publish the backup; avatar preserved"
+msgstr "לא ניתן לפרסם את הגיבוי; התמונה האישית נשמרה"

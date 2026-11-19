@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mainuan-welcome\n"
 "Report-Msgid-Bugs-To: https://github.com/mainuan/welcome/issues\n"
-"POT-Creation-Date: 2026-11-16 12:18-0300\n"
+"POT-Creation-Date: 2026-11-19 01:53-0300\n"
 "PO-Revision-Date: 2026-11-16 12:18-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: sw <https://github.com/mainuan>\n"
@@ -66,8 +66,8 @@ msgctxt "@title navigation page"
 msgid "About"
 msgstr "Kuhusu"
 
-#: qml/Main.qml:87 qml/pages/ContributePage.qml:20
-#: qml/pages/ContributePage.qml:32
+#: qml/Main.qml:87 qml/pages/ContributePage.qml:27
+#: qml/pages/ContributePage.qml:43
 msgctxt "@title navigation page"
 msgid "Contribute"
 msgstr "Changia"
@@ -418,11 +418,13 @@ msgstr "Rangi ya Msisitizo"
 
 #: qml/pages/AppearancePage.qml:127
 msgid ""
-"Applies the KDE color scheme, the Kora icons, the wallpaper and the avatar. "
-"Keeps the choice when you change style or theme."
+"Applies the KDE color scheme, the Kora icons and the wallpaper, and the "
+"Mainuan avatar unless you use a picture of your own. Keeps the choice when "
+"you change style or theme."
 msgstr ""
-"Hutumia mpango wa rangi wa KDE, aikoni za Kora, picha ya mandharinyuma na "
-"avatari. Huhifadhi chaguo unapobadilisha mtindo au mandhari."
+"Hutumia mpango wa rangi wa KDE, aikoni za Kora na picha ya mandharinyuma, "
+"pamoja na avatari ya Mainuan usipotumia picha yako mwenyewe. Huhifadhi "
+"chaguo unapobadilisha mtindo au mandhari."
 
 #. i18n: %1 is the accent color name
 #: qml/pages/AppearancePage.qml:158
@@ -510,7 +512,7 @@ msgstr ""
 "Flatpak haikupatikana. Programu za Flatpak hazipatikani. FreeOffice na "
 "huduma za mtandaoni hazitegemei Flatpak."
 
-#: qml/pages/ContributePage.qml:35
+#: qml/pages/ContributePage.qml:46
 msgid ""
 "Mainuan is made by its community. You can help with a donation, with code or "
 "by reporting problems."
@@ -519,42 +521,42 @@ msgstr ""
 "msimbo au kwa kuripoti matatizo."
 
 #. i18n: Pix is the Brazilian instant payment system; %1 is the Pix key
-#: qml/pages/ContributePage.qml:78
+#: qml/pages/ContributePage.qml:89
 msgid "Pix QR code. Key: %1"
 msgstr "Msimbo wa QR wa Pix. Ufunguo: %1"
 
-#: qml/pages/ContributePage.qml:79
+#: qml/pages/ContributePage.qml:90
 msgid "Pix key QR code. Key: %1"
 msgstr "Msimbo wa QR wa ufunguo wa Pix. Ufunguo: %1"
 
-#: qml/pages/ContributePage.qml:97
+#: qml/pages/ContributePage.qml:108
 msgid "Support Mainuan"
 msgstr "Saidia Mainuan"
 
-#: qml/pages/ContributePage.qml:104
+#: qml/pages/ContributePage.qml:115
 msgid ""
 "Your donation helps sustain development, infrastructure and the community."
 msgstr "Mchango wako husaidia kuendeleza uundaji, miundombinu na jumuiya."
 
-#: qml/pages/ContributePage.qml:111 qml/pages/ContributePage.qml:136
+#: qml/pages/ContributePage.qml:122 qml/pages/ContributePage.qml:147
 msgid "Pix Key"
 msgstr "Ufunguo wa Pix"
 
-#: qml/pages/ContributePage.qml:143
+#: qml/pages/ContributePage.qml:154
 msgid "Copy Pix Key"
 msgstr "Nakili Ufunguo wa Pix"
 
-#: qml/pages/ContributePage.qml:158 src/services/SystemService.cpp:1117
+#: qml/pages/ContributePage.qml:169 src/services/SystemService.cpp:1181
 #, kde-format
 msgid "Pix key copied."
 msgstr "Ufunguo wa Pix umenakiliwa."
 
-#: qml/pages/ContributePage.qml:168
+#: qml/pages/ContributePage.qml:179
 msgid "Scan the QR code with your bank's app, using the Pix option."
 msgstr ""
 "Changanua msimbo wa QR kwa programu ya benki yako, ukitumia chaguo la Pix."
 
-#: qml/pages/ContributePage.qml:169
+#: qml/pages/ContributePage.qml:180
 msgid ""
 "The QR code contains the Pix key. In your bank's app, use the Pix option "
 "with the copied key or the one read from the code."
@@ -562,42 +564,63 @@ msgstr ""
 "Msimbo wa QR una ufunguo wa Pix. Katika programu ya benki yako, tumia chaguo "
 "la Pix pamoja na ufunguo ulionakiliwa au ule uliosomwa kutoka kwenye msimbo."
 
-#: qml/pages/ContributePage.qml:177
+#: qml/pages/ContributePage.qml:188
 msgid "The Pix key has not been set up on this installation yet."
 msgstr "Ufunguo wa Pix bado haujawekwa kwenye usakinishaji huu."
 
-#: qml/pages/ContributePage.qml:187
+#: qml/pages/ContributePage.qml:198
 msgid "Other Ways to Help"
 msgstr "Njia Nyingine za Kusaidia"
 
-#: qml/pages/ContributePage.qml:196
+#: qml/pages/ContributePage.qml:208
 msgid "Contribute Code"
 msgstr "Changia Msimbo"
 
-#: qml/pages/ContributePage.qml:197
+#: qml/pages/ContributePage.qml:209
 msgid "Code, translations and improvements on GitHub."
 msgstr "Msimbo, tafsiri na maboresho kwenye GitHub."
 
-#: qml/pages/ContributePage.qml:205
+#: qml/pages/ContributePage.qml:221
 msgid "Report a Problem"
 msgstr "Ripoti Tatizo"
 
-#: qml/pages/ContributePage.qml:206
+#: qml/pages/ContributePage.qml:222
 msgid ""
 "Describe what happened; attaching the system report (in About) helps a lot."
 msgstr ""
 "Eleza kilichotokea; kuambatisha ripoti ya mfumo (katika Kuhusu) husaidia "
 "sana."
 
-#: qml/pages/ContributePage.qml:214
+#: qml/pages/ContributePage.qml:234
 msgid "Telegram Community"
 msgstr "Jumuiya ya Telegram"
 
-#: qml/pages/ContributePage.qml:215
+#: qml/pages/ContributePage.qml:235
 msgid "Chat with Mainuan users and developers."
 msgstr "Zungumza na watumiaji na wasanidi wa Mainuan."
 
-#: qml/pages/ContributePage.qml:222
+#: qml/pages/ContributePage.qml:259
+msgid ""
+"The web browser could not be opened. Copy the address below and open it in "
+"your browser:"
+msgstr ""
+"Kivinjari cha wavuti hakikuweza kufunguliwa. Nakili anwani iliyo hapa chini "
+"na uifungue kwenye kivinjari chako:"
+
+#: qml/pages/ContributePage.qml:275
+msgid "Page address"
+msgstr "Anwani ya ukurasa"
+
+#: qml/pages/ContributePage.qml:281
+msgid "Copy Address"
+msgstr "Nakili Anwani"
+
+#: qml/pages/ContributePage.qml:287 src/services/SystemService.cpp:1166
+#, kde-format
+msgid "Address copied."
+msgstr "Anwani imenakiliwa."
+
+#: qml/pages/ContributePage.qml:297
 msgid ""
 "Links open in the browser only when you click them. The QR code is generated "
 "on this computer, without internet access."
@@ -2198,69 +2221,69 @@ msgctxt "@info system report footer"
 msgid "No network addresses, serial numbers or computer name."
 msgstr "Hakuna anwani za mtandao, nambari za mfululizo wala jina la kompyuta."
 
-#: src/services/SystemService.cpp:93
+#: src/services/SystemService.cpp:103
 #, kde-format
 msgid "The %1 decoration engine is not installed."
 msgstr "Injini ya mapambo %1 haijasakinishwa."
 
-#: src/services/SystemService.cpp:108
+#: src/services/SystemService.cpp:118
 #, kde-format
 msgid "The %1 decoration is not installed or its resources are incomplete."
 msgstr "Mapambo %1 hayajasakinishwa au rasilimali zake hazijakamilika."
 
 #. i18n: "Gestão de Drivers" is the Mainuan driver manager application.
-#: src/services/SystemService.cpp:480
+#: src/services/SystemService.cpp:495
 #, kde-format
 msgid "Driver Manager available"
 msgstr "Kidhibiti cha Viendeshi kinapatikana"
 
-#: src/services/SystemService.cpp:481
+#: src/services/SystemService.cpp:496
 #, kde-format
 msgid "Driver Manager not installed"
 msgstr "Kidhibiti cha Viendeshi hakijasakinishwa"
 
-#: src/services/SystemService.cpp:497
+#: src/services/SystemService.cpp:512
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Active"
 msgstr "Inafanya kazi"
 
-#: src/services/SystemService.cpp:498
+#: src/services/SystemService.cpp:513
 #, kde-format
 msgctxt "firewall state at boot"
 msgid "Inactive"
 msgstr "Haifanyi kazi"
 
-#: src/services/SystemService.cpp:501
+#: src/services/SystemService.cpp:516
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: active"
 msgstr "kuanza: inafanya kazi"
 
-#: src/services/SystemService.cpp:502
+#: src/services/SystemService.cpp:517
 #, kde-format
 msgctxt "@info firewall preference at boot"
 msgid "startup: inactive"
 msgstr "kuanza: haifanyi kazi"
 
 #. i18n: %1 is an error message shown in the page banner.
-#: src/services/SystemService.cpp:538
+#: src/services/SystemService.cpp:553
 #, kde-format
 msgid "Error: %1"
 msgstr "Hitilafu: %1"
 
-#: src/services/SystemService.cpp:557
+#: src/services/SystemService.cpp:572
 #, kde-format
 msgid "Invalid theme."
 msgstr "Mandhari si sahihi."
 
-#: src/services/SystemService.cpp:562 src/services/SystemService.cpp:612
-#: src/services/SystemService.cpp:858
+#: src/services/SystemService.cpp:577 src/services/SystemService.cpp:627
+#: src/services/SystemService.cpp:896
 #, kde-format
 msgid "Wait for the current operation to finish."
 msgstr "Subiri operesheni ya sasa ikamilike."
 
-#: src/services/SystemService.cpp:571 src/services/SystemService.cpp:600
+#: src/services/SystemService.cpp:586 src/services/SystemService.cpp:615
 #, kde-format
 msgid ""
 "The current external color scheme has no known variant. Select a Mainuan "
@@ -2269,158 +2292,173 @@ msgstr ""
 "Mpango wa rangi wa nje wa sasa hauna toleo linalojulikana. Chagua rangi ya "
 "Mainuan kwanza."
 
-#: src/services/SystemService.cpp:578
+#: src/services/SystemService.cpp:593
 #, kde-format
 msgid "Dark theme applied."
 msgstr "Mandhari ya giza imetumika."
 
-#: src/services/SystemService.cpp:579
+#: src/services/SystemService.cpp:594
 #, kde-format
 msgid "Light theme applied."
 msgstr "Mandhari ya mwanga imetumika."
 
 #. i18n: %1 is an accent color name (Brown, Cyan…).
-#: src/services/SystemService.cpp:596
+#: src/services/SystemService.cpp:611
 #, kde-format
 msgid "Theme and %1 color applied."
 msgstr "Mandhari na rangi ya %1 vimetumika."
 
-#: src/services/SystemService.cpp:608
+#: src/services/SystemService.cpp:623
 #, kde-format
 msgid "Invalid accent color."
 msgstr "Rangi ya msisitizo si sahihi."
 
-#: src/services/SystemService.cpp:618
+#: src/services/SystemService.cpp:633
 #, kde-format
 msgid "Applying %1 color…"
 msgstr "Inatumia rangi ya %1…"
 
-#: src/services/SystemService.cpp:629
+#: src/services/SystemService.cpp:644
 #, kde-format
-msgid "%1 color, icons, wallpaper and avatar applied."
-msgstr "Rangi ya %1, aikoni, picha ya mandharinyuma na avatari vimetumika."
+msgid "%1 color, icons and wallpaper applied."
+msgstr "Rangi ya %1, aikoni na picha ya mandharinyuma vimetumika."
 
-#: src/services/SystemService.cpp:640
+#: src/services/SystemService.cpp:655
 #, kde-format
 msgid "Color scheme %1.colors is missing or unreadable."
 msgstr "Mpango wa rangi %1.colors haupo au hausomeki."
 
-#: src/services/SystemService.cpp:646
+#: src/services/SystemService.cpp:661
 #, kde-format
 msgid "Color scheme %1.colors is invalid."
 msgstr "Mpango wa rangi %1.colors si sahihi."
 
-#: src/services/SystemService.cpp:651
+#: src/services/SystemService.cpp:666
 #, kde-format
 msgid "plasma-apply-colorscheme is not available."
 msgstr "plasma-apply-colorscheme haipatikani."
 
-#: src/services/SystemService.cpp:658
+#: src/services/SystemService.cpp:673
 #, kde-format
 msgid "Plasma did not recognize the %1.colors color scheme."
 msgstr "Plasma haikutambua mpango wa rangi %1.colors."
 
-#: src/services/SystemService.cpp:704
+#: src/services/SystemService.cpp:719
 #, kde-format
 msgid "Could not prepare the KDE color configuration."
 msgstr "Haikuweza kuandaa usanidi wa rangi wa KDE."
 
-#: src/services/SystemService.cpp:715
+#: src/services/SystemService.cpp:730
 #, kde-format
 msgid "Plasma did not confirm the %1 color scheme without a color override."
 msgstr "Plasma haikuthibitisha mpango wa rangi %1 bila kubatilisha rangi."
 
 #. i18n: Item of a list of failed adjustments (lowercase, no final period).
-#: src/services/SystemService.cpp:729
+#: src/services/SystemService.cpp:744
 #, kde-format
 msgid "icon theme %1 missing or invalid index.theme (previous icons preserved)"
 msgstr ""
 "mandhari ya aikoni %1 haipo au index.theme si sahihi (aikoni za awali "
 "zimehifadhiwa)"
 
-#: src/services/SystemService.cpp:732
+#: src/services/SystemService.cpp:747
 #, kde-format
 msgctxt "failed adjustment list item; %1 is an icon theme"
 msgid "icons %1"
 msgstr "aikoni %1"
 
-#: src/services/SystemService.cpp:737
+#: src/services/SystemService.cpp:752
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper %1 missing"
 msgstr "picha ya mandharinyuma %1 haipo"
 
-#: src/services/SystemService.cpp:739 src/services/SystemService.cpp:1007
-#: src/services/SystemService.cpp:1022
+#: src/services/SystemService.cpp:754 src/services/SystemService.cpp:1045
+#: src/services/SystemService.cpp:1060
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "wallpaper"
 msgstr "picha ya mandharinyuma"
 
-#: src/services/SystemService.cpp:744 src/services/SystemService.cpp:1012
+#: src/services/SystemService.cpp:759 src/services/SystemService.cpp:1050
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "Plasma did not confirm the %1 icons"
 msgstr "Plasma haikuthibitisha aikoni %1"
 
-#: src/services/SystemService.cpp:758
+#: src/services/SystemService.cpp:783
+#, kde-format
+msgid "The Mainuan avatar was updated."
+msgstr "Avatari ya Mainuan imesasishwa."
+
+#: src/services/SystemService.cpp:788
+#, kde-format
+msgid "Your own avatar was kept."
+msgstr "Picha yako mwenyewe imehifadhiwa."
+
+#: src/services/SystemService.cpp:791
+#, kde-format
+msgid "The Mainuan avatar is not installed; the current avatar was kept."
+msgstr "Avatari ya Mainuan haijasakinishwa; avatari ya sasa imehifadhiwa."
+
+#: src/services/SystemService.cpp:794
 #, kde-format
 msgctxt "failed adjustment list item; %1 is the avatar error"
 msgid "avatar: %1"
 msgstr "avatari: %1"
 
-#: src/services/SystemService.cpp:764
+#: src/services/SystemService.cpp:802
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "color scheme changed during the operation; avatar preserved"
 msgstr "mpango wa rangi ulibadilika wakati wa operesheni; avatari imehifadhiwa"
 
-#: src/services/SystemService.cpp:779
+#: src/services/SystemService.cpp:817
 #, kde-format
 msgid "Could not complete all adjustments: %1."
 msgstr "Haikuweza kukamilisha marekebisho yote: %1."
 
-#: src/services/SystemService.cpp:780
+#: src/services/SystemService.cpp:818
 #, kde-format
 msgctxt "separator between failed adjustment list items"
 msgid "; "
 msgstr "; "
 
-#: src/services/SystemService.cpp:795
+#: src/services/SystemService.cpp:833
 #, kde-format
 msgid "Could not communicate with KWin to update the window decoration."
 msgstr "Haikuweza kuwasiliana na KWin ili kusasisha mapambo ya dirisha."
 
-#: src/services/SystemService.cpp:804 src/services/SystemService.cpp:811
-#: src/services/SystemService.cpp:830
+#: src/services/SystemService.cpp:842 src/services/SystemService.cpp:849
+#: src/services/SystemService.cpp:868
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "could not restore the previous window decoration"
 msgstr "haikuweza kurejesha mapambo ya awali ya dirisha"
 
-#: src/services/SystemService.cpp:821
+#: src/services/SystemService.cpp:859
 #, kde-format
 msgid "Could not save the requested window decoration in KWin."
 msgstr "Haikuweza kuhifadhi mapambo ya dirisha yaliyoombwa katika KWin."
 
-#: src/services/SystemService.cpp:831
+#: src/services/SystemService.cpp:869
 #, kde-format
 msgid ""
 "The final window decoration configuration was changed during the operation."
 msgstr ""
 "Usanidi wa mwisho wa mapambo ya dirisha ulibadilishwa wakati wa operesheni."
 
-#: src/services/SystemService.cpp:854
+#: src/services/SystemService.cpp:892
 #, kde-format
 msgid "Invalid visual style."
 msgstr "Mtindo wa kuona si sahihi."
 
-#: src/services/SystemService.cpp:862
+#: src/services/SystemService.cpp:900
 #, kde-format
 msgid "%1 style applied."
 msgstr "Mtindo %1 umetumika."
 
-#: src/services/SystemService.cpp:895
+#: src/services/SystemService.cpp:933
 #, kde-format
 msgid ""
 "This system's Plasma does not provide plasma-apply-lookandfeel; the style "
@@ -2429,97 +2467,97 @@ msgstr ""
 "Plasma ya mfumo huu haitoi plasma-apply-lookandfeel; mtindo hauwezi "
 "kubadilishwa."
 
-#: src/services/SystemService.cpp:900
+#: src/services/SystemService.cpp:938
 #, kde-format
 msgid "The %1 style is not installed on this system."
 msgstr "Mtindo %1 haujasakinishwa kwenye mfumo huu."
 
 #. i18n: %1 is a complete sentence describing the problem.
-#: src/services/SystemService.cpp:911
+#: src/services/SystemService.cpp:949
 #, kde-format
 msgid "%1 Previous appearance preserved."
 msgstr "%1 Mwonekano wa awali umehifadhiwa."
 
-#: src/services/SystemService.cpp:927
+#: src/services/SystemService.cpp:965
 #, kde-format
 msgid "Could not preserve the %1 icon theme. Previous style preserved."
 msgstr ""
 "Haikuweza kuhifadhi mandhari ya aikoni %1. Mtindo wa awali umehifadhiwa."
 
-#: src/services/SystemService.cpp:931
+#: src/services/SystemService.cpp:969
 #, kde-format
 msgid "Applying %1 style…"
 msgstr "Inatumia mtindo %1…"
 
-#: src/services/SystemService.cpp:948
+#: src/services/SystemService.cpp:986
 #, kde-format
 msgid "Could not apply the %1 style."
 msgstr "Haikuweza kutumia mtindo %1."
 
-#: src/services/SystemService.cpp:956
+#: src/services/SystemService.cpp:994
 #, kde-format
 msgid "Plasma did not confirm the %1 style."
 msgstr "Plasma haikuthibitisha mtindo %1."
 
-#: src/services/SystemService.cpp:981 src/services/SystemService.cpp:1002
+#: src/services/SystemService.cpp:1019 src/services/SystemService.cpp:1040
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "icons"
 msgstr "aikoni"
 
-#: src/services/SystemService.cpp:986
+#: src/services/SystemService.cpp:1024
 #, kde-format
 msgctxt "failed adjustment list item"
 msgid "cursor"
 msgstr "kishale"
 
-#: src/services/SystemService.cpp:1057
+#: src/services/SystemService.cpp:1095
 #, kde-format
 msgid "Driver Manager is not installed."
 msgstr "Kidhibiti cha Viendeshi hakijasakinishwa."
 
-#: src/services/SystemService.cpp:1061
+#: src/services/SystemService.cpp:1099
 #, kde-format
 msgid "Could not open Driver Manager."
 msgstr "Haikuweza kufungua Kidhibiti cha Viendeshi."
 
-#: src/services/SystemService.cpp:1066
+#: src/services/SystemService.cpp:1104
 #, kde-format
 msgid "Unknown action."
 msgstr "Kitendo kisichojulikana."
 
-#: src/services/SystemService.cpp:1075
+#: src/services/SystemService.cpp:1113 src/services/SystemService.cpp:1158
 #, kde-format
 msgid "URL blocked for security reasons."
 msgstr "URL imezuiwa kwa sababu za usalama."
 
-#: src/services/SystemService.cpp:1079
+#: src/services/SystemService.cpp:1117
 #, kde-format
 msgid "Requested the web browser to open the page."
 msgstr "Kivinjari kimeombwa kufungua ukurasa."
 
-#: src/services/SystemService.cpp:1080
+#: src/services/SystemService.cpp:1118
 #, kde-format
 msgid "Could not open the URL in the default web browser."
 msgstr "Haikuweza kufungua URL katika kivinjari chaguo-msingi."
 
-#: src/services/SystemService.cpp:1087
+#: src/services/SystemService.cpp:1125
 #, kde-format
 msgid "This application is not allowed to be opened in Discover."
 msgstr "Programu hii hairuhusiwi kufunguliwa katika Discover."
 
-#: src/services/SystemService.cpp:1092
+#: src/services/SystemService.cpp:1130
 #, kde-format
 msgid "Discover was not found. Install KDE Discover to open this application."
 msgstr ""
 "Discover haikupatikana. Sakinisha KDE Discover ili kufungua programu hii."
 
-#: src/services/SystemService.cpp:1098
+#: src/services/SystemService.cpp:1136
 #, kde-format
 msgid "Could not open the page in Discover. Try again."
 msgstr "Haikuweza kufungua ukurasa katika Discover. Jaribu tena."
 
-#: src/services/SystemService.cpp:1101
+#: src/services/SystemService.cpp:1139
 #, kde-format
 msgid ""
 "Requested Discover to open the page. Confirm the installation in Discover; "
@@ -2528,35 +2566,23 @@ msgstr ""
 "Discover imeombwa kufungua ukurasa. Thibitisha usakinishaji katika Discover; "
 "programu isipopatikana, kagua Flathub kisha ujaribu tena."
 
-#: src/services/SystemService.cpp:1109
-#, kde-format
-msgid "No Pix key is configured."
-msgstr "Hakuna ufunguo wa Pix uliosanidiwa."
-
-#: src/services/SystemService.cpp:1113
+#: src/services/SystemService.cpp:1162 src/services/SystemService.cpp:1177
 #, kde-format
 msgid "Clipboard unavailable."
 msgstr "Ubao wa kunakili haupatikani."
 
-#: src/services/UserAvatar.cpp:70
+#: src/services/SystemService.cpp:1173
 #, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "avatar update not allowed as administrator"
-msgstr "kusasisha avatari hakuruhusiwi ukiwa msimamizi"
+msgid "No Pix key is configured."
+msgstr "Hakuna ufunguo wa Pix uliosanidiwa."
 
-#: src/services/UserAvatar.cpp:76
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "source .face file missing, unreadable or unsafe"
-msgstr "faili chanzo la .face halipo, halisomeki au si salama"
-
-#: src/services/UserAvatar.cpp:80 src/services/UserAvatar.cpp:84
+#: src/services/UserAvatar.cpp:84 src/services/UserAvatar.cpp:88
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not read the source avatar"
 msgstr "haikuweza kusoma avatari chanzo"
 
-#: src/services/UserAvatar.cpp:93
+#: src/services/UserAvatar.cpp:99
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid ""
@@ -2565,88 +2591,100 @@ msgid ""
 msgstr ""
 "faili la .face halina picha sahihi (SVG inahitaji programu-jalizi ya Qt SVG)"
 
-#: src/services/UserAvatar.cpp:100
+#: src/services/UserAvatar.cpp:183
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "home folder unavailable or with unsafe permissions"
 msgstr "folda ya nyumbani haipatikani au ina ruhusa zisizo salama"
 
-#: src/services/UserAvatar.cpp:106
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "~/.face is not a safe regular file; avatar preserved"
-msgstr "~/.face si faili la kawaida salama; avatari imehifadhiwa"
-
-#: src/services/UserAvatar.cpp:112
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "unsafe avatar backup; avatar preserved"
-msgstr "nakala rudufu ya avatari si salama; avatari imehifadhiwa"
-
-#: src/services/UserAvatar.cpp:120
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not safely open the previous avatar"
-msgstr "haikuweza kufungua kwa usalama avatari ya awali"
-
-#: src/services/UserAvatar.cpp:124
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not read the previous avatar"
-msgstr "haikuweza kusoma avatari ya awali"
-
-#: src/services/UserAvatar.cpp:128
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not preserve the previous avatar"
-msgstr "haikuweza kuhifadhi avatari ya awali"
-
-#: src/services/UserAvatar.cpp:132
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not write the backup; avatar preserved"
-msgstr "haikuweza kuandika nakala rudufu; avatari imehifadhiwa"
-
-#: src/services/UserAvatar.cpp:138
-#, kde-format
-msgctxt "avatar error in a list of failed adjustments"
-msgid "could not publish the backup; avatar preserved"
-msgstr "haikuweza kuchapisha nakala rudufu; avatari imehifadhiwa"
-
-#: src/services/UserAvatar.cpp:146
+#: src/services/UserAvatar.cpp:197
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not write the new avatar; avatar preserved"
 msgstr "haikuweza kuandika avatari mpya; avatari imehifadhiwa"
 
-#: src/services/UserAvatar.cpp:155
+#: src/services/UserAvatar.cpp:207
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "could not safely replace ~/.face; avatar preserved"
 msgstr "haikuweza kubadilisha ~/.face kwa usalama; avatari imehifadhiwa"
 
-#: src/services/UserAvatar.cpp:158
+#: src/services/UserAvatar.cpp:210
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but writing to disk could not be confirmed"
 msgstr ""
 "avatari imesasishwa, lakini uandishi kwenye diski haukuweza kuthibitishwa"
 
-#: src/services/UserAvatar.cpp:165
+#: src/services/UserAvatar.cpp:217
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be checked"
 msgstr "avatari imesasishwa, lakini ~/.face.icon haikuweza kukaguliwa"
 
-#: src/services/UserAvatar.cpp:168
+#: src/services/UserAvatar.cpp:220
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be created"
 msgstr "avatari imesasishwa, lakini ~/.face.icon haikuweza kuundwa"
 
-#: src/services/UserAvatar.cpp:171
+#: src/services/UserAvatar.cpp:223
 #, kde-format
 msgctxt "avatar error in a list of failed adjustments"
 msgid "avatar updated, but ~/.face.icon could not be confirmed on disk"
 msgstr ""
 "avatari imesasishwa, lakini ~/.face.icon haikuweza kuthibitishwa kwenye diski"
+
+#: src/services/UserAvatar.cpp:254 src/services/UserAvatar.cpp:348
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "avatar update not allowed as administrator"
+msgstr "kusasisha avatari hakuruhusiwi ukiwa msimamizi"
+
+#: src/services/UserAvatar.cpp:296 src/services/UserAvatar.cpp:372
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "~/.face is not a safe regular file; avatar preserved"
+msgstr "~/.face si faili la kawaida salama; avatari imehifadhiwa"
+
+#: src/services/UserAvatar.cpp:354
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "source .face file missing, unreadable or unsafe"
+msgstr "faili chanzo la .face halipo, halisomeki au si salama"
+
+#: src/services/UserAvatar.cpp:378
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "unsafe avatar backup; avatar preserved"
+msgstr "nakala rudufu ya avatari si salama; avatari imehifadhiwa"
+
+#: src/services/UserAvatar.cpp:386
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not safely open the previous avatar"
+msgstr "haikuweza kufungua kwa usalama avatari ya awali"
+
+#: src/services/UserAvatar.cpp:390
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not read the previous avatar"
+msgstr "haikuweza kusoma avatari ya awali"
+
+#: src/services/UserAvatar.cpp:394
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not preserve the previous avatar"
+msgstr "haikuweza kuhifadhi avatari ya awali"
+
+#: src/services/UserAvatar.cpp:398
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not write the backup; avatar preserved"
+msgstr "haikuweza kuandika nakala rudufu; avatari imehifadhiwa"
+
+#: src/services/UserAvatar.cpp:404
+#, kde-format
+msgctxt "avatar error in a list of failed adjustments"
+msgid "could not publish the backup; avatar preserved"
+msgstr "haikuweza kuchapisha nakala rudufu; avatari imehifadhiwa"
