@@ -183,7 +183,7 @@ jobs:
           Maintainer: Mainuan CI <ci@mainuan.invalid>
           Description: Minimal Kubuntu settings ownership fixture for dpkg-divert testing
           CONTROL
-          printf '%s\\n' '/etc/xdg/kicker-extra-favoritesrc' > "$fixture/DEBIAN/conffiles"
+          printf '%s\n' '/etc/xdg/kicker-extra-favoritesrc' > "$fixture/DEBIAN/conffiles"
           cat > "$fixture/etc/xdg/kicker-extra-favoritesrc" <<'KUBUNTU'
           [General]
           Prepend=org.kubuntu.manage-software.desktop
