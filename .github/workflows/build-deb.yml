@@ -260,7 +260,7 @@ jobs:
           # Purge must relinquish the diversion and restore Kubuntu's original file.
           test ! -e /etc/xdg/kicker-extra-favoritesrc.kubuntu
           test -z "$(dpkg-divert --listpackage /etc/xdg/kicker-extra-favoritesrc)"
-          cmp ../kubuntu-favoritesrc.before /etc/xdg/kicker-extra-favoritesrc
+          cmp kubuntu-favoritesrc.before /etc/xdg/kicker-extra-favoritesrc
           dpkg-query -S /etc/xdg/kicker-extra-favoritesrc | grep -q '^kubuntu-settings-desktop:'
           if dpkg -s "$PACKAGE" >/dev/null 2>&1; then
             echo "::error::$PACKAGE still known to dpkg after purge"; exit 1
