@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+
+favorites_file='/etc/xdg/kicker-extra-favoritesrc'
+kubuntu_file='/etc/xdg/kicker-extra-favoritesrc.kubuntu'
+
+case "$1" in
+    install|upgrade)
+        diverted_by="$(dpkg-divert --listpackage "$favorites_file")"
+        case "$diverted_by" in
+            "")
+                # Keep Kubuntu's packaged conffile intact and let Mainuan own
+                # the active path. dpkg-divert exempts this package's own copy.
+                dpkg-divert --package mainuan-welcome --add --rename \
+                    --divert "$kubuntu_file" "$favorites_file"
+                ;;
+            mainuan-welcome)
+                actual_target="$(dpkg-divert --truename "$favorites_file")"
+                if [ "$actual_target" != "$kubuntu_file" ]; then
+                    echo "mainuan-welcome: unexpected existing diversion for $favorites_file: $actual_target" >&2
+                    exit 1
+                fi
+                ;;
+            *)
+                echo "mainuan-welcome: $favorites_file is already diverted by $diverted_by; refusing to replace it." >&2
+                exit 1
+                ;;
+        esac
+        ;;
+esac
+
+#DEBHELPER#
