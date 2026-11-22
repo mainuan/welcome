@@ -4,7 +4,7 @@ var installedWidgets = [];
 var screenCount = 1;
 var mockScreens = [{width: 1920, height: 1080}];
 var mockPanels = [], mockRemoved = 0, mockOutput = "";
-var mockIconFactor = 1;
+var mockIconFactor = 1; mockShrinkPanelOnAppletAdd = false;\nvar mockShrinkPanelOnAppletAdd = false;
 function screenGeometry(screen) { return mockScreens[screen]; }
 function print(value) { mockOutput += String(value) + "\n"; }
 function panels() { return mockPanels.slice(); }
@@ -47,7 +47,11 @@ Object.defineProperty(Panel.prototype, 'length', {
     },
     set: function () { throw new Error('Do not impose the content length reported by Plasma'); }
 });
-Panel.prototype.addWidget = function (type) { var widget = new MockWidget(type); this.items.push(widget); return widget; };
+Panel.prototype.addWidget = function (type) {
+    var widget = new MockWidget(type); this.items.push(widget);
+    if (mockShrinkPanelOnAppletAdd) this.height = 38;
+    return widget;
+};
 Panel.prototype.widgets = function () { return this.items.slice(); };
 Panel.prototype.remove = function () { ++mockRemoved; mockPanels.splice(mockPanels.indexOf(this), 1); };
 function mockReset(screens) {
