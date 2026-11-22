@@ -16,7 +16,7 @@ const QStringList widgets = {"org.kde.plasma.kickoff", "org.kde.plasma.kicker", 
     "org.kde.plasma.icontasks", "org.kde.plasma.systemtray", "org.kde.plasma.digitalclock", "org.kde.plasma.panelspacer",
     "org.kde.plasma.marginsseparator", "org.kde.plasma.appmenu", "org.kde.plasma.pager", "org.kde.plasma.trash",
     "org.kde.plasma.powershowdesktop", "org.kde.plasma.showdesktop", "Chaac.Complete.Weather", "com.mike.desktop",
-    "org.kde.milou", "ChatAI-Plasmoid", "KdeControlStation"};
+    "org.kde.milou", "ChatAI-Plasmoid", "local.laetum.controlcenter"};
 QString json(const QStringList &values) { return QString::fromUtf8(QJsonDocument(QJsonArray::fromStringList(values)).toJson(QJsonDocument::Compact)); }
 QByteArray read(const QString &path) { QFile file(path); return file.open(QIODevice::ReadOnly) ? file.readAll() : QByteArray(); }
 void write(const QString &path, const QByteArray &bytes) {
@@ -145,9 +145,15 @@ void LayoutTest::adaptsToScreens() {
     for (const QSize &size : {QSize(1280,720), QSize(1366,768), QSize(1920,1080)}) {
         for (const QString &id : ids) {
             plasma.reset(QString("[{width:%1,height:%2},{width:1280,height:720}]").arg(size.width()).arg(size.height()));
+            plasma.run("mockShrinkPanelOnAppletAdd=true;");
             plasma.apply(id);
             QVERIFY2(LayoutService::matchesLayout(plasma.description(), id), qPrintable(id));
             QVERIFY(plasma.run("panels().every(function(p){return p.height===40 && (p.lengthMode==='custom' || p.writes.length===0);})").toBool());
+            // Reproduce a late Plasma size-hint change and ensure the delayed
+            // normalization restores 40 px for every layout, not only Classic.
+            plasma.run("panels().forEach(function(p){p.height=38;});");
+            QVERIFY2(plasma.run("positionMainuanLayout('" + id + "').ok").toBool(), qPrintable(id));
+            QVERIFY(plasma.run("panels().every(function(p){return p.height===40;})").toBool());
             if (id == "three-panels" || id == "plasma-default") {
                 QVERIFY2(plasma.run("positionMainuanLayout('" + id + "').ok").toBool(), qPrintable(id));
                 // A second set of intrinsic icon widths still fits; lengths are measured, never imposed.
@@ -174,11 +180,17 @@ void LayoutTest::correctsClassicSegmentsAndLengthModes() {
     QCOMPARE(plasma.run("panels().length").toInt(), 5);
     QCOMPARE(plasma.run("panels()[0].items.map(function(w){return w.type;}).join('|')").toString(), QString("org.kde.plasma.marginsseparator|org.kde.plasma.kickoff"));
     QCOMPARE(plasma.run("panels()[1].items.map(function(w){return w.type;}).join('|')").toString(), QString("Chaac.Complete.Weather|com.mike.desktop"));
-    QCOMPARE(plasma.run("panels()[3].items.map(function(w){return w.type;}).join('|')").toString(), QString("ChatAI-Plasmoid|org.kde.plasma.systemtray|KdeControlStation"));
+    QCOMPARE(plasma.run("panels()[3].items.map(function(w){return w.type;}).join('|')").toString(), QString("ChatAI-Plasmoid|org.kde.plasma.systemtray|local.laetum.controlcenter"));
+    const QString layoutScript = LayoutService::buildScript("plasma-default", {});
+    QVERIFY(layoutScript.contains("applications:mainuan-store.desktop"));
+    QVERIFY(!layoutScript.contains("org.kde.discover.desktop"));
+    QVERIFY(layoutScript.contains("local.laetum.controlcenter"));
+    QVERIFY(!layoutScript.contains("KdeControlStation"));
+    QVERIFY(plasma.run("panels()[3].items[2].config['General/showBatteryIndicator']===false && panels()[3].items[2].config['General/showNetworkIndicator']===false && panels()[3].items[2].config['General/showNotificationIndicator']===false && panels()[3].items[2].config['General/showVolumeIndicator']===false").toBool());
     QCOMPARE(plasma.run("panels()[4].items.map(function(w){return w.type;}).join('|')").toString(), QString("org.kde.plasma.digitalclock|org.kde.plasma.powershowdesktop"));
     QVERIFY(plasma.run("panels()[3].lengthMode==='custom' && panels()[3].minimumLength<panels()[3].maximumLength").toBool());
     QVERIFY(!LayoutService::buildScript("plasma-default", {}).contains("org.kde.plasma.kdeaichat"));
-    for (const QString &missing : {QString("Chaac.Complete.Weather"), QString("com.mike.desktop"), QString("ChatAI-Plasmoid"), QString("KdeControlStation")}) {
+    for (const QString &missing : {QString("Chaac.Complete.Weather"), QString("com.mike.desktop"), QString("ChatAI-Plasmoid"), QString("local.laetum.controlcenter")}) {
         plasma.reset(); plasma.run("knownWidgetTypes=knownWidgetTypes.filter(function(t){return t!=='"+missing+"';});");
         plasma.apply("plasma-default");
         QCOMPARE(plasma.run("mockRemoved").toInt(), 0);
