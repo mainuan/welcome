@@ -84,7 +84,7 @@ var REFERENCE_LAYOUTS = {
                         "General": {
                             "launchers": [
                                 "applications:org.kde.kdeconnect.app.desktop",
-                                "applications:org.kde.discover.desktop",
+                                "applications:mainuan-store.desktop",
                                 "applications:onlyoffice-desktopeditors.desktop",
                                 "preferred://filemanager",
                                 "applications:firefox.desktop"
@@ -138,8 +138,16 @@ var REFERENCE_LAYOUTS = {
                     }
                 },
                 {
-                    "type": "KdeControlStation",
-                    "required": true
+                    "type": "local.laetum.controlcenter",
+                    "required": true,
+                    "config": {
+                        "General": {
+                            "showBatteryIndicator": false,
+                            "showNetworkIndicator": false,
+                            "showNotificationIndicator": false,
+                            "showVolumeIndicator": false
+                        }
+                    }
                 }
             ]
         },
@@ -230,7 +238,7 @@ var REFERENCE_LAYOUTS = {
                             "launchers": [
                                 "applications:org.kde.kdeconnect.app.desktop",
                                 "applications:org.jitsi.jitsi-meet.desktop",
-                                "applications:org.kde.discover.desktop",
+                                "applications:mainuan-store.desktop",
                                 "applications:onlyoffice-desktopeditors.desktop",
                                 "preferred://filemanager",
                                 "applications:firefox.desktop"
@@ -278,18 +286,13 @@ var REFERENCE_LAYOUTS = {
                     }
                 },
                 {
-                    "type": "KdeControlStation",
+                    "type": "local.laetum.controlcenter",
                     "config": {
-                        "Appearance": {
-                            "darkGlobalTheme": "Blue-Dark-1",
-                            "lightGlobalTheme": "Blue-Light-1",
-                            "preferChangeGlobalTheme": true,
-                            "scale": 95,
-                            "showBorders": false,
-                            "showMediaPlayer": false,
-                            "showPercentage": true,
-                            "transparency": true,
-                            "transparencyLevel": 50
+                        "General": {
+                            "showBatteryIndicator": false,
+                            "showNetworkIndicator": false,
+                            "showNotificationIndicator": false,
+                            "showVolumeIndicator": false
                         }
                     }
                 },
@@ -391,7 +394,7 @@ var REFERENCE_LAYOUTS = {
                             "launchers": [
                                 "applications:org.kde.kdeconnect.app.desktop",
                                 "applications:org.jitsi.jitsi-meet.desktop",
-                                "applications:org.kde.discover.desktop",
+                                "applications:mainuan-store.desktop",
                                 "applications:onlyoffice-desktopeditors.desktop",
                                 "preferred://filemanager",
                                 "applications:firefox.desktop"
@@ -442,18 +445,13 @@ var REFERENCE_LAYOUTS = {
                     }
                 },
                 {
-                    "type": "KdeControlStation",
+                    "type": "local.laetum.controlcenter",
                     "config": {
-                        "Appearance": {
-                            "darkGlobalTheme": "Blue-Dark-1",
-                            "lightGlobalTheme": "Blue-Light-1",
-                            "preferChangeGlobalTheme": true,
-                            "scale": 95,
-                            "showBorders": false,
-                            "showMediaPlayer": false,
-                            "showPercentage": true,
-                            "transparency": true,
-                            "transparencyLevel": 50
+                        "General": {
+                            "showBatteryIndicator": false,
+                            "showNetworkIndicator": false,
+                            "showNotificationIndicator": false,
+                            "showVolumeIndicator": false
                         }
                     }
                 },
@@ -536,7 +534,15 @@ var REFERENCE_LAYOUTS = {
                     }
                 },
                 {
-                    "type": "KdeControlStation"
+                    "type": "local.laetum.controlcenter",
+                    "config": {
+                        "General": {
+                            "showBatteryIndicator": false,
+                            "showNetworkIndicator": false,
+                            "showNotificationIndicator": false,
+                            "showVolumeIndicator": false
+                        }
+                    }
                 },
                 {
                     "type": "org.kde.plasma.powershowdesktop"
@@ -572,7 +578,7 @@ var REFERENCE_LAYOUTS = {
                         "General": {
                             "launchers": [
                                 "applications:org.kde.kdeconnect.app.desktop",
-                                "applications:org.kde.discover.desktop",
+                                "applications:mainuan-store.desktop",
                                 "applications:onlyoffice-desktopeditors.desktop",
                                 "preferred://filemanager",
                                 "applications:firefox.desktop"
@@ -674,7 +680,7 @@ var REFERENCE_LAYOUTS = {
                             "launchers": [
                                 "applications:org.kde.kdeconnect.app.desktop",
                                 "applications:org.jitsi.jitsi-meet.desktop",
-                                "applications:org.kde.discover.desktop",
+                                "applications:mainuan-store.desktop",
                                 "applications:onlyoffice-desktopeditors.desktop",
                                 "preferred://filemanager",
                                 "applications:firefox.desktop"
@@ -725,18 +731,13 @@ var REFERENCE_LAYOUTS = {
                     }
                 },
                 {
-                    "type": "KdeControlStation",
+                    "type": "local.laetum.controlcenter",
                     "config": {
-                        "Appearance": {
-                            "darkGlobalTheme": "Blue-Dark-1",
-                            "lightGlobalTheme": "Blue-Light-1",
-                            "preferChangeGlobalTheme": true,
-                            "scale": 95,
-                            "showBorders": false,
-                            "showMediaPlayer": false,
-                            "showPercentage": true,
-                            "transparency": true,
-                            "transparencyLevel": 50
+                        "General": {
+                            "showBatteryIndicator": false,
+                            "showNetworkIndicator": false,
+                            "showNotificationIndicator": false,
+                            "showVolumeIndicator": false
                         }
                     }
                 },
@@ -882,18 +883,13 @@ var REFERENCE_LAYOUTS = {
                     }
                 },
                 {
-                    "type": "KdeControlStation",
+                    "type": "local.laetum.controlcenter",
                     "config": {
-                        "Appearance": {
-                            "darkGlobalTheme": "Blue-Dark-1",
-                            "lightGlobalTheme": "Blue-Light-1",
-                            "preferChangeGlobalTheme": true,
-                            "scale": 95,
-                            "showBorders": false,
-                            "showMediaPlayer": false,
-                            "showPercentage": true,
-                            "transparency": true,
-                            "transparencyLevel": 50
+                        "General": {
+                            "showBatteryIndicator": false,
+                            "showNetworkIndicator": false,
+                            "showNotificationIndicator": false,
+                            "showVolumeIndicator": false
                         }
                     }
                 },
