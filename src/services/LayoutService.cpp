@@ -378,12 +378,9 @@ void LayoutService::refresh()
 void LayoutService::settleLayout(const QString &id, int attempts, const QString &previous,
                                 std::function<void(bool, const QString &)> done)
 {
-    if (id != QStringLiteral("plasma-default") && id != QStringLiteral("three-panels")) {
-        done(true, {});
-        return;
-    }
-    // Let Plasma measure the applets before positioning neighboring custom
-    // segments. Two equal samples avoid declaring success on initial sizes.
+    // Let Plasma measure the applets before normalizing every panel's
+    // thickness and positioning neighboring custom segments. Two equal
+    // samples avoid declaring success on initial sizes.
     QTimer::singleShot(200, this, [this, id, attempts, previous, done]() {
         const QString script = widgetPrelude(installedPlasmoids()) + scriptLibrary()
             + QStringLiteral("\nprint(JSON.stringify(positionMainuanLayout(\"%1\")));\n").arg(id);
