@@ -1,3 +1,16 @@
+mainuan-welcome (1.1.6) resolute; urgency=medium
+
+  * Evita o prompt de conffile do dpkg: instala o modelo de favoritos em
+    /usr/share e o ativa no caminho do Plasma por postinst, sem registrar
+    kicker-extra-favoritesrc como conffile do Mainuan Welcome.
+  * Mantém dpkg-divert para preservar o arquivo de kubuntu-settings-desktop
+    e restaura o original no expurgo.
+  * Amplia o teste de integração para validar instalação, reinstalação,
+    remoção e expurgo sem perguntas interativas.
+  * Incrementa a versão para 1.1.6.
+
+ -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 19:58:00 -0300
+
 mainuan-welcome (1.1.5) resolute; urgency=medium
 
   * Corrige a colisão com kubuntu-settings-desktop usando dpkg-divert para
