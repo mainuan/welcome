@@ -1,3 +1,14 @@
+mainuan-welcome (1.1.3) resolute; urgency=medium
+
+  * Padroniza o widget Chat AI em todos os layouts de referência para iniciar
+    pela Maritaca AI, com URL, favicon, nome do provedor e opções da configuração
+    de referência.
+  * Acrescenta testes para validar a configuração no modelo de cada layout e
+    depois da aplicação dos painéis.
+  * Atualiza a versão para 1.1.3 para facilitar a instalação de teste.
+
+ -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 16:00:00 -0300
+
 mainuan-welcome (1.1.2) resolute; urgency=medium
 
   * Depende de mainuan-identity, a fonte oficial do avatar e do logotipo

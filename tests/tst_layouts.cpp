@@ -73,6 +73,7 @@ private slots:
     void modelOrderAndNames();
     void createsAndIdentifiesAllLayouts();
     void preservesReferenceWidgetsAndSettings();
+    void chatAiStartsWithMaritacaInEveryReferenceLayout();
     void adaptsToScreens();
     void correctsClassicSegmentsAndLengthModes();
     void classicSpacing_data();
@@ -138,6 +139,51 @@ void LayoutTest::preservesReferenceWidgetsAndSettings() {
     const QString script = LayoutService::buildScript("unity", {});
     for (const QString &privateValue : {QString("ScreenMapping"), QString("/home/"), QString("activityId"), QString("AppletOrder"), QString("PreloadWeight"), QString("file:///var/lib/flatpak/")})
         QVERIFY2(!script.contains(privateValue), qPrintable(privateValue));
+}
+
+
+void LayoutTest::chatAiStartsWithMaritacaInEveryReferenceLayout() {
+    PlasmaMock plasma;
+    const QString referenceCheck = QStringLiteral(
+        "function valid(g) { return g && g.configVersion===2"
+        " && g.customSitesJson===JSON.stringify([{name:'Maritaca AI',url:'https://chat.maritaca.ai/auth'}])"
+        " && g.dialogHeight===684 && g.dialogWidth===772"
+        " && g.favIcon==='https://chat.maritaca.ai/favicon.svg'"
+        " && g.javascriptCanPaste===true"
+        " && g.lastFavIcon==='https://chat.maritaca.ai/favicon.svg'"
+        " && g.showBingCopilot===true"
+        " && g.url==='https://chat.maritaca.ai/auth'; }"
+        "Object.keys(REFERENCE_LAYOUTS).length===6 && Object.keys(REFERENCE_LAYOUTS).every(function(id) {"
+        " var matches=[]; REFERENCE_LAYOUTS[id].forEach(function(p) {"
+        " p.widgets.forEach(function(w) { if(w.type==='ChatAI-Plasmoid') matches.push(w); }); });"
+        " return matches.length===1 && valid(matches[0].config && matches[0].config.General);"
+        "})"
+    );
+    QVERIFY2(plasma.run(referenceCheck).toBool(),
+             "Every reference layout must define Maritaca AI as the initial Chat AI provider.");
+
+    const QStringList referenceIds = {
+        "plasma-default", "three-panels", "single-bar", "panel-top", "unity", "minimal"
+    };
+    const QString appliedCheck = QStringLiteral(
+        "function valid(w) { var c=w.config; return c['General/configVersion']===2"
+        " && c['General/customSitesJson']===JSON.stringify([{name:'Maritaca AI',url:'https://chat.maritaca.ai/auth'}])"
+        " && c['General/dialogHeight']===684 && c['General/dialogWidth']===772"
+        " && c['General/favIcon']==='https://chat.maritaca.ai/favicon.svg'"
+        " && c['General/javascriptCanPaste']===true"
+        " && c['General/lastFavIcon']==='https://chat.maritaca.ai/favicon.svg'"
+        " && c['General/showBingCopilot']===true"
+        " && c['General/url']==='https://chat.maritaca.ai/auth'; }"
+        "var chats=[]; panels().forEach(function(p) {"
+        " p.widgets().forEach(function(w) { if(w.type==='ChatAI-Plasmoid') chats.push(w); }); });"
+        "chats.length===1 && valid(chats[0])"
+    );
+    for (const QString &id : referenceIds) {
+        plasma.reset();
+        plasma.apply(id);
+        QVERIFY2(plasma.run(appliedCheck).toBool(),
+                 qPrintable(id + ": Chat AI must start with Maritaca AI."));
+    }
 }
 
 void LayoutTest::adaptsToScreens() {

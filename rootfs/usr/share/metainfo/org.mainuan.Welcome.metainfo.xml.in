@@ -16,6 +16,11 @@
   <url type="homepage">https://github.com/mainuan/welcome</url>
   <url type="bugtracker">https://github.com/mainuan/build/issues</url>
   <releases>
+    <release version="1.1.3" date="2026-11-22" type="stable">
+      <description translate="no">
+        <p>Standardize Chat AI to open with Maritaca AI in every desktop reference layout.</p>
+      </description>
+    </release>
     <release version="1.1.2" date="2026-11-19" type="stable">
       <description translate="no">
         <p>The official Mainuan avatar is now a required dependency (mainuan-identity).</p>

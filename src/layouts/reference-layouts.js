@@ -31,6 +31,28 @@ var CLASSIC_PANEL_GEOMETRY = {
     }
 };
 
+
+function mainuanChatAiWidget(required) {
+    var widget = {
+        "type": "ChatAI-Plasmoid",
+        "config": {
+            "General": {
+                "configVersion": 2,
+                "customSitesJson": "[{\"name\":\"Maritaca AI\",\"url\":\"https://chat.maritaca.ai/auth\"}]",
+                "dialogHeight": 684,
+                "dialogWidth": 772,
+                "favIcon": "https://chat.maritaca.ai/favicon.svg",
+                "javascriptCanPaste": true,
+                "lastFavIcon": "https://chat.maritaca.ai/favicon.svg",
+                "showBingCopilot": true,
+                "url": "https://chat.maritaca.ai/auth"
+            }
+        }
+    };
+    if (required) widget.required = true;
+    return widget;
+}
+
 var REFERENCE_LAYOUTS = {
     "plasma-default": [
         {
@@ -97,17 +119,7 @@ var REFERENCE_LAYOUTS = {
         {
             "role": "tray",
             "widgets": [
-                {
-                    "type": "ChatAI-Plasmoid",
-                    "required": true,
-                    "config": {
-                        "General": {
-                            "customSitesJson": "[{\"name\":\"Maritaca AI\",\"url\":\"https://chat.maritaca.ai/auth\"}]",
-                            "showBingCopilot": true,
-                            "url": "https://chat.maritaca.ai/auth"
-                        }
-                    }
-                },
+                mainuanChatAiWidget(true),
                 {
                     "type": "org.kde.plasma.systemtray",
                     "required": true,
@@ -251,9 +263,7 @@ var REFERENCE_LAYOUTS = {
         {
             "role": "right",
             "widgets": [
-                {
-                    "type": "ChatAI-Plasmoid"
-                },
+                mainuanChatAiWidget(false),
                 {
                     "type": "org.kde.plasma.systemtray",
                     "config": {
@@ -405,14 +415,7 @@ var REFERENCE_LAYOUTS = {
                 {
                     "type": "org.kde.plasma.panelspacer"
                 },
-                {
-                    "type": "ChatAI-Plasmoid",
-                    "config": {
-                        "General": {
-                            "customSitesJson": "[{\"name\":\"Maritalk\",\"url\":\"https://chat.maritaca.ai/\"}]"
-                        }
-                    }
-                },
+                mainuanChatAiWidget(false),
                 {
                     "type": "org.kde.plasma.systemtray",
                     "config": {
@@ -501,9 +504,7 @@ var REFERENCE_LAYOUTS = {
                 {
                     "type": "org.kde.plasma.panelspacer"
                 },
-                {
-                    "type": "ChatAI-Plasmoid"
-                },
+                mainuanChatAiWidget(false),
                 {
                     "type": "org.kde.plasma.systemtray",
                     "config": {
@@ -691,14 +692,7 @@ var REFERENCE_LAYOUTS = {
                 {
                     "type": "org.kde.plasma.panelspacer"
                 },
-                {
-                    "type": "ChatAI-Plasmoid",
-                    "config": {
-                        "General": {
-                            "customSitesJson": "[{\"name\":\"Maritalk\",\"url\":\"https://chat.maritaca.ai/\"}]"
-                        }
-                    }
-                },
+                mainuanChatAiWidget(false),
                 {
                     "type": "org.kde.plasma.systemtray",
                     "config": {
@@ -843,14 +837,7 @@ var REFERENCE_LAYOUTS = {
                         }
                     }
                 },
-                {
-                    "type": "ChatAI-Plasmoid",
-                    "config": {
-                        "General": {
-                            "customSitesJson": "[{\"name\":\"Maritalk\",\"url\":\"https://chat.maritaca.ai/\"}]"
-                        }
-                    }
-                },
+                mainuanChatAiWidget(false),
                 {
                     "type": "org.kde.plasma.systemtray",
                     "config": {
