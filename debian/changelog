@@ -1,3 +1,15 @@
+mainuan-welcome (1.1.5) resolute; urgency=medium
+
+  * Corrige a colisão com kubuntu-settings-desktop usando dpkg-divert para
+    preservar a configuração original do Kubuntu e instalar os favoritos
+    Mainuan no caminho de configuração esperado pelo Plasma.
+  * Restaura o arquivo original do Kubuntu ao remover completamente o pacote.
+  * Acrescenta teste de integração que reproduz a propriedade do arquivo pelo
+    kubuntu-settings-desktop, testando instalação, reinstalação, remoção e expurgo.
+  * Incrementa a versão para 1.1.5.
+
+ -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 18:35:00 -0300
+
 mainuan-welcome (1.1.4) resolute; urgency=medium
 
   * Acrescenta Centro de Informações e Configurações do Sistema aos favoritos
