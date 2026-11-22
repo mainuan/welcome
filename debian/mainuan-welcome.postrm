@@ -1,0 +1,29 @@
+#!/bin/sh
+set -e
+
+favorites_file='/etc/xdg/kicker-extra-favoritesrc'
+kubuntu_file='/etc/xdg/kicker-extra-favoritesrc.kubuntu'
+
+remove_favorites_diversion() {
+    diverted_by="$(dpkg-divert --listpackage "$favorites_file")"
+    if [ "$diverted_by" = "mainuan-welcome" ]; then
+        dpkg-divert --package mainuan-welcome --remove --rename \
+            --divert "$kubuntu_file" "$favorites_file"
+    fi
+}
+
+case "$1" in
+    purge|abort-install)
+        remove_favorites_diversion
+        ;;
+    abort-upgrade)
+        old_version="${2:-}"
+        # The diversion is first introduced in 1.1.5. Preserve it when a
+        # later version already had responsibility for the same diversion.
+        if [ -z "$old_version" ] || dpkg --compare-versions "$old_version" lt "1.1.5~"; then
+            remove_favorites_diversion
+        fi
+        ;;
+esac
+
+#DEBHELPER#
