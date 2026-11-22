@@ -4,7 +4,8 @@ var installedWidgets = [];
 var screenCount = 1;
 var mockScreens = [{width: 1920, height: 1080}];
 var mockPanels = [], mockRemoved = 0, mockOutput = "";
-var mockIconFactor = 1; mockShrinkPanelOnAppletAdd = false;\nvar mockShrinkPanelOnAppletAdd = false;
+var mockIconFactor = 1;
+var mockShrinkPanelOnAppletAdd = false;
 function screenGeometry(screen) { return mockScreens[screen]; }
 function print(value) { mockOutput += String(value) + "\n"; }
 function panels() { return mockPanels.slice(); }
@@ -55,7 +56,7 @@ Panel.prototype.addWidget = function (type) {
 Panel.prototype.widgets = function () { return this.items.slice(); };
 Panel.prototype.remove = function () { ++mockRemoved; mockPanels.splice(mockPanels.indexOf(this), 1); };
 function mockReset(screens) {
-    mockScreens = screens; screenCount = screens.length; mockPanels = []; mockRemoved = 0; mockOutput = ""; mockIconFactor = 1;
+    mockScreens = screens; screenCount = screens.length; mockPanels = []; mockRemoved = 0; mockOutput = ""; mockIconFactor = 1; mockShrinkPanelOnAppletAdd = false;
     var original = new Panel("org.kde.panel");
     original.addWidget("org.kde.plasma.kickoff");
 }
