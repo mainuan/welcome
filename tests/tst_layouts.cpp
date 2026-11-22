@@ -195,8 +195,9 @@ void LayoutTest::configuresInfoCenterAndSystemSettingsAsLauncherFavorites() {
     QVERIFY2(!config.isEmpty(), "The KDE launcher favorites policy must be present in the source tree.");
     QVERIFY(config.contains("[General]"));
     QVERIFY(config.contains("Prepend=org.kde.kinfocenter.desktop;systemsettings.desktop"));
-    // Preserve the rest of Plasma's normal favorites instead of replacing them.
-    QVERIFY(config.contains("IgnoreDefaults=false"));
+    // The reference launcher shows exactly these two entries, without Plasma's
+    // additional distribution-independent default favorites.
+    QVERIFY(config.contains("IgnoreDefaults=true"));
 }
 
 void LayoutTest::adaptsToScreens() {
