@@ -1,3 +1,15 @@
+mainuan-welcome (1.1.8) resolute; urgency=medium
+
+  * Adiciona Jitsi Meet aos lançadores fixados das barras nos sete layouts,
+    sempre após o KDE Connect e antes dos demais aplicativos.
+  * Aplica a mesma lista de lançadores ao painel do layout de janelas lado
+    a lado, mantendo o identificador portátil do aplicativo Flatpak.
+  * Acrescenta teste de regressão para confirmar presença, ordem e unicidade
+    do atalho em todos os layouts.
+  * Incrementa a versão para 1.1.8.
+
+ -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 20:54:00 -0300
+
 mainuan-welcome (1.1.7) resolute; urgency=medium
 
   * Corrige o caminho do arquivo de referência no teste final de expurgo,

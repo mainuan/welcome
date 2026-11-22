@@ -73,6 +73,7 @@ private slots:
     void modelOrderAndNames();
     void createsAndIdentifiesAllLayouts();
     void preservesReferenceWidgetsAndSettings();
+    void pinsJitsiInEveryTaskbarLayout();
     void chatAiStartsWithMaritacaInEveryReferenceLayout();
     void configuresInfoCenterAndSystemSettingsAsLauncherFavorites();
     void adaptsToScreens();
@@ -142,6 +143,27 @@ void LayoutTest::preservesReferenceWidgetsAndSettings() {
         QVERIFY2(!script.contains(privateValue), qPrintable(privateValue));
 }
 
+
+void LayoutTest::pinsJitsiInEveryTaskbarLayout() {
+    PlasmaMock plasma;
+    const QString launcherCheck = QStringLiteral(
+        "(function(){"
+        "var taskManagers=[];"
+        "panels().forEach(function(panel){panel.widgets().forEach(function(widget){"
+        "if(widget.type==='org.kde.plasma.icontasks')"
+        "taskManagers.push(widget.config['General/launchers']||[]);"
+        "});});"
+        "return taskManagers.length>0 && taskManagers.every(function(launchers){"
+        "return launchers.indexOf('applications:org.kde.kdeconnect.app.desktop')===0"
+        " && launchers.indexOf('applications:org.jitsi.jitsi-meet.desktop')===1"
+        " && launchers.filter(function(item){return item==='applications:org.jitsi.jitsi-meet.desktop';}).length===1;"
+        "});})()");
+    for (const QString &id : ids) {
+        plasma.reset();
+        plasma.apply(id);
+        QVERIFY2(plasma.run(launcherCheck).toBool(), qPrintable(id + ": " + plasma.output()));
+    }
+}
 
 void LayoutTest::chatAiStartsWithMaritacaInEveryReferenceLayout() {
     PlasmaMock plasma;

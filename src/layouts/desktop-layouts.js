@@ -117,7 +117,7 @@ function newPanel(screen, id, props) {
 }
 
 // Mainuan's pinned applications (a string list in the task manager's config).
-var MAINUAN_LAUNCHERS = ["applications:org.kde.kdeconnect.app.desktop", "applications:mainuan-store.desktop",
+var MAINUAN_LAUNCHERS = ["applications:org.kde.kdeconnect.app.desktop", "applications:org.jitsi.jitsi-meet.desktop", "applications:mainuan-store.desktop",
                          "applications:onlyoffice-desktopeditors.desktop", "preferred://filemanager",
                          "applications:firefox.desktop"];
 
@@ -137,7 +137,7 @@ var layouts = {
         addLauncher(panel);
         addWidget(panel, "org.kde.plasma.pager", { "General": { "displayedText": "Number" } });
         addWidget(panel, "org.kde.plasma.panelspacer");
-        addWidget(panel, "org.kde.plasma.icontasks", taskConfig(screen, {}));
+        addWidget(panel, "org.kde.plasma.icontasks", taskConfig(screen, { "launchers": MAINUAN_LAUNCHERS }));
         addWidget(panel, "org.kde.plasma.panelspacer");
         addWidget(panel, "org.kde.plasma.systemtray");
         addWidget(panel, "org.kde.plasma.digitalclock");
