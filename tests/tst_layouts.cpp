@@ -144,6 +144,9 @@ void LayoutTest::preservesReferenceWidgetsAndSettings() {
 
 void LayoutTest::chatAiStartsWithMaritacaInEveryReferenceLayout() {
     PlasmaMock plasma;
+    // Load the embedded reference-layout library into the isolated JS engine
+    // before inspecting REFERENCE_LAYOUTS directly.
+    plasma.apply("plasma-default");
     const QString referenceCheck = QStringLiteral(
         "function valid(g) { return g && g.configVersion===2"
         " && g.customSitesJson===JSON.stringify([{name:'Maritaca AI',url:'https://chat.maritaca.ai/auth'}])"
