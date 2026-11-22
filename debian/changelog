@@ -1,3 +1,13 @@
+mainuan-welcome (1.1.7) resolute; urgency=medium
+
+  * Corrige o caminho do arquivo de referência no teste final de expurgo,
+    permitindo validar a restauração exata do conffile pertencente ao Kubuntu.
+  * Mantém o gerenciamento reversível por dpkg-divert e a configuração dos
+    dois favoritos do lançador.
+  * Incrementa a versão para 1.1.7 para distinguir o novo pacote de teste.
+
+ -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 19:55:00 -0300
+
 mainuan-welcome (1.1.6) resolute; urgency=medium
 
   * Evita o prompt de conffile do dpkg: instala o modelo de favoritos em
