@@ -208,6 +208,9 @@ jobs:
           grep -Fxq 'IgnoreDefaults=true' /etc/xdg/kicker-extra-favoritesrc
           dpkg -s "$PACKAGE" | grep -q '^Status: install ok installed'
           test "$(dpkg-query -W -f='${Version}' "$PACKAGE")" = "$PACKAGE_VERSION"
+          # The favorites template is data; postinst activates it outside dpkg's conffile database.
+          test -f /usr/share/mainuan-welcome/kicker-extra-favoritesrc
+          ! dpkg-query -W -f='${Conffiles}' "$PACKAGE" | grep -Fq '/etc/xdg/kicker-extra-favoritesrc'
           dpkg -L "$PACKAGE" > ../installed-files.txt
           # Every path listed by dpkg must exist on disk.
           while IFS= read -r f; do
@@ -248,7 +251,7 @@ jobs:
           apt-get install --yes --reinstall ./dist/"${PACKAGE}_${PACKAGE_VERSION}_amd64.deb"
           test "$(dpkg-divert --listpackage /etc/xdg/kicker-extra-favoritesrc)" = "mainuan-welcome"
           apt-get remove --yes "$PACKAGE"
-          # Removing (without purging) retains the Mainuan conffile and diversion.
+          # Removing (without purging) retains the generated favorites file and diversion.
           test -f /etc/xdg/kicker-extra-favoritesrc
           test -f /etc/xdg/kicker-extra-favoritesrc.kubuntu
           test "$(dpkg-divert --listpackage /etc/xdg/kicker-extra-favoritesrc)" = "mainuan-welcome"
