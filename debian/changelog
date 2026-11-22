@@ -3,8 +3,8 @@ mainuan-welcome (1.1.4) resolute; urgency=medium
   * Acrescenta Centro de Informações e Configurações do Sistema aos favoritos
     padrão dos lançadores de aplicativos do Plasma, pela configuração oficial
     kicker-extra-favoritesrc.
-  * Preserva os favoritos padrão do Plasma e coloca os dois atalhos Mainuan no
-    início da lista.
+  * Define os dois atalhos como favoritos padrão exclusivos do lançador, na
+    ordem da referência visual, sem importar a lista padrão do Plasma.
   * Adiciona testes para validar a configuração e sua instalação em /etc/xdg.
   * Atualiza a versão para 1.1.4 para facilitar a instalação de teste.
 
