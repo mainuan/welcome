@@ -173,12 +173,36 @@ jobs:
           # mainuan-identity (official avatar sources) is not in the Ubuntu
           # archive: the pinned release, checked by SHA-256, as in the ISO.
           apt-get install --yes --no-install-recommends curl ca-certificates
+          # Reproduce the Kubuntu package owning the system-wide Plasma favorites file.
+          fixture=../kubuntu-settings-fixture
+          mkdir -p "$fixture/DEBIAN" "$fixture/etc/xdg"
+          cat > "$fixture/DEBIAN/control" <<'CONTROL'
+          Package: kubuntu-settings-desktop
+          Version: 1:26.04.13
+          Architecture: all
+          Maintainer: Mainuan CI <ci@mainuan.invalid>
+          Description: Minimal Kubuntu settings ownership fixture for dpkg-divert testing
+          CONTROL
+          printf '%s\\n' '/etc/xdg/kicker-extra-favoritesrc' > "$fixture/DEBIAN/conffiles"
+          cat > "$fixture/etc/xdg/kicker-extra-favoritesrc" <<'KUBUNTU'
+          [General]
+          Prepend=org.kubuntu.manage-software.desktop
+          IgnoreDefaults=false
+          KUBUNTU
+          dpkg-deb --build "$fixture" ../kubuntu-settings-fixture.deb
+          dpkg --install ../kubuntu-settings-fixture.deb
+          dpkg-query -S /etc/xdg/kicker-extra-favoritesrc | grep -q '^kubuntu-settings-desktop:'
+          cp /etc/xdg/kicker-extra-favoritesrc ../kubuntu-favoritesrc.before
+
           identity=mainuan-identity_2026.11.19_all.deb
           curl --fail --location --silent --show-error --proto '=https' --output "../${identity}" \
             "https://github.com/mainuan/dot-files/releases/download/v2026.11.19/${identity}"
           echo "0b0b84a06b2ae6811690dd4e332345124b5cd588fb603be82dfbe97ec283a139  ../${identity}" | sha256sum --check
           apt-get install --yes ./"${PACKAGE}_${PACKAGE_VERSION}_amd64.deb" "../${identity}"
           test -f /usr/share/mainuan/identity/avatars/cyan.svg
+          test "$(dpkg-divert --listpackage /etc/xdg/kicker-extra-favoritesrc)" = "mainuan-welcome"
+          test -f /etc/xdg/kicker-extra-favoritesrc.kubuntu
+          cmp ../kubuntu-favoritesrc.before /etc/xdg/kicker-extra-favoritesrc.kubuntu
           test -f /etc/xdg/kicker-extra-favoritesrc
           grep -Fxq 'Prepend=org.kde.kinfocenter.desktop;systemsettings.desktop' /etc/xdg/kicker-extra-favoritesrc
           grep -Fxq 'IgnoreDefaults=true' /etc/xdg/kicker-extra-favoritesrc
@@ -222,9 +246,19 @@ jobs:
         run: |
           set -euo pipefail
           apt-get install --yes --reinstall ./dist/"${PACKAGE}_${PACKAGE_VERSION}_amd64.deb"
+          test "$(dpkg-divert --listpackage /etc/xdg/kicker-extra-favoritesrc)" = "mainuan-welcome"
           apt-get remove --yes "$PACKAGE"
+          # Removing (without purging) retains the Mainuan conffile and diversion.
+          test -f /etc/xdg/kicker-extra-favoritesrc
+          test -f /etc/xdg/kicker-extra-favoritesrc.kubuntu
+          test "$(dpkg-divert --listpackage /etc/xdg/kicker-extra-favoritesrc)" = "mainuan-welcome"
           # APT 3 no longer resolves a removed local package: purge with dpkg.
           dpkg --purge "$PACKAGE"
+          # Purge must relinquish the diversion and restore Kubuntu's original file.
+          test ! -e /etc/xdg/kicker-extra-favoritesrc.kubuntu
+          test -z "$(dpkg-divert --listpackage /etc/xdg/kicker-extra-favoritesrc)"
+          cmp ../kubuntu-favoritesrc.before /etc/xdg/kicker-extra-favoritesrc
+          dpkg-query -S /etc/xdg/kicker-extra-favoritesrc | grep -q '^kubuntu-settings-desktop:'
           if dpkg -s "$PACKAGE" >/dev/null 2>&1; then
             echo "::error::$PACKAGE still known to dpkg after purge"; exit 1
           fi
