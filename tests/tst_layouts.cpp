@@ -126,7 +126,7 @@ void LayoutTest::preservesReferenceWidgetsAndSettings() {
     plasma.reset(); plasma.apply("three-panels");
     QCOMPARE(plasma.run("panels()[0].items.map(function(w){return w.type;}).join('|')").toString(), QString("org.kde.plasma.kickoff|Chaac.Complete.Weather|org.kde.milou|com.mike.desktop"));
     QCOMPARE(plasma.run("panels()[1].items[0].config['General/launchers'][1]").toString(), QString("applications:org.jitsi.jitsi-meet.desktop"));
-    QCOMPARE(plasma.run("panels()[2].items[2].config['Appearance/scale']").toInt(), 95);
+    QVERIFY(plasma.run("panels()[2].items[2].type==='local.laetum.controlcenter' && panels()[2].items[2].config['General/showBatteryIndicator']===false").toBool());
     plasma.reset(); plasma.apply("single-bar");
     QVERIFY(plasma.run("panels()[0].floating && panels()[0].lengthMode==='custom'").toBool());
     plasma.reset(); plasma.apply("panel-top");
