@@ -9,8 +9,8 @@ case "$1" in
         diverted_by="$(dpkg-divert --listpackage "$favorites_file")"
         case "$diverted_by" in
             "")
-                # Keep Kubuntu's packaged conffile intact and let Mainuan own
-                # the active path. dpkg-divert exempts this package's own copy.
+                # Preserve the Kubuntu-owned file; the package no longer ships
+                # this path as a conffile, so dpkg will not prompt after rename.
                 dpkg-divert --package mainuan-welcome --add --rename \
                     --divert "$kubuntu_file" "$favorites_file"
                 ;;
