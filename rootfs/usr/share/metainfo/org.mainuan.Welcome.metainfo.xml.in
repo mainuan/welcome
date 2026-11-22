@@ -16,6 +16,11 @@
   <url type="homepage">https://github.com/mainuan/welcome</url>
   <url type="bugtracker">https://github.com/mainuan/build/issues</url>
   <releases>
+    <release version="1.1.5" date="2026-11-22" type="stable">
+      <description translate="no">
+        <p>Fixes the Kubuntu favorites configuration file ownership conflict with a reversible dpkg diversion.</p>
+      </description>
+    </release>
     <release version="1.1.4" date="2026-11-22" type="stable">
       <description translate="no">
         <p>Sets Info Center and System Settings as the only default launcher favorites, in the reference order.</p>
