@@ -181,7 +181,7 @@ jobs:
           test -f /usr/share/mainuan/identity/avatars/cyan.svg
           test -f /etc/xdg/kicker-extra-favoritesrc
           grep -Fxq 'Prepend=org.kde.kinfocenter.desktop;systemsettings.desktop' /etc/xdg/kicker-extra-favoritesrc
-          grep -Fxq 'IgnoreDefaults=false' /etc/xdg/kicker-extra-favoritesrc
+          grep -Fxq 'IgnoreDefaults=true' /etc/xdg/kicker-extra-favoritesrc
           dpkg -s "$PACKAGE" | grep -q '^Status: install ok installed'
           test "$(dpkg-query -W -f='${Version}' "$PACKAGE")" = "$PACKAGE_VERSION"
           dpkg -L "$PACKAGE" > ../installed-files.txt
