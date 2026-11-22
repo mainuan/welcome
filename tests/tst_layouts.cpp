@@ -74,6 +74,7 @@ private slots:
     void createsAndIdentifiesAllLayouts();
     void preservesReferenceWidgetsAndSettings();
     void chatAiStartsWithMaritacaInEveryReferenceLayout();
+    void configuresInfoCenterAndSystemSettingsAsLauncherFavorites();
     void adaptsToScreens();
     void correctsClassicSegmentsAndLengthModes();
     void classicSpacing_data();
@@ -187,6 +188,15 @@ void LayoutTest::chatAiStartsWithMaritacaInEveryReferenceLayout() {
         QVERIFY2(plasma.run(appliedCheck).toBool(),
                  qPrintable(id + ": Chat AI must start with Maritaca AI."));
     }
+}
+
+void LayoutTest::configuresInfoCenterAndSystemSettingsAsLauncherFavorites() {
+    const QByteArray config = read(QStringLiteral(MAINUAN_TEST_KICKER_FAVORITES_FILE));
+    QVERIFY2(!config.isEmpty(), "The KDE launcher favorites policy must be present in the source tree.");
+    QVERIFY(config.contains("[General]"));
+    QVERIFY(config.contains("Prepend=org.kde.kinfocenter.desktop;systemsettings.desktop"));
+    // Preserve the rest of Plasma's normal favorites instead of replacing them.
+    QVERIFY(config.contains("IgnoreDefaults=false"));
 }
 
 void LayoutTest::adaptsToScreens() {

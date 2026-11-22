@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(mainuan-welcome VERSION 1.1.3 LANGUAGES CXX)
+project(mainuan-welcome VERSION 1.1.4 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -322,6 +322,14 @@ install(FILES
     DESTINATION ${MAINUAN_SYSCONFDIR}/xdg/autostart
 )
 
+# KDE's shared launcher-favorites policy is read by Plasma application menus.
+# Keep it outside any individual panel layout so every supported menu gets the
+# same distribution defaults when its favorites are first initialized.
+install(FILES
+    rootfs/etc/xdg/kicker-extra-favoritesrc
+    DESTINATION ${MAINUAN_SYSCONFDIR}/xdg
+)
+
 install(FILES
     rootfs/etc/mainuan/welcome.conf
     DESTINATION ${MAINUAN_SYSCONFDIR}/mainuan
@@ -377,7 +385,8 @@ if (Qt6Test_FOUND)
     add_executable(tst_layouts tests/tst_layouts.cpp)
     target_link_libraries(tst_layouts PRIVATE mainuan-core Qt6::Test Qt6::Qml)
     target_compile_definitions(tst_layouts PRIVATE
-        MAINUAN_TEST_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures")
+        MAINUAN_TEST_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures"
+        MAINUAN_TEST_KICKER_FAVORITES_FILE="${CMAKE_CURRENT_SOURCE_DIR}/rootfs/etc/xdg/kicker-extra-favoritesrc")
     mainuan_add_isolated_test(tst_layouts)
     # i18n: the functional suites assert the English source text. LANGUAGE=en
     # keeps an installed pt_BR catalog (or a Portuguese session) out of them;

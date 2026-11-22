@@ -1,3 +1,15 @@
+mainuan-welcome (1.1.4) resolute; urgency=medium
+
+  * Acrescenta Centro de Informações e Configurações do Sistema aos favoritos
+    padrão dos lançadores de aplicativos do Plasma, pela configuração oficial
+    kicker-extra-favoritesrc.
+  * Preserva os favoritos padrão do Plasma e coloca os dois atalhos Mainuan no
+    início da lista.
+  * Adiciona testes para validar a configuração e sua instalação em /etc/xdg.
+  * Atualiza a versão para 1.1.4 para facilitar a instalação de teste.
+
+ -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 16:36:00 -0300
+
 mainuan-welcome (1.1.3) resolute; urgency=medium
 
   * Padroniza o widget Chat AI em todos os layouts de referência para iniciar
