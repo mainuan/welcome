@@ -1484,7 +1484,7 @@ msgctxt "@info %1 is an application or component name"
 msgid "Could not open %1."
 msgstr ""
 
-#: src/services/LayoutService.cpp:36 src/services/LayoutService.cpp:409
+#: src/services/LayoutService.cpp:36 src/services/LayoutService.cpp:406
 #, kde-format
 msgid "Invalid layout."
 msgstr ""
@@ -1559,92 +1559,92 @@ msgctxt "desktop layout name"
 msgid "Tiling"
 msgstr ""
 
-#: src/services/LayoutService.cpp:394
+#: src/services/LayoutService.cpp:391
 #, kde-format
 msgid "Could not measure the layout segments."
 msgstr ""
 
-#: src/services/LayoutService.cpp:400
+#: src/services/LayoutService.cpp:397
 #, kde-format
 msgid "The segments did not settle without overlapping on this screen."
 msgstr ""
 
-#: src/services/LayoutService.cpp:416
+#: src/services/LayoutService.cpp:413
 #, kde-format
 msgid "Plasma did not respond; open the Welcome inside a KDE Plasma session."
 msgstr ""
 
-#: src/services/LayoutService.cpp:423
+#: src/services/LayoutService.cpp:420
 #, kde-format
 msgid "Checking the launcher of the %1 layout…"
 msgstr ""
 
-#: src/services/LayoutService.cpp:426
+#: src/services/LayoutService.cpp:423
 #, kde-format
 msgid "Could not load the layout scripts; nothing was changed."
 msgstr ""
 
-#: src/services/LayoutService.cpp:437
+#: src/services/LayoutService.cpp:434
 #, kde-format
 msgid "Could not save a copy of the current layout; nothing was changed."
 msgstr ""
 
-#: src/services/LayoutService.cpp:440
+#: src/services/LayoutService.cpp:437
 #, kde-format
 msgid "Applying the %1 layout…"
 msgstr ""
 
 #. i18n: %1 is a complete sentence explaining why the layout failed.
-#: src/services/LayoutService.cpp:445
+#: src/services/LayoutService.cpp:442
 #, kde-format
 msgid "%1 The previous layout was restored."
 msgstr ""
 
 #. i18n: “Restore Previous Layout” is the button on the Appearance page.
-#: src/services/LayoutService.cpp:447
+#: src/services/LayoutService.cpp:444
 #, kde-format
 msgid "%1 Could not restore automatically; use “Restore Previous Layout”."
 msgstr ""
 
 #. i18n: %2 is the raw error reported by Plasma.
-#: src/services/LayoutService.cpp:459
+#: src/services/LayoutService.cpp:456
 #, kde-format
 msgid "Could not apply the %1 layout (%2)."
 msgstr ""
 
-#: src/services/LayoutService.cpp:469
+#: src/services/LayoutService.cpp:466
 #, kde-format
 msgid "The %1 layout was not completed."
 msgstr ""
 
-#: src/services/LayoutService.cpp:474
+#: src/services/LayoutService.cpp:471
 #, kde-format
 msgid "%1 layout applied."
 msgstr ""
 
-#: src/services/LayoutService.cpp:478
+#: src/services/LayoutService.cpp:475
 #, kde-format
 msgid ""
 "%1 layout applied. Drag windows while holding Shift to snap them into the "
 "tiles."
 msgstr ""
 
-#: src/services/LayoutService.cpp:479
+#: src/services/LayoutService.cpp:476
 #, kde-format
 msgid "%1 layout applied, but the KWin tiles could not be configured."
 msgstr ""
 
-#: src/services/LayoutService.cpp:554
+#: src/services/LayoutService.cpp:551
 #, kde-format
 msgid "Restoring the previous layout; Plasma will be restarted…"
 msgstr ""
 
-#: src/services/LayoutService.cpp:556
+#: src/services/LayoutService.cpp:553
 #, kde-format
 msgid "Previous layout restored."
 msgstr ""
 
-#: src/services/LayoutService.cpp:557
+#: src/services/LayoutService.cpp:554
 #, kde-format
 msgid "Could not restore the previous layout."
 msgstr ""

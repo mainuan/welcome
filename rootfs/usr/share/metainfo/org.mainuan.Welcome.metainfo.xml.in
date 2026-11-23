@@ -16,6 +16,13 @@
   <url type="homepage">https://github.com/mainuan/welcome</url>
   <url type="bugtracker">https://github.com/mainuan/build/issues</url>
   <releases>
+    <release version="1.1.3" date="2026-11-22" type="stable">
+      <description translate="no">
+        <p>Standardizes all seven desktop layouts with 40-pixel panels, including post-load size correction, and updates taskbar launchers with Mainuan Store and Jitsi Meet.</p>
+        <p>Replaces the Control Station widget with Mainuan Control Center, sets Maritaca AI as the default Chat AI provider, and adds Info Center and System Settings to the launcher favorites.</p>
+        <p>Preserves and restores Kubuntu's original launcher-favorites configuration when the package is removed; expands layout and package integration tests.</p>
+      </description>
+    </release>
     <release version="1.1.2" date="2026-11-19" type="stable">
       <description translate="no">
         <p>The official Mainuan avatar is now a required dependency (mainuan-identity).</p>

@@ -1,3 +1,21 @@
+mainuan-welcome (1.1.3) resolute; urgency=medium
+
+  * Padroniza a espessura dos painéis em 40 px nos sete layouts e reaplica
+    e valida essa medida depois que o Plasma carrega e mede os plasmoides.
+  * Atualiza os lançadores das barras: usa Mainuan Store no lugar do Discover,
+    inclui Jitsi Meet após o KDE Connect e mantém a lista de atalhos consistente
+    também no layout de janelas lado a lado.
+  * Substitui KdeControlStation pelo widget local.laetum.controlcenter e
+    desativa seus indicadores duplicados de bateria, rede, notificações e volume.
+  * Configura o Chat AI para iniciar com Maritaca AI em todos os layouts.
+  * Adiciona Centro de Informações e Configurações do Sistema aos favoritos
+    padrão do lançador, preservando o arquivo original do Kubuntu com
+    dpkg-divert e restaurando-o na remoção completa do pacote.
+  * Amplia os testes de regressão dos layouts e os testes de integração do
+    pacote para instalação, execução, reinstalação, remoção e expurgo.
+
+ -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 21:20:00 -0300
+
 mainuan-welcome (1.1.2) resolute; urgency=medium
 
   * Depende de mainuan-identity, a fonte oficial do avatar e do logotipo

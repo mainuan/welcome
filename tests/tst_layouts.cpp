@@ -16,7 +16,7 @@ const QStringList widgets = {"org.kde.plasma.kickoff", "org.kde.plasma.kicker", 
     "org.kde.plasma.icontasks", "org.kde.plasma.systemtray", "org.kde.plasma.digitalclock", "org.kde.plasma.panelspacer",
     "org.kde.plasma.marginsseparator", "org.kde.plasma.appmenu", "org.kde.plasma.pager", "org.kde.plasma.trash",
     "org.kde.plasma.powershowdesktop", "org.kde.plasma.showdesktop", "Chaac.Complete.Weather", "com.mike.desktop",
-    "org.kde.milou", "ChatAI-Plasmoid", "KdeControlStation"};
+    "org.kde.milou", "ChatAI-Plasmoid", "local.laetum.controlcenter"};
 QString json(const QStringList &values) { return QString::fromUtf8(QJsonDocument(QJsonArray::fromStringList(values)).toJson(QJsonDocument::Compact)); }
 QByteArray read(const QString &path) { QFile file(path); return file.open(QIODevice::ReadOnly) ? file.readAll() : QByteArray(); }
 void write(const QString &path, const QByteArray &bytes) {
@@ -73,6 +73,9 @@ private slots:
     void modelOrderAndNames();
     void createsAndIdentifiesAllLayouts();
     void preservesReferenceWidgetsAndSettings();
+    void pinsJitsiInEveryTaskbarLayout();
+    void chatAiStartsWithMaritacaInEveryReferenceLayout();
+    void configuresInfoCenterAndSystemSettingsAsLauncherFavorites();
     void adaptsToScreens();
     void correctsClassicSegmentsAndLengthModes();
     void classicSpacing_data();
@@ -126,7 +129,7 @@ void LayoutTest::preservesReferenceWidgetsAndSettings() {
     plasma.reset(); plasma.apply("three-panels");
     QCOMPARE(plasma.run("panels()[0].items.map(function(w){return w.type;}).join('|')").toString(), QString("org.kde.plasma.kickoff|Chaac.Complete.Weather|org.kde.milou|com.mike.desktop"));
     QCOMPARE(plasma.run("panels()[1].items[0].config['General/launchers'][1]").toString(), QString("applications:org.jitsi.jitsi-meet.desktop"));
-    QCOMPARE(plasma.run("panels()[2].items[2].config['Appearance/scale']").toInt(), 95);
+    QVERIFY(plasma.run("panels()[2].items[2].type==='local.laetum.controlcenter' && panels()[2].items[2].config['General/showBatteryIndicator']===false").toBool());
     plasma.reset(); plasma.apply("single-bar");
     QVERIFY(plasma.run("panels()[0].floating && panels()[0].lengthMode==='custom'").toBool());
     plasma.reset(); plasma.apply("panel-top");
@@ -140,14 +143,99 @@ void LayoutTest::preservesReferenceWidgetsAndSettings() {
         QVERIFY2(!script.contains(privateValue), qPrintable(privateValue));
 }
 
+
+void LayoutTest::pinsJitsiInEveryTaskbarLayout() {
+    PlasmaMock plasma;
+    const QString launcherCheck = QStringLiteral(
+        "(function(){"
+        "var taskManagers=[];"
+        "panels().forEach(function(panel){panel.widgets().forEach(function(widget){"
+        "if(widget.type==='org.kde.plasma.icontasks')"
+        "taskManagers.push(widget.config['General/launchers']||[]);"
+        "});});"
+        "return taskManagers.length>0 && taskManagers.every(function(launchers){"
+        "return launchers.indexOf('applications:org.kde.kdeconnect.app.desktop')===0"
+        " && launchers.indexOf('applications:org.jitsi.jitsi-meet.desktop')===1"
+        " && launchers.filter(function(item){return item==='applications:org.jitsi.jitsi-meet.desktop';}).length===1;"
+        "});})()");
+    for (const QString &id : ids) {
+        plasma.reset();
+        plasma.apply(id);
+        QVERIFY2(plasma.run(launcherCheck).toBool(), qPrintable(id + ": " + plasma.output()));
+    }
+}
+
+void LayoutTest::chatAiStartsWithMaritacaInEveryReferenceLayout() {
+    PlasmaMock plasma;
+    // Load the embedded reference-layout library into the isolated JS engine
+    // before inspecting REFERENCE_LAYOUTS directly.
+    plasma.apply("plasma-default");
+    const QString referenceCheck = QStringLiteral(
+        "function valid(g) { return g && g.configVersion===2"
+        " && g.customSitesJson===JSON.stringify([{name:'Maritaca AI',url:'https://chat.maritaca.ai/auth'}])"
+        " && g.dialogHeight===684 && g.dialogWidth===772"
+        " && g.favIcon==='https://chat.maritaca.ai/favicon.svg'"
+        " && g.javascriptCanPaste===true"
+        " && g.lastFavIcon==='https://chat.maritaca.ai/favicon.svg'"
+        " && g.showBingCopilot===true"
+        " && g.url==='https://chat.maritaca.ai/auth'; }"
+        "Object.keys(REFERENCE_LAYOUTS).length===6 && Object.keys(REFERENCE_LAYOUTS).every(function(id) {"
+        " var matches=[]; REFERENCE_LAYOUTS[id].forEach(function(p) {"
+        " p.widgets.forEach(function(w) { if(w.type==='ChatAI-Plasmoid') matches.push(w); }); });"
+        " return matches.length===1 && valid(matches[0].config && matches[0].config.General);"
+        "})"
+    );
+    QVERIFY2(plasma.run(referenceCheck).toBool(),
+             "Every reference layout must define Maritaca AI as the initial Chat AI provider.");
+
+    const QStringList referenceIds = {
+        "plasma-default", "three-panels", "single-bar", "panel-top", "unity", "minimal"
+    };
+    const QString appliedCheck = QStringLiteral(
+        "function valid(w) { var c=w.config; return c['General/configVersion']===2"
+        " && c['General/customSitesJson']===JSON.stringify([{name:'Maritaca AI',url:'https://chat.maritaca.ai/auth'}])"
+        " && c['General/dialogHeight']===684 && c['General/dialogWidth']===772"
+        " && c['General/favIcon']==='https://chat.maritaca.ai/favicon.svg'"
+        " && c['General/javascriptCanPaste']===true"
+        " && c['General/lastFavIcon']==='https://chat.maritaca.ai/favicon.svg'"
+        " && c['General/showBingCopilot']===true"
+        " && c['General/url']==='https://chat.maritaca.ai/auth'; }"
+        "var chats=[]; panels().forEach(function(p) {"
+        " p.widgets().forEach(function(w) { if(w.type==='ChatAI-Plasmoid') chats.push(w); }); });"
+        "chats.length===1 && valid(chats[0])"
+    );
+    for (const QString &id : referenceIds) {
+        plasma.reset();
+        plasma.apply(id);
+        QVERIFY2(plasma.run(appliedCheck).toBool(),
+                 qPrintable(id + ": Chat AI must start with Maritaca AI."));
+    }
+}
+
+void LayoutTest::configuresInfoCenterAndSystemSettingsAsLauncherFavorites() {
+    const QByteArray config = read(QStringLiteral(MAINUAN_TEST_KICKER_FAVORITES_FILE));
+    QVERIFY2(!config.isEmpty(), "The KDE launcher favorites policy must be present in the source tree.");
+    QVERIFY(config.contains("[General]"));
+    QVERIFY(config.contains("Prepend=org.kde.kinfocenter.desktop;systemsettings.desktop"));
+    // The reference launcher shows exactly these two entries, without Plasma's
+    // additional distribution-independent default favorites.
+    QVERIFY(config.contains("IgnoreDefaults=true"));
+}
+
 void LayoutTest::adaptsToScreens() {
     PlasmaMock plasma;
     for (const QSize &size : {QSize(1280,720), QSize(1366,768), QSize(1920,1080)}) {
         for (const QString &id : ids) {
             plasma.reset(QString("[{width:%1,height:%2},{width:1280,height:720}]").arg(size.width()).arg(size.height()));
+            plasma.run("mockShrinkPanelOnAppletAdd=true;");
             plasma.apply(id);
             QVERIFY2(LayoutService::matchesLayout(plasma.description(), id), qPrintable(id));
             QVERIFY(plasma.run("panels().every(function(p){return p.height===40 && (p.lengthMode==='custom' || p.writes.length===0);})").toBool());
+            // Reproduce a late Plasma size-hint change and ensure the delayed
+            // normalization restores 40 px for every layout, not only Classic.
+            plasma.run("panels().forEach(function(p){p.height=38;});");
+            QVERIFY2(plasma.run("positionMainuanLayout('" + id + "').ok").toBool(), qPrintable(id));
+            QVERIFY(plasma.run("panels().every(function(p){return p.height===40;})").toBool());
             if (id == "three-panels" || id == "plasma-default") {
                 QVERIFY2(plasma.run("positionMainuanLayout('" + id + "').ok").toBool(), qPrintable(id));
                 // A second set of intrinsic icon widths still fits; lengths are measured, never imposed.
@@ -174,11 +262,17 @@ void LayoutTest::correctsClassicSegmentsAndLengthModes() {
     QCOMPARE(plasma.run("panels().length").toInt(), 5);
     QCOMPARE(plasma.run("panels()[0].items.map(function(w){return w.type;}).join('|')").toString(), QString("org.kde.plasma.marginsseparator|org.kde.plasma.kickoff"));
     QCOMPARE(plasma.run("panels()[1].items.map(function(w){return w.type;}).join('|')").toString(), QString("Chaac.Complete.Weather|com.mike.desktop"));
-    QCOMPARE(plasma.run("panels()[3].items.map(function(w){return w.type;}).join('|')").toString(), QString("ChatAI-Plasmoid|org.kde.plasma.systemtray|KdeControlStation"));
+    QCOMPARE(plasma.run("panels()[3].items.map(function(w){return w.type;}).join('|')").toString(), QString("ChatAI-Plasmoid|org.kde.plasma.systemtray|local.laetum.controlcenter"));
+    const QString layoutScript = LayoutService::buildScript("plasma-default", {});
+    QVERIFY(layoutScript.contains("applications:mainuan-store.desktop"));
+    QVERIFY(!layoutScript.contains("org.kde.discover.desktop"));
+    QVERIFY(layoutScript.contains("local.laetum.controlcenter"));
+    QVERIFY(!layoutScript.contains("KdeControlStation"));
+    QVERIFY(plasma.run("panels()[3].items[2].config['General/showBatteryIndicator']===false && panels()[3].items[2].config['General/showNetworkIndicator']===false && panels()[3].items[2].config['General/showNotificationIndicator']===false && panels()[3].items[2].config['General/showVolumeIndicator']===false").toBool());
     QCOMPARE(plasma.run("panels()[4].items.map(function(w){return w.type;}).join('|')").toString(), QString("org.kde.plasma.digitalclock|org.kde.plasma.powershowdesktop"));
     QVERIFY(plasma.run("panels()[3].lengthMode==='custom' && panels()[3].minimumLength<panels()[3].maximumLength").toBool());
     QVERIFY(!LayoutService::buildScript("plasma-default", {}).contains("org.kde.plasma.kdeaichat"));
-    for (const QString &missing : {QString("Chaac.Complete.Weather"), QString("com.mike.desktop"), QString("ChatAI-Plasmoid"), QString("KdeControlStation")}) {
+    for (const QString &missing : {QString("Chaac.Complete.Weather"), QString("com.mike.desktop"), QString("ChatAI-Plasmoid"), QString("local.laetum.controlcenter")}) {
         plasma.reset(); plasma.run("knownWidgetTypes=knownWidgetTypes.filter(function(t){return t!=='"+missing+"';});");
         plasma.apply("plasma-default");
         QCOMPARE(plasma.run("mockRemoved").toInt(), 0);

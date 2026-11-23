@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+favorites_source='/usr/share/mainuan-welcome/kicker-extra-favoritesrc'
+favorites_file='/etc/xdg/kicker-extra-favoritesrc'
+
+case "$1" in
+    configure)
+        if [ ! -r "$favorites_source" ]; then
+            echo "mainuan-welcome: missing launcher favorites template: $favorites_source" >&2
+            exit 1
+        fi
+        # Create the active system-wide policy only when absent. Existing
+        # administrator or user customizations survive upgrades/reinstalls.
+        if [ ! -e "$favorites_file" ]; then
+            install -D -m 0644 "$favorites_source" "$favorites_file"
+        fi
+        ;;
+esac
+
+#DEBHELPER#

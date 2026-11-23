@@ -117,7 +117,7 @@ function newPanel(screen, id, props) {
 }
 
 // Mainuan's pinned applications (a string list in the task manager's config).
-var MAINUAN_LAUNCHERS = ["applications:org.kde.kdeconnect.app.desktop", "applications:org.kde.discover.desktop",
+var MAINUAN_LAUNCHERS = ["applications:org.kde.kdeconnect.app.desktop", "applications:org.jitsi.jitsi-meet.desktop", "applications:mainuan-store.desktop",
                          "applications:onlyoffice-desktopeditors.desktop", "preferred://filemanager",
                          "applications:firefox.desktop"];
 
@@ -137,10 +137,11 @@ var layouts = {
         addLauncher(panel);
         addWidget(panel, "org.kde.plasma.pager", { "General": { "displayedText": "Number" } });
         addWidget(panel, "org.kde.plasma.panelspacer");
-        addWidget(panel, "org.kde.plasma.icontasks", taskConfig(screen, {}));
+        addWidget(panel, "org.kde.plasma.icontasks", taskConfig(screen, { "launchers": MAINUAN_LAUNCHERS }));
         addWidget(panel, "org.kde.plasma.panelspacer");
         addWidget(panel, "org.kde.plasma.systemtray");
         addWidget(panel, "org.kde.plasma.digitalclock");
+        panel.height = PANEL_THICKNESS;
     }
 };
 
@@ -191,6 +192,9 @@ function buildReferenceLayout(id, screen) {
             if (entry.type === "org.kde.plasma.kickoff") addLauncher(panel, config);
             else addWidget(panel, entry.type, config);
         });
+        // Applet size hints can shrink a newly-created panel after its initial
+        // height is assigned. Reassert the requested thickness after insertion.
+        panel.height = PANEL_THICKNESS;
     });
 }
 
@@ -250,6 +254,11 @@ function positionMainuanLayout(id) {
         var onScreen = panels().filter(function (panel) { return panel.screen === screen; });
         var byRole = {};
         onScreen.forEach(function (panel) {
+            // Reapply after Plasma has loaded and measured every applet. Some
+            // applet size hints otherwise leave the saved panel at 38 px.
+            panel.height = PANEL_THICKNESS;
+            ok = ok && panel.height === PANEL_THICKNESS;
+            measurements.push("h" + Math.round(panel.height));
             var role = panel.readConfig("MainuanPanelRole", "");
             var length = Math.max(PANEL_THICKNESS, panel.length);
             if (panel.lengthMode === "custom") length = Math.max(panel.minimumLength, Math.min(panel.maximumLength, length));
