@@ -580,6 +580,7 @@ var REFERENCE_LAYOUTS = {
                         "General": {
                             "launchers": [
                                 "applications:org.kde.kdeconnect.app.desktop",
+                                "applications:org.jitsi.jitsi-meet.desktop",
                                 "applications:mainuan-store.desktop",
                                 "applications:onlyoffice-desktopeditors.desktop",
                                 "preferred://filemanager",
