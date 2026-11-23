@@ -1,72 +1,20 @@
-mainuan-welcome (1.1.8) resolute; urgency=medium
-
-  * Adiciona Jitsi Meet aos lançadores fixados das barras nos sete layouts,
-    sempre após o KDE Connect e antes dos demais aplicativos.
-  * Aplica a mesma lista de lançadores ao painel do layout de janelas lado
-    a lado, mantendo o identificador portátil do aplicativo Flatpak.
-  * Acrescenta teste de regressão para confirmar presença, ordem e unicidade
-    do atalho em todos os layouts.
-  * Incrementa a versão para 1.1.8.
-
- -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 20:54:00 -0300
-
-mainuan-welcome (1.1.7) resolute; urgency=medium
-
-  * Corrige o caminho do arquivo de referência no teste final de expurgo,
-    permitindo validar a restauração exata do conffile pertencente ao Kubuntu.
-  * Mantém o gerenciamento reversível por dpkg-divert e a configuração dos
-    dois favoritos do lançador.
-  * Incrementa a versão para 1.1.7 para distinguir o novo pacote de teste.
-
- -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 19:55:00 -0300
-
-mainuan-welcome (1.1.6) resolute; urgency=medium
-
-  * Evita o prompt de conffile do dpkg: instala o modelo de favoritos em
-    /usr/share e o ativa no caminho do Plasma por postinst, sem registrar
-    kicker-extra-favoritesrc como conffile do Mainuan Welcome.
-  * Mantém dpkg-divert para preservar o arquivo de kubuntu-settings-desktop
-    e restaura o original no expurgo.
-  * Amplia o teste de integração para validar instalação, reinstalação,
-    remoção e expurgo sem perguntas interativas.
-  * Incrementa a versão para 1.1.6.
-
- -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 19:45:00 -0300
-
-mainuan-welcome (1.1.5) resolute; urgency=medium
-
-  * Corrige a colisão com kubuntu-settings-desktop usando dpkg-divert para
-    preservar a configuração original do Kubuntu e instalar os favoritos
-    Mainuan no caminho de configuração esperado pelo Plasma.
-  * Restaura o arquivo original do Kubuntu ao remover completamente o pacote.
-  * Acrescenta teste de integração que reproduz a propriedade do arquivo pelo
-    kubuntu-settings-desktop, testando instalação, reinstalação, remoção e expurgo.
-  * Incrementa a versão para 1.1.5.
-
- -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 18:35:00 -0300
-
-mainuan-welcome (1.1.4) resolute; urgency=medium
-
-  * Acrescenta Centro de Informações e Configurações do Sistema aos favoritos
-    padrão dos lançadores de aplicativos do Plasma, pela configuração oficial
-    kicker-extra-favoritesrc.
-  * Define os dois atalhos como favoritos padrão exclusivos do lançador, na
-    ordem da referência visual, sem importar a lista padrão do Plasma.
-  * Adiciona testes para validar a configuração e sua instalação em /etc/xdg.
-  * Atualiza a versão para 1.1.4 para facilitar a instalação de teste.
-
- -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 16:36:00 -0300
-
 mainuan-welcome (1.1.3) resolute; urgency=medium
 
-  * Padroniza o widget Chat AI em todos os layouts de referência para iniciar
-    pela Maritaca AI, com URL, favicon, nome do provedor e opções da configuração
-    de referência.
-  * Acrescenta testes para validar a configuração no modelo de cada layout e
-    depois da aplicação dos painéis.
-  * Atualiza a versão para 1.1.3 para facilitar a instalação de teste.
+  * Padroniza a espessura dos painéis em 40 px nos sete layouts e reaplica
+    e valida essa medida depois que o Plasma carrega e mede os plasmoides.
+  * Atualiza os lançadores das barras: usa Mainuan Store no lugar do Discover,
+    inclui Jitsi Meet após o KDE Connect e mantém a lista de atalhos consistente
+    também no layout de janelas lado a lado.
+  * Substitui KdeControlStation pelo widget local.laetum.controlcenter e
+    desativa seus indicadores duplicados de bateria, rede, notificações e volume.
+  * Configura o Chat AI para iniciar com Maritaca AI em todos os layouts.
+  * Adiciona Centro de Informações e Configurações do Sistema aos favoritos
+    padrão do lançador, preservando o arquivo original do Kubuntu com
+    dpkg-divert e restaurando-o na remoção completa do pacote.
+  * Amplia os testes de regressão dos layouts e os testes de integração do
+    pacote para instalação, execução, reinstalação, remoção e expurgo.
 
- -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 16:00:00 -0300
+ -- ruscher <rruscher@gmail.com>  Sun, 22 Nov 2026 21:20:00 -0300
 
 mainuan-welcome (1.1.2) resolute; urgency=medium
 

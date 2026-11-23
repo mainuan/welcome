@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(mainuan-welcome VERSION 1.1.8 LANGUAGES CXX)
+project(mainuan-welcome VERSION 1.1.3 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
